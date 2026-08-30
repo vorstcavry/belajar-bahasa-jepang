@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Master Angka &amp; Kosakata Waktu Bahasa Jepang</title>
+  
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --accent: #f59e0b;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --converter-bg: #1e293b;
+      --converter-border: #059669;
+      --result-box-bg: linear-gradient(145deg, #064e3b 0%, #0f172a 100%);
+      --result-box-border: #059669;
+      --chip-bg: #0f172a;
+      --chip-border: #334155;
+      --chip-text: #cbd5e1;
+      --input-bg: #0f172a;
+      --card-hover-bg: #064e3b;
+      --card-hover-border: #10b981;
+      --card-badge-bg: #064e3b;
+      --card-badge-color: #6ee7b7;
+      --rule-box-bg: #064e3b;
+      --rule-box-border: #059669;
+      --rule-box-title: #6ee7b7;
+      --rule-box-text: #d1fae5;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #059669;
+      --primary-dark: #065f46;
+      --accent: #f59e0b;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --converter-bg: #ffffff;
+      --converter-border: #a7f3d0;
+      --result-box-bg: linear-gradient(145deg, #f0fdf4 0%, #ecfeff 100%);
+      --result-box-border: #6ee7b7;
+      --chip-bg: #f8fafc;
+      --chip-border: #cbd5e1;
+      --chip-text: #334155;
+      --input-bg: #ffffff;
+      --card-hover-bg: #f0fdf4;
+      --card-hover-border: #059669;
+      --card-badge-bg: #ecfdf5;
+      --card-badge-color: #047857;
+      --rule-box-bg: #f0fdf4;
+      --rule-box-border: #bbf7d0;
+      --rule-box-title: #14532d;
+      --rule-box-text: #166534;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Top Floating Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #065f46 0%, #0284c7 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 16px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.15rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #e0f2fe;
+      font-size: 0.82rem;
+    }
+
+    .nav-mode-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 3px;
+      border-radius: 10px;
+      gap: 3px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .btn-nav-mode {
+      flex: 1;
+      padding: 7px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-nav-mode.active {
+      background: #ffffff;
+      color: #065f46;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* ================= MODE 1: KONVERTER ANGKA INTERAKTIF ================= */
+    .converter-card {
+      background: var(--converter-bg);
+      border: 2px solid var(--converter-border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px -4px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .converter-title-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .converter-title-box h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .converter-title-box span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .converter-input-wrap {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .converter-input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+      background: var(--input-bg);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .converter-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .btn-action-voice {
+      padding: 0 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--primary-dark);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .btn-action-voice:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-action-voice:active {
+      transform: scale(0.96);
+    }
+
+    /* Output Card Konverter */
+    .converter-result-box {
+      background: var(--result-box-bg);
+      border: 1.5px dashed var(--result-box-border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .res-kanji {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.4rem, 6vw, 2.2rem);
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.25;
+      word-break: break-all;
+      width: 100%;
+    }
+
+    .res-reading {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(0.95rem, 4vw, 1.25rem);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.3px;
+      word-break: break-all;
+      width: 100%;
+    }
+
+    .res-romaji {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #38bdf8;
+      font-style: italic;
+      letter-spacing: 0.3px;
+      word-break: break-all;
+      width: 100%;
+    }
+    html.light-theme .res-romaji, body.light-theme .res-romaji {
+      color: #0284c7;
+    }
+
+    .res-meaning {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: var(--chip-bg);
+      padding: 4px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      margin-top: 4px;
+      max-width: 100%;
+      word-break: break-word;
+    }
+
+    .preset-chips-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0 6px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .preset-chips-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .chip-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--chip-border);
+      background: var(--chip-bg);
+      color: var(--chip-text);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .chip-btn:hover, .chip-btn:active {
+      background: var(--card-hover-bg);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ================= MODE 2: KATALOG & FILTER E-CARD ================= */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--input-bg);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: var(--chip-bg);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Grid Layout E-Card */
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+    }
+
+    /* Card Item */
+    .time-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 120px;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .time-card:hover {
+      border-color: var(--card-hover-border);
+      background: var(--card-hover-bg);
+    }
+
+    .time-card:active, .time-card.playing {
+      transform: scale(0.95);
+      background: var(--card-hover-bg);
+      border-color: var(--primary);
+    }
+
+    .card-no {
+      position: absolute;
+      top: 5px;
+      left: 6px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .group-badge {
+      position: absolute;
+      top: 5px;
+      right: 6px;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--card-badge-bg);
+      color: var(--card-badge-color);
+    }
+
+    .tier-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
+      margin-top: 14px;
+      margin-bottom: 2px;
+      word-break: break-all;
+    }
+
+    .tier-reading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 2px;
+      word-break: break-word;
+    }
+
+    .tier-meaning {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    /* Highlight Badges */
+    .tag-special-yellow {
+      background: #854d0e;
+      color: #fef08a;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.62rem;
+      border: 1px solid #ca8a04;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    html.light-theme .tag-special-yellow, body.light-theme .tag-special-yellow {
+      background: #fef08a;
+      color: #854d0e;
+      border-color: #fde047;
+    }
+
+    .tag-special-green {
+      background: #064e3b;
+      color: #a7f3d0;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.62rem;
+      border: 1px solid #059669;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    html.light-theme .tag-special-green, body.light-theme .tag-special-green {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+
+    .element-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 9999px;
+      margin-top: 2px;
+    }
+    .elem-moon { background: #78350f; color: #fde68a; }
+    .elem-fire { background: #7f1d1d; color: #fecaca; }
+    .elem-water { background: #075985; color: #bae6fd; }
+    .elem-wood { background: #064e3b; color: #a7f3d0; }
+    .elem-gold { background: #713f12; color: #fef08a; }
+    .elem-earth { background: #7c2d12; color: #fed7aa; }
+    .elem-sun { background: #701a75; color: #f5d0fe; }
+
+    html.light-theme .elem-moon, body.light-theme .elem-moon { background: #fef3c7; color: #b45309; }
+    html.light-theme .elem-fire, body.light-theme .elem-fire { background: #fee2e2; color: #dc2626; }
+    html.light-theme .elem-water, body.light-theme .elem-water { background: #e0f2fe; color: #0284c7; }
+    html.light-theme .elem-wood, body.light-theme .elem-wood { background: #dcfce7; color: #166534; }
+    html.light-theme .elem-gold, body.light-theme .elem-gold { background: #fef08a; color: #854d0e; }
+    html.light-theme .elem-earth, body.light-theme .elem-earth { background: #ffedd5; color: #c2410c; }
+    html.light-theme .elem-sun, body.light-theme .elem-sun { background: #fae8ff; color: #a21caf; }
+
+    /* Grammatical Rules Box */
+    .rule-box {
+      background: var(--rule-box-bg);
+      border: 1.5px solid var(--rule-box-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--rule-box-text);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-box h3 {
+      font-size: 0.92rem;
+      color: var(--rule-box-title);
+      margin-bottom: 8px;
+    }
+
+    .rule-box ul {
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 980px;
+      margin-top: 30px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 16px;
+      padding: 20px 14px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Kosakata Waktu JLPT N5</span>
+        <h1>Master Angka &amp; Kosakata Waktu</h1>
+        <p>Katalog lengkap angka, tanggal, hari, bulan, tahun, jam, serta fitur ketik angka sendiri.</p>
+      </div>
+      
+      <div class="nav-mode-tabs">
+        <button class="btn-nav-mode active" id="btnModeCatalog" onclick="switchNavMode('catalog')">📚 Katalog</button>
+        <button class="btn-nav-mode" id="btnModeConverter" onclick="switchNavMode('converter')">✍️ Ketik Angka</button>
+      </div>
+    </header>
+
+    <div id="converterView" class="converter-card" style="display: none;">
+      <div class="converter-title-box">
+        <h2>✍️ Konverter Angka Jepang Otomatis</h2>
+        <span>Mendukung angka 0 sampai 9 Triliun+</span>
+      </div>
+
+      <div class="converter-input-wrap">
+        <input type="number" id="customNumberInput" class="converter-input" placeholder="Ketik angka..." oninput="convertCustomNumber()" />
+        <button class="btn-action-voice" onclick="playConverterVoice()">🔊 Dengar</button>
+      </div>
+
+      <div class="preset-chips-group">
+        <span class="chip-label">Contoh:</span>
+        <button class="chip-btn" onclick="setPresetNumber(14)">14</button>
+        <button class="chip-btn" onclick="setPresetNumber(365)">365</button>
+        <button class="chip-btn" onclick="setPresetNumber(1980)">1.980</button>
+        <button class="chip-btn" onclick="setPresetNumber(25000)">25.000</button>
+        <button class="chip-btn" onclick="setPresetNumber(150000)">150.000</button>
+        <button class="chip-btn" onclick="setPresetNumber(2500000)">2.500.000</button>
+        <button class="chip-btn" onclick="setPresetNumber(100000000)">100.000.000</button>
+      </div>
+
+      <div class="converter-result-box" id="converterResultBox">
+        <div class="res-kanji" id="resKanji">零</div>
+        <div class="res-reading" id="resReading">ゼロ / れい</div>
+        <div class="res-romaji" id="resRomaji">zero / rei</div>
+        <div class="res-meaning" id="resMeaning">Nol (Kosong)</div>
+      </div>
+    </div>
+
+    <div id="catalogView">
+      <div class="search-filter-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari angka / waktu (contoh: 11, 21, 111, 211, 1000, senin, hyaku)..." onkeyup="filterCards()">
+        <div class="filter-tags">
+          <button class="filter-btn active" onclick="setCategory('all', this)">Semua Data</button>
+          <button class="filter-btn" onclick="setCategory('basic', this)">🔢 Satuan &amp; Belasan</button>
+          <button class="filter-btn" onclick="setCategory('tens_series', this)">🔟 Puluhan (21-99)</button>
+          <button class="filter-btn" onclick="setCategory('hyaku', this)">💯 Ratusan (100-900)</button>
+          <button class="filter-btn" onclick="setCategory('hundreds_series', this)">🔢 Ratusan Rinci (111-999)</button>
+          <button class="filter-btn" onclick="setCategory('sen', this)">🏷️ Ribuan (千)</button>
+          <button class="filter-btn" onclick="setCategory('man', this)">💰 Puluhan Ribu - Ratusan Juta</button>
+          <button class="filter-btn" onclick="setCategory('days', this)">🗓️ Hari (曜日)</button>
+          <button class="filter-btn" onclick="setCategory('dates', this)">📅 Tanggal 1-31 (日)</button>
+          <button class="filter-btn" onclick="setCategory('months', this)">🌙 Bulan (月)</button>
+          <button class="filter-btn" onclick="setCategory('years', this)">⏳ Tahun (年)</button>
+          <button class="filter-btn" onclick="setCategory('month_dur', this)">⏱️ Durasi Bulan</button>
+          <button class="filter-btn" onclick="setCategory('year_dur', this)">⏱️ Durasi Tahun</button>
+          <button class="filter-btn" onclick="setCategory('matrix', this)">🔄 Matriks Waktu</button>
+          <button class="filter-btn" onclick="setCategory('dayparts', this)">🌅 Bagian Hari</button>
+          <button class="filter-btn" onclick="setCategory('relative', this)">⏰ Keterangan Waktu</button>
+          <button class="filter-btn" onclick="setCategory('clock', this)">🕒 Jam &amp; Menit</button>
+        </div>
+      </div>
+
+      <div class="time-grid" id="timeContainer"></div>
+    </div>
+
+    <div class="rule-box">
+      <h3>📌 Panduan Lengkap Penggunaan Partikel Waktu &amp; Angka</h3>
+      <ul>
+        <li><strong>Sistem 4 Digit Jepang (万 - Man):</strong> Pengelompokan angka Jepang per 4 digit (万 = 10.000). Contoh: 250.000 dibaca <em>25万 (Nijuugo-man)</em>.</li>
+        <li><strong>Hari / Jam / Tanggal Pasti + に (ni):</strong> Keterangan waktu angka pasti/hari memakai partikel に. Contoh: <em>7時に起きます</em> (Bangun jam 7).</li>
+        <li><strong>Waktu Relatif TANPA に:</strong> Keterangan waktu seperti <em>今日 (kyou), 明日 (ashita), 今週 (konshuu), 今 (ima)</em> TIDAK boleh menggunakan partikel に.</li>
+        <li><strong>~から (~kara) = Dari &bull; ~まで (~made) = Sampai:</strong> Menunjukkan rentang waktu awal dan akhir.</li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================= SINKRONISASI & PENGENDALI TEMA =================
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // ================= DATA MASTER LENGKAP ANGKA & WAKTU =================
+    const masterTimeList = [
+      // Satuan & Belasan (0 - 20)
+      { cat: "basic", tag: "Satuan", jp: "0", rd: "ゼロ / れい (zero / rei)", id: "Nol / Kosong", s: "ゼロ" },
+      { cat: "basic", tag: "Satuan", jp: "1", rd: "いち (ichi)", id: "Satu", s: "いち" },
+      { cat: "basic", tag: "Satuan", jp: "2", rd: "に (ni)", id: "Dua", s: "に" },
+      { cat: "basic", tag: "Satuan", jp: "3", rd: "さん (san)", id: "Tiga", s: "さん" },
+      { cat: "basic", tag: "Satuan", jp: "4", rd: "よん / し (yon / shi)", id: "Empat <span class='tag-special-yellow'>2 bacaan</span>", s: "よん" },
+      { cat: "basic", tag: "Satuan", jp: "5", rd: "ご (go)", id: "Lima", s: "ご" },
+      { cat: "basic", tag: "Satuan", jp: "6", rd: "ろく (roku)", id: "Enam", s: "ろく" },
+      { cat: "basic", tag: "Satuan", jp: "7", rd: "なな / しち (nana / shichi)", id: "Tujuh <span class='tag-special-yellow'>2 bacaan</span>", s: "なな" },
+      { cat: "basic", tag: "Satuan", jp: "8", rd: "はち (hachi)", id: "Delapan", s: "はち" },
+      { cat: "basic", tag: "Satuan", jp: "9", rd: "きゅう / く (kyuu / ku)", id: "Sembilan <span class='tag-special-yellow'>2 bacaan</span>", s: "きゅう" },
+      { cat: "basic", tag: "Belasan", jp: "10", rd: "じゅう (juu)", id: "Sepuluh", s: "じゅう" },
+      { cat: "basic", tag: "Belasan", jp: "11", rd: "じゅういち (juu-ichi)", id: "Sebelas", s: "じゅういち" },
+      { cat: "basic", tag: "Belasan", jp: "12", rd: "じゅうに (juu-ni)", id: "Dua Belas", s: "じゅうに" },
+      { cat: "basic", tag: "Belasan", jp: "13", rd: "じゅうさん (juu-san)", id: "Tiga Belas", s: "じゅうさん" },
+      { cat: "basic", tag: "Belasan", jp: "14", rd: "
