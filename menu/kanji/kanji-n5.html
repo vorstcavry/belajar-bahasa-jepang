@@ -12,6 +12,8 @@
         const savedTheme = localStorage.getItem('theme_preference');
         if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
           document.documentElement.classList.add('light-theme');
+        } else {
+          document.documentElement.classList.remove('light-theme');
         }
       } catch (e) {}
     })();
@@ -1098,7 +1100,55 @@
   </div>
 
   <script>
-    // Database Lengkap Kanji N5
+    // --- 1. SINKRONISASI TEMA OTOMATIS & INTEGRATIF ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        if (bodyEl) bodyEl.classList.add('light-theme');
+        if (themeIcon) themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        if (bodyEl) bodyEl.classList.remove('light-theme');
+        if (themeIcon) themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    function initTheme() {
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        applyThemeState(true);
+      } else {
+        applyThemeState(false);
+      }
+    }
+
+    // Inisialisasi tema saat script dimuat
+    initTheme();
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isCurrentlyLight = rootHtml.classList.contains('light-theme') || (bodyEl && bodyEl.classList.contains('light-theme'));
+        applyThemeState(!isCurrentlyLight);
+      });
+    }
+
+    // Sinkronisasi otomatis jika tema diubah dari tab lain
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'theme_preference') {
+        applyThemeState(event.newValue === 'light');
+      }
+    });
+
+    // --- 2. DATA KANJI MASTER N5 ---
     const kanjiN5MasterData = [
       // 1. ANGKA & BILANGAN
       { k: "一", rd: "いち、ひと・つ", romaji: "ichi, hitotsu", id: "Satu", cat: "ANGKA", mandatory: true, icon: "1️⃣", ex: "一人 (ひとり), 一月 (いちがつ)" },
