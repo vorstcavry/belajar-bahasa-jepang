@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kamus &amp; Flashcard Kanji N5 Lengkap &amp; Prioritas</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #f87171;
+      --primary-dark: #dc2626;
+      --primary-light: #450a0a;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --border: #334155;
+      --accent: #fbbf24;
+      --gold: #fbbf24;
+      --gold-bg: #451a03;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --app-header-bg: #1e293b;
+      --view-tab-bg: #0f172a;
+      --btn-priority-bg: #0f172a;
+      --btn-cat-bg: #0f172a;
+      --flip-front-bg: linear-gradient(145deg, #1e293b 0%, #450a0a 100%);
+      --flip-front-border: #7f1d1d;
+      --flip-back-bg: linear-gradient(145deg, #1e293b 0%, #451a03 100%);
+      --flip-back-border: #b45309;
+      --flip-reading-box-bg: rgba(15, 23, 42, 0.85);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #fde68a;
+      --flex-back-bg: #064e3b;
+      --flex-back-border: #059669;
+      --flex-hiragana-text: #86efac;
+      --flex-meaning-bg: #052e16;
+      --flex-meaning-text: #86efac;
+      --mini-illus-bg: #450a0a;
+      --mini-illus-border: #7f1d1d;
+      --mini-illus-text: #fca5a5;
+      --btn-audio-bg: #450a0a;
+      --btn-audio-border: #991b1b;
+      --btn-audio-text: #fca5a5;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --jp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #dc2626;
+      --primary-dark: #991b1b;
+      --primary-light: #fee2e2;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #cbd5e1;
+      --accent: #f59e0b;
+      --gold: #d97706;
+      --gold-bg: #fef3c7;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --app-header-bg: #ffffff;
+      --view-tab-bg: #e2e8f0;
+      --btn-priority-bg: #f8fafc;
+      --btn-cat-bg: #f8fafc;
+      --flip-front-bg: linear-gradient(145deg, #ffffff 0%, #fef2f2 100%);
+      --flip-front-border: #fca5a5;
+      --flip-back-bg: linear-gradient(145deg, #ffffff 0%, #fef3c7 100%);
+      --flip-back-border: #fde68a;
+      --flip-reading-box-bg: rgba(255, 255, 255, 0.85);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #92400e;
+      --flex-back-bg: #f0fdf4;
+      --flex-back-border: #86efac;
+      --flex-hiragana-text: #15803d;
+      --flex-meaning-bg: #dcfce7;
+      --flex-meaning-text: #14532d;
+      --mini-illus-bg: #fef2f2;
+      --mini-illus-border: #fca5a5;
+      --mini-illus-text: var(--primary-dark);
+      --btn-audio-bg: #fee2e2;
+      --btn-audio-border: #fca5a5;
+      --btn-audio-text: var(--primary-dark);
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
+      min-height: 100vh;
+    }
+
+    /* Header Navigasi */
+    .app-header {
+      background: var(--app-header-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      background: var(--primary-dark);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-2px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .view-mode-tabs {
+      display: flex;
+      background: var(--view-tab-bg);
+      padding: 3px;
+      border-radius: 10px;
+      gap: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .btn-view-mode {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-view-mode.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 16px auto;
+      padding: 0 12px;
+    }
+
+    /* Kontrol Pencarian & Filter */
+    .control-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .search-input-box {
+      width: 100%;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--subtext);
+    }
+
+    /* Filter Prioritas */
+    .priority-filter-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-priority {
+      flex: 1;
+      min-width: 160px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--btn-priority-bg);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-priority.active {
+      background: var(--gold-bg);
+      color: var(--gold);
+      border-color: var(--accent);
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
+    }
+
+    .btn-priority.all-active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+    }
+
+    .category-scroll-group {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .category-scroll-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn-cat {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--btn-cat-bg);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-cat.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* MODE 1: FLIP CARD TUNGGAL */
+    .flashcard-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 520px;
+      margin: 20px auto;
+    }
+
+    .flip-scene {
+      width: 100%;
+      height: 310px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px var(--shadow-color);
+    }
+
+    .flip-card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .flip-face-front {
+      background: var(--flip-front-bg);
+      border-color: var(--flip-front-border);
+    }
+
+    .flip-face-back {
+      background: var(--flip-back-bg);
+      border-color: var(--flip-back-border);
+      transform: rotateY(180deg);
+    }
+
+    .flip-header-meta {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .badge-mandatory {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid var(--accent);
+    }
+
+    .badge-support {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--btn-cat-bg);
+      color: var(--subtext);
+      border: 1px solid var(--border);
+    }
+
+    .flip-center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+    }
+
+    .flip-kanji-big {
+      font-family: var(--jp-font);
+      font-size: 4.8rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.1;
+      margin: 4px 0;
+      text-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .flip-reading-box {
+      background: var(--flip-reading-box-bg);
+      border: 1px dashed var(--flip-reading-box-border);
+      border-radius: 12px;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .flip-reading-text {
+      font-family: var(--jp-font);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .flip-romaji-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .flip-id-text {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--flip-id-text);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .flip-example-text {
+      font-family: var(--jp-font);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--subtext);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      max-width: 95%;
+    }
+
+    .flip-hint {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--subtext);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flip-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .btn-flash-nav {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-flash-nav:hover {
+      background: var(--bg);
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio:hover {
+      background: var(--primary);
+    }
+
+    .card-counter {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--subtext);
+    }
+
+    /* MODE 2: DAFTAR GRID KAMUS */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .vocab-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .vocab-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(220, 38, 38, 0.15);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .vocab-mini-illus {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: var(--mini-illus-bg);
+      border: 1.5px solid var(--mini-illus-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--jp-font);
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--mini-illus-text);
+      flex-shrink: 0;
+    }
+
+    .vocab-text-group {
+      flex: 1;
+    }
+
+    .vocab-jp {
+      font-family: var(--jp-font);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .vocab-reading-mini {
+      font-family: var(--jp-font);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 1px;
+    }
+
+    .vocab-id {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--subtext);
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    .vocab-examples-mini {
+      font-size: 0.74rem;
+      color: var(--subtext);
+      margin-top: 3px;
+      font-family: var(--jp-font);
+    }
+
+    .vocab-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-audio-mini {
+      background: var(--btn-audio-bg);
+      border: 1px solid var(--btn-audio-border);
+      color: var(--btn-audio-text);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .tag-category {
+      font-size: 0.7rem;
+      font-weight: 800;
+      background: var(--btn-cat-bg);
+      color: var(--subtext);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* MODE 3: GRID FLEKSIBEL */
+    .flex-header-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .flex-total-count {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--subtext);
+    }
+
+    .btn-flex-shuffle {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-flex-shuffle:hover {
+      border-color: var(--primary);
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .flex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .flex-card {
+      perspective: 1000px;
+      height: 200px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .flex-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px var(--shadow-color);
+    }
+
+    .flex-card.flipped .flex-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flex-card-front, .flex-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 8px;
+      border: 1.5px solid var(--border);
+    }
+
+    .flex-card-front {
+      background-color: var(--card-bg);
+      transition: all 0.2s ease;
+    }
+
+    .flex-card-front:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(220, 38, 38, 0.15);
+    }
+
+    .flex-card.is-must .flex-card-front {
+      border-color: #fde68a;
+    }
+
+    .flex-card-back {
+      background-color: var(--flex-back-bg);
+      transform: rotateY(180deg);
+      border-color: var(--flex-back-border);
+    }
+
+    .flex-tag-must {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid #fde68a;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .flex-kanji-char {
+      font-family: var(--jp-font);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: 1px;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    .flex-hint-tap {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--subtext);
+      margin-top: 10px;
+      background: var(--bg);
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .flex-visual-icon {
+      font-size: 1.8rem;
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+
+    .flex-hiragana {
+      font-family: var(--jp-font);
+      font-size: 0.95rem;
+      color: var(--flex-hiragana-text);
+      font-weight: 800;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    .flex-romaji {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .flex-meaning {
+      font-size: 0.78rem;
+      color: var(--flex-meaning-text);
+      font-weight: 700;
+      background: var(--flex-meaning-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      max-width: 95%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.2;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--subtext);
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1.5px dashed var(--border);
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1140px;
+      margin: 36px auto 0;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--subtext);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .flex-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .flex-card {
+        height: 185px;
+      }
+      .flex-kanji-char {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-title">
+        <span class="brand-badge">KANJI N5</span>
+        <span class="brand-text">Bank Kanji Lengkap &amp; Prioritas</span>
+      </div>
+
+      <div class="header-actions">
+        <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
+          <span>←</span> Beranda Hub
+        </a>
+
+        <!-- Tab Pilihan Mode Belajar (3 Mode) -->
+        <div class="view-mode-tabs">
+          <button class="btn-view-mode active" id="btnModeFlip" onclick="switchViewMode('flip')">🎴 Flashcard</button>
+          <button class="btn-view-mode" id="btnModeFlex" onclick="switchViewMode('flex')">⚡ Fleksibel</button>
+          <button class="btn-view-mode" id="btnModeList" onclick="switchViewMode('list')">📑 Kamus</button>
+        </div>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Kontrol Filter Kategori & Pencarian -->
+    <div class="control-card">
+      <div class="search-input-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari kanji, cara baca hiragana/romaji, atau arti..." oninput="handleSearch()">
+      </div>
+
+      <!-- Filter Prioritas (Wajib vs Semua) -->
+      <div class="priority-filter-group">
+        <button class="btn-priority all-active" id="btnFilterAll" onclick="setPriorityFilter('ALL', this)">
+          📚 Semua Kanji (160+ Kanji)
+        </button>
+        <button class="btn-priority" id="btnFilterMandatory" onclick="setPriorityFilter('MANDATORY', this)">
+          ⭐ Kanji Wajib Diketahui (Core N5)
+        </button>
+      </div>
+
+      <!-- Filter Kategori Tematik -->
+      <div class="category-scroll-group" id="categoryFilterButtons">
+        <button class="btn-cat active" onclick="setCategoryFilter('ALL', this)">Semua Kategori</button>
+        <button class="btn-cat" onclick="setCategoryFilter('ANGKA', this)">🔢 Angka &amp; Bilangan</button>
+        <button class="btn-cat" onclick="setCategoryFilter('WAKTU', this)">📅 Waktu &amp; Hari</button>
+        <button class="btn-cat" onclick="setCategoryFilter('ARAH', this)">🧭 Arah &amp; Posisi</button>
+        <button class="btn-cat" onclick="setCategoryFilter('MANUSIA', this)">👥 Manusia &amp; Tubuh</button>
+        <button class="btn-cat" onclick="setCategoryFilter('ALAM', this)">🌲 Alam &amp; Lingkungan</button>
+        <button class="btn-cat" onclick="setCategoryFilter('VERBA', this)">⚡ Kata Kerja</button>
+        <button class="btn-cat" onclick="setCategoryFilter('ADJEKTIVA', this)">🎨 Kata Sifat &amp; Ukuran</button>
+      </div>
+    </div>
+
+    <!-- TAMPILAN 1: MODE FLIP CARD TUNGGAL -->
+    <div id="flipModeView" class="flashcard-wrapper">
+      <div class="card-counter" id="flipCounterText">Kartu 1 dari 1</div>
+      
+      <div class="flip-scene" onclick="toggleCardFlip()">
+        <div class="flip-card-inner" id="flipCardInner">
+          <!-- Sisi Depan -->
+          <div class="flip-face flip-face-front">
+            <div class="flip-header-meta">
+              <span id="flipFrontPriorityBadge" class="badge-mandatory">⭐ WAJIB</span>
+            </div>
+            <div class="flip-center-content">
+              <div class="flip-kanji-big" id="flipFrontKanji">日</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk melihat cara baca &amp; arti</div>
+          </div>
+          <!-- Sisi Belakang -->
+          <div class="flip-face flip-face-back">
+            <div class="flip-header-meta">
+              <span id="flipBackPriorityBadge" class="badge-mandatory">⭐ WAJIB</span>
+            </div>
+            <div class="flip-center-content">
+              <div class="flip-reading-box">
+                <div class="flip-reading-text" id="flipBackReading">ひ、にち</div>
+                <div class="flip-romaji-text" id="flipBackRomaji">hi, nichi</div>
+              </div>
+              <div class="flip-id-text" id="flipBackMeaning">Hari, Matahari</div>
+              <div class="flip-example-text" id="flipBackExample">Contoh: 日本 (にほん), 日曜日 (にちようび)</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk kembali</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kontrol Navigasi Flashcard -->
+      <div class="flip-controls">
+        <button class="btn-flash-nav" onclick="navigateFlashcard(-1)">← Sebelumnya</button>
+        <button class="btn-flash-nav btn-flash-audio" onclick="playCurrentFlashVoice()">🔊 Dengar Suara</button>
+        <button class="btn-flash-nav" onclick="navigateFlashcard(1)">Selanjutnya →</button>
+      </div>
+      <button class="btn-flash-nav" style="width: 100%;" onclick="shuffleCurrentList()">🎲 Acak Kartu</button>
+    </div>
+
+    <!-- TAMPILAN 2: MODE FLEKSIBEL (GRID MULTI FLIP CARD) -->
+    <div id="flexModeSection" style="display: none;">
+      <div class="flex-header-action">
+        <div class="flex-total-count" id="flexTotalText">Menampilkan 0 Kanji</div>
+        <button class="btn-flex-shuffle" onclick="shuffleCurrentList()">🎲 Acak Posisi Kanji</button>
+      </div>
+      <div id="flexModeView" class="flex-grid"></div>
+    </div>
+
+    <!-- TAMPILAN 3: MODE DAFTAR GRID KAMUS -->
+    <div id="listModeView" class="vocab-grid" style="display: none;"></div>
+
+    <!-- Kontak & Donasi Section -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Database Lengkap Kanji N5
+    const kanjiN5MasterData = [
+      // 1. ANGKA & BILANGAN
+      { k: "一", rd: "いち、ひと・つ", romaji: "ichi, hitotsu", id: "Satu", cat: "ANGKA", mandatory: true, icon: "1️⃣", ex: "一人 (ひとり), 一月 (いちがつ)" },
+      { k: "二", rd: "に、ふた・つ", romaji: "ni, futatsu", id: "Dua", cat: "ANGKA", mandatory: true, icon: "2️⃣", ex: "二人 (ふたり), 二月 (にがつ)" },
+      { k: "三", rd: "さん、みっ・つ", romaji: "san, mittsu", id: "Tiga", cat: "ANGKA", mandatory: true, icon: "3️⃣", ex: "三人 (さんにん), 三日 (みっか)" },
+      { k: "四", rd: "よん、し、よっ・つ", romaji: "yon, shi, yottsu", id: "Empat", cat: "ANGKA", mandatory: true, icon: "4️⃣", ex: "四月 (しがつ), 四日 (よっか)" },
+      { k: "五", rd: "ご、いつ・つ", romaji: "go, itsutsu", id: "Lima", cat: "ANGKA", mandatory: true, icon: "5️⃣", ex: "五日 (いつか), 五人 (ごにん)" },
+      { k: "六", rd: "ろく、むっ・つ", romaji: "roku, muttsu", id: "Enam", cat: "ANGKA", mandatory: true, icon: "6️⃣", ex: "六日 (むいか), 六月 (ろくがつ)" },
+      { k: "七", rd: "なな、しち、なな・つ", romaji: "nana, shichi", id: "Tujuh", cat: "ANGKA", mandatory: true, icon: "7️⃣", ex: "七日 (なのか), 七月 (しちがつ)" },
+      { k: "八", rd: "はち、やっ・つ", romaji: "hachi, yattsu", id: "Delapan", cat: "ANGKA", mandatory: true, icon: "8️⃣", ex: "八日 (ようか), 八月 (はちがつ)" },
+      { k: "九", rd: "きゅう、く、ここの・つ", romaji: "kyuu, ku, kokonotsu", id: "Sembilan", cat: "ANGKA", mandatory: true, icon: "9️⃣", ex: "九日 (ここのか), 九月 (くがつ)" },
+      { k: "十", rd: "じゅう、とお", romaji: "juu, too", id: "Sepuluh", cat: "ANGKA", mandatory: true, icon: "🔟", ex: "十日 (とおか), 十月 (じゅうがつ)" },
+      { k: "百", rd: "ひゃく", romaji: "hyaku", id: "Ratus", cat: "ANGKA", mandatory: true, icon: "💯", ex: "三百 (さんびゃく), 六百 (ろっぴゃく)" },
+      { k: "千", rd: "せん", romaji: "sen", id: "Ribu", cat: "ANGKA", mandatory: true, icon: "💰", ex: "三千 (さんぜん), 千円 (せんえん)" },
+      { k: "万", rd: "まん、ばん", romaji: "man, ban", id: "Puluh Ribu", cat: "ANGKA", mandatory: true, icon: "💴", ex: "一万円 (いちまんえん), 万国 (ばんこく)" },
+      { k: "円", rd: "えん、まる・い", romaji: "en, marui", id: "Yen, Lingkaran", cat: "ANGKA", mandatory: true, icon: "🪙", ex: "百円 (ひゃくえん), 円い (まるい)" },
+      { k: "何", rd: "なに、なん", romaji: "nani, nan", id: "Apa", cat: "ANGKA", mandatory: true, icon: "❓", ex: "何時 (なんじ), 何人 (なんにん)" },
+
+      // 2. WAKTU & HARI
+      { k: "日", rd: "ひ、にち、び、か", romaji: "hi, nichi, bi, ka", id: "Hari, Matahari", cat: "WAKTU", mandatory: true, icon: "☀️", ex: "日曜日 (にちようび), 毎日 (まいにち)" },
+      { k: "月", rd: "つき、げつ、がつ", romaji: "tsuki, getsu, gatsu", id: "Bulan", cat: "WAKTU", mandatory: true, icon: "🌙", ex: "月曜日 (げつようび), 一月 (いちがつ)" },
+      { k: "火", rd: "ひ、か", romaji: "hi, ka", id: "Api, Hari Selasa", cat: "WAKTU", mandatory: true, icon: "🔥", ex: "火曜日 (かようび), 火事 (かじ)" },
+      { k: "水", rd: "みず、すい", romaji: "mizu, sui", id: "Air, Hari Rabu", cat: "WAKTU", mandatory: true, icon: "💧", ex: "水曜日 (すいようび), 水泳 (すいえい)" },
+      { k: "木", rd: "き、もく", romaji: "ki, moku", id: "Pohon, Hari Kamis", cat: "WAKTU", mandatory: true, icon: "🌲", ex: "木曜日 (もくようび), 大木 (たいぼく)" },
+      { k: "金", rd: "かね、きん", romaji: "kane, kin", id: "Uang, Emas, Hari Jumat", cat: "WAKTU", mandatory: true, icon: "✨", ex: "金曜日 (きんようび), お金 (おかね)" },
+      { k: "土", rd: "つち、ど", romaji: "tsuchi, do", id: "Tanah, Hari Sabtu", cat: "WAKTU", mandatory: true, icon: "🪐", ex: "土曜日 (どようび), 土地 (とち)" },
+      { k: "年", rd: "とし、ねん", romaji: "toshi, nen", id: "Tahun", cat: "WAKTU", mandatory: true, icon: "📅", ex: "今年 (ことし), 来年 (らいねん), 去年 (きょねん)" },
+      { k: "時", rd: "とき、じ", romaji: "toki, ji", id: "Waktu, Jam", cat: "WAKTU", mandatory: true, icon: "⏰", ex: "時間 (じかん), 一時 (いちじ), 時計 (とけい)" },
+      { k: "分", rd: "ふん、ぷん、わ・かる", romaji: "fun, pun, wakaru", id: "Menit, Mengerti", cat: "WAKTU", mandatory: true, icon: "⏱️", ex: "五分 (ごふん), 分かる (わかる)" },
+      { k: "週", rd: "しゅう", romaji: "shuu", id: "Minggu (Pekan)", cat: "WAKTU", mandatory: true, icon: "🗓️", ex: "今週 (こんしゅう), 先週 (せんしゅう), 毎週 (まいしゅう)" },
+      { k: "毎", rd: "まい", romaji: "mai", id: "Setiap", cat: "WAKTU", mandatory: true, icon: "🔄", ex: "毎日 (まいにち), 毎朝 (まいあさ), 毎晩 (まいばん)" },
+      { k: "今", rd: "いま、こん", romaji: "ima, kon", id: "Sekarang", cat: "WAKTU", mandatory: true, icon: "📍", ex: "今日 (きょう), 今晩 (こんばん), 今月 (こんげつ)" },
+      { k: "先", rd: "さき、せん", romaji: "saki, sen", id: "Sebelum, Duluan", cat: "WAKTU", mandatory: true, icon: "⏮️", ex: "先生 (せんせい), 先月 (せんげつ), お先に (おさきに)" },
+      { k: "来", rd: "く・る、らい", romaji: "kuru, rai", id: "Datang, Masa Depan", cat: "WAKTU", mandatory: true, icon: "🏃", ex: "来週 (らいしゅう), 来年 (らいねん), 来る (くる)" },
+      { k: "去", rd: "さ・る、きょ、こ", romaji: "saru, kyo, ko", id: "Lalu, Meninggalkan", cat: "WAKTU", mandatory: true, icon: "📜", ex: "去年 (きょねん), 過去 (かこ)" },
+      { k: "半", rd: "はん、なか・ば", romaji: "han, nakaba", id: "Setengah", cat: "WAKTU", mandatory: true, icon: "🌗", ex: "一時半 (いちじはん), 半年 (はんとし)" },
+      { k: "午", rd: "ご", romaji: "go", id: "Tengah Hari", cat: "WAKTU", mandatory: true, icon: "☀️", ex: "午前 (ごぜん), 午後 (ごご)" },
+      { k: "朝", rd: "あさ、ちょう", romaji: "asa, chou", id: "Pagi", cat: "WAKTU", mandatory: true, icon: "🌅", ex: "毎朝 (まいあさ), 朝ご飯 (あさごはん), 今朝 (けさ)" },
+      { k: "昼", rd: "ひる、ちゅう", romaji: "hiru, chuu", id: "Siang", cat: "WAKTU", mandatory: true, icon: "☀️", ex: "昼休み (ひるやすみ), 昼ご飯 (ひるごはん)" },
+      { k: "夜", rd: "よる、や", romaji: "yoru, ya", id: "Malam", cat: "WAKTU", mandatory: true, icon: "🌃", ex: "今夜 (こんや), 夜中 (よなか), 昨夜 (ゆうべ)" },
+      { k: "夕", rd: "ゆう、せき", romaji: "yuu, seki", id: "Sore / Petang", cat: "WAKTU", mandatory: true, icon: "🌇", ex: "夕方 (ゆうがた), 夕飯 (ゆうはん)" },
+      { k: "間", rd: "あいだ、かん", romaji: "aida, kan", id: "Di Antara, Durasi", cat: "WAKTU", mandatory: true, icon: "↔️", ex: "時間 (じかん), 一週間 (いっしゅうかん)" },
+      { k: "春", rd: "はる、しゅん", romaji: "haru, shun", id: "Musim Semi", cat: "WAKTU", mandatory: false, icon: "🌸", ex: "春休み (はるやすみ), 青春 (せいしゅん)" },
+      { k: "夏", rd: "なつ、か", romaji: "natsu, ka", id: "Musim Panas", cat: "WAKTU", mandatory: false, icon: "🌻", ex: "夏休み (なつやすみ), 初夏 (しょか)" },
+      { k: "秋", rd: "あき、しゅう", romaji: "aki, shuu", id: "Musim Gugur", cat: "WAKTU", mandatory: false, icon: "🍁", ex: "秋祭り (あきまつり), 晩秋 (ばんしゅう)" },
+      { k: "冬", rd: "ふゆ、とう", romaji: "fuyu, tou", id: "Musim Dingin", cat: "WAKTU", mandatory: false, icon: "⛄", ex: "冬休み (ふゆやすみ), 春夏秋冬 (しゅんかしゅうとう)" },
+
+      // 3. ARAH & POSISI
+      { k: "上", rd: "うえ、じょう", romaji: "ue, jou", id: "Atas, Naik", cat: "ARAH", mandatory: true, icon: "⬆️", ex: "机の上 (つくえのうえ), 上手 (じょうず)" },
+      { k: "下", rd: "した、か、げ", romaji: "shita, ka, ge", id: "Bawah, Turun", cat: "ARAH", mandatory: true, icon: "⬇️", ex: "地下鉄 (ちかてつ), 下手 (へた)" },
+      { k: "左", rd: "ひだり、さ", romaji: "hidari, sa", id: "Kiri", cat: "ARAH", mandatory: true, icon: "⬅️", ex: "左手 (ひだりて), 左側 (ひだりがわ)" },
+      { k: "右", rd: "みぎ、う、ゆう", romaji: "migi, u, yuu", id: "Kanan", cat: "ARAH", mandatory: true, icon: "➡️", ex: "右手 (みぎて), 右側 (みぎがわ)" },
+      { k: "中", rd: "なか、ちゅう", romaji: "naka, chuu", id: "Dalam, Tengah", cat: "ARAH", mandatory: true, icon: "📥", ex: "部屋の中 (へやのなか), 中国 (ちゅうごく)" },
+      { k: "外", rd: "そと、がい", romaji: "soto, gai", id: "Luar, Asing", cat: "ARAH", mandatory: true, icon: "📤", ex: "外国 (がいこく), 外国人 (がいこくじん)" },
+      { k: "前", rd: "まえ、ぜん", romaji: "mae, zen", id: "Depan, Sebelum", cat: "ARAH", mandatory: true, icon: "⏩", ex: "駅の前 (えきのまえ), 午前 (ごぜん)" },
+      { k: "後", rd: "うし・ろ、あと、ご", romaji: "ushiro, ato, go", id: "Belakang, Setelah", cat: "ARAH", mandatory: true, icon: "⏪", ex: "後ろ (うしろ), 後で (あとで)" },
+      { k: "東", rd: "ひがし、とう", romaji: "higashi, tou", id: "Timur", cat: "ARAH", mandatory: true, icon: "🧭", ex: "東京 (とうきょう), 東口 (ひがしぐち)" },
+      { k: "西", rd: "にし、せい、さい", romaji: "nishi, sei, sai", id: "Barat", cat: "ARAH", mandatory: true, icon: "🧭", ex: "西口 (にしぐち), 関西 (かんさい)" },
+      { k: "南", rd: "みなみ、なん", romaji: "minami, nan", id: "Selatan", cat: "ARAH", mandatory: true, icon: "🧭", ex: "南口 (みなみぐち), 東南アジア (とうなんあじあ)" },
+      { k: "北", rd: "きた、ほく", romaji: "kita, hoku", id: "Utara", cat: "ARAH", mandatory: true, icon: "🧭", ex: "北海道 (ほっかいどう), 北口 (きたぐち)" },
+      { k: "方", rd: "かた、ほう", romaji: "kata, hou", id: "Arah, Cara, Orang", cat: "ARAH", mandatory: true, icon: "🧭", ex: "読み方 (よみかた), 夕方 (ゆうがた)" },
+      { k: "近", rd: "ちか・い、きん", romaji: "chikai, kin", id: "Dekat", cat: "ARAH", mandatory: false, icon: "📍", ex: "近く (ちかく), 近所 (きんじょ)" },
+      { k: "遠", rd: "とお・い、えん", romaji: "tooi, en", id: "Jauh", cat: "ARAH", mandatory: false, icon: "🔭", ex: "遠い (とおい), 遠慮 (えんりょ)" },
+
+      // 4. MANUSIA & TUBUH
+      { k: "人", rd: "ひと、じん、にん", romaji: "hito, jin, nin", id: "Orang, Manusia", cat: "MANUSIA", mandatory: true, icon: "👤", ex: "日本人 (にほんじん), 三人 (さんにん)" },
+      { k: "男", rd: "おとこ、だん", romaji: "otoko, dan", id: "Laki-laki", cat: "MANUSIA", mandatory: true, icon: "👨", ex: "男の子 (おとこのこ), 男性 (だんせい)" },
+      { k: "女", rd: "おんな、じょ", romaji: "onna, jo", id: "Perempuan", cat: "MANUSIA", mandatory: true, icon: "👩", ex: "女の子 (おんなのこ), 女性 (じょせい)" },
+      { k: "子", rd: "こ、し", romaji: "ko, shi", id: "Anak", cat: "MANUSIA", mandatory: true, icon: "🧒", ex: "子供 (こども), 電子 (でんし)" },
+      { k: "父", rd: "ちち、とう、ふ", romaji: "chichi, tou, fu", id: "Ayah", cat: "MANUSIA", mandatory: true, icon: "👨", ex: "父 (ちち), お父さん (おとうさん)" },
+      { k: "母", rd: "はは、かあ、ぼ", romaji: "haha, kaa, bo", id: "Ibu", cat: "MANUSIA", mandatory: true, icon: "👩", ex: "母 (はは), お母さん (おかあさん)" },
+      { k: "兄", rd: "あに、きょう", romaji: "ani, kyou", id: "Kakak Laki-laki", cat: "MANUSIA", mandatory: false, icon: "👦", ex: "兄 (あに), お兄さん (おにいさん), 兄弟 (きょうだい)" },
+      { k: "弟", rd: "おとうと、だい", romaji: "otouto, dai", id: "Adik Laki-laki", cat: "MANUSIA", mandatory: false, icon: "👦", ex: "弟 (おとうと), 兄弟 (きょうだい)" },
+      { k: "姉", rd: "あね、し", romaji: "ane, shi", id: "Kakak Perempuan", cat: "MANUSIA", mandatory: false, icon: "👧", ex: "姉 (あね), お姉さん (おねえさん), 姉妹 (しまい)" },
+      { k: "妹", rd: "いもうと、まい", romaji: "imouto, mai", id: "Adik Perempuan", cat: "MANUSIA", mandatory: false, icon: "👧", ex: "妹 (いもうと), 姉妹 (しまい)" },
+      { k: "友", rd: "とも、ゆう", romaji: "tomo, yuu", id: "Teman, Sahabat", cat: "MANUSIA", mandatory: true, icon: "🤝", ex: "友達 (ともだち), 友人 (ゆうじん)" },
+      { k: "生", rd: "い・きる、う・まれる、せい", romaji: "ikiru, umareru, sei", id: "Hidup, Lahir, Murid", cat: "MANUSIA", mandatory: true, icon: "🌱", ex: "学生 (がくせい), 先生 (せんせい)" },
+      { k: "学", rd: "まな・ぶ、がく", romaji: "manabu, gaku", id: "Belajar, Ilmu", cat: "MANUSIA", mandatory: true, icon: "🎓", ex: "学校 (がっこう), 大学 (だいがく)" },
+      { k: "校", rd: "こう", romaji: "kou", id: "Sekolah", cat: "MANUSIA", mandatory: true, icon: "🏫", ex: "学校 (がっこう), 高校 (こうこう)" },
+      { k: "目", rd: "め、もく", romaji: "me, moku", id: "Mata, Poin", cat: "MANUSIA", mandatory: true, icon: "👁️", ex: "目 (め), 一つ目 (ひとつめ)" },
+      { k: "口", rd: "くち、ぐち、こう", romaji: "kuchi, guchi, kou", id: "Mulut, Pintu Masuk/Keluar", cat: "MANUSIA", mandatory: true, icon: "👄", ex: "入口 (いりぐち), 出口 (でぐち)" },
+      { k: "耳", rd: "みみ、じ", romaji: "mimi, ji", id: "Telinga", cat: "MANUSIA", mandatory: false, icon: "👂", ex: "耳 (みみ), 耳鼻科 (じびか)" },
+      { k: "手", rd: "て、しゅ", romaji: "te, shu", id: "Tangan, Keahlian", cat: "MANUSIA", mandatory: true, icon: "✋", ex: "手 (て), 上手 (じょうず), 手紙 (てがみ)" },
+      { k: "足", rd: "あし、た・りる、そく", romaji: "ashi, tariru, soku", id: "Kaki, Cukup", cat: "MANUSIA", mandatory: true, icon: "🦶", ex: "足 (あし), 足りる (たりる)" },
+      { k: "体", rd: "からだ、たい", romaji: "karada, tai", id: "Badan, Tubuh", cat: "MANUSIA", mandatory: true, icon: "🧍", ex: "体 (からだ), 体重 (たいじゅう)" },
+      { k: "頭", rd: "あたま、とう", romaji: "atama, tou", id: "Kepala", cat: "MANUSIA", mandatory: false, icon: "🗣️", ex: "頭 (あたま), 頭痛 (ずつう)" },
+      { k: "顔", rd: "かお、がん", romaji: "kao, gan", id: "Wajah", cat: "MANUSIA", mandatory: false, icon: "🙂", ex: "顔 (かお), 笑顔 (えがお)" },
+      { k: "心", rd: "こころ、しん", romaji: "kokoro, shin", id: "Hati, Pikiran", cat: "MANUSIA", mandatory: false, icon: "❤️", ex: "安心 (あんしん), 心配 (しんぱい)" },
+
+      // 5. ALAM & LINGKUNGAN
+      { k: "山", rd: "やま、さん", romaji: "yama, san", id: "Gunung", cat: "ALAM", mandatory: true, icon: "⛰️", ex: "富士山 (ふじさん), 山 (やま)" },
+      { k: "川", rd: "かわ、がわ、せん", romaji: "kawa, gawa, sen", id: "Sungai", cat: "ALAM", mandatory: true, icon: "🏞️", ex: "川 (かわ), 小川 (おがわ)" },
+      { k: "田", rd: "た、でん", romaji: "ta, den", id: "Sawah", cat: "ALAM", mandatory: true, icon: "🌾", ex: "田んぼ (たんぼ), 田中 (たなか)" },
+      { k: "天", rd: "あめ、てん", romaji: "ame, ten", id: "Langit, Cuaca", cat: "ALAM", mandatory: true, icon: "🌤️", ex: "天気 (てんき), 天才 (てんさい)" },
+      { k: "気", rd: "き、け", romaji: "ki, ke", id: "Semangat, Udara, Energi", cat: "ALAM", mandatory: true, icon: "⚡", ex: "元気 (げんき), 電気 (でんき)" },
+      { k: "雨", rd: "あめ、う", romaji: "ame, u", id: "Hujan", cat: "ALAM", mandatory: true, icon: "🌧️", ex: "雨 (あめ), 大雨 (おおあめ)" },
+      { k: "雪", rd: "ゆき、せつ", romaji: "yuki, setsu", id: "Salju", cat: "ALAM", mandatory: false, icon: "❄️", ex: "大雪 (おおゆき), 新雪 (しんせつ)" },
+      { k: "風", rd: "かぜ、ふう", romaji: "kaze, fuu", id: "Angin, Flu", cat: "ALAM", mandatory: false, icon: "💨", ex: "台風 (たいふう), 風邪 (かぜ)" },
+      { k: "空", rd: "そら、くう", romaji: "sora, kuu", id: "Langit, Kosong", cat: "ALAM", mandatory: true, icon: "🌌", ex: "空 (そら), 空港 (くうこう)" },
+      { k: "花", rd: "はな、か", romaji: "hana, ka", id: "Bunga", cat: "ALAM", mandatory: true, icon: "🌸", ex: "花火 (はなび), 花見 (はなみ)" },
+      { k: "海", rd: "うみ、かい", romaji: "umi, kai", id: "Laut", cat: "ALAM", mandatory: false, icon: "🌊", ex: "海外 (かいがい), 海水浴 (かいすいよく)" },
+      { k: "魚", rd: "さかな、ぎょ", romaji: "sakana, gyo", id: "Ikan", cat: "ALAM", mandatory: true, icon: "🐟", ex: "魚 (さかな), 金魚 (きんぎょ)" },
+      { k: "犬", rd: "いぬ、けん", romaji: "inu, ken", id: "Anjing", cat: "ALAM", mandatory: true, icon: "🐕", ex: "犬 (いぬ), 子犬 (こいぬ)" },
+      { k: "鳥", rd: "とり、ちょう", romaji: "tori, chou", id: "Burung", cat: "ALAM", mandatory: false, icon: "🐦", ex: "小鳥 (ことり), 焼き鳥 (やきとり)" },
+      { k: "牛", rd: "うし、ぎゅう", romaji: "ushi, gyuu", id: "Sapi", cat: "ALAM", mandatory: false, icon: "🐄", ex: "牛肉 (ぎゅうにく), 牛乳 (ぎゅうにゅう)" },
+      { k: "肉", rd: "にく", romaji: "niku", id: "Daging", cat: "ALAM", mandatory: false, icon: "🥩", ex: "豚肉 (ぶたにく), 肉屋 (にくや)" },
+      { k: "車", rd: "くるま、しゃ", romaji: "kuruma, sha", id: "Mobil, Roda", cat: "ALAM", mandatory: true, icon: "🚗", ex: "電車 (でんしゃ), 車 (くるま)" },
+      { k: "電", rd: "でん", romaji: "den", id: "Listrik", cat: "ALAM", mandatory: true, icon: "💡", ex: "電気 (でんき), 電話 (でんわ)" },
+      { k: "語", rd: "かた・る、ご", romaji: "kataru, go", id: "Bahasa, Kata", cat: "ALAM", mandatory: true, icon: "🗣️", ex: "日本語 (にほんご), 英語 (えいご)" },
+      { k: "本", rd: "ほん、もと", romaji: "hon, moto", id: "Buku, Asal", cat: "ALAM", mandatory: true, icon: "📚", ex: "本 (ほん), 日本 (にほん)" },
+      { k: "名", rd: "な、めい、みょう", romaji: "na, mei, myou", id: "Nama", cat: "ALAM", mandatory: true, icon: "🏷️", ex: "名前 (なまえ), 有名 (ゆうめい)" },
+      { k: "国", rd: "くに、こく", romaji: "kuni, koku", id: "Negara", cat: "ALAM", mandatory: true, icon: "🗾", ex: "外国 (がいこく), 中国 (ちゅうごく)" },
+      { k: "駅", rd: "えき", romaji: "eki", id: "Stasiun", cat: "ALAM", mandatory: true, icon: "🚉", ex: "駅 (えき), 駅前 (えきまえ)" },
+      { k: "店", rd: "みせ、てん", romaji: "mise, ten", id: "Toko", cat: "ALAM", mandatory: true, icon: "🏪", ex: "店 (みせ), 店員 (てんいん)" },
+      { k: "社", rd: "しゃ、やしろ", romaji: "sha, yashiro", id: "Perusahaan, Kuil", cat: "ALAM", mandatory: true, icon: "🏢", ex: "会社 (かいしゃ), 社長 (しゃちょう)" },
+      { k: "道", rd: "みち、どう", romaji: "michi, dou", id: "Jalan", cat: "ALAM", mandatory: true, icon: "🛣️", ex: "道 (みち), 北海道 (ほっかいどう)" },
+      { k: "町", rd: "まち、ちょう", romaji: "machi, chou", id: "Kota", cat: "ALAM", mandatory: false, icon: "🏘️", ex: "下町 (したまち), 町長 (ちょうちょう)" },
+      { k: "村", rd: "むら、そん", romaji: "mura, son", id: "Desa", cat: "ALAM", mandatory: false, icon: "🏡", ex: "村 (むら), 農村 (のうそん)" },
+      { k: "門", rd: "もん、かど", romaji: "mon, kado", id: "Gerbang, Pintu", cat: "ALAM", mandatory: false, icon: "⛩️", ex: "専門 (せんもん), 正門 (せいもん)" },
+      { k: "室", rd: "しつ", romaji: "shitsu", id: "Ruangan, Kamar", cat: "ALAM", mandatory: false, icon: "🚪", ex: "教室 (きょうしつ), 部屋 (へや)" },
+      { k: "屋", rd: "や、おく", romaji: "ya, oku", id: "Atap, Toko", cat: "ALAM", mandatory: false, icon: "🏪", ex: "本屋 (ほんや), 部屋 (へや)" },
+      { k: "家", rd: "いえ、や、か", romaji: "ie, ya, ka", id: "Rumah, Keluarga", cat: "ALAM", mandatory: false, icon: "🏠", ex: "家族 (かぞく), 家内 (かない)" },
+
+      // 6. KATA KERJA (VERBA)
+      { k: "行", rd: "い・く、こう、ぎょう", romaji: "iku, kou, gyou", id: "Pergi, Melaksanakan", cat: "VERBA", mandatory: true, icon: "🚶", ex: "行く (いく), 旅行 (りょこう)" },
+      { k: "来", rd: "く・る、らい", romaji: "kuru, rai", id: "Datang", cat: "VERBA", mandatory: true, icon: "🏃", ex: "来る (くる), 来年 (らいねん)" },
+      { k: "帰", rd: "かえ・る、き", romaji: "kaeru, ki", id: "Pulang, Kembali", cat: "VERBA", mandatory: true, icon: "🏠", ex: "帰る (かえる), 帰国 (きこく)" },
+      { k: "食", rd: "た・べる、しょく", romaji: "taberu, shoku", id: "Makan", cat: "VERBA", mandatory: true, icon: "🍽️", ex: "食べる (たべる), 食事 (しょくじ)" },
+      { k: "飲", rd: "の・む、いん", romaji: "nomu, in", id: "Minum", cat: "VERBA", mandatory: true, icon: "🍵", ex: "飲む (のむ), 飲み物 (のみもの)" },
+      { k: "見", rd: "み・る、けん", romaji: "miru, ken", id: "Melihat, Memperlihatkan", cat: "VERBA", mandatory: true, icon: "👀", ex: "見る (みる), 見学 (けんがく)" },
+      { k: "聞", rd: "き・く、ぶん", romaji: "kiku, bun", id: "Mendengar, Bertanya", cat: "VERBA", mandatory: true, icon: "👂", ex: "聞く (きく), 新聞 (しんぶん)" },
+      { k: "読", rd: "よ・む、どく", romaji: "yomu, doku", id: "Membaca", cat: "VERBA", mandatory: true, icon: "📖", ex: "読む (よむ), 読書 (どくしょ)" },
+      { k: "書", rd: "か・く、しょ", romaji: "kaku, sho", id: "Menulis", cat: "VERBA", mandatory: true, icon: "✍️", ex: "書く (かく), 辞書 (じしょ)" },
+      { k: "話", rd: "はな・す、わ", romaji: "hanasu, wa", id: "Berbicara, Cerita", cat: "VERBA", mandatory: true, icon: "🗣️", ex: "話す (話し), 会話 (かいわ)" },
+      { k: "買", rd: "か・う、ばい", romaji: "kau, bai", id: "Membeli", cat: "VERBA", mandatory: true, icon: "🛍️", ex: "買う (かう), 買い物 (かいもの)" },
+      { k: "売", rd: "う・る、ばい", romaji: "uru, bai", id: "Menjual", cat: "VERBA", mandatory: false, icon: "🏷️", ex: "売る (うる), 売店 (ばいてん)" },
+      { k: "出", rd: "で・る、だ・す、しゅつ", romaji: "deru, dasu, shutsu", id: "Keluar, Mengeluarkan", cat: "VERBA", mandatory: true, icon: "🚪", ex: "出る (でる), 出口 (でぐち)" },
+      { k: "入", rd: "はい・る、い・れる、にゅう", romaji: "hairu, ireru, nyuu", id: "Masuk, Memasukkan", cat: "VERBA", mandatory: true, icon: "📥", ex: "入る (はいる), 入口 (いりぐち)" },
+      { k: "休", rd: "やす・む、きゅう", romaji: "yasumu, kyuu", id: "Istirahat, Libur", cat: "VERBA", mandatory: true, icon: "🛌", ex: "休む (やすむ), 休日 (きゅうじつ)" },
+      { k: "立", rd: "た・つ、りつ", romaji: "tatsu, ritsu", id: "Berdiri", cat: "VERBA", mandatory: true, icon: "🧍", ex: "立つ (たつ), 立入禁止 (たちいりきんし)" },
+      { k: "会", rd: "あ・う、かい", romaji: "au, kai", id: "Bertemu, Perkumpulan", cat: "VERBA", mandatory: true, icon: "🤝", ex: "会う (あう), 会社 (かいしゃ)" },
+      { k: "言", rd: "い・う、げん、ごん", romaji: "iu, gen, gon", id: "Berkata, Mengatakan", cat: "VERBA", mandatory: true, icon: "💬", ex: "言う (いう), 言葉 (ことば)" },
+      { k: "思", rd: "おも・う、し", romaji: "omou, shi", id: "Berpikir, Mengira", cat: "VERBA", mandatory: false, icon: "💭", ex: "思う (おもう), 思い出す (おもいだす)" },
+      { k: "作", rd: "つく・る、さく", romaji: "tsukuru, saku", id: "Membuat", cat: "VERBA", mandatory: false, icon: "🛠️", ex: "作る (つくる), 作文 (さくぶん)" },
+      { k: "使", rd: "つか・う、し", romaji: "tsukau, shi", id: "Menggunakan", cat: "VERBA", mandatory: false, icon: "🔧", ex: "使う (つかう), 大使館 (たいしかん)" },
+      { k: "持", rd: "も・つ、じ", romaji: "motsu, ji", id: "Membawa, Memegang", cat: "VERBA", mandatory: false, icon: "👜", ex: "持つ (もつ), 気持ち (きもち)" },
+      { k: "待", rd: "ま・つ、たい", romaji: "matsu, tai", id: "Menunggu", cat: "VERBA", mandatory: false, icon: "⏳", ex: "待つ (まつ), 招待 (しょうたい)" },
+      { k: "知", rd: "し・る、ち", romaji: "shiru, chi", id: "Tahu, Mengenal", cat: "VERBA", mandatory: false, icon: "💡", ex: "知る (しる), 知らせる (しらせる)" },
+      { k: "止", rd: "と・まる、し", romaji: "tomaru, shi", id: "Berhenti", cat: "VERBA", mandatory: false, icon: "🛑", ex: "止まる (とまる), 中止 (ちゅうし)" },
+      { k: "歩", rd: "ある・く、ほ", romaji: "aruku, ho", id: "Berjalan Kaki", cat: "VERBA", mandatory: false, icon: "🚶", ex: "歩く (あるく), 散歩 (さんぽ)" },
+      { k: "走", rd: "はし・る、そう", romaji: "hashiru, sou", id: "Berlari", cat: "VERBA", mandatory: false, icon: "🏃", ex: "走る (はしる), ご馳走 (ごちそう)" },
+      { k: "開", rd: "あ・ける、ひら・く、かい", romaji: "akeru, hiraku, kai", id: "Membuka", cat: "VERBA", mandatory: false, icon: "📖", ex: "開ける (あける), 開店 (かいてん)" },
+      { k: "閉", rd: "し・める、と・じる、へい", romaji: "shimeru, tojiru, hei", id: "Menutup", cat: "VERBA", mandatory: false, icon: "📕", ex: "閉める (しめる), 閉店 (へいてん)" },
+      { k: "教", rd: "おし・える、きょう", romaji: "oshieru, kyou", id: "Mengajar, Memberitahu", cat: "VERBA", mandatory: false, icon: "🧑‍🏫", ex: "教える (おしえる), 教科書 (きょうかしょ)" },
+      { k: "習", rd: "なら・う、しゅう", romaji: "narau, shuu", id: "Belajar, Berlatih", cat: "VERBA", mandatory: false, icon: "📝", ex: "習う (ならう), 練習 (れんしゅう)" },
+      { k: "貸", rd: "か・す、たい", romaji: "kasu, tai", id: "Meminjamkan", cat: "VERBA", mandatory: false, icon: "📤", ex: "貸す (かす), 賃貸 (ちんたい)" },
+      { k: "借", rd: "か・りる、しゃく", romaji: "kariru, shaku", id: "Meminjam", cat: "VERBA", mandatory: false, icon: "📥", ex: "借りる (かりる), 借金 (しゃっきん)" },
+      { k: "送", rd: "おく・る、そう", romaji: "okuru, sou", id: "Mengirim, Mengantar", cat: "VERBA", mandatory: false, icon: "✉️", ex: "送る (おくる), 見送り (みおくり)" },
+      { k: "切", rd: "き・る、せつ", romaji: "kiru, setsu", id: "Memotong, Tiket", cat: "VERBA", mandatory: false, icon: "✂️", ex: "切る (きる), 切手 (きって), 切符 (きっぷ)" },
+      { k: "洗", rd: "あら・う、せん", romaji: "arau, sen", id: "Mencuci", cat: "VERBA", mandatory: false, icon: "🫧", ex: "洗う (あらう), お手洗い (おてあらい)" },
+      { k: "起", rd: "お・きる、き", romaji: "okiru, ki", id: "Bangun", cat: "VERBA", mandatory: false, icon: "⏰", ex: "起きる (おきる), 早起き (はやおき)" },
+      { k: "寝", rd: "ね・る、しん", romaji: "neru, shin", id: "Tidur", cat: "VERBA", mandatory: false, icon: "🛌", ex: "寝る (ねる), 寝坊 (ねぼう)" },
+
+      // 7. KATA SIFAT & UKURAN (ADJEKTIVA)
+      { k: "大", rd: "おお・きい、だい、たい", romaji: "ookii, dai, tai", id: "Besar", cat: "ADJEKTIVA", mandatory: true, icon: "🐘", ex: "大きい (おおきい), 大学 (だいがく)" },
+      { k: "小", rd: "ちい・さい、しょう", romaji: "chiisai, shou", id: "Kecil", cat: "ADJEKTIVA", mandatory: true, icon: "🐭", ex: "小さい (ちいさい), 小学校 (しょうがっこう)" },
+      { k: "高", rd: "たか・い、こう", romaji: "takai, kou", id: "Tinggi, Mahal", cat: "ADJEKTIVA", mandatory: true, icon: "🗼", ex: "高い (たかい), 高校 (こうこう)" },
+      { k: "安", rd: "やす・い、あん", romaji: "yasui, an", id: "Murah, Aman", cat: "ADJEKTIVA", mandatory: true, icon: "🏷️", ex: "安い (やすい), 安心 (あんしん)" },
+      { k: "新", rd: "あたら・しい、しん", romaji: "atarashii, shin", id: "Baru", cat: "ADJEKTIVA", mandatory: true, icon: "✨", ex: "新しい (あたらしい), 新聞 (しんぶん)" },
+      { k: "古", rd: "ふる・い、こ", romaji: "furui, ko", id: "Lama, Usang", cat: "ADJEKTIVA", mandatory: true, icon: "🏺", ex: "古い (ふるい), 中古 (ちゅうこ)" },
+      { k: "長", rd: "なが・い、ちょう", romaji: "nagai, chou", id: "Panjang, Pemimpin", cat: "ADJEKTIVA", mandatory: true, icon: "📏", ex: "長い (ながい), 社長 (しゃちょう)" },
+      { k: "短", rd: "みじか・い、たん", romaji: "mijikai, tan", id: "Pendek", cat: "ADJEKTIVA", mandatory: false, icon: "📐", ex: "短い (みじかい), 短時間 (たんじかん)" },
+      { k: "多", rd: "おお・い、た", romaji: "ooi, ta", id: "Banyak", cat: "ADJEKTIVA", mandatory: true, icon: "👥", ex: "多い (おおい), 多少 (たしょう)" },
+      { k: "少", rd: "すく・ない、すこ・し、しょう", romaji: "sukunai, sukoshi, shou", id: "Sedikit", cat: "ADJEKTIVA", mandatory: true, icon: "🤏", ex: "少ない (すくない), 少し (すこし)" },
+      { k: "重", rd: "おも・い、じゅう", romaji: "omoi, juu", id: "Berat", cat: "ADJEKTIVA", mandatory: false, icon: "🏋️", ex: "重い (おもい), 体重 (たいじゅう)" },
+      { k: "軽", rd: "かる・い、けい", romaji: "karui, kei", id: "Ringan", cat: "ADJEKTIVA", mandatory: false, icon: "🪶", ex: "軽い (かるい), 手軽 (てがる)" },
+      { k: "早", rd: "はや・い、そう", romaji: "hayai, sou", id: "Cepat, Awal (Waktu)", cat: "ADJEKTIVA", mandatory: false, icon: "⚡", ex: "早い (はやい), 早朝 (そうちょう)" },
+      { k: "速", rd: "はや・い、そく", romaji: "hayai, soku", id: "Cepat (Kecepatan)", cat: "ADJEKTIVA", mandatory: false, icon: "🐆", ex: "速い (はやい), 速度 (そくど)" },
+      { k: "明", rd: "あか・るい、めい", romaji: "akarui, mei", id: "Terang, Jelas", cat: "ADJEKTIVA", mandatory: false, icon: "💡", ex: "明るい (あかるい), 明日 (あした)" },
+      { k: "暗", rd: "くら・い、あん", romaji: "kurai, an", id: "Gelap", cat: "ADJEKTIVA", mandatory: false, icon: "🌙", ex: "暗い (くらい), 暗記 (あんき)" },
+      { k: "白", rd: "しろ、しろ・い、はく", romaji: "shiro, shiroi, haku", id: "Putih", cat: "ADJEKTIVA", mandatory: true, icon: "⬜", ex: "白い (しろい), 白鳥 (はくちょう)" },
+      { k: "黒", rd: "くろ、くろ・い、こく", romaji: "kuro, kuroi, koku", id: "Hitam", cat: "ADJEKTIVA", mandatory: true, icon: "⬛", ex: "黒い (くろい), 黒板 (こくばん)" },
+      { k: "赤", rd: "あか、あか・い、せき", romaji: "aka, akai, seki", id: "Merah", cat: "ADJEKTIVA", mandatory: true, icon: "🔴", ex: "赤い (あかい), 赤ちゃん (あかちゃん)" },
+      { k: "青", rd: "あお、あお・い、せい", romaji: "ao, aoi, sei", id: "Biru", cat: "ADJEKTIVA", mandatory: true, icon: "🔵", ex: "青い (あおい), 青空 (あおぞら)" },
+      { k: "広", rd: "ひろ・い、こう", romaji: "hiroi, kou", id: "Luas", cat: "ADJEKTIVA", mandatory: false, icon: "🏟️", ex: "広い (ひろい), 広島 (ひろしま)" }
+    ];
+
+    let currentPriorityFilter = "ALL";
+    let currentCategoryFilter = "ALL";
+    let filteredKanjiList = [...kanjiN5MasterData];
+    let currentFlashIndex = 0;
+    let currentViewMode = 'flip';
+
+    function initKanjiApp() {
+      applyKanjiFilter();
+    }
+
+    function setPriorityFilter(priorityKey, btn) {
+      currentPriorityFilter = priorityKey;
+      document.getElementById('btnFilterAll').className = `btn-priority ${priorityKey === 'ALL' ? 'all-active' : ''}`;
+      document.getElementById('btnFilterMandatory').className = `btn-priority ${priorityKey === 'MANDATORY' ? 'active' : ''}`;
+      applyKanjiFilter();
+    }
+
+    function setCategoryFilter(categoryKey, btn) {
+      currentCategoryFilter = categoryKey;
+      document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyKanjiFilter();
+    }
+
+    function handleSearch() {
+      applyKanjiFilter();
+    }
+
+    function switchViewMode(mode) {
+      currentViewMode = mode;
+      document.getElementById('btnModeFlip').classList.toggle('active', mode === 'flip');
+      document.getElementById('btnModeFlex').classList.toggle('active', mode === 'flex');
+      document.getElementById('btnModeList').classList.toggle('active', mode === 'list');
+
+      document.getElementById('flipModeView').style.display = (mode === 'flip') ? 'flex' : 'none';
+      document.getElementById('flexModeSection').style.display = (mode === 'flex') ? 'block' : 'none';
+      document.getElementById('listModeView').style.display = (mode === 'list') ? 'grid' : 'none';
+    }
+
+    function applyKanjiFilter() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      filteredKanjiList = kanjiN5MasterData.filter(item => {
+        const matchPriority = (currentPriorityFilter === "ALL") || (item.mandatory === true);
+        const matchCategory = (currentCategoryFilter === "ALL") || (item.cat === currentCategoryFilter);
+        const matchQuery = !query || 
+                           item.k.toLowerCase().includes(query) || 
+                           item.rd.toLowerCase().includes(query) || 
+                           item.romaji.toLowerCase().includes(query) || 
+                           item.id.toLowerCase().includes(query) || 
+                           item.ex.toLowerCase().includes(query);
+        return matchPriority && matchCategory && matchQuery;
+      });
+
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+      renderFlexView();
+      renderListView();
+    }
+
+    // --- LOGIKA FLIP CARD TUNGGAL ---
+    function toggleCardFlip() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.toggle('is-flipped');
+    }
+
+    function updateFlashcardDisplay() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.remove('is-flipped');
+
+      if (filteredKanjiList.length === 0) {
+        document.getElementById('flipFrontKanji').innerText = "無";
+        document.getElementById('flipFrontPriorityBadge').style.display = "none";
+        document.getElementById('flipBackMeaning').innerText = "Kanji Tidak Ditemukan";
+        document.getElementById('flipBackReading').innerText = "-";
+        document.getElementById('flipBackRomaji').innerText = "";
+        document.getElementById('flipBackExample').innerText = "Coba gunakan kata kunci pencarian lain";
+        document.getElementById('flipBackPriorityBadge').style.display = "none";
+        document.getElementById('flipCounterText').innerText = "0 dari 0 Kartu";
+        return;
+      }
+
+      const item = filteredKanjiList[currentFlashIndex];
+      
+      // Sisi Depan
+      document.getElementById('flipFrontKanji').innerText = item.k;
+      const frontBadge = document.getElementById('flipFrontPriorityBadge');
+      frontBadge.style.display = "inline-block";
+      frontBadge.className = item.mandatory ? 'badge-mandatory' : 'badge-support';
+      frontBadge.innerText = item.mandatory ? '⭐ WAJIB' : '📘 PENDUKUNG';
+
+      // Sisi Belakang
+      document.getElementById('flipBackMeaning').innerText = item.id;
+      document.getElementById('flipBackReading').innerText = item.rd;
+      document.getElementById('flipBackRomaji').innerText = item.romaji;
+      document.getElementById('flipBackExample').innerText = `Contoh: ${item.ex}`;
+      const backBadge = document.getElementById('flipBackPriorityBadge');
+      backBadge.style.display = "inline-block";
+      backBadge.className = item.mandatory ? 'badge-mandatory' : 'badge-support';
+      backBadge.innerText = item.mandatory ? '⭐ WAJIB' : '📘 PENDUKUNG';
+
+      document.getElementById('flipCounterText').innerText = `Kartu ${currentFlashIndex + 1} dari ${filteredKanjiList.length}`;
+    }
+
+    function navigateFlashcard(step) {
+      if (filteredKanjiList.length === 0) return;
+      currentFlashIndex += step;
+      if (currentFlashIndex < 0) currentFlashIndex = filteredKanjiList.length - 1;
+      if (currentFlashIndex >= filteredKanjiList.length) currentFlashIndex = 0;
+      updateFlashcardDisplay();
+    }
+
+    function shuffleCurrentList() {
+      if (filteredKanjiList.length <= 1) return;
+      for (let i = filteredKanjiList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [filteredKanjiList[i], filteredKanjiList[j]] = [filteredKanjiList[j], filteredKanjiList[i]];
+      }
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+      renderFlexView();
+      renderListView();
+    }
+
+    function playCurrentFlashVoice() {
+      if (filteredKanjiList.length === 0) return;
+      playAudioVoice(filteredKanjiList[currentFlashIndex].k);
+    }
+
+    // --- LOGIKA MODE FLEKSIBEL (GRID MULTI FLIP) ---
+    function renderFlexView() {
+      const container = document.getElementById('flexModeView');
+      const countEl = document.getElementById('flexTotalText');
+      container.innerHTML = '';
+      countEl.innerText = `Menampilkan ${filteredKanjiList.length} Kanji`;
+
+      if (filteredKanjiList.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <p style="font-weight: 700;">Kanji tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredKanjiList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = `flex-card ${item.mandatory ? 'is-must' : ''}`;
+        card.onclick = () => card.classList.toggle('flipped');
+
+        card.innerHTML = `
+          <div class="flex-card-inner">
+            <div class="flex-card-front">
+              ${item.mandatory ? '<div class="flex-tag-must">⭐ Wajib N5</div>' : ''}
+              <div class="flex-kanji-char">${item.k}</div>
+              <div class="flex-hint-tap">Ketuk balik 🔄</div>
+            </div>
+            <div class="flex-card-back">
+              <div class="flex-visual-icon">${item.icon || '📖'}</div>
+              <div class="flex-hiragana">${item.rd}</div>
+              <div class="flex-romaji">${item.romaji}</div>
+              <div class="flex-meaning">${item.id}</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- LOGIKA DAFTAR GRID KAMUS ---
+    function renderListView() {
+      const container = document.getElementById('listModeView');
+      container.innerHTML = '';
+
+      if (filteredKanjiList.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <p style="font-weight: 700;">Kanji tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredKanjiList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+          <div class="vocab-top">
+            <div class="vocab-mini-illus">${item.k}</div>
+            <div class="vocab-text-group">
+              <div class="vocab-jp">${item.k}</div>
+              <div class="vocab-reading-mini">${item.rd} &bull; <i>${item.romaji}</i></div>
+              <div class="vocab-id">${item.id}</div>
+              <div class="vocab-examples-mini">${item.ex}</div>
+            </div>
+          </div>
+          <div class="vocab-bottom">
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span class="${item.mandatory ? 'badge-mandatory' : 'badge-support'}">${item.mandatory ? '⭐ WAJIB' : '📘 PENDUKUNG'}</span>
+              <span class="tag-category">${item.cat}</span>
+            </div>
+            <button class="btn-audio-mini" onclick="playAudioVoice('${item.k}')">🔊 Dengar</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function playAudioVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    window.onload = initKanjiApp;
+  </script>
+</body>
+</html>
