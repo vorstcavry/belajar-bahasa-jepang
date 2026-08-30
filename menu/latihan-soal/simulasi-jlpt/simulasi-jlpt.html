@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Simulasi Ujian JLPT N5 - N1 Lengkap</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #f87171;
+      --primary-dark: #dc2626;
+      --accent: #fb923c;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --badge-bg: #450a0a;
+      --badge-text: #fca5a5;
+      --badge-border: #7f1d1d;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --dashed-border: #334155;
+      --arrow-bg: #0f172a;
+      --arrow-text: #94a3b8;
+
+      /* Palette Level JLPT Dark */
+      --n5-icon-bg: #052e16; --n5-icon-text: #4ade80; --n5-tag-bg: #021a0d; --n5-tag-text: #86efac; --n5-tag-border: #16a34a;
+      --n4-icon-bg: #082f49; --n4-icon-text: #38bdf8; --n4-tag-bg: #031e30; --n4-tag-text: #7dd3fc; --n4-tag-border: #0284c7;
+      --n3-icon-bg: #451a03; --n3-icon-text: #fbbf24; --n3-tag-bg: #271002; --n3-tag-text: #fde68a; --n3-tag-border: #d97706;
+      --n2-icon-bg: #431407; --n2-icon-text: #fb923c; --n2-tag-bg: #270b04; --n2-tag-text: #fed7aa; --n2-tag-border: #ea580c;
+      --n1-icon-bg: #450a0a; --n1-icon-text: #f87171; --n1-tag-bg: #2b0707; --n1-tag-text: #fca5a5; --n1-tag-border: #dc2626;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #dc2626;
+      --primary-dark: #b91c1c;
+      --accent: #ea580c;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #f1f5f9;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --badge-bg: #fee2e2;
+      --badge-text: #dc2626;
+      --badge-border: #fca5a5;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --dashed-border: #f1f5f9;
+      --arrow-bg: #f8fafc;
+      --arrow-text: #94a3b8;
+
+      /* Palette Level JLPT Light */
+      --n5-icon-bg: #dcfce7; --n5-icon-text: #16a34a; --n5-tag-bg: #f0fdf4; --n5-tag-text: #16a34a; --n5-tag-border: #bbf7d0;
+      --n4-icon-bg: #e0f2fe; --n4-icon-text: #0284c7; --n4-tag-bg: #f0f9ff; --n4-tag-text: #0284c7; --n4-tag-border: #bae6fd;
+      --n3-icon-bg: #fef3c7; --n3-icon-text: #d97706; --n3-tag-bg: #fffbeb; --n3-tag-text: #d97706; --n3-tag-border: #fde68a;
+      --n2-icon-bg: #ffedd5; --n2-icon-text: #ea580c; --n2-tag-bg: #fff7ed; --n2-tag-text: #ea580c; --n2-tag-border: #fed7aa;
+      --n1-icon-bg: #fee2e2; --n1-icon-text: #dc2626; --n1-tag-bg: #fef2f2; --n1-tag-text: #dc2626; --n1-tag-border: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 16px 8px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header Navigasi */
+    .header-box {
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: clamp(0.72rem, 2vw, 0.8rem);
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.6px;
+      border: 1px solid var(--badge-border);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .header-box h1 {
+      font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-box h1 span {
+      background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-box p {
+      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Grid Layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 36px;
+    }
+
+    /* Card Box */
+    .eval-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px -2px var(--shadow-color);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Hover Effects */
+    @media (hover: hover) {
+      .eval-card:hover {
+        transform: translateY(-5px);
+      }
+      .card-n5:hover { border-color: #4ade80; box-shadow: 0 14px 24px -4px rgba(22, 163, 74, 0.2); }
+      .card-n4:hover { border-color: #38bdf8; box-shadow: 0 14px 24px -4px rgba(2, 132, 199, 0.2); }
+      .card-n3:hover { border-color: #fbbf24; box-shadow: 0 14px 24px -4px rgba(217, 119, 6, 0.2); }
+      .card-n2:hover { border-color: #fb923c; box-shadow: 0 14px 24px -4px rgba(234, 88, 12, 0.2); }
+      .card-n1:hover { border-color: #f87171; box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.2); }
+
+      .eval-card:hover .icon-box {
+        transform: scale(1.1) rotate(4deg);
+      }
+      .eval-card:hover .arrow-icon {
+        transform: translateX(5px);
+        background: var(--primary);
+        color: #ffffff;
+      }
+    }
+
+    .eval-card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      margin-bottom: 16px;
+      pointer-events: none;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .status-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Level Color Styling */
+    .card-n5 .icon-box { background: var(--n5-icon-bg); color: var(--n5-icon-text); }
+    .card-n5 .status-tag { background: var(--n5-tag-bg); color: var(--n5-tag-text); border: 1px solid var(--n5-tag-border); }
+    .card-n5 .card-footer { color: var(--n5-icon-text); }
+
+    .card-n4 .icon-box { background: var(--n4-icon-bg); color: var(--n4-icon-text); }
+    .card-n4 .status-tag { background: var(--n4-tag-bg); color: var(--n4-tag-text); border: 1px solid var(--n4-tag-border); }
+    .card-n4 .card-footer { color: var(--n4-icon-text); }
+
+    .card-n3 .icon-box { background: var(--n3-icon-bg); color: var(--n3-icon-text); }
+    .card-n3 .status-tag { background: var(--n3-tag-bg); color: var(--n3-tag-text); border: 1px solid var(--n3-tag-border); }
+    .card-n3 .card-footer { color: var(--n3-icon-text); }
+
+    .card-n2 .icon-box { background: var(--n2-icon-bg); color: var(--n2-icon-text); }
+    .card-n2 .status-tag { background: var(--n2-tag-bg); color: var(--n2-tag-text); border: 1px solid var(--n2-tag-border); }
+    .card-n2 .card-footer { color: var(--n2-icon-text); }
+
+    .card-n1 .icon-box { background: var(--n1-icon-bg); color: var(--n1-icon-text); }
+    .card-n1 .status-tag { background: var(--n1-tag-bg); color: var(--n1-tag-text); border: 1px solid var(--n1-tag-border); }
+    .card-n1 .card-footer { color: var(--n1-icon-text); }
+
+    .eval-card h2 {
+      font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .eval-card p {
+      font-size: clamp(0.82rem, 2.5vw, 0.88rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .specs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .specs-list span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--dashed-border);
+      pointer-events: none;
+    }
+
+    .arrow-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--arrow-bg);
+      color: var(--arrow-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .eval-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Navigation Controls -->
+    <div class="top-controls">
+      <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-box">
+      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
+      <h1>Simulasi <span>Ujian JLPT</span></h1>
+      <p>Pilih tingkatan level ujian resmi JLPT (Japanese-Language Proficiency Test) dari tingkat dasar N5 hingga tingkat mahir N1.</p>
+    </div>
+
+    <!-- Cards Grid Container -->
+    <div class="cards-container">
+
+      <!-- 1. SIMULASI JLPT N5 -->
+      <a href="/belajar-bahasa-jepang/menu/simulasi-jlpt/JLPT-N5.html" class="eval-card card-n5">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🌱</div>
+            <span class="status-tag">DASAR PEMULA</span>
+          </div>
+          <h2>SIMULASI JLPT N5</h2>
+          <p>Mencakup pemahaman huruf dasar (Hiragana/Katakana), ~100 Kanji, ~800 kosakata harian, pola kalimat dasar, dan percakapan tempo lambat.</p>
+          <div class="specs-list">
+            <span>📋 ~80 Soal</span>
+            <span>⏱️ 85 Menit</span>
+            <span>🎯 Lulus: 80/180</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian N5</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <!-- 2. SIMULASI JLPT N4 -->
+      <a href="/belajar-bahasa-jepang/menu/simulasi-jlpt/JLPT-N4.html" class="eval-card card-n4">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🌿</div>
+            <span class="status-tag">DASAR LANJUTAN</span>
+          </div>
+          <h2>SIMULASI JLPT N4</h2>
+          <p>Mencakup penguasaan ~300 Kanji, ~1.500 kosakata, tata bahasa bentuk sopan &amp; kasual, klausa modifikasi, bentuk syarat, dan instruksi umum.</p>
+          <div class="specs-list">
+            <span>📋 ~85 Soal</span>
+            <span>⏱️ 115 Menit</span>
+            <span>🎯 Lulus: 90/180</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian N4</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <!-- 3. SIMULASI JLPT N3 -->
+      <a href="/belajar-bahasa-jepang/menu/simulasi-jlpt/JLPT-N3.html" class="eval-card card-n3">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🌲</div>
+            <span class="status-tag">MENENGAH (INTERMEDIATE)</span>
+          </div>
+          <h2>SIMULASI JLPT N3</h2>
+          <p>Tingkat penghubung dasar ke lanjutan. Menguji ~650 Kanji, ~3.750 kosakata, pemahaman artikel surat kabar sederhana, dan percakapan tempo wajar.</p>
+          <div class="specs-list">
+            <span>📋 ~95 Soal</span>
+            <span>⏱️ 140 Menit</span>
+            <span>🎯 Lulus: 95/180</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian N3</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <!-- 4. SIMULASI JLPT N2 -->
+      <a href="/belajar-bahasa-jepang/menu/simulasi-jlpt/JLPT-N2.html" class="eval-card card-n2">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">⚡</div>
+            <span class="status-tag">BISNIS &amp; KERJA</span>
+          </div>
+          <h2>SIMULASI JLPT N2</h2>
+          <p>Standar kerja dan perkuliahan di Jepang. Menguji ~1.000 Kanji, ~6.000 kosakata, bacaan opini/editorial, nuansa bahasa resmi, dan berita cepat.</p>
+          <div class="specs-list">
+            <span>📋 ~90 Soal</span>
+            <span>⏱️ 155 Menit</span>
+            <span>🎯 Lulus: 90/180</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian N2</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <!-- 5. SIMULASI JLPT N1 -->
+      <a href="/belajar-bahasa-jepang/menu/simulasi-jlpt/JLPT-N1.html" class="eval-card card-n1">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🏆</div>
+            <span class="status-tag">MAHIR (ADVANCED)</span>
+          </div>
+          <h2>SIMULASI JLPT N1</h2>
+          <p>Tingkat kemahiran tertinggi. Menguji ~2.000 Kanji, ~10.000 kosakata, pemahaman artikel ilmiah, kritik/opini mendalam, dan bahasa formal berstruktur tinggi.</p>
+          <div class="specs-list">
+            <span>📋 ~95 Soal</span>
+            <span>⏱️ 165 Menit</span>
+            <span>🎯 Lulus: 100/180</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian N1</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Kontak & Donasi Section -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+  </script>
+
+</body>
+</html>
