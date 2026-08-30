@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portal Berbagi Materi &amp; Galeri Google Drive Real-Time</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #818cf8;
+      --primary-dark: #6366f1;
+      --primary-light: #312e81;
+      --accent: #38bdf8;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --border: #334155;
+      --success: #4ade80;
+      --success-bg: #064e3b;
+      --danger: #f87171;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --tab-bar-bg: #1e293b;
+      --tab-btn-text: #94a3b8;
+      --input-bg: #0f172a;
+      --dropzone-bg: #0f172a;
+      --dropzone-hover-bg: #1e1b4b;
+      --thumb-bg: #0f172a;
+      --modal-bg: #1e293b;
+      --modal-header-bg: #0f172a;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --log-item-bg: #0f172a;
+      --preview-box-bg: #1e1b4b;
+      --preview-box-border: #4338ca;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #e0e7ff;
+      --accent: #06b6d4;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #ef4444;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --tab-bar-bg: #e2e8f0;
+      --tab-btn-text: #64748b;
+      --input-bg: #f8fafc;
+      --dropzone-bg: #f8fafc;
+      --dropzone-hover-bg: #eef2ff;
+      --thumb-bg: #e2e8f0;
+      --modal-bg: #ffffff;
+      --modal-header-bg: #f8fafc;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --log-item-bg: #f8fafc;
+      --preview-box-bg: #eef2ff;
+      --preview-box-border: #c7d2fe;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .portal-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #065f46 100%);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 18px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px -4px rgba(49, 46, 129, 0.2);
+      text-align: center;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #e0e7ff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .portal-header h1 {
+      font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    .portal-header p {
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      margin: 0 auto 12px;
+      line-height: 1.45;
+    }
+
+    .drive-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .drive-link-btn:hover {
+      background: #059669;
+    }
+
+    /* Tab Bar Navigasi */
+    .tab-bar {
+      display: flex;
+      background: var(--tab-bar-bg);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 16px;
+      border: 1.5px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 9px 4px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--tab-btn-text);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
+
+    /* Form Upload Responsif */
+    .upload-section {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .section-desc {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      background: var(--input-bg);
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .dropzone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--dropzone-bg);
+      transition: all 0.2s;
+    }
+
+    .dropzone:hover {
+      border-color: var(--primary);
+      background: var(--dropzone-hover-bg);
+    }
+
+    .dropzone-icon {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .dropzone p {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .dropzone span {
+      font-size: 0.72rem;
+      color: var(--success);
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    .file-preview {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--preview-box-bg);
+      border: 1px solid var(--preview-box-border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .progress-wrapper {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 7px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4f46e5, #06b6d4);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-status {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary-dark);
+      color: #ffffff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+      margin-top: 6px;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary);
+    }
+
+    .btn-submit:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Filter Chips Bar */
+    .gallery-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .gallery-filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-chip {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--subtext);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .filter-chip.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-refresh {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--primary);
+      background: var(--preview-box-bg);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-refresh:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Galeri Grid Mobile */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 650px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+    }
+
+    .doc-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s;
+    }
+
+    .doc-thumb {
+      height: 110px;
+      background: var(--thumb-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .doc-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .doc-card:hover .doc-thumb img {
+      transform: scale(1.05);
+    }
+
+    .doc-type-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #ffffff;
+    }
+
+    .preview-hint {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #ffffff;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      backdrop-filter: blur(2px);
+    }
+
+    .doc-body {
+      padding: 10px 8px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .doc-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .doc-desc {
+      font-size: 0.72rem;
+      color: var(--subtext);
+      line-height: 1.3;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .doc-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--subtext);
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+    }
+
+    .btn-card-group {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .btn-preview-action {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      background: var(--preview-box-bg);
+      color: var(--primary);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-drive-action {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    /* Modal Pop-up Preview */
+    .preview-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      padding: 10px;
+    }
+
+    .preview-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .preview-modal-box {
+      background: var(--modal-bg);
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      transform: scale(0.95);
+      transition: all 0.25s ease;
+      border: 1px solid var(--border);
+    }
+
+    .preview-modal-overlay.active .preview-modal-box {
+      transform: scale(1);
+    }
+
+    .preview-modal-header {
+      padding: 12px 16px;
+      background: var(--modal-header-bg);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-modal-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10px;
+    }
+
+    .btn-close-modal {
+      background: var(--border);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--subtext);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-modal-body {
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      background: #0f172a;
+    }
+
+    .preview-modal-body img {
+      max-width: 100%;
+      max-height: 55vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .preview-modal-body iframe {
+      width: 100%;
+      height: 55vh;
+      border: none;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .preview-doc-placeholder {
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .preview-doc-placeholder .icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+
+    .preview-modal-footer {
+      padding: 10px 14px;
+      background: var(--modal-bg);
+      border-top: 1.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-modal-open-drive {
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* Log Aktivitas Styling */
+    .log-container {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .log-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .log-header h3 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .btn-clear-log {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .log-item {
+      background: var(--log-item-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .log-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .log-user {
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+
+    .log-time {
+      font-size: 0.68rem;
+      color: var(--subtext);
+      font-weight: 600;
+    }
+
+    .log-filename {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .log-badge-success {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.62rem;
+      font-weight: 800;
+      background: var(--success-bg);
+      color: var(--success);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    /* Footer & Kontak Section */
+    .footer-section {
+      width: 100%;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 16px;
+      padding: 20px 14px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      margin-top: 10px;
+    }
+
+    .footer-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .footer-desc {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      margin-bottom: 12px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.72rem;
+      color: var(--subtext);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    /* Loading Spinner */
+    .loading-box {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 30px;
+      color: var(--subtext);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      opacity: 0;
+      z-index: 10001;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="portal-header">
+      <div class="badge-top">COMMUNITY LEARNING HUB</div>
+      <h1>📁 Portal Berbagi Materi <span>&amp; Galeri Google Drive</span></h1>
+      <p>Unggah modul catatan, kanji, soal latihan, atau gambar materi. File langsung tersimpan di Drive dan otomatis dapat dipratinjau (*preview*) di galeri.</p>
+      
+      <a href="https://drive.google.com/drive/folders/1aZ9fleQfYCoQqB-_ledEj4bBthdwWzQK?usp=drive_link" target="_blank" rel="noopener noreferrer" class="drive-link-btn">
+        📂 Buka Folder Drive Utama ↗
+      </a>
+    </header>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('galleryTab', this)">🖼️ Galeri File</button>
+      <button class="tab-btn" onclick="switchTab('uploadTab', this)">📤 Upload File</button>
+      <button class="tab-btn" onclick="switchTab('logTab', this)">📊 Log Aktivitas</button>
+    </div>
+
+    <section id="uploadTab" class="upload-section" style="display: none;">
+      <div class="section-title">📤 Upload Berkas Materi (Maksimal 25 MB)</div>
+      <p class="section-desc">Berkas akan langsung terunggah ke Google Drive dan tampil pada galeri.</p>
+
+      <form id="uploadForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label>Nama Pengunggah / Kontributor</label>
+          <input type="text" id="uploaderName" class="form-input" placeholder="Contoh: Vorst Cavry" required>
+        </div>
+
+        <div class="form-group">
+          <label>Judul Materi / Catatan</label>
+          <input type="text" id="docTitle" class="form-input" placeholder="Contoh: Ringkasan Pola Kalimat Bab 1-25 N5" required>
+        </div>
+
+        <div class="form-group">
+          <label>Kategori Materi</label>
+          <select id="docCategory" class="form-select">
+            <option value="Tata Bahasa (Bunpou)">Tata Bahasa (Bunpou)</option>
+            <option value="Kanji &amp; Kosakata">Kanji &amp; Kosakata</option>
+            <option value="Latihan Soal &amp; Kuis">Latihan Soal &amp; Kuis</option>
+            <option value="Menyimak (Choukai)">Menyimak (Choukai)</option>
+            <option value="Audio / Video Materi">Audio / Video Materi</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Deskripsi Singkat</label>
+          <textarea id="docDescription" class="form-textarea" rows="2" placeholder="Tuliskan ringkasan isi berkas ini..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Pilih File (PDF, Word, Gambar, Audio, atau ZIP)</label>
+          <div class="dropzone" id="dropzoneBox" onclick="document.getElementById('fileInput').click()">
+            <div class="dropzone-icon">☁️</div>
+            <p>Ketuk untuk memilih berkas dari HP</p>
+            <span>✨ Maksimal ukuran: 25 MB</span>
+          </div>
+          <input type="file" id="fileInput" style="display: none;" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.mp4,.zip,.rar" onchange="handleFileSelect(this)">
+          
+          <div class="file-preview" id="filePreview">
+            <span id="fileNameDisplay">nama_file.pdf</span>
+            <span style="color: #ef4444; cursor: pointer;" onclick="clearFileSelection()">✕ Hapus</span>
+          </div>
+
+          <div class="progress-wrapper" id="progressWrapper">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+            <div class="progress-status" id="progressStatus">Mengonversi file... (0%)</div>
+          </div>
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn-submit">
+          🚀 Kirim &amp; Simpan ke Google Drive
+        </button>
+      </form>
+    </section>
+
+    <section id="galleryTab">
+      <div class="gallery-filter-bar">
+        <button class="filter-chip active" onclick="filterGallery('all', this)">Semua</button>
+        <button class="filter-chip" onclick="filterGallery('image', this)">🖼️ Foto</button>
+        <button class="filter-chip" onclick="filterGallery('pdf', this)">📄 PDF</button>
+        <button class="filter-chip" onclick="filterGallery('doc', this)">📝 Dokumen</button>
+        <button class="btn-refresh" onclick="fetchLiveGalleryFromDrive()">🔄 Sinkronkan</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryContainer">
+        <div class="loading-box">⏳ Memuat berkas galeri...</div>
+      </div>
+    </section>
+
+    <section id="logTab" style="display: none;">
+      <div class="log-container">
+        <div class="log-header">
+          <h3>📊 Log Aktivitas Pengunggahan</h3>
+          <button class="btn-clear-log" onclick="clearLogHistory()">Hapus</button>
+        </div>
+        <div class="log-list" id="logListContainer"></div>
+      </div>
+    </section>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, saran materi, atau ingin memberikan dukungan donasi? Hubungi tautan resmi:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WA</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 FB</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 IG</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-modal-overlay" id="previewModal" onclick="closePreviewModal(event)">
+    <div class="preview-modal-box" onclick="event.stopPropagation()">
+      <div class="preview-modal-header">
+        <div class="preview-modal-title" id="modalDocTitle">Pratinjau Berkas</div>
+        <button class="btn-close-modal" onclick="closePreviewModal(event)">✕</button>
+      </div>
+      <div class="preview-modal-body" id="modalPreviewContent"></div>
+      <div class="preview-modal-footer">
+        <span style="font-size: 0.72rem; color: var(--subtext);" id="modalUploaderInfo">Diunggah oleh: -</span>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive" id="modalDriveBtn">Buka di Drive ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-msg" id="toastMsg">Notifikasi</div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. CONFIG GOOGLE APPS SCRIPT ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_WsyaNBClq2G0B8mdtxDaw_oMCyk7ynDtqaFILbqD-2qOBFqQCSdkGFhCsk7MSCHK/exec";
+    const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1aZ9fleQfYCoQqB-_ledEj4bBthdwWzQK?usp=drive_link";
+    const MAX_FILE_SIZE = 25 * 1024 * 1024;
+
+    let sharedDocuments = JSON.parse(localStorage.getItem('user_gallery_docs')) || [];
+    let uploadLogs = JSON.parse(localStorage.getItem('user_upload_logs')) || [];
+
+    let selectedFile = null;
+    let currentGalleryFilter = 'all';
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.getElementById('uploadTab').style.display = 'none';
+      document.getElementById('galleryTab').style.display = 'none';
+      document.getElementById('logTab').style.display = 'none';
+
+      document.getElementById(tabId).style.display = 'block';
+
+      if (tabId === 'galleryTab') renderGallery(sharedDocuments);
+      if (tabId === 'logTab') renderLogs();
+    }
+
+    function handleFileSelect(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        if (file.size > MAX_FILE_SIZE) {
+          showToast(`❌ Ukuran file terlalu besar (${(file.size / 1024 / 1024).toFixed(2)} MB). Maksimal 25 MB!`);
+          clearFileSelection();
+          return;
+        }
+
+        selectedFile = file;
+        document.getElementById('fileNameDisplay').innerText = `📄 ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`;
+        document.getElementById('filePreview').style.display = 'flex';
+        document.getElementById('dropzoneBox').style.display = 'none';
+      }
+    }
+
+    function clearFileSelection() {
+      selectedFile = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('filePreview').style.display = 'none';
+      document.getElementById('dropzoneBox').style.display = 'block';
+      document.getElementById('progressWrapper').style.display = 'none';
+    }
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onprogress = (event) => {
+          if (event.lengthComputable) {
+            const percent = Math.round((event.loaded / event.total) * 45);
+            updateProgress(percent, `Membaca berkas... (${percent}%)`);
+          }
+        };
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    function updateProgress(percent, text) {
+      const progressBar = document.getElementById('progressBarFill');
+      const progressStatus = document.getElementById('progressStatus');
+      progressBar.style.width = `${percent}%`;
+      progressStatus.innerText = text;
+    }
+
+    // --- 3. SUBMIT FORMULIR & AUTO-SHOW DI GALERI ---
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+
+      if (!selectedFile) {
+        showToast("⚠️ Pilih file terlebih dahulu!");
+        return;
+      }
+
+      const btnSubmit = document.getElementById('btnSubmit');
+      const progressWrapper = document.getElementById('progressWrapper');
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = "⏳ Sedang Mengunggah File...";
+      progressWrapper.style.display = 'block';
+      updateProgress(10, "Menyiapkan file... (10%)");
+
+      const uploader = document.getElementById('uploaderName').value;
+      const title = document.getElementById('docTitle').value;
+      const category = document.getElementById('docCategory').value;
+      const desc = document.getElementById('docDescription').value;
+
+      try {
+        const base64Data = await toBase64(selectedFile);
+        updateProgress(60, "Mengunggah langsung ke Google Drive... (60%)");
+
+        const formData = new URLSearchParams();
+        formData.append("fileName", selectedFile.name);
+        formData.append("mimeType", selectedFile.type || "application/octet-stream");
+        formData.append("fileData", base64Data);
+        formData.append("uploader", uploader);
+        formData.append("title", title);
+        formData.append("category", category);
+        formData.append("description", desc);
+
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        updateProgress(100, "Selesai! (100%)");
+
+        if (result.status !== "success") {
+          throw new Error(result.message || "Gagal mengunggah berkas");
+        }
+
+        let fileType = 'doc';
+        let isImage = selectedFile.type.startsWith('image/');
+        let isMedia = selectedFile.type.startsWith('audio/') || selectedFile.type.startsWith('video/');
+        
+        if (isImage) fileType = 'image';
+        else if (selectedFile.name.endsWith('.pdf')) fileType = 'pdf';
+        else if (isMedia) fileType = 'media';
+
+        const now = new Date();
+        const dateString = now.getFullYear() + "-" + 
+                           String(now.getMonth() + 1).padStart(2, '0') + "-" + 
+                           String(now.getDate()).padStart(2, '0') + " " + 
+                           String(now.getHours()).padStart(2, '0') + ":" + 
+                           String(now.getMinutes()).padStart(2, '0') + ":" + 
+                           String(now.getSeconds()).padStart(2, '0');
+
+        const localBlobUrl = URL.createObjectURL(selectedFile);
+
+        const newDoc = {
+          id: result.fileId || Date.now().toString(),
+          title: title,
+          category: category,
+          type: fileType,
+          uploader: uploader,
+          date: dateString,
+          desc: desc || "Materi berhasil diunggah kontributor.",
+          thumbIcon: isImage ? '🖼️' : (fileType === 'pdf' ? '📄' : (fileType === 'media' ? '🎧' : '📝')),
+          imgUrl: isImage ? localBlobUrl : '',
+          previewUrl: localBlobUrl,
+          driveUrl: result.fileUrl || DRIVE_FOLDER_URL
+        };
+
+        sharedDocuments.unshift(newDoc);
+        localStorage.setItem('user_gallery_docs', JSON.stringify(sharedDocuments));
+
+        const newLog = {
+          uploader: uploader,
+          fileName: selectedFile.name,
+          date: dateString,
+          size: (selectedFile.size / 1024 / 1024).toFixed(2) + " MB",
+          status: "Berhasil Tayang di Galeri & Drive"
+        };
+
+        uploadLogs.unshift(newLog);
+        localStorage.setItem('user_upload_logs', JSON.stringify(uploadLogs));
+
+        document.getElementById('uploadForm').reset();
+        clearFileSelection();
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = "🚀 Kirim & Simpan ke Google Drive";
+
+        showToast("✅ Berhasil! File Anda langsung tayang di galeri.");
+        switchTab('galleryTab', document.querySelector('.tab-bar .tab-btn:first-child'));
+
+      } catch (err) {
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = "🚀 Kirim & Simpan ke Google Drive";
+        progressWrapper.style.display = 'none';
+        showToast("❌ Terjadi kendala saat mengunggah: " + err.message);
+      }
+    }
+
+    // --- 4. SINKRONISASI DAFTAR FILE GOOGLE DRIVE ---
+    async function fetchLiveGalleryFromDrive() {
+      const container = document.getElementById('galleryContainer');
+      container.innerHTML = '<div class="loading-box">⏳ Menyinkronkan daftar berkas dari Google Drive...</div>';
+
+      try {
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
+
+        if (data && data.status === "success" && data.files) {
+          const driveDocs = data.files.map(file => {
+            let fType = 'doc';
+            let isImg = file.mimeType.startsWith('image/');
+            let isMed = file.mimeType.startsWith('audio/') || file.mimeType.startsWith('video/');
+            if (isImg) fType = 'image';
+            else if (file.mimeType.includes('pdf')) fType = 'pdf';
+            else if (isMed) fType = 'media';
+
+            let uploader = "Kontributor Drive";
+            let desc = `Ukuran berkas: ${file.size}`;
+            if (file.description) {
+              desc = file.description;
+              if (file.description.includes("Pengunggah:")) {
+                uploader = file.description.split("Pengunggah:")[1].split("|")[0].trim();
+              }
+            }
+
+            const driveThumbnail = `https://drive.google.com/thumbnail?id=${file.id}&sz=w600`;
+            const drivePreviewIframe = `https://drive.google.com/file/d/${file.id}/preview`;
+
+            return {
+              id: file.id,
+              title: file.name,
+              category: "Materi Terverifikasi",
+              type: fType,
+              uploader: uploader,
+              date: file.date,
+              desc: desc,
+              thumbIcon: isImg ? '🖼️' : (fType === 'pdf' ? '📄' : (fType === 'media' ? '🎧' : '📝')),
+              imgUrl: isImg ? driveThumbnail : '',
+              previewUrl: isImg ? driveThumbnail : drivePreviewIframe,
+              driveUrl: file.url || DRIVE_FOLDER_URL
+            };
+          });
+
+          if (driveDocs.length > 0) {
+            sharedDocuments = driveDocs;
+            localStorage.setItem('user_gallery_docs', JSON.stringify(sharedDocuments));
+          }
+        }
+      } catch (e) {
+        console.log("Menggunakan cache galeri lokal:", e);
+      }
+
+      renderGallery(sharedDocuments);
+      showToast("🔄 Galeri berhasil diperbarui!");
+    }
+
+    // --- 5. RENDER GALERI DOKUMEN & GAMBAR ---
+    function renderGallery(docs) {
+      const container = document.getElementById('galleryContainer');
+      container.innerHTML = '';
+
+      const filtered = docs.filter(item => {
+        if (currentGalleryFilter === 'all') return true;
+        return item.type === currentGalleryFilter;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--subtext); font-weight: 700; font-size: 0.82rem;">Belum ada berkas pada kategori ini.</div>';
+        return;
+      }
+
+      filtered.forEach(doc => {
+        const card = document.createElement('div');
+        card.className = 'doc-card';
+        
+        let thumb = doc.type === 'image' && doc.imgUrl 
+          ? `<img src="${doc.imgUrl}" alt="${doc.title}" onerror="this.src='https://images.unsplash.com/photo-1528164344705-475426879c0d?w=500&auto=format&fit=crop&q=60'">` 
+          : `<div style="font-size: 2.5rem;">${doc.thumbIcon}</div>`;
+
+        card.innerHTML = `
+          <div class="doc-thumb" onclick="openPreviewModal('${doc.id}')">
+            <span class="doc-type-badge">${doc.type.toUpperCase()}</span>
+            ${thumb}
+            <span class="preview-hint">🔍 Lihat</span>
+          </div>
+          <div class="doc-body">
+            <div>
+              <div class="doc-title">${doc.title}</div>
+              <div class="doc-desc">${doc.desc}</div>
+            </div>
+            <div>
+              <div class="doc-meta">
+                <span>👤 ${doc.uploader}</span>
+                <span>📅 ${doc.date ? doc.date.split(' ')[0] : 'Baru saja'}</span>
+              </div>
+              <div class="btn-card-group">
+                <button class="btn-preview-action" onclick="openPreviewModal('${doc.id}')">🔍 Preview</button>
+                <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-drive-action">📂 Drive</a>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 6. MODAL PREVIEW HANDLER ---
+    function openPreviewModal(docId) {
+      const doc = sharedDocuments.find(d => d.id === docId);
+      if (!doc) return;
+
+      document.getElementById('modalDocTitle').innerText = doc.title;
+      document.getElementById('modalUploaderInfo').innerText = `Diunggah oleh: ${doc.uploader}`;
+      document.getElementById('modalDriveBtn').href = doc.driveUrl;
+
+      const previewContainer = document.getElementById('modalPreviewContent');
+      previewContainer.innerHTML = '';
+
+      if (doc.type === 'image') {
+        previewContainer.innerHTML = `<img src="${doc.previewUrl || doc.imgUrl}" alt="${doc.title}">`;
+      } else if (doc.type === 'pdf') {
+        const pdfSrc = doc.previewUrl.startsWith('blob:') ? doc.previewUrl : `https://drive.google.com/file/d/${doc.id}/preview`;
+        previewContainer.innerHTML = `<iframe src="${pdfSrc}" allow="autoplay"></iframe>`;
+      } else {
+        previewContainer.innerHTML = `
+          <div class="preview-doc-placeholder">
+            <div class="icon">${doc.thumbIcon}</div>
+            <p style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">${doc.title}</p>
+            <p style="font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px;">${doc.desc}</p>
+            <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive">Buka &amp; Unduh Dokumen Lengkap di Drive ↗</a>
+          </div>
+        `;
+      }
+
+      document.getElementById('previewModal').classList.add('active');
+    }
+
+    function closePreviewModal(e) {
+      if (e) e.preventDefault();
+      document.getElementById('previewModal').classList.remove('active');
+      document.getElementById('modalPreviewContent').innerHTML = '';
+    }
+
+    // --- 7. LOG AKTIVITAS ---
+    function renderLogs() {
+      const container = document.getElementById('logListContainer');
+      container.innerHTML = '';
+
+      if (uploadLogs.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 16px; color: var(--subtext); font-weight: 600; font-size: 0.78rem;">Belum ada riwayat aktivitas pengunggahan.</div>';
+        return;
+      }
+
+      uploadLogs.forEach(log => {
+        const item = document.createElement('div');
+        item.className = 'log-item';
+        item.innerHTML = `
+          <div class="log-item-top">
+            <span class="log-user">👤 ${log.uploader}</span>
+            <span class="log-time">${log.date}</span>
+          </div>
+          <div class="log-filename">📄 ${log.fileName} (${log.size})</div>
+          <span class="log-badge-success">✅ ${log.status}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function clearLogHistory() {
+      if (confirm("Hapus seluruh catatan log aktivitas di perangkat ini?")) {
+        uploadLogs = [];
+        localStorage.removeItem('user_upload_logs');
+        renderLogs();
+        showToast("🗑️ Riwayat log berhasil dibersihkan.");
+      }
+    }
+
+    function filterGallery(type, btn) {
+      currentGalleryFilter = type;
+      document.querySelectorAll('.gallery-filter-bar .filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGallery(sharedDocuments);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastMsg');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Inisialisasi awal
+    if (sharedDocuments.length === 0) {
+      fetchLiveGalleryFromDrive();
+    } else {
+      renderGallery(sharedDocuments);
+    }
+  </script>
+</body>
+</html>
