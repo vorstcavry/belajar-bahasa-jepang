@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Belajar Huruf Kana - Hiragana &amp; Katakana</title>
+  
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #818cf8;
+      --primary-dark: #a5b4fc;
+      --accent-hira: #f472b6;
+      --accent-kata: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-empty: #0f172a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --border-dashed: #1e293b;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --tab-nav-bg: #1e293b;
+      --tab-btn-color: #94a3b8;
+      --rule-item-bg: #0f172a;
+      --rule-item-border: #334155;
+      --info-bar-bg: #1e293b;
+      --info-bar-border: #334155;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --hira-hover-bg: #831843;
+      --kata-hover-bg: #075985;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #4338ca;
+      --primary-dark: #312e81;
+      --accent-hira: #ec4899;
+      --accent-kata: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-empty: transparent;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --border-dashed: #e2e8f0;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --tab-nav-bg: #ffffff;
+      --tab-btn-color: #64748b;
+      --rule-item-bg: #f8fafc;
+      --rule-item-border: #f1f5f9;
+      --info-bar-bg: #ffffff;
+      --info-bar-border: #e2e8f0;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --hira-hover-bg: #fdf2f8;
+      --kata-hover-bg: #f0f9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 16px 10px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Top Floating Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #312e81 0%, #db2777 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.75rem;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #fce7f3;
+      font-size: 0.9rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+    }
+
+    /* Navigation Tabs */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--tab-nav-bg);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--tab-btn-color);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn.active.hira-tab {
+      background: #831843;
+      color: #fbcfe8;
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.25);
+    }
+    html.light-theme .tab-btn.active.hira-tab,
+    body.light-theme .tab-btn.active.hira-tab {
+      background: #fdf2f8;
+      color: var(--accent-hira);
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.15);
+    }
+
+    .tab-btn.active.kata-tab {
+      background: #075985;
+      color: #bae6fd;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    html.light-theme .tab-btn.active.kata-tab,
+    body.light-theme .tab-btn.active.kata-tab {
+      background: #f0f9ff;
+      color: var(--accent-kata);
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Info Bar */
+    .info-bar {
+      background: var(--info-bar-bg);
+      border: 1.5px solid var(--info-bar-border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    /* Section Subtitle */
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin: 24px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    /* Kana Grids */
+    .kana-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .yoon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tokushu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .kana-grid { gap: 5px; }
+      .yoon-grid { gap: 5px; }
+      .tokushu-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    }
+
+    /* Card Item (Kana) */
+    .kana-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 96px;
+      user-select: none;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .kana-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 14px var(--shadow-color);
+    }
+
+    .kana-card:active, .kana-card.playing {
+      transform: scale(0.92);
+    }
+
+    .hira-theme .kana-card:hover, .hira-theme .kana-card.playing {
+      border-color: var(--accent-hira);
+      background: var(--hira-hover-bg);
+    }
+
+    .kata-theme .kana-card:hover, .kata-theme .kana-card.playing {
+      border-color: var(--accent-kata);
+      background: var(--kata-hover-bg);
+    }
+
+    .tier-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.15rem, 3.2vw, 1.5rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .tier-reading {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .tier-meaning {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .kana-card.empty {
+      background: var(--bg-card-empty);
+      border: 1.5px dashed var(--border-dashed);
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    /* Rule Box */
+    .rule-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      padding: 20px;
+      margin-top: 24px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-card h3 {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      font-size: 0.86rem;
+    }
+
+    .rule-item {
+      background: var(--rule-item-bg);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--rule-item-border);
+      color: var(--text-main);
+    }
+
+    .rule-item strong {
+      color: var(--primary);
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 980px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Pondasi Huruf Dasar Jepang</span>
+        <h1>Belajar Huruf Hiragana &amp; Katakana</h1>
+        <p>Ketuk kartu apa saja untuk mendengarkan pelafalan vokal dan konsonan yang akurat.</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
+    </header>
+
+    <div class="tab-nav">
+      <button class="tab-btn active hira-tab" onclick="switchKana('hiragana')">
+        <span>🌸</span> Hiragana Lengkap
+      </button>
+      <button class="tab-btn kata-tab" onclick="switchKana('katakana')">
+        <span>⚡</span> Katakana + Modern
+      </button>
+    </div>
+
+    <div class="info-bar" id="kanaInfoText">
+      🌸 <strong>Hiragana:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ).
+    </div>
+
+    <div id="hiraganaContainer" class="hira-theme">
+      <div class="section-title">1. Huruf Dasar (Gojuon - 46 Huruf)</div>
+      <div class="kana-grid" id="hiraBaseGrid"></div>
+
+      <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+      <div class="kana-grid" id="hiraDakuGrid"></div>
+
+      <div class="section-title">3. Yoon (Gabungan Huruf Kecil ゃ, ゅ, ょ)</div>
+      <div class="yoon-grid" id="hiraYoonGrid"></div>
+    </div>
+
+    <div id="katakanaContainer" class="kata-theme" style="display: none;">
+      <div class="section-title">1. Huruf Dasar Katakana (46 Huruf)</div>
+      <div class="kana-grid" id="kataBaseGrid"></div>
+
+      <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+      <div class="kana-grid" id="kataDakuGrid"></div>
+
+      <div class="section-title">3. Yoon (Gabungan Huruf Kecil ャ, ュ, ョ)</div>
+      <div class="yoon-grid" id="kataYoonGrid"></div>
+
+      <div class="section-title">4. Katakana Khusus / Modern (Kata Serapan Asing)</div>
+      <div class="tokushu-grid" id="kataSpecialGrid"></div>
+    </div>
+
+    <div class="rule-card">
+      <h3>📖 Aturan Turunan Huruf Kana (Wajib Dipahami)</h3>
+      <div class="rule-grid">
+        <div class="rule-item">
+          <strong>1. Dakuon (Tanda Kutip ゛):</strong> Mengubah konsonan tak bersuara menjadi bersuara (K &rarr; G, S &rarr; Z, T &rarr; D, H &rarr; B). Contoh: か (ka) &rarr; が (ga).
+        </div>
+        <div class="rule-item">
+          <strong>2. Handakuon (Tanda Bulat ゜):</strong> Khusus deret H berubah menjadi letupan P. Contoh: は (ha) &rarr; ぱ (pa).
+        </div>
+        <div class="rule-item">
+          <strong>3. Yoon (Gabungan Kecil ゃ, ゅ, ょ):</strong> Menggabungkan deret vokal 'i' dengan ya/yu/yo kecil. Contoh: き (ki) + ゃ (ya) = きゃ (kya).
+        </div>
+        <div class="rule-item">
+          <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Berfungsi sebagai konsonan rangkap (dobel) atau jeda ketukan. Contoh: きって (kitte - perangko).
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA HURUF KANA ---
+    const baseKana = [
+      { h: "あ", k: "ア", r: "a", m: "Huruf A", s: "あ" },
+      { h: "い", k: "イ", r: "i", m: "Huruf I", s: "い" },
+      { h: "う", k: "ウ", r: "u", m: "Huruf U", s: "う" },
+      { h: "え", k: "エ", r: "e", m: "Huruf E", s: "え" },
+      { h: "お", k: "オ", r: "o", m: "Huruf O", s: "お" },
+      { h: "か", k: "カ", r: "ka", m: "Huruf Ka", s: "か" },
+      { h: "き", k: "キ", r: "ki", m: "Huruf Ki", s: "き" },
+      { h: "く", k: "ク", r: "ku", m: "Huruf Ku", s: "く" },
+      { h: "け", k: "ケ", r: "ke", m: "Huruf Ke", s: "け" },
+      { h: "こ", k: "コ", r: "ko", m: "Huruf Ko", s: "こ" },
+      { h: "さ", k: "サ", r: "sa", m: "Huruf Sa", s: "さ" },
+      { h: "し", k: "シ", r: "shi", m: "Huruf Shi", s: "し" },
+      { h: "す", k: "ス", r: "su", m: "Huruf Su", s: "す" },
+      { h: "せ", k: "セ", r: "se", m: "Huruf Se", s: "せ" },
+      { h: "そ", k: "ソ", r: "so", m: "Huruf So", s: "そ" },
+      { h: "た", k: "タ", r: "ta", m: "Huruf Ta", s: "た" },
+      { h: "ち", k: "チ", r: "chi", m: "Huruf Chi", s: "ち" },
+      { h: "つ", k: "ツ", r: "tsu", m: "Huruf Tsu", s: "つ" },
+      { h: "て", k: "テ", r: "te", m: "Huruf Te", s: "て" },
+      { h: "と", k: "ト", r: "to", m: "Huruf To", s: "to" },
+      { h: "な", k: "ナ", r: "na", m: "Huruf Na", s: "な" },
+      { h: "に", k: "ニ", r: "ni", m: "Huruf Ni", s: "ni" },
+      { h: "ぬ", k: "ヌ", r: "nu", m: "Huruf Nu", s: "ぬ" },
+      { h: "ね", k: "ネ", r: "ne", m: "Huruf Ne", s: "ね" },
+      { h: "の", k: "ノ", r: "no", m: "Huruf No", s: "no" },
+      { h: "は", k: "ハ", r: "ha", m: "Huruf Ha", s: "は" },
+      { h: "ひ", k: "ヒ", r: "hi", m: "Huruf Hi", s: "hi" },
+      { h: "ふ", k: "フ", r: "fu", m: "Huruf Fu", s: "ふ" },
+      { h: "へ", k: "ヘ", r: "he", m: "Huruf He", s: "へ" },
+      { h: "ほ", k: "ホ", r: "ho", m: "Huruf Ho", s: "ほ" },
+      { h: "ま", k: "マ", r: "ma", m: "Huruf Ma", s: "ま" },
+      { h: "み", k: "ミ", r: "mi", m: "Huruf Mi", s: "み" },
+      { h: "む", k: "ム", r: "mu", m: "Huruf Mu", s: "む" },
+      { h: "め", k: "メ", r: "me", m: "Huruf Me", s: "me" },
+      { h: "も", k: "モ", r: "mo", m: "Huruf Mo", s: "mo" },
+      { h: "や", k: "ヤ", r: "ya", m: "Huruf Ya", s: "や" },
+      { empty: true },
+      { h: "ゆ", k: "ユ", r: "yu", m: "Huruf Yu", s: "ゆ" },
+      { empty: true },
+      { h: "よ", k: "ヨ", r: "yo", m: "Huruf Yo", s: "よ" },
+      { h: "ら", k: "ラ", r: "ra", m: "Huruf Ra", s: "ら" },
+      { h: "り", k: "リ", r: "ri", m: "Huruf Ri", s: "ri" },
+      { h: "る", k: "ル", r: "ru", m: "Huruf Ru", s: "る" },
+      { h: "れ", k: "レ", r: "re", m: "Huruf Re", s: "れ" },
+      { h: "ろ", k: "ロ", r: "ro", m: "Huruf Ro", s: "ろ" },
+      { h: "わ", k: "ワ", r: "wa", m: "Huruf Wa", s: "wa" },
+      { empty: true },
+      { h: "を", k: "ヲ", r: "wo (o)", m: "Huruf Wo (Partikel O)", s: "を" },
+      { empty: true },
+      { h: "ん", k: "ン", r: "n", m: "Huruf N", s: "ん" }
+    ];
+
+    const dakuKana = [
+      { h: "が", k: "ガ", r: "ga", m: "Huruf Ga", s: "が" },
+      { h: "ぎ", k: "ギ", r: "gi", m: "Huruf Gi", s: "ぎ" },
+      { h: "ぐ", k: "グ", r: "gu", m: "Huruf Gu", s: "ぐ" },
+      { h: "げ", k: "ゲ", r: "ge", m: "Huruf Ge", s: "げ" },
+      { h: "ご", k: "ゴ", r: "go", m: "Huruf Go", s: "ご" },
+      { h: "ざ", k: "ザ", r: "za", m: "Huruf Za", s: "ざ" },
+      { h: "じ", k: "ジ", r: "ji", m: "Huruf Ji", s: "じ" },
+      { h: "ず", k: "ズ", r: "zu", m: "Huruf Zu", s: "ず" },
+      { h: "ぜ", k: "ゼ", r: "ze", m: "Huruf Ze", s: "ぜ" },
+      { h: "ぞ", k: "ゾ", r: "zo", m: "Huruf Zo", s: "ぞ" },
+      { h: "だ", k: "ダ", r: "da", m: "Huruf Da", s: "だ" },
+      { h: "ぢ", k: "ヂ", r: "ji (di)", m: "Huruf Ji (Di)", s: "ぢ" },
+      { h: "づ", k: "ヅ", r: "zu (du)", m: "Huruf Zu (Du)", s: "づ" },
+      { h: "で", k: "デ", r: "de", m: "Huruf De", s: "で" },
+      { h: "ど", k: "ド", r: "do", m: "Huruf Do", s: "ど" },
+      { h: "ば", k: "バ", r: "ba", m: "Huruf Ba", s: "ば" },
+      { h: "び", k: "ビ", r: "bi", m: "Huruf Bi", s: "び" },
+      { h: "ぶ", k: "ブ", r: "bu", m: "Huruf Bu", s: "ぶ" },
+      { h: "べ", k: "ベ", r: "be", m: "Huruf Be", s: "べ" },
+      { h: "ぼ", k: "ボ", r: "bo", m: "Huruf Bo", s: "ぼ" },
+      { h: "ぱ", k: "パ", r: "pa", m: "Huruf Pa", s: "pa" },
+      { h: "ぴ", k: "ピ", r: "pi", m: "Huruf Pi", s: "pi" },
+      { h: "ぷ", k: "プ", r: "pu", m: "Huruf Pu", s: "pu" },
+      { h: "ぺ", k: "ペ", r: "pe", m: "Huruf Pe", s: "pe" },
+      { h: "ぽ", k: "ポ", r: "po", m: "Huruf Po", s: "po" }
+    ];
+
+    const yoonKana = [
+      { h: "きゃ", k: "キャ", r: "kya", m: "Bunyi Kya", s: "きゃ" },
+      { h: "きゅ", k: "キュ", r: "kyu", m: "Bunyi Kyu", s: "きゅ" },
+      { h: "きょ", k: "キョ", r: "kyo", m: "Bunyi Kyo", s: "きょ" },
+      { h: "しゃ", k: "シャ", r: "sha", m: "Bunyi Sha", s: "しゃ" },
+      { h: "しゅ", k: "シュ", r: "shu", m: "Bunyi Shu", s: "しゅ" },
+      { h: "しょ", k: "ショ", r: "sho", m: "Bunyi Sho", s: "しょ" },
+      { h: "ちゃ", k: "チャ", r: "cha", m: "Bunyi Cha", s: "ちゃ" },
+      { h: "ちゅ", k: "チュ", r: "chu", m: "Bunyi Chu", s: "ちゅ" },
+      { h: "ちょ", k: "チョ", r: "cho", m: "Bunyi Cho", s: "ちょ" },
+      { h: "にゃ", k: "ニャ", r: "nya", m: "Bunyi Nya", s: "にゃ" },
+      { h: "にゅ", k: "ニュ", r: "nyu", m: "Bunyi Nyu", s: "にゅ" },
+      { h: "にょ", k: "ニョ", r: "nyo", m: "Bunyi Nyo", s: "にょ" },
+      { h: "ひゃ", k: "ヒャ", r: "hya", m: "Bunyi Hya", s: "ひゃ" },
+      { h: "ひゅ", k: "ヒュ", r: "hyu", m: "Bunyi Hyu", s: "ひゅ" },
+      { h: "ひょ", k: "ヒョ", r: "hyo", m: "Bunyi Hyo", s: "ひょ" },
+      { h: "みゃ", k: "ミャ", r: "mya", m: "Bunyi Mya", s: "みゃ" },
+      { h: "みゅ", k: "ミュ", r: "myu", m: "Bunyi Myu", s: "みゅ" },
+      { h: "みょ", k: "ミョ", r: "myo", m: "Bunyi Myo", s: "みょ" },
+      { h: "りゃ", k: "リャ", r: "rya", m: "Bunyi Rya", s: "りゃ" },
+      { h: "りゅ", k: "リュ", r: "ryu", m: "Bunyi Ryu", s: "りゅ" },
+      { h: "りょ", k: "リョ", r: "ryo", m: "Bunyi Ryo", s: "りょ" },
+      { h: "ぎゃ", k: "ギャ", r: "gya", m: "Bunyi Gya", s: "ぎゃ" },
+      { h: "ぎゅ", k: "ギュ", r: "gyu", m: "Bunyi Gyu", s: "ぎゅ" },
+      { h: "ぎょ", k: "ギョ", r: "gyo", m: "Bunyi Gyo", s: "ぎょ" },
+      { h: "じゃ", k: "ジャ", r: "ja", m: "Bunyi Ja", s: "じゃ" },
+      { h: "じゅ", k: "ジュ", r: "ju", m: "Bunyi Ju", s: "じゅ" },
+      { h: "じょ", k: "ジョ", r: "jo", m: "Bunyi Jo", s: "じょ" },
+      { h: "びゃ", k: "ビャ", r: "bya", m: "Bunyi Bya", s: "びゃ" },
+      { h: "びゅ", k: "ビュ", r: "byu", m: "Bunyi Byu", s: "びゅ" },
+      { h: "びょ", k: "ビョ", r: "byo", m: "Bunyi Byo", s: "びょ" },
+      { h: "ぴゃ", k: "ピャ", r: "pya", m: "Bunyi Pya", s: "ぴゃ" },
+      { h: "ぴゅ", k: "ピュ", r: "pyu", m: "Bunyi Pyu", s: "ぴゅ" },
+      { h: "ぴょ", k: "ピョ", r: "pyo", m: "Bunyi Pyo", s: "ぴょ" }
+    ];
+
+    const specialKatakana = [
+      { k: "ウィ", r: "wi", m: "Bunyi Wi", s: "ウィ" },
+      { k: "ウェ", r: "we", m: "Bunyi We", s: "ウェ" },
+      { k: "ウォ", r: "wo", m: "Bunyi Wo", s: "ウォ" },
+      { k: "ティ", r: "ti", m: "Bunyi Ti", s: "ティ" },
+      { k: "ディ", r: "di", m: "Bunyi Di", s: "ディ" },
+      { k: "デュ", r: "dyu / du", m: "Bunyi Dyu / Du", s: "デュ" },
+      { k: "ツァ", r: "tsa", m: "Bunyi Tsa", s: "ツァ" },
+      { k: "ツェ", r: "tse", m: "Bunyi Tse", s: "ツェ" },
+      { k: "ツォ", r: "tso", m: "Bunyi Tso", s: "ツォ" },
+      { k: "トゥ", r: "tu", m: "Bunyi Tu", s: "トゥ" },
+      { k: "ドゥ", r: "du", m: "Bunyi Du", s: "ドゥ" },
+      { k: "ファ", r: "fa", m: "Bunyi Fa", s: "ファ" },
+      { k: "フィ", r: "fi", m: "Bunyi Fi", s: "フィ" },
+      { k: "フェ", r: "fe", m: "Bunyi Fe", s: "フェ" },
+      { k: "フォ", r: "fo", m: "Bunyi Fo", s: "フォ" },
+      { k: "ヴァ", r: "va", m: "Bunyi Va", s: "ヴァ" },
+      { k: "ヴィ", r: "vi", m: "Bunyi Vi", s: "ヴィ" },
+      { k: "ヴ", r: "vu", m: "Bunyi Vu", s: "ヴ" },
+      { k: "ヴェ", r: "ve", m: "Bunyi Ve", s: "ヴェ" },
+      { k: "ヴォ", r: "vo", m: "Bunyi Vo", s: "ヴォ" },
+      { k: "チェ", r: "che", m: "Bunyi Che", s: "チェ" },
+      { k: "ジェ", r: "je", m: "Bunyi Je", s: "ジェ" },
+      { k: "シェ", r: "she", m: "Bunyi She", s: "シェ" }
+    ];
+
+    // --- 3. SPEECH SYNTHESIS ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(soundText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') ||
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    function create3TierCard(jpText, readingText, meaningText, soundText) {
+      return `
+        <div class="kana-card" onclick="playAudio('${soundText}', this)">
+          <div class="tier-jp">${jpText}</div>
+          <div class="tier-reading">${readingText}</div>
+          <div class="tier-meaning">${meaningText}</div>
+        </div>`;
+    }
+
+    function renderGrids() {
+      const hBase = document.getElementById('hiraBaseGrid');
+      const hDaku = document.getElementById('hiraDakuGrid');
+      const hYoon = document.getElementById('hiraYoonGrid');
+      baseKana.forEach(i => hBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.h, i.r, i.m, i.s));
+      dakuKana.forEach(i => hDaku.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
+      yoonKana.forEach(i => hYoon.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
+
+      const kBase = document.getElementById('kataBaseGrid');
+      const kDaku = document.getElementById('kataDakuGrid');
+      const kYoon = document.getElementById('kataYoonGrid');
+      const kSpec = document.getElementById('kataSpecialGrid');
+      baseKana.forEach(i => kBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.k, i.r, i.m, i.s));
+      dakuKana.forEach(i => kDaku.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+      yoonKana.forEach(i => kYoon.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+      specialKatakana.forEach(i => kSpec.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+    }
+
+    function switchKana(type) {
+      const hTab = document.querySelector('.hira-tab');
+      const kTab = document.querySelector('.kata-tab');
+      const hCon = document.getElementById('hiraganaContainer');
+      const kCon = document.getElementById('katakanaContainer');
+      const info = document.getElementById('kanaInfoText');
+
+      if (type === 'hiragana') {
+        hTab.classList.add('active');
+        kTab.classList.remove('active');
+        hCon.style.display = 'block';
+        kCon.style.display = 'none';
+        info.innerHTML = '🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ). Ketuk kartu untuk mendengar suara!';
+      } else {
+        kTab.classList.add('active');
+        hTab.classList.remove('active');
+        kCon.style.display = 'block';
+        hCon.style.display = 'none';
+        info.innerHTML = '⚡ <strong>Katakana Lengkap &amp; Modern:</strong> 46 Huruf Dasar, Dakuon, Yoon, serta Kombinasi Kata Serapan Modern (wi, we, ti, di, fa, fi, va, vi, che, je).';
+      }
+    }
+
+    renderGrids();
+  </script>
+
+</body>
+</html>
