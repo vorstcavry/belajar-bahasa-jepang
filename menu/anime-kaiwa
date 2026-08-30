@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Anime &amp; Percakapan - Frasa Nyata &amp; Bedah Kalimat</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #fb7185;
+      --primary-dark: #f43f5e;
+      --accent: #a78bfa;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
+      --card-hover-bg: #881337;
+      --card-active-bg: #4c0519;
+      --source-tag-bg: #2e1065;
+      --source-tag-text: #c4b5fd;
+      --phrase-id-bg: #0f172a;
+      --phrase-id-border: #334155;
+      --rule-box-bg: #4c0519;
+      --rule-box-border: #9f1239;
+      --rule-box-text: #fecdd3;
+      --rule-box-h3: #fb7185;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #f43f5e;
+      --primary-dark: #be123c;
+      --accent: #8b5cf6;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #e2e8f0;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
+      --card-hover-bg: #fff1f2;
+      --card-active-bg: #ffe4e6;
+      --source-tag-bg: #ede9fe;
+      --source-tag-text: #6d28d9;
+      --phrase-id-bg: #f8fafc;
+      --phrase-id-border: #f1f5f9;
+      --rule-box-bg: #fff1f2;
+      --rule-box-border: #fecdd3;
+      --rule-box-text: #9f1239;
+      --rule-box-h3: #881337;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #be123c 0%, #7c3aed 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #fce7f3;
+      font-size: 0.85rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-body);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Cards Grid */
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Phrase Card */
+    .phrase-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .phrase-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 20px -4px var(--shadow-color);
+    }
+
+    .phrase-card:active, .phrase-card.playing {
+      transform: scale(0.98);
+      background: var(--card-hover-bg);
+      border-color: var(--primary);
+    }
+
+    .card-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .source-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--source-tag-bg);
+      color: var(--source-tag-text);
+    }
+
+    .speaker-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .phrase-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .phrase-romaji {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .phrase-id {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      background: var(--phrase-id-bg);
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--phrase-id-border);
+    }
+
+    .breakdown-box {
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .breakdown-box strong {
+      color: var(--text-heading);
+    }
+
+    .audio-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    /* Grammatical Notes */
+    .rule-box {
+      background: var(--rule-box-bg);
+      border: 1.5px solid var(--rule-box-border);
+      border-radius: 12px;
+      padding: 16px 16px;
+      margin-top: 24px;
+      font-size: 0.84rem;
+      color: var(--rule-box-text);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-box h3 {
+      font-size: 0.95rem;
+      color: var(--rule-box-h3);
+      margin-bottom: 8px;
+    }
+
+    .rule-box ul {
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1040px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Percakapan &amp; Anime JLPT</span>
+        <h1>Anime &amp; Percakapan (アニメと日常会話)</h1>
+        <p>Pelajari frasa percakapan nyata dan bedah pola kalimat bahasa Jepang dari anime populer.</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
+    </header>
+
+    <div class="search-filter-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari frasa, arti, romaji, atau judul anime..." onkeyup="filterCards()">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua Kategori</button>
+        <button class="filter-btn" onclick="setCategory('semangat', this)">🔥 Tekad &amp; Semangat</button>
+        <button class="filter-btn" onclick="setCategory('kasual', this)">💬 Santai &amp; Teman</button>
+        <button class="filter-btn" onclick="setCategory('emosi', this)">😭 Emosional &amp; Janji</button>
+        <button class="filter-btn" onclick="setCategory('keseharian', this)">☕ Rutinitas Sehari-hari</button>
+      </div>
+    </div>
+
+    <div class="phrase-grid" id="phraseContainer"></div>
+
+    <div class="rule-box">
+      <h3>📌 Catatan Penting Bahasa Jepang Anime vs Realita Nyata</h3>
+      <ul>
+        <li><strong>Partikel Sering Dihilangkan:</strong> Pada percakapan kasual dan anime, partikel seperti <em>は (wa), を (wo), が (ga)</em> sering kali dihilangkan untuk mempercepat tempo bicara (Contoh: <em>ご飯食べる？</em> daripada <em>ご飯を食べますか？</em>).</li>
+        <li><strong>Bentuk Singkatan Kasual:</strong> Sering terdengar singkatan seperti <em>〜ておく &rarr; 〜とく</em>, <em>〜てしまう &rarr; 〜ちゃう</em>, dan <em>〜なくてはならない &rarr; 〜なくちゃ</em>.</li>
+        <li><strong>Konteks Penggunaan:</strong> Karakter anime sering menggunakan kata ganti ekstrem seperti <em>俺 (ore), お前 (omae), てめえ (temee)</em> yang terdengar kasar jika digunakan pada percakapan sopan di dunia nyata.</li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA FRASA ANIME & PERCAKAPAN ---
+    const animePhrases = [
+      {
+        no: 1,
+        source: "Anime Phrase",
+        speaker: "Anime Character",
+        jp: "誰か助けて！",
+        romaji: "Dareka tasukete!",
+        mean: "Siapa saja tolong aku!",
+        cat: "emosi",
+        voicePitch: 1.2,
+        voiceRate: 1.0,
+        audioUrl: "https://www.myinstants.com/media/sounds/dareka-tasukete.mp3",
+        breakdown: "<strong>誰か (dareka)</strong>: Seseorang / Siapa saja.<br><strong>助けて (tasukete)</strong>: Bentuk ~Te dari <em>tasukeru</em> (menolong) yang digunakan dalam situasi darurat untuk meminta pertolongan."
+      },
+      {
+        no: 2,
+        source: "Anime Phrase",
+        speaker: "Anime Character",
+        jp: "何するんですか？",
+        romaji: "Nani suru n desu ka?",
+        mean: "Apa yang sedang kamu lakukan? / Mau melakukan apa?",
+        cat: "kasual",
+        voicePitch: 1.15,
+        voiceRate: 1.0,
+        audioUrl: "https://www.myinstants.com/media/sounds/393fc54.mp3",
+        breakdown: "<strong>何 (nani)</strong>: Apa.<br><strong>するんですか (suru n desu ka)</strong>: Bentuk penjelas sopan (*~n desu ka*) dari kata kerja <em>suru</em> (melakukan) untuk menanyakan atau meminta penjelasan mengenai tindakan lawan bicara."
+      },
+      {
+        no: 3,
+        source: "Anime Idiom",
+        speaker: "Anime Character",
+        jp: "それはそれ、これはこれ！",
+        romaji: "Sore wa sore, Kore wa kore!",
+        mean: "Itu urusan itu, ini urusan ini! (Jangan dicampuradukkan)",
+        cat: "kasual",
+        voicePitch: 1.1,
+        voiceRate: 1.0,
+        audioUrl: "https://www.myinstants.com/media/sounds/kore-wa-kore-sore-wa-sore_jLF7Qke.mp3",
+        breakdown: "<strong>それはそれ (sore wa sore)</strong>: 'Itu adalah itu' (hal yang lain). <br><strong>これはこれ (kore wa kore)</strong>: 'Ini adalah ini' (hal yang saat ini). Idiom populer untuk menegaskan pemisahan batas antara dua perkara atau tanggung jawab yang berbeda."
+      },
+      {
+        no: 4,
+        source: "One Piece",
+        speaker: "Monkey D. Luffy",
+        jp: "海賊王に俺はなる！",
+        romaji: "Kaizoku-ou ni ore wa naru!",
+        mean: "Aku pasti akan menjadi Raja Bajak Laut!",
+        cat: "semangat",
+        voicePitch: 1.3,
+        voiceRate: 1.1,
+        audioUrl: null,
+        breakdown: "<strong>〜になる (~ni naru)</strong>: Pola tata bahasa menyatakan perubahan cita-cita/menjadi.<br><strong>俺 (ore)</strong>: Kata ganti 'aku' maskulin kasual."
+      },
+      {
+        no: 5,
+        source: "Boku no Hero Academia",
+        speaker: "All Might",
+        jp: "もう大丈夫！なぜなら、私が来た！",
+        romaji: "Mou daijoubu! Nazenara, watashi ga kita!",
+        mean: "Semuanya sudah baik-baik saja! Karena, aku telah tiba!",
+        cat: "semangat",
+        voicePitch: 0.75,
+        voiceRate: 0.95,
+        audioUrl: null,
+        breakdown: "<strong>なぜなら (nazenara)</strong>: Konjungsi formal untuk 'karena/alasannya adalah'.<br><strong>来た (kita)</strong>: Bentuk lampau dari <em>kuru</em> (datang)."
+      },
+      {
+        no: 6,
+        source: "Kimi no Na wa",
+        speaker: "Taki & Mitsuha",
+        jp: "言おうと思ったんだ。お前が世界のどこにいても...",
+        romaji: "Iou to omottanda. Omae ga sekai no doko ni itemo...",
+        mean: "Aku berniat mengatakannya. Di mana pun kau berada di dunia ini...",
+        cat: "emosi",
+        voicePitch: 1.0,
+        voiceRate: 0.85,
+        audioUrl: null,
+        breakdown: "<strong>言おうと思った (iou to omotta)</strong>: Pola <em>~you to omou</em> (berniat untuk melakukan sesuatu).<br><strong>〜ても (~temo)</strong>: Pola pengandaian bertentangan (meskipun/walaupun)."
+      },
+      {
+        no: 7,
+        source: "Shingeki no Kyojin",
+        speaker: "Eren Yeager",
+        jp: "戦わなければ勝てない。",
+        romaji: "Tatakawanakereba katenai.",
+        mean: "Jika tidak bertarung, kau tak akan bisa menang.",
+        cat: "semangat",
+        voicePitch: 0.95,
+        voiceRate: 0.95,
+        audioUrl: null,
+        breakdown: "<strong>戦わなければ (tatakawanakereba)</strong>: Bentuk pengandaian syarat negatif (~nakereba).<br><strong>勝てない (katenai)</strong>: Bentuk potensial negatif dari <em>katsu</em> (menang)."
+      },
+      {
+        no: 8,
+        source: "Haikyuu!!",
+        speaker: "Hinata Shouyou",
+        jp: "まだ負けてないよ？",
+        romaji: "Mada maketenai yo?",
+        mean: "Kita kan belum kalah?",
+        cat: "semangat",
+        voicePitch: 1.25,
+        voiceRate: 1.0,
+        audioUrl: null,
+        breakdown: "<strong>まだ〜てない (mada ~tenai)</strong>: Pola menyatakan 'belum selesai/belum terjadi'.<br><strong>よ (yo)</strong>: Partikel penegas di akhir kalimat."
+      },
+      {
+        no: 9,
+        source: "Spy x Family",
+        speaker: "Anya Forger",
+        jp: "アーニャ、ピーナッツが好き！",
+        romaji: "Aanya, piinattsu ga suki!",
+        mean: "Anya suka kacang tanah!",
+        cat: "keseharian",
+        voicePitch: 1.6,
+        voiceRate: 0.9,
+        audioUrl: null,
+        breakdown: "<strong>〜が好き (~ga suki)</strong>: Pola dasar N5 untuk menyatakan kesukaan terhadap suatu objek/benda."
+      },
+      {
+        no: 10,
+        source: "Sousou no Frieren",
+        speaker: "Frieren",
+        jp: "人間の寿命は短いって、わかってたのに。",
+        romaji: "Ningen no jumyou wa mijikai tte, wakatteta noni.",
+        mean: "Padahal aku sudah tahu kalau umur manusia itu singkat.",
+        cat: "emosi",
+        voicePitch: 1.05,
+        voiceRate: 0.85,
+        audioUrl: null,
+        breakdown: "<strong>〜って (tte)</strong>: Bentuk kasual dari partikel kutipan <em>〜と (to)</em>.<br><strong>〜のに (noni)</strong>: Pola penyesalan/kontradiksi 'padahal'."
+      },
+      {
+        no: 11,
+        source: "Koe no Katachi",
+        speaker: "Shouya Ishida",
+        jp: "君に生きるのを手伝ってほしい。",
+        romaji: "Kimi ni ikiru no o tetsudatte hoshii.",
+        mean: "Aku ingin membantumu untuk terus bertahan hidup.",
+        cat: "emosi",
+        voicePitch: 0.95,
+        voiceRate: 0.88,
+        audioUrl: null,
+        breakdown: "<strong>生きるの (ikiru no)</strong>: Nominalisasi kata kerja <em>ikiru</em> (hidup) menjadi kata benda.<br><strong>〜てほしい (~te hoshii)</strong>: Pola permohonan 'ingin orang lain melakukan hal tersebut'."
+      },
+      {
+        no: 12,
+        source: "Percakapan Sehari-hari",
+        speaker: "Konteks Kasual",
+        jp: "今何してるの？ちょっと手伝って！",
+        romaji: "Ima nani shiteru no? Chotto tetsudatte!",
+        mean: "Lagi ngapain sekarang? Tolong bantuin sebentar dong!",
+        cat: "kasual",
+        voicePitch: 1.1,
+        voiceRate: 1.0,
+        audioUrl: null,
+        breakdown: "<strong>何してるの (nani shiteru no)</strong>: Singkatan dari <em>nani o shite iru no</em> (sedang melakukan apa).<br><strong>手伝って (tetsudatte)</strong>: Bentuk ~Te kasual untuk meminta tolong."
+      },
+      {
+        no: 13,
+        source: "Percakapan Sehari-hari",
+        speaker: "Konteks Kasual",
+        jp: "お腹すいたから、何か食べに行こう！",
+        romaji: "Onaka suita kara, nanika tabe ni ikou!",
+        mean: "Karena lapar, yuk pergi makan sesuatu!",
+        cat: "keseharian",
+        voicePitch: 1.05,
+        voiceRate: 1.0,
+        audioUrl: null,
+        breakdown: "<strong>お腹すいた (onaka suita)</strong>: Ungkapan kasual 'perut sudah lapar'.<br><strong>食べに行こう (tabe ni ikou)</strong>: Bentuk ajakan (*Ikoukei*) dari pola pergi untuk makan (*~ni iku*)."
+      },
+      {
+        no: 14,
+        source: "Percakapan Sehari-hari",
+        speaker: "Konteks Kasual",
+        jp: "明日のテスト、全然勉強してないんだけど...",
+        romaji: "Ashita no tesuto, zenzen benkyou shitenai n dakedo...",
+        mean: "Ujian besok, aku sama sekali belum belajar nih...",
+        cat: "keseharian",
+        voicePitch: 0.95,
+        voiceRate: 0.92,
+        audioUrl: null,
+        breakdown: "<strong>全然〜ない (zenzen ~nai)</strong>: Sama sekali tidak.<br><strong>〜んだけど (n dakedo)</strong>: Ungkapan penjelas pembuka topik percakapan."
+      },
+      {
+        no: 15,
+        source: "Percakapan Sehari-hari",
+        speaker: "Konteks Kasual",
+        jp: "無理しないでね。いつでも連絡して。",
+        romaji: "Muri shinaide ne. Itsu demo renraku shite.",
+        mean: "Jangan memaksakan diri ya. Hubungi aku kapan saja.",
+        cat: "emosi",
+        voicePitch: 1.05,
+        voiceRate: 0.9,
+        audioUrl: null,
+        breakdown: "<strong>無理しないで (muri shinaide)</strong>: Larangan halus dari <em>muri o suru</em> (memaksakan diri).<br><strong>いつでも (itsu demo)</strong>: Kapan pun / Kapan saja."
+      }
+    ];
+
+    let currentCategory = 'all';
+    let currentAudioPlayer = null;
+
+    // --- 3. SPEECH SYNTHESIS ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playPhraseAudio(item, element) {
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 250);
+      }
+
+      if (currentAudioPlayer) {
+        currentAudioPlayer.pause();
+        currentAudioPlayer.currentTime = 0;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      if (item.audioUrl) {
+        currentAudioPlayer = new Audio(item.audioUrl);
+        currentAudioPlayer.play().catch(err => {
+          console.warn("Audio MP3 gagal diputar, beralih ke voice tuning:", err);
+          playTunedVoice(item);
+        });
+      } else {
+        playTunedVoice(item);
+      }
+    }
+
+    function playTunedVoice(item) {
+      if (!('speechSynthesis' in window)) return;
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(item.jp);
+        utterance.lang = 'ja-JP';
+        utterance.pitch = item.voicePitch || 1.0;
+        utterance.rate = item.voiceRate || 0.95;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') || 
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // --- 4. RENDER FUNCTION ---
+    function renderCards(data) {
+      const container = document.getElementById('phraseContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Frasa kalimat tidak ditemukan...</div>';
+        return;
+      }
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'phrase-card';
+        card.onclick = () => playPhraseAudio(item, card);
+
+        card.innerHTML = `
+          <div>
+            <div class="card-top-meta">
+              <span class="source-tag">🎬 ${item.source}</span>
+              <span class="speaker-label">${item.speaker}</span>
+            </div>
+            <div class="phrase-jp">${item.jp}</div>
+            <div class="phrase-romaji">${item.romaji}</div>
+            <div class="phrase-id">${item.mean}</div>
+          </div>
+          <div>
+            <div class="breakdown-box">
+              ${item.breakdown}
+            </div>
+            <div class="audio-cue">🔊 Ketuk kartu untuk mendengarkan</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 5. FILTER & SEARCH LOGIC ---
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      const filtered = animePhrases.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchSearch = item.jp.toLowerCase().includes(query) || 
+                            item.romaji.toLowerCase().includes(query) || 
+                            item.mean.toLowerCase().includes(query) || 
+                            item.source.toLowerCase().includes(query) || 
+                            item.speaker.toLowerCase().includes(query);
+        return matchCategory && matchSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterCards();
+    }
+
+    renderCards(animePhrases);
+  </script>
+
+</body>
+</html>
