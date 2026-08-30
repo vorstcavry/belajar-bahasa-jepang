@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Master Satuan Hitungan Bahasa Jepang (助数詞 - Josuushi)</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --accent: #fbbf24;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
+      --card-hover-bg: #075985;
+      --card-active-bg: #0369a1;
+      --group-badge-bg: #075985;
+      --group-badge-text: #7dd3fc;
+      --kanji-sub-bg: #075985;
+      --kanji-sub-border: #0284c7;
+      --kanji-sub-text: #bae6fd;
+      --rule-box-bg: #064e3b;
+      --rule-box-border: #059669;
+      --rule-box-text: #a7f3d0;
+      --rule-box-h3: #34d399;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --accent: #f59e0b;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
+      --card-hover-bg: #f0f9ff;
+      --card-active-bg: #e0f2fe;
+      --group-badge-bg: #e0f2fe;
+      --group-badge-text: #0369a1;
+      --kanji-sub-bg: #e0f2fe;
+      --kanji-sub-border: #bae6fd;
+      --kanji-sub-text: #0284c7;
+      --rule-box-bg: #f0fdf4;
+      --rule-box-border: #bbf7d0;
+      --rule-box-text: #166534;
+      --rule-box-h3: #14532d;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #0369a1 0%, #4338ca 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #e0f2fe;
+      font-size: 0.85rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-body);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Grid Layout E-Card */
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+
+    /* Card Item (Struktur 3 Tingkat) */
+    .counter-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 125px;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .counter-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--primary);
+      background: var(--card-hover-bg);
+      box-shadow: 0 6px 14px var(--shadow-color);
+    }
+
+    .counter-card:active, .counter-card.playing {
+      transform: scale(0.94);
+      background: var(--card-active-bg);
+      border-color: var(--primary);
+    }
+
+    .card-no {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .group-badge {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--group-badge-bg);
+      color: var(--group-badge-text);
+    }
+
+    .tier-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
+      margin-top: 14px;
+      margin-bottom: 2px;
+    }
+
+    .tier-kanji-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--kanji-sub-text);
+      background: var(--kanji-sub-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      border: 1px solid var(--kanji-sub-border);
+    }
+
+    .tier-reading {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .tier-meaning {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    /* Highlight Badges */
+    .tag-special-yellow {
+      background: #78350f;
+      color: #fef08a;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.65rem;
+      border: 1px solid #d97706;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    html.light-theme .tag-special-yellow, body.light-theme .tag-special-yellow {
+      background: #fef08a;
+      color: #854d0e;
+      border-color: #fde047;
+    }
+
+    .tag-special-green {
+      background: #064e3b;
+      color: #a7f3d0;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.65rem;
+      border: 1px solid #059669;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    html.light-theme .tag-special-green, body.light-theme .tag-special-green {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+
+    /* Grammatical Rules Box */
+    .rule-box {
+      background: var(--rule-box-bg);
+      border: 1.5px solid var(--rule-box-border);
+      border-radius: 12px;
+      padding: 16px 16px;
+      margin-top: 24px;
+      font-size: 0.84rem;
+      color: var(--rule-box-text);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-box h3 {
+      font-size: 0.95rem;
+      color: var(--rule-box-h3);
+      margin-bottom: 8px;
+    }
+
+    .rule-box ul {
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 980px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Satuan Hitungan JLPT N5</span>
+        <h1>Katalog Satuan Hitungan (助数詞)</h1>
+        <p>Katalog lengkap satuan bilangan bahasa Jepang (Josuushi) lengkap dengan fitur pencarian dan pelafalan audio.</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
+    </header>
+
+    <div class="search-filter-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari satuan hitungan (contoh: orang, lembar, botol, hitotsu, mai, hon)..." onkeyup="filterCards()">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua Satuan</button>
+        <button class="filter-btn" onclick="setCategory('tsu', this)">📦 Benda Umum (つ)</button>
+        <button class="filter-btn" onclick="setCategory('nin', this)">👤 Orang (人)</button>
+        <button class="filter-btn" onclick="setCategory('mai', this)">📄 Tipis / Lembar (枚)</button>
+        <button class="filter-btn" onclick="setCategory('hon', this)">✏️ Benda Panjang (本)</button>
+        <button class="filter-btn" onclick="setCategory('ko', this)">🍎 Benda Kecil (個)</button>
+        <button class="filter-btn" onclick="setCategory('hai', this)">☕ Gelas / Cangkir (杯)</button>
+        <button class="filter-btn" onclick="setCategory('satsu', this)">📖 Buku / Jilid (冊)</button>
+        <button class="filter-btn" onclick="setCategory('dai', this)">🚗 Kendaraan / Mesin (台)</button>
+        <button class="filter-btn" onclick="setCategory('hiki', this)">🐱 Hewan Kecil (匹)</button>
+        <button class="filter-btn" onclick="setCategory('tou', this)">🐘 Hewan Besar (頭)</button>
+        <button class="filter-btn" onclick="setCategory('wa', this)">🕊️ Unggas / Kelinci (羽)</button>
+        <button class="filter-btn" onclick="setCategory('soku', this)">👟 Alas Kaki (足)</button>
+        <button class="filter-btn" onclick="setCategory('sou', this)">🧤 Sarung Tangan (双)</button>
+        <button class="filter-btn" onclick="setCategory('kai', this)">🏢 Lantai Gedung (階)</button>
+        <button class="filter-btn" onclick="setCategory('times', this)">🔄 Frekuensi / Kali (回)</button>
+        <button class="filter-btn" onclick="setCategory('hako', this)">📦 Kotak / Dus (箱)</button>
+        <button class="filter-btn" onclick="setCategory('taba', this)">💐 Ikat / Bundel (束)</button>
+        <button class="filter-btn" onclick="setCategory('kumi', this)">👥 Set / Kelompok (組)</button>
+        <button class="filter-btn" onclick="setCategory('ban', this)">🔢 Nomor Urut (番)</button>
+        <button class="filter-btn" onclick="setCategory('retsu', this)">🧍 Baris / Antrean (列)</button>
+      </div>
+    </div>
+
+    <div class="counter-grid" id="josuushiContainer"></div>
+
+    <div class="rule-box">
+      <h3>📌 Panduan Penulisan &amp; Tata Bahasa Satuan Hitungan (助数詞)</h3>
+      <ul>
+        <li><strong>Perbedaan Format Penulisan:</strong> Pada teks modern horizontal (*Yoko-gaki*), angka Arab umum dipakai bersama kanji satuan (contoh: <strong>3本</strong>, <strong>5枚</strong>). Pada penulisan vertikal formal (*Tate-gaki*), kanji angka murni digunakan (contoh: <strong>三本</strong>, <strong>五枚</strong>).</li>
+        <li><strong>Posisi Alami dalam Kalimat:</strong> Satuan hitungan diletakkan langsung <strong>setelah partikel</strong> (sebelum kata kerja) tanpa partikel tambahan.
+          <br><em>Contoh Alami:</em> りんごを <strong>3つ</strong> 買いました (Membeli apel 3 buah).
+          <br><em>Kurang Alami:</em> りんご 3つを 買いました.
+        </li>
+        <li><strong>Jika diletakkan di depan kata benda:</strong> Wajib menambahkan partikel <strong>の (no)</strong>.
+          <br><em>Contoh:</em> <strong>3つの</strong> りんごを 買いました.
+        </li>
+        <li><strong>Perubahan Bunyi Konsonan:</strong> Satuan berawalan huruf H (<em>本, 杯, 匹</em>) akan berubah menjadi <strong>P</strong> pada angka 1, 6, 8, 10 dan menjadi <strong>B</strong> pada angka 3 (atau kata tanya <em>Nan</em>).</li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA SATUAN HITUNGAN MASTER ---
+    const josuushiList = [
+      // 1. Tsu (Benda Umum)
+      { cat: "tsu", tag: "Barang Umum", jp: "1つ", kj: "一つ", rd: "ひとつ (hitotsu)", id: "1 Buah <span class='tag-special-yellow'>Khusus</span>", s: "ひとつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "2つ", kj: "二つ", rd: "ふたつ (futatsu)", id: "2 Buah <span class='tag-special-yellow'>Khusus</span>", s: "ふたつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "3つ", kj: "三つ", rd: "みっつ (mittsu)", id: "3 Buah <span class='tag-special-yellow'>Khusus</span>", s: "みっつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "4つ", kj: "四つ", rd: "よっつ (yottsu)", id: "4 Buah <span class='tag-special-yellow'>Khusus</span>", s: "よっつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "5つ", kj: "五つ", rd: "いつつ (itsutsu)", id: "5 Buah <span class='tag-special-yellow'>Khusus</span>", s: "いつつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "6つ", kj: "六つ", rd: "むっつ (muttsu)", id: "6 Buah <span class='tag-special-yellow'>Khusus</span>", s: "むっつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "7つ", kj: "七つ", rd: "ななつ (nanatsu)", id: "7 Buah <span class='tag-special-yellow'>Khusus</span>", s: "ななつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "8つ", kj: "八つ", rd: "やっつ (yattsu)", id: "8 Buah <span class='tag-special-yellow'>Khusus</span>", s: "やっつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "9つ", kj: "九つ", rd: "ここのつ (kokonotsu)", id: "9 Buah <span class='tag-special-yellow'>Khusus</span>", s: "ここのつ" },
+      { cat: "tsu", tag: "Barang Umum", jp: "10", kj: "十", rd: "とお (too)", id: "10 Buah <span class='tag-special-yellow'>Khusus</span>", s: "とお" },
+      { cat: "tsu", tag: "Barang Umum", jp: "いくつ", kj: "幾つ", rd: "いくつ (ikutsu)", id: "Berapa Buah?", s: "いくつ" },
+
+      // 2. Nin (Orang)
+      { cat: "nin", tag: "Orang", jp: "1人", kj: "一人", rd: "ひとり (hitori)", id: "1 Orang <span class='tag-special-yellow'>Khusus</span>", s: "ひとり" },
+      { cat: "nin", tag: "Orang", jp: "2人", kj: "二人", rd: "ふたり (futari)", id: "2 Orang <span class='tag-special-yellow'>Khusus</span>", s: "ふたり" },
+      { cat: "nin", tag: "Orang", jp: "3人", kj: "三人", rd: "さんにん (san-nin)", id: "3 Orang", s: "さんにん" },
+      { cat: "nin", tag: "Orang", jp: "4人", kj: "四人", rd: "よにん (yo-nin)", id: "4 Orang <span class='tag-special-yellow'>Wajib 'Yo'</span>", s: "よにん" },
+      { cat: "nin", tag: "Orang", jp: "5人", kj: "五人", rd: "ごにん (go-nin)", id: "5 Orang", s: "ごにん" },
+      { cat: "nin", tag: "Orang", jp: "6人", kj: "六人", rd: "ろくにん (roku-nin)", id: "6 Orang", s: "ろくにん" },
+      { cat: "nin", tag: "Orang", jp: "7人", kj: "七人", rd: "ななにん / しちにん", id: "7 Orang", s: "ななにん" },
+      { cat: "nin", tag: "Orang", jp: "8人", kj: "八人", rd: "はちにん (hachi-nin)", id: "8 Orang", s: "はちにん" },
+      { cat: "nin", tag: "Orang", jp: "9人", kj: "九人", rd: "きゅうにん / くにん", id: "9 Orang", s: "きゅうにん" },
+      { cat: "nin", tag: "Orang", jp: "10人", kj: "十人", rd: "じゅうにん (juu-nin)", id: "10 Orang", s: "じゅうにん" },
+      { cat: "nin", tag: "Orang", jp: "何人", kj: "何人", rd: "なんにん (nan-nin)", id: "Berapa Orang?", s: "なんにん" },
+
+      // 3. Mai (Lembar)
+      { cat: "mai", tag: "Lembar/Tipis", jp: "1枚", kj: "一枚", rd: "いちまい (ichi-mai)", id: "1 Lembar (Kertas/Baju)", s: "いちまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "2枚", kj: "二枚", rd: "にまい (ni-mai)", id: "2 Lembar", s: "にまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "3枚", kj: "三枚", rd: "さんまい (san-mai)", id: "3 Lembar", s: "san-mai" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "4枚", kj: "四枚", rd: "よんまい (yon-mai)", id: "4 Lembar", s: "よんまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "5枚", kj: "五枚", rd: "ごまい (go-mai)", id: "5 Lembar", s: "ごまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "6枚", kj: "六枚", rd: "ろくまい (roku-mai)", id: "6 Lembar", s: "ろくまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "7枚", kj: "七枚", rd: "ななまい (nana-mai)", id: "7 Lembar", s: "ななまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "8枚", kj: "八枚", rd: "はちまい (hachi-mai)", id: "8 Lembar", s: "haちまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "9枚", kj: "九枚", rd: "きゅうまい (kyuu-mai)", id: "9 Lembar", s: "きゅうまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "10枚", kj: "十枚", rd: "じゅうまい (juu-mai)", id: "10 Lembar", s: "じゅうまい" },
+      { cat: "mai", tag: "Lembar/Tipis", jp: "何枚", kj: "何枚", rd: "なんまい (nan-mai)", id: "Berapa Lembar?", s: "なんまい" },
+
+      // 4. Hon (Panjang)
+      { cat: "hon", tag: "Benda Panjang", jp: "1本", kj: "一本", rd: "いっぽん (ippon)", id: "1 Batang/Botol <span class='tag-special-green'>'Pon'</span>", s: "いっぽん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "2本", kj: "二本", rd: "にほん (ni-hon)", id: "2 Batang/Botol", s: "にほん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "3本", kj: "三本", rd: "さんぼん (san-bon)", id: "3 Batang/Botol <span class='tag-special-green'>'Bon'</span>", s: "san-bon" },
+      { cat: "hon", tag: "Benda Panjang", jp: "4本", kj: "四本", rd: "よんほん (yon-hon)", id: "4 Batang/Botol", s: "よんほん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "5本", kj: "五本", rd: "ごほん (go-hon)", id: "5 Batang/Botol", s: "ごほん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "6本", kj: "六本", rd: "ろっぽん (roppon)", id: "6 Batang/Botol <span class='tag-special-green'>'Pon'</span>", s: "ろっぽん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "7本", kj: "七本", rd: "ななほん (nana-hon)", id: "7 Batang/Botol", s: "ななほん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "8本", kj: "八本", rd: "はっぽん (happon)", id: "8 Batang/Botol <span class='tag-special-green'>'Pon'</span>", s: "はっぽん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "9本", kj: "九本", rd: "きゅうほん (kyuu-hon)", id: "9 Batang/Botol", s: "きゅうほん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "10本", kj: "十本", rd: "じゅっぽん (juppon)", id: "10 Batang/Botol <span class='tag-special-green'>'Pon'</span>", s: "じゅっぽん" },
+      { cat: "hon", tag: "Benda Panjang", jp: "何本", kj: "何本", rd: "なんぼん (nan-bon)", id: "Berapa Batang? <span class='tag-special-green'>'Bon'</span>", s: "なんぼん" },
+
+      // 5. Ko (Kecil)
+      { cat: "ko", tag: "Benda Kecil", jp: "1個", kj: "一個", rd: "いっこ (ikko)", id: "1 Butir/Buah <span class='tag-special-green'>Sokuon</span>", s: "いっこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "2個", kj: "二個", rd: "にこ (ni-ko)", id: "2 Butir/Buah", s: "にこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "3個", kj: "三個", rd: "さんこ (san-ko)", id: "3 Butir/Buah", s: "san-ko" },
+      { cat: "ko", tag: "Benda Kecil", jp: "4個", kj: "四個", rd: "よんこ (yon-ko)", id: "4 Butir/Buah", s: "よんこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "5個", kj: "五個", rd: "ごこ (go-ko)", id: "5 Butir/Buah", s: "ごこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "6個", kj: "六個", rd: "ろっこ (rokko)", id: "6 Butir/Buah <span class='tag-special-green'>Sokuon</span>", s: "ろっこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "7個", kj: "七個", rd: "ななこ (nana-ko)", id: "7 Butir/Buah", s: "ななこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "8個", kj: "八個", rd: "はっこ (hakko)", id: "8 Butir/Buah <span class='tag-special-green'>Sokuon</span>", s: "はっこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "9個", kj: "九個", rd: "きゅうこ (kyuu-ko)", id: "9 Butir/Buah", s: "きゅうこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "10個", kj: "十個", rd: "じゅっこ (jukko)", id: "10 Butir/Buah <span class='tag-special-green'>Sokuon</span>", s: "じゅっこ" },
+      { cat: "ko", tag: "Benda Kecil", jp: "何個", kj: "何個", rd: "なんこ (nan-ko)", id: "Berapa Butir/Biji?", s: "なんこ" },
+
+      // 6. Hai (Cangkir/Gelas)
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "1杯", kj: "一杯", rd: "いっぱい (ippai)", id: "1 Cangkir/Gelas <span class='tag-special-green'>'Pai'</span>", s: "いっぱい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "2杯", kj: "二杯", rd: "にはい (ni-hai)", id: "2 Cangkir/Gelas", s: "にはい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "3杯", kj: "三杯", rd: "さんばい (san-bai)", id: "3 Cangkir/Gelas <span class='tag-special-green'>'Bai'</span>", s: "san-bai" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "4杯", kj: "四杯", rd: "よんはい (yon-hai)", id: "4 Cangkir/Gelas", s: "よんはい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "5杯", kj: "五杯", rd: "ごはい (go-hai)", id: "5 Cangkir/Gelas", s: "ごはい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "6杯", kj: "六杯", rd: "ろっぱい (roppai)", id: "6 Cangkir/Gelas <span class='tag-special-green'>'Pai'</span>", s: "ろっぱい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "7杯", kj: "七杯", rd: "ななはい (nana-hai)", id: "7 Cangkir/Gelas", s: "ななはい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "8杯", kj: "八杯", rd: "はっぱい (happai)", id: "8 Cangkir/Gelas <span class='tag-special-green'>'Pai'</span>", s: "はっぱい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "9杯", kj: "九杯", rd: "きゅうはい (kyuu-hai)", id: "9 Cangkir/Gelas", s: "きゅうはい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "10杯", kj: "十杯", rd: "じゅっぱい (juppai)", id: "10 Cangkir/Gelas <span class='tag-special-green'>'Pai'</span>", s: "じゅっぱい" },
+      { cat: "hai", tag: "Gelas/Mangkuk", jp: "何杯", kj: "何杯", rd: "なんばい (nan-bai)", id: "Berapa Gelas? <span class='tag-special-green'>'Bai'</span>", s: "なんばい" },
+
+      // 7. Satsu (Buku)
+      { cat: "satsu", tag: "Jilid Buku", jp: "1冊", kj: "一冊", rd: "いっさつ (issatsu)", id: "1 Jilid/Buku <span class='tag-special-green'>Sokuon</span>", s: "いっさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "2冊", kj: "二冊", rd: "にさつ (ni-satsu)", id: "2 Jilid/Buku", s: "にさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "3冊", kj: "三冊", rd: "さんさつ (san-satsu)", id: "3 Jilid/Buku", s: "san-satsu" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "4冊", kj: "四冊", rd: "よんさつ (yon-satsu)", id: "4 Jilid/Buku", s: "よんさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "5冊", kj: "五冊", rd: "ごさつ (go-satsu)", id: "5 Jilid/Buku", s: "ごさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "6冊", kj: "六冊", rd: "ろくさつ (roku-satsu)", id: "6 Jilid/Buku", s: "ろくさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "7冊", kj: "七冊", rd: "ななさつ (nana-satsu)", id: "7 Jilid/Buku", s: "ななさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "8冊", kj: "八冊", rd: "はっさつ (hassatsu)", id: "8 Jilid/Buku <span class='tag-special-green'>Sokuon</span>", s: "はっさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "9冊", kj: "九冊", rd: "きゅうさつ (kyuu-satsu)", id: "9 Jilid/Buku", s: "きゅうさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "10冊", kj: "十冊", rd: "じゅっさつ (jussatsu)", id: "10 Jilid/Buku <span class='tag-special-green'>Sokuon</span>", s: "じゅっさつ" },
+      { cat: "satsu", tag: "Jilid Buku", jp: "何冊", kj: "何冊", rd: "なんさつ (nan-satsu)", id: "Berapa Jilid/Buku?", s: "なんさつ" },
+
+      // 8. Dai (Mesin/Kendaraan)
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "1台", kj: "一台", rd: "いちだい (ichi-dai)", id: "1 Unit (Mobil/Mesin/HP)", s: "いちだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "2台", kj: "二台", rd: "にだい (ni-dai)", id: "2 Unit", s: "にだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "3台", kj: "三台", rd: "さんだい (san-dai)", id: "3 Unit", s: "san-dai" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "4台", kj: "四台", rd: "よんだい (yon-dai)", id: "4 Unit", s: "よんだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "5台", kj: "五台", rd: "ごだい (go-dai)", id: "5 Unit", s: "ごだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "6台", kj: "六台", rd: "ろくだい (roku-dai)", id: "6 Unit", s: "ろくだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "7台", kj: "七台", rd: "ななだい (nana-dai)", id: "7 Unit", s: "ななだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "8台", kj: "八台", rd: "はちだい (hachi-dai)", id: "8 Unit", s: "hachidai" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "9台", kj: "九台", rd: "きゅうだい (kyuu-dai)", id: "9 Unit", s: "きゅうだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "10台", kj: "十台", rd: "じゅうだい (juu-dai)", id: "10 Unit", s: "じゅうだい" },
+      { cat: "dai", tag: "Kendaraan/Mesin", jp: "何台", kj: "何台", rd: "なんだい (nan-dai)", id: "Berapa Unit?", s: "なんだい" },
+
+      // 9. Hiki (Hewan Kecil)
+      { cat: "hiki", tag: "Hewan Kecil", jp: "1匹", kj: "一匹", rd: "いっぴき (ippiki)", id: "1 Ekor (Kucing/Ikan) <span class='tag-special-green'>'Piki'</span>", s: "いっぴき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "2匹", kj: "二匹", rd: "にひき (ni-hiki)", id: "2 Ekor", s: "にひき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "3匹", kj: "三匹", rd: "さんびき (san-biki)", id: "3 Ekor <span class='tag-special-green'>'Biki'</span>", s: "san-biki" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "4匹", kj: "四匹", rd: "よんひき (yon-hiki)", id: "4 Ekor", s: "よんひき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "5匹", kj: "五匹", rd: "ごひき (go-hiki)", id: "5 Ekor", s: "ごひき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "6匹", kj: "六匹", rd: "ろっぴき (roppiki)", id: "6 Ekor <span class='tag-special-green'>'Piki'</span>", s: "ろっぴき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "7匹", kj: "七匹", rd: "ななひき (nana-hiki)", id: "7 Ekor", s: "ななひき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "8匹", kj: "八匹", rd: "はっぴき (happiki)", id: "8 Ekor <span class='tag-special-green'>'Piki'</span>", s: "はっぴき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "9匹", kj: "九匹", rd: "きゅうひき (kyuu-hiki)", id: "9 Ekor", s: "きゅうひき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "10匹", kj: "十匹", rd: "じゅっぴき (juppiki)", id: "10 Ekor <span class='tag-special-green'>'Piki'</span>", s: "じゅっぴき" },
+      { cat: "hiki", tag: "Hewan Kecil", jp: "何匹", kj: "何匹", rd: "なんびき (nan-biki)", id: "Berapa Ekor? <span class='tag-special-green'>'Biki'</span>", s: "なんびき" },
+
+      // 10. Tou (Hewan Besar)
+      { cat: "tou", tag: "Hewan Besar", jp: "1頭", kj: "一頭", rd: "いっとう (ittou)", id: "1 Ekor (Gajah/Sapi) <span class='tag-special-green'>Sokuon</span>", s: "いっとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "2頭", kj: "二頭", rd: "にとう (ni-tou)", id: "2 Ekor", s: "にとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "3頭", kj: "三頭", rd: "さんとう (san-tou)", id: "3 Ekor", s: "san-tou" },
+      { cat: "tou", tag: "Hewan Besar", jp: "4頭", kj: "四頭", rd: "よんとう (yon-tou)", id: "4 Ekor", s: "よんとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "5頭", kj: "五頭", rd: "ごとう (go-tou)", id: "5 Ekor", s: "ごとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "6頭", kj: "六頭", rd: "ろくとう (roku-tou)", id: "6 Ekor", s: "ろくとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "7頭", kj: "七頭", rd: "ななとう (nana-tou)", id: "7 Ekor", s: "ななとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "8頭", kj: "八頭", rd: "はっとう (hattou)", id: "8 Ekor <span class='tag-special-green'>Sokuon</span>", s: "はっとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "9頭", kj: "九頭", rd: "きゅうとう (kyuu-tou)", id: "9 Ekor", s: "きゅうとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "10頭", kj: "十頭", rd: "じゅっとう (juttou)", id: "10 Ekor <span class='tag-special-green'>Sokuon</span>", s: "じゅっとう" },
+      { cat: "tou", tag: "Hewan Besar", jp: "何頭", kj: "何頭", rd: "なんとう (nan-tou)", id: "Berapa Ekor (Besar)?", s: "なんとう" },
+
+      // 11. Wa (Unggas/Kelinci)
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "1羽", kj: "一羽", rd: "いちわ (ichi-wa)", id: "1 Ekor (Unggas/Kelinci)", s: "いちわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "2羽", kj: "二羽", rd: "にわ (ni-wa)", id: "2 Ekor", s: "にわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "3羽", kj: "三羽", rd: "さんわ / さんば", id: "3 Ekor", s: "さんわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "4羽", kj: "四羽", rd: "よんわ / よんば", id: "4 Ekor", s: "よんわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "5羽", kj: "五羽", rd: "ごわ (go-wa)", id: "5 Ekor", s: "ごわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "6羽", kj: "六羽", rd: "ろくわ / ろっぱ", id: "6 Ekor", s: "ろくわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "7羽", kj: "七羽", rd: "ななわ (nana-wa)", id: "7 Ekor", s: "ななわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "8羽", kj: "八羽", rd: "はちわ / はっぱ", id: "8 Ekor", s: "はちわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "9羽", kj: "九羽", rd: "きゅうわ (kyuu-wa)", id: "9 Ekor", s: "きゅうわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "10羽", kj: "十羽", rd: "じゅうわ / じゅっぱ", id: "10 Ekor", s: "じゅうわ" },
+      { cat: "wa", tag: "Unggas/Kelinci", jp: "何羽", kj: "何羽", rd: "なんわ / なんば", id: "Berapa Ekor (Unggas)?", s: "なんわ" },
+
+      // 12. Soku (Alas Kaki)
+      { cat: "soku", tag: "Alas Kaki", jp: "1足", kj: "一足", rd: "いっそく (issoku)", id: "1 Pasang Sepatu <span class='tag-special-green'>Sokuon</span>", s: "いっそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "2足", kj: "二足", rd: "にそく (ni-soku)", id: "2 Pasang", s: "にそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "3足", kj: "三足", rd: "さんぞく (san-zoku)", id: "3 Pasang <span class='tag-special-green'>'Zoku'</span>", s: "san-zoku" },
+      { cat: "soku", tag: "Alas Kaki", jp: "4足", kj: "四足", rd: "よんそく (yon-soku)", id: "4 Pasang", s: "よんそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "5足", kj: "五足", rd: "ごそく (go-soku)", id: "5 Pasang", s: "ごそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "6足", kj: "六足", rd: "ろくそく (roku-soku)", id: "6 Pasang", s: "ろくそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "7足", kj: "七足", rd: "ななそく (nana-soku)", id: "7 Pasang", s: "ななそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "8足", kj: "八足", rd: "はっそく (hassoku)", id: "8 Pasang <span class='tag-special-green'>Sokuon</span>", s: "はっそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "9足", kj: "九足", rd: "きゅうそく (kyuu-soku)", id: "9 Pasang", s: "きゅうそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "10足", kj: "十足", rd: "じゅっそく (jussoku)", id: "10 Pasang <span class='tag-special-green'>Sokuon</span>", s: "じゅっそく" },
+      { cat: "soku", tag: "Alas Kaki", jp: "何足", kj: "何足", rd: "なんぞく (nan-zoku)", id: "Berapa Pasang? <span class='tag-special-green'>'Zoku'</span>", s: "なんぞく" },
+
+      // 13. Sou (Sarung Tangan)
+      { cat: "sou", tag: "Sarung Tangan", jp: "1双", kj: "一双", rd: "いっそう (issou)", id: "1 Pasang Sarung Tangan <span class='tag-special-green'>Sokuon</span>", s: "いっそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "2双", kj: "二双", rd: "にそう (ni-sou)", id: "2 Pasang", s: "にそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "3双", kj: "三双", rd: "さんそう (san-sou)", id: "3 Pasang", s: "san-sou" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "4双", kj: "四双", rd: "よんそう (yon-sou)", id: "4 Pasang", s: "よんそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "5双", kj: "五双", rd: "ごそう (go-sou)", id: "5 Pasang", s: "ごそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "6双", kj: "六双", rd: "ろくそう (roku-sou)", id: "6 Pasang", s: "ろくそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "7双", kj: "七双", rd: "ななそう (nana-sou)", id: "7 Pasang", s: "ななそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "8双", kj: "八双", rd: "はっそう (hassou)", id: "8 Pasang <span class='tag-special-green'>Sokuon</span>", s: "はっそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "9双", kj: "九双", rd: "きゅうそう (kyuu-sou)", id: "9 Pasang", s: "きゅうそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "10双", kj: "十双", rd: "じゅっそう (jussou)", id: "10 Pasang <span class='tag-special-green'>Sokuon</span>", s: "じゅっそう" },
+      { cat: "sou", tag: "Sarung Tangan", jp: "何双", kj: "何双", rd: "なんそう (nan-sou)", id: "Berapa Pasang?", s: "なんそう" },
+
+      // 14. Kai (Lantai Gedung)
+      { cat: "kai", tag: "Lantai Gedung", jp: "1階", kj: "一階", rd: "いっかい (ikkai)", id: "Lantai 1 <span class='tag-special-green'>Sokuon</span>", s: "いっかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "2階", kj: "二階", rd: "にかい (ni-kai)", id: "Lantai 2", s: "にかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "3階", kj: "三階", rd: "さんがい (san-gai)", id: "Lantai 3 <span class='tag-special-green'>'Gai'</span>", s: "san-gai" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "4階", kj: "四階", rd: "よんかい (yon-kai)", id: "Lantai 4", s: "よんかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "5階", kj: "五階", rd: "ごかい (go-kai)", id: "Lantai 5", s: "ごかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "6階", kj: "六階", rd: "ろっかい (rokkai)", id: "Lantai 6 <span class='tag-special-green'>Sokuon</span>", s: "ろっかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "7階", kj: "七階", rd: "ななかい (nana-kai)", id: "Lantai 7", s: "ななかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "8階", kj: "八階", rd: "はっかい (hakkai)", id: "Lantai 8 <span class='tag-special-green'>Sokuon</span>", s: "はっかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "9階", kj: "九階", rd: "きゅうかい (kyuu-kai)", id: "Lantai 9", s: "きゅうかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "10階", kj: "十階", rd: "じゅっかい (jukkai)", id: "Lantai 10 <span class='tag-special-green'>Sokuon</span>", s: "じゅっかい" },
+      { cat: "kai", tag: "Lantai Gedung", jp: "何階", kj: "何階", rd: "なんがい / なんかい", id: "Lantai Berapa? <span class='tag-special-green'>'Gai'</span>", s: "なんがい" },
+
+      // 15. Times (Frekuensi/Kali)
+      { cat: "times", tag: "Frekuensi/Kali", jp: "1回", kj: "一回", rd: "いっかい (ikkai)", id: "1 Kali <span class='tag-special-green'>Sokuon</span>", s: "いっかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "2回", kj: "二回", rd: "にかい (ni-kai)", id: "2 Kali", s: "にかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "3回", kj: "三回", rd: "さんかい (san-kai)", id: "3 Kali (Bukan 'gai')", s: "san-kai" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "4回", kj: "四回", rd: "よんかい (yon-kai)", id: "4 Kali", s: "よんかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "5回", kj: "五回", rd: "ごかい (go-kai)", id: "5 Kali", s: "ごかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "6回", kj: "六回", rd: "ろっかい (rokkai)", id: "6 Kali <span class='tag-special-green'>Sokuon</span>", s: "ろっかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "7回", kj: "七回", rd: "ななかい (nana-kai)", id: "7 Kali", s: "ななかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "8回", kj: "八回", rd: "はっかい (hakkai)", id: "8 Kali <span class='tag-special-green'>Sokuon</span>", s: "はっかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "9回", kj: "九回", rd: "きゅうかい (kyuu-kai)", id: "9 Kali", s: "きゅうかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "10回", kj: "十回", rd: "じゅっかい (jukkai)", id: "10 Kali <span class='tag-special-green'>Sokuon</span>", s: "じゅっかい" },
+      { cat: "times", tag: "Frekuensi/Kali", jp: "何回", kj: "何回", rd: "なんかい (nan-kai)", id: "Berapa Kali?", s: "なんかい" },
+
+      // 16. Hako (Kotak/Dus)
+      { cat: "hako", tag: "Kotak/Dus", jp: "1箱", kj: "一箱", rd: "ひとはこ (hito-hako)", id: "1 Kotak/Dus <span class='tag-special-yellow'>Khusus</span>", s: "ひとはこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "2箱", kj: "二箱", rd: "ふたはこ (futa-hako)", id: "2 Kotak <span class='tag-special-yellow'>Khusus</span>", s: "ふたはこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "3箱", kj: "三箱", rd: "さんばこ (san-bako)", id: "3 Kotak <span class='tag-special-green'>'Bako'</span>", s: "san-bako" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "4箱", kj: "四箱", rd: "よんばこ (yon-bako)", id: "4 Kotak <span class='tag-special-green'>'Bako'</span>", s: "よんばこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "5箱", kj: "五箱", rd: "ごはこ (go-hako)", id: "5 Kotak", s: "ごはこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "6箱", kj: "六箱", rd: "ろっぱこ (roppako)", id: "6 Kotak <span class='tag-special-green'>'Pako'</span>", s: "ろっぱこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "7箱", kj: "七箱", rd: "ななはこ (nana-hako)", id: "7 Kotak", s: "ななはこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "8箱", kj: "八箱", rd: "はっぱこ (happako)", id: "8 Kotak <span class='tag-special-green'>'Pako'</span>", s: "はっぱこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "9箱", kj: "九箱", rd: "きゅうはこ (kyuu-hako)", id: "9 Kotak", s: "きゅうはこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "10箱", kj: "十箱", rd: "じゅっぱこ (juppako)", id: "10 Kotak <span class='tag-special-green'>'Pako'</span>", s: "じゅっぱこ" },
+      { cat: "hako", tag: "Kotak/Dus", jp: "何箱", kj: "何箱", rd: "なんばこ (nan-bako)", id: "Berapa Kotak/Dus?", s: "なんばこ" },
+
+      // 17. Taba (Bundel/Ikat)
+      { cat: "taba", tag: "Ikat/Bundel", jp: "1束", kj: "一束", rd: "ひとたば (hito-taba)", id: "1 Ikat/Bundel <span class='tag-special-yellow'>Khusus</span>", s: "ひとたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "2束", kj: "二束", rd: "ふたたば (futa-taba)", id: "2 Ikat <span class='tag-special-yellow'>Khusus</span>", s: "ふたたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "3束", kj: "三束", rd: "さんたば (san-taba)", id: "3 Ikat", s: "san-taba" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "4束", kj: "四束", rd: "よんたば (yon-taba)", id: "4 Ikat", s: "よんたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "5束", kj: "五束", rd: "ごたば (go-taba)", id: "5 Ikat", s: "ごたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "6束", kj: "六束", rd: "ろくたば (roku-taba)", id: "6 Ikat", s: "ろくたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "7束", kj: "七束", rd: "ななたば (nana-taba)", id: "7 Ikat", s: "ななたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "8束", kj: "八束", rd: "はちたば (hachi-taba)", id: "8 Ikat", s: "はちたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "9束", kj: "九束", rd: "きゅうたば (kyuu-taba)", id: "9 Ikat", s: "きゅうたば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "10束", kj: "十束", rd: "じゅったば (juttaba)", id: "10 Ikat <span class='tag-special-green'>Sokuon</span>", s: "じゅったば" },
+      { cat: "taba", tag: "Ikat/Bundel", jp: "何束", kj: "何束", rd: "なんたば (nan-taba)", id: "Berapa Ikat?", s: "なんたば" },
+
+      // 18. Kumi (Set/Kelompok)
+      { cat: "kumi", tag: "Kelompok/Set", jp: "1組", kj: "一組", rd: "ひとくみ (hito-kumi)", id: "1 Pasang/Set <span class='tag-special-yellow'>Khusus</span>", s: "ひとくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "2組", kj: "二組", rd: "ふたくみ (futa-kumi)", id: "2 Pasang/Set <span class='tag-special-yellow'>Khusus</span>", s: "ふたくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "3組", kj: "三組", rd: "さんくみ / さんぐみ", id: "3 Kelompok", s: "san-kumi" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "4組", kj: "四組", rd: "よんくみ / よんぐみ", id: "4 Kelompok", s: "よんくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "5組", kj: "五組", rd: "ごくみ (go-kumi)", id: "5 Kelompok", s: "ごくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "6組", kj: "六組", rd: "ろっくみ (rokkumi)", id: "6 Kelompok <span class='tag-special-green'>Sokuon</span>", s: "ろっくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "7組", kj: "七組", rd: "ななくみ (nana-kumi)", id: "7 Kelompok", s: "ななくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "8組", kj: "八組", rd: "はっくみ (hakkumi)", id: "8 Kelompok <span class='tag-special-green'>Sokuon</span>", s: "はっくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "9組", kj: "九組", rd: "きゅうくみ (kyuu-kumi)", id: "9 Kelompok", s: "きゅうくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "10組", kj: "十組", rd: "じゅっくみ (jukkumi)", id: "10 Kelompok <span class='tag-special-green'>Sokuon</span>", s: "じゅっくみ" },
+      { cat: "kumi", tag: "Kelompok/Set", jp: "何組", kj: "何組", rd: "なんくみ / なんぐみ", id: "Berapa Kelompok?", s: "なんくみ" },
+
+      // 19. Ban (Nomor Urut)
+      { cat: "ban", tag: "Nomor Urut", jp: "1番", kj: "一番", rd: "いちばん (ichi-ban)", id: "Nomor 1 (Pertama)", s: "いちばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "2番", kj: "二番", rd: "にばん (ni-ban)", id: "Nomor 2", s: "にばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "3番", kj: "三番", rd: "さんばん (san-ban)", id: "Nomor 3", s: "san-ban" },
+      { cat: "ban", tag: "Nomor Urut", jp: "4番", kj: "四番", rd: "よんばん (yon-ban)", id: "Nomor 4", s: "よんばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "5番", kj: "五番", rd: "ごばん (go-ban)", id: "Nomor 5", s: "ごばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "6番", kj: "六番", rd: "ろくばん (roku-ban)", id: "Nomor 6", s: "ろくばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "7番", kj: "七番", rd: "ななばん / しちばん", id: "Nomor 7", s: "ななばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "8番", kj: "八番", rd: "はちばん (hachi-ban)", id: "Nomor 8", s: "hachi-ban" },
+      { cat: "ban", tag: "Nomor Urut", jp: "9番", kj: "九番", rd: "きゅうばん / くばん", id: "Nomor 9", s: "きゅうばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "10番", kj: "十番", rd: "じゅうばん (juu-ban)", id: "Nomor 10", s: "じゅうばん" },
+      { cat: "ban", tag: "Nomor Urut", jp: "何番", kj: "何番", rd: "なんばん (nan-ban)", id: "Nomor Berapa?", s: "なんばん" },
+
+      // 20. Retsu (Baris/Antrean)
+      { cat: "retsu", tag: "Baris/Antrean", jp: "1列", kj: "一列", rd: "いちれつ (ichi-retsu)", id: "1 Baris/Antrean", s: "いちれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "2列", kj: "二列", rd: "にれつ (ni-retsu)", id: "2 Baris", s: "にれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "3列", kj: "三列", rd: "さんれつ (san-retsu)", id: "3 Baris", s: "san-retsu" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "4列", kj: "四列", rd: "よんれつ (yon-retsu)", id: "4 Baris", s: "よんれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "5列", kj: "五列", rd: "ごれつ (go-retsu)", id: "5 Baris", s: "ごれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "6列", kj: "六列", rd: "ろくれつ (roku-retsu)", id: "6 Baris", s: "ろくれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "7列", kj: "七列", rd: "ななれつ (nana-retsu)", id: "7 Baris", s: "ななれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "8列", kj: "八列", rd: "はちれつ (hachi-retsu)", id: "8 Baris", s: "haちれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "9列", kj: "九列", rd: "きゅうれつ (kyuu-retsu)", id: "9 Baris", s: "きゅうれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "10列", kj: "十列", rd: "じゅうれつ (juu-retsu)", id: "10 Baris", s: "じゅうれつ" },
+      { cat: "retsu", tag: "Baris/Antrean", jp: "何列", kj: "何列", rd: "なんれつ (nan-retsu)", id: "Berapa Baris?", s: "なんれつ" }
+    ];
+
+    let currentCategory = 'all';
+
+    // --- 3. AUDIO ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(soundText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') ||
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // --- 4. RENDER FUNCTION ---
+    function renderCards(data) {
+      const container = document.getElementById('josuushiContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color:#94a3b8; font-weight:700;">Satuan hitungan tidak ditemukan...</div>';
+        return;
+      }
+
+      data.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'counter-card';
+        card.onclick = () => playAudio(item.s, card);
+
+        card.innerHTML = `
+          <span class="card-no">#${index + 1}</span>
+          <span class="group-badge">${item.tag}</span>
+          <div class="tier-jp">${item.jp}</div>
+          <div class="tier-kanji-sub">${item.kj}</div>
+          <div class="tier-reading">${item.rd}</div>
+          <div class="tier-meaning">${item.id}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 5. FILTER & SEARCH LOGIC ---
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      const filtered = josuushiList.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchSearch = item.jp.toLowerCase().includes(query) || 
+                            item.kj.toLowerCase().includes(query) || 
+                            item.rd.toLowerCase().includes(query) || 
+                            item.id.toLowerCase().includes(query) ||
+                            item.tag.toLowerCase().includes(query);
+        return matchCategory && matchSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterCards();
+    }
+
+    // Inisialisasi Pertama
+    renderCards(josuushiList);
+  </script>
+
+</body>
+</html>
