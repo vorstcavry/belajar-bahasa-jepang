@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Modul Pembelajaran Per Bab - Minna no Nihongo</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #f87171;
+      --primary-dark: #dc2626;
+      --accent: #fb923c;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --badge-bg: #450a0a;
+      --badge-text: #fca5a5;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --divider-color: #334155;
+
+      /* Palette N5 (Merah Gelap) */
+      --n5-badge-bg: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+      --n5-badge-text: #fca5a5;
+      --n5-hover-border: #f87171;
+      --n5-action-bg: #0f172a;
+      --n5-action-text: #94a3b8;
+
+      /* Palette N4 (Indigo Gelap) */
+      --n4-badge-bg: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      --n4-badge-text: #a5b4fc;
+      --n4-hover-border: #818cf8;
+      --n4-pill-bg: #1e1b4b;
+      --n4-pill-text: #a5b4fc;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #dc2626;
+      --primary-dark: #b91c1c;
+      --accent: #ea580c;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #f1f5f9;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --badge-bg: #fee2e2;
+      --badge-text: #dc2626;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --divider-color: #e2e8f0;
+
+      /* Palette N5 (Merah Terang) */
+      --n5-badge-bg: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      --n5-badge-text: #dc2626;
+      --n5-hover-border: #fca5a5;
+      --n5-action-bg: #f8fafc;
+      --n5-action-text: #94a3b8;
+
+      /* Palette N4 (Indigo Terang) */
+      --n4-badge-bg: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+      --n4-badge-text: #4338ca;
+      --n4-hover-border: #a5b4fc;
+      --n4-pill-bg: #e0e7ff;
+      --n4-pill-text: #4338ca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header Navigasi */
+    .header-box {
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 20px;
+      padding: 0 8px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .header-box h1 {
+      font-size: clamp(1.4rem, 4.5vw, 2rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-box h1 span {
+      background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-box p {
+      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section Heading for Levels */
+    .section-divider {
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-heading);
+    }
+
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider-color);
+    }
+
+    .level-tag-pill {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+    .pill-n5 { background: var(--badge-bg); color: var(--badge-text); }
+    .pill-n4 { background: var(--n4-pill-bg); color: var(--n4-pill-text); }
+
+    /* Grid Layout Bab */
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    /* Chapter Card */
+    .chapter-card {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 5px var(--shadow-color);
+      border: 1.5px solid var(--border-color);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Efek Desktop Hover */
+    @media (hover: hover) {
+      .chapter-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--n5-hover-border);
+        box-shadow: 0 10px 18px -4px rgba(220, 38, 38, 0.15);
+      }
+      .card-n4-style:hover {
+        border-color: var(--n4-hover-border);
+        box-shadow: 0 10px 18px -4px rgba(67, 56, 202, 0.15);
+      }
+      .chapter-card:hover .action-icon {
+        background: #dc2626;
+        color: #ffffff;
+        transform: translateX(3px);
+      }
+      .card-n4-style:hover .action-icon {
+        background: #4338ca;
+        color: #ffffff;
+      }
+      .chapter-card:hover .bab-badge {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Mobile Active State */
+    .chapter-card:active {
+      transform: scale(0.98);
+      background-color: var(--bg-card);
+      border-color: var(--n5-hover-border);
+    }
+
+    .card-n4-style:active {
+      border-color: var(--n4-hover-border);
+    }
+
+    /* Bab Number Badge */
+    .bab-badge {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: var(--n5-badge-bg);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: var(--n5-badge-text);
+      font-weight: 800;
+      transition: transform 0.2s ease;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    .badge-n4-color {
+      background: var(--n4-badge-bg);
+      color: var(--n4-badge-text);
+    }
+
+    .bab-badge .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .bab-badge .number {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    /* Content Area */
+    .chapter-info {
+      flex: 1;
+      min-width: 0;
+      pointer-events: none;
+    }
+
+    .chapter-info h2 {
+      font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 3px;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .chapter-info p {
+      font-size: clamp(0.78rem, 2.5vw, 0.83rem);
+      color: var(--text-muted);
+      line-height: 1.4;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Action Arrow Button */
+    .action-icon {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      background: var(--n5-action-bg);
+      color: var(--n5-action-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-left: 8px;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    /* Penyesuaian Khusus Smartphone Kecil */
+    @media (max-width: 480px) {
+      .chapter-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .chapter-card {
+        padding: 12px 14px;
+      }
+      .bab-badge {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        margin-right: 10px;
+      }
+      .bab-badge .number {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <div class="header-box">
+      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
+      <h1>Modul Pembelajaran <span>Per Bab</span></h1>
+      <p>Silabus lengkap 50 bab Minna no Nihongo terbagi atas Shokyu I (JLPT N5) dan Shokyu II (JLPT N4).</p>
+    </div>
+
+    <div class="section-divider">
+      <span>MINNA NO NIHONGO I</span>
+      <span class="level-tag-pill pill-n5">JLPT N5 (Bab 1 - 25)</span>
+    </div>
+
+    <div class="chapter-grid">
+      <a href="./bab-1.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">01</span></div>
+        <div class="chapter-info">
+          <h2>Perkenalan Diri (Jikoshoukai)</h2>
+          <p>Pola kalimat dasar: ~wa ~desu, ~dewa arimasen, partikel Ka &amp; Mo.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-2.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">02</span></div>
+        <div class="chapter-info">
+          <h2>Kata Tunjuk Benda</h2>
+          <p>Penggunaan Kore, Sore, Are, Kono, Sono, Ano, dan kepemilikan (No).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-3.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">03</span></div>
+        <div class="chapter-info">
+          <h2>Kata Tunjuk Tempat &amp; Arah</h2>
+          <p>Penggunaan Koko, Soko, Asoko, Kochira, Sochira, dan harga barang.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-4.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">04</span></div>
+        <div class="chapter-info">
+          <h2>Waktu &amp; Kata Kerja Rutinitas</h2>
+          <p>Menyatakan jam, menit, hari, serta pola ~masu, ~masen, kara ~ made.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-5.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">05</span></div>
+        <div class="chapter-info">
+          <h2>Perpindahan Tempat (Ikimasu)</h2>
+          <p>Partikel arah (e/de), alat transportasi, dan pergi bersama orang lain.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-6.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">06</span></div>
+        <div class="chapter-info">
+          <h2>Objek &amp; Lokasi Kegiatan</h2>
+          <p>Partikel Wo (objek), Partikel De (lokasi kegiatan), dan ajakan ~mashou.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-7.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">07</span></div>
+        <div class="chapter-info">
+          <h2>Alat, Bahasa &amp; Memberi/Menerima</h2>
+          <p>Penggunaan partikel De (alat/bahasa), Agemasu, dan Moraimasu.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-8.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">08</span></div>
+        <div class="chapter-info">
+          <h2>Kata Sifat (I &amp; Na-Keiyoushi)</h2>
+          <p>Mendeskripsikan sifat benda/keadaan dan bentuk lampau/negatifnya.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-9.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">09</span></div>
+        <div class="chapter-info">
+          <h2>Kesukaan, Kemampuan &amp; Alasan</h2>
+          <p>Penggunaan Suki/Kirai, Jouzu/Heta, Wakarimasu/Arimasu (Ga), dan Kara.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-10.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">10</span></div>
+        <div class="chapter-info">
+          <h2>Keberadaan &amp; Posisi Letak Ruang</h2>
+          <p>Keberadaan benda/makhluk (Arimasu/Imasu), posisi ruang, dan partikel Ya/Nado.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-11.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">11</span></div>
+        <div class="chapter-info">
+          <h2>Jumlah, Frekuensi &amp; Durasi</h2>
+          <p>Kata bantu bilangan (*Josuushi*), durasi waktu, rentang periode, dan kuantitas.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-12.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">12</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Lampau &amp; Komparasi</h2>
+          <p>Bentuk lampau kata benda/sifat, perbandingan (Yori), dan tingkat paling (Ichiban).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-13.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">13</span></div>
+        <div class="chapter-info">
+          <h2>Keinginan &amp; Tujuan Pergi</h2>
+          <p>Menyatakan keinginan (~Hoshii, ~Tai) dan pergi untuk melakukan sesuatu (~Ni ikimasu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-14.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">14</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk ~Te (Permohonan &amp; Progresif)</h2>
+          <p>Konjugasi bentuk Te, permohonan (~Te kudasai), dan progresif (~Te imasu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-15.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">15</span></div>
+        <div class="chapter-info">
+          <h2>Izin &amp; Larangan</h2>
+          <p>Meminta izin (~Te mo ii desu ka) dan menyatakan larangan (~Te wa ikemasen).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-16.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">16</span></div>
+        <div class="chapter-info">
+          <h2>Urutan Kejadian &amp; Penghubung</h2>
+          <p>Menyambung aktivitas berurutan (~Te, ~Te), ~Te kara, dan sifat fisik.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-17.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">17</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk ~Nai (Keharusan &amp; Larangan)</h2>
+          <p>Konjugasi bentuk Nai, ~Nai de kudasai, dan keharusan (~Nakereba narimasen).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-18.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">18</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Kamus (Kemampuan &amp; Hobi)</h2>
+          <p>Bentuk kamus (Jishokei), ~Koto ga dekimasu (bisa), hobi, dan urutan (~Mae ni).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-19.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">19</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk ~Ta (Pengalaman &amp; Variasi)</h2>
+          <p>Konjugasi bentuk Ta, pengalaman (~Ta koto ga arimasu), acak (~Tari ~tari), ~Narimasu.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-20.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">20</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Biasa / Informal (Futsuukei)</h2>
+          <p>Percakapan kasual dan akrab dengan teman sebaya tanpa bentuk akhiran sopan.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-21.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">21</span></div>
+        <div class="chapter-info">
+          <h2>Pendapat &amp; Kalimat Kutipan</h2>
+          <p>Menyatakan opini/pendapat (~To omoimasu) dan mengutip perkataan orang (~To iimashita).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-22.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">22</span></div>
+        <div class="chapter-info">
+          <h2>Anak Kalimat Pewatas Kata Benda</h2>
+          <p>Menerangkan kata benda menggunakan anak kalimat kata kerja (*Noun Modification*).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-23.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">23</span></div>
+        <div class="chapter-info">
+          <h2>Waktu (~Toki) &amp; Pengandaian Pasti (~To)</h2>
+          <p>Menyatakan saat melakukan sesuatu (~Toki) dan hubungan sebab-akibat pasti (~To).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-24.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">24</span></div>
+        <div class="chapter-info">
+          <h2>Memberi &amp; Menerima Jasa / Kebaikan</h2>
+          <p>Pola pertolongan perbuatan: ~Te agemasu, ~Te moraimasu, dan ~Te kuremasu.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-25.html" class="chapter-card">
+        <div class="bab-badge"><span class="label">Bab</span><span class="number">25</span></div>
+        <div class="chapter-info">
+          <h2>Pengandaian (~Tara) &amp; Walaupun (~Temo)</h2>
+          <p>Syarat pengandaian jika/setelah (~Tara) dan pertentangan meskipun (~Temo).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+    </div>
+
+    <div class="section-divider" style="margin-top: 36px;">
+      <span>MINNA NO NIHONGO II</span>
+      <span class="level-tag-pill pill-n4">JLPT N4 (Bab 26 - 50)</span>
+    </div>
+
+    <div class="chapter-grid">
+      <a href="./bab-26.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">26</span></div>
+        <div class="chapter-info">
+          <h2>Ungkapan Penjelas (~n desu)</h2>
+          <p>Menjelaskan alasan, menegaskan fakta, dan meminta saran/solusi (~n desu ga).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-27.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">27</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Potensial (Bisa / Sanggup)</h2>
+          <p>Konjugasi kata kerja bentuk kesanggupan (*Kanoukei*) dan partikel Ga.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-28.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">28</span></div>
+        <div class="chapter-info">
+          <h2>Dua Aksi Bersamaan (~Nagara)</h2>
+          <p>Melakukan 2 hal sekaligus (~Nagara), rutinitas berulang, dan mendaftar alasan (~Shi).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-29.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">29</span></div>
+        <div class="chapter-info">
+          <h2>Kondisi Spontan (~Te imasu / Jidoushi)</h2>
+          <p>Menyatakan keadaan hasil kejadian tanpa sengaja dan kata kerja intransitif.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-30.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">30</span></div>
+        <div class="chapter-info">
+          <h2>Kondisi Sengaja &amp; Persiapan (~Te arimasu / okimasu)</h2>
+          <p>Menyatakan hasil kesengajaan (~Te arimasu) dan persiapan sebelumnya (~Te okimasu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-31.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">31</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Maksud / Ajakan (~Ikoukei &amp; Tsumori)</h2>
+          <p>Konjugasi bentuk kehendak (~Ou), rencana (~Tsumori desu), dan jadwal (~Yotei desu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-32.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">32</span></div>
+        <div class="chapter-info">
+          <h2>Saran (~Hou ga ii) &amp; Dugaan (~Deshou)</h2>
+          <p>Memberikan anjuran/saran yang baik dan menyatakan perkiraan/probabilitas cuaca/situasi.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-33.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">33</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Perintah &amp; Larangan Keras</h2>
+          <p>Bentuk perintah (Meireikei), larangan (Kinshikei), rambu tanda, dan menyampaikan pesan.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-34.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">34</span></div>
+        <div class="chapter-info">
+          <h2>Mengikuti Contoh (~Toori ni) &amp; Urutan (~Ato de)</h2>
+          <p>Melakukan sesuai petunjuk/contoh (~Toori ni) dan urutan setelah selesai (~Ato de).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-35.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">35</span></div>
+        <div class="chapter-info">
+          <h2>Bentuk Pengandaian Syarat (~Ba / Joukenkei)</h2>
+          <p>Konjugasi bentuk syarat (~Ba), meminta saran (*~ba ii desu ka*), dan semakin... semakin...</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-36.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">36</span></div>
+        <div class="chapter-info">
+          <h2>Tujuan (~You ni) &amp; Menjadi Terbiasa</h2>
+          <p>Melakukan tindakan agar tercapai target (~You ni) dan perubahan kebiasaan (~You ni narimashita).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-37.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">37</span></div>
+        <div class="chapter-info">
+          <h2>Kalimat Pasif (Ukemi / Di- / Ter-)</h2>
+          <p>Konjugasi kata kerja pasif, pasif yang merugikan (*Meiwaku Ukemi*), dan inovasi penemuan.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-38.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">38</span></div>
+        <div class="chapter-info">
+          <h2>Nominalisasi Kalimat (~no wa / no ga)</h2>
+          <p>Mengubah kata kerja menjadi kata benda menggunakan partikel No (*Gerund / Nominalization*).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-39.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">39</span></div>
+        <div class="chapter-info">
+          <h2>Sebab &amp; Akibat Alami (~Te / ~Node)</h2>
+          <p>Menyatakan alasan emosional/bencana dengan bentuk Te serta alasan objektif sopan (~Node).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-40.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">40</span></div>
+        <div class="chapter-info">
+          <h2>Kalimat Tanya Terselip (~Ka / ~Ka dou ka)</h2>
+          <p>Menyisipkan kalimat tanya di tengah kalimat (*embedded question*) dan mencoba aksi (~Te mimasu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-41.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">41</span></div>
+        <div class="chapter-info">
+          <h2>Memberi &amp; Menerima Tingkat Sopan</h2>
+          <p>Bentuk hormat pemberian/penerimaan: Yarimasu, Itadakimasu, dan Kudasaimasu.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-42.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">42</span></div>
+        <div class="chapter-info">
+          <h2>Tujuan Demi (~Tame ni) &amp; Kegunaan (~Ni)</h2>
+          <p>Melakukan demi cita-cita/keuntungan (~Tame ni) dan fungsi guna (*tsukaimasu/benri desu*).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-43.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">43</span></div>
+        <div class="chapter-info">
+          <h2>Kelihatan / Tampak Seperti (~Sou desu)</h2>
+          <p>Menyatakan kesan visual perkiraan yang tampak di depan mata (tampaknya akan jatuh/hujan).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-44.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">44</span></div>
+        <div class="chapter-info">
+          <h2>Terlalu Berlebihan (~Sugimasu) &amp; Kemudahan</h2>
+          <p>Menyatakan berlebihan (~Sugiru), mudah dilakukan (~Yasui), dan sulit dilakukan (~Nikui).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-45.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">45</span></div>
+        <div class="chapter-info">
+          <h2>Kondisi Darurat (~Baai wa) &amp; Padahal (~Noni)</h2>
+          <p>Instruksi saat terjadi kasus/kondisi darurat dan rasa kecewa/kontradiksi padahal (~Noni).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-46.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">46</span></div>
+        <div class="chapter-info">
+          <h2>Titik Waktu (~Tokoro) &amp; Baru Saja (~Bakari)</h2>
+          <p>Akan segera mulai, sedang berlangsung, baru saja selesai (~Tokoro), serta kepastian (~Hazu desu).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-47.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">47</span></div>
+        <div class="chapter-info">
+          <h2>Kabar Angin (~Sou desu) &amp; Nampaknya (~You desu)</h2>
+          <p>Menyampaikan desas-desus/berita (*katanya*) dan dugaan berdasarkan panca indera (*sepertinya*).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-48.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">48</span></div>
+        <div class="chapter-info">
+          <h2>Kalimat Kausatif (Shieki / Menyuruh / Mengizinkan)</h2>
+          <p>Konjugasi kata kerja bentuk kausatif untuk menyuruh atau mengizinkan bawahan melakukan aksi.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-49.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">49</span></div>
+        <div class="chapter-info">
+          <h2>Bahasa Penghormatan Tinggi (Sonkeigo / 尊敬語)</h2>
+          <p>Menghormati tindakan lawan bicara, atasan, atau klien bisnis dengan kosakata khusus.</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+
+      <a href="./bab-50.html" class="chapter-card card-n4-style">
+        <div class="bab-badge badge-n4-color"><span class="label">Bab</span><span class="number">50</span></div>
+        <div class="chapter-info">
+          <h2>Bahasa Merendahkan Diri (Kenjougo / 謙譲語)</h2>
+          <p>Merendahkan tindakan diri sendiri di depan klien/atasan dan bahasa formal santun (*Teineigo*).</p>
+        </div>
+        <div class="action-icon">→</div>
+      </a>
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+  </script>
+
+</body>
+</html>
