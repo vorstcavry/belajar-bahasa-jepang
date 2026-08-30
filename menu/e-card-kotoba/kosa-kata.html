@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kamus &amp; Flashcard Kosakata Bab 1 - 35</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: #082f49;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --border: #334155;
+      --accent: #fbbf24;
+      --purple: #a78bfa;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --app-header-bg: #1e293b;
+      --view-tab-bg: #0f172a;
+      --btn-chap-bg: #0f172a;
+      --btn-chap-border: #334155;
+      --btn-chap-text: #cbd5e1;
+      --flip-front-bg: linear-gradient(145deg, #1e293b 0%, #0c4a6e 100%);
+      --flip-front-border: #0369a1;
+      --flip-back-bg: linear-gradient(145deg, #1e293b 0%, #451a03 100%);
+      --flip-back-border: #b45309;
+      --flip-reading-box-bg: rgba(15, 23, 42, 0.8);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #fde68a;
+      --mini-illus-bg: #0c4a6e;
+      --mini-illus-border: #0284c7;
+      --tag-bab-bg: #0f172a;
+      --tag-bab-text: #94a3b8;
+      --btn-audio-bg: #082f49;
+      --btn-audio-border: #0284c7;
+      --btn-audio-text: #38bdf8;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --jp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #cbd5e1;
+      --accent: #f59e0b;
+      --purple: #7c3aed;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --app-header-bg: #ffffff;
+      --view-tab-bg: #e2e8f0;
+      --btn-chap-bg: #f8fafc;
+      --btn-chap-border: #cbd5e1;
+      --btn-chap-text: #334155;
+      --flip-front-bg: linear-gradient(145deg, #ffffff 0%, #f0f9ff 100%);
+      --flip-front-border: #bae6fd;
+      --flip-back-bg: linear-gradient(145deg, #ffffff 0%, #fef3c7 100%);
+      --flip-back-border: #fde68a;
+      --flip-reading-box-bg: rgba(255, 255, 255, 0.8);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #92400e;
+      --mini-illus-bg: #f0f9ff;
+      --mini-illus-border: #bae6fd;
+      --tag-bab-bg: #f1f5f9;
+      --tag-bab-text: #475569;
+      --btn-audio-bg: #e0f2fe;
+      --btn-audio-border: #7dd3fc;
+      --btn-audio-text: #0369a1;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
+      min-height: 100vh;
+    }
+
+    /* Header Navigasi */
+    .app-header {
+      background: var(--app-header-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      background: var(--primary-dark);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-2px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .view-mode-tabs {
+      display: flex;
+      background: var(--view-tab-bg);
+      padding: 3px;
+      border-radius: 10px;
+      gap: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .btn-view-mode {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-view-mode.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 16px auto;
+      padding: 0 12px;
+    }
+
+    /* Kontrol Pencarian & Filter Bab */
+    .control-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .search-input-box {
+      width: 100%;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--subtext);
+    }
+
+    .chapter-scroll-group {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .chapter-scroll-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn-chap {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--btn-chap-border);
+      background: var(--btn-chap-bg);
+      color: var(--btn-chap-text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-chap.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+
+    /* MODE FLIP CARD */
+    .flashcard-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 520px;
+      margin: 20px auto;
+    }
+
+    .flip-scene {
+      width: 100%;
+      height: 300px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px var(--shadow-color);
+    }
+
+    .flip-card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .flip-face-front {
+      background: var(--flip-front-bg);
+      border-color: var(--flip-front-border);
+    }
+
+    .flip-face-back {
+      background: var(--flip-back-bg);
+      border-color: var(--flip-back-border);
+      transform: rotateY(180deg);
+    }
+
+    .flip-header-meta {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .flip-badge-status {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--tag-bab-bg);
+      color: var(--subtext);
+      border: 1px solid var(--border);
+    }
+
+    .flip-face-back .flip-badge-status {
+      background: var(--btn-chap-bg);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .flip-center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+    }
+
+    .flip-jp-text {
+      font-family: var(--jp-font);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .flip-reading-box {
+      background: var(--flip-reading-box-bg);
+      border: 1px dashed var(--flip-reading-box-border);
+      border-radius: 12px;
+      padding: 8px 16px;
+      margin-bottom: 12px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .flip-reading-text {
+      font-family: var(--jp-font);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .flip-romaji-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--subtext);
+      margin-top: 2px;
+    }
+
+    .flip-id-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--flip-id-text);
+      line-height: 1.35;
+    }
+
+    .flip-hint {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--subtext);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flip-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .btn-flash-nav {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-flash-nav:hover {
+      background: var(--bg);
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio:hover {
+      background: var(--primary);
+    }
+
+    .card-counter {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--subtext);
+    }
+
+    /* MODE DAFTAR GRID KAMUS */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .vocab-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .vocab-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(2, 132, 199, 0.15);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .vocab-mini-illus {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--mini-illus-bg);
+      border: 1px solid var(--mini-illus-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .vocab-text-group {
+      flex: 1;
+    }
+
+    .vocab-jp {
+      font-family: var(--jp-font);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .vocab-reading-mini {
+      font-family: var(--jp-font);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 1px;
+    }
+
+    .vocab-id {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--subtext);
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    .vocab-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-audio-mini {
+      background: var(--btn-audio-bg);
+      border: 1px solid var(--btn-audio-border);
+      color: var(--btn-audio-text);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .tag-bab {
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: var(--tag-bab-bg);
+      color: var(--tag-bab-text);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--subtext);
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1.5px dashed var(--border);
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin: 36px auto 0;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--subtext);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-title">
+        <span class="brand-badge">KOSAKATA</span>
+        <span class="brand-text">Bab 1 – 35</span>
+      </div>
+
+      <div class="header-actions">
+        <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
+          <span>←</span> Beranda Hub
+        </a>
+
+        <!-- Tab Pilihan Mode Belajar -->
+        <div class="view-mode-tabs">
+          <button class="btn-view-mode active" id="btnModeFlip" onclick="switchViewMode('flip')">🎴 Mode Flip</button>
+          <button class="btn-view-mode" id="btnModeList" onclick="switchViewMode('list')">📑 Mode Kamus</button>
+        </div>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Kontrol Filter Bab & Pencarian -->
+    <div class="control-card">
+      <div class="search-input-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari kosakata, kanji, atau cara baca..." oninput="handleSearch()">
+      </div>
+
+      <div class="chapter-scroll-group" id="chapterFilterButtons">
+        <button class="btn-chap active" onclick="setChapterFilter(0, this)">Semua Bab (1-35)</button>
+      </div>
+    </div>
+
+    <!-- TAMPILAN 1: MODE FLIP CARD -->
+    <div id="flipModeView" class="flashcard-wrapper">
+      <div class="card-counter" id="flipCounterText">Kartu 1 dari 1</div>
+      
+      <!-- Kartu Flip Interaktif -->
+      <div class="flip-scene" onclick="toggleCardFlip()">
+        <div class="flip-card-inner" id="flipCardInner">
+          <!-- Sisi Depan -->
+          <div class="flip-face flip-face-front">
+            <div class="flip-header-meta">
+              <span class="tag-bab" id="flipFrontBab">Bab 1</span>
+              <span class="flip-badge-status">SOAL</span>
+            </div>
+            <div class="flip-center-content">
+              <div class="flip-jp-text" id="flipFrontJp">日本語</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk melihat cara baca &amp; arti</div>
+          </div>
+          <!-- Sisi Belakang -->
+          <div class="flip-face flip-face-back">
+            <div class="flip-header-meta">
+              <span class="tag-bab" id="flipBackBab">Bab 1</span>
+              <span class="flip-badge-status">JAWABAN</span>
+            </div>
+            <div class="flip-center-content">
+              <div class="flip-reading-box">
+                <div class="flip-reading-text" id="flipBackReading">にほんご</div>
+                <div class="flip-romaji-text" id="flipBackRomaji">nihongo</div>
+              </div>
+              <div class="flip-id-text" id="flipBackId">Bahasa Indonesia</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk kembali</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kontrol Navigasi Flashcard -->
+      <div class="flip-controls">
+        <button class="btn-flash-nav" onclick="navigateFlashcard(-1)">← Sebelumnya</button>
+        <button class="btn-flash-nav btn-flash-audio" onclick="playCurrentFlashVoice()">🔊 Dengar Suara</button>
+        <button class="btn-flash-nav" onclick="navigateFlashcard(1)">Selanjutnya →</button>
+      </div>
+      <button class="btn-flash-nav" style="width: 100%;" onclick="shuffleFlashcards()">🎲 Acak Kartu</button>
+    </div>
+
+    <!-- TAMPILAN 2: MODE DAFTAR GRID -->
+    <div id="listModeView" class="vocab-grid" style="display: none;"></div>
+
+    <!-- Kontak & Donasi Section -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA KOSAKATA LENGKAP BAB 1 - 35 ---
+    const rawVocabData = [
+      // Bab 1
+      { b: 1, jp: "アメリカ", r: "アメリカ", romaji: "amerika", id: "Amerika", icon: "🇺🇸" },
+      { b: 1, jp: "インドネシア", r: "インドネシア", romaji: "indonesia", id: "Indonesia", icon: "🇮🇩" },
+      { b: 1, jp: "ゴム", r: "ゴム", romaji: "gomu", id: "Karet", icon: "🩹" },
+      { b: 1, jp: "ジャカルタ", r: "ジャカルタ", romaji: "jakaruta", id: "Jakarta", icon: "🏙️" },
+      { b: 1, jp: "インドネシア人", r: "インドネシアじん", romaji: "indoneshia-jin", id: "Orang Indonesia", icon: "🧑" },
+      { b: 1, jp: "インド人", r: "インドじん", romaji: "indo-jin", id: "Orang India", icon: "👳" },
+      { b: 1, jp: "カンボジア人", r: "カンボジアじん", romaji: "kanbojia-jin", id: "Orang Kamboja", icon: "🧑‍🌾" },
+      { b: 1, jp: "フィリピン人", r: "フィリピンじん", romaji: "firipin-jin", id: "Orang Filipina", icon: "👨" },
+      { b: 1, jp: "ベトナム人", r: "ベトナムじん", romaji: "betonamu-jin", id: "Orang Vietnam", icon: "👩" },
+      { b: 1, jp: "マレーシア人", r: "マレーシアじん", romaji: "mareeshia-jin", id: "Orang Malaysia", icon: "👨‍💼" },
+      { b: 1, jp: "あの人", r: "あのひと", romaji: "ano hito", id: "Orang Itu", icon: "👉" },
+      { b: 1, jp: "おいくつ", r: "おいくつ", romaji: "oikutsu", id: "Berapa Umur (Sopan)", icon: "🎂" },
+      { b: 1, jp: "どちら", r: "どちら", romaji: "dochira", id: "Mana (Sopan)", icon: "🧭" },
+      { b: 1, jp: "どなた", r: "どなた", romaji: "donata", id: "Siapa (Sopan)", icon: "❓" },
+      { b: 1, jp: "~歳", r: "~さい", romaji: "~sai", id: "Umur", icon: "📅" },
+      { b: 1, jp: "国", r: "くに", romaji: "kuni", id: "Negara", icon: "🗺️" },
+      { b: 1, jp: "私", r: "わたし", romaji: "watashi", id: "Saya", icon: "🙋" },
+      { b: 1, jp: "人", r: "ひと", romaji: "hito", id: "Orang", icon: "👤" },
+      { b: 1, jp: "誰", r: "だれ", romaji: "dare", id: "Siapa", icon: "❓" },
+      { b: 1, jp: "何歳", r: "なんさい", romaji: "nansai", id: "Berapa Umurnya", icon: "🔢" },
+      { b: 1, jp: "会社員", r: "かいしゃいん", romaji: "kaishain", id: "Pegawai Perusahaan", icon: "💼" },
+      { b: 1, jp: "学生", r: "がくせい", romaji: "gakusei", id: "Pelajar", icon: "🎒" },
+      { b: 1, jp: "韓国", r: "かんこく", romaji: "kankoku", id: "Korea Selatan", icon: "🇰🇷" },
+      { b: 1, jp: "機械", r: "きかい", romaji: "kikai", id: "Mesin", icon: "⚙️" },
+      { b: 1, jp: "先生", r: "せんせい", romaji: "sensei", id: "Guru", icon: "🧑‍🏫" },
+      { b: 1, jp: "大学", r: "だいがく", romaji: "daigaku", id: "Universitas", icon: "🏛️" },
+      { b: 1, jp: "中国", r: "ちゅうごく", romaji: "chuugoku", id: "China", icon: "🇨🇳" },
+      { b: 1, jp: "日本", r: "にほん", romaji: "nihon", id: "Jepang", icon: "🇯🇵" },
+      { b: 1, jp: "名前", r: "なまえ", romaji: "namae", id: "Nama", icon: "📛" },
+      { b: 1, jp: "中国人", r: "ちゅうごくじん", romaji: "chuugoku-jin", id: "Orang Cina", icon: "👨‍💼" },
+      { b: 1, jp: "二十歳", r: "はたち", romaji: "hatachi", id: "Umur 20 Thn", icon: "🎓" },
+      { b: 1, jp: "日本人", r: "にほんじん", romaji: "nihon-jin", id: "Orang Jepang", icon: "👘" },
+      { b: 1, jp: "研修生", r: "けんしゅうせい", romaji: "kenshuusei", id: "Peserta Magang", icon: "👷" },
+      { b: 1, jp: "自己紹介", r: "じこしょうかい", romaji: "jikoshoukai", id: "Perkenalan", icon: "🤝" },
+      { b: 1, jp: "頑張ります", r: "がんばります", romaji: "ganbarimasu", id: "Berusaha / Bersemangat", icon: "🔥" },
+
+      // Bab 2
+      { b: 2, jp: "カメラ", r: "カメラ", romaji: "kamera", id: "Kamera", icon: "📷" },
+      { b: 2, jp: "コンベックス", r: "コンベックス", romaji: "konbekkusu", id: "Meteran Gulung", icon: "📏" },
+      { b: 2, jp: "ゴミ箱", r: "ごみばこ", romaji: "gomibako", id: "Tempat Sampah", icon: "🗑️" },
+      { b: 2, jp: "シャープペンシル", r: "シャープペンシル", romaji: "shaapu penshiru", id: "Pensil Mekanik", icon: "✏️" },
+      { b: 2, jp: "テレビ", r: "テレビ", romaji: "terebi", id: "Televisi", icon: "📺" },
+      { b: 2, jp: "ノート", r: "ノート", romaji: "nooto", id: "Buku Catatan", icon: "📓" },
+      { b: 2, jp: "ハンマー", r: "ハンマー", romaji: "hanmaa", id: "Palu", icon: "🔨" },
+      { b: 2, jp: "パソコン", r: "パソコン", romaji: "pasokon", id: "Laptop (Komputer Pribadi)", icon: "💻" },
+      { b: 2, jp: "ベッド", r: "ベッド", romaji: "beddo", id: "Ranjang", icon: "🛏️" },
+      { b: 2, jp: "ボールペン", r: "ボールペン", romaji: "boorupen", id: "Bulpoin", icon: "🖊️" },
+      { b: 2, jp: "メモ帳", r: "メモちょう", romaji: "memochou", id: "Buku Catatan Kecil", icon: "📋" },
+      { b: 2, jp: "ライター", r: "ライター", romaji: "raitaa", id: "Korek Gas", icon: "🔥" },
+      { b: 2, jp: "ラジオ", r: "ラジオ", romaji: "rajio", id: "Radio", icon: "📻" },
+      { b: 2, jp: "あれ", r: "あれ", romaji: "are", id: "Itu (Jauh)", icon: "👉" },
+      { b: 2, jp: "これ", r: "これ", romaji: "kore", id: "Ini", icon: "👇" },
+      { b: 2, jp: "それ", r: "それ", romaji: "sore", id: "Itu (Dekat)", icon: "👉" },
+      { b: 2, jp: "鞄", r: "かばん", romaji: "kaban", id: "Tas", icon: "👜" },
+      { b: 2, jp: "机", r: "つくえ", romaji: "tsukue", id: "Meja", icon: "🪑" },
+      { b: 2, jp: "鍵", r: "かぎ", romaji: "kagi", id: "Kunci", icon: "🔑" },
+      { b: 2, jp: "紙", r: "かみ", romaji: "kami", id: "Kertas", icon: "📄" },
+      { b: 2, jp: "車", r: "くるま", romaji: "kuruma", id: "Mobil", icon: "🚗" },
+      { b: 2, jp: "本", r: "ほん", romaji: "hon", id: "Buku", icon: "📖" },
+      { b: 2, jp: "鋏", r: "はさみ", romaji: "hasami", id: "Gunting", icon: "✂️" },
+      { b: 2, jp: "椅子", r: "いす", romaji: "isu", id: "Kursi", icon: "🪑" },
+      { b: 2, jp: "煙草", r: "たばこ", romaji: "tabako", id: "Rokok", icon: "🚬" },
+      { b: 2, jp: "鉛筆", r: "えんぴつ", romaji: "enpitsu", id: "Pensil", icon: "✏️" },
+      { b: 2, jp: "灰皿", r: "はいざら", romaji: "haizara", id: "Asbak", icon: "🚬" },
+      { b: 2, jp: "眼鏡", r: "めがね", romaji: "megane", id: "Kacamata", icon: "👓" },
+      { b: 2, jp: "雑誌", r: "ざっし", romaji: "zasshi", id: "Majalah", icon: "📰" },
+      { b: 2, jp: "時計", r: "とけい", romaji: "tokei", id: "Jam Dinding", icon: "⏰" },
+      { b: 2, jp: "辞書", r: "じしょ", romaji: "jisho", id: "Kamus", icon: "📕" },
+      { b: 2, jp: "社長", r: "しゃちょう", romaji: "shachou", id: "Direktur Perusahaan", icon: "👔" },
+      { b: 2, jp: "手紙", r: "てがみ", romaji: "tegami", id: "Surat", icon: "✉️" },
+      { b: 2, jp: "新聞", r: "しんぶん", romaji: "shinbun", id: "Koran", icon: "🗞️" },
+      { b: 2, jp: "電卓", r: "でんたく", romaji: "dentaku", id: "Kalkulator", icon: "🧮" },
+      { b: 2, jp: "電話", r: "でんわ", romaji: "denwa", id: "Telepon", icon: "☎️" },
+      { b: 2, jp: "携帯電話", r: "けいたいでんわ", romaji: "keitai denwa", id: "Handphone", icon: "📱" },
+
+      // Bab 3
+      { b: 3, jp: "トイレ", r: "トイレ", romaji: "toire", id: "Toilet", icon: "🚻" },
+      { b: 3, jp: "寮", r: "りょう", romaji: "ryou", id: "Asrama", icon: "🏢" },
+      { b: 3, jp: "会社", r: "かいしゃ", romaji: "kaisha", id: "Perusahaan", icon: "🏢" },
+      { b: 3, jp: "教室", r: "きょうしつ", romaji: "kyoushitsu", id: "Ruang Kelas", icon: "🏫" },
+      { b: 3, jp: "工場", r: "こうじょう", romaji: "koujou", id: "Pabrik", icon: "🏭" },
+      { b: 3, jp: "食堂", r: "しょくどう", romaji: "shokudou", id: "Kantin", icon: "🍽️" },
+      { b: 3, jp: "倉庫", r: "そうこ", romaji: "souko", id: "Gudang", icon: "📦" },
+      { b: 3, jp: "台所", r: "だいどころ", romaji: "daidokoro", id: "Dapur", icon: "🍳" },
+      { b: 3, jp: "電気", r: "でんき", romaji: "denki", id: "Listrik", icon: "⚡" },
+      { b: 3, jp: "部屋", r: "へや", romaji: "heya", id: "Kamar", icon: "🚪" },
+      { b: 3, jp: "事務所", r: "じむしょ", romaji: "jimusho", id: "Kantor", icon: "💼" },
+      { b: 3, jp: "風呂場", r: "ふろば", romaji: "furoba", id: "Kamar Mandi", icon: "🛁" },
+
+      // Bab 4
+      { b: 4, jp: "スーパー", r: "スーパー", romaji: "suupaa", id: "Supermarket", icon: "🛒" },
+      { b: 4, jp: "レストラン", r: "レストラン", romaji: "resutoran", id: "Restoran", icon: "🍴" },
+      { b: 4, jp: "銀行", r: "ぎんこう", romaji: "ginkou", id: "Bank", icon: "🏦" },
+      { b: 4, jp: "現場", r: "げんば", romaji: "genba", id: "Tempat Kerja Lapangan", icon: "🚧" },
+      { b: 4, jp: "病院", r: "びょういん", romaji: "byouin", id: "Rumah Sakit", icon: "🏥" },
+      { b: 4, jp: "図書館", r: "としょかん", romaji: "toshokan", id: "Perpustakaan", icon: "📚" },
+      { b: 4, jp: "郵便局", r: "ゆうびんきょく", romaji: "yuubinkyoku", id: "Kantor Pos", icon: "📮" },
+      { b: 4, jp: "寝ます", r: "ねます", romaji: "nemasu", id: "Tidur", icon: "🛌" },
+      { b: 4, jp: "起きます", r: "おきます", romaji: "okimasu", id: "Bangun Tidur", icon: "⏰" },
+      { b: 4, jp: "働きます", r: "はたらきます", romaji: "hatarakimasu", id: "Bekerja", icon: "🔨" },
+      { b: 4, jp: "勉強します", r: "べんきょうします", romaji: "benkyoushimasu", id: "Belajar", icon: "📖" },
+
+      // Bab 5
+      { b: 5, jp: "オートバイ", r: "オートバイ", romaji: "ootobai", id: "Sepeda Motor", icon: "🏍️" },
+      { b: 5, jp: "タクシー", r: "タクシー", romaji: "takushii", id: "Taksi", icon: "🚕" },
+      { b: 5, jp: "駅", r: "えき", romaji: "eki", id: "Stasiun", icon: "🚉" },
+      { b: 5, jp: "学校", r: "がっこう", romaji: "gakkou", id: "Sekolah", icon: "🏫" },
+      { b: 5, jp: "電車", r: "でんしゃ", romaji: "densha", id: "Kereta Listrik", icon: "🚆" },
+      { b: 5, jp: "飛行機", r: "ひこうき", romaji: "hikouki", id: "Pesawat Terbang", icon: "✈️" },
+      { b: 5, jp: "自転車", r: "じてんしゃ", romaji: "jitensha", id: "Sepeda", icon: "🚲" },
+
+      // Bab 6
+      { b: 6, jp: "コーヒー", r: "コーヒー", romaji: "koohii", id: "Kopi", icon: "☕" },
+      { b: 6, jp: "魚", r: "さかな", romaji: "sakana", id: "Ikan", icon: "🐟" },
+      { b: 6, jp: "靴", r: "くつ", romaji: "kutsu", id: "Sepatu", icon: "👞" },
+      { b: 6, jp: "水", r: "みず", romaji: "mizu", id: "Air", icon: "💧" },
+      { b: 6, jp: "肉", r: "にく", romaji: "niku", id: "Daging", icon: "🥩" },
+      { b: 6, jp: "卵", r: "たまご", romaji: "tamago", id: "Telur", icon: "🥚" },
+      { b: 6, jp: "お茶", r: "おちゃ", romaji: "ocha", id: "Teh Jepang", icon: "🍵" },
+      { b: 6, jp: "写真", r: "しゃしん", romaji: "shashin", id: "Foto", icon: "📸" },
+
+      // Bab 7
+      { b: 7, jp: "スパナ", r: "スパナ", romaji: "supana", id: "Kunci Pas", icon: "🔧" },
+      { b: 7, jp: "ドライバー", r: "ドライバー", romaji: "doraibaa", id: "Obeng", icon: "🪛" },
+      { b: 7, jp: "プレゼント", r: "プレゼント", romaji: "purezento", id: "Hadiah", icon: "🎁" },
+      { b: 7, jp: "花", r: "はな", romaji: "hana", id: "Bunga", icon: "🌸" },
+      { b: 7, jp: "お金", r: "おかね", romaji: "okane", id: "Uang", icon: "💴" },
+
+      // Bab 8
+      { b: 8, jp: "山", r: "やま", romaji: "yama", id: "Gunung", icon: "⛰️" },
+      { b: 8, jp: "町", r: "まち", romaji: "machi", id: "Kota", icon: "🏙️" },
+      { b: 8, jp: "高い", r: "たかい", romaji: "takai", id: "Mahal / Tinggi", icon: "📈" },
+      { b: 8, jp: "安い", r: "やすい", romaji: "yasui", id: "Murah", icon: "📉" },
+
+      // Bab 9 - 35
+      { b: 9, jp: "薬", r: "くすり", romaji: "kusuri", id: "Obat", icon: "💊" },
+      { b: 10, jp: "猫", r: "ねこ", romaji: "neko", id: "Kucing", icon: "🐱" },
+      { b: 10, jp: "冷蔵庫", r: "れいぞうこ", romaji: "reizouko", id: "Kulkas", icon: "🧊" },
+      { b: 11, jp: "犬", r: "いぬ", romaji: "inu", id: "Anjing", icon: "🐶" },
+      { b: 12, jp: "花火", r: "はなび", romaji: "hanabi", id: "Kembang Api", icon: "🎆" },
+      { b: 13, jp: "給料", r: "きゅうりょう", romaji: "kyuuryou", id: "Gaji / Upah", icon: "💰" },
+      { b: 14, jp: "救急車", r: "きゅうきゅうしゃ", romaji: "kyuukyuusha", id: "Mobil Ambulans", icon: "🚑" },
+      { b: 15, jp: "手袋", r: "てぶくろ", romaji: "tebukuro", id: "Sarung Tangan", icon: "🧤" },
+      { b: 16, jp: "鏡", r: "かがみ", romaji: "kagami", id: "Cermin", icon: "🪞" },
+      { b: 17, jp: "ヘルメット", r: "ヘルメット", romaji: "herumetto", id: "Helm Pengaman", icon: "⛑️" },
+      { b: 18, jp: "釣り", r: "つり", romaji: "tsuri", id: "Memancing", icon: "🎣" },
+      { b: 19, jp: "海", r: "うみ", romaji: "umi", id: "Laut", icon: "🌊" },
+      { b: 20, jp: "安全靴", r: "あんぜんぐつ", romaji: "anzengutsu", id: "Sepatu Pengaman", icon: "🥾" },
+      { b: 21, jp: "交番", r: "こうばん", romaji: "kouban", id: "Pos Polisi", icon: "👮" },
+      { b: 22, jp: "鍋", r: "なべ", romaji: "nabe", id: "Panci", icon: "🍲" },
+      { b: 23, jp: "相談します", r: "そうだんします", romaji: "soudanshimasu", id: "Konsultasi / Musyawarah", icon: "🗣️" },
+      { b: 24, jp: "カレンダー", r: "カレンダー", romaji: "karendaa", id: "Kalender", icon: "📅" },
+      { b: 25, jp: "晴れます", r: "はれます", romaji: "haremasu", id: "Cerah", icon: "☀️" },
+      { b: 26, jp: "家賃", r: "やちん", romaji: "yachin", id: "Biaya Sewa Rumah", icon: "🏠" },
+      { b: 27, jp: "アルバイト", r: "アルバイト", romaji: "arubaito", id: "Kerja Paruh Waktu", icon: "⏱️" },
+      { b: 28, jp: "天気予報", r: "てんきよほう", romaji: "tenkiyohou", id: "Prakiraan Cuaca", icon: "⛅" },
+      { b: 29, jp: "案内します", r: "あんないします", romaji: "annaishimasu", id: "Memandu", icon: "🚩" },
+      { b: 30, jp: "試合", r: "しあい", romaji: "shiai", id: "Pertandingan", icon: "🏆" },
+      { b: 31, jp: "泥棒", r: "どろぼう", romaji: "dorobou", id: "Pencuri", icon: "🦹" },
+      { b: 32, jp: "安心", r: "あんしん", romaji: "anshin", id: "Lega", icon: "😌" },
+      { b: 33, jp: "宅配便", r: "たくはいびん", romaji: "takuhaibin", id: "Pengiriman Paket", icon: "📦" },
+      { b: 34, jp: "経済", r: "けいざい", romaji: "keizai", id: "Ekonomi", icon: "📊" },
+      { b: 35, jp: "動物園", r: "どうぶつえん", romaji: "doubutsuen", id: "Kebun Binatang", icon: "🦁" }
+    ];
+
+    let currentChapter = 0;
+    let filteredList = [...rawVocabData];
+    let currentFlashIndex = 0;
+    let currentViewMode = 'flip';
+
+    function initApp() {
+      renderChapterButtons();
+      applyFilter();
+    }
+
+    function renderChapterButtons() {
+      const container = document.getElementById('chapterFilterButtons');
+      for (let i = 1; i <= 35; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-chap';
+        btn.innerText = `Bab ${i}`;
+        btn.onclick = () => setChapterFilter(i, btn);
+        container.appendChild(btn);
+      }
+    }
+
+    function setChapterFilter(chapNum, btn) {
+      currentChapter = chapNum;
+      document.querySelectorAll('.btn-chap').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter();
+    }
+
+    function handleSearch() {
+      applyFilter();
+    }
+
+    function switchViewMode(mode) {
+      currentViewMode = mode;
+      document.getElementById('btnModeFlip').classList.toggle('active', mode === 'flip');
+      document.getElementById('btnModeList').classList.toggle('active', mode === 'list');
+
+      document.getElementById('flipModeView').style.display = (mode === 'flip') ? 'flex' : 'none';
+      document.getElementById('listModeView').style.display = (mode === 'list') ? 'grid' : 'none';
+    }
+
+    function applyFilter() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      filteredList = rawVocabData.filter(item => {
+        const matchChap = (currentChapter === 0) || (item.b === currentChapter);
+        const matchQuery = !query || 
+                           item.jp.toLowerCase().includes(query) || 
+                           item.r.toLowerCase().includes(query) || 
+                           item.romaji.toLowerCase().includes(query) || 
+                           item.id.toLowerCase().includes(query);
+        return matchChap && matchQuery;
+      });
+
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+      renderListView();
+    }
+
+    // Logika Flip Card
+    function toggleCardFlip() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.toggle('is-flipped');
+    }
+
+    function updateFlashcardDisplay() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.remove('is-flipped');
+
+      if (filteredList.length === 0) {
+        document.getElementById('flipFrontJp').innerText = "Kosakata Tidak Ditemukan";
+        document.getElementById('flipFrontBab').innerText = "-";
+        document.getElementById('flipBackReading').innerText = "-";
+        document.getElementById('flipBackRomaji').innerText = "";
+        document.getElementById('flipBackId').innerText = "Coba kata kunci lain";
+        document.getElementById('flipBackBab').innerText = "-";
+        document.getElementById('flipCounterText').innerText = "0 dari 0 Kartu";
+        return;
+      }
+
+      const item = filteredList[currentFlashIndex];
+      // Sisi Depan
+      document.getElementById('flipFrontJp').innerText = item.jp;
+      document.getElementById('flipFrontBab').innerText = `Bab ${item.b}`;
+
+      // Sisi Belakang
+      document.getElementById('flipBackReading').innerText = item.r;
+      document.getElementById('flipBackRomaji').innerText = item.romaji;
+      document.getElementById('flipBackId').innerText = item.id;
+      document.getElementById('flipBackBab').innerText = `Bab ${item.b}`;
+
+      document.getElementById('flipCounterText').innerText = `Kartu ${currentFlashIndex + 1} dari ${filteredList.length}`;
+    }
+
+    function navigateFlashcard(step) {
+      if (filteredList.length === 0) return;
+      currentFlashIndex += step;
+      if (currentFlashIndex < 0) currentFlashIndex = filteredList.length - 1;
+      if (currentFlashIndex >= filteredList.length) currentFlashIndex = 0;
+      updateFlashcardDisplay();
+    }
+
+    function shuffleFlashcards() {
+      if (filteredList.length <= 1) return;
+      for (let i = filteredList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [filteredList[i], filteredList[j]] = [filteredList[j], filteredList[i]];
+      }
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+    }
+
+    function playCurrentFlashVoice() {
+      if (filteredList.length === 0) return;
+      playAudioVoice(filteredList[currentFlashIndex].jp);
+    }
+
+    // Logika Daftar Grid Kamus
+    function renderListView() {
+      const container = document.getElementById('listModeView');
+      container.innerHTML = '';
+
+      if (filteredList.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <p style="font-weight: 700;">Kosakata tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredList.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+          <div class="vocab-top">
+            <div class="vocab-mini-illus">${item.icon || '🇯🇵'}</div>
+            <div class="vocab-text-group">
+              <div class="vocab-jp">${item.jp}</div>
+              <div class="vocab-reading-mini">${item.r} &bull; <i>${item.romaji}</i></div>
+              <div class="vocab-id">${item.id}</div>
+            </div>
+          </div>
+          <div class="vocab-bottom">
+            <span class="tag-bab">Bab ${item.b}</span>
+            <button class="btn-audio-mini" onclick="playAudioVoice('${item.jp.replace(/'/g, "\\'")}')">🔊 Dengar</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function playAudioVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const cleanText = text.replace(/\(.*?\)/g, '').trim();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
