@@ -159,13 +159,17 @@
       transform: scale(1.08);
     }
 
-    /* Header Navigasi */
+    /* Header Navigasi Terpusat (Centered Layout) */
     .header-box {
       text-align: center;
       width: 100%;
-      max-width: 700px;
-      margin-bottom: 24px;
+      max-width: 760px;
+      margin: 0 auto 28px;
       padding: 0 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .badge-top {
@@ -176,10 +180,11 @@
       font-weight: 700;
       padding: 5px 14px;
       border-radius: 9999px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       letter-spacing: 0.6px;
       border: 1px solid var(--badge-border);
       box-shadow: 0 2px 6px var(--shadow-color);
+      text-align: center;
     }
 
     .header-box h1 {
@@ -187,7 +192,9 @@
       font-weight: 800;
       color: var(--text-heading);
       line-height: 1.25;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      text-align: center;
+      width: 100%;
     }
 
     .header-box h1 span {
@@ -199,7 +206,9 @@
     .header-box p {
       font-size: clamp(0.82rem, 2.8vw, 0.95rem);
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 680px;
     }
 
     /* Grid Layout */
@@ -457,7 +466,7 @@
       </button>
     </div>
 
-    <!-- Header Section -->
+    <!-- Header Section (Teks Terpusat di Tengah) -->
     <div class="header-box">
       <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
       <h1>Simulasi <span>Ujian JLPT</span></h1>
