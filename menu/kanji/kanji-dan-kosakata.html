@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Master Kanji &amp; Kosakata JLPT N5 - N4 (613 Kosakata)</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        } else {
+          document.documentElement.classList.remove('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #34d399;
+      --primary-dark: #059669;
+      --primary-light: #064e3b;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --border: #334155;
+      --accent: #fbbf24;
+      --gold: #fbbf24;
+      --gold-bg: #451a03;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --app-header-bg: #1e293b;
+      --view-tab-bg: #0f172a;
+      --btn-cat-bg: #0f172a;
+      --flip-front-bg: linear-gradient(145deg, #1e293b 0%, #064e3b 100%);
+      --flip-front-border: #059669;
+      --flip-back-bg: linear-gradient(145deg, #1e293b 0%, #451a03 100%);
+      --flip-back-border: #b45309;
+      --flip-reading-box-bg: rgba(15, 23, 42, 0.85);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #fde68a;
+      --flex-back-bg: #064e3b;
+      --flex-back-border: #059669;
+      --flex-hiragana-text: #86efac;
+      --flex-meaning-bg: #052e16;
+      --flex-meaning-text: #86efac;
+      --mini-illus-bg: #064e3b;
+      --mini-illus-border: #059669;
+      --btn-audio-bg: #064e3b;
+      --btn-audio-border: #059669;
+      --btn-audio-text: #86efac;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --jp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #d1fae5;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #cbd5e1;
+      --accent: #f59e0b;
+      --gold: #d97706;
+      --gold-bg: #fef3c7;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --app-header-bg: #ffffff;
+      --view-tab-bg: #e2e8f0;
+      --btn-cat-bg: #f8fafc;
+      --flip-front-bg: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
+      --flip-front-border: #a7f3d0;
+      --flip-back-bg: linear-gradient(145deg, #ffffff 0%, #fef3c7 100%);
+      --flip-back-border: #fde68a;
+      --flip-reading-box-bg: rgba(255, 255, 255, 0.85);
+      --flip-reading-box-border: #f59e0b;
+      --flip-id-text: #92400e;
+      --flex-back-bg: #f0fdf4;
+      --flex-back-border: #86efac;
+      --flex-hiragana-text: var(--primary-dark);
+      --flex-meaning-bg: #dcfce7;
+      --flex-meaning-text: #14532d;
+      --mini-illus-bg: #f0fdf4;
+      --mini-illus-border: #bbf7d0;
+      --btn-audio-bg: #d1fae5;
+      --btn-audio-border: #6ee7b7;
+      --btn-audio-text: var(--primary-dark);
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
+      min-height: 100vh;
+    }
+
+    /* Header Navigasi */
+    .app-header {
+      background: var(--app-header-bg);
+      border-bottom: 2px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      background: var(--primary-dark);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-2px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .view-mode-tabs {
+      display: flex;
+      background: var(--view-tab-bg);
+      padding: 3px;
+      border-radius: 10px;
+      gap: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .btn-view-mode {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-view-mode.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 16px auto;
+      padding: 0 12px;
+    }
+
+    /* Kontrol Pencarian & Filter */
+    .control-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .search-input-box {
+      width: 100%;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--subtext);
+    }
+
+    .category-scroll-group {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .category-scroll-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn-cat {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--btn-cat-bg);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-cat.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);
+    }
+
+    /* MODE 1: FLIP CARD TUNGGAL */
+    .flashcard-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 520px;
+      margin: 20px auto;
+    }
+
+    .flip-scene {
+      width: 100%;
+      height: 310px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px var(--shadow-color);
+    }
+
+    .flip-card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .flip-face-front {
+      background: var(--flip-front-bg);
+      border-color: var(--flip-front-border);
+    }
+
+    .flip-face-back {
+      background: var(--flip-back-bg);
+      border-color: var(--flip-back-border);
+      transform: rotateY(180deg);
+    }
+
+    .flip-header-meta {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tag-category-back {
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: var(--btn-cat-bg);
+      color: var(--subtext);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .flip-center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+    }
+
+    .flip-kanji-big {
+      font-family: var(--jp-font);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 4px 0;
+      word-break: break-all;
+    }
+
+    .flip-kanji-big.long-word {
+      font-size: 1.8rem;
+    }
+
+    .flip-reading-box {
+      background: var(--flip-reading-box-bg);
+      border: 1px dashed var(--flip-reading-box-border);
+      border-radius: 12px;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .flip-reading-text {
+      font-family: var(--jp-font);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .flip-romaji-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .flip-id-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--flip-id-text);
+      line-height: 1.35;
+    }
+
+    .flip-hint {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--subtext);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flip-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .btn-flash-nav {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-flash-nav:hover {
+      background: var(--bg);
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-flash-audio:hover {
+      background: var(--primary);
+    }
+
+    .card-counter {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--subtext);
+    }
+
+    /* MODE 2: DAFTAR GRID KAMUS */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .vocab-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .vocab-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(5, 150, 105, 0.15);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .vocab-mini-illus {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--mini-illus-bg);
+      border: 1px solid var(--mini-illus-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .vocab-text-group {
+      flex: 1;
+    }
+
+    .vocab-jp {
+      font-family: var(--jp-font);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .vocab-reading-mini {
+      font-family: var(--jp-font);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 1px;
+    }
+
+    .vocab-id {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--subtext);
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    .vocab-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-audio-mini {
+      background: var(--btn-audio-bg);
+      border: 1px solid var(--btn-audio-border);
+      color: var(--btn-audio-text);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .tag-category-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      background: var(--btn-cat-bg);
+      color: var(--subtext);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* MODE 3: GRID FLEKSIBEL */
+    .flex-header-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .flex-total-count {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--subtext);
+    }
+
+    .btn-flex-shuffle {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-flex-shuffle:hover {
+      border-color: var(--primary);
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .flex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .flex-card {
+      perspective: 1000px;
+      height: 195px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .flex-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px var(--shadow-color);
+    }
+
+    .flex-card.flipped .flex-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flex-card-front, .flex-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 8px;
+      border: 1.5px solid var(--border);
+    }
+
+    .flex-card-front {
+      background-color: var(--card-bg);
+      transition: all 0.2s ease;
+    }
+
+    .flex-card-front:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(5, 150, 105, 0.15);
+    }
+
+    .flex-card-back {
+      background-color: var(--flex-back-bg);
+      transform: rotateY(180deg);
+      border-color: var(--flex-back-border);
+    }
+
+    .flex-kanji-char {
+      font-family: var(--jp-font);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: 1px;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    .flex-kanji-char.long-word {
+      font-size: 1.5rem;
+    }
+
+    .flex-hint-tap {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--subtext);
+      margin-top: 10px;
+      background: var(--bg);
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .flex-visual-icon {
+      font-size: 1.8rem;
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+
+    .flex-hiragana {
+      font-family: var(--jp-font);
+      font-size: 0.95rem;
+      color: var(--flex-hiragana-text);
+      font-weight: 800;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    .flex-romaji {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .flex-meaning {
+      font-size: 0.78rem;
+      color: var(--flex-meaning-text);
+      font-weight: 700;
+      background: var(--flex-meaning-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      max-width: 95%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.2;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--subtext);
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1.5px dashed var(--border);
+    }
+
+    @media (max-width: 480px) {
+      .flex-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .flex-card {
+        height: 185px;
+      }
+      .flex-kanji-char {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-title">
+        <span class="brand-badge">KANJI &amp; KOTOBA</span>
+        <span class="brand-text">613 Kosakata JLPT N5 - N4</span>
+      </div>
+
+      <div class="header-actions">
+        <a href="/belajar-bahasa-jepang/menu/kanji/kanji.html" class="btn-back-hub">
+          <span>←</span> Kembali
+        </a>
+
+        <!-- Tab Pilihan Mode Belajar (3 Mode) -->
+        <div class="view-mode-tabs">
+          <button class="btn-view-mode active" id="btnModeFlip" onclick="switchViewMode('flip')">🎴 Flashcard</button>
+          <button class="btn-view-mode" id="btnModeFlex" onclick="switchViewMode('flex')">⚡ Fleksibel</button>
+          <button class="btn-view-mode" id="btnModeList" onclick="switchViewMode('list')">📑 Kamus</button>
+        </div>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Kontrol Filter Kategori & Pencarian -->
+    <div class="control-card">
+      <div class="search-input-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari kanji, hiragana, romaji, atau arti..." oninput="handleSearch()">
+      </div>
+
+      <div class="category-scroll-group" id="categoryFilterButtons">
+        <button class="btn-cat active" onclick="setCategoryFilter('all', this)">Semua (613)</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat1', this)">🥩 Makanan &amp; Sifat</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat2', this)">🕒 Waktu &amp; Angka</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat3', this)">🧭 Arah &amp; Belanja</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat4', this)">👨‍👩‍👧 Keluarga &amp; Bahasa</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat5', this)">🌤️ Musim &amp; Cuaca</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat6', this)">🏫 Sekolah &amp; Rasa</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat7', this)">💼 Kantor &amp; Tubuh</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat8', this)">🌲 Alam &amp; Wisata</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat9', this)">🎉 Acara &amp; Elektronik</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat10', this)">⛩️ Kuil &amp; Sejarah</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat11', this)">⚽ Profesi &amp; Olahraga</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat12', this)">🍱 Pola Makan &amp; Relasi</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat13', this)">✈️ Bisnis &amp; Bahasa</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat14', this)">🏥 Medis &amp; Syarat</button>
+        <button class="btn-cat" onclick="setCategoryFilter('cat15', this)">🏢 Layanan &amp; Bencana</button>
+      </div>
+    </div>
+
+    <!-- TAMPILAN 1: MODE FLIP CARD -->
+    <div id="flipModeView" class="flashcard-wrapper">
+      <div class="card-counter" id="flipCounterText">Kartu 1 dari 613</div>
+      
+      <!-- Kartu Flip Interaktif -->
+      <div class="flip-scene" onclick="toggleCardFlip()">
+        <div class="flip-card-inner" id="flipCardInner">
+          <!-- Sisi Depan -->
+          <div class="flip-face flip-face-front">
+            <div class="flip-center-content">
+              <div class="flip-kanji-big" id="flipFrontKanji">魚</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk melihat cara baca &amp; arti</div>
+          </div>
+          <!-- Sisi Belakang -->
+          <div class="flip-face flip-face-back">
+            <div class="flip-header-meta">
+              <span class="tag-category-back" id="flipBackCat">Makanan &amp; Sifat</span>
+            </div>
+            <div class="flip-center-content">
+              <div class="flip-reading-box">
+                <div class="flip-reading-text" id="flipBackReading">さかな</div>
+                <div class="flip-romaji-text" id="flipBackRomaji">sakana</div>
+              </div>
+              <div class="flip-id-text" id="flipBackId">Ikan</div>
+            </div>
+            <div class="flip-hint">👆 Klik kartu untuk kembali</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kontrol Navigasi Flashcard -->
+      <div class="flip-controls">
+        <button class="btn-flash-nav" onclick="navigateFlashcard(-1)">← Sebelumnya</button>
+        <button class="btn-flash-nav btn-flash-audio" onclick="playCurrentFlashVoice()">🔊 Dengar Suara</button>
+        <button class="btn-flash-nav" onclick="navigateFlashcard(1)">Selanjutnya →</button>
+      </div>
+      <button class="btn-flash-nav" style="width: 100%;" onclick="shuffleCurrentList()">🎲 Acak Kartu</button>
+    </div>
+
+    <!-- TAMPILAN 2: MODE FLEKSIBEL (GRID MULTI FLIP CARD) -->
+    <div id="flexModeSection" style="display: none;">
+      <div class="flex-header-action">
+        <div class="flex-total-count" id="flexTotalText">Menampilkan 613 Kanji</div>
+        <button class="btn-flex-shuffle" onclick="shuffleCurrentList()">🎲 Acak Posisi Kanji</button>
+      </div>
+      <div id="flexModeView" class="flex-grid"></div>
+    </div>
+
+    <!-- TAMPILAN 3: MODE DAFTAR GRID -->
+    <div id="listModeView" class="vocab-grid" style="display: none;"></div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI TEMA OTOMATIS & INTEGRATIF ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        if (bodyEl) bodyEl.classList.add('light-theme');
+        if (themeIcon) themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        if (bodyEl) bodyEl.classList.remove('light-theme');
+        if (themeIcon) themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    function initTheme() {
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        applyThemeState(true);
+      } else {
+        applyThemeState(false);
+      }
+    }
+
+    // Jalankan inisialisasi tema
+    initTheme();
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isCurrentlyLight = rootHtml.classList.contains('light-theme') || (bodyEl && bodyEl.classList.contains('light-theme'));
+        applyThemeState(!isCurrentlyLight);
+      });
+    }
+
+    // Sinkronisasi otomatis saat tema diubah dari tab lain
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'theme_preference') {
+        applyThemeState(event.newValue === 'light');
+      }
+    });
+
+    // ================= DATA MASTER 613 KANJI & KOSAKATA =================
+    const masterKanjiList = [{"no": 1, "kj": "魚", "rd": "さかな", "id": "Ikan", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🐟"}, {"no": 2, "kj": "肉", "rd": "にく", "id": "Daging", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🥩"}, {"no": 3, "kj": "卵", "rd": "たまご", "id": "Telur", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🥚"}, {"no": 4, "kj": "水", "rd": "みず", "id": "Air", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "💧"}, {"no": 5, "kj": "食べます", "rd": "たべます", "id": "Makan", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🍽️"}, {"no": 6, "kj": "飲みます", "rd": "のみます", "id": "Minum", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🍵"}, {"no": 7, "kj": "大きい", "rd": "おおきい", "id": "Besar", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🐘"}, {"no": 8, "kj": "小さい", "rd": "ちいさい", "id": "Kecil", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🐭"}, {"no": 9, "kj": "新しい", "rd": "あたらしい", "id": "Baru", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "✨"}, {"no": 10, "kj": "古い", "rd": "ふるい", "id": "Lama, usang", "cat": "cat1", "tag": "Makanan & Sifat", "icon": "🏺"}, {"no": 11, "kj": "～時", "rd": "～じ", "id": "~ jam", "cat": "cat2", "tag": "Waktu & Angka", "icon": "⏰"}, {"no": 12, "kj": "～分", "rd": "～ふん、ぷん、ぶん", "id": "~ menit", "cat": "cat2", "tag": "Waktu & Angka", "icon": "⏱️"}, {"no": 13, "kj": "～半", "rd": "～はん", "id": "~ setengah", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🌗"}, {"no": 14, "kj": "月曜日", "rd": "げつようび", "id": "Senin", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🌙"}, {"no": 15, "kj": "火曜日", "rd": "かようび", "id": "Selasa", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🔥"}, {"no": 16, "kj": "水曜日", "rd": "すいようび", "id": "Rabu", "cat": "cat2", "tag": "Waktu & Angka", "icon": "💧"}, {"no": 17, "kj": "木曜日", "rd": "もくようび", "id": "Kamis", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🌲"}, {"no": 18, "kj": "金曜日", "rd": "きんようび", "id": "Jumat", "cat": "cat2", "tag": "Waktu & Angka", "icon": "✨"}, {"no": 19, "kj": "土曜日", "rd": "どようび", "id": "Sabtu", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🪐"}, {"no": 20, "kj": "日曜日", "rd": "にちようび", "id": "Minggu", "cat": "cat2", "tag": "Waktu & Angka", "icon": "☀️"}, {"no": 21, "kj": "言います", "rd": "いいます", "id": "Berkata", "cat": "cat2", "tag": "Waktu & Angka", "icon": "💬"}, {"no": 22, "kj": "話します", "rd": "はなします", "id": "Berbicara", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🗣️"}, {"no": 23, "kj": "読みます", "rd": "よみます", "id": "Membaca", "cat": "cat2", "tag": "Waktu & Angka", "icon": "📖"}, {"no": 24, "kj": "見ます", "rd": "みます", "id": "Melihat", "cat": "cat2", "tag": "Waktu & Angka", "icon": "👀"}, {"no": 25, "kj": "聞きます", "rd": "ききます", "id": "Mendengarkan", "cat": "cat2", "tag": "Waktu & Angka", "icon": "👂"}, {"no": 26, "kj": "書きます", "rd": "かきます", "id": "Menulis", "cat": "cat2", "tag": "Waktu & Angka", "icon": "✍️"}, {"no": 27, "kj": "一", "rd": "いち", "id": "Satu", "cat": "cat2", "tag": "Waktu & Angka", "icon": "1️⃣"}, {"no": 28, "kj": "二", "rd": "に", "id": "Dua", "cat": "cat2", "tag": "Waktu & Angka", "icon": "2️⃣"}, {"no": 29, "kj": "三", "rd": "さん", "id": "Tiga", "cat": "cat2", "tag": "Waktu & Angka", "icon": "3️⃣"}, {"no": 30, "kj": "四", "rd": "よん、し", "id": "Empat", "cat": "cat2", "tag": "Waktu & Angka", "icon": "4️⃣"}, {"no": 31, "kj": "五", "rd": "ご", "id": "Lima", "cat": "cat2", "tag": "Waktu & Angka", "icon": "5️⃣"}, {"no": 32, "kj": "六", "rd": "ろく", "id": "Enam", "cat": "cat2", "tag": "Waktu & Angka", "icon": "6️⃣"}, {"no": 33, "kj": "七", "rd": "なな、しち", "id": "Tujuh", "cat": "cat2", "tag": "Waktu & Angka", "icon": "7️⃣"}, {"no": 34, "kj": "八", "rd": "はち", "id": "Delapan", "cat": "cat2", "tag": "Waktu & Angka", "icon": "8️⃣"}, {"no": 35, "kj": "九", "rd": "きゅう", "id": "Sembilan", "cat": "cat2", "tag": "Waktu & Angka", "icon": "9️⃣"}, {"no": 36, "kj": "十", "rd": "じゅう", "id": "Sepuluh", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🔟"}, {"no": 37, "kj": "～年", "rd": "～ねん", "id": "~ tahun", "cat": "cat2", "tag": "Waktu & Angka", "icon": "📅"}, {"no": 38, "kj": "～月", "rd": "～がつ", "id": "~ bulan", "cat": "cat2", "tag": "Waktu & Angka", "icon": "🗓️"}, {"no": 39, "kj": "～日", "rd": "～にち", "id": "~ tanggal", "cat": "cat2", "tag": "Waktu & Angka", "icon": "📆"}, {"no": 40, "kj": "東", "rd": "ひがし", "id": "Timur", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🧭"}, {"no": 41, "kj": "西", "rd": "にし", "id": "Barat", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🧭"}, {"no": 42, "kj": "南", "rd": "みなみ", "id": "Selatan", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🧭"}, {"no": 43, "kj": "北", "rd": "きた", "id": "Utara", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🧭"}, {"no": 44, "kj": "～口", "rd": "～ぐち", "id": "~ pintu", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🚪"}, {"no": 45, "kj": "東口", "rd": "ひがしぐち", "id": "Pintu timur", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🚪"}, {"no": 46, "kj": "西口", "rd": "にしぐち", "id": "Pintu barat", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🚪"}, {"no": 47, "kj": "南口", "rd": "みなみぐち", "id": "Pintu selatan", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🚪"}, {"no": 48, "kj": "北口", "rd": "きたぐち", "id": "Pintu utara", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🚪"}, {"no": 49, "kj": "買います", "rd": "かいます", "id": "Membeli", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🛍️"}, {"no": 50, "kj": "買い物", "rd": "かいもの", "id": "Belanja", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🛒"}, {"no": 51, "kj": "お金", "rd": "おかね", "id": "Uang", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💰"}, {"no": 52, "kj": "～円", "rd": "～えん", "id": "~ yen", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💴"}, {"no": 53, "kj": "百", "rd": "ひゃく", "id": "100", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💯"}, {"no": 54, "kj": "千", "rd": "せん", "id": "1000", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💵"}, {"no": 55, "kj": "万", "rd": "まん", "id": "10000", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💳"}, {"no": 56, "kj": "百円", "rd": "ひゃくえん", "id": "100 yen", "cat": "cat3", "tag": "Arah & Belanja", "icon": "🪙"}, {"no": 57, "kj": "千円", "rd": "せんえん", "id": "1000 yen", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💵"}, {"no": 58, "kj": "一万円", "rd": "いちまんえん", "id": "10000 yen", "cat": "cat3", "tag": "Arah & Belanja", "icon": "💴"}, {"no": 59, "kj": "行きます", "rd": "いきます", "id": "Pergi", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🚶"}, {"no": 60, "kj": "来ます", "rd": "きます", "id": "Datang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🏃"}, {"no": 61, "kj": "会います", "rd": "あいます", "id": "Bertemu", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🤝"}, {"no": 62, "kj": "休みます", "rd": "やすみます", "id": "Libur, istirahat", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🛌"}, {"no": 63, "kj": "日本", "rd": "にほん", "id": "Jepang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🇯🇵"}, {"no": 64, "kj": "東京", "rd": "とうきょう", "id": "Tokyo", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🗼"}, {"no": 65, "kj": "私", "rd": "わたし", "id": "Saya", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🙋"}, {"no": 66, "kj": "父", "rd": "ちち", "id": "Ayah", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👨"}, {"no": 67, "kj": "母", "rd": "はは", "id": "Ibu", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👩"}, {"no": 68, "kj": "子供", "rd": "こども", "id": "Anak", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🧒"}, {"no": 69, "kj": "男", "rd": "おとこ", "id": "Laki-laki", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👨"}, {"no": 70, "kj": "女", "rd": "おんな", "id": "Perempuan", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👩"}, {"no": 71, "kj": "人", "rd": "ひと", "id": "Orang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👤"}, {"no": 72, "kj": "お父さん", "rd": "おとうさん", "id": "Ayah (orang lain)", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👨"}, {"no": 73, "kj": "お母さん", "rd": "おかあさん", "id": "Ibu (orang lain)", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👩"}, {"no": 74, "kj": "何人", "rd": "なんにん", "id": "Berapa orang?", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🔢"}, {"no": 75, "kj": "国", "rd": "くに", "id": "Negara", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🗾"}, {"no": 76, "kj": "外国", "rd": "がいこく", "id": "Luar negeri", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "✈️"}, {"no": 77, "kj": "～語", "rd": "～ご", "id": "~ Bahasa", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🗣️"}, {"no": 78, "kj": "日本語", "rd": "にほんご", "id": "Bahasa jepang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🇯🇵"}, {"no": 79, "kj": "英語", "rd": "えいご", "id": "Bahasa inggris", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🇬🇧"}, {"no": 80, "kj": "中国語", "rd": "ちゅうごくご", "id": "Bahasa china", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🇨🇳"}, {"no": 81, "kj": "～人", "rd": "～じん／～にん", "id": "~ orang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "👥"}, {"no": 82, "kj": "日本人", "rd": "にほんじん", "id": "Orang jepang", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "🇯🇵"}, {"no": 83, "kj": "好き", "rd": "すき", "id": "Suka", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "❤️"}, {"no": 84, "kj": "本", "rd": "ほん", "id": "Buku", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "📚"}, {"no": 85, "kj": "読書", "rd": "どくしょ", "id": "Bacaan", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "📖"}, {"no": 86, "kj": "何", "rd": "なに", "id": "Apa?", "cat": "cat4", "tag": "Keluarga & Bahasa", "icon": "❓"}, {"no": 87, "kj": "春", "rd": "はる", "id": "Musim semi", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌸"}, {"no": 88, "kj": "夏", "rd": "なつ", "id": "Musim panas", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌻"}, {"no": 89, "kj": "秋", "rd": "あき", "id": "Musim gugur", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🍁"}, {"no": 90, "kj": "冬", "rd": "ふゆ", "id": "Musim dingin", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "⛄"}, {"no": 91, "kj": "今", "rd": "いま", "id": "Sekarang", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "⏰"}, {"no": 92, "kj": "花", "rd": "はな", "id": "Bunga", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌷"}, {"no": 93, "kj": "海", "rd": "うみ", "id": "Laut", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌊"}, {"no": 94, "kj": "山", "rd": "やま", "id": "Gunung", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "⛰️"}, {"no": 95, "kj": "川", "rd": "かわ", "id": "Sungai", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🏞️"}, {"no": 96, "kj": "今日", "rd": "きょう", "id": "Hari ini", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "📅"}, {"no": 97, "kj": "天気", "rd": "てんき", "id": "Cuaca", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌤️"}, {"no": 98, "kj": "晴れ", "rd": "はれ", "id": "Cerah", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "☀️"}, {"no": 99, "kj": "雨", "rd": "あめ", "id": "Hujan", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌧️"}, {"no": 100, "kj": "雪", "rd": "ゆき", "id": "Salju", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "❄️"}, {"no": 101, "kj": "雲", "rd": "くも", "id": "Mendung", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "☁️"}, {"no": 102, "kj": "風", "rd": "かぜ", "id": "Angin", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "💨"}, {"no": 103, "kj": "空", "rd": "そら", "id": "Langit", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🌌"}, {"no": 104, "kj": "町", "rd": "まち", "id": "Kota", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🏘️"}, {"no": 105, "kj": "店", "rd": "みせ", "id": "Toko", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🏪"}, {"no": 106, "kj": "人気", "rd": "にんき", "id": "Popularitas", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "⭐"}, {"no": 107, "kj": "多い", "rd": "おおい", "id": "Banyak", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "👥"}, {"no": 108, "kj": "少ない", "rd": "すくない", "id": "Sedikit", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🤏"}, {"no": 109, "kj": "高い", "rd": "たかい", "id": "Mahal", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🏷️"}, {"no": 110, "kj": "安い", "rd": "やすい", "id": "Murah", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "💸"}, {"no": 111, "kj": "広い", "rd": "ひろい", "id": "Luas", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🏟️"}, {"no": 112, "kj": "道", "rd": "みち", "id": "Jalan", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🛣️"}, {"no": 113, "kj": "通り", "rd": "とおり", "id": "Jalan", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "🛤️"}, {"no": 114, "kj": "右", "rd": "みぎ", "id": "Kanan", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "➡️"}, {"no": 115, "kj": "左", "rd": "ひだり", "id": "Kiri", "cat": "cat5", "tag": "Musim & Cuaca", "icon": "⬅️"}, {"no": 116, "kj": "一つ", "rd": "ひとつ", "id": "Satu buah", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "1️⃣"}, {"no": 117, "kj": "二つ", "rd": "ふたつ", "id": "Dua buah", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "2️⃣"}, {"no": 118, "kj": "赤い", "rd": "あかい", "id": "Merah", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🔴"}, {"no": 119, "kj": "青い", "rd": "あおい", "id": "Biru", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🔵"}, {"no": 120, "kj": "黒い", "rd": "くろい", "id": "Hitam", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⬛"}, {"no": 121, "kj": "白い", "rd": "しろい", "id": "Putih", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⬜"}, {"no": 122, "kj": "時間", "rd": "じかん", "id": "Waktu", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⏰"}, {"no": 123, "kj": "場所", "rd": "ばしょ", "id": "Tempat", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "📍"}, {"no": 124, "kj": "駅", "rd": "えき", "id": "Stasiun", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🚉"}, {"no": 125, "kj": "日", "rd": "ひ", "id": "Matahari", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "☀️"}, {"no": 126, "kj": "出かけます", "rd": "でかけます", "id": "Meninggalkan rumah", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🚪"}, {"no": 127, "kj": "待ちます", "rd": "まちます", "id": "Menunggu", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⏳"}, {"no": 128, "kj": "止まります", "rd": "とまります", "id": "Berhenti", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🛑"}, {"no": 129, "kj": "食事", "rd": "しょくじ", "id": "Makan bersama", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🍲"}, {"no": 130, "kj": "仕事", "rd": "しごと", "id": "Pekerjaan", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "💼"}, {"no": 131, "kj": "前", "rd": "まえ", "id": "Sebelum", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⏮️"}, {"no": 132, "kj": "後", "rd": "あと", "id": "Setelah", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "⏭️"}, {"no": 133, "kj": "朝", "rd": "あさ", "id": "Pagi", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🌅"}, {"no": 134, "kj": "昼", "rd": "ひる", "id": "Siang", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "☀️"}, {"no": 135, "kj": "夜", "rd": "よる", "id": "Malam", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🌃"}, {"no": 136, "kj": "乗ります", "rd": "のります", "id": "Naik", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🚆"}, {"no": 137, "kj": "学校", "rd": "がっこう", "id": "Sekolahan", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🏫"}, {"no": 138, "kj": "小学校", "rd": "しょうがっこう", "id": "SD", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎒"}, {"no": 139, "kj": "中学校", "rd": "ちゅうがっこう", "id": "SMP", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🏫"}, {"no": 140, "kj": "高校", "rd": "こうこう", "id": "SMA", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🏫"}, {"no": 141, "kj": "大学", "rd": "だいがく", "id": "Universitas", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🏛️"}, {"no": 142, "kj": "先生", "rd": "せんせい", "id": "Guru", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "👨‍🏫"}, {"no": 143, "kj": "学生", "rd": "がくせい", "id": "Murid, siswa", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎓"}, {"no": 144, "kj": "～年生", "rd": "～ねんせい", "id": "Kelas ~", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "📚"}, {"no": 145, "kj": "勉強", "rd": "べんきょう", "id": "Pelajaran", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "📝"}, {"no": 146, "kj": "文化", "rd": "ぶんか", "id": "Kebudayaan", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎎"}, {"no": 147, "kj": "音楽", "rd": "おんがく", "id": "Musik", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎵"}, {"no": 148, "kj": "旅行", "rd": "りょこう", "id": "Wisata", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "✈️"}, {"no": 149, "kj": "留学", "rd": "りゅうがく", "id": "Belajar di luar negeri", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🌍"}, {"no": 150, "kj": "友達", "rd": "ともだち", "id": "Teman", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🤝"}, {"no": 151, "kj": "楽しい", "rd": "たのしい", "id": "Gembira", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎉"}, {"no": 152, "kj": "週", "rd": "しゅう", "id": "Minggu", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🗓️"}, {"no": 153, "kj": "～回", "rd": "～かい", "id": "~ kali", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🔁"}, {"no": 154, "kj": "食べ物", "rd": "たべもの", "id": "Makanan", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🍱"}, {"no": 155, "kj": "飲物", "rd": "のみもの", "id": "Minuman", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🧃"}, {"no": 156, "kj": "お茶", "rd": "おちゃ", "id": "Teh hijau", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🍵"}, {"no": 157, "kj": "お酒", "rd": "おさけ", "id": "Sake", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🍶"}, {"no": 158, "kj": "作ります", "rd": "つくります", "id": "Membuat", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🛠️"}, {"no": 159, "kj": "持っていきます", "rd": "もっていきます", "id": "Membawa pergi", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🏃"}, {"no": 160, "kj": "お願いします", "rd": "おねがいします", "id": "Tolong", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🙏"}, {"no": 161, "kj": "料理", "rd": "りょうり", "id": "Masakan", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🍳"}, {"no": 162, "kj": "味", "rd": "あじ", "id": "Rasa", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "👅"}, {"no": 163, "kj": "色", "rd": "いろ", "id": "Warna", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🎨"}, {"no": 164, "kj": "野菜", "rd": "やさい", "id": "Sayuran", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🥦"}, {"no": 165, "kj": "少し", "rd": "すこし", "id": "Sedikit", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "🤏"}, {"no": 166, "kj": "中", "rd": "なか", "id": "Dalam", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "📥"}, {"no": 167, "kj": "入っています", "rd": "はいっています", "id": "Masuk", "cat": "cat6", "tag": "Sekolah & Rasa", "icon": "📥"}, {"no": 168, "kj": "会社", "rd": "かいしゃ", "id": "Perusahaan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏢"}, {"no": 169, "kj": "本社", "rd": "ほんしゃ", "id": "Kantor pusat", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏢"}, {"no": 170, "kj": "支社", "rd": "ししゃ", "id": "Kantor cabang", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏢"}, {"no": 171, "kj": "出張", "rd": "しゅっちょう", "id": "Dinas luar kota", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "💼"}, {"no": 172, "kj": "空港", "rd": "くうこう", "id": "Bandara", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "✈️"}, {"no": 173, "kj": "出発", "rd": "しゅっぱつ", "id": "Keberangkatan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🛫"}, {"no": 174, "kj": "到着", "rd": "とうちゃく", "id": "Kedatangan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🛬"}, {"no": 175, "kj": "午前", "rd": "ごぜん", "id": "AM", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🌅"}, {"no": 176, "kj": "午後", "rd": "ごご", "id": "PM", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🌇"}, {"no": 177, "kj": "自分", "rd": "じぶん", "id": "Sendiri", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🪞"}, {"no": 178, "kj": "電話", "rd": "でんわ", "id": "Telepon", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "☎️"}, {"no": 179, "kj": "電気", "rd": "でんき", "id": "Listrik", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "💡"}, {"no": 180, "kj": "電車", "rd": "でんしゃ", "id": "Kereta", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🚆"}, {"no": 181, "kj": "車", "rd": "くるま", "id": "Mobil", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🚗"}, {"no": 182, "kj": "送ります", "rd": "おくります", "id": "Mengirim", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "✉️"}, {"no": 183, "kj": "使います", "rd": "つかいます", "id": "Menggunakan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🛠️"}, {"no": 184, "kj": "借ります", "rd": "かります", "id": "Meminjam", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📥"}, {"no": 185, "kj": "体", "rd": "からだ", "id": "Badan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🧍"}, {"no": 186, "kj": "頭", "rd": "あたま", "id": "Kepala", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🗣️"}, {"no": 187, "kj": "目", "rd": "め", "id": "Mata", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "👁️"}, {"no": 188, "kj": "口", "rd": "くち", "id": "Mulut", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "👄"}, {"no": 189, "kj": "耳", "rd": "みみ", "id": "Telinga", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "👂"}, {"no": 190, "kj": "手", "rd": "て", "id": "Tangan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "✋"}, {"no": 191, "kj": "足", "rd": "あし", "id": "Kaki", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🦶"}, {"no": 192, "kj": "上", "rd": "うえ", "id": "Atas", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⬆️"}, {"no": 193, "kj": "下", "rd": "した", "id": "Bawah", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⬇️"}, {"no": 194, "kj": "毎～", "rd": "まい～", "id": "~ setiap", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🔄"}, {"no": 195, "kj": "毎朝", "rd": "まいあさ", "id": "Setiap pagi", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🌅"}, {"no": 196, "kj": "毎日", "rd": "まいにち", "id": "Setiap hari", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📅"}, {"no": 197, "kj": "週末", "rd": "しゅうまつ", "id": "Akhir pekan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🎉"}, {"no": 198, "kj": "元気", "rd": "げんき", "id": "Sehat", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⚡"}, {"no": 199, "kj": "外", "rd": "そと", "id": "Luar", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🌳"}, {"no": 200, "kj": "起きます", "rd": "おきます", "id": "Bangun tidur", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⏰"}, {"no": 201, "kj": "歩きます", "rd": "あるきます", "id": "Berjalan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🚶"}, {"no": 202, "kj": "走ります", "rd": "はしります", "id": "Berlari", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏃"}, {"no": 203, "kj": "泳ぎます", "rd": "およぎます", "id": "Berenang", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏊"}, {"no": 204, "kj": "お祝い", "rd": "おいわい", "id": "Perayaan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🎊"}, {"no": 205, "kj": "誕生日", "rd": "たんじょうび", "id": "Ulang tahun", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🎂"}, {"no": 206, "kj": "結婚", "rd": "けっこん", "id": "Pernikahan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "💍"}, {"no": 207, "kj": "絵", "rd": "え", "id": "Gambar, lukisan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🎨"}, {"no": 208, "kj": "写真", "rd": "しゃしん", "id": "Foto", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📷"}, {"no": 209, "kj": "時計", "rd": "とけい", "id": "Jam", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⌚"}, {"no": 210, "kj": "着ます", "rd": "きます", "id": "Memakai pakaian", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "👕"}, {"no": 211, "kj": "先～", "rd": "せん～", "id": "~lalu", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⏮️"}, {"no": 212, "kj": "先週", "rd": "せんしゅう", "id": "Minggu lalu", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "⏪"}, {"no": 213, "kj": "今月", "rd": "こんげつ", "id": "Bulan ini", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🗓️"}, {"no": 214, "kj": "来年", "rd": "らいねん", "id": "Tahun depan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🚀"}, {"no": 215, "kj": "今年", "rd": "ことし", "id": "Tahun ini", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📅"}, {"no": 216, "kj": "去年", "rd": "きょねん", "id": "Tahun lalu", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📜"}, {"no": 217, "kj": "家", "rd": "いえ", "id": "Rumah", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏠"}, {"no": 218, "kj": "思います", "rd": "おもいます", "id": "Mengira", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "💭"}, {"no": 219, "kj": "自己紹介", "rd": "じこしょうかい", "id": "Perkenalan", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🙋"}, {"no": 220, "kj": "名前", "rd": "なまえ", "id": "Nama", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏷️"}, {"no": 221, "kj": "意味", "rd": "いみ", "id": "Arti", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📖"}, {"no": 222, "kj": "本屋", "rd": "ほんや", "id": "Toko buku", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📚"}, {"no": 223, "kj": "近く", "rd": "ちかく", "id": "Dekat", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "📍"}, {"no": 224, "kj": "住みます", "rd": "すみます", "id": "Tinggal", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🏘️"}, {"no": 225, "kj": "働きます", "rd": "はたらきます", "id": "Bekerja", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "💻"}, {"no": 226, "kj": "～番目", "rd": "～ばんめ", "id": "Urutan yang ~", "cat": "cat7", "tag": "Kantor & Tubuh", "icon": "🔢"}, {"no": 227, "kj": "兄", "rd": "あに", "id": "Kakak laki2 (sendiri)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👦"}, {"no": 228, "kj": "兄いさん", "rd": "おにいさん", "id": "Kakak laki2 (orang lain)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👨"}, {"no": 229, "kj": "姉", "rd": "あね", "id": "Kakak perempuan (sendiri)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👧"}, {"no": 230, "kj": "お姉さん", "rd": "おねえさん", "id": "Kakak perempuan (orang lain)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👩"}, {"no": 231, "kj": "弟", "rd": "おとうと", "id": "Adik laki2 (sendiri)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👦"}, {"no": 232, "kj": "妹", "rd": "いもうと", "id": "Adik perempuan (sendiri)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👧"}, {"no": 233, "kj": "家族", "rd": "かぞく", "id": "Keluarga", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👨‍👩‍👧‍👦"}, {"no": 234, "kj": "長い", "rd": "ながい", "id": "Panjang", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📏"}, {"no": 235, "kj": "短い", "rd": "みじかい", "id": "Pendek", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📐"}, {"no": 236, "kj": "低い", "rd": "ひくい", "id": "Rendah", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📉"}, {"no": 237, "kj": "上手", "rd": "じょうず", "id": "Pandai", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🏆"}, {"no": 238, "kj": "歌", "rd": "うた", "id": "Lagu", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🎤"}, {"no": 239, "kj": "歌います", "rd": "うたいます", "id": "Menyanyi", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🎵"}, {"no": 240, "kj": "客", "rd": "きゃく", "id": "Tamu", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👤"}, {"no": 241, "kj": "注文", "rd": "ちゅうもん", "id": "Pesanan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📝"}, {"no": 242, "kj": "洋食", "rd": "ようしょく", "id": "Makanan barat", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🍔"}, {"no": 243, "kj": "和食", "rd": "わしょく", "id": "Makanan jepang", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🍱"}, {"no": 244, "kj": "牛肉", "rd": "ぎゅうにく", "id": "Daging sapi", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🥩"}, {"no": 245, "kj": "地方", "rd": "ちほう", "id": "Daerah, wilayah", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🗺️"}, {"no": 246, "kj": "有名", "rd": "ゆうめい", "id": "Terkenal", "cat": "cat8", "tag": "Alam & Wisata", "icon": "⭐"}, {"no": 247, "kj": "生", "rd": "なま", "id": "Mentah", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🥗"}, {"no": 248, "kj": "冷たい", "rd": "つめたい", "id": "Dingin (benda)", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🧊"}, {"no": 249, "kj": "ご飯", "rd": "ごはん", "id": "Nasi", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🍚"}, {"no": 250, "kj": "塩", "rd": "しお", "id": "Garam", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🧂"}, {"no": 251, "kj": "全部", "rd": "ぜんぶ", "id": "Semua", "cat": "cat8", "tag": "Alam & Wisata", "icon": "💯"}, {"no": 252, "kj": "～方", "rd": "～かた", "id": "Cara ~", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📘"}, {"no": 253, "kj": "食べ方", "rd": "たべかた", "id": "Cara makan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🥢"}, {"no": 254, "kj": "熱い", "rd": "あつい", "id": "Panas", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🔥"}, {"no": 255, "kj": "苦手", "rd": "にがて", "id": "Susah, tidak begitu suka", "cat": "cat8", "tag": "Alam & Wisata", "icon": "⚠️"}, {"no": 256, "kj": "入れます", "rd": "いれます", "id": "Memasukkan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📥"}, {"no": 257, "kj": "木", "rd": "き", "id": "Pohon", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🌳"}, {"no": 258, "kj": "森", "rd": "もり", "id": "Hutan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🌲"}, {"no": 259, "kj": "島", "rd": "しま", "id": "Pulau", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🏝️"}, {"no": 260, "kj": "自然", "rd": "しぜん", "id": "Alam", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🌿"}, {"no": 261, "kj": "船", "rd": "ふね", "id": "Kapal", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🚢"}, {"no": 262, "kj": "暑い", "rd": "あつい", "id": "Panas", "cat": "cat8", "tag": "Alam & Wisata", "icon": "☀️"}, {"no": 263, "kj": "帰ります", "rd": "かえります", "id": "Pulang", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🏠"}, {"no": 264, "kj": "予約します", "rd": "よやくします", "id": "Memesan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📅"}, {"no": 265, "kj": "運転します", "rd": "うんてんします", "id": "Menyetir", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🚗"}, {"no": 266, "kj": "～中", "rd": "～ちゅう／～じゅう", "id": "Sedang / dalam ~", "cat": "cat8", "tag": "Alam & Wisata", "icon": "⏳"}, {"no": 267, "kj": "旅行中", "rd": "りょこうちゅう", "id": "Sedang wisata", "cat": "cat8", "tag": "Alam & Wisata", "icon": "✈️"}, {"no": 268, "kj": "観光地", "rd": "かんこうち", "id": "Tempat wisata", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📸"}, {"no": 269, "kj": "女性", "rd": "じょせい", "id": "Wanita", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👩"}, {"no": 270, "kj": "男性", "rd": "だんせい", "id": "Pria", "cat": "cat8", "tag": "Alam & Wisata", "icon": "👨"}, {"no": 271, "kj": "動物", "rd": "どうぶつ", "id": "Hewan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🦁"}, {"no": 272, "kj": "空気", "rd": "くうき", "id": "Udara", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🍃"}, {"no": 273, "kj": "料金", "rd": "りょうきん", "id": "Biaya / tarif", "cat": "cat8", "tag": "Alam & Wisata", "icon": "💳"}, {"no": 274, "kj": "無料", "rd": "むりょう", "id": "Gratis", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🆓"}, {"no": 275, "kj": "明るい", "rd": "あかるい", "id": "Terang", "cat": "cat8", "tag": "Alam & Wisata", "icon": "💡"}, {"no": 276, "kj": "便利", "rd": "べんり", "id": "Praktis", "cat": "cat8", "tag": "Alam & Wisata", "icon": "⚡"}, {"no": 277, "kj": "一年中", "rd": "いちねんじゅう", "id": "Dalam satu tahun", "cat": "cat8", "tag": "Alam & Wisata", "icon": "📅"}, {"no": 278, "kj": "受付", "rd": "うけつけ", "id": "Penerima tamu", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🛎️"}, {"no": 279, "kj": "広場", "rd": "ひろば", "id": "Lapangan", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🏟️"}, {"no": 280, "kj": "問題", "rd": "もんだい", "id": "Soal, masalah", "cat": "cat8", "tag": "Alam & Wisata", "icon": "❓"}, {"no": 281, "kj": "同じ", "rd": "おなじ", "id": "Sama", "cat": "cat8", "tag": "Alam & Wisata", "icon": "🟰"}, {"no": 282, "kj": "集まります", "rd": "あつまります", "id": "Berkumpul", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "👥"}, {"no": 283, "kj": "始まります", "rd": "はじまります", "id": "Mulai", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "▶️"}, {"no": 284, "kj": "終わります", "rd": "おわります", "id": "Selesai", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⏹️"}, {"no": 285, "kj": "中止します", "rd": "ちゅうしします", "id": "Membatalkan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "❌"}, {"no": 286, "kj": "教えます", "rd": "おしえます", "id": "Memberitahu", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📢"}, {"no": 287, "kj": "祭り", "rd": "まつり", "id": "Perayaan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏮"}, {"no": 288, "kj": "日本祭り", "rd": "にほんまつり", "id": "Perayaan jepang", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⛩️"}, {"no": 289, "kj": "会場", "rd": "かいじょう", "id": "Ruang pertemuan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏛️"}, {"no": 290, "kj": "入場料", "rd": "にゅうじょうりょう", "id": "Tarif masuk", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🎟️"}, {"no": 291, "kj": "参加者", "rd": "さんかしゃ", "id": "Peserta", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🙋"}, {"no": 292, "kj": "急ぎます", "rd": "いそぎます", "id": "Buru-buru", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏃"}, {"no": 293, "kj": "決めます", "rd": "きめます", "id": "Menentukan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🎯"}, {"no": 294, "kj": "知ります", "rd": "しります", "id": "Kenal, tahu", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "💡"}, {"no": 295, "kj": "正月", "rd": "しょうがつ", "id": "Tahun baru", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🎍"}, {"no": 296, "kj": "年末", "rd": "ねんまつ", "id": "Akhir tahun", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📉"}, {"no": 297, "kj": "年始", "rd": "ねんし", "id": "Awal tahun", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📈"}, {"no": 298, "kj": "親", "rd": "おや", "id": "Orang tua", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "👨‍👩‍👦"}, {"no": 299, "kj": "忙しい", "rd": "いそがしい", "id": "Sibuk", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏃‍♂️"}, {"no": 300, "kj": "特別", "rd": "とくべつ", "id": "Istimewa, spesial", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⭐"}, {"no": 301, "kj": "帰国", "rd": "きこく", "id": "Pulang ke negara asal", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "✈️"}, {"no": 302, "kj": "喜びます", "rd": "よろこびます", "id": "Merasa gembira", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "😊"}, {"no": 303, "kj": "幸せ", "rd": "しあわせ", "id": "Bahagia", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🍀"}, {"no": 304, "kj": "成長", "rd": "せいちょう", "id": "Pertumbuhan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📈"}, {"no": 305, "kj": "長生き", "rd": "ながいき", "id": "Umur panjang", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🐢"}, {"no": 306, "kj": "願い事", "rd": "ねがいこと", "id": "Harapan, doa", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "✨"}, {"no": 307, "kj": "合格", "rd": "ごうかく", "id": "Lulus", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🎯"}, {"no": 308, "kj": "試験", "rd": "しけん", "id": "Ujian", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📝"}, {"no": 309, "kj": "大人", "rd": "おとな", "id": "Orang dewasa", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🧑"}, {"no": 310, "kj": "～式（成人式）", "rd": "～しき（せいじんしき）", "id": "Upacara ~ (kedewasaan)", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🎓"}, {"no": 311, "kj": "～市（さいたま市）", "rd": "～し（さいたまし）", "id": "Kota ~ (Saitama)", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏙️"}, {"no": 312, "kj": "商品", "rd": "しょうひん", "id": "Barang dagangan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "📦"}, {"no": 313, "kj": "電気製品", "rd": "でんきせいひん", "id": "Peralatan listrik", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🔌"}, {"no": 314, "kj": "電子レンジ", "rd": "でんしレンジ", "id": "Oven microwave", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🍲"}, {"no": 315, "kj": "～機（そうじ機）", "rd": "～き（そうじき）", "id": "Mesin ~ (vacuum cleaner)", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🧹"}, {"no": 316, "kj": "店員", "rd": "てんいん", "id": "Penjaga toko", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🧑‍💼"}, {"no": 317, "kj": "調子", "rd": "ちょうし", "id": "Kondisi", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⚙️"}, {"no": 318, "kj": "悪い", "rd": "わるい", "id": "Jelek, buruk", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "❌"}, {"no": 319, "kj": "動きます", "rd": "うごきます", "id": "Bergerak", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🔄"}, {"no": 320, "kj": "考えます", "rd": "かんがえます", "id": "Berpikir", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "💭"}, {"no": 321, "kj": "音", "rd": "おと", "id": "Suara", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🔊"}, {"no": 322, "kj": "出ます", "rd": "でます", "id": "Keluar", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🚪"}, {"no": 323, "kj": "機能", "rd": "きのう", "id": "Fungsi", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⚙️"}, {"no": 324, "kj": "省エネ", "rd": "しょうエネ", "id": "Hemat energi", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🔋"}, {"no": 325, "kj": "日本製", "rd": "にほんせい", "id": "Buatan Jepang", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🇯🇵"}, {"no": 326, "kj": "重い", "rd": "おもい", "id": "Berat", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🏋️"}, {"no": 327, "kj": "軽い", "rd": "かるい", "id": "Ringan", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🪶"}, {"no": 328, "kj": "静か", "rd": "しずか", "id": "Tenang", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🤫"}, {"no": 329, "kj": "早く", "rd": "はやく", "id": "Cepat", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "⚡"}, {"no": 330, "kj": "方（こっちの方）", "rd": "ほう（こっちのほう）", "id": "Arah (sebelah sini)", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🧭"}, {"no": 331, "kj": "洗います", "rd": "あらいます", "id": "Mencuci", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "🫧"}, {"no": 332, "kj": "満足します", "rd": "まんぞくします", "id": "Puas", "cat": "cat9", "tag": "Acara & Elektronik", "icon": "😌"}, {"no": 333, "kj": "京都", "rd": "きょうと", "id": "Kyoto", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "⛩️"}, {"no": 334, "kj": "神社", "rd": "じんじゃ", "id": "Kuil Shinto", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "⛩️"}, {"no": 335, "kj": "お寺", "rd": "おてら", "id": "Kuil Buddha", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🛕"}, {"no": 336, "kj": "仏教", "rd": "ぶっきょう", "id": "Agama Buddha", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "☸️"}, {"no": 337, "kj": "歴史", "rd": "れきし", "id": "Sejarah", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📜"}, {"no": 338, "kj": "世界", "rd": "せかい", "id": "Dunia", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🌍"}, {"no": 339, "kj": "中心", "rd": "ちゅうしん", "id": "Pusat", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🎯"}, {"no": 340, "kj": "～世紀（８世紀）", "rd": "～せいき（はっせいき）", "id": "Abad ~ (abad 8)", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "⏳"}, {"no": 341, "kj": "～的", "rd": "～てき", "id": "Bersifat ~", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏷️"}, {"no": 342, "kj": "日本的な", "rd": "にほんてき", "id": "Bernuansa Jepang", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🎌"}, {"no": 343, "kj": "歴史的", "rd": "れきしてき", "id": "Bersejarah", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏛️"}, {"no": 344, "kj": "飲食", "rd": "いんしょく", "id": "Makan minum", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🍽️"}, {"no": 345, "kj": "禁止", "rd": "きんし", "id": "Larangan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🚷"}, {"no": 346, "kj": "説明", "rd": "せつめい", "id": "Penjelasan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📖"}, {"no": 347, "kj": "道具", "rd": "どうぐ", "id": "Peralatan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🛠️"}, {"no": 348, "kj": "博物館", "rd": "はくぶつかん", "id": "Museum", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏛️"}, {"no": 349, "kj": "必要", "rd": "ひつよう", "id": "Kebutuhan, penting", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📌"}, {"no": 350, "kj": "～階（２階）", "rd": "～かい（にかい）", "id": "Lantai ~ (lantai 2)", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏢"}, {"no": 351, "kj": "油", "rd": "あぶら", "id": "Minyak", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🛢️"}, {"no": 352, "kj": "紙", "rd": "かみ", "id": "Kertas", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📄"}, {"no": 353, "kj": "温度", "rd": "おんど", "id": "Suhu, derajat", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🌡️"}, {"no": 354, "kj": "活動", "rd": "かつどう", "id": "Aktivitas", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏃"}, {"no": 355, "kj": "会議室", "rd": "かいぎしつ", "id": "Ruang rapat", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "💼"}, {"no": 356, "kj": "寒い", "rd": "さむい", "id": "Dingin (suhu)", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🥶"}, {"no": 357, "kj": "出します", "rd": "だします", "id": "Mengeluarkan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📤"}, {"no": 358, "kj": "～度（２８度）", "rd": "～ど（にじゅうはちど）", "id": "~ derajat (28 derajat)", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🌡️"}, {"no": 359, "kj": "～点（１００点）", "rd": "～てん（１００てん）", "id": "Nilai ~ (100 poin)", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "💯"}, {"no": 360, "kj": "服", "rd": "ふく", "id": "Pakaian", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "👕"}, {"no": 361, "kj": "自転車", "rd": "じてんしゃ", "id": "Sepeda", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🚲"}, {"no": 362, "kj": "自動車", "rd": "じどうしゃ", "id": "Mobil", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🚗"}, {"no": 363, "kj": "売ります", "rd": "うります", "id": "Menjual", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🏷️"}, {"no": 364, "kj": "貸します", "rd": "かします", "id": "Meminjamkan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📤"}, {"no": 365, "kj": "返します", "rd": "かえします", "id": "Mengembalikan", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🔄"}, {"no": 366, "kj": "変わります", "rd": "かわります", "id": "Berubah, berganti", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🔀"}, {"no": 367, "kj": "～用", "rd": "～よう", "id": "Untuk keperluan ~", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "📌"}, {"no": 368, "kj": "子供用", "rd": "こどもよう", "id": "Untuk anak-anak", "cat": "cat10", "tag": "Kuil & Sejarah", "icon": "🧸"}, {"no": 369, "kj": "人生", "rd": "じんせい", "id": "Kehidupan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🌱"}, {"no": 370, "kj": "歌手", "rd": "かしゅ", "id": "Penyanyi", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🎤"}, {"no": 371, "kj": "選手", "rd": "せんしゅ", "id": "Atlet, pemain", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "⚽"}, {"no": 372, "kj": "画家", "rd": "がか", "id": "Pelukis", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🎨"}, {"no": 373, "kj": "作家", "rd": "さっか", "id": "Penulis, pengarang", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "✍️"}, {"no": 374, "kj": "入学", "rd": "にゅうがく", "id": "Masuk sekolah", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🎒"}, {"no": 375, "kj": "卒業", "rd": "そつぎょう", "id": "Kelulusan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🎓"}, {"no": 376, "kj": "病気", "rd": "びょうき", "id": "Sakit", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🤒"}, {"no": 377, "kj": "若い", "rd": "わかい", "id": "Muda", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "👦"}, {"no": 378, "kj": "生まれます", "rd": "うまれます", "id": "Lahir", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "👶"}, {"no": 379, "kj": "思い出", "rd": "おもいで", "id": "Kenangan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "📸"}, {"no": 380, "kj": "生活", "rd": "せいかつ", "id": "Kehidupan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🏡"}, {"no": 381, "kj": "映画", "rd": "えいが", "id": "Film", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🎬"}, {"no": 382, "kj": "夫", "rd": "おっと", "id": "Suami (sendiri)", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "👨"}, {"no": 383, "kj": "妻", "rd": "つま", "id": "Istri (sendiri)", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "👩"}, {"no": 384, "kj": "両親", "rd": "りょうしん", "id": "Orang tua", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "👨‍👩‍👦"}, {"no": 385, "kj": "不便", "rd": "ふべん", "id": "Tidak praktis", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "⚠️"}, {"no": 386, "kj": "選びます", "rd": "えらびます", "id": "Memilih", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "☑️"}, {"no": 387, "kj": "寝ます", "rd": "ねます", "id": "Tidur", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🛌"}, {"no": 388, "kj": "サッカー場", "rd": "サッカーじょう", "id": "Lapangan sepak bola", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "⚽"}, {"no": 389, "kj": "試合", "rd": "しあい", "id": "Pertandingan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🏆"}, {"no": 390, "kj": "日曜日", "rd": "にちようび", "id": "Minggu", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "☀️"}, {"no": 391, "kj": "強い", "rd": "つよい", "id": "Kuat", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "💪"}, {"no": 392, "kj": "弱い", "rd": "よわい", "id": "Lemah", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🔋"}, {"no": 393, "kj": "勝ちます", "rd": "かちます", "id": "Menang", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🥇"}, {"no": 394, "kj": "負けます", "rd": "まけます", "id": "Kalah", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🥈"}, {"no": 395, "kj": "～対～（２対１）", "rd": "～たい～（にたいいち）", "id": "~ lawan ~ (2 lawan 1)", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "📊"}, {"no": 396, "kj": "庭", "rd": "にわ", "id": "Halaman", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🏡"}, {"no": 397, "kj": "公園", "rd": "こうえん", "id": "Taman", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🏞️"}, {"no": 398, "kj": "病院", "rd": "びょういん", "id": "Rumah sakit", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🏥"}, {"no": 399, "kj": "交通", "rd": "こうつう", "id": "Lalu lintas", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🚦"}, {"no": 400, "kj": "通勤", "rd": "つうきん", "id": "Perjalanan ke kantor", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "💼"}, {"no": 401, "kj": "安全", "rd": "あんぜん", "id": "Keselamatan", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🛡️"}, {"no": 402, "kj": "危ない", "rd": "あぶない", "id": "Bahaya", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "⚠️"}, {"no": 403, "kj": "遠い", "rd": "とおい", "id": "Jauh", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "🔭"}, {"no": 404, "kj": "勤めます", "rd": "つとめます", "id": "Bekerja", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "💻"}, {"no": 405, "kj": "～以上", "rd": "～いじょう", "id": "~ lebih", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "📈"}, {"no": 406, "kj": "～以下", "rd": "～いか", "id": "~ kurang", "cat": "cat11", "tag": "Profesi & Olahraga", "icon": "📉"}, {"no": 407, "kj": "海外", "rd": "かいがい", "id": "Luar negeri", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "✈️"}, {"no": 408, "kj": "食生活", "rd": "しょくせいかつ", "id": "Pola makan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍲"}, {"no": 409, "kj": "健康", "rd": "けんこう", "id": "Kesehatan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "💪"}, {"no": 410, "kj": "家庭料理", "rd": "かていりょうり", "id": "Masakan rumahan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍳"}, {"no": 411, "kj": "材料", "rd": "ざいりょう", "id": "Bahan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🛒"}, {"no": 412, "kj": "量", "rd": "りょう", "id": "Jumlah, kuantitas", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "⚖️"}, {"no": 413, "kj": "米", "rd": "こめ", "id": "Beras", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌾"}, {"no": 414, "kj": "～食", "rd": "～しょく", "id": "Makan ~", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍽️"}, {"no": 415, "kj": "朝食", "rd": "ちょうしょく", "id": "Sarapan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🥞"}, {"no": 416, "kj": "昼食", "rd": "ちゅうしょく", "id": "Makan siang", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍛"}, {"no": 417, "kj": "夕食", "rd": "ゆうしょく", "id": "Makan malam", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍲"}, {"no": 418, "kj": "外食", "rd": "がいしょく", "id": "Makan di luar", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍜"}, {"no": 419, "kj": "定食", "rd": "ていしょく", "id": "Set menu lengkap", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🍱"}, {"no": 420, "kj": "住所", "rd": "じゅうしょ", "id": "Alamat", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📍"}, {"no": 421, "kj": "訪問", "rd": "ほうもん", "id": "Kunjungan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🚪"}, {"no": 422, "kj": "経験", "rd": "けいけん", "id": "Pengalaman", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📜"}, {"no": 423, "kj": "親切", "rd": "しんせつ", "id": "Ramah", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "😊"}, {"no": 424, "kj": "座ります", "rd": "すわります", "id": "Duduk", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🪑"}, {"no": 425, "kj": "立ちます", "rd": "たちます", "id": "Berdiri", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🧍"}, {"no": 426, "kj": "～観（人生観）", "rd": "～かん（じんせいかん）", "id": "Pandangan ~ (pandangan hidup)", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "👁️"}, {"no": 427, "kj": "約～", "rd": "やく～", "id": "Kira-kira, sekitar ~", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "⏳"}, {"no": 428, "kj": "計画", "rd": "けいかく", "id": "Rencana", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📊"}, {"no": 429, "kj": "自信", "rd": "じしん", "id": "Percaya diri", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🦁"}, {"no": 430, "kj": "方法", "rd": "ほうほう", "id": "Cara, metode", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📘"}, {"no": 431, "kj": "目的", "rd": "もくてき", "id": "Tujuan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🎯"}, {"no": 432, "kj": "難しい", "rd": "むずかしい", "id": "Sulit", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🧩"}, {"no": 433, "kj": "通じます", "rd": "つうじます", "id": "Berhubungan, dipahami", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌊"}, {"no": 434, "kj": "習います", "rd": "ならいます", "id": "Belajar kepada", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🧑‍🏫"}, {"no": 435, "kj": "学びます", "rd": "まなびます", "id": "Belajar", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📚"}, {"no": 436, "kj": "～級", "rd": "～きゅう", "id": "Tingkat, level ~", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🏆"}, {"no": 437, "kj": "初級", "rd": "しょきゅう", "id": "Tingkat dasar", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌱"}, {"no": 438, "kj": "中級", "rd": "ちゅうきゅう", "id": "Tingkat menengah", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌿"}, {"no": 439, "kj": "上級", "rd": "じょうきゅう", "id": "Tingkat mahir", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌳"}, {"no": 440, "kj": "相手", "rd": "あいて", "id": "Lawan bicara, pasangan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "👥"}, {"no": 441, "kj": "気持ち", "rd": "きもち", "id": "Perasaan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "✨"}, {"no": 442, "kj": "恋人", "rd": "こいびと", "id": "Pacar, kekasih", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "❤️"}, {"no": 443, "kj": "出会い", "rd": "であい", "id": "Pertemuan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🤝"}, {"no": 444, "kj": "最近", "rd": "さいきん", "id": "Akhir-akhir ini", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📅"}, {"no": 445, "kj": "最高", "rd": "さいこう", "id": "Terbaik, tertinggi", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "⭐"}, {"no": 446, "kj": "出席", "rd": "しゅっせき", "id": "Kehadiran", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "📋"}, {"no": 447, "kj": "招待", "rd": "しょうたい", "id": "Undangan", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "💌"}, {"no": 448, "kj": "～合う（知り合う）", "rd": "～あう（しりあう）", "id": "Saling ~ (saling kenal)", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "👥"}, {"no": 449, "kj": "社会人", "rd": "しゃかいじん", "id": "Orang yang sudah bekerja", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🏙️"}, {"no": 450, "kj": "職場", "rd": "しょくば", "id": "Tempat kerja", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "💻"}, {"no": 451, "kj": "給料", "rd": "きゅうりょう", "id": "Gaji, upah", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "💴"}, {"no": 452, "kj": "人間関係", "rd": "にんげんかんけい", "id": "Hubungan antar manusia", "cat": "cat12", "tag": "Pola Makan & Relasi", "icon": "🌐"}, {"no": 453, "kj": "親友", "rd": "しんゆう", "id": "Sahabat karib", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🤝"}, {"no": 454, "kj": "恋愛", "rd": "れんあい", "id": "Percintaan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "💖"}, {"no": 455, "kj": "相談", "rd": "そうだん", "id": "Konsultasi", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🗣️"}, {"no": 456, "kj": "心", "rd": "こころ", "id": "Hati", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "❤️"}, {"no": 457, "kj": "心配", "rd": "しんぱい", "id": "Khawatir", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "😟"}, {"no": 458, "kj": "不安", "rd": "ふあん", "id": "Gelisah", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "⚠️"}, {"no": 459, "kj": "お客様", "rd": "おきゃくさま", "id": "Tamu, pelanggan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "👤"}, {"no": 460, "kj": "手続き", "rd": "てつづき", "id": "Prosedur", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📋"}, {"no": 461, "kj": "飛行機", "rd": "ひこうき", "id": "Pesawat terbang", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "✈️"}, {"no": 462, "kj": "変更", "rd": "へんこう", "id": "Perubahan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🔄"}, {"no": 463, "kj": "予定", "rd": "よてい", "id": "Rencana", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📅"}, {"no": 464, "kj": "利用", "rd": "りよう", "id": "Penggunaan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "⚡"}, {"no": 465, "kj": "忘れ物", "rd": "わすれもの", "id": "Barang tertinggal", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🧳"}, {"no": 466, "kj": "助けます", "rd": "たすけます", "id": "Menolong", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🤝"}, {"no": 467, "kj": "～航空", "rd": "～こうくう", "id": "Penerbangan ~", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "✈️"}, {"no": 468, "kj": "～便", "rd": "～びん", "id": "Nomor penerbangan ~", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "✉️"}, {"no": 469, "kj": "体力", "rd": "たいりょく", "id": "Stamina, fisik", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "💪"}, {"no": 470, "kj": "協力", "rd": "きょうりょく", "id": "Kerja sama", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🤝"}, {"no": 471, "kj": "担当", "rd": "たんとう", "id": "Penanggung jawab", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🧑‍💼"}, {"no": 472, "kj": "報告", "rd": "ほうこく", "id": "Laporan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📊"}, {"no": 473, "kj": "連絡", "rd": "れんらく", "id": "Menghubungi", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📞"}, {"no": 474, "kj": "募集", "rd": "ぼしゅう", "id": "Perekrutan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📝"}, {"no": 475, "kj": "輸出", "rd": "ゆしゅつ", "id": "Ekspor", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🚢"}, {"no": 476, "kj": "輸入", "rd": "ゆにゅう", "id": "Impor", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📦"}, {"no": 477, "kj": "会話", "rd": "かいわ", "id": "Percakapan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "💬"}, {"no": 478, "kj": "形", "rd": "かたち", "id": "Bentuk", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📐"}, {"no": 479, "kj": "漢字", "rd": "かんじ", "id": "Kanji", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🀄"}, {"no": 480, "kj": "答え", "rd": "こたえ", "id": "Jawaban", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "💡"}, {"no": 481, "kj": "質問", "rd": "しつもん", "id": "Pertanyaan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "❓"}, {"no": 482, "kj": "正しい", "rd": "ただしい", "id": "Benar", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "✅"}, {"no": 483, "kj": "読解", "rd": "どっかい", "id": "Pemahaman bacaan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📖"}, {"no": 484, "kj": "表現", "rd": "ひょうげん", "id": "Ungkapan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🗣️"}, {"no": 485, "kj": "文", "rd": "ぶん", "id": "Kalimat", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📝"}, {"no": 486, "kj": "文型", "rd": "ぶんけい", "id": "Pola kalimat", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📘"}, {"no": 487, "kj": "文法", "rd": "ぶんぽう", "id": "Tata bahasa", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📐"}, {"no": 488, "kj": "もう一度", "rd": "もういちど", "id": "Sekali lagi", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🔁"}, {"no": 489, "kj": "例", "rd": "れい", "id": "Contoh", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📌"}, {"no": 490, "kj": "練習", "rd": "れんしゅう", "id": "Latihan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📝"}, {"no": 491, "kj": "～枚", "rd": "～まい", "id": "～ lembar", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "📄"}, {"no": 492, "kj": "今週", "rd": "こんしゅう", "id": "Minggu ini", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🗓️"}, {"no": 493, "kj": "今度", "rd": "こんど", "id": "Lain kali", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "⏭️"}, {"no": 494, "kj": "横", "rd": "よこ", "id": "Samping, sebelah", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "↔️"}, {"no": 495, "kj": "押します", "rd": "おします", "id": "Menekan, mendorong", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🔘"}, {"no": 496, "kj": "引きます", "rd": "ひきます", "id": "Menarik", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🫱"}, {"no": 497, "kj": "温泉", "rd": "おんせん", "id": "Pemandian air panas", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "♨️"}, {"no": 498, "kj": "来週", "rd": "らいしゅう", "id": "Minggu depan", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "⏩"}, {"no": 499, "kj": "犬", "rd": "いぬ", "id": "Anjing", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🐕"}, {"no": 500, "kj": "夕方", "rd": "ゆうがた", "id": "Sore hari", "cat": "cat13", "tag": "Bisnis & Bahasa", "icon": "🌇"}, {"no": 501, "kj": "季節", "rd": "きせつ", "id": "Musim", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🌸"}, {"no": 502, "kj": "昨日", "rd": "きのう", "id": "Kemarin", "cat": "cat14", "tag": "Medis & Syarat", "icon": "⏮️"}, {"no": 503, "kj": "明日", "rd": "あした", "id": "Besok", "cat": "cat14", "tag": "Medis & Syarat", "icon": "⏭️"}, {"no": 504, "kj": "食堂", "rd": "しょくどう", "id": "Kantin", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🍱"}, {"no": 505, "kj": "銀行", "rd": "ぎんこう", "id": "Bank", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🏦"}, {"no": 506, "kj": "受付", "rd": "うけつけ", "id": "Resepsionis", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🛎️"}, {"no": 507, "kj": "門", "rd": "もん", "id": "Pintu gerbang", "cat": "cat14", "tag": "Medis & Syarat", "icon": "⛩️"}, {"no": 508, "kj": "登ります", "rd": "のぼります", "id": "Mendaki", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🧗"}, {"no": 509, "kj": "教科書", "rd": "きょうかしょ", "id": "Buku pelajaran", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📖"}, {"no": 510, "kj": "教室", "rd": "きょうしつ", "id": "Ruang kelas", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🚪"}, {"no": 511, "kj": "参加します", "rd": "さんかします", "id": "Berpartisipasi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🙋"}, {"no": 512, "kj": "用意します", "rd": "よういします", "id": "Menyiapkan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🛠️"}, {"no": 513, "kj": "牛肉", "rd": "ぎゅうにく", "id": "Daging sapi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🥩"}, {"no": 514, "kj": "豚肉", "rd": "ぶたにく", "id": "Daging babi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🥓"}, {"no": 515, "kj": "皿", "rd": "さら", "id": "Piring", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🍽️"}, {"no": 516, "kj": "お湯", "rd": "おゆ", "id": "Air panas", "cat": "cat14", "tag": "Medis & Syarat", "icon": "♨️"}, {"no": 517, "kj": "調理方法", "rd": "ちょうりほうほう", "id": "Cara memasak", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🍳"}, {"no": 518, "kj": "甘い", "rd": "あまい", "id": "Manis", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🍬"}, {"no": 519, "kj": "辛い", "rd": "からい", "id": "Pedas", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🌶️"}, {"no": 520, "kj": "数字", "rd": "すうじ", "id": "Angka, bilangan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🔢"}, {"no": 521, "kj": "机", "rd": "つくえ", "id": "Meja", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🪑"}, {"no": 522, "kj": "都合", "rd": "つごう", "id": "Kondisi waktu", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📌"}, {"no": 523, "kj": "用事", "rd": "ようじ", "id": "Keperluan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📋"}, {"no": 524, "kj": "氏名", "rd": "しめい", "id": "Nama lengkap", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🏷️"}, {"no": 525, "kj": "理由", "rd": "りゆう", "id": "Alasan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "💭"}, {"no": 526, "kj": "別に", "rd": "べつに", "id": "Tidak ada yang khusus", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🔀"}, {"no": 527, "kj": "連絡先", "rd": "れんらくさき", "id": "Kontak person", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📞"}, {"no": 528, "kj": "吸います", "rd": "すいます", "id": "Menghisap", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🚬"}, {"no": 529, "kj": "取ります", "rd": "とります", "id": "Mengambil", "cat": "cat14", "tag": "Medis & Syarat", "icon": "✋"}, {"no": 530, "kj": "伝えます", "rd": "つたえます", "id": "Menyampaikan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📢"}, {"no": 531, "kj": "熱", "rd": "ねつ", "id": "Demam", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🤒"}, {"no": 532, "kj": "薬", "rd": "くすり", "id": "Obat", "cat": "cat14", "tag": "Medis & Syarat", "icon": "💊"}, {"no": 533, "kj": "医者", "rd": "いしゃ", "id": "Dokter", "cat": "cat14", "tag": "Medis & Syarat", "icon": "👨‍⚕️"}, {"no": 534, "kj": "～才", "rd": "～さい", "id": "Umur ~", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🎂"}, {"no": 535, "kj": "眠い", "rd": "ねむい", "id": "Mengantuk", "cat": "cat14", "tag": "Medis & Syarat", "icon": "😴"}, {"no": 536, "kj": "記入します", "rd": "きにゅうします", "id": "Mengisi form", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📝"}, {"no": 537, "kj": "顔", "rd": "かお", "id": "Wajah", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🙂"}, {"no": 538, "kj": "泣きます", "rd": "なきます", "id": "Menangis", "cat": "cat14", "tag": "Medis & Syarat", "icon": "😢"}, {"no": 539, "kj": "会計", "rd": "かいけい", "id": "Pembayaran, kasir", "cat": "cat14", "tag": "Medis & Syarat", "icon": "💳"}, {"no": 540, "kj": "電話番号", "rd": "でんわばんごう", "id": "Nomor telepon", "cat": "cat14", "tag": "Medis & Syarat", "icon": "☎️"}, {"no": 541, "kj": "牛乳", "rd": "ぎゅうにゅう", "id": "Susu sapi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🥛"}, {"no": 542, "kj": "禁煙", "rd": "きんえん", "id": "Dilarang merokok", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🚭"}, {"no": 543, "kj": "自由", "rd": "じゆう", "id": "Bebas", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🕊️"}, {"no": 544, "kj": "切ります", "rd": "きります", "id": "Memotong", "cat": "cat14", "tag": "Medis & Syarat", "icon": "✂️"}, {"no": 545, "kj": "焼きます", "rd": "やきます", "id": "Memanggang", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🔥"}, {"no": 546, "kj": "旅館", "rd": "りょかん", "id": "Penginapan tradisional", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🏨"}, {"no": 547, "kj": "遊びます", "rd": "あそびます", "id": "Bermain", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🎈"}, {"no": 548, "kj": "調べます", "rd": "しらべます", "id": "Memeriksa", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🔍"}, {"no": 549, "kj": "事故", "rd": "じこ", "id": "Kecelakaan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "💥"}, {"no": 550, "kj": "故障", "rd": "こしょう", "id": "Kerusakan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "⚠️"}, {"no": 551, "kj": "指定席", "rd": "していせき", "id": "Kursi pesanan", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🎫"}, {"no": 552, "kj": "光ります", "rd": "ひかります", "id": "Bersinar", "cat": "cat14", "tag": "Medis & Syarat", "icon": "✨"}, {"no": 553, "kj": "お知らせ", "rd": "おしらせ", "id": "Pengumuman", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📢"}, {"no": 554, "kj": "水道", "rd": "すいどう", "id": "Air ledeng", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🚰"}, {"no": 555, "kj": "工事", "rd": "こうじ", "id": "Konstruksi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🚧"}, {"no": 556, "kj": "場合", "rd": "ばあい", "id": "Situasi, kondisi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📌"}, {"no": 557, "kj": "条件", "rd": "じょうけん", "id": "Syarat-syarat", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📝"}, {"no": 558, "kj": "開きます", "rd": "ひらきます", "id": "Membuka", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📖"}, {"no": 559, "kj": "生産します", "rd": "せいさんします", "id": "Memproduksi", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🏭"}, {"no": 560, "kj": "体験", "rd": "たいけん", "id": "Pengalaman nyata", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🧪"}, {"no": 561, "kj": "国際交流", "rd": "こくさいこうりゅう", "id": "Pertukaran internasional", "cat": "cat14", "tag": "Medis & Syarat", "icon": "🌐"}, {"no": 562, "kj": "申し込みます", "rd": "もうしこみます", "id": "Mendaftar", "cat": "cat14", "tag": "Medis & Syarat", "icon": "📝"}, {"no": 563, "kj": "昨年", "rd": "さくねん", "id": "Tahun lalu", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📜"}, {"no": 564, "kj": "毎年", "rd": "まいとし", "id": "Setiap tahun", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📅"}, {"no": 565, "kj": "袋", "rd": "ふくろ", "id": "Kantong", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🛍️"}, {"no": 566, "kj": "店長", "rd": "てんちょう", "id": "Manajer toko", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "👔"}, {"no": 567, "kj": "全員", "rd": "ぜんいん", "id": "Semua orang", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "👥"}, {"no": 568, "kj": "習慣", "rd": "しゅうかん", "id": "Kebiasaan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🔄"}, {"no": 569, "kj": "普通", "rd": "ふつう", "id": "Biasa", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "⭐"}, {"no": 570, "kj": "暗い", "rd": "くらい", "id": "Gelap", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🌙"}, {"no": 571, "kj": "怒ります", "rd": "おこります", "id": "Marah", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "😡"}, {"no": 572, "kj": "入院します", "rd": "にゅういんします", "id": "Rawat inap", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏥"}, {"no": 573, "kj": "退院します", "rd": "たいいんします", "id": "Keluar rumah sakit", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏃‍♂️"}, {"no": 574, "kj": "急に", "rd": "きゅうに", "id": "Tiba-tiba", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "⚡"}, {"no": 575, "kj": "営業します", "rd": "えいぎょうします", "id": "Buka usaha", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏪"}, {"no": 576, "kj": "案内します", "rd": "あんないします", "id": "Memandu", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🗺️"}, {"no": 577, "kj": "値段", "rd": "ねだん", "id": "Harga", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏷️"}, {"no": 578, "kj": "価格", "rd": "かかく", "id": "Harga", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "💰"}, {"no": 579, "kj": "消費税", "rd": "しょうひぜい", "id": "Pajak konsumsi", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🧾"}, {"no": 580, "kj": "税別", "rd": "ぜいべつ", "id": "Belum termasuk pajak", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "💵"}, {"no": 581, "kj": "図書館", "rd": "としょかん", "id": "Perpustakaan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📚"}, {"no": 582, "kj": "開きます", "rd": "あきます", "id": "Terbuka", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📖"}, {"no": 583, "kj": "閉まります", "rd": "しまります", "id": "Tertutup", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📕"}, {"no": 584, "kj": "利用します", "rd": "りようします", "id": "Menggunakan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🛠️"}, {"no": 585, "kj": "窓口", "rd": "まどぐち", "id": "Loket", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🎫"}, {"no": 586, "kj": "郵便局", "rd": "ゆうびんきょく", "id": "Kantor pos", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏣"}, {"no": 587, "kj": "近所", "rd": "きんじょ", "id": "Tetangga", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏘️"}, {"no": 588, "kj": "自動", "rd": "じどう", "id": "Otomatis", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🔄"}, {"no": 589, "kj": "危険", "rd": "きけん", "id": "Bahaya", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "⚠️"}, {"no": 590, "kj": "～種類", "rd": "～しゅるい", "id": "～ macam, jenis", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🗂️"}, {"no": 591, "kj": "消します", "rd": "けします", "id": "Memadamkan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🧯"}, {"no": 592, "kj": "捨てます", "rd": "すてます", "id": "Membuang", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🗑️"}, {"no": 593, "kj": "分けます", "rd": "わけます", "id": "Membagi, memisah", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🔀"}, {"no": 594, "kj": "燃えます", "rd": "もえます", "id": "Terbakar", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🔥"}, {"no": 595, "kj": "設定します", "rd": "せっていします", "id": "Menyetel", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "⚙️"}, {"no": 596, "kj": "地震", "rd": "じしん", "id": "Gempa bumi", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🌋"}, {"no": 597, "kj": "台風", "rd": "たいふう", "id": "Angin topan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🌀"}, {"no": 598, "kj": "声", "rd": "こえ", "id": "Suara (makhluk hidup)", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🗣️"}, {"no": 599, "kj": "大切な", "rd": "たいせつな", "id": "Penting", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "💎"}, {"no": 600, "kj": "進みます", "rd": "すすみます", "id": "Maju", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "👍"}, {"no": 601, "kj": "授業", "rd": "じゅぎょう", "id": "Pelajaran", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📖"}, {"no": 602, "kj": "大変な", "rd": "たいへんな", "id": "Berat, susah", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "😓"}, {"no": 603, "kj": "困ります", "rd": "こまります", "id": "Kesulitan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "😣"}, {"no": 604, "kj": "違います", "rd": "ちがいます", "id": "Berbeda, salah", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "❌"}, {"no": 605, "kj": "慣れます", "rd": "なれます", "id": "Terbiasa", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🌱"}, {"no": 606, "kj": "増えます", "rd": "ふえます", "id": "Bertambah", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "📈"}, {"no": 607, "kj": "笑います", "rd": "わらいます", "id": "Tertawa", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "😄"}, {"no": 608, "kj": "苦労します", "rd": "くろうします", "id": "Berjuang keras", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🧗"}, {"no": 609, "kj": "希望", "rd": "きぼう", "id": "Harapan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🌟"}, {"no": 610, "kj": "特に", "rd": "とくに", "id": "Khususnya, terutama", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "⭐"}, {"no": 611, "kj": "建てます", "rd": "たてます", "id": "Mendirikan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🏗️"}, {"no": 612, "kj": "続けます", "rd": "つづけます", "id": "Melanjutkan", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "🔄"}, {"no": 613, "kj": "役に立ちます", "rd": "やくにたちます", "id": "Bermanfaat", "cat": "cat15", "tag": "Layanan & Bencana", "icon": "💡"}];
+
+    // Engine Konversi Hiragana ke Romaji
+    function toRomaji(str) {
+      if (!str) return '';
+      const map = {
+        'きゃ':'kya','きゅ':'kyu','きょ':'kyo','しゃ':'sha','しゅ':'shu','しょ':'sho',
+        'ちゃ':'cha','ちゅ':'chu','ちょ':'cho','にゃ':'nya','にゅ':'nyu','にょ':'nyo',
+        'ひゃ':'hya','ひゅ':'hyu','ひょ':'hyo','みゃ':'mya','みゅ':'myu','みょ':'myo',
+        'りゃ':'rya','りゅ':'ryu','りょ':'ryo','ぎゃ':'gya','ぎゅ':'gyu','ぎょ':'gyo',
+        'じゃ':'ja','じゅ':'ju','じょ':'jo','びゃ':'bya','びゅ':'byu','びょ':'byo',
+        'ぴゃ':'pya','ぴゅ':'pyu','ぴょ':'pyo','あ':'a','い':'i','う':'u','え':'e','お':'o',
+        'か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko','さ':'sa','し':'shi','す':'su','せ':'se','そ':'so',
+        'た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to','な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no',
+        'は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho','ま':'ma','み':'mi','む':'mu','め':'me','も':'mo',
+        'や':'ya','ゆ':'yu','よ':'yo','ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
+        'わ':'wa','を':'o','ん':'n','が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go',
+        'ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo','だ':'da','ヂ':'ji','づ':'zu','で':'de','ど':'do',
+        'ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo','ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ポ':'po',
+        'ア':'a','イ':'i','ウ':'u','エ':'e','オ':'o','カ':'ka','キ':'ki','ク':'ku','ケ':'ke','コ':'ko',
+        'サ':'sa','シ':'shi','ス':'su','セ':'se','ソ':'so','タ':'ta','チ':'chi','ツ':'tsu','テ':'te','ト':'to',
+        'ナ':'na','ニ':'ni','ヌ':'nu','ネ':'ne','ノ':'no','ハ':'ha','ヒ':'hi','フ':'fu','ヘ':'he','ホ':'ho',
+        'マ':'ma','ミ':'mi','ム':'mu','メ':'me','モ':'mo','ヤ':'ya','ユ':'yu','ヨ':'yo','ラ':'ra','リ':'ri',
+        'ル':'ru','レ':'re','ロ':'ro','ワ':'wa','ヲ':'o','ン':'n','ガ':'ga','ギ':'gi','グ':'gu','ゲ':'ge','ゴ':'go',
+        'ザ':'za','ジ':'ji','ズ':'zu','ゼ':'ze','ゾ':'zo','ダ':'da','ヂ':'ji','ヅ':'zu','デ':'de','ド':'do',
+        'バ':'ba','ビ':'bi','ブ':'bu','ベ':'be','ボ':'bo','パ':'pa','ピ':'pi','プ':'pu','ペ':'pe','ポ':'po',
+        'キャ':'kya','キュ':'kyu','キョ':'kyo','シャ':'sha','シュ':'shu','ショ':'sho',
+        'チャ':'cha','チュ':'chu','チョ':'cho','ニャ':'nya','ニュ':'nyu','ニョ':'nyo',
+        'ヒャ':'hya','ヒュ':'hyu','ヒョ':'hyo','ミャ':'mya','ミュ':'myu','ミョ':'myo',
+        'リャ':'rya','リュ':'ryu','リョ':'ryo','ギャ':'gya','ギュ':'gyu','ギョ':'gyo',
+        'ジャ':'ja','ジュ':'ju','ジョ':'jo','ビャ':'bya','ビュ':'byu','ビョ':'byo',
+        'ピャ':'pya','ピュ':'pyu','ピョ':'pyo','ー':'-'
+      };
+      let res = '';
+      let i = 0;
+      while (i < str.length) {
+        if (str[i] === 'っ' || str[i] === 'ッ') {
+          let nextTwo = str.substring(i+1, i+3);
+          let nextOne = str.substring(i+1, i+2);
+          let nxt = map[nextTwo] || map[nextOne] || '';
+          if (nxt) {
+            res += (nxt[0] === 'c' ? 't' : nxt[0]);
+          }
+          i++;
+          continue;
+        }
+        let two = str.substring(i, i+2);
+        if (map[two]) {
+          res += map[two];
+          i += 2;
+        } else if (map[str[i]]) {
+          res += map[str[i]];
+          i++;
+        } else {
+          res += str[i];
+          i++;
+        }
+      }
+      return res;
+    }
+
+    let currentCategory = 'all';
+    let filteredList = [...masterKanjiList];
+    let currentFlashIndex = 0;
+    let currentViewMode = 'flip';
+
+    function initApp() {
+      applyFilter();
+    }
+
+    function setCategoryFilter(catKey, btn) {
+      currentCategory = catKey;
+      document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter();
+    }
+
+    function handleSearch() {
+      applyFilter();
+    }
+
+    function switchViewMode(mode) {
+      currentViewMode = mode;
+      document.getElementById('btnModeFlip').classList.toggle('active', mode === 'flip');
+      document.getElementById('btnModeFlex').classList.toggle('active', mode === 'flex');
+      document.getElementById('btnModeList').classList.toggle('active', mode === 'list');
+
+      document.getElementById('flipModeView').style.display = (mode === 'flip') ? 'flex' : 'none';
+      document.getElementById('flexModeSection').style.display = (mode === 'flex') ? 'block' : 'none';
+      document.getElementById('listModeView').style.display = (mode === 'list') ? 'grid' : 'none';
+    }
+
+    function applyFilter() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      filteredList = masterKanjiList.filter(item => {
+        const romaji = toRomaji(item.rd).toLowerCase();
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchQuery = !query || 
+                           item.kj.toLowerCase().includes(query) || 
+                           item.rd.toLowerCase().includes(query) || 
+                           romaji.includes(query) || 
+                           item.id.toLowerCase().includes(query) || 
+                           item.no.toString() === query;
+        return matchCategory && matchQuery;
+      });
+
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+      renderFlexView();
+      renderListView();
+    }
+
+    // --- LOGIKA FLIP CARD ---
+    function toggleCardFlip() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.toggle('is-flipped');
+    }
+
+    function updateFlashcardDisplay() {
+      const card = document.getElementById('flipCardInner');
+      card.classList.remove('is-flipped');
+
+      if (filteredList.length === 0) {
+        document.getElementById('flipFrontKanji').innerText = "無";
+        document.getElementById('flipBackReading').innerText = "-";
+        document.getElementById('flipBackRomaji').innerText = "";
+        document.getElementById('flipBackId').innerText = "Kosakata tidak ditemukan";
+        document.getElementById('flipBackCat').innerText = "-";
+        document.getElementById('flipCounterText').innerText = "0 dari 0 Kartu";
+        return;
+      }
+
+      const item = filteredList[currentFlashIndex];
+      const romajiText = toRomaji(item.rd);
+
+      // Sisi Depan
+      const frontEl = document.getElementById('flipFrontKanji');
+      frontEl.innerText = item.kj;
+      frontEl.className = item.kj.length >= 4 ? 'flip-kanji-big long-word' : 'flip-kanji-big';
+
+      // Sisi Belakang
+      document.getElementById('flipBackReading').innerText = item.rd;
+      document.getElementById('flipBackRomaji').innerText = romajiText;
+      document.getElementById('flipBackId').innerText = item.id;
+      document.getElementById('flipBackCat').innerText = item.tag;
+
+      document.getElementById('flipCounterText').innerText = `Kartu ${currentFlashIndex + 1} dari ${filteredList.length}`;
+    }
+
+    function navigateFlashcard(step) {
+      if (filteredList.length === 0) return;
+      currentFlashIndex += step;
+      if (currentFlashIndex < 0) currentFlashIndex = filteredList.length - 1;
+      if (currentFlashIndex >= filteredList.length) currentFlashIndex = 0;
+      updateFlashcardDisplay();
+    }
+
+    function shuffleCurrentList() {
+      if (filteredList.length <= 1) return;
+      for (let i = filteredList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [filteredList[i], filteredList[j]] = [filteredList[j], filteredList[i]];
+      }
+      currentFlashIndex = 0;
+      updateFlashcardDisplay();
+      renderFlexView();
+      renderListView();
+    }
+
+    function playCurrentFlashVoice() {
+      if (filteredList.length === 0) return;
+      playAudioVoice(filteredList[currentFlashIndex].kj);
+    }
+
+    // --- LOGIKA MODE FLEKSIBEL ---
+    function renderFlexView() {
+      const container = document.getElementById('flexModeView');
+      const countEl = document.getElementById('flexTotalText');
+      container.innerHTML = '';
+      countEl.innerText = `Menampilkan ${filteredList.length} Kanji`;
+
+      if (filteredList.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <p style="font-weight: 700;">Kosakata kanji tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredList.forEach(item => {
+        const romajiText = toRomaji(item.rd);
+        const card = document.createElement('div');
+        card.className = 'flex-card';
+        card.onclick = () => card.classList.toggle('flipped');
+
+        card.innerHTML = `
+          <div class="flex-card-inner">
+            <div class="flex-card-front">
+              <div class="flex-kanji-char ${item.kj.length >= 4 ? 'long-word' : ''}">${item.kj}</div>
+              <div class="flex-hint-tap">Ketuk balik 🔄</div>
+            </div>
+            <div class="flex-card-back">
+              <div class="flex-visual-icon">${item.icon || '📖'}</div>
+              <div class="flex-hiragana">${item.rd}</div>
+              <div class="flex-romaji">${romajiText}</div>
+              <div class="flex-meaning">${item.id}</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- LOGIKA DAFTAR GRID KAMUS ---
+    function renderListView() {
+      const container = document.getElementById('listModeView');
+      container.innerHTML = '';
+
+      if (filteredList.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            <p style="font-weight: 700;">Kosakata kanji tidak ditemukan</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredList.forEach(item => {
+        const romajiText = toRomaji(item.rd);
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+          <div class="vocab-top">
+            <div class="vocab-mini-illus">${item.icon || '📖'}</div>
+            <div class="vocab-text-group">
+              <div class="vocab-jp">${item.kj}</div>
+              <div class="vocab-reading-mini">${item.rd} &bull; <i>${romajiText}</i></div>
+              <div class="vocab-id">${item.id}</div>
+            </div>
+          </div>
+          <div class="vocab-bottom">
+            <span class="tag-category-badge">${item.tag}</span>
+            <button class="btn-audio-mini" onclick="playAudioVoice('${item.kj.replace(/'/g, "\\'")}')">🔊 Dengar</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function playAudioVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const cleanText = text.replace(/[～~]/g, '').trim();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
