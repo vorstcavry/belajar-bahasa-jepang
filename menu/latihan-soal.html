@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pusat Latihan Evaluasi &amp; Simulasi Ujian JLPT / JFT</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #818cf8;
+      --primary-dark: #6366f1;
+      --accent: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --badge-bg: #1e1b4b;
+      --badge-text: #a5b4fc;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --dashed-border: #334155;
+      --arrow-bg: #0f172a;
+      --arrow-text: #94a3b8;
+
+      /* Palette Kartu Evaluasi Dark Mode */
+      --jlpt-icon-bg: #450a0a; --jlpt-icon-text: #f87171; --jlpt-tag-bg: #2b0707; --jlpt-tag-text: #fca5a5;
+      --jft-icon-bg: #082f49; --jft-icon-text: #38bdf8; --jft-tag-bg: #031e30; --jft-tag-text: #7dd3fc;
+      --c12-icon-bg: #1e1b4b; --c12-icon-text: #818cf8; --c12-tag-bg: #0f172a; --c12-tag-text: #a5b4fc;
+      --c34-icon-bg: #450a0a; --c34-icon-text: #f87171; --c34-tag-bg: #2b0707; --c34-tag-text: #fca5a5;
+      --c56-icon-bg: #052e16; --c56-icon-text: #4ade80; --c56-tag-bg: #021a0d; --c56-tag-text: #86efac;
+      --c78-icon-bg: #451a03; --c78-icon-text: #fbbf24; --c78-tag-bg: #271002; --c78-tag-text: #fde68a;
+      --c910-icon-bg: #500724; --c910-icon-text: #f472b6; --c910-tag-bg: #370318; --c910-tag-text: #fbcfe8;
+
+      --ind-icon-bg: #042f2e; --ind-icon-text: #2dd4bf; --ind-tag-bg: #021a1a; --ind-tag-text: #99f6e4;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #f1f5f9;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --badge-bg: #e0e7ff;
+      --badge-text: #4338ca;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --dashed-border: #f1f5f9;
+      --arrow-bg: #f8fafc;
+      --arrow-text: #94a3b8;
+
+      /* Palette Kartu Evaluasi Light Mode */
+      --jlpt-icon-bg: #fee2e2; --jlpt-icon-text: #dc2626; --jlpt-tag-bg: #fef2f2; --jlpt-tag-text: #dc2626;
+      --jft-icon-bg: #e0f2fe; --jft-icon-text: #0284c7; --jft-tag-bg: #f0f9ff; --jft-tag-text: #0284c7;
+      --c12-icon-bg: #e0e7ff; --c12-icon-text: #4338ca; --c12-tag-bg: #eef2ff; --c12-tag-text: #4338ca;
+      --c34-icon-bg: #fee2e2; --c34-icon-text: #dc2626; --c34-tag-bg: #fef2f2; --c34-tag-text: #dc2626;
+      --c56-icon-bg: #dcfce7; --c56-icon-text: #16a34a; --c56-tag-bg: #f0fdf4; --c56-tag-text: #16a34a;
+      --c78-icon-bg: #fef3c7; --c78-icon-text: #d97706; --c78-tag-bg: #fffbeb; --c78-tag-text: #d97706;
+      --c910-icon-bg: #fce7f3; --c910-icon-text: #db2777; --c910-tag-bg: #fdf2f8; --c910-tag-text: #db2777;
+
+      --ind-icon-bg: #ccfbf1; --ind-icon-text: #0f766e; --ind-tag-bg: #f0fdfa; --ind-tag-text: #0f766e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 16px 8px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header Navigasi */
+    .header-box {
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: clamp(0.72rem, 2vw, 0.8rem);
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .header-box h1 {
+      font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-box h1 span {
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-box p {
+      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Grid Layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 36px;
+    }
+
+    /* Card Box */
+    .eval-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px -2px var(--shadow-color);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Hover & Touch Effects */
+    @media (hover: hover) {
+      .eval-card:hover {
+        transform: translateY(-5px);
+      }
+      .card-jlpt:hover { border-color: #f87171; box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.2); }
+      .card-jft:hover { border-color: #38bdf8; box-shadow: 0 14px 24px -4px rgba(2, 132, 199, 0.2); }
+      .card-12:hover { border-color: #818cf8; box-shadow: 0 14px 24px -4px rgba(79, 70, 229, 0.2); }
+      .card-34:hover { border-color: #f87171; box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.2); }
+      .card-56:hover { border-color: #4ade80; box-shadow: 0 14px 24px -4px rgba(22, 163, 74, 0.2); }
+      .card-78:hover { border-color: #fbbf24; box-shadow: 0 14px 24px -4px rgba(217, 119, 6, 0.2); }
+      .card-910:hover { border-color: #f472b6; box-shadow: 0 14px 24px -4px rgba(219, 39, 119, 0.2); }
+      .card-ind:hover { border-color: #2dd4bf; box-shadow: 0 14px 24px -4px rgba(13, 148, 136, 0.2); }
+
+      .eval-card:hover .icon-box {
+        transform: scale(1.1) rotate(4deg);
+      }
+      .eval-card:hover .arrow-icon {
+        transform: translateX(5px);
+        background: var(--primary);
+        color: #ffffff;
+      }
+    }
+
+    .eval-card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      margin-bottom: 16px;
+      pointer-events: none;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .status-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Color Themes */
+    .card-jlpt .icon-box { background: var(--jlpt-icon-bg); color: var(--jlpt-icon-text); }
+    .card-jlpt .status-tag { background: var(--jlpt-tag-bg); color: var(--jlpt-tag-text); }
+    .card-jlpt .card-footer { color: var(--jlpt-icon-text); }
+
+    .card-jft .icon-box { background: var(--jft-icon-bg); color: var(--jft-icon-text); }
+    .card-jft .status-tag { background: var(--jft-tag-bg); color: var(--jft-tag-text); }
+    .card-jft .card-footer { color: var(--jft-icon-text); }
+
+    .card-12 .icon-box { background: var(--c12-icon-bg); color: var(--c12-icon-text); }
+    .card-12 .status-tag { background: var(--c12-tag-bg); color: var(--c12-tag-text); }
+    .card-12 .card-footer { color: var(--c12-icon-text); }
+
+    .card-34 .icon-box { background: var(--c34-icon-bg); color: var(--c34-icon-text); }
+    .card-34 .status-tag { background: var(--c34-tag-bg); color: var(--c34-tag-text); }
+    .card-34 .card-footer { color: var(--c34-icon-text); }
+
+    .card-56 .icon-box { background: var(--c56-icon-bg); color: var(--c56-icon-text); }
+    .card-56 .status-tag { background: var(--c56-tag-bg); color: var(--c56-tag-text); }
+    .card-56 .card-footer { color: var(--c56-icon-text); }
+
+    .card-78 .icon-box { background: var(--c78-icon-bg); color: var(--c78-icon-text); }
+    .card-78 .status-tag { background: var(--c78-tag-bg); color: var(--c78-tag-text); }
+    .card-78 .card-footer { color: var(--c78-icon-text); }
+
+    .card-910 .icon-box { background: var(--c910-icon-bg); color: var(--c910-icon-text); }
+    .card-910 .status-tag { background: var(--c910-tag-bg); color: var(--c910-tag-text); }
+    .card-910 .card-footer { color: var(--c910-icon-text); }
+
+    /* Individual Bab 11-25 */
+    .card-ind .icon-box { background: var(--ind-icon-bg); color: var(--ind-icon-text); }
+    .card-ind .status-tag { background: var(--ind-tag-bg); color: var(--ind-tag-text); }
+    .card-ind .card-footer { color: var(--ind-icon-text); }
+
+    .eval-card h2 {
+      font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .eval-card p {
+      font-size: clamp(0.82rem, 2.5vw, 0.88rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .specs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .specs-list span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--dashed-border);
+      pointer-events: none;
+    }
+
+    .arrow-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--arrow-bg);
+      color: var(--arrow-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .eval-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <div class="header-box">
+      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
+      <h1>Pusat <span>Latihan Evaluasi</span></h1>
+      <p>Pilih paket ujian sertifikasi (JLPT / JFT) atau evaluasi bab di bawah ini untuk menguji kemampuan kosakata, kanji, tata bahasa, dokkai, dan choukai.</p>
+    </div>
+
+    <div class="cards-container">
+
+      <a href="./simulasi-jlpt.html" class="eval-card card-jlpt">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🇯🇵</div>
+            <span class="status-tag">UJIAN RESMI JLPT</span>
+          </div>
+          <h2>SIMULASI JLPT</h2>
+          <p>Simulasi lengkap Japanese-Language Proficiency Test (Level N5 &amp; N4) mencakup Moji-Goi, Bunpou, Dokkai, dan Choukai Audio Native.</p>
+          <div class="specs-list">
+            <span>📋 80-85 Soal</span>
+            <span>⏱️ 85-115 Menit</span>
+            <span>🎯 Standar 180 Poin</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian JLPT</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./simulasi-jft.html" class="eval-card card-jft">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">💻</div>
+            <span class="status-tag">CBT TOKUTEI GINOU</span>
+          </div>
+          <h2>SIMULASI JFT</h2>
+          <p>Simulasi ujian CBT Japan Foundation Test for Basic Japanese (JFT-Basic A2) untuk visa SSW (Tokutei Ginou) dengan 4 seksi lengkap.</p>
+          <div class="specs-list">
+            <span>📋 Format CBT</span>
+            <span>⏱️ 60 Menit</span>
+            <span>🎯 Standar 250 Poin</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian JFT</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-1-dan-2.html" class="eval-card card-12">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">📝</div>
+            <span class="status-tag">MODUL 01</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 1 &amp; 2</h2>
+          <p>Materi dasar perkenalan diri (*Jikoshoukai*), kata tunjuk benda (*Kore/Sore/Are*), partikel は/も/の/か, dan bentuk negatif.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-3-dan-4.html" class="eval-card card-34">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">📍</div>
+            <span class="status-tag">MODUL 02</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 3 &amp; 4</h2>
+          <p>Materi penunjuk tempat &amp; arah (*Koko/Soko/Asoko*), menanyakan harga (*Ikura*), jam/menit, partikel に/から/まで, dan kata kerja ~masu.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-5-dan-6.html" class="eval-card card-56">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🚆</div>
+            <span class="status-tag">MODUL 03</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 5 &amp; 6</h2>
+          <p>Materi kata kerja gerak (*Ikimasu/Kimasu/Kaerimasu*), sarana transportasi (*De*), objek aksi (*Wo*), tempat aksi (*De*), &amp; ajakan *~mashou*.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-7-dan-8.html" class="eval-card card-78">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🎁</div>
+            <span class="status-tag">MODUL 04</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 7 &amp; 8</h2>
+          <p>Materi alat bantu (*De*), memberi &amp; menerima (*Agemasu/Moraimasu*), kata sifat -i dan -na, serta ungkapan waktu lampau.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-9-dan-10.html" class="eval-card card-910">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🏢</div>
+            <span class="status-tag">MODUL 05</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 9 &amp; 10</h2>
+          <p>Materi kesukaan/kemampuan (*Suki/Jouzu/Wakarimasu*), alasan (*Kara*), keberadaan benda hidup &amp; mati (*Imasu/Arimasu*), serta posisi.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-11.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🔢</div>
+            <span class="status-tag">MODUL 06</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 11</h2>
+          <p>Materi kata bantu bilangan (*Tsu/Nin/Mai/Dai/Kai*), durasi waktu (*Jikan/Kagetsu/Nenkan*), dan frekuensi periode (*Ni ~kai*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-12.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">⚖️</div>
+            <span class="status-tag">MODUL 07</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 12</h2>
+          <p>Materi bentuk lampau kata sifat (*~katta desu / ~deshita*), perbandingan dua benda (*Yori / No hou ga*), dan perbandingan superlatif (*Ichiban*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-13.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🎯</div>
+            <span class="status-tag">MODUL 08</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 13</h2>
+          <p>Materi keinginan memiliki benda (*~ga Hoshii*), keinginan melakukan aksi (*~tai desu*), serta pergi untuk tujuan (*~ni ikimasu*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-14.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🔄</div>
+            <span class="status-tag">MODUL 09</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 14</h2>
+          <p>Materi perubahan kata kerja bentuk Te (*~Te kei*), permohonan tolong (*~te kudasai*), sedang melakukan (*~te imasu*), dan penawaran (*~mashou ka*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-15.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🛡️</div>
+            <span class="status-tag">MODUL 10</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 15</h2>
+          <p>Materi izin melakukan sesuatu (*~te mo ii desu ka*), larangan (*~te wa ikemasen*), serta keadaan/status berkelanjutan (*~te imasu*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-16.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🔗</div>
+            <span class="status-tag">MODUL 11</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 16</h2>
+          <p>Materi menyambung kalimat aksi berurutan (*~te, ~te*), setelah melakukan (*~te kara*), menyambung kata sifat, dan ciri fisik (*~ga [KS]*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-17.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">⛔</div>
+            <span class="status-tag">MODUL 12</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 17</h2>
+          <p>Materi kata kerja bentuk Nai (*~Nai kei*), larangan halus (*~naide kudasai*), keharusan (*~nakereba narimasen*), dan tidak perlu (*~nakutemo ii desu*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-18.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">💡</div>
+            <span class="status-tag">MODUL 13</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 18</h2>
+          <p>Materi bentuk kamus (*Jisho kei*), kemampuan (*Koto ga dekimasu*), hobi (*Shumi wa ~koto desu*), dan urutan sebelum (*Mae ni*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-19.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">📜</div>
+            <span class="status-tag">MODUL 14</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 19</h2>
+          <p>Materi kata kerja bentuk Ta (*~Ta kei*), pengalaman pernah (*~ta koto ga arimasu*), contoh aksi non-urut (*~tari, ~tari shimasu*), &amp; perubahan (*~ni narimasu*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-20.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">💬</div>
+            <span class="status-tag">MODUL 15</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 20</h2>
+          <p>Materi bentuk biasa / kasual (*Futsuukei*), percakapan informal dengan teman sebaya (*Tamego*), dan penghilangan partikel.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-21.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">💭</div>
+            <span class="status-tag">MODUL 16</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 21</h2>
+          <p>Materi opini / pendapat pribadi (*~to Omoimasu*), mengutip perkataan (*~to Iimashita*), dan konfirmasi kepastian (*~deshou?*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-22.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🏷️</div>
+            <span class="status-tag">MODUL 17</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 22</h2>
+          <p>Materi klausa modifikasi kata benda (*Rentai Shuushoku*), menerangkan kata benda menggunakan anak kalimat kata kerja bentuk biasa.</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-23.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">⏳</div>
+            <span class="status-tag">MODUL 18</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 23</h2>
+          <p>Materi saat/ketika melakukan (*~Toki*), dan syarat mutlak / akibat pasti / petunjuk jalan (*~to, [Akibat]*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-24.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🤝</div>
+            <span class="status-tag">MODUL 19</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 24</h2>
+          <p>Materi memberi &amp; menerima kebaikan / jasa (*Kuremasu / ~te agemasu / ~te moraimasu / ~te kuremasu*).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./latihan-bab-25.html" class="eval-card card-ind">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="icon-box">🎓</div>
+            <span class="status-tag">MODUL 20 (AKHIR N5)</span>
+          </div>
+          <h2>Latihan Evaluasi Bab 25</h2>
+          <p>Materi kalimat pengandaian syarat (*~tara* / jika-setelah) dan pengandaian kontradiktif berlawanan (*~temo* / walaupun-meskipun).</p>
+          <div class="specs-list">
+            <span>📋 65 Soal</span>
+            <span>⏱️ 60 Menit</span>
+            <span>📖 Lengkap Kunci</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Mulai Ujian</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+  </script>
+
+</body>
+</html>
