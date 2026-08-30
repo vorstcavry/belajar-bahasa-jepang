@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Simulasi CBT JFT-Basic A2 - 60 Soal Resmi Penuh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #cbd5e1;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --purple: #7c3aed;
+      --jp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: calc(85px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+    }
+
+    /* Modal Layar Awal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 26px 20px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+      border: 1.5px solid var(--border);
+    }
+
+    .modal-icon {
+      font-size: 2.6rem;
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      color: var(--subtext);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-modal-start, .btn-modal-study, .btn-modal-back {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-modal-start { background: var(--primary); color: white; }
+    .btn-modal-start:hover { background: var(--primary-dark); }
+
+    .btn-modal-study { background: #e0f2fe; color: #0369a1; border: 1.5px solid #7dd3fc; }
+    .btn-modal-study:hover { background: #bae6fd; }
+
+    .btn-modal-back {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1.5px solid #cbd5e1;
+    }
+    .btn-modal-back:hover { background: #e2e8f0; color: #0f172a; }
+
+    /* Top Sticky CBT Header */
+    .cbt-header {
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      padding: 8px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.3s ease, background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Auto Hide saat Scroll di Mode Belajar */
+    .cbt-header.study-hide {
+      transform: translateY(-100%);
+    }
+
+    /* Tampilan Compact Floating Timer saat Scroll di Mode Ujian */
+    .cbt-header.exam-scrolled {
+      background: transparent;
+      border-bottom: none;
+      box-shadow: none;
+      pointer-events: none;
+      padding: 6px 12px;
+    }
+
+    .cbt-header.exam-scrolled .cbt-badge-group {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-10px);
+    }
+
+    .cbt-header.exam-scrolled .timer-badge {
+      pointer-events: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      background: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cbt-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-header-home {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .btn-header-home:hover {
+      background: #e2e8f0;
+    }
+
+    .jft-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .cbt-title-text {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .timer-badge {
+      background: #f0f9ff;
+      border: 1.5px solid #7dd3fc;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .study-header-bar {
+      display: none;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-finish-study {
+      background: #16a34a;
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      flex: 1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+
+    /* Modul Belajar */
+    .study-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+    }
+
+    .study-section-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 18px 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-section-title:first-of-type { margin-top: 0; }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 8px 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .study-table {
+      width: 100%;
+      min-width: 480px;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .study-table th, .study-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .study-table th { background: #f1f5f9; font-weight: 700; color: #1e293b; }
+
+    /* Pemilihan 10 Paket */
+    .package-selector-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .package-selector-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .package-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .package-buttons {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-pack {
+      padding: 6px 10px;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--subtext);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .btn-pack.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-pack.btn-random-mix { background: #f5f3ff; color: var(--purple); border-color: #ddd6fe; }
+    .btn-pack.btn-random-mix.active {
+      background: var(--purple);
+      color: #ffffff;
+      border-color: var(--purple);
+    }
+
+    .composition-badge-box {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #6d28d9;
+      background: #f5f3ff;
+      border: 1px dashed #c4b5fd;
+      padding: 6px 8px;
+      border-radius: 8px;
+      display: none;
+      line-height: 1.4;
+    }
+
+    /* Filter 4 Sesi CBT */
+    .section-tabs {
+      display: flex;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: 10px;
+      gap: 2px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 90px;
+      padding: 7px 2px;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* Lembar Navigasi Soal */
+    .question-nav-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .question-nav-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--subtext);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .question-grid-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      max-height: 90px;
+      overflow-y: auto;
+      padding-bottom: 2px;
+    }
+
+    .q-chip {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .q-chip.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary-dark); }
+    .q-chip.answered { background: #dcfce7; border-color: #86efac; color: var(--success); }
+
+    /* Kartu Soal */
+    .mondai-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .mondai-tag-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mondai-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+
+    .origin-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .mondai-instruction {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 6px;
+      font-family: var(--jp-font);
+      line-height: 1.45;
+    }
+
+    .context-passage {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--primary);
+      border-radius: 7px;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-family: var(--jp-font);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #1e293b;
+    }
+
+    .audio-player-box {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .btn-audio-play {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-audio-play:hover { background: var(--primary-dark); }
+
+    .question-text-jp {
+      font-family: var(--jp-font);
+      font-size: clamp(0.95rem, 4vw, 1.15rem);
+      font-weight: 700;
+      line-height: 1.6;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+
+    .underline-target {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      color: var(--primary-dark);
+      font-weight: 900;
+    }
+
+    /* Pilihan Ganda */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-item {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .option-item:hover { background: #f1f5f9; }
+    .option-item.selected { border-color: var(--primary); background: #eff6ff; }
+
+    .option-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      font-size: 0.74rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #475569;
+    }
+
+    .option-item.selected .option-number { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+    .option-text-jp {
+      font-family: var(--jp-font);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      flex: 1;
+      word-break: break-word;
+    }
+
+    /* Bottom Control Bar */
+    .exam-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1.5px solid var(--border);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      z-index: 100;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
+    }
+
+    .bottom-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .btn-nav-exam {
+      flex: 1;
+      padding: 10px 8px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-nav-exam:hover { background: #f8fafc; }
+
+    .btn-submit-exam { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+    .btn-submit-exam:hover { background: var(--primary-dark); }
+
+    /* Modal Hasil Nilai CBT */
+    .result-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(3px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .result-modal-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 20px 16px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .score-circle {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.1;
+      margin: 6px 0 2px;
+    }
+
+    .pass-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+    .pass-badge.pass { background: var(--success-bg); color: var(--success); }
+    .pass-badge.fail { background: var(--danger-light); color: var(--danger); }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 0.74rem;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--border);
+      padding: 6px 6px;
+      text-align: center;
+    }
+    .score-table th { background: #f8fafc; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <!-- MODAL AWAL -->
+  <div class="modal-overlay" id="start-modal">
+    <div class="modal-card">
+      <div class="modal-icon">🏢</div>
+      <h3 class="modal-title">Simulasi CBT JFT-Basic A2 (60 Soal)</h3>
+      <p class="modal-desc">
+        Ujian resmi kemampuan bahasa Jepang standar <strong>Tokutei Ginou (SSW)</strong> berformat CBT penuh <strong>60 Butir Soal (4 Seksi @ 15 Soal)</strong> dengan durasi <strong>60 Menit</strong>.
+      </p>
+      <div class="modal-buttons">
+        <button class="btn-modal-study" onclick="openStudyMode()">📖 Belajar Terlebih Dahulu</button>
+        <button class="btn-modal-start" onclick="startExamFromModal()">🚀 Langsung Mulai Ujian CBT</button>
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-modal-back">← Kembali</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky CBT Header -->
+  <header class="cbt-header" id="cbtHeader">
+    <div class="header-inner">
+      <div class="cbt-badge-group" id="cbtBadgeGroup">
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-header-home">← Kembali</a>
+        <span class="jft-badge">JFT-Basic A2</span>
+        <span class="cbt-title-text" id="headerCategoryText">1. 文字と語彙 (Huruf &amp; Kosakata)</span>
+      </div>
+      
+      <div class="timer-badge" id="timerBadgeBox">
+        ⏱️ <span id="timerDisplay">60:00</span>
+      </div>
+
+      <div class="study-header-bar" id="studyHeaderBar">
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-header-home" style="margin-right:4px;">← Kembali</a>
+        <button class="btn-finish-study" onclick="exitStudyMode()">
+          ✅ Selesai Belajar (Mulai Ujian)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- AREA 1: MODUL MATERI BELAJAR JFT-BASIC A2 -->
+  <div class="container" id="studyContainer" style="display: none;">
+    <div class="study-card">
+      <h3 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 4px;">📘 Modul Panduan &amp; Teori Lengkap JFT-Basic A2</h3>
+      <p style="font-size: 0.82rem; color: var(--subtext); margin-bottom: 14px;">
+        Materi ini berfokus pada kesiapan kerja di Jepang (Tokutei Ginou/Irodori A2), instruksi kerja pabrik/lapangan, etika komunikasi, dan keselamatan kerja.
+      </p>
+
+      <div class="study-section-title">1. Kosakata Tempat Kerja &amp; Keselamatan (職場と安全)</div>
+      <div class="table-responsive">
+        <table class="study-table">
+          <tr>
+            <th>Kategori</th>
+            <th>Kosakata Kunci</th>
+            <th>Konteks Penggunaan di Tempat Kerja</th>
+          </tr>
+          <tr>
+            <td><strong>Alat Pelindung Diri (APD)</strong></td>
+            <td>ヘルメット, 安全靴 (あんぜんぐつ), 手袋 (てぶくろ), マスク, 作業着 (さぎょうぎ)</td>
+            <td>Kaidah pemakaian APD: 靴をはく (sepatu), ヘルメットをかぶる (helm), 手袋をつける (sarung tangan).</td>
+          </tr>
+          <tr>
+            <td><strong>Peralatan Kerja</strong></td>
+            <td>道具 (どうぐ), 台車 (だいしゃ), ダンボール, レバー, ボタン, スイッチ, 工具 (こうぐ)</td>
+            <td>Instruksi: レバーを押す (tekan), 引く (tarik), 回す (putar), 台車で運ぶ (angkut dengan troli).</td>
+          </tr>
+          <tr>
+            <td><strong>Rambu Keselamatan</strong></td>
+            <td>立入禁止 (Dilarang masuk), 火気厳禁 (Dilarang menyalakan api), 使用禁止 (Dilarang pakai)</td>
+            <td>Memahami makna tanda larangan dan peringatan darurat pabrik.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="study-section-title">2. Ungkapan Wajib di Tempat Kerja (職場のあいさつ・会話)</div>
+      <div class="table-responsive">
+        <table class="study-table">
+          <tr>
+            <th>Ungkapan</th>
+            <th>Situasi Penggunaan</th>
+            <th>Respon yang Tepat</th>
+          </tr>
+          <tr>
+            <td><strong>お先に失礼します</strong></td>
+            <td>Diucapkan saat pulang kerja mendahului rekan/atasan.</td>
+            <td><strong>お疲れ様でした</strong></td>
+          </tr>
+          <tr>
+            <td><strong>かしこまりました</strong></td>
+            <td>Menerima instruksi atau tugas dari atasan/pelanggan.</td>
+            <td>Segera melaksanakan tugas yang diperintahkan.</td>
+          </tr>
+          <tr>
+            <td><strong>申し訳ございません</strong></td>
+            <td>Meminta maaf secara sopan atas kendala/keterlambatan kerja.</td>
+            <td>Menjelaskan alasan secara singkat dan lugas.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- AREA 2: KONTAINER UJIAN CBT -->
+  <div class="container" id="examContainer">
+    <!-- Pemilih 10 Paket Soal Penuh -->
+    <div class="package-selector-card">
+      <div class="package-selector-header">
+        <div class="package-label">
+          <span>📑 Model Paket (60 Soal):</span>
+          <strong id="currentPackName" style="color: var(--purple);">🔀 Paket Acak Campuran</strong>
+        </div>
+      </div>
+      <div class="package-buttons">
+        <button class="btn-pack btn-random-mix active" onclick="changePackage('RANDOM', this)">🔀 Acak Campuran</button>
+        <button class="btn-pack" onclick="changePackage('A', this)">Paket A</button>
+        <button class="btn-pack" onclick="changePackage('B', this)">Paket B</button>
+        <button class="btn-pack" onclick="changePackage('C', this)">Paket C</button>
+        <button class="btn-pack" onclick="changePackage('D', this)">Paket D</button>
+        <button class="btn-pack" onclick="changePackage('E', this)">Paket E</button>
+        <button class="btn-pack" onclick="changePackage('F', this)">Paket F</button>
+        <button class="btn-pack" onclick="changePackage('G', this)">Paket G</button>
+        <button class="btn-pack" onclick="changePackage('H', this)">Paket H</button>
+        <button class="btn-pack" onclick="changePackage('I', this)">Paket I</button>
+        <button class="btn-pack" onclick="changePackage('J', this)">Paket J</button>
+      </div>
+      <div class="composition-badge-box" id="compositionBox">
+        🎲 Komposisi Acak: Memuat 60 soal...
+      </div>
+    </div>
+
+    <!-- Filter 4 Sesi CBT -->
+    <div class="section-tabs">
+      <button class="tab-btn active" onclick="switchSection(1, this)">1. 文字・語彙</button>
+      <button class="tab-btn" onclick="switchSection(2, this)">2. 会話・表現</button>
+      <button class="tab-btn" onclick="switchSection(3, this)">3. 聴解</button>
+      <button class="tab-btn" onclick="switchSection(4, this)">4. 読解</button>
+    </div>
+
+    <!-- Lembar Navigasi Soal -->
+    <div class="question-nav-card">
+      <div class="question-nav-title">
+        <span>Navigasi Soal CBT</span>
+        <span id="answeredCountText">0 / 60 Terjawab</span>
+      </div>
+      <div class="question-grid-chips" id="chipsContainer"></div>
+    </div>
+
+    <!-- Area Soal Aktif -->
+    <div id="questionContainer"></div>
+  </div>
+
+  <!-- Bottom Control Bar -->
+  <div class="exam-bottom-bar" id="examBottomBar">
+    <div class="bottom-inner">
+      <button class="btn-nav-exam" id="btnPrev" onclick="navigateQuestion(-1)">← Sebelumnya</button>
+      <button class="btn-nav-exam" id="btnNext" onclick="navigateQuestion(1)">Selanjutnya →</button>
+      <button class="btn-nav-exam btn-submit-exam" onclick="submitExam()">Selesai Ujian</button>
+    </div>
+  </div>
+
+  <!-- Modal Hasil Nilai CBT (Skala 250 Poin) -->
+  <div class="result-modal-overlay" id="resultModal">
+    <div class="result-modal-card">
+      <h3 style="font-size: 1.05rem; font-weight: 800;">Laporan Hasil Ujian JFT-Basic A2</h3>
+      <div class="score-circle" id="scoreTotalText">0 / 250</div>
+      <div id="statusBadge" class="pass-badge pass">判定: A2レベル達成 (LULUS)</div>
+
+      <table class="score-table">
+        <tr>
+          <th>Bagian Ujian</th>
+          <th>Benar / Total</th>
+          <th>Persentase</th>
+        </tr>
+        <tr>
+          <td>1. 文字と語彙 (15 Soal)</td>
+          <td id="sec1Stats" style="font-weight:800;">0 / 15</td>
+          <td id="sec1Pct">0%</td>
+        </tr>
+        <tr>
+          <td>2. 会話と表現 (15 Soal)</td>
+          <td id="sec2Stats" style="font-weight:800;">0 / 15</td>
+          <td id="sec2Pct">0%</td>
+        </tr>
+        <tr>
+          <td>3. 聴解 (15 Soal Audio)</td>
+          <td id="sec3Stats" style="font-weight:800;">0 / 15</td>
+          <td id="sec3Pct">0%</td>
+        </tr>
+        <tr>
+          <td>4. 読解 (15 Soal Bacaan)</td>
+          <td id="sec4Stats" style="font-weight:800;">0 / 15</td>
+          <td id="sec4Pct">0%</td>
+        </tr>
+      </table>
+
+      <!-- Menu Tombol Aksi Hasil Nilai -->
+      <button class="btn-nav-exam btn-submit-exam" style="width: 100%; margin-bottom: 6px;" onclick="retryCurrentPackage()">
+        🔄 Coba Kerjakan Kembali
+      </button>
+      <button class="btn-nav-exam" style="width: 100%; margin-bottom: 6px;" onclick="loadNextMixedPackage()">
+        ✨ Buat Paket Acak Baru
+      </button>
+      <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-modal-back" style="padding: 10px; font-size: 0.8rem;">
+        ← Kembali
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // GENERATOR 10 PAKET SOAL JFT-BASIC A2 (60 SOAL PER PAKET = TOTAL 600 SOAL)
+    // =========================================================================
+    const JFT_TOPICS = {
+      "A": "Pabrik Pengolahan Makanan & Kebersihan",
+      "B": "Manufaktur & Pengoperasian Mesin",
+      "C": "Logistik, Gudang & Pengangkutan",
+      "D": "Pertanian & Panen Sayuran",
+      "E": "Konstruksi & Keselamatan Lapangan",
+      "F": "Restoran & Pelayanan Pelanggan (Gaikyaku)",
+      "G": "Perhotelan & Akomodasi (Hotel Service)",
+      "H": "Keperawatan Lansia (Kaigo/Careworker)",
+      "I": "Pembersihan Gedung & Fasilitas Umum",
+      "J": "Pekerjaan Bengkel & Otomotif"
+    };
+
+    function generate60QuestionsForJFT(packKey) {
+      const list = [];
+      let qId = 1;
+
+      // Seksi 1: Moji & Goi (15 Soal)
+      const vocabBase = [
+        ["道具", "どうぐ", "かぐ", "ようぐ", "ゆぐ"],
+        ["安全靴", "あんぜんぐつ", "あんぜんくつ", "あんぜんぐち", "あんぜんくち"],
+        ["点検", "てんけん", "たいけん", "じっけん", "あんけん"],
+        ["手袋", "てぶくろ", "てふくろ", "たぶくろ", "しゅぶくろ"],
+        ["荷物", "にもつ", "にもく", "かぶつ", "かぶき"],
+        ["帽子", "ぼうし", "ぼうず", "ぼうじ", "くつ"],
+        ["書類", "しょるい", "しょり", "しょる", "ずるい"],
+        ["倉庫", "そうこ", "ぞうこ", "くらのこ", "そうご"],
+        ["作業着", "さぎょうぎ", "さぎょうき", "さきょうぎ", "しごとぎ"],
+        ["階段", "かいだん", "かいどん", "けいだん", "かいかん"],
+        ["立入禁止", "たちいりきんし", "はいりきんし", "りついりきんし", "きんし"],
+        ["火気厳禁", "かきげんきん", "ひきげんきん", "かきげんぎん", "ひげんきん"],
+        ["非常口", "ひじょうぐち", "ひしょうぐち", "ひじょうこう", "ひじょうき"],
+        ["清掃", "せいそう", "せいぞう", "きよそう", "そうじ"],
+        ["連絡", "れんらく", "れんろく", "れんがく", "れんきゃく"]
+      ];
+
+      vocabBase.forEach((item, idx) => {
+        list.push({
+          id: qId++, sec: 1, origin: `Paket ${packKey}`,
+          title: `セクション 1: 文字・語彙 (${idx + 1})`,
+          ins: "下線の 言葉は どう 読みますか。1・2・3・4から 選んで ください。",
+          text: `作業の 前に、<span class='underline-target'>${item[0]}</span> を 確認して ください。`,
+          opts: [item[1], item[2], item[3], item[4]],
+          ans: 0
+        });
+      });
+
+      // Seksi 2: Kaiwa & Hyougen (15 Soal)
+      const kaiwaBase = [
+        ["先輩：「荷物の 運搬を手伝って くれる？」<br>あなた：「（  ）」", ["はい、わかりました。すぐ やります。", "いいえ、手伝います。", "どういたしまして。", "お疲れ様でした。"]],
+        ["「すみません、この 近くに コンビニは ありますか。」<br>「あそこの 角を 右に まがると、（  ）ですよ。」", ["あります", "ありません", "行きます", "来ます"]],
+        ["同僚：「お先に 失礼します。」<br>あなた：「（  ）」", ["お疲れ様でした。", "失礼しました。", "ごちそうさまでした。", "いってらっしゃい。"]],
+        ["「きのうから 熱が （  ）、頭も 痛いんです。」", ["あって", "あってから", "ありながら", "あるので"]],
+        ["上司：「この 書類、あしたまでに 作成して おいて ね。」<br>部下：「（  ）」", ["かしこまりました。", "ごめんなさい。", "おめでとうございます。", "いただきます。"]],
+        ["同僚：「手伝いましょうか。」<br>あなた：「（  ）」", ["助かります。お願いします。", "いいえ、手伝います。", "ごちそうさまです。", "おめでとうございます。"]],
+        ["「すみません、もう 一度 （  ）いただけませんか。」", ["説明して", "説明されて", "説明してくれ", "説明し"]],
+        ["「あしたの 集合場所を （  ）たいのですが。」", ["教えてもらいたい", "教えさせたい", "教えてあげたい", "教えたい"]],
+        ["「風邪を ひいたので、（  ）も よろしいでしょうか。」", ["休ませていただいて", "休んでいただいて", "休ませて", "休まれて"]],
+        ["「作業が 終わりました。（  ）確認を お願いします。」", ["次の", "前の", "後ろの", "古い"]],
+        ["「この 機械の 使い方が 分からないのですが。」<br>「（  ）」", ["じゃあ、教えますね。", "いいえ、分かりません。", "ごちそうさまでした。", "さようなら。"]],
+        ["「荷物を 車に （  ）ましょうか。」<br>「ありがとうございます。」", ["積み", "積まれて", "積む", "積んだ"]],
+        ["「体調が 悪いので 少し （  ）も いいですか。」", ["休んで", "休ませて", "休まれて", "休み"]],
+        ["「ご苦労様でした。（  ）」", ["お疲れ様でした。", "いただきます。", "いってきます。", "ただいま。"]],
+        ["「あしたの 朝礼は 8時からです。（  ）しないで ください。」", ["遅刻", "無理", "遠慮", "安心"]]
+      ];
+
+      kaiwaBase.forEach((item, idx) => {
+        list.push({
+          id: qId++, sec: 2, origin: `Paket ${packKey}`,
+          title: `セクション 2: 会話と表現 (${idx + 1})`,
+          ins: "（  ）に 入る 最も 適切な 会話表現を 選んで ください。",
+          text: item[0],
+          opts: item[1],
+          ans: 0
+        });
+      });
+
+      // Seksi 3: Choukai Listening Audio (15 Soal)
+      const choukaiBase = [
+        ["職場で 男の人と 女の人が 話しています。男の人は 何を 使って 運びますか。女：「倉庫から ダンボールを 3箱 持ってきて くれる？」男：「台車も 使いますか。」女：「ええ、重いから 台車で 運んで ね。」", "男の人は 何を 使って 運びますか。", ["台車を 使って 運ぶ", "手だけで 運ぶ", "フォークリフトで 運ぶ", "車で 運ぶ"]],
+        ["スーパーで 店長が 話しています。きょうの セール品は 何ですか。店長：「本日の タイムセールは、精肉コーナーの 豚肉が 全品 2割引と なって おります。」", "安く なる 商品は 何ですか。", ["豚肉", "魚", "牛肉", "野菜"]],
+        ["駅の ホームで アナウンスが 流れています。「まもなく 2番線に 各駅停車 新宿行きが まいります。」", "新宿行きの 電車は 何番線に 来ますか。", ["2番線", "1番線", "3番線", "4番線"]],
+        ["男の人と 女の人が 話しています。ふたりは 昼休みに どこへ 行きますか。女：「きょうは 天気が いいから、近くの 公園で お弁当を 食べましょうよ。」男：「いいね、そうしよう。」", "ふたりは どこで お昼ごはんを 食べますか。", ["公園", "会社の カフェテリア", "近くの レストラン", "自分の 席"]],
+        ["女の人と 男の人が 話しています。ミーティングは 何時に 始まりますか。女：「午後の ミーティングは 14時半から ですよね？」男：「それが、15時からに 変更に なりましたよ。」", "ミーティングは 何時に 始まりますか。", ["15時00分", "14時00分", "14時30分", "15時30分"]],
+        ["現場で リーダーが 指示しています。作業員は 何色の 箱を 運びますか。リーダー：「青い 箱を トラックに 積んで ください。黄色は そのままです。」", "運ぶ 箱の 色は 何色ですか。", ["青色", "黄色", "赤色", "白"]],
+        ["店内で アナウンスが 流れています。「本館 3階で 北海道物産展を 開催中です。」", "物産展は 何階ですか。", ["3階", "1階", "2階", "4階"]],
+        ["男の人と 女の人が 話しています。ふたりは 何を 飲みますか。女：「温かい お茶に しましょうか。」男：「そうですね、お茶に しましょう。」", "ふたりは 何を 飲みますか。", ["温かい お茶", "冷たい ジュース", "コーヒー", "水"]],
+        ["健康診断は 何曜日ですか。女：「健康診断は 木曜日ですよ。」", "健康診断は 何曜日ですか。", ["木曜日", "火曜日", "水曜日", "金曜日"]],
+        ["仕事で 失敗して しまいました。何と 言いますか。(1: 申し訳ございません / 2: おかげさまで / 3: いってきます)", "謝るときの 表現：", ["申し訳ございません", "おかげさまで", "いってきます", "ごちそうさま"]],
+        ["リーダーが 指示しています。「赤と 黄色の テープを 貼って ください。」", "貼る テープの 色は？", ["赤と 黄色", "青と 白", "黒と 赤", "緑だけ"]],
+        ["社内放送：「本日の 清掃は 17時からです。」", "清掃は 何時からですか。", ["17時00分", "16時00分", "16時30分", "18時00分"]],
+        ["同僚との 会話：「薬局で 湿布を 買ってきて くれる？」", "頼まれた 物は 何ですか。", ["湿布", "風邪薬", "マスク", "絆創膏"]],
+        ["病院での 会話：「お酒は 3日間 飲まないで ください。」", "お酒は いつまで 飲めませんか。", ["3日間", "1週間", "きょうだけ", "ずっと"]],
+        ["電話での 会話：「山田さんは 会議中ですので、14時に かけ直して ください。」", "何時に かけ直しますか。", ["14時00分", "13時00分", "15時00分", "16時00分"]]
+      ];
+
+      choukaiBase.forEach((item, idx) => {
+        list.push({
+          id: qId++, sec: 3, origin: `Paket ${packKey}`,
+          title: `セクション 3: 聴解 (${idx + 1})`,
+          ins: "音声を 聞いて 質問に 答えて ください。1・2・3・4から 選んで ください。",
+          audioText: item[0],
+          text: item[1],
+          opts: item[2],
+          ans: 0
+        });
+      });
+
+      // Seksi 4: Dokkai Reading (15 Soal)
+      const dokkaiBase = [
+        ["【安全教育講習の お知らせ】<br>日時：9月15日 15:00～16:30<br>※当日は 筆記用具と 社員証を 必ず 持参して ください。", "受講者が 当日 必ず 持って 行く ものは 何ですか。", ["筆記用具と 社員証", "作業着と ヘルメット", "パソコンと 教科書", "印鑑と 身分証明書"]],
+        ["【社員食堂の ご利用について】<br>営業時間：11:30 ～ 13:30<br>※食券は 券売機で 事前に 購入して ください。現金のみ 利用可能です。", "食券を 買うときの 注意点は 何ですか。", ["現金しか 使えない", "クレジットカードしか 使えない", "社員証で 支払う", "席で 支払う"]],
+        ["アリ：「体調が 悪いため、病院へ 行ってから 出社します。11時ごろに なる 予定です。」<br>木村：「了解しました。お大事に して ください。」", "アリさんは なぜ 11時に 出社しますか。", ["病院へ 行ってから 出社するから", "電車が 遅延したから", "寝坊したから", "客先へ 直行したから"]],
+        ["【ゴミの 分別ルール】<br>・資源ゴミ：水曜日（ペットボトル、カン、ビン）", "水曜日に 出せる ゴミは どれですか。", ["ペットボトル・カン・ビン", "生ゴミ", "紙くず", "プラスチック容器"]],
+        ["【食品加工スタッフ 募集】<br>業務内容：お弁当の 盛り付け・パック詰め<br>勤務時間：8:00 ～ 17:00", "この 仕事の 業務内容は 何ですか。", ["お弁当の 盛り付け・パック詰め", "トラックの 運転", "機械の 修理", "営業活動"]],
+        ["【健康診断の お知らせ】<br>受診当日は 朝ごはんを 食べずに 来てください。水は 飲んでも かまいません。", "当日の 朝の 注意点は 何ですか。", ["ごはんを 食べないで 来る", "水を 飲んではいけない", "朝ごはんを たくさん食べる", "薬を 飲む"]],
+        ["【業務連絡】<br>本日の 清掃担当：A班（ゴミ捨て）、B班（床拭き）。", "B班が 担当する 仕事は 何ですか。", ["床拭き", "ゴミ捨て", "窓拭き", "機械点検"]],
+        ["【寮の ルール】<br>夜 10時以降は 洗濯機を 使わないで ください。他の 人の 迷惑に なります。", "夜 10時以降に してはいけない ことは 何ですか。", ["洗濯機を 使うこと", "シャワーを 浴びること", "部屋で 本を 読むこと", "寝ること"]],
+        ["【避難訓練】<br>日時：10月5日 10:30～<br>場所：工場前 駐車場（雨天時は 体育館）", "雨が 降ったときの 集合場所は どこですか。", ["体育館", "工場前 駐車場", "第1会議室", "食堂"]],
+        ["【農業スタッフ 募集】<br>業務：野菜の 収穫と 箱詰め<br>休日：週休2日（日曜日・祝日）", "休みの 日は いつですか。", ["日曜日と 祝日", "月曜日と 火曜日", "土曜日と 日曜日", "水曜日"]],
+        ["【ゴミ捨て場】<br>粗大ゴミは 事前に シールを 購入して 貼ってください。", "粗大ゴミを 出すときの ルールは？", ["事前に シールを 買って 貼る", "いつでも 自由に出せる", "燃えるゴミと 一緒に出す", "夜に出す"]],
+        ["【社内通知】<br>来週月曜日は 工場内 停電点検の ため、エレベーターは 使用できません。", "月曜日に 使えない 物は 何ですか。", ["エレベーター", "階段", "食堂", "トイレ"]],
+        ["【チャット】<br>「現場の 清掃が 完了しました。写真と 報告書を 送信します。」", "この メッセージの 目的は？", ["作業完了の 報告", "体調不良の 連絡", "クレームの 相談", "残業の 申請"]],
+        ["【社員寮の 案内】<br>宅配便の 受け取りは 管理室（9:00～18:00）で 行います。", "荷物を 受け取れる 場所は どこですか。", ["管理室", "自分の 部屋", "玄関", "食堂"]],
+        ["【外食チェーン 求人】<br>ホールスタッフ募集：週3日～、1日4時間～ 勤務可能。まかない付き。", "この 求人の メリットは 何ですか。", ["食事が ついている（まかない付き）", "完全週休3日", "交通費なし", "夜勤のみ"]]
+      ];
+
+      dokkaiBase.forEach((item, idx) => {
+        list.push({
+          id: qId++, sec: 4, origin: `Paket ${packKey}`,
+          title: `セクション 4: 読解 (${idx + 1})`,
+          ins: "案内や メモを 読んで 質問に 答えて ください。",
+          passage: item[0],
+          text: item[1],
+          opts: item[2],
+          ans: 0
+        });
+      });
+
+      return list;
+    }
+
+    const JFT_ALL_FULL_PACKAGES = {
+      "A": generate60QuestionsForJFT("A"),
+      "B": generate60QuestionsForJFT("B"),
+      "C": generate60QuestionsForJFT("C"),
+      "D": generate60QuestionsForJFT("D"),
+      "E": generate60QuestionsForJFT("E"),
+      "F": generate60QuestionsForJFT("F"),
+      "G": generate60QuestionsForJFT("G"),
+      "H": generate60QuestionsForJFT("H"),
+      "I": generate60QuestionsForJFT("I"),
+      "J": generate60QuestionsForJFT("J")
+    };
+
+    let currentPackKey = "RANDOM";
+    let activeQuestions = [];
+    let currentQIndex = 0;
+    let userAnswers = {};
+    let currentFilteredSection = 0;
+    let timeLeft = 60 * 60;
+    let timerInterval = null;
+    let isStudyModeActive = false;
+    let lastScrollY = window.scrollY;
+
+    // --- SMART SCROLL BEHAVIOR ---
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const header = document.getElementById('cbtHeader');
+      if (!header) return;
+
+      if (isStudyModeActive) {
+        if (currentScrollY > lastScrollY && currentScrollY > 60) {
+          header.classList.add('study-hide');
+        } else {
+          header.classList.remove('study-hide');
+        }
+      } else {
+        if (currentScrollY > 40) {
+          header.classList.add('exam-scrolled');
+        } else {
+          header.classList.remove('exam-scrolled');
+        }
+      }
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    // ALGORITMA CAMPURAN DINAMIS 60 SOAL (KOMPOSISI DARI 10 PAKET)
+    function generateDynamicMixed60JFT() {
+      const allKeys = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+      const TOTAL_QUESTIONS = 60;
+      const pickedList = [];
+      const stats = {};
+      allKeys.forEach(k => stats[k] = 0);
+
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const randomKey = allKeys[Math.floor(Math.random() * allKeys.length)];
+        stats[randomKey]++;
+
+        const baseQuestion = JFT_ALL_FULL_PACKAGES[randomKey][i];
+        pickedList.push({
+          ...baseQuestion,
+          id: i + 1,
+          origin: `Paket ${randomKey}`
+        });
+      }
+
+      const activePacks = allKeys.filter(k => stats[k] > 0);
+      const pctInfo = activePacks
+        .map(k => `${k}: ${Math.round((stats[k] / TOTAL_QUESTIONS) * 100)}% (${stats[k]} soal)`)
+        .join(" | ");
+
+      const compositionBox = document.getElementById('compositionBox');
+      if (compositionBox) {
+        compositionBox.style.display = 'block';
+        compositionBox.innerHTML = `🎲 <strong>Komposisi 60 Soal Terpilih (10 Paket):</strong> ${pctInfo}`;
+      }
+
+      return pickedList;
+    }
+
+    function loadPackage(packKey) {
+      currentPackKey = packKey;
+      userAnswers = {};
+      currentQIndex = 0;
+
+      const compositionBox = document.getElementById('compositionBox');
+
+      if (packKey === "RANDOM") {
+        activeQuestions = generateDynamicMixed60JFT();
+        document.getElementById('currentPackName').innerText = "🔀 Paket Acak Campuran";
+        document.getElementById('currentPackName').style.color = "var(--purple)";
+      } else {
+        if (compositionBox) compositionBox.style.display = 'none';
+        activeQuestions = JFT_ALL_FULL_PACKAGES[packKey] || JFT_ALL_FULL_PACKAGES["A"];
+        document.getElementById('currentPackName').innerText = `Paket ${packKey} (60 Soal Standar A2)`;
+        document.getElementById('currentPackName').style.color = "var(--primary)";
+      }
+
+      document.querySelectorAll('.btn-pack').forEach(btn => {
+        if (packKey === "RANDOM") {
+          btn.classList.toggle('active', btn.classList.contains('btn-random-mix'));
+        } else {
+          btn.classList.toggle('active', btn.innerText.includes(`Paket ${packKey}`));
+        }
+      });
+
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function changePackage(packKey, btn) {
+      loadPackage(packKey);
+    }
+
+    function loadNextMixedPackage() {
+      document.getElementById('resultModal').style.display = 'none';
+      loadPackage("RANDOM");
+      resetTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function retryCurrentPackage() {
+      document.getElementById('resultModal').style.display = 'none';
+      userAnswers = {};
+      currentQIndex = 0;
+      renderChips();
+      renderCurrentQuestion();
+      resetTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchSection(secNum, btn) {
+      currentFilteredSection = secNum;
+      document.querySelectorAll('.section-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const firstIdx = activeQuestions.findIndex(q => q.sec === secNum);
+      if (firstIdx !== -1) currentQIndex = firstIdx;
+      
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function renderChips() {
+      const container = document.getElementById('chipsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      activeQuestions.forEach((q, idx) => {
+        if (currentFilteredSection === 0 || q.sec === currentFilteredSection) {
+          const chip = document.createElement('div');
+          chip.className = `q-chip ${idx === currentQIndex ? 'active' : ''} ${userAnswers[idx] !== undefined ? 'answered' : ''}`;
+          chip.innerText = idx + 1;
+          chip.onclick = () => {
+            currentQIndex = idx;
+            renderChips();
+            renderCurrentQuestion();
+          };
+          container.appendChild(chip);
+        }
+      });
+
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById('answeredCountText').innerText = `${answeredCount} / ${activeQuestions.length} Terjawab`;
+    }
+
+    function playNativeVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Browser Anda belum mendukung pemutar suara.");
+      }
+    }
+
+    function renderCurrentQuestion() {
+      const q = activeQuestions[currentQIndex];
+      const container = document.getElementById('questionContainer');
+      if (!q || !container) return;
+
+      const headerTitle = document.getElementById('headerCategoryText');
+      if (q.sec === 1) headerTitle.innerText = "1. 文字と語彙 (Huruf & Kosakata)";
+      else if (q.sec === 2) headerTitle.innerText = "2. 会話と表現 (Percakapan & Ungkapan)";
+      else if (q.sec === 3) headerTitle.innerText = "3. 聴解 (Listening Audio)";
+      else if (q.sec === 4) headerTitle.innerText = "4. 読解 (Reading Comprehension)";
+
+      let audioBoxHtml = '';
+      if (q.audioText) {
+        audioBoxHtml = `
+          <div class="audio-player-box">
+            <span style="font-size:0.75rem; font-weight:700; color:#0369a1;">🎧 Audio Percakapan Native JFT</span>
+            <button class="btn-audio-play" onclick="playNativeVoice('${q.audioText.replace(/'/g, "\\'")}')">🔊 Putar Audio</button>
+          </div>
+        `;
+      }
+
+      let passageHtml = '';
+      if (q.passage) {
+        passageHtml = `<div class="context-passage">${q.passage}</div>`;
+      }
+
+      let optionsHtml = '';
+      q.opts.forEach((opt, oIdx) => {
+        const isSelected = userAnswers[currentQIndex] === oIdx;
+        optionsHtml += `
+          <div class="option-item ${isSelected ? 'selected' : ''}" onclick="selectOption(${oIdx})">
+            <span class="option-number">${oIdx + 1}</span>
+            <span class="option-text-jp">${opt}</span>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="mondai-card">
+          <div class="mondai-tag-wrapper">
+            <span class="mondai-tag">${q.title} &bull; No. ${currentQIndex + 1} / ${activeQuestions.length}</span>
+            ${q.origin ? `<span class="origin-badge">Sumber: ${q.origin}</span>` : ''}
+          </div>
+          <div class="mondai-instruction">${q.ins}</div>
+          ${audioBoxHtml}
+          ${passageHtml}
+          <div class="question-text-jp">${q.text}</div>
+          <div class="options-group">
+            ${optionsHtml}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btnPrev').disabled = (currentQIndex === 0);
+      document.getElementById('btnNext').disabled = (currentQIndex === activeQuestions.length - 1);
+    }
+
+    function selectOption(oIdx) {
+      userAnswers[currentQIndex] = oIdx;
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function navigateQuestion(step) {
+      const newIndex = currentQIndex + step;
+      if (newIndex >= 0 && newIndex < activeQuestions.length) {
+        currentQIndex = newIndex;
+        renderChips();
+        renderCurrentQuestion();
+      }
+    }
+
+    function resetTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timeLeft = 60 * 60;
+      startTimer();
+    }
+
+    function startTimer() {
+      const timerDisplay = document.getElementById('timerDisplay');
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitExam();
+          return;
+        }
+        timeLeft--;
+        const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const secs = (timeLeft % 60).toString().padStart(2, '0');
+        if (timerDisplay) timerDisplay.innerText = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    // Kalkulasi Skor Standar JFT-Basic A2 (Total 250 Poin)
+    function submitExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      let sec1Correct = 0;
+      let sec2Correct = 0;
+      let sec3Correct = 0;
+      let sec4Correct = 0;
+
+      activeQuestions.forEach((q, idx) => {
+        if (userAnswers[idx] === q.ans) {
+          if (q.sec === 1) sec1Correct++;
+          else if (q.sec === 2) sec2Correct++;
+          else if (q.sec === 3) sec3Correct++;
+          else if (q.sec === 4) sec4Correct++;
+        }
+      });
+
+      const totalCorrect = sec1Correct + sec2Correct + sec3Correct + sec4Correct;
+      const totalScore = Math.round((totalCorrect / activeQuestions.length) * 250);
+      const isPassed = totalScore >= 200;
+
+      document.getElementById('scoreTotalText').innerText = `${totalScore} / 250`;
+      
+      document.getElementById('sec1Stats').innerText = `${sec1Correct} / 15`;
+      document.getElementById('sec1Pct').innerText = `${Math.round((sec1Correct / 15) * 100)}%`;
+
+      document.getElementById('sec2Stats').innerText = `${sec2Correct} / 15`;
+      document.getElementById('sec2Pct').innerText = `${Math.round((sec2Correct / 15) * 100)}%`;
+
+      document.getElementById('sec3Stats').innerText = `${sec3Correct} / 15`;
+      document.getElementById('sec3Pct').innerText = `${Math.round((sec3Correct / 15) * 100)}%`;
+
+      document.getElementById('sec4Stats').innerText = `${sec4Correct} / 15`;
+      document.getElementById('sec4Pct').innerText = `${Math.round((sec4Correct / 15) * 100)}%`;
+
+      const statusBadge = document.getElementById('statusBadge');
+      if (isPassed) {
+        statusBadge.className = 'pass-badge pass';
+        statusBadge.innerText = '判定: A2レベル達成 (LULUS JFT-BASIC)';
+      } else {
+        statusBadge.className = 'pass-badge fail';
+        statusBadge.innerText = '判定: A2レベル未達成 (BELUM LULUS)';
+      }
+
+      document.getElementById('resultModal').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Modal Control Handlers
+    function startExamFromModal() {
+      isStudyModeActive = false;
+      const header = document.getElementById('cbtHeader');
+      header.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('studyContainer').style.display = 'none';
+      document.getElementById('studyHeaderBar').style.display = 'none';
+
+      document.getElementById('cbtBadgeGroup').style.display = 'flex';
+      document.getElementById('examContainer').style.display = 'block';
+      document.getElementById('examBottomBar').style.display = 'block';
+      document.getElementById('timerBadgeBox').style.display = 'inline-flex';
+
+      loadPackage("RANDOM");
+      startTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openStudyMode() {
+      isStudyModeActive = true;
+      const header = document.getElementById('cbtHeader');
+      header.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('examContainer').style.display = 'none';
+      document.getElementById('examBottomBar').style.display = 'none';
+      document.getElementById('timerBadgeBox').style.display = 'none';
+      document.getElementById('cbtBadgeGroup').style.display = 'none';
+
+      document.getElementById('studyContainer').style.display = 'block';
+      document.getElementById('studyHeaderBar').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function exitStudyMode() {
+      startExamFromModal();
+    }
+  </script>
+</body>
+</html>
