@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vorst Cavry - JLPT N5 Learning Hub</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --bg-body: #0f172a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --modal-bg: #1e293b;
+      --modal-overlay: rgba(15, 23, 42, 0.75);
+      --badge-bg: #312e81;
+      --badge-text: #a5b4fc;
+      --badge-border: #4338ca;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --input-bg: #0f172a;
+      --input-border: #475569;
+      --close-btn-bg: #334155;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    body.light-theme {
+      --bg-body: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --modal-bg: #ffffff;
+      --modal-overlay: rgba(15, 23, 42, 0.4);
+      --badge-bg: #e0e7ff;
+      --badge-text: #4338ca;
+      --badge-border: #c7d2fe;
+      --shadow-color: rgba(100, 116, 139, 0.15);
+      --input-bg: #f1f5f9;
+      --input-border: #cbd5e1;
+      --close-btn-bg: #e2e8f0;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 32px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Floating Theme Toggle Button */
+    .theme-toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--shadow-color);
+      z-index: 1000;
+      font-size: 1.3rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      max-width: 700px;
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 14px;
+      letter-spacing: 0.6px;
+      border: 1px solid var(--badge-border);
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #6366f1 0%, #0284c7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Grid Layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1040px;
+    }
+
+    /* Card Styling */
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid var(--card-border);
+      box-shadow: 0 4px 6px -1px var(--shadow-color);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px -6px var(--shadow-color);
+    }
+
+    .card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      margin-bottom: 16px;
+    }
+
+    .icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-wrapper svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .card:hover .icon-wrapper {
+      transform: scale(1.1) rotate(4deg);
+    }
+
+    /* Card Themes */
+    .card-kana .icon-wrapper { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .card-kana .card-footer { color: #f472b6; }
+    body.light-theme .card-kana .icon-wrapper { background: #fdf2f8; color: #db2777; border-color: #fbcfe8; }
+    body.light-theme .card-kana .card-footer { color: #db2777; }
+
+    .card-waktu .icon-wrapper { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+    .card-waktu .card-footer { color: #38bdf8; }
+    body.light-theme .card-waktu .icon-wrapper { background: #f0f9ff; color: #0284c7; border-color: #bae6fd; }
+    body.light-theme .card-waktu .card-footer { color: #0284c7; }
+
+    .card-hitung .icon-wrapper { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .card-hitung .card-footer { color: #fbbf24; }
+    body.light-theme .card-hitung .icon-wrapper { background: #fefce8; color: #d97706; border-color: #fde68a; }
+    body.light-theme .card-hitung .card-footer { color: #d97706; }
+
+    .card-ecard .icon-wrapper { background: #4c1d95; color: #c084fc; border: 1px solid #9333ea; }
+    .card-ecard .card-footer { color: #c084fc; }
+    body.light-theme .card-ecard .icon-wrapper { background: #faf5ff; color: #9333ea; border-color: #e9d5ff; }
+    body.light-theme .card-ecard .card-footer { color: #9333ea; }
+
+    .card-n5 .icon-wrapper { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .card-n5 .card-footer { color: #f87171; }
+    body.light-theme .card-n5 .icon-wrapper { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+    body.light-theme .card-n5 .card-footer { color: #dc2626; }
+
+    .card-kotoba .icon-wrapper { background: #134e4a; color: #2dd4bf; border: 1px solid #0d9488; }
+    .card-kotoba .card-footer { color: #2dd4bf; }
+    body.light-theme .card-kotoba .icon-wrapper { background: #f0fdfa; color: #0d9488; border-color: #99f6e4; }
+    body.light-theme .card-kotoba .card-footer { color: #0d9488; }
+
+    .card-soal .icon-wrapper { background: #312e81; color: #818cf8; border: 1px solid #4f46e5; }
+    .card-soal .card-footer { color: #818cf8; }
+    body.light-theme .card-soal .icon-wrapper { background: #eef2ff; color: #4f46e5; border-color: #c7d2fe; }
+    body.light-theme .card-soal .card-footer { color: #4f46e5; }
+
+    .card-kanji .icon-wrapper { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .card-kanji .card-footer { color: #4ade80; }
+    body.light-theme .card-kanji .icon-wrapper { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    body.light-theme .card-kanji .card-footer { color: #16a34a; }
+
+    .card-choukai .icon-wrapper { background: #7c2d12; color: #fb923c; border: 1px solid #ea580c; }
+    .card-choukai .card-footer { color: #fb923c; }
+    body.light-theme .card-choukai .icon-wrapper { background: #fff7ed; color: #ea580c; border-color: #fed7aa; }
+    body.light-theme .card-choukai .card-footer { color: #ea580c; }
+
+    .card-anime .icon-wrapper { background: #701a75; color: #f472b6; border: 1px solid #c026d3; }
+    .card-anime .card-footer { color: #f472b6; }
+    body.light-theme .card-anime .icon-wrapper { background: #fdf4ff; color: #c026d3; border-color: #f5d0fe; }
+    body.light-theme .card-anime .card-footer { color: #c026d3; }
+
+    .card-share .icon-wrapper { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .card-share .card-footer { color: #34d399; }
+    body.light-theme .card-share .icon-wrapper { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+    body.light-theme .card-share .card-footer { color: #059669; }
+
+    .card-upload .icon-wrapper { background: #312e81; color: #a5b4fc; border: 1px solid #6366f1; }
+    .card-upload .card-footer { color: #a5b4fc; }
+    body.light-theme .card-upload .icon-wrapper { background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; }
+    body.light-theme .card-upload .card-footer { color: #4338ca; }
+
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    .arrow {
+      margin-left: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    /* Modal / Pop-up Share */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--modal-overlay);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: var(--modal-bg);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px var(--shadow-color);
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.25s ease;
+      border: 1px solid var(--card-border);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: var(--close-btn-bg);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--card-border);
+      color: var(--text-main);
+    }
+
+    .modal-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .share-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .share-action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .share-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .share-tg { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+    .share-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .share-x  { background: #334155; color: #f8fafc; border: 1px solid #475569; }
+
+    body.light-theme .share-wa { background: #dcfce7; color: #166534; border-color: #86efac; }
+    body.light-theme .share-tg { background: #e0f2fe; color: #075985; border-color: #7dd3fc; }
+    body.light-theme .share-fb { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+    body.light-theme .share-x  { background: #f1f5f9; color: #0f172a; border-color: #cbd5e1; }
+
+    .copy-link-wrapper {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .copy-input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--input-border);
+      font-size: 0.82rem;
+      background: var(--input-bg);
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .btn-copy {
+      background: #4f46e5;
+      color: #ffffff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-copy:hover {
+      background: #4338ca;
+    }
+
+    .copy-status {
+      font-size: 0.75rem;
+      color: #4ade80;
+      font-weight: 700;
+      margin-top: 8px;
+      display: none;
+    }
+    body.light-theme .copy-status {
+      color: #16a34a;
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1040px;
+      margin-top: 40px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    body.light-theme .btn-wa { background: #dcfce7; color: #166534; border-color: #86efac; }
+    body.light-theme .btn-email { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    body.light-theme .btn-fb { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+    body.light-theme .btn-ig { background: #fce7f3; color: #9d174d; border-color: #f9a8d4; }
+    body.light-theme .btn-saweria { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+    body.light-theme .btn-trakteer { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    body.light-theme .btn-kofi { background: #e0f2fe; color: #075985; border-color: #7dd3fc; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle Dark/Light Mode">
+    <span id="themeIcon">🌙</span>
+  </button>
+
+  <div class="hero">
+    <div class="badge">DEVELOPED BY VORST CAVRY</div>
+    <h1>Mulai Belajar <span>Bahasa Jepang</span></h1>
+    <p>Pilih modul pembelajaran di bawah ini untuk mengasah kemampuan huruf dasar, angka, waktu, satuan hitungan, e-card bergambar, tata bahasa, kanji, latihan menyimak, hingga berbagi materi belajar.</p>
+  </div>
+
+  <div class="cards-container">
+
+    <a href="./menu/belajar-hiragana-katakana.html" class="card card-kana">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9"></path>
+            <path d="M16.5 6.5 19 4a1.41 1.41 0 0 1 2 2l-2.5 2.5"></path>
+            <path d="m15 11 3 3"></path>
+            <path d="M6 19c-1 1-2 2-4 2 0-2 1-3 2-4"></path>
+          </svg>
+        </div>
+        <h2>Huruf Hiragana &amp; Katakana</h2>
+        <p>Tabel interaktif 46 huruf dasar Hiragana, Katakana, Dakuon, Yoon, serta Katakana modern.</p>
+      </div>
+      <div class="card-footer">
+        Belajar Huruf <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/angka-waktu.html" class="card card-waktu">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+            <line x1="16" x2="16" y1="2" y2="6"></line>
+            <line x1="8" x2="8" y1="2" y2="6"></line>
+            <line x1="3" x2="21" y1="10" y2="10"></line>
+            <circle cx="12" cy="15" r="2.5"></circle>
+            <polyline points="12 14 12 15 13.5 15"></polyline>
+          </svg>
+        </div>
+        <h2>Angka &amp; Waktu</h2>
+        <p>Angka satuan s.d ratusan juta, hari ber-elemen, tanggal 1-31, bulan, jam, dan partikel waktu.</p>
+      </div>
+      <div class="card-footer">
+        Buka Modul Waktu <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/satuan-hitungan.html" class="card card-hitung">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+            <path d="m3.3 7 8.7 5 8.7-5"></path>
+            <path d="M12 22V12"></path>
+          </svg>
+        </div>
+        <h2>Satuan Hitungan</h2>
+        <p>Katalog kata bantu bilangan barang (tsu), orang (nin), lembar (mai), botol (hon), ekor, jilid, dll.</p>
+      </div>
+      <div class="card-footer">
+        Pelajari Satuan <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/e-card-kotoba.html" class="card card-ecard">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+          </svg>
+        </div>
+        <h2>E-Card Kotoba Bergambar</h2>
+        <p>Hafalan 451 kosakata visual bersuara: 244 Kata Benda (Meishi), 136 Kata Kerja (Doushi), &amp; 71 Kata Sifat (Keiyoushi).</p>
+      </div>
+      <div class="card-footer">
+        Buka E-Card <span class="arrow">→</span>
+      </div>
+    </a>
+    
+    <a href="./menu/belajar-n5.html" class="card card-n5">
+      <div class="card-top">
+        <div class="icon-wrapper">📖</div>
+        <h2>Belajar N5</h2>
+        <p>Materi tata bahasa (bunpou), partikel, dan pola kalimat dasar level JLPT N5.</p>
+      </div>
+      <div class="card-footer">
+        Buka Modul <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/latihan-kotoba.html" class="card card-kotoba">
+      <div class="card-top">
+        <div class="icon-wrapper">📚</div>
+        <h2>Latihan Kotoba</h2>
+        <p>Drill perbendaharaan kosakata N5 per bab, kata kerja, kata sifat, dan istilah praktis.</p>
+      </div>
+      <div class="card-footer">
+        Latihan Kosakata <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/latihan-soal.html" class="card card-soal">
+      <div class="card-top">
+        <div class="icon-wrapper">✍️</div>
+        <h2>Belajar Soal</h2>
+        <p>Latihan simulasi ujian terstruktur dan pembahasan soal untuk menguji pemahaman.</p>
+      </div>
+      <div class="card-footer">
+        Mulai Latihan <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/kanji.html" class="card card-kanji">
+      <div class="card-top">
+        <div class="icon-wrapper">漢</div>
+        <h2>Belajar Kanji</h2>
+        <p>Katalog kanji dasar N5 lengkap dengan cara baca Onyomi/Kunyomi dan contoh kata.</p>
+      </div>
+      <div class="card-footer">
+        Pelajari Kanji <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/latihan-choukai.html" class="card card-choukai">
+      <div class="card-top">
+        <div class="icon-wrapper">🎧</div>
+        <h2>Latihan Choukai</h2>
+        <p>Latihan menyimak audio percakapan pendek sehari-hari dan simulasi listening JLPT.</p>
+      </div>
+      <div class="card-footer">
+        Dengarkan Audio <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="./menu/anime-kaiwa.html" class="card card-anime">
+      <div class="card-top">
+        <div class="icon-wrapper">🎌</div>
+        <h2>Anime &amp; Percakapan</h2>
+        <p>Pelajari frasa percakapan nyata dan bedah kalimat bahasa Jepang dari anime populer.</p>
+      </div>
+      <div class="card-footer">
+        Eksplorasi Dialog <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <div class="card card-share" id="openModalBtn">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </div>
+        <h2>Berbagi Materi</h2>
+        <p>Bagikan modul belajar, latihan soal, dan materi bermanfaat ini kepada teman atau grup belajar.</p>
+      </div>
+      <div class="card-footer">
+        Bagikan Sekarang <span class="arrow">→</span>
+      </div>
+    </div>
+
+    <a href="./menu/upload-materi.html" class="card card-upload">
+      <div class="card-top">
+        <div class="icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+            <path d="M12 12v9"></path>
+            <path d="m16 16-4-4-4 4"></path>
+          </svg>
+        </div>
+        <h2>Upload File Materi</h2>
+        <p>Unggah modul catatan, ringkasan kanji, dokumen soal, atau gambar materi untuk tersimpan bersama.</p>
+      </div>
+      <div class="card-footer">
+        Unggah Berkas <span class="arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close-btn" id="closeModalBtn" type="button">✕</button>
+      
+      <div class="modal-icon">📤</div>
+      <h3 class="modal-title">Bagikan Materi Belajar</h3>
+      <p class="modal-desc">Ajak teman atau grup belajarmu untuk bersama-sama menguasai bahasa Jepang level N5!</p>
+
+      <div class="share-grid">
+        <button type="button" class="share-action-btn share-wa" data-platform="wa">💬 WhatsApp</button>
+        <button type="button" class="share-action-btn share-tg" data-platform="tg">✈️ Telegram</button>
+        <button type="button" class="share-action-btn share-fb" data-platform="fb">🌐 Facebook</button>
+        <button type="button" class="share-action-btn share-x" data-platform="x">✖️ Twitter / X</button>
+      </div>
+
+      <div class="copy-link-wrapper">
+        <input type="text" id="shareUrlInput" class="copy-input" readonly value="">
+        <button class="btn-copy" id="copyBtn" type="button">Salin Tautan</button>
+      </div>
+      <div class="copy-status" id="copyStatusText">✅ Tautan berhasil disalin ke papan klip!</div>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+    <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+    
+    <div class="social-group">
+      <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+      <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+      <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+      <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+    </div>
+
+    <div class="social-group">
+      <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+      <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+      <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+    </div>
+
+    <div class="copyright">
+      &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. TEMA (DARK / LIGHT MODE)
+      const themeBtn = document.getElementById('themeToggleBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const body = document.body;
+
+      function updateTheme(isLight) {
+        if (isLight) {
+          body.classList.add('light-theme');
+          themeIcon.textContent = '☀️';
+          try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+        } else {
+          body.classList.remove('light-theme');
+          themeIcon.textContent = '🌙';
+          try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+        }
+      }
+
+      // Cek preferensi awal
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        updateTheme(true);
+      } else {
+        updateTheme(false);
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const isCurrentLight = body.classList.contains('light-theme');
+        updateTheme(!isCurrentLight);
+      });
+
+      // 2. MODAL & BERBAGI
+      const currentUrl = window.location.href.split('#')[0];
+      const shareText = "Yuk belajar Bahasa Jepang JLPT N5 lengkap di JLPT N5 Learning Hub:";
+      const shareModal = document.getElementById('shareModal');
+      const modalBox = document.getElementById('modalBox');
+      const openModalBtn = document.getElementById('openModalBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const shareUrlInput = document.getElementById('shareUrlInput');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyStatusText = document.getElementById('copyStatusText');
+
+      shareUrlInput.value = currentUrl;
+
+      openModalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+          navigator.share({
+            title: 'JLPT N5 Learning Hub - Vorst Cavry',
+            text: shareText,
+            url: currentUrl
+          }).catch(() => {
+            shareModal.classList.add('active');
+          });
+        } else {
+          shareModal.classList.add('active');
+        }
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        shareModal.classList.remove('active');
+        copyStatusText.style.display = 'none';
+      });
+
+      shareModal.addEventListener('click', (e) => {
+        if (!modalBox.contains(e.target)) {
+          shareModal.classList.remove('active');
+          copyStatusText.style.display = 'none';
+        }
+      });
+
+      // Tombol Media Sosial di Modal
+      document.querySelectorAll('.share-action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const platform = btn.getAttribute('data-platform');
+          const encUrl = encodeURIComponent(currentUrl);
+          const encTxt = encodeURIComponent(shareText);
+          let targetUrl = '';
+
+          if (platform === 'wa') targetUrl = `https://api.whatsapp.com/send?text=${encTxt}%20${encUrl}`;
+          if (platform === 'tg') targetUrl = `https://t.me/share/url?url=${encUrl}&text=${encTxt}`;
+          if (platform === 'fb') targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${encUrl}`;
+          if (platform === 'x')  targetUrl = `https://twitter.com/intent/tweet?text=${encTxt}&url=${encUrl}`;
+
+          if (targetUrl) window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        });
+      });
+
+      // Tombol Salin Tautan
+      copyBtn.addEventListener('click', () => {
+        shareUrlInput.select();
+        shareUrlInput.setSelectionRange(0, 99999);
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(shareUrlInput.value).then(showCopiedStatus);
+        } else {
+          document.execCommand('copy');
+          showCopiedStatus();
+        }
+      });
+
+      function showCopiedStatus() {
+        copyStatusText.style.display = 'block';
+        setTimeout(() => {
+          copyStatusText.style.display = 'none';
+        }, 3000);
+      }
+    });
+  </script>
+
+</body>
+</html>
