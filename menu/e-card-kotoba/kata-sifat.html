@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>E-Card Keiyoushi List N5 - 71 Kata Sifat Bergambar</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #fbbf24;
+      --primary-dark: #d97706;
+      --accent: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
+      --card-hover-bg: #451a03;
+      --card-active-bg: #78350f;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+
+      /* Badge Tipe Sifat Dark */
+      --badge-i-bg: #78350f; --badge-i-text: #fde68a; --badge-i-border: #d97706;
+      --badge-na-bg: #1e1b4b; --badge-na-text: #c7d2fe; --badge-na-border: #6366f1;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --accent: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
+      --card-hover-bg: #fefce8;
+      --card-active-bg: #fef3c7;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+
+      /* Badge Tipe Sifat Light */
+      --badge-i-bg: #fef3c7; --badge-i-text: #b45309; --badge-i-border: #fde68a;
+      --badge-na-bg: #e0e7ff; --badge-na-text: #4338ca; --badge-na-border: #c7d2fe;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .nav-links-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-nav-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #0284c7 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #fef3c7;
+      font-size: 0.85rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-body);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Grid Layout E-Card */
+    .ecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .ecard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+
+    /* E-Card Item */
+    .keiyoushi-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 125px;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .keiyoushi-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--primary);
+      background: var(--card-hover-bg);
+      box-shadow: 0 6px 14px var(--shadow-color);
+    }
+
+    .keiyoushi-card:active, .keiyoushi-card.playing {
+      transform: scale(0.94);
+      background: var(--card-active-bg);
+      border-color: var(--primary);
+    }
+
+    .card-no {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .type-badge {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .badge-i {
+      background: var(--badge-i-bg);
+      color: var(--badge-i-text);
+      border: 1px solid var(--badge-i-border);
+    }
+
+    .badge-na {
+      background: var(--badge-na-bg);
+      color: var(--badge-na-text);
+      border: 1px solid var(--badge-na-border);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .card-romaji {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .card-id {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    /* Grammatical Rules Box */
+    .rule-box {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 16px;
+      margin-top: 24px;
+      font-size: 0.84rem;
+      color: var(--text-main);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-box h3 {
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .rule-box ul {
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .rule-box strong {
+      color: var(--text-heading);
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1040px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Navigation Controls -->
+    <div class="top-controls">
+      <div class="nav-links-left">
+        <a href="/belajar-bahasa-jepang/index.html" class="btn-nav-link">
+          <span>←</span> Beranda Hub
+        </a>
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-benda.html" class="btn-nav-link">
+          <span>📦</span> Kata Benda
+        </a>
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-kerja.html" class="btn-nav-link">
+          <span>🏃</span> Kata Kerja
+        </a>
+      </div>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Kata Sifat Bergambar JLPT N5</span>
+        <h1>E-Card Keiyoushi List (えカード けいようし リスト)</h1>
+        <p>Katalog lengkap 71 kata sifat bergambar N5 lengkap dengan klasifikasi pembeda Kata Sifat-I (い) dan Kata Sifat-Na (な).</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
+    </header>
+
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kata sifat (contoh: panas, dingin, takai, sifat-i, sifat-na)..." onkeyup="filterCards()">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua (71)</button>
+        <button class="filter-btn" onclick="setCategory('sifat-i', this)">🟡 Sifat-I (い)</button>
+        <button class="filter-btn" onclick="setCategory('sifat-na', this)">🟣 Sifat-Na (な)</button>
+        <button class="filter-btn" onclick="setCategory('ukuran', this)">📏 Ukuran &amp; Jumlah</button>
+        <button class="filter-btn" onclick="setCategory('suhu', this)">🌡️ Suhu &amp; Cuaca</button>
+        <button class="filter-btn" onclick="setCategory('rasa', this)">🍱 Rasa Makanan</button>
+        <button class="filter-btn" onclick="setCategory('perasaan', this)">😊 Kondisi &amp; Perasaan</button>
+      </div>
+    </div>
+
+    <!-- Container Grid 71 Kartu -->
+    <div class="ecard-grid" id="keiyoushiContainer"></div>
+
+    <!-- Info Box Aturan Perubahan Kata Sifat -->
+    <div class="rule-box">
+      <h3>📌 Panduan Penggunaan Kata Sifat Bahasa Jepang (形容詞)</h3>
+      <ul>
+        <li><span class="type-badge badge-i" style="position:static;">Sifat-I</span> <strong>Kata Sifat-I (い形容詞):</strong> Selalu berakhiran huruf <strong>い (i)</strong>. Bentuk negatifnya mengubah <em>~い</em> menjadi <strong>〜くない (~kunai / ~ku arimasen)</strong>, dan bentuk lampau menjadi <strong>〜かった (~katta desu)</strong>.</li>
+        <li><span class="type-badge badge-na" style="position:static;">Sifat-Na</span> <strong>Kata Sifat-Na (な形容詞):</strong> Bila menerangkan kata benda, wajib menambahkan <strong>な (na)</strong> di tengahnya (contoh: <em>しずか<strong>な</strong> まち</em>). Negatifnya memakai <strong>〜じゃありません (~ja arimasen)</strong>, dan lampau memakai <strong>〜でした (~deshita)</strong>.</li>
+        <li><strong>Pengecualian Khusus:</strong> Kata <em>きれい (kirei)</em> dan <em>ゆうめい (yuumei)</em> berakhiran 'i' tetapi tergolong ke dalam <strong>Kata Sifat-Na</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- Kontak & Donasi Section -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA 71 KATA SIFAT (KEIYOUSHI) N5 ---
+    const keiyoushiList = [
+      // Sifat-I
+      { no: 1, jp: "おおきい", r: "ookii", id: "Besar", icon: "🐘", type: "i", cat: "ukuran" },
+      { no: 2, jp: "ちいさい", r: "chiisai", id: "Kecil", icon: "🐁", type: "i", cat: "ukuran" },
+      { no: 3, jp: "あたらしい", r: "atarashii", id: "Baru", icon: "✨", type: "i", cat: "perasaan" },
+      { no: 4, jp: "ふるい", r: "furui", id: "Lama / Kuno", icon: "🏺", type: "i", cat: "perasaan" },
+      { no: 5, jp: "いい / よい", r: "ii / yoi", id: "Bagus / Baik", icon: "👍", type: "i", cat: "perasaan" },
+      { no: 6, jp: "わるい", r: "warui", id: "Buruk / Jelek", icon: "👎", type: "i", cat: "perasaan" },
+      { no: 7, jp: "あつい", r: "atsui", id: "Panas (Suhu Udara)", icon: "☀️", type: "i", cat: "suhu" },
+      { no: 8, jp: "あつい", r: "atsui", id: "Panas (Benda)", icon: "☕", type: "i", cat: "suhu" },
+      { no: 9, jp: "さむい", r: "samui", id: "Dingin (Suhu Udara)", icon: "❄️", type: "i", cat: "suhu" },
+      { no: 10, jp: "つめたい", r: "tsumetai", id: "Dingin (Benda)", icon: "🧊", type: "i", cat: "suhu" },
+      { no: 11, jp: "むずかしい", r: "muzukashii", id: "Sulit / Sukar", icon: "🤯", type: "i", cat: "perasaan" },
+      { no: 12, jp: "やさしい", r: "yasashii", id: "Mudah / Gampang", icon: "👌", type: "i", cat: "perasaan" },
+      { no: 13, jp: "たかい", r: "takai", id: "Mahal / Tinggi", icon: "📈", type: "i", cat: "ukuran" },
+      { no: 14, jp: "やすい", r: "yasui", id: "Murah", icon: "🏷️", type: "i", cat: "ukuran" },
+      { no: 15, jp: "ひくい", r: "hikui", id: "Rendah", icon: "📉", type: "i", cat: "ukuran" },
+      { no: 16, jp: "おもしろい", r: "omoshiroi", id: "Menarik / Lucu", icon: "🎪", type: "i", cat: "perasaan" },
+      { no: 17, jp: "おいしい", r: "oishii", id: "Enak / Lezat", icon: "😋", type: "i", cat: "rasa" },
+      { no: 18, jp: "まずい", r: "mazui", id: "Tidak Enak", icon: "🤢", type: "i", cat: "rasa" },
+      { no: 19, jp: "いそがしい", r: "isogashii", id: "Sibuk", icon: "🏃‍♂️", type: "i", cat: "perasaan" },
+      { no: 20, jp: "たのしい", r: "tanoshii", id: "Menyenangkan", icon: "🎉", type: "i", cat: "perasaan" },
+      { no: 21, jp: "しろい", r: "shiroi", id: "Putih", icon: "⚪", type: "i", cat: "perasaan" },
+      { no: 22, jp: "くろい", r: "kuroi", id: "Hitam", icon: "⚫", type: "i", cat: "perasaan" },
+      { no: 23, jp: "あかい", r: "akai", id: "Merah", icon: "🔴", type: "i", cat: "perasaan" },
+      { no: 24, jp: "あおい", r: "aoi", id: "Biru", icon: "🔵", type: "i", cat: "perasaan" },
+      { no: 25, jp: "ちかい", r: "chikai", id: "Dekat", icon: "📍", type: "i", cat: "ukuran" },
+      { no: 26, jp: "とおい", r: "tooi", id: "Jauh", icon: "🗺️", type: "i", cat: "ukuran" },
+      { no: 27, jp: "はやい", r: "hayai", id: "Cepat (Kecepatan)", icon: "🚅", type: "i", cat: "ukuran" },
+      { no: 28, jp: "はやい", r: "hayai", id: "Pagi / Awal (Waktu)", icon: "⏰", type: "i", cat: "perasaan" },
+      { no: 29, jp: "おそい", r: "osoi", id: "Lambat / Terlambat", icon: "🐢", type: "i", cat: "ukuran" },
+      { no: 30, jp: "おおい", r: "ooi", id: "Banyak (Orang/Benda)", icon: "👥", type: "i", cat: "ukuran" },
+      { no: 31, jp: "すくない", r: "sukunai", id: "Sedikit", icon: "👤", type: "i", cat: "ukuran" },
+      { no: 32, jp: "あたたかい", r: "atatakai", id: "Hangat", icon: "🌤️", type: "i", cat: "suhu" },
+      { no: 33, jp: "すずしい", r: "suzushii", id: "Sejuk", icon: "🍃", type: "i", cat: "suhu" },
+      { no: 34, jp: "あまい", r: "amai", id: "Manis", icon: "🍬", type: "i", cat: "rasa" },
+      { no: 35, jp: "からい", r: "karai", id: "Pedas / Asin", icon: "🌶️", type: "i", cat: "rasa" },
+      { no: 36, jp: "にがい", r: "nigai", id: "Pahit", icon: "☕", type: "i", cat: "rasa" },
+      { no: 37, jp: "すっぱい", r: "suppai", id: "Asam / Masam", icon: "🍋", type: "i", cat: "rasa" },
+      { no: 38, jp: "おもい", r: "omoi", id: "Berat", icon: "🏋️", type: "i", cat: "ukuran" },
+      { no: 39, jp: "かるい", r: "karui", id: "Ringan", icon: "🪶", type: "i", cat: "ukuran" },
+      { no: 40, jp: "ひろい", r: "hiroi", id: "Luas / Lebar", icon: "🏞️", type: "i", cat: "ukuran" },
+      { no: 41, jp: "せまい", r: "semai", id: "Sempit", icon: "🚪", type: "i", cat: "ukuran" },
+      { no: 42, jp: "わかい", r: "wakai", id: "Muda", icon: "🧒", type: "i", cat: "perasaan" },
+      { no: 43, jp: "ながい", r: "nagai", id: "Panjang", icon: "📏", type: "i", cat: "ukuran" },
+      { no: 44, jp: "みじかい", r: "mijikai", id: "Pendek", icon: "📐", type: "i", cat: "ukuran" },
+      { no: 45, jp: "あかるい", r: "akarui", id: "Terang", icon: "💡", type: "i", cat: "suhu" },
+      { no: 46, jp: "くらい", r: "kurai", id: "Gelap", icon: "🌑", type: "i", cat: "suhu" },
+      { no: 47, jp: "あぶない", r: "abunai", id: "Bahaya", icon: "⚠️", type: "i", cat: "perasaan" },
+      { no: 48, jp: "ほしい", r: "hoshii", id: "Ingin / Mau", icon: "✨", type: "i", cat: "perasaan" },
+      { no: 49, jp: "いたい", r: "itai", id: "Sakit", icon: "🤕", type: "i", cat: "perasaan" },
+      { no: 50, jp: "ねむい", r: "nemui", id: "Mengantuk", icon: "🥱", type: "i", cat: "perasaan" },
+      { no: 51, jp: "つよい", r: "tsuyoi", id: "Kuat", icon: "💪", type: "i", cat: "perasaan" },
+      { no: 52, jp: "よわい", r: "yowai", id: "Lemah", icon: "🥀", type: "i", cat: "perasaan" },
+
+      // Sifat-Na
+      { no: 53, jp: "しんせつ(な)", r: "shinsetsu(na)", id: "Ramah / Baik Hati", icon: "🤝", type: "na", cat: "perasaan" },
+      { no: 54, jp: "べんり(な)", r: "benri(na)", id: "Praktis", icon: "📱", type: "na", cat: "perasaan" },
+      { no: 55, jp: "ふべん(な)", r: "fuben(na)", id: "Tidak Praktis", icon: "📦", type: "na", cat: "perasaan" },
+      { no: 56, jp: "ゆうめい(な)", r: "yuumei(na)", id: "Terkenal", icon: "🌟", type: "na", cat: "perasaan" },
+      { no: 57, jp: "きれい(な)", r: "kirei(na)", id: "Cantik / Bersih", icon: "🌺", type: "na", cat: "perasaan" },
+      { no: 58, jp: "しずか(な)", r: "shizuka(na)", id: "Tenang / Sunyi", icon: "🤫", type: "na", cat: "perasaan" },
+      { no: 59, jp: "にぎやか(な)", r: "nigiyaka(na)", id: "Ramai", icon: "🎉", type: "na", cat: "perasaan" },
+      { no: 60, jp: "ひま(な)", r: "hima(na)", id: "Senggang / Luang", icon: "🛋️", type: "na", cat: "perasaan" },
+      { no: 61, jp: "げんき(な)", r: "genki(na)", id: "Sehat / Semangat", icon: "🏃", type: "na", cat: "perasaan" },
+      { no: 62, jp: "すき(な)", r: "suki(na)", id: "Suka", icon: "❤️", type: "na", cat: "perasaan" },
+      { no: 63, jp: "きらい(な)", r: "kirai(na)", id: "Benci / Tidak Suka", icon: "💔", type: "na", cat: "perasaan" },
+      { no: 64, jp: "じょうず(な)", r: "jouzu(na)", id: "Pintar / Mahir", icon: "🎓", type: "na", cat: "perasaan" },
+      { no: 65, jp: "へた(な)", r: "heta(na)", id: "Payah / Tidak Mahir", icon: "📉", type: "na", cat: "perasaan" },
+      { no: 66, jp: "かんたん(な)", r: "kantan(na)", id: "Sederhana / Mudah", icon: "📝", type: "na", cat: "perasaan" },
+      { no: 67, jp: "たいへん(な)", r: "taihen(na)", id: "Berat / Repot", icon: "💦", type: "na", cat: "perasaan" },
+      { no: 68, jp: "たいせつ(な)", r: "taisetsu(na)", id: "Penting / Berharga", icon: "💎", type: "na", cat: "perasaan" },
+      { no: 69, jp: "だいじょうぶ(な)", r: "daijoubu(na)", id: "Tidak Apa-apa", icon: "🙆‍♂️", type: "na", cat: "perasaan" },
+      { no: 70, jp: "ひつよう(な)", r: "hitsuyou(na)", id: "Perlu / Butuh", icon: "📌", type: "na", cat: "perasaan" },
+      { no: 71, jp: "むり(な)", r: "muri(na)", id: "Mustahil / Terlalu Berat", icon: "🚫", type: "na", cat: "perasaan" }
+    ];
+
+    let currentCategory = 'all';
+
+    // --- 3. SPEECH SYNTHESIS ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const cleanText = soundText.replace(/\(.*?\)/g, '').replace(/\//g, ' ').trim();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') || 
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // --- 4. RENDER FUNCTION ---
+    function renderCards(data) {
+      const container = document.getElementById('keiyoushiContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Kata sifat tidak ditemukan...</div>';
+        return;
+      }
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'keiyoushi-card';
+        card.onclick = () => playAudio(item.jp, card);
+
+        const typeBadgeText = item.type === 'i' ? 'Sifat-I' : 'Sifat-Na';
+        const typeBadgeClass = item.type === 'i' ? 'badge-i' : 'badge-na';
+
+        card.innerHTML = `
+          <span class="card-no">#${item.no}</span>
+          <span class="type-badge ${typeBadgeClass}">${typeBadgeText}</span>
+          <div class="card-icon">${item.icon}</div>
+          <div class="card-jp">${item.jp}</div>
+          <div class="card-romaji">${item.r}</div>
+          <div class="card-id">${item.id}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 5. FILTER & SEARCH LOGIC ---
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      const filtered = keiyoushiList.filter(item => {
+        let matchCategory = false;
+        if (currentCategory === 'all') {
+          matchCategory = true;
+        } else if (currentCategory === 'sifat-i') {
+          matchCategory = (item.type === 'i');
+        } else if (currentCategory === 'sifat-na') {
+          matchCategory = (item.type === 'na');
+        } else {
+          matchCategory = (item.cat === currentCategory);
+        }
+
+        const matchSearch = item.jp.includes(query) || 
+                            item.r.toLowerCase().includes(query) || 
+                            item.id.toLowerCase().includes(query) ||
+                            item.no.toString() === query;
+        return matchCategory && matchSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterCards();
+    }
+
+    // Inisialisasi Pertama
+    renderCards(keiyoushiList);
+  </script>
+
+</body>
+</html>
