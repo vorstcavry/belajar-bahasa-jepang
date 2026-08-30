@@ -86,7 +86,7 @@
       gap: 10px;
     }
 
-    .btn-modal-start, .btn-modal-study {
+    .btn-modal-start, .btn-modal-study, .btn-modal-back {
       border: none;
       padding: 13px 18px;
       border-radius: 12px;
@@ -95,6 +95,9 @@
       cursor: pointer;
       width: 100%;
       transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
     }
 
     .btn-modal-start {
@@ -109,6 +112,13 @@
       border: 1.5px solid #fca5a5;
     }
     .btn-modal-study:hover { background: #fca5a5; }
+
+    .btn-modal-back {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1.5px solid #cbd5e1;
+    }
+    .btn-modal-back:hover { background: #e2e8f0; color: #0f172a; }
 
     /* Top Sticky Header */
     .exam-header {
@@ -168,6 +178,25 @@
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
+    .btn-header-home {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .btn-header-home:hover {
+      background: #e2e8f0;
+    }
+
     .jlpt-badge {
       background: var(--primary);
       color: #ffffff;
@@ -207,7 +236,9 @@
     .study-header-bar {
       display: none;
       width: 100%;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-finish-study {
@@ -220,8 +251,7 @@
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-      width: 100%;
-      max-width: 320px;
+      flex: 1;
     }
 
     .container {
@@ -769,6 +799,7 @@
       <div class="modal-buttons">
         <button class="btn-modal-study" onclick="openStudyMode()">📖 Belajar Terlebih Dahulu</button>
         <button class="btn-modal-start" onclick="startExamFromModal()">🚀 Langsung Mulai Ujian</button>
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/simulasi-jlpt/simulasi-jlpt.html" class="btn-modal-back">← Kembali</a>
       </div>
     </div>
   </div>
@@ -777,6 +808,7 @@
   <header class="exam-header" id="examHeader">
     <div class="header-inner">
       <div class="exam-badge-group" id="examBadgeGroup">
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/simulasi-jlpt/simulasi-jlpt.html" class="btn-header-home">← Kembali</a>
         <span class="jlpt-badge">JLPT N5</span>
         <span class="exam-title-text" id="headerCategoryText">Sesi 1: 言語知識 (文字・語彙)</span>
       </div>
@@ -786,6 +818,7 @@
       </div>
 
       <div class="study-header-bar" id="studyHeaderBar">
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/simulasi-jlpt/simulasi-jlpt.html" class="btn-header-home" style="margin-right:4px;">← Kembali</a>
         <button class="btn-finish-study" onclick="exitStudyMode()">
           ✅ Mulai Ujian Sekarang
         </button>
@@ -1047,9 +1080,12 @@
       <button class="btn-nav-exam btn-submit-exam" style="width: 100%; margin-bottom: 6px;" onclick="retryCurrentPackage()">
         🔄 Coba Kerjakan Kembali
       </button>
-      <button class="btn-nav-exam" style="width: 100%;" onclick="loadNextMixedPackage()">
+      <button class="btn-nav-exam" style="width: 100%; margin-bottom: 6px;" onclick="loadNextMixedPackage()">
         ✨ Buat Paket Acak Baru
       </button>
+      <a href="/belajar-bahasa-jepang/menu/latihan-soal/simulasi-jlpt/simulasi-jlpt.html" class="btn-modal-back" style="padding: 10px; font-size: 0.8rem;">
+        ← Kembali
+      </a>
     </div>
   </div>
 
@@ -1431,23 +1467,19 @@
     let isStudyModeActive = false;
     let lastScrollY = window.scrollY;
 
-    // =========================================================================
-    // SMART SCROLL BEHAVIOR (MOBILE OPTIMIZATION)
-    // =========================================================================
+    // --- SMART SCROLL BEHAVIOR ---
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
       const header = document.getElementById('examHeader');
       if (!header) return;
 
       if (isStudyModeActive) {
-        // Mode Belajar: Scroll ke bawah sembunyikan penuh, scroll ke atas tampilkan
         if (currentScrollY > lastScrollY && currentScrollY > 60) {
           header.classList.add('study-hide');
         } else {
           header.classList.remove('study-hide');
         }
       } else {
-        // Mode Ujian: Scroll ke bawah hanya tampilkan badge timer floating agar area soal luas
         if (currentScrollY > 40) {
           header.classList.add('exam-scrolled');
         } else {
@@ -1770,7 +1802,7 @@
       document.getElementById('examContainer').style.display = 'none';
       document.getElementById('examBottomBar').style.display = 'none';
       document.getElementById('timerBadgeBox').style.display = 'none';
-      document.getElementById('examBadgeGroup').style.display = 'none'; // Sembunyikan badge/judul JLPT N5 di header saat belajar
+      document.getElementById('examBadgeGroup').style.display = 'none';
 
       document.getElementById('studyContainer').style.display = 'block';
       document.getElementById('studyHeaderBar').style.display = 'flex';
