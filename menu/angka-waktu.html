@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Master Angka &amp; Kosakata Waktu Bahasa Jepang</title>
-  
+
   <script>
     (function () {
       try {
@@ -21,9 +21,9 @@
 
     /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
-      --primary: #10b981;
+      --primary: #34d399;
       --primary-dark: #059669;
-      --accent: #f59e0b;
+      --accent: #fbbf24;
       --bg-body: #0f172a;
       --bg-card: #1e293b;
       --text-main: #f8fafc;
@@ -34,22 +34,25 @@
       --toggle-btn-bg: #1e293b;
       --toggle-btn-border: #475569;
       --toggle-btn-text: #f8fafc;
-      --converter-bg: #1e293b;
       --converter-border: #059669;
-      --result-box-bg: linear-gradient(145deg, #064e3b 0%, #0f172a 100%);
-      --result-box-border: #059669;
+      --converter-res-bg: linear-gradient(145deg, #064e3b 0%, #082f49 100%);
+      --converter-res-border: #047857;
+      --res-meaning-bg: rgba(15, 23, 42, 0.7);
+      --res-meaning-text: #6ee7b7;
       --chip-bg: #0f172a;
       --chip-border: #334155;
       --chip-text: #cbd5e1;
-      --input-bg: #0f172a;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
       --card-hover-bg: #064e3b;
-      --card-hover-border: #10b981;
-      --card-badge-bg: #064e3b;
-      --card-badge-color: #6ee7b7;
+      --card-active-bg: #047857;
+      --group-badge-bg: #064e3b;
+      --group-badge-text: #6ee7b7;
       --rule-box-bg: #064e3b;
       --rule-box-border: #059669;
-      --rule-box-title: #6ee7b7;
-      --rule-box-text: #d1fae5;
+      --rule-box-text: #a7f3d0;
+      --rule-box-h3: #34d399;
       --footer-bg: #1e293b;
       --footer-border: #334155;
     }
@@ -69,22 +72,25 @@
       --toggle-btn-bg: #ffffff;
       --toggle-btn-border: #cbd5e1;
       --toggle-btn-text: #0f172a;
-      --converter-bg: #ffffff;
       --converter-border: #a7f3d0;
-      --result-box-bg: linear-gradient(145deg, #f0fdf4 0%, #ecfeff 100%);
-      --result-box-border: #6ee7b7;
+      --converter-res-bg: linear-gradient(145deg, #f0fdf4 0%, #ecfeff 100%);
+      --converter-res-border: #6ee7b7;
+      --res-meaning-bg: rgba(255, 255, 255, 0.9);
+      --res-meaning-text: #166534;
       --chip-bg: #f8fafc;
       --chip-border: #cbd5e1;
       --chip-text: #334155;
-      --input-bg: #ffffff;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
       --card-hover-bg: #f0fdf4;
-      --card-hover-border: #059669;
-      --card-badge-bg: #ecfdf5;
-      --card-badge-color: #047857;
+      --card-active-bg: #dcfce7;
+      --group-badge-bg: #ecfdf5;
+      --group-badge-text: #047857;
       --rule-box-bg: #f0fdf4;
       --rule-box-border: #bbf7d0;
-      --rule-box-title: #14532d;
       --rule-box-text: #166534;
+      --rule-box-h3: #14532d;
       --footer-bg: #ffffff;
       --footer-border: #e2e8f0;
     }
@@ -113,14 +119,15 @@
       max-width: 980px;
       margin: 0 auto;
       width: 100%;
+      position: relative;
     }
 
-    /* Top Floating Controls */
+    /* Top Controls (Back to Hub & Theme Toggle) */
     .top-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       gap: 10px;
     }
 
@@ -171,7 +178,7 @@
       border-radius: 14px;
       padding: 16px 14px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -238,9 +245,9 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    /* ================= MODE 1: KONVERTER ANGKA INTERAKTIF ================= */
+    /* MODE 1: KONVERTER ANGKA INTERAKTIF */
     .converter-card {
-      background: var(--converter-bg);
+      background: var(--bg-card);
       border: 2px solid var(--converter-border);
       border-radius: 16px;
       padding: 16px;
@@ -286,9 +293,9 @@
       padding: 12px 14px;
       border-radius: 10px;
       border: 2px solid var(--border-color);
-      background: var(--input-bg);
       font-size: 1.1rem;
       font-weight: 800;
+      background: var(--bg-body);
       color: var(--text-main);
       outline: none;
       transition: all 0.2s;
@@ -297,7 +304,7 @@
 
     .converter-input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
     }
 
     .btn-action-voice {
@@ -319,7 +326,7 @@
     }
 
     .btn-action-voice:hover {
-      filter: brightness(1.1);
+      background: var(--primary);
     }
 
     .btn-action-voice:active {
@@ -328,8 +335,8 @@
 
     /* Output Card Konverter */
     .converter-result-box {
-      background: var(--result-box-bg);
-      border: 1.5px dashed var(--result-box-border);
+      background: var(--converter-res-bg);
+      border: 1.5px dashed var(--converter-res-border);
       border-radius: 12px;
       padding: 16px 12px;
       text-align: center;
@@ -369,18 +376,15 @@
       word-break: break-all;
       width: 100%;
     }
-    html.light-theme .res-romaji, body.light-theme .res-romaji {
-      color: #0284c7;
-    }
 
     .res-meaning {
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--text-main);
-      background: var(--chip-bg);
+      color: var(--res-meaning-text);
+      background: var(--res-meaning-bg);
       padding: 4px 12px;
       border-radius: 16px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--converter-res-border);
       margin-top: 4px;
       max-width: 100%;
       word-break: break-word;
@@ -422,12 +426,12 @@
     }
 
     .chip-btn:hover, .chip-btn:active {
-      background: var(--card-hover-bg);
+      background: var(--card-active-bg);
       border-color: var(--primary);
-      color: var(--primary);
+      color: var(--text-heading);
     }
 
-    /* ================= MODE 2: KATALOG & FILTER E-CARD ================= */
+    /* MODE 2: KATALOG & FILTER E-CARD */
     .search-filter-box {
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
@@ -445,7 +449,7 @@
       padding: 10px 14px;
       border-radius: 8px;
       border: 1.5px solid var(--border-color);
-      background: var(--input-bg);
+      background: var(--bg-body);
       color: var(--text-main);
       font-size: 0.88rem;
       font-weight: 600;
@@ -473,9 +477,9 @@
     .filter-btn {
       padding: 6px 12px;
       border-radius: 20px;
-      border: 1px solid var(--border-color);
-      background: var(--chip-bg);
-      color: var(--text-muted);
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
       font-size: 0.76rem;
       font-weight: 700;
       cursor: pointer;
@@ -484,7 +488,7 @@
     }
 
     .filter-btn.active {
-      background: var(--primary);
+      background: var(--primary-dark);
       color: #ffffff;
       border-color: var(--primary);
     }
@@ -524,13 +528,13 @@
     }
 
     .time-card:hover {
-      border-color: var(--card-hover-border);
+      border-color: var(--primary);
       background: var(--card-hover-bg);
     }
 
     .time-card:active, .time-card.playing {
       transform: scale(0.95);
-      background: var(--card-hover-bg);
+      background: var(--card-active-bg);
       border-color: var(--primary);
     }
 
@@ -551,8 +555,8 @@
       font-weight: 800;
       padding: 1px 5px;
       border-radius: 4px;
-      background: var(--card-badge-bg);
-      color: var(--card-badge-color);
+      background: var(--group-badge-bg);
+      color: var(--group-badge-text);
     }
 
     .tier-jp {
@@ -585,13 +589,13 @@
 
     /* Highlight Badges */
     .tag-special-yellow {
-      background: #854d0e;
+      background: #78350f;
       color: #fef08a;
       padding: 1px 4px;
       border-radius: 3px;
       font-weight: 700;
       font-size: 0.62rem;
-      border: 1px solid #ca8a04;
+      border: 1px solid #d97706;
       display: inline-block;
       margin-top: 2px;
     }
@@ -628,11 +632,11 @@
       border-radius: 9999px;
       margin-top: 2px;
     }
-    .elem-moon { background: #78350f; color: #fde68a; }
+    .elem-moon { background: #78350f; color: #fef08a; }
     .elem-fire { background: #7f1d1d; color: #fecaca; }
     .elem-water { background: #075985; color: #bae6fd; }
     .elem-wood { background: #064e3b; color: #a7f3d0; }
-    .elem-gold { background: #713f12; color: #fef08a; }
+    .elem-gold { background: #78350f; color: #fde68a; }
     .elem-earth { background: #7c2d12; color: #fed7aa; }
     .elem-sun { background: #701a75; color: #f5d0fe; }
 
@@ -658,7 +662,7 @@
 
     .rule-box h3 {
       font-size: 0.92rem;
-      color: var(--rule-box-title);
+      color: var(--rule-box-h3);
       margin-bottom: 8px;
     }
 
@@ -859,7 +863,7 @@
   </div>
 
   <script>
-    // ================= SINKRONISASI & PENGENDALI TEMA =================
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const rootHtml = document.documentElement;
@@ -879,6 +883,7 @@
       }
     }
 
+    // Inisialisasi tema awal
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
 
@@ -893,7 +898,7 @@
       applyThemeState(!isCurrentlyLight);
     });
 
-    // ================= DATA MASTER LENGKAP ANGKA & WAKTU =================
+    // --- 2. DATA MASTER LENGKAP ANGKA & WAKTU ---
     const masterTimeList = [
       // Satuan & Belasan (0 - 20)
       { cat: "basic", tag: "Satuan", jp: "0", rd: "ゼロ / れい (zero / rei)", id: "Nol / Kosong", s: "ゼロ" },
@@ -910,4 +915,565 @@
       { cat: "basic", tag: "Belasan", jp: "11", rd: "じゅういち (juu-ichi)", id: "Sebelas", s: "じゅういち" },
       { cat: "basic", tag: "Belasan", jp: "12", rd: "じゅうに (juu-ni)", id: "Dua Belas", s: "じゅうに" },
       { cat: "basic", tag: "Belasan", jp: "13", rd: "じゅうさん (juu-san)", id: "Tiga Belas", s: "じゅうさん" },
-      { cat: "basic", tag: "Belasan", jp: "14", rd: "
+      { cat: "basic", tag: "Belasan", jp: "14", rd: "じゅうよん / じゅうし", id: "Empat Belas", s: "じゅうよん" },
+      { cat: "basic", tag: "Belasan", jp: "15", rd: "じゅうご (juu-go)", id: "Lima Belas", s: "じゅうご" },
+      { cat: "basic", tag: "Belasan", jp: "16", rd: "じゅうろく (juu-roku)", id: "Enam Belas", s: "じゅうろく" },
+      { cat: "basic", tag: "Belasan", jp: "17", rd: "じゅうなな / じゅうしち", id: "Tujuh Belas", s: "じゅうなな" },
+      { cat: "basic", tag: "Belasan", jp: "18", rd: "じゅうはち (juu-hachi)", id: "Delapan Belas", s: "じゅうはち" },
+      { cat: "basic", tag: "Belasan", jp: "19", rd: "じゅうきゅう / じゅうく", id: "Sembilan Belas", s: "じゅうきゅう" },
+      { cat: "basic", tag: "Puluhan", jp: "20", rd: "にじゅう (ni-juu)", id: "Dua Puluh", s: "にじゅう" },
+
+      // Puluhan Rinci (21-29, 31-39, dst.)
+      { cat: "tens_series", tag: "20-an", jp: "21", rd: "にじゅういち (ni-juu-ichi)", id: "Dua Puluh Satu", s: "にじゅういち" },
+      { cat: "tens_series", tag: "20-an", jp: "22", rd: "にじゅうに (ni-juu-ni)", id: "Dua Puluh Dua", s: "にじゅうに" },
+      { cat: "tens_series", tag: "20-an", jp: "23", rd: "にじゅうさん (ni-juu-san)", id: "Dua Puluh Tiga", s: "にじゅうさん" },
+      { cat: "tens_series", tag: "20-an", jp: "24", rd: "にじゅうよん (ni-juu-yon)", id: "Dua Puluh Empat", s: "にじゅうよん" },
+      { cat: "tens_series", tag: "20-an", jp: "25", rd: "にじゅうご (ni-juu-go)", id: "Dua Puluh Lima", s: "にじゅうご" },
+      { cat: "tens_series", tag: "20-an", jp: "26", rd: "にじゅうろく (ni-juu-roku)", id: "Dua Puluh Enam", s: "にじゅうろく" },
+      { cat: "tens_series", tag: "20-an", jp: "27", rd: "にじゅうなな / にじゅうしち", id: "Dua Puluh Tujuh", s: "にじゅうなな" },
+      { cat: "tens_series", tag: "20-an", jp: "28", rd: "にじゅうはち (ni-juu-hachi)", id: "Dua Puluh Delapan", s: "にじゅうはち" },
+      { cat: "tens_series", tag: "20-an", jp: "29", rd: "にじゅうきゅう / にじゅうく", id: "Dua Puluh Sembilan", s: "にじゅうきゅう" },
+      { cat: "tens_series", tag: "Puluhan", jp: "30", rd: "さんじゅう (san-juu)", id: "Tiga Puluh", s: "さんじゅう" },
+      { cat: "tens_series", tag: "30-an", jp: "31", rd: "さんじゅういち (san-juu-ichi)", id: "Tiga Puluh Satu", s: "さんじゅういち" },
+      { cat: "tens_series", tag: "30-an", jp: "35", rd: "さんじゅうご (san-juu-go)", id: "Tiga Puluh Lima", s: "san-juu-go" },
+      { cat: "tens_series", tag: "30-an", jp: "39", rd: "さんじゅうきゅう (san-juu-kyuu)", id: "Tiga Puluh Sembilan", s: "san-juu-kyuu" },
+      { cat: "tens_series", tag: "Puluhan", jp: "40", rd: "よんじゅう (yon-juu)", id: "Empat Puluh", s: "よんじゅう" },
+      { cat: "tens_series", tag: "40-an", jp: "41", rd: "よんじゅういち (yon-juu-ichi)", id: "Empat Puluh Satu", s: "よんじゅういち" },
+      { cat: "tens_series", tag: "40-an", jp: "49", rd: "よんじゅうきゅう (yon-juu-kyuu)", id: "Empat Puluh Sembilan", s: "よんじゅうきゅう" },
+      { cat: "tens_series", tag: "Puluhan", jp: "50", rd: "ごじゅう (go-juu)", id: "Lima Puluh", s: "ごじゅう" },
+      { cat: "tens_series", tag: "50-an", jp: "51", rd: "ごじゅういち (go-juu-ichi)", id: "Lima Puluh Satu", s: "ごじゅういち" },
+      { cat: "tens_series", tag: "50-an", jp: "59", rd: "ごじゅうきゅう (go-juu-kyuu)", id: "Lima Puluh Sembilan", s: "ごじゅうきゅう" },
+      { cat: "tens_series", tag: "Puluhan", jp: "60", rd: "ろくじゅう (roku-juu)", id: "Enam Puluh", s: "ろくじゅう" },
+      { cat: "tens_series", tag: "60-an", jp: "61", rd: "ろくじゅういち (roku-juu-ichi)", id: "Enam Puluh Satu", s: "ろくじゅういち" },
+      { cat: "tens_series", tag: "60-an", jp: "69", rd: "ろくじゅうきゅう (roku-juu-kyuu)", id: "Enam Puluh Sembilan", s: "ろくじゅうきゅう" },
+      { cat: "tens_series", tag: "Puluhan", jp: "70", rd: "ななじゅう / しちじゅう", id: "Tujuh Puluh", s: "ななじゅう" },
+      { cat: "tens_series", tag: "70-an", jp: "71", rd: "ななじゅういち (nana-juu-ichi)", id: "Tujuh Puluh Satu", s: "ななじゅういち" },
+      { cat: "tens_series", tag: "70-an", jp: "79", rd: "ななじゅうきゅう (nana-juu-kyuu)", id: "Tujuh Puluh Sembilan", s: "ななじゅうきゅう" },
+      { cat: "tens_series", tag: "Puluhan", jp: "80", rd: "はちじゅう (hachi-juu)", id: "Delapan Puluh", s: "はちじゅう" },
+      { cat: "tens_series", tag: "80-an", jp: "81", rd: "はちじゅういち (hachi-juu-ichi)", id: "Delapan Puluh Satu", s: "hachi-juu-ichi" },
+      { cat: "tens_series", tag: "80-an", jp: "89", rd: "はちじゅうきゅう (hachi-juu-kyuu)", id: "Delapan Puluh Sembilan", s: "hachi-juu-kyuu" },
+      { cat: "tens_series", tag: "Puluhan", jp: "90", rd: "きゅうじゅう (kyuu-juu)", id: "Sembilan Puluh", s: "きゅうじゅう" },
+      { cat: "tens_series", tag: "90-an", jp: "91", rd: "きゅうじゅういち (kyuu-juu-ichi)", id: "Sembilan Puluh Satu", s: "kyuu-juu-ichi" },
+      { cat: "tens_series", tag: "90-an", jp: "99", rd: "きゅうじゅうきゅう (kyuu-juu-kyuu)", id: "Sembilan Puluh Sembilan", s: "kyuu-juu-kyuu" },
+
+      // Ratusan Utama (Hyaku)
+      { cat: "hyaku", tag: "Ratusan", jp: "100", rd: "ひゃく (hyaku)", id: "Seratus", s: "ひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "200", rd: "にひゃく (ni-hyaku)", id: "Dua Ratus", s: "にひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "300", rd: "さんびゃく (sanbyaku)", id: "Tiga Ratus <span class='tag-special-green'>'Byaku'</span>", s: "さんびゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "400", rd: "よんひゃく (yon-hyaku)", id: "Empat Ratus", s: "よんひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "500", rd: "ごひゃく (go-hyaku)", id: "Lima Ratus", s: "ごひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "600", rd: "ろっぴゃく (roppyaku)", id: "Enam Ratus <span class='tag-special-green'>'Ppyaku'</span>", s: "ろっぴゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "700", rd: "ななひゃく (nana-hyaku)", id: "Tujuh Ratus", s: "ななひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "800", rd: "はっぴゃく (happyaku)", id: "Delapan Ratus <span class='tag-special-green'>'Ppyaku'</span>", s: "はっぴゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "900", rd: "きゅうひゃく (kyuu-hyaku)", id: "Sembilan Ratus", s: "きゅうひゃく" },
+      { cat: "hyaku", tag: "Ratusan", jp: "何百", rd: "なんびゃく (nanbyaku)", id: "Berapa Ratus? <span class='tag-special-green'>'Byaku'</span>", s: "なんびゃく" },
+
+      // Ratusan Rinci (111-119, 211-219, dst.)
+      { cat: "hundreds_series", tag: "100-an", jp: "111", rd: "ひゃくじゅういち (hyaku-juu-ichi)", id: "Seratus Sebelas", s: "ひゃくじゅういち" },
+      { cat: "hundreds_series", tag: "100-an", jp: "112", rd: "ひゃくじゅうに (hyaku-juu-ni)", id: "Seratus Dua Belas", s: "ひゃくじゅうに" },
+      { cat: "hundreds_series", tag: "100-an", jp: "113", rd: "ひゃくじゅうさん (hyaku-juu-san)", id: "Seratus Tiga Belas", s: "ひゃくじゅうsan" },
+      { cat: "hundreds_series", tag: "100-an", jp: "114", rd: "ひゃくじゅうよん (hyaku-juu-yon)", id: "Seratus Empat Belas", s: "ひゃくじゅうよん" },
+      { cat: "hundreds_series", tag: "100-an", jp: "115", rd: "ひゃくじゅうご (hyaku-juu-go)", id: "Seratus Lima Belas", s: "ひゃくじゅうご" },
+      { cat: "hundreds_series", tag: "100-an", jp: "116", rd: "ひゃくじゅうろく (hyaku-juu-roku)", id: "Seratus Enam Belas", s: "ひゃくじゅうろく" },
+      { cat: "hundreds_series", tag: "100-an", jp: "117", rd: "ひゃくじゅうなな (hyaku-juu-nana)", id: "Seratus Tujuh Belas", s: "ひゃくじゅうなな" },
+      { cat: "hundreds_series", tag: "100-an", jp: "118", rd: "ひゃくじゅうはち (hyaku-juu-hachi)", id: "Seratus Delapan Belas", s: "ひゃくじゅうはち" },
+      { cat: "hundreds_series", tag: "100-an", jp: "119", rd: "ひゃくじゅうきゅう (hyaku-juu-kyuu)", id: "Seratus Sembilan Belas", s: "ひゃくじゅうきゅう" },
+      { cat: "hundreds_series", tag: "100-an", jp: "125", rd: "ひゃくにじゅうご (hyaku-ni-juu-go)", id: "Seratus Dua Puluh Lima", s: "ひゃくにじゅうご" },
+      { cat: "hundreds_series", tag: "100-an", jp: "199", rd: "ひゃくきゅうじゅうきゅう", id: "Seratus Sembilan Puluh Sembilan", s: "ひゃくきゅうじゅうきゅう" },
+      { cat: "hundreds_series", tag: "200-an", jp: "211", rd: "にひゃくじゅういち (ni-hyaku-juu-ichi)", id: "Dua Ratus Sebelas", s: "にひゃくじゅういち" },
+      { cat: "hundreds_series", tag: "200-an", jp: "212", rd: "にひゃくじゅうに (ni-hyaku-juu-ni)", id: "Dua Ratus Dua Belas", s: "にひゃくじゅうに" },
+      { cat: "hundreds_series", tag: "200-an", jp: "213", rd: "にひゃくじゅうさん (ni-hyaku-juu-san)", id: "Dua Ratus Tiga Belas", s: "にひゃくじゅうさん" },
+      { cat: "hundreds_series", tag: "200-an", jp: "214", rd: "にひゃくじゅうよん (ni-hyaku-juu-yon)", id: "Dua Ratus Empat Belas", s: "にひゃくじゅうよん" },
+      { cat: "hundreds_series", tag: "200-an", jp: "215", rd: "にひゃくじゅうご (ni-hyaku-juu-go)", id: "Dua Ratus Lima Belas", s: "にひゃくじゅうご" },
+      { cat: "hundreds_series", tag: "200-an", jp: "216", rd: "にひゃくじゅうろく (ni-hyaku-juu-roku)", id: "Dua Ratus Enam Belas", s: "にひゃくじゅうろく" },
+      { cat: "hundreds_series", tag: "200-an", jp: "217", rd: "にひゃくじゅうなな (ni-hyaku-juu-nana)", id: "Dua Ratus Tujuh Belas", s: "にひゃくじゅうなな" },
+      { cat: "hundreds_series", tag: "200-an", jp: "218", rd: "にひゃくじゅうはち (ni-hyaku-juu-hachi)", id: "Dua Ratus Delapan Belas", s: "にひゃくじゅうはち" },
+      { cat: "hundreds_series", tag: "200-an", jp: "219", rd: "にひゃくじゅうきゅう (ni-hyaku-juu-kyuu)", id: "Dua Ratus Sembilan Belas", s: "にひゃくじゅうきゅう" },
+      { cat: "hundreds_series", tag: "300-an", jp: "315", rd: "さんびゃくじゅうご (sanbyaku-juu-go)", id: "Tiga Ratus Lima Belas", s: "さんびゃくじゅうご" },
+      { cat: "hundreds_series", tag: "400-an", jp: "415", rd: "よんひゃくじゅうご (yon-hyaku-juu-go)", id: "Empat Ratus Lima Belas", s: "よんひゃくじゅうご" },
+      { cat: "hundreds_series", tag: "500-an", jp: "555", rd: "ごひゃくごじゅうご (go-hyaku-go-juu-go)", id: "Lima Ratus Lima Puluh Lima", s: "ごひゃくごじゅうご" },
+      { cat: "hundreds_series", tag: "600-an", jp: "612", rd: "ろっぴゃくじゅうに (roppyaku-juu-ni)", id: "Enam Ratus Dua Belas", s: "ろっぴゃくじゅうに" },
+      { cat: "hundreds_series", tag: "700-an", jp: "777", rd: "ななひゃくななじゅうなな", id: "Tujuh Ratus Tujuh Puluh Tujuh", s: "ななひゃくななじゅうなな" },
+      { cat: "hundreds_series", tag: "800-an", jp: "818", rd: "はっぴゃくじゅうはち (happyaku-juu-hachi)", id: "Delapan Ratus Delapan Belas", s: "はっぴゃくじゅうはち" },
+      { cat: "hundreds_series", tag: "900-an", jp: "999", rd: "きゅうひゃくきゅうじゅうきゅう", id: "Sembilan Ratus Sembilan Puluh Sembilan", s: "きゅうひゃくきゅうじゅうきゅう" },
+
+      // Ribuan (Sen) & Kombinasinya
+      { cat: "sen", tag: "Ribuan", jp: "1.000", rd: "せん / いっせん (sen / issen)", id: "Seribu", s: "せん" },
+      { cat: "sen", tag: "Ribuan", jp: "1.111", rd: "せんひゃくじゅういち", id: "Seribu Seratus Sebelas", s: "せんひゃくじゅういち" },
+      { cat: "sen", tag: "Ribuan", jp: "1.500", rd: "せんごひゃく (sen-go-hyaku)", id: "Seribu Lima Ratus", s: "せんごひゃく" },
+      { cat: "sen", tag: "Ribuan", jp: "2.000", rd: "にせん (ni-sen)", id: "Dua Ribu", s: "にせん" },
+      { cat: "sen", tag: "Ribuan", jp: "2.222", rd: "にせんにひゃくにじゅうに", id: "Dua Ribu Dua Ratus Dua Puluh Dua", s: "にせんにひゃくにじゅうに" },
+      { cat: "sen", tag: "Ribuan", jp: "3.000", rd: "さんぜん (sanzen)", id: "Tiga Ribu <span class='tag-special-green'>'Zen'</span>", s: "さんぜん" },
+      { cat: "sen", tag: "Ribuan", jp: "3.333", rd: "さんぜんさんびゃくさんじゅうさん", id: "Tiga Ribu Tiga Ratus Tiga Puluh Tiga", s: "さんぜんさんびゃくさんじゅうさん" },
+      { cat: "sen", tag: "Ribuan", jp: "4.000", rd: "よんせん (yon-sen)", id: "Empat Ribu", s: "よんせん" },
+      { cat: "sen", tag: "Ribuan", jp: "5.000", rd: "ごせん (go-sen)", id: "Lima Ribu", s: "ごせん" },
+      { cat: "sen", tag: "Ribuan", jp: "6.000", rd: "ろくせん (roku-sen)", id: "Enam Ribu", s: "ろくせん" },
+      { cat: "sen", tag: "Ribuan", jp: "7.000", rd: "ななせん (nana-sen)", id: "Tujuh Ribu", s: "ななせん" },
+      { cat: "sen", tag: "Ribuan", jp: "8.000", rd: "はっせん (hassen)", id: "Delapan Ribu <span class='tag-special-green'>'Ssen'</span>", s: "はっせん" },
+      { cat: "sen", tag: "Ribuan", jp: "8.888", rd: "はっせんはっぴゃくはちじゅうはち", id: "Delapan Ribu Delapan Ratus Delapan Puluh Delapan", s: "はっせんはっぴゃくはちじゅうはち" },
+      { cat: "sen", tag: "Ribuan", jp: "9.000", rd: "きゅうせん (kyuu-sen)", id: "Sembilan Ribu", s: "きゅうせん" },
+      { cat: "sen", tag: "Ribuan", jp: "9.999", rd: "きゅうせんきゅうひゃくきゅうじゅうきゅう", id: "Sembilan Ribu Sembilan Ratus Sembilan Puluh Sembilan", s: "きゅうせんきゅうひゃくきゅうじゅうきゅう" },
+      { cat: "sen", tag: "Ribuan", jp: "何千", rd: "なんぜん (nanzen)", id: "Berapa Ribu? <span class='tag-special-green'>'Zen'</span>", s: "なんぜん" },
+
+      // Puluhan Ribu, Ratusan Ribu, Juta & Miliar (Man & Oku)
+      { cat: "man", tag: "Puluhan Ribu", jp: "10.000", rd: "いちまん (ichi-man)", id: "Sepuluh Ribu <span class='tag-special-green'>'Ichi'</span>", s: "いちまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "20.000", rd: "にまん (ni-man)", id: "Dua Puluh Ribu (2 Man)", s: "にまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "30.000", rd: "さんまん (san-man)", id: "Tiga Puluh Ribu (3 Man)", s: "さんまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "40.000", rd: "よんまん (yon-man)", id: "Empat Puluh Ribu (4 Man)", s: "よんまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "50.000", rd: "ごまん (go-man)", id: "Lima Puluh Ribu (5 Man)", s: "ごまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "60.000", rd: "ろくまん (roku-man)", id: "Enam Puluh Ribu (6 Man)", s: "ろくまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "70.000", rd: "ななまん (nana-man)", id: "Tujuh Puluh Ribu (7 Man)", s: "ななまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "80.000", rd: "はちまん (hachi-man)", id: "Delapan Puluh Ribu (8 Man)", s: "はちまん" },
+      { cat: "man", tag: "Puluhan Ribu", jp: "90.000", rd: "きゅうまん (kyuu-man)", id: "Sembilan Puluh Ribu (9 Man)", s: "きゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "100.000", rd: "じゅうまん (juu-man)", id: "Seratus Ribu (10 Man)", s: "じゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "200.000", rd: "にじゅうまん (ni-juu-man)", id: "Dua Ratus Ribu (20 Man)", s: "にじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "300.000", rd: "さんじゅうまん (san-juu-man)", id: "Tiga Ratus Ribu (30 Man)", s: "さんじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "400.000", rd: "よんじゅうまん (yon-juu-man)", id: "Empat Ratus Ribu (40 Man)", s: "よんじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "500.000", rd: "ごじゅうまん (go-juu-man)", id: "Lima Ratus Ribu (50 Man)", s: "ごじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "600.000", rd: "ろくじゅうまん (roku-juu-man)", id: "Enam Ratus Ribu (60 Man)", s: "ろくじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "700.000", rd: "ななじゅうまん (nana-juu-man)", id: "Tujuh Ratus Ribu (70 Man)", s: "ななじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "800.000", rd: "はちじゅうまん (hachi-juu-man)", id: "Delapan Ratus Ribu (80 Man)", s: "はちじゅうまん" },
+      { cat: "man", tag: "Ratusan Ribu", jp: "900.000", rd: "きゅうじゅうまん (kyuu-juu-man)", id: "Sembilan Ratus Ribu (90 Man)", s: "きゅうじゅうまん" },
+      { cat: "man", tag: "Jutaan", jp: "1.000.000", rd: "ひゃくまん (hyaku-man)", id: "Satu Juta (100 Man)", s: "ひゃくまん" },
+      { cat: "man", tag: "Jutaan", jp: "5.000.000", rd: "ごひゃくまん (go-hyaku-man)", id: "Lima Juta (500 Man)", s: "ごひゃくまん" },
+      { cat: "man", tag: "Jutaan", jp: "10.000.000", rd: "いっせんまん (issen-man)", id: "Sepuluh Juta (1.000 Man)", s: "いっせんまん" },
+      { cat: "man", tag: "Jutaan", jp: "50.000.000", rd: "ごせんまん (go-sen-man)", id: "Lima Puluh Juta (5.000 Man)", s: "ごせんまん" },
+      { cat: "man", tag: "Miliar", jp: "100.000.000", rd: "いちおく (ichi-oku)", id: "Seratus Juta (1 Oku)", s: "いちおく" },
+      { cat: "man", tag: "Miliar", jp: "1.000.000.000", rd: "じゅうおく (juu-oku)", id: "Satu Miliar (10 Oku)", s: "じゅうおく" },
+      { cat: "man", tag: "Tanya", jp: "何万", rd: "なんまん (nan-man)", id: "Berapa Puluh Ribu?", s: "なんまん" },
+      { cat: "man", tag: "Tanya", jp: "何億", rd: "なんおく (nan-oku)", id: "Berapa Ratus Juta?", s: "なんおく" },
+
+      // Hari
+      { cat: "days", tag: "Hari", jp: "月曜日", rd: "げつようび (getsuyoubi)", id: "Senin <br><span class='element-tag elem-moon'>🌙 Bulan</span>", s: "げつようび" },
+      { cat: "days", tag: "Hari", jp: "火曜日", rd: "かようび (kayoubi)", id: "Selasa <br><span class='element-tag elem-fire'>🔥 Api</span>", s: "かようび" },
+      { cat: "days", tag: "Hari", jp: "水曜日", rd: "すいようび (suiyoubi)", id: "Rabu <br><span class='element-tag elem-water'>💧 Air</span>", s: "すいようび" },
+      { cat: "days", tag: "Hari", jp: "木曜日", rd: "もくようび (mokuyoubi)", id: "Kamis <br><span class='element-tag elem-wood'>🌳 Kayu</span>", s: "もくようび" },
+      { cat: "days", tag: "Hari", jp: "金曜日", rd: "きんようび (kinyoubi)", id: "Jumat <br><span class='element-tag elem-gold'>🪙 Logam</span>", s: "きんようび" },
+      { cat: "days", tag: "Hari", jp: "土曜日", rd: "どようび (doyoubi)", id: "Sabtu <br><span class='element-tag elem-earth'>⛰️ Tanah</span>", s: "どようび" },
+      { cat: "days", tag: "Hari", jp: "日曜日", rd: "にちようび (nichiyoubi)", id: "Minggu <br><span class='element-tag elem-sun'>☀️ Matahari</span>", s: "にちようび" },
+      { cat: "days", tag: "Hari", jp: "平日", rd: "へいじつ (heijitsu)", id: "Hari Kerja (Senin-Jumat)", s: "へいじつ" },
+      { cat: "days", tag: "Hari", jp: "週末", rd: "しゅうまつ (shuumatsu)", id: "Akhir Pekan (Weekend)", s: "しゅうまつ" },
+      { cat: "days", tag: "Hari", jp: "何曜日", rd: "なんようび (nan-youbi)", id: "Hari Apa?", s: "なんようび" },
+
+      // Tanggal (1-31)
+      { cat: "dates", tag: "Tanggal", jp: "1日", rd: "ついたち (tsuitachi)", id: "Tanggal 1 <span class='tag-special-yellow'>Khusus</span>", s: "ついたち" },
+      { cat: "dates", tag: "Tanggal", jp: "2日", rd: "ふつか (futsuka)", id: "Tanggal 2 <span class='tag-special-yellow'>Khusus</span>", s: "ふつか" },
+      { cat: "dates", tag: "Tanggal", jp: "3日", rd: "みっか (mikka)", id: "Tanggal 3 <span class='tag-special-yellow'>Khusus</span>", s: "みっか" },
+      { cat: "dates", tag: "Tanggal", jp: "4日", rd: "よっか (yokka)", id: "Tanggal 4 <span class='tag-special-yellow'>Khusus</span>", s: "よっか" },
+      { cat: "dates", tag: "Tanggal", jp: "5日", rd: "いつか (itsuka)", id: "Tanggal 5 <span class='tag-special-yellow'>Khusus</span>", s: "いつか" },
+      { cat: "dates", tag: "Tanggal", jp: "6日", rd: "むいか (muika)", id: "Tanggal 6 <span class='tag-special-yellow'>Khusus</span>", s: "むいか" },
+      { cat: "dates", tag: "Tanggal", jp: "7日", rd: "なのか (nanoka)", id: "Tanggal 7 <span class='tag-special-yellow'>Khusus</span>", s: "なのか" },
+      { cat: "dates", tag: "Tanggal", jp: "8日", rd: "ようか (youka)", id: "Tanggal 8 <span class='tag-special-yellow'>Khusus</span>", s: "ようか" },
+      { cat: "dates", tag: "Tanggal", jp: "9日", rd: "ここのか (kokonoka)", id: "Tanggal 9 <span class='tag-special-yellow'>Khusus</span>", s: "ここのか" },
+      { cat: "dates", tag: "Tanggal", jp: "10日", rd: "とおか (tooka)", id: "Tanggal 10 <span class='tag-special-yellow'>Khusus</span>", s: "とおか" },
+      { cat: "dates", tag: "Tanggal", jp: "11日", rd: "じゅういちにち (juu-ichi-nichi)", id: "Tanggal 11", s: "じゅういちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "12日", rd: "じゅうににち (juu-ni-nichi)", id: "Tanggal 12", s: "じゅうににち" },
+      { cat: "dates", tag: "Tanggal", jp: "13日", rd: "じゅうさんにち (juu-san-nichi)", id: "Tanggal 13", s: "じゅうさんにち" },
+      { cat: "dates", tag: "Tanggal", jp: "14日", rd: "じゅうよっか (juu-yokka)", id: "Tanggal 14 <span class='tag-special-yellow'>'Yokka'</span>", s: "じゅうよっか" },
+      { cat: "dates", tag: "Tanggal", jp: "15日", rd: "じゅうごにち (juu-go-nichi)", id: "Tanggal 15", s: "じゅうごにち" },
+      { cat: "dates", tag: "Tanggal", jp: "16日", rd: "じゅうろくにち (juu-roku-nichi)", id: "Tanggal 16", s: "じゅうろくにち" },
+      { cat: "dates", tag: "Tanggal", jp: "17日", rd: "じゅうしちにち (juu-shichi-nichi)", id: "Tanggal 17 <span class='tag-special-green'>'Shichi'</span>", s: "じゅうしちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "18日", rd: "じゅうはちにち (juu-hachi-nichi)", id: "Tanggal 18", s: "じゅうはちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "19日", rd: "じゅうくにち (juu-ku-nichi)", id: "Tanggal 19 <span class='tag-special-green'>'Ku'</span>", s: "じゅうくにち" },
+      { cat: "dates", tag: "Tanggal", jp: "20日", rd: "はつか (hatsuka)", id: "Tanggal 20 <span class='tag-special-yellow'>Khusus</span>", s: "はつか" },
+      { cat: "dates", tag: "Tanggal", jp: "21日", rd: "にじゅういちにち (ni-juu-ichi-nichi)", id: "Tanggal 21", s: "にじゅういちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "22日", rd: "にじゅうににち (ni-juu-ni-nichi)", id: "Tanggal 22", s: "にじゅうににち" },
+      { cat: "dates", tag: "Tanggal", jp: "23日", rd: "にじゅうさんにち (ni-juu-san-nichi)", id: "Tanggal 23", s: "にじゅうさんにち" },
+      { cat: "dates", tag: "Tanggal", jp: "24日", rd: "にじゅうよっか (ni-juu-yokka)", id: "Tanggal 24 <span class='tag-special-yellow'>'Yokka'</span>", s: "にじゅうよっか" },
+      { cat: "dates", tag: "Tanggal", jp: "25日", rd: "にじゅうごにち (ni-juu-go-nichi)", id: "Tanggal 25", s: "にじゅうごにち" },
+      { cat: "dates", tag: "Tanggal", jp: "26日", rd: "にじゅうろくにち (ni-juu-roku-nichi)", id: "Tanggal 26", s: "にじゅうろくにち" },
+      { cat: "dates", tag: "Tanggal", jp: "27日", rd: "にじゅうしちにち (ni-juu-shichi-nichi)", id: "Tanggal 27 <span class='tag-special-green'>'Shichi'</span>", s: "にじゅうしちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "28日", rd: "にじゅうはちにち (ni-juu-hachi-nichi)", id: "Tanggal 28", s: "にじゅうはちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "29日", rd: "にじゅうくにち (ni-juu-ku-nichi)", id: "Tanggal 29 <span class='tag-special-green'>'Ku'</span>", s: "にじゅうくにち" },
+      { cat: "dates", tag: "Tanggal", jp: "30日", rd: "さんじゅうにち (san-juu-nichi)", id: "Tanggal 30", s: "さんじゅうにち" },
+      { cat: "dates", tag: "Tanggal", jp: "31日", rd: "さんじゅういちにち (san-juu-ichi-nichi)", id: "Tanggal 31", s: "さんじゅういちにち" },
+      { cat: "dates", tag: "Tanggal", jp: "何日", rd: "なんにち (nan-nichi)", id: "Tanggal Berapa?", s: "なんにち" },
+
+      // Bulan
+      { cat: "months", tag: "Nama Bulan", jp: "1月", rd: "いちがつ (ichi-gatsu)", id: "Bulan Januari", s: "いちがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "2月", rd: "にがつ (ni-gatsu)", id: "Bulan Februari", s: "にがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "3月", rd: "さんがつ (san-gatsu)", id: "Bulan Maret", s: "さんがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "4月", rd: "しがつ (shi-gatsu)", id: "Bulan April <span class='tag-special-yellow'>'Shi'</span>", s: "しがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "5月", rd: "ごがつ (go-gatsu)", id: "Bulan Mei", s: "ごがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "6月", rd: "ろくがつ (roku-gatsu)", id: "Bulan Juni", s: "ろくがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "7月", rd: "しちがつ (shichi-gatsu)", id: "Bulan Juli <span class='tag-special-yellow'>'Shichi'</span>", s: "しちがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "8月", rd: "はちがつ (hachi-gatsu)", id: "Bulan Agustus", s: "はちがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "9月", rd: "くがつ (ku-gatsu)", id: "Bulan September <span class='tag-special-yellow'>'Ku'</span>", s: "くがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "10月", rd: "じゅうがつ (juu-gatsu)", id: "Bulan Oktober", s: "じゅうがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "11月", rd: "じゅういちがつ (juu-ichi-gatsu)", id: "Bulan November", s: "じゅういちがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "12月", rd: "じゅうにがつ (juu-ni-gatsu)", id: "Bulan Desember", s: "じゅうにがつ" },
+      { cat: "months", tag: "Nama Bulan", jp: "何月", rd: "なんがつ (nan-gatsu)", id: "Bulan Apa?", s: "なんがつ" },
+
+      // Tahun
+      { cat: "years", tag: "Tahun", jp: "1年", rd: "いちねん (ichi-nen)", id: "Tahun 1", s: "いちねん" },
+      { cat: "years", tag: "Tahun", jp: "2年", rd: "にねん (ni-nen)", id: "Tahun 2", s: "にねん" },
+      { cat: "years", tag: "Tahun", jp: "3年", rd: "さんねん (san-nen)", id: "Tahun 3", s: "さんねん" },
+      { cat: "years", tag: "Tahun", jp: "4年", rd: "よねん (yo-nen)", id: "Tahun 4 <span class='tag-special-yellow'>'Yo'</span>", s: "よねん" },
+      { cat: "years", tag: "Tahun", jp: "5年", rd: "ごねん (go-nen)", id: "Tahun 5", s: "ごねん" },
+      { cat: "years", tag: "Tahun", jp: "6年", rd: "ろくねん (roku-nen)", id: "Tahun 6", s: "ろくねん" },
+      { cat: "years", tag: "Tahun", jp: "7年", rd: "しちねん / ななねん", id: "Tahun 7", s: "しちねん" },
+      { cat: "years", tag: "Tahun", jp: "8年", rd: "はちねん (hachi-nen)", id: "Tahun 8", s: "はちねん" },
+      { cat: "years", tag: "Tahun", jp: "9年", rd: "きゅうねん / くねん", id: "Tahun 9", s: "きゅうねん" },
+      { cat: "years", tag: "Tahun", jp: "10年", rd: "じゅうねん (juu-nen)", id: "Tahun 10", s: "じゅうねん" },
+      { cat: "years", tag: "Tahun", jp: "何年", rd: "なんねん (nan-nen)", id: "Tahun Berapa?", s: "なんねん" },
+
+      // Durasi Bulan (~Kagetsu)
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "1か月", rd: "いっかげつ (ikkagetsu)", id: "Durasi 1 Bulan <span class='tag-special-green'>'Ikka'</span>", s: "いっかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "2か月", rd: "にかげつ (ni-kagetsu)", id: "Durasi 2 Bulan", s: "にかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "3か月", rd: "さんかげつ (san-kagetsu)", id: "Durasi 3 Bulan", s: "san-kagetsu" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "4か月", rd: "よんかげつ (yon-kagetsu)", id: "Durasi 4 Bulan", s: "よんかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "5か月", rd: "ごかげつ (go-kagetsu)", id: "Durasi 5 Bulan", s: "ごかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "6か月 / 半年", rd: "ろっかげつ / はんとし", id: "Durasi 6 Bulan / 1/2 Thn <span class='tag-special-green'>'Rokka'</span>", s: "ろっかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "7か月", rd: "ななかげつ (nana-kagetsu)", id: "Durasi 7 Bulan", s: "ななかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "8か月", rd: "はっかげつ (hakkagetsu)", id: "Durasi 8 Bulan <span class='tag-special-green'>'Hakka'</span>", s: "はっかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "9か月", rd: "きゅうかげつ (kyuu-kagetsu)", id: "Durasi 9 Bulan", s: "きゅうかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "10か月", rd: "じゅっかげつ (jukkagetsu)", id: "Durasi 10 Bulan <span class='tag-special-green'>'Jukka'</span>", s: "じゅっかげつ" },
+      { cat: "month_dur", tag: "Durasi Bulan", jp: "何か月", rd: "なんかげつ (nan-kagetsu)", id: "Berapa Bulan?", s: "なんかげつ" },
+
+      // Durasi Tahun (~Nenkan)
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "1年間", rd: "いちねんかん (ichi-nenkan)", id: "Selama 1 Tahun", s: "いちねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "2年間", rd: "にねんかん (ni-nenkan)", id: "Selama 2 Tahun", s: "にねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "3年間", rd: "さんねんかん (san-nenkan)", id: "Selama 3 Tahun", s: "san-nenkan" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "4年間", rd: "よねんかん (yo-nenkan)", id: "Selama 4 Tahun <span class='tag-special-yellow'>'Yo'</span>", s: "よねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "5年間", rd: "ごねんかん (go-nenkan)", id: "Selama 5 Tahun", s: "ごねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "6年間", rd: "ろくねんかん (roku-nenkan)", id: "Selama 6 Tahun", s: "ろくねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "7年間", rd: "しちねんかん / ななねんかん", id: "Selama 7 Tahun", s: "しちねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "8年間", rd: "はちねんかん (hachi-nenkan)", id: "Selama 8 Tahun", s: "はちねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "9年間", rd: "きゅうねんかん / くねんかん", id: "Selama 9 Tahun", s: "きゅうねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "10年間", rd: "じゅうねんかん (juu-nenkan)", id: "Selama 10 Tahun", s: "じゅうねんかん" },
+      { cat: "year_dur", tag: "Durasi Tahun", jp: "何年間", rd: "なんねんかん (nan-nenkan)", id: "Berapa Tahun Lamanya?", s: "なんねんかん" },
+
+      // Matriks Waktu
+      { cat: "matrix", tag: "Periode", jp: "一昨日", rd: "おととい (ototoi)", id: "2 Hari Lalu (Lusa Lalu)", s: "おととい" },
+      { cat: "matrix", tag: "Periode", jp: "昨日", rd: "きのう (kinou)", id: "Kemarin", s: "きのう" },
+      { cat: "matrix", tag: "Periode", jp: "今日", rd: "きょう (kyou)", id: "Hari Ini", s: "きょう" },
+      { cat: "matrix", tag: "Periode", jp: "明日", rd: "あした (ashita)", id: "Besok", s: "あした" },
+      { cat: "matrix", tag: "Periode", jp: "明後日", rd: "あさって (asatte)", id: "Lusa (2 Hari Lagi)", s: "あさって" },
+      { cat: "matrix", tag: "Periode", jp: "毎日", rd: "まいにち (mainichi)", id: "Setiap Hari", s: "まいにち" },
+      { cat: "matrix", tag: "Periode", jp: "先々週", rd: "せんせんしゅう (sensenshuu)", id: "2 Minggu Lalu", s: "せんせんしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "先週", rd: "せんしゅう (senshuu)", id: "Minggu Lalu", s: "せんしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "今週", rd: "こんしゅう (konshuu)", id: "Minggu Ini", s: "こんしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "来週", rd: "らいしゅう (raishuu)", id: "Minggu Depan", s: "らいしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "再来週", rd: "さらいしゅう (saraishuu)", id: "2 Minggu Lagi", s: "さらいしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "毎週", rd: "まいしゅう (maishuu)", id: "Setiap Minggu", s: "まいしゅう" },
+      { cat: "matrix", tag: "Periode", jp: "先々月", rd: "せんせんげつ (sensengetsu)", id: "2 Bulan Lalu", s: "せんせんげつ" },
+      { cat: "matrix", tag: "Periode", jp: "先月", rd: "せんげつ (sengetsu)", id: "Bulan Lalu", s: "せんげつ" },
+      { cat: "matrix", tag: "Periode", jp: "今月", rd: "こんげつ (kongetsu)", id: "Bulan Ini", s: "こんげつ" },
+      { cat: "matrix", tag: "Periode", jp: "来月", rd: "らいげつ (raigetsu)", id: "Bulan Depan", s: "らいげつ" },
+      { cat: "matrix", tag: "Periode", jp: "再来月", rd: "さらいげつ (saraigetsu)", id: "2 Bulan Lagi", s: "さらいげつ" },
+      { cat: "matrix", tag: "Periode", jp: "毎月", rd: "まいつき (maitsuki)", id: "Setiap Bulan", s: "まいつき" },
+      { cat: "matrix", tag: "Periode", jp: "一昨年", rd: "おととし (ototoshi)", id: "2 Tahun Lalu", s: "おととし" },
+      { cat: "matrix", tag: "Periode", jp: "去年 / 昨年", rd: "きょねん (kyonen) / さくねん", id: "Tahun Lalu", s: "きょねん" },
+      { cat: "matrix", tag: "Periode", jp: "今年", rd: "ことし (kotoshi)", id: "Tahun Ini", s: "ことし" },
+      { cat: "matrix", tag: "Periode", jp: "来年", rd: "らいねん (rainen)", id: "Tahun Depan", s: "らいねん" },
+      { cat: "matrix", tag: "Periode", jp: "再来年", rd: "さらいねん (sarainen)", id: "2 Tahun Lagi", s: "さらいねん" },
+      { cat: "matrix", tag: "Periode", jp: "毎年", rd: "まいとし (maitoshi)", id: "Setiap Tahun", s: "まいとし" },
+
+      // Bagian Hari
+      { cat: "dayparts", tag: "Bagian Hari", jp: "朝", rd: "あさ (asa)", id: "Pagi Hari", s: "あさ" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "昼", rd: "ひる (hiru)", id: "Siang Hari", s: "ひる" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "夕方", rd: "ゆうがた (yuugata)", id: "Sore Hari", s: "ゆうがた" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "夜", rd: "よる (yoru)", id: "Malam Hari", s: "よる" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "今朝", rd: "けさ (kesa)", id: "Tadi Pagi <span class='tag-special-yellow'>Khusus</span>", s: "けさ" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "今晩", rd: "こんばん (konban)", id: "Malam Ini", s: "こんばん" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "昨夜", rd: "さくや / ゆうべ", id: "Tadi Malam", s: "さくや" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "明日の朝", rd: "あしたのあさ (ashita no asa)", id: "Besok Pagi", s: "あしたのあさ" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "毎朝", rd: "まいあさ (maiasa)", id: "Setiap Pagi", s: "まいあさ" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "毎晩", rd: "まいばん (maiban)", id: "Setiap Malam", s: "まいばん" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "午前", rd: "ごぜん (gozen)", id: "AM (00.00-12.00)", s: "ごぜん" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "午後", rd: "ごご (gogo)", id: "PM (12.00-24.00)", s: "ごご" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "正午", rd: "しょうご (shougo)", id: "Tepat Siang (12:00)", s: "しょうご" },
+      { cat: "dayparts", tag: "Bagian Hari", jp: "真夜中", rd: "まよなか (mayonaka)", id: "Tengah Malam (00:00)", s: "まよなか" },
+
+      // Waktu Relatif
+      { cat: "relative", tag: "Relatif", jp: "今", rd: "いま (ima)", id: "Sekarang", s: "いま" },
+      { cat: "relative", tag: "Relatif", jp: "さっき", rd: "さっき (sakki)", id: "Tadi / Baru Saja", s: "さっき" },
+      { cat: "relative", tag: "Relatif", jp: "後で", rd: "あとで (ato de)", id: "Nanti / Setelah Ini", s: "あとで" },
+      { cat: "relative", tag: "Relatif", jp: "もうすぐ", rd: "もうすぐ (mousugu)", id: "Sebentar Lagi", s: "mousugu" },
+      { cat: "relative", tag: "Relatif", jp: "最近", rd: "さいきん (saikin)", id: "Akhir-akhir Ini", s: "さいきん" },
+      { cat: "relative", tag: "Relatif", jp: "将来", rd: "しょうらい (shourai)", id: "Masa Depan", s: "しょうらい" },
+
+      // Jam & Menit
+      { cat: "clock", tag: "Jam & Menit", jp: "1時", rd: "いちじ (ichi-ji)", id: "Jam 1 (01:00)", s: "いちじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "2時", rd: "にじ (ni-ji)", id: "Jam 2 (02:00)", s: "にじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "3時", rd: "さんじ (san-ji)", id: "Jam 3 (03:00)", s: "さんじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "4時", rd: "よじ (yo-ji)", id: "Jam 4 <span class='tag-special-yellow'>'Yo'</span>", s: "よじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "5時", rd: "ごじ (go-ji)", id: "Jam 5 (05:00)", s: "ごじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "6時", rd: "ろくじ (roku-ji)", id: "Jam 6 (06:00)", s: "ろくじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "7時", rd: "しちじ (shichi-ji)", id: "Jam 7 <span class='tag-special-yellow'>'Shichi'</span>", s: "しちじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "8時", rd: "はちじ (hachi-ji)", id: "Jam 8 (08:00)", s: "はちじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "9時", rd: "くじ (ku-ji)", id: "Jam 9 <span class='tag-special-yellow'>'Ku'</span>", s: "くじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "10時", rd: "じゅうじ (juu-ji)", id: "Jam 10 (10:00)", s: "じゅうじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "11時", rd: "じゅういちじ (juu-ichi-ji)", id: "Jam 11 (11:00)", s: "じゅういちじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "12時", rd: "じゅうにじ (juu-ni-ji)", id: "Jam 12 (12:00)", s: "じゅうにじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "何時", rd: "なんじ (nan-ji)", id: "Jam Berapa?", s: "なんじ" },
+      { cat: "clock", tag: "Jam & Menit", jp: "1分", rd: "いっぷん (ippun)", id: "1 Menit <span class='tag-special-green'>'Pun'</span>", s: "いっぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "2分", rd: "にふん (ni-fun)", id: "2 Menit", s: "にふん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "3分", rd: "さんぷん (san-pun)", id: "3 Menit <span class='tag-special-green'>'Pun'</span>", s: "さんぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "4分", rd: "よんぷん (yon-pun)", id: "4 Menit <span class='tag-special-green'>'Pun'</span>", s: "よんぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "5分", rd: "ごふん (go-fun)", id: "5 Menit", s: "ごふん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "6分", rd: "ろっぷん (roppun)", id: "6 Menit <span class='tag-special-green'>'Pun'</span>", s: "ろっぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "7分", rd: "ななふん (nana-fun)", id: "7 Menit", s: "ななふん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "8分", rd: "はっぷん (happun)", id: "8 Menit <span class='tag-special-green'>'Pun'</span>", s: "はっぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "9分", rd: "きゅうふん (kyuu-fun)", id: "9 Menit", s: "きゅうふん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "10分", rd: "じゅっぷん (juppun)", id: "10 Menit <span class='tag-special-green'>'Pun'</span>", s: "じゅっぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "15分", rd: "じゅうごふん (juugo-fun)", id: "15 Menit", s: "じゅうごふん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "30分 / 半", rd: "さんじゅっぷん / はん", id: "30 Menit / 1/2 Jam", s: "さんじゅっぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "何分", rd: "なんぷん (nan-pun)", id: "Berapa Menit?", s: "なんぷん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "1秒", rd: "いちびょう (ichibyou)", id: "1 Detik", s: "いちびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "2秒", rd: "にびょう (nibyou)", id: "2 Detik", s: "にびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "3秒", rd: "さんびょう (sanbyou)", id: "3 Detik", s: "sanbyou" },
+      { cat: "clock", tag: "Jam & Menit", jp: "4秒", rd: "よんびょう (yonbyou)", id: "4 Detik", s: "よんびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "5秒", rd: "ごびょう (gobyou)", id: "5 Detik", s: "ごびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "10秒", rd: "じゅうびょう (juubyou)", id: "10 Detik", s: "じゅうびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "30秒", rd: "さんじゅうびょう (sanjuubyou)", id: "30 Detik", s: "sanjuubyou" },
+      { cat: "clock", tag: "Jam & Menit", jp: "何秒", rd: "なんびょう (nanbyou)", id: "Berapa Detik?", s: "なんびょう" },
+      { cat: "clock", tag: "Jam & Menit", jp: "〜時間", rd: "〜じかん (~jikan)", id: "Durasi Jam (Cth: 1時間)", s: "いちじかん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "〜分間", rd: "〜ふんかん / ぷんかん", id: "Durasi Menit (Cth: 10分間)", s: "じゅっぷんかん" },
+      { cat: "clock", tag: "Jam & Menit", jp: "〜秒間", rd: "〜びょうかん (~byoukan)", id: "Durasi Detik (Cth: 30秒間)", s: "さんじゅうびょうかん" }
+    ];
+
+    let currentCategory = 'all';
+
+    // --- 3. AUDIO ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(soundText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') ||
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // --- 4. ALGORITMA KONVERTER ANGKA JEPANG ---
+    const digitsJp = {
+      0: { k: "", h: "", r: "" },
+      1: { k: "一", h: "いち", r: "ichi" },
+      2: { k: "二", h: "に", r: "ni" },
+      3: { k: "三", h: "さん", r: "san" },
+      4: { k: "四", h: "よん", r: "yon" },
+      5: { k: "五", h: "ご", r: "go" },
+      6: { k: "六", h: "ろく", r: "roku" },
+      7: { k: "七", h: "なな", r: "nana" },
+      8: { k: "八", h: "はち", r: "hachi" },
+      9: { k: "九", h: "きゅう", r: "kyuu" }
+    };
+
+    function convertBlockUnder10000(num) {
+      if (num === 0) return { k: "", h: "", r: "" };
+      let k = "", h = "", r = [];
+
+      const thousands = Math.floor(num / 1000);
+      const hundreds = Math.floor((num % 1000) / 100);
+      const tens = Math.floor((num % 100) / 10);
+      const ones = num % 10;
+
+      // Ribuan (千)
+      if (thousands === 1) { k += "千"; h += "せん"; r.push("sen"); }
+      else if (thousands === 3) { k += "三千"; h += "さんぜん"; r.push("sanzen"); }
+      else if (thousands === 8) { k += "八千"; h += "はっせん"; r.push("hassen"); }
+      else if (thousands > 1) { k += digitsJp[thousands].k + "千"; h += digitsJp[thousands].h + "せん"; r.push(digitsJp[thousands].r + "-sen"); }
+
+      // Ratusan (百)
+      if (hundreds === 1) { k += "百"; h += "ひゃく"; r.push("hyaku"); }
+      else if (hundreds === 3) { k += "三百"; h += "さんびゃく"; r.push("sanbyaku"); }
+      else if (hundreds === 6) { k += "六百"; h += "ろっぴゃく"; r.push("roppyaku"); }
+      else if (hundreds === 8) { k += "八百"; h += "はっぴゃく"; r.push("happyaku"); }
+      else if (hundreds > 1) { k += digitsJp[hundreds].k + "百"; h += digitsJp[hundreds].h + "ひゃく"; r.push(digitsJp[hundreds].r + "-hyaku"); }
+
+      // Puluhan (十)
+      if (tens === 1) { k += "十"; h += "じゅう"; r.push("juu"); }
+      else if (tens > 1) { k += digitsJp[tens].k + "十"; h += digitsJp[tens].h + "じゅう"; r.push(digitsJp[tens].r + "-juu"); }
+
+      // Satuan (1-9)
+      if (ones > 0) {
+        k += digitsJp[ones].k;
+        h += digitsJp[ones].h;
+        r.push(digitsJp[ones].r);
+      }
+
+      return { k, h, r: r.join(" ") };
+    }
+
+    function convertNumberToJapanese(n) {
+      if (n === 0) {
+        return {
+          kanji: "零 / 〇",
+          hiragana: "ゼロ / れい",
+          romaji: "zero / rei",
+          meaning: "Nol (Kosong)"
+        };
+      }
+
+      const units = [
+        { val: 1000000000000, k: "兆", h: "ちょう", r: "chou" },
+        { val: 100000000, k: "億", h: "おく", r: "oku" },
+        { val: 10000, k: "万", h: "まん", r: "man" },
+        { val: 1, k: "", h: "", r: "" }
+      ];
+
+      let kanji = "", hiragana = "", romajiArr = [];
+      let remainder = n;
+
+      for (let unit of units) {
+        let count = Math.floor(remainder / unit.val);
+        if (count > 0) {
+          let block = convertBlockUnder10000(count);
+
+          if ((unit.val === 10000 || unit.val === 100000000 || unit.val === 1000000000000) && count === 1) {
+            block.k = "一";
+            block.h = "いち";
+            block.r = "ichi";
+          }
+
+          kanji += block.k + unit.k;
+          hiragana += block.h + unit.h;
+          romajiArr.push(block.r + (unit.r ? "-" + unit.r : ""));
+
+          remainder %= unit.val;
+        }
+      }
+
+      const formattedIndo = new Intl.NumberFormat('id-ID').format(n);
+
+      return {
+        kanji: kanji || "零",
+        hiragana: hiragana || "ゼロ",
+        romaji: romajiArr.join(" ") || "zero",
+        meaning: `Angka: ${formattedIndo}`
+      };
+    }
+
+    function convertCustomNumber() {
+      const inputEl = document.getElementById('customNumberInput');
+      const val = parseInt(inputEl.value, 10);
+
+      if (isNaN(val) || val < 0) {
+        document.getElementById('resKanji').innerText = "零";
+        document.getElementById('resReading').innerText = "ゼロ / れい";
+        document.getElementById('resRomaji').innerText = "zero / rei";
+        document.getElementById('resMeaning').innerText = "Silakan masukkan angka positif";
+        return;
+      }
+
+      if (val > 9999999999999) {
+        document.getElementById('resKanji').innerText = "数超過";
+        document.getElementById('resReading').innerText = "Angka terlalu besar";
+        document.getElementById('resRomaji').innerText = "Maksimal hingga 9 Triliun";
+        document.getElementById('resMeaning').innerText = "Input melebihi batas konverter";
+        return;
+      }
+
+      const res = convertNumberToJapanese(val);
+      document.getElementById('resKanji').innerText = res.kanji;
+      document.getElementById('resReading').innerText = res.hiragana;
+      document.getElementById('resRomaji').innerText = res.romaji;
+      document.getElementById('resMeaning').innerText = res.meaning;
+    }
+
+    function setPresetNumber(num) {
+      document.getElementById('customNumberInput').value = num;
+      convertCustomNumber();
+      playConverterVoice();
+    }
+
+    function playConverterVoice() {
+      const textToRead = document.getElementById('resReading').innerText.replace(/\s+/g, '');
+      playAudio(textToRead);
+    }
+
+    // --- 5. NAV MODE SWITCH ---
+    function switchNavMode(mode) {
+      document.getElementById('btnModeCatalog').classList.toggle('active', mode === 'catalog');
+      document.getElementById('btnModeConverter').classList.toggle('active', mode === 'converter');
+
+      document.getElementById('catalogView').style.display = (mode === 'catalog') ? 'block' : 'none';
+      document.getElementById('converterView').style.display = (mode === 'converter') ? 'flex' : 'none';
+    }
+
+    // --- 6. RENDER FUNCTION KATALOG ---
+    function renderCards(data) {
+      const container = document.getElementById('timeContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color:#94a3b8; font-weight:700;">Kosakata angka / waktu tidak ditemukan...</div>';
+        return;
+      }
+
+      data.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'time-card';
+        card.onclick = () => playAudio(item.s, card);
+
+        card.innerHTML = `
+          <span class="card-no">#${index + 1}</span>
+          <span class="group-badge">${item.tag}</span>
+          <div class="tier-jp">${item.jp}</div>
+          <div class="tier-reading">${item.rd}</div>
+          <div class="tier-meaning">${item.id}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 7. FILTER & SEARCH LOGIC ---
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      const filtered = masterTimeList.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchSearch = item.jp.toLowerCase().includes(query) || 
+                            item.rd.toLowerCase().includes(query) || 
+                            item.id.toLowerCase().includes(query) || 
+                            item.tag.toLowerCase().includes(query);
+        return matchCategory && matchSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterCards();
+    }
+
+    // Inisialisasi Pertama
+    renderCards(masterTimeList);
+  </script>
+
+</body>
+</html>
