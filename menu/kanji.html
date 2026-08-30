@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Katalog Kanji Lengkap JLPT N5 - N1</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Serif+JP:wght@700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #4ade80;
+      --primary-dark: #16a34a;
+      --accent: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --badge-bg: #14532d;
+      --badge-text: #86efac;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --dashed-border: #334155;
+
+      /* Warna Khusus Kartu Kanji (Dark Mode) */
+      --n5-icon-bg: #14532d; --n5-icon-text: #4ade80; --n5-tag-bg: #052e16; --n5-tag-text: #86efac;
+      --n4-icon-bg: #083344; --n4-icon-text: #22d3ee; --n4-tag-bg: #042f2e; --n4-tag-text: #67e8f9;
+      --n3-icon-bg: #1e1b4b; --n3-icon-text: #818cf8; --n3-tag-bg: #0f172a; --n3-tag-text: #a5b4fc;
+      --n2-icon-bg: #450a0a; --n2-icon-text: #f87171; --n2-tag-bg: #2b0707; --n2-tag-text: #fca5a5;
+      --n1-icon-bg: #3b0764; --n1-icon-text: #c084fc; --n1-tag-bg: #240046; --n1-tag-text: #d8b4fe;
+      --n5n4-icon-bg: #451a03; --n5n4-icon-text: #fbbf24; --n5n4-tag-bg: #271002; --n5n4-tag-text: #fde68a;
+      --kotoba-icon-bg: #500724; --kotoba-icon-text: #f472b6; --kotoba-tag-bg: #370318; --kotoba-tag-text: #fbcfe8;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --accent: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #f1f5f9;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --badge-bg: #dcfce7;
+      --badge-text: #15803d;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --dashed-border: #f1f5f9;
+
+      /* Warna Khusus Kartu Kanji (Light Mode) */
+      --n5-icon-bg: #dcfce7; --n5-icon-text: #16a34a; --n5-tag-bg: #f0fdf4; --n5-tag-text: #16a34a;
+      --n4-icon-bg: #cffafe; --n4-icon-text: #0891b2; --n4-tag-bg: #ecfeff; --n4-tag-text: #0891b2;
+      --n3-icon-bg: #e0e7ff; --n3-icon-text: #4338ca; --n3-tag-bg: #eef2ff; --n3-tag-text: #4338ca;
+      --n2-icon-bg: #fee2e2; --n2-icon-text: #dc2626; --n2-tag-bg: #fef2f2; --n2-tag-text: #dc2626;
+      --n1-icon-bg: #f3e8ff; --n1-icon-text: #9333ea; --n1-tag-bg: #faf5ff; --n1-tag-text: #9333ea;
+      --n5n4-icon-bg: #fef3c7; --n5n4-icon-text: #d97706; --n5n4-tag-bg: #fffbeb; --n5n4-tag-text: #b45309;
+      --kotoba-icon-bg: #fce7f3; --kotoba-icon-text: #db2777; --kotoba-tag-bg: #fdf2f8; --kotoba-tag-text: #db2777;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 16px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header Navigasi */
+    .header-box {
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: clamp(0.72rem, 2vw, 0.8rem);
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .header-box h1 {
+      font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-box h1 span {
+      background: linear-gradient(135deg, #16a34a 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-box p {
+      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Grid Layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    /* Card Styling */
+    .kanji-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px -2px var(--shadow-color);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    @media (hover: hover) {
+      .kanji-card:hover {
+        transform: translateY(-5px);
+      }
+      .card-n5:hover { border-color: #86efac; box-shadow: 0 14px 24px -4px rgba(22, 163, 74, 0.2); }
+      .card-n4:hover { border-color: #67e8f9; box-shadow: 0 14px 24px -4px rgba(6, 182, 212, 0.2); }
+      .card-n3:hover { border-color: #a5b4fc; box-shadow: 0 14px 24px -4px rgba(79, 70, 229, 0.2); }
+      .card-n2:hover { border-color: #fca5a5; box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.2); }
+      .card-n1:hover { border-color: #d8b4fe; box-shadow: 0 14px 24px -4px rgba(147, 51, 234, 0.2); }
+      .card-n5n4:hover { border-color: #fcd34d; box-shadow: 0 14px 24px -4px rgba(217, 119, 6, 0.2); }
+      .card-kotoba:hover { border-color: #f472b6; box-shadow: 0 14px 24px -4px rgba(219, 39, 119, 0.2); }
+
+      .kanji-card:hover .kanji-icon {
+        transform: scale(1.1) rotate(4deg);
+      }
+      .kanji-card:hover .arrow-icon {
+        transform: translateX(5px);
+      }
+    }
+
+    .kanji-card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      margin-bottom: 16px;
+      pointer-events: none;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .kanji-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 900;
+      transition: transform 0.3s ease;
+    }
+
+    .level-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Level Specific Palettes */
+    .card-n5 .kanji-icon { background: var(--n5-icon-bg); color: var(--n5-icon-text); }
+    .card-n5 .level-tag { background: var(--n5-tag-bg); color: var(--n5-tag-text); }
+    .card-n5 .card-footer { color: var(--n5-icon-text); }
+
+    .card-n4 .kanji-icon { background: var(--n4-icon-bg); color: var(--n4-icon-text); }
+    .card-n4 .level-tag { background: var(--n4-tag-bg); color: var(--n4-tag-text); }
+    .card-n4 .card-footer { color: var(--n4-icon-text); }
+
+    .card-n3 .kanji-icon { background: var(--n3-icon-bg); color: var(--n3-icon-text); }
+    .card-n3 .level-tag { background: var(--n3-tag-bg); color: var(--n3-tag-text); }
+    .card-n3 .card-footer { color: var(--n3-icon-text); }
+
+    .card-n2 .kanji-icon { background: var(--n2-icon-bg); color: var(--n2-icon-text); }
+    .card-n2 .level-tag { background: var(--n2-tag-bg); color: var(--n2-tag-text); }
+    .card-n2 .card-footer { color: var(--n2-icon-text); }
+
+    .card-n1 .kanji-icon { background: var(--n1-icon-bg); color: var(--n1-icon-text); }
+    .card-n1 .level-tag { background: var(--n1-tag-bg); color: var(--n1-tag-text); }
+    .card-n1 .card-footer { color: var(--n1-icon-text); }
+
+    .card-n5n4 .kanji-icon { background: var(--n5n4-icon-bg); color: var(--n5n4-icon-text); }
+    .card-n5n4 .level-tag { background: var(--n5n4-tag-bg); color: var(--n5n4-tag-text); }
+    .card-n5n4 .card-footer { color: var(--n5n4-icon-text); }
+
+    .card-kotoba .kanji-icon { background: var(--kotoba-icon-bg); color: var(--kotoba-icon-text); }
+    .card-kotoba .level-tag { background: var(--kotoba-tag-bg); color: var(--kotoba-tag-text); }
+    .card-kotoba .card-footer { color: var(--kotoba-icon-text); }
+
+    .kanji-card h2 {
+      font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .kanji-card p {
+      font-size: clamp(0.82rem, 2.5vw, 0.88rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .specs-list {
+      display: flex;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+
+    .specs-list span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--dashed-border);
+      pointer-events: none;
+    }
+
+    .arrow-icon {
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 480px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .kanji-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <div class="header-box">
+      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
+      <h1>Katalog <span>Kanji Lengkap</span></h1>
+      <p>Pilih tingkatan level JLPT di bawah ini untuk mempelajari daftar kanji, cara baca (Onyomi/Kunyomi), arti, guratan, dan contoh kosakata.</p>
+    </div>
+
+    <div class="cards-container">
+      
+      <a href="./kanji-n5.html" class="kanji-card card-n5">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">日</div>
+            <span class="level-tag">PEMULA DASAR</span>
+          </div>
+          <h2>Kanji N5</h2>
+          <p>Kumpulan kanji dasar pemula meliputi angka, hari, waktu, arah, keluarga, dan kata kerja sederhana.</p>
+          <div class="specs-list">
+            <span>㊗️ ~215 Kanji</span>
+            <span>🟢 Level Dasar</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Daftar Kanji</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./kanji-n4.html" class="kanji-card card-n4">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">語</div>
+            <span class="level-tag">DASAR LANJUTAN</span>
+          </div>
+          <h2>Kanji N4</h2>
+          <p>Kanji untuk aktivitas sehari-hari, benda di sekitar, transportasi, tempat umum, dan kondisi cuaca.</p>
+          <div class="specs-list">
+            <span>㊗️ ~181 Kanji</span>
+            <span>🔵 Level Menengah Bawah</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Daftar Kanji</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./kanji-n3.html" class="kanji-card card-n3">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">読</div>
+            <span class="level-tag">MENENGAH</span>
+          </div>
+          <h2>Kanji N3</h2>
+          <p>Jembatan menuju tingkat mahir: kanji untuk percakapan formal, artikel umum, dan berita ringkas.</p>
+          <div class="specs-list">
+            <span>㊗️ ~370 Kanji</span>
+            <span>🟣 Level Menengah</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Daftar Kanji</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./kanji-n2.html" class="kanji-card card-n2">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">論</div>
+            <span class="level-tag">BISNIS &amp; AKADEMIK</span>
+          </div>
+          <h2>Kanji N2</h2>
+          <p>Kanji level bisnis dan akademik yang umum digunakan pada koran, esai, instruksi kerja, dan berita TV.</p>
+          <div class="specs-list">
+            <span>㊗️ ~415 Kanji</span>
+            <span>🔴 Level Lanjutan</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Daftar Kanji</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./kanji-n1.html" class="kanji-card card-n1">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">覇</div>
+            <span class="level-tag">MAHIR / ADVANCED</span>
+          </div>
+          <h2>Kanji N1</h2>
+          <p>Tingkatan tertinggi: kanji literatur, istilah hukum, politik, sastra klasik, dan istilah teknis khusus.</p>
+          <div class="specs-list">
+            <span>㊗️ ~1.150 Kanji</span>
+            <span>⭐ Level Tertinggi</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Daftar Kanji</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./kata-kalimat-kanji-n5-n4.html" class="kanji-card card-n5n4">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">漢</div>
+            <span class="level-tag">GABUNGAN KANJI</span>
+          </div>
+          <h2>Kata &amp; Kalimat Kanji N5-N4</h2>
+          <p>Kumpulan kosakata dan kalimat kanji praktis untuk mempermudah pemahaman tulisan dan penulisan singkat.</p>
+          <div class="specs-list">
+            <span>📖 ~613 Kosakata</span>
+            <span>📙 Flashcard &amp; Kamus</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Kata &amp; Kalimat</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+      <a href="./e-card-kotoba.html" class="kanji-card card-kotoba">
+        <div class="card-top">
+          <div class="card-meta">
+            <div class="kanji-icon">語</div>
+            <span class="level-tag">KOSAKATA INTERAKTIF</span>
+          </div>
+          <h2>Kosakata Interaktif Bab 1–35</h2>
+          <p>Latihan kosakata bergambar lengkap Bab 1–35 dilengkapi fitur Mode Flashcard Flip, audio pelafalan, dan kamus mandiri.</p>
+          <div class="specs-list">
+            <span>🌸 Bab 1 - 35</span>
+            <span>🎴 Audio &amp; Flashcard</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>Buka Kosakata Interaktif</span>
+          <span class="arrow-icon">→</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+  </script>
+
+</body>
+</html>
