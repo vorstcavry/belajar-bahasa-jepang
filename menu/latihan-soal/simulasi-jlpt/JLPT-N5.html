@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Simulasi Ujian JLPT N5 - Full Package 80 Soal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #991b1b;
+      --primary-light: #fee2e2;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+      --border: #cbd5e1;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --accent: #2563eb;
+      --purple: #7c3aed;
+      --jp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: calc(85px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+    }
+
+    /* Modal Pop-up Layar Awal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px 18px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+      border: 1.5px solid var(--border);
+    }
+
+    .modal-icon {
+      font-size: 2.4rem;
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      color: var(--subtext);
+      font-size: 0.84rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-modal-start, .btn-modal-study {
+      border: none;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+
+    .btn-modal-start {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-modal-start:hover { background: var(--primary-dark); }
+
+    .btn-modal-study {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1.5px solid #fca5a5;
+    }
+    .btn-modal-study:hover { background: #fca5a5; }
+
+    /* Top Sticky Header */
+    .exam-header {
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      padding: 8px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.3s ease, background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Auto Hide saat Scroll di Mode Belajar */
+    .exam-header.study-hide {
+      transform: translateY(-100%);
+    }
+
+    /* Tampilan Compact Floating Timer saat Scroll di Mode Ujian */
+    .exam-header.exam-scrolled {
+      background: transparent;
+      border-bottom: none;
+      box-shadow: none;
+      pointer-events: none;
+      padding: 6px 12px;
+    }
+
+    .exam-header.exam-scrolled .exam-badge-group {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-10px);
+    }
+
+    .exam-header.exam-scrolled .timer-badge {
+      pointer-events: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      background: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exam-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .jlpt-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .exam-title-text {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #1e293b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .timer-badge {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .study-header-bar {
+      display: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-finish-study {
+      background: #16a34a;
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+
+    /* Modul Belajar Rinci */
+    .study-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+    }
+
+    .study-section-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 18px 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .study-card-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .study-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .jp-line-single {
+      font-family: var(--jp-font);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .study-card-bottom {
+      font-size: 0.8rem;
+      color: #334155;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* Table Scroll Wrapper for Mobile */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 8px 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .study-table {
+      width: 100%;
+      min-width: 480px;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .study-table th, .study-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .study-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Pemilihan Paket Soal */
+    .package-selector-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .package-selector-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .package-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .package-buttons {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-pack {
+      padding: 6px 10px;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--subtext);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .btn-pack.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-pack.btn-random-mix {
+      background: #f5f3ff;
+      color: var(--purple);
+      border-color: #ddd6fe;
+    }
+
+    .btn-pack.btn-random-mix.active {
+      background: var(--purple);
+      color: #ffffff;
+      border-color: var(--purple);
+    }
+
+    .composition-badge-box {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #6d28d9;
+      background: #f5f3ff;
+      border: 1px dashed #c4b5fd;
+      padding: 6px 8px;
+      border-radius: 8px;
+      display: none;
+      line-height: 1.4;
+    }
+
+    /* Filter Sesi */
+    .section-tabs {
+      display: flex;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: 10px;
+      gap: 2px;
+      margin-bottom: 10px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 7px 2px;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* Lembar Navigasi Soal */
+    .question-nav-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .question-nav-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--subtext);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .question-grid-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      max-height: 90px;
+      overflow-y: auto;
+      padding-bottom: 2px;
+    }
+
+    .q-chip {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .q-chip.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .q-chip.answered {
+      background: #dbeafe;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+    }
+
+    /* Kartu Soal */
+    .mondai-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .mondai-tag-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mondai-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+
+    .origin-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      background: #fef2f2;
+      color: var(--primary);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #fecaca;
+    }
+
+    .mondai-instruction {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 6px;
+      font-family: var(--jp-font);
+      line-height: 1.45;
+    }
+
+    .reading-passage {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--accent);
+      border-radius: 7px;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-family: var(--jp-font);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #1e293b;
+    }
+
+    .audio-player-box {
+      background: #f0f9ff;
+      border: 1.5px solid #bae6fd;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .btn-audio-play {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .question-text-jp {
+      font-family: var(--jp-font);
+      font-size: clamp(0.95rem, 4vw, 1.15rem);
+      font-weight: 700;
+      line-height: 1.6;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+
+    .underline-target {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      color: var(--primary-dark);
+      font-weight: 900;
+    }
+
+    /* Pilihan Ganda */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-item {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      background: #f1f5f9;
+    }
+
+    .option-item.selected {
+      border-color: var(--primary);
+      background: #fff5f5;
+    }
+
+    .option-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      font-size: 0.74rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #475569;
+    }
+
+    .option-item.selected .option-number {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .option-text-jp {
+      font-family: var(--jp-font);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      flex: 1;
+      word-break: break-word;
+    }
+
+    /* Bottom Control Bar */
+    .exam-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1.5px solid var(--border);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      z-index: 100;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
+    }
+
+    .bottom-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .btn-nav-exam {
+      flex: 1;
+      padding: 10px 8px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-nav-exam:hover { background: #f8fafc; }
+
+    .btn-submit-exam {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-submit-exam:hover { background: var(--primary-dark); }
+
+    /* Modal Hasil Nilai */
+    .result-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(3px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .result-modal-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 20px 16px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .score-circle {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.1;
+      margin: 6px 0 2px;
+    }
+
+    .pass-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+    .pass-badge.pass { background: var(--success-bg); color: var(--success); }
+    .pass-badge.fail { background: var(--primary-light); color: var(--primary); }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 0.74rem;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid var(--border);
+      padding: 6px 6px;
+      text-align: center;
+    }
+    .score-table th { background: #f8fafc; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <!-- MODAL AWAL -->
+  <div class="modal-overlay" id="start-modal">
+    <div class="modal-card">
+      <div class="modal-icon">🇯🇵</div>
+      <h3 class="modal-title">Simulasi Ujian Resmi JLPT N5</h3>
+      <p class="modal-desc">
+        Paket lengkap <strong>80 Butir Soal</strong> (Moji-Goi, Bunpou, Dokkai, dan Choukai Listening Audio) dengan durasi waktu <strong>85 Menit</strong>.
+      </p>
+      <div class="modal-buttons">
+        <button class="btn-modal-study" onclick="openStudyMode()">📖 Belajar Terlebih Dahulu</button>
+        <button class="btn-modal-start" onclick="startExamFromModal()">🚀 Langsung Mulai Ujian</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="exam-header" id="examHeader">
+    <div class="header-inner">
+      <div class="exam-badge-group" id="examBadgeGroup">
+        <span class="jlpt-badge">JLPT N5</span>
+        <span class="exam-title-text" id="headerCategoryText">Sesi 1: 言語知識 (文字・語彙)</span>
+      </div>
+      
+      <div class="timer-badge" id="timerBadgeBox">
+        ⏱️ <span id="timerDisplay">85:00</span>
+      </div>
+
+      <div class="study-header-bar" id="studyHeaderBar">
+        <button class="btn-finish-study" onclick="exitStudyMode()">
+          ✅ Mulai Ujian Sekarang
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- AREA 1: MODUL MATERI BELAJAR LENGKAP -->
+  <div class="container" id="studyContainer" style="display: none;">
+    <div class="study-card">
+      <h3 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 4px;">📘 Modul Panduan &amp; Teori Lengkap JLPT N5</h3>
+      <p style="font-size: 0.82rem; color: var(--subtext); margin-bottom: 14px;">
+        Pelajari kaidah dasar huruf Kanji, perubahan bentuk kata kerja (*Katsuyou*), aturan partikel (*Joshi*), teknik membaca teks pendek, serta strategi mendengarkan audio.
+      </p>
+
+      <!-- 1. Huruf & Kanji -->
+      <div class="study-section-title">1. Panduan Huruf &amp; Pembacaan Kanji N5 (文字・漢字)</div>
+      <p style="font-size: 0.8rem; color: #475569; margin-bottom: 8px;">
+        Pada JLPT N5, Anda diuji untuk membedakan bunyi panjang (*Chouon*), konsonan ganda (*Sokuon* / っ kecil), serta pembacaan On'yomi &amp; Kun'yomi.
+      </p>
+      <div class="table-responsive">
+        <table class="study-table">
+          <tr>
+            <th>Kategori Kanji</th>
+            <th>Contoh Karakter &amp; Furigana</th>
+            <th>Poin Penting Analisis</th>
+          </tr>
+          <tr>
+            <td><strong>Angka &amp; Bilangan</strong></td>
+            <td>一 (いち), 二 (に), 三 (さん), 四 (よん/し), 五 (ご), 百 (ひゃく), 千 (せん), 万 (まん)</td>
+            <td>Bentuk khusus hitungan: ひとつ (1), ふたつ (2), みっつ (3), よっつ (4).</td>
+          </tr>
+          <tr>
+            <td><strong>Waktu &amp; Hari</strong></td>
+            <td>日 (ひ/にち), 月 (つき/げつ), 火 (か), 水 (みず/すい), 木 (き/もく), 金 (かね/きん), 土 (ど)</td>
+            <td>Bulan: 4月 (しがつ), 9月 (くがつ). Hari/tanggal khusus: ついたち, ふつか, みっか, よっか.</td>
+          </tr>
+          <tr>
+            <td><strong>Arah &amp; Posisi</strong></td>
+            <td>上 (うえ), 下 (した), 前 (まえ), 後 (うしろ/あと), 左 (ひだり), 右 (みぎ), 中 (なか), 外 (そと)</td>
+            <td>Sering bersama partikel の + に (つくえの 上に / えきの 前で).</td>
+          </tr>
+          <tr>
+            <td><strong>Alam &amp; Manusia</strong></td>
+            <td>人 (ひと/じん), 男 (おとこ), 女 (おんな), 子 (こ), 山 (やま), 川 (かわ), 田 (た), 空 (そら)</td>
+            <td>Kata majemuk: 男の子 (おとこのこ), 女の子 (おんなのこ), 先生 (せんせい).</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 2. Klasifikasi Perubahan Kata Kerja -->
+      <div class="study-section-title">2. Klasifikasi &amp; Perubahan Bentuk Kata Kerja (動詞の活用)</div>
+      <p style="font-size: 0.8rem; color: #475569; margin-bottom: 8px;">
+        Memahami pembagian 3 golongan kata kerja adalah kunci menjawab bagian tata bahasa (*Bunpou*).
+      </p>
+      <div class="table-responsive">
+        <table class="study-table">
+          <tr>
+            <th>Golongan</th>
+            <th>Ciri Kamus</th>
+            <th>Bentuk-Te (て形)</th>
+            <th>Bentuk-Nai (ない形)</th>
+          </tr>
+          <tr>
+            <td><strong>Gol. 1 (Godan)</strong></td>
+            <td>Akhiran vokal -u (かく, のむ, はなす, かう, まつ, とる)</td>
+            <td>
+              ・う/つ/る → <strong>~って</strong><br>
+              ・む/ぶ/ぬ → <strong>~んで</strong><br>
+              ・く → <strong>~いて</strong>, ぐ → <strong>~いで</strong><br>
+              ・す → <strong>~して</strong>
+            </td>
+            <td>Ubah baris -u ke -a + ない (かく→かかない). <em>Kecuali う→わない (かう→かわない).</em></td>
+          </tr>
+          <tr>
+            <td><strong>Gol. 2 (Ichidan)</strong></td>
+            <td>Akhiran -iru / -eru (たべる, みる, ねる)</td>
+            <td>Hilangkan る + <strong>て</strong> (たべて, みて)</td>
+            <td>Hilangkan る + <strong>ない</strong> (たべない, みない)</td>
+          </tr>
+          <tr>
+            <td><strong>Gol. 3 (Fukisoku)</strong></td>
+            <td>くる / する</td>
+            <td>・くる → <strong>きて</strong><br>・する → <strong>して</strong></td>
+            <td>・くる → <strong>こない</strong><br>・する → <strong>しない</strong></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 3. Fungsi Partikel Penting -->
+      <div class="study-section-title">3. Penggunaan Partikel Baku (助詞のまとめ)</div>
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">は (Wa) vs が (Ga)</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>は:</strong> Topik utama kalimat (わたしは 学生です).<br>
+          <strong>が:</strong> Subjek spesifik, keberadaan (*~ga arimasu/imasu*), kesukaan (*~ga suki*), atau kemampuan (*~ga dekimasu*).
+        </div>
+      </div>
+
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">で (De) vs に (Ni) vs へ (He)</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>で:</strong> Tempat aksi dinamis (図書館で 本を読む) atau sarana/alat (バスで 行く).<br>
+          <strong>に:</strong> Waktu spesifik (7時に 起きる), tempat tujuan akhir (部屋に 入る), atau posisi statis (いすの 上に ある).<br>
+          <strong>へ:</strong> Arah pergerakan tujuan (日本へ 行きます).
+        </div>
+      </div>
+
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">を (Wo) &bull; と (To) &bull; も (Mo) &bull; から/まで</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>を:</strong> Objek aksi transitif (ごはんを 食べる).<br>
+          <strong>と:</strong> "Dan" (tertutup: パンと 牛乳) atau "bersama" (友だちと 行く).<br>
+          <strong>から / まで:</strong> Titik awal (dari) hingga batas akhir (sampai).
+        </div>
+      </div>
+
+      <!-- 4. Pola Kalimat Kunci -->
+      <div class="study-section-title">4. Pola Tata Bahasa Bunpou Penting N5</div>
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">KK ~てください / ~ては いけません</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>~てください:</strong> Permohonan sopan (名前を 書いてください = Tolong tulis nama).<br>
+          <strong>~ては いけません:</strong> Larangan (写真を とっては いけません = Dilarang mengambil foto).
+        </div>
+      </div>
+
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">KK ~たいです / KK ~ながら</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>~たいです:</strong> Keinginan (お茶を 飲みたいです = Ingin minum teh).<br>
+          <strong>~ながら:</strong> Dua aktivitas serentak (音楽を 聞きながら 勉強します = Belajar sambil dengar musik).
+        </div>
+      </div>
+
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">Pengandaian ~たら / Urutan ~てから</span>
+        </div>
+        <div class="study-card-bottom">
+          <strong>~たら:</strong> Syarat "jika/setelah" (雨が ふったら 行きません = Jika hujan, tidak pergi).<br>
+          <strong>~てから:</strong> Urutan aksi yang pasti (ごはんを 食べてから 宿題をします = Setelah makan, baru buat PR).
+        </div>
+      </div>
+
+      <!-- 5. Strategi Dokkai & Choukai -->
+      <div class="study-section-title">5. Strategi Membaca &amp; Mendengarkan</div>
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">Strategi Membaca Teks (読解 - Dokkai)</span>
+        </div>
+        <div class="study-card-bottom">
+          1. <strong>Baca pertanyaan dan kata kunci terlebih dahulu.</strong><br>
+          2. Perhatikan kata hubung kontras: <strong>でも (tetapi), しかし (namun), だから (karena itu).</strong><br>
+          3. Cermati detail tanda bintang (※), syarat libur (休館日), dan tenggat waktu (締め切り).
+        </div>
+      </div>
+
+      <div class="study-card-item">
+        <div class="study-card-top">
+          <span class="jp-line-single">Strategi Mendengarkan Audio (聴解 - Choukai)</span>
+        </div>
+        <div class="study-card-bottom">
+          1. <strong>Cermati koreksi keputusan di akhir dialog:</strong> Contoh: "8時？ちょっと早いね、じゃあ9時にしよう" → Keputusan: Jam 9.<br>
+          2. <strong>Hafalkan salam baku situasi:</strong> Izin masuk (失礼します), terima kasih makanan (ごちそうさまでした), maaf (すみません).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AREA 2: KONTAINER UJIAN -->
+  <div class="container" id="examContainer">
+    <!-- Pemilih Paket Soal -->
+    <div class="package-selector-card">
+      <div class="package-selector-header">
+        <div class="package-label">
+          <span>📑 Model Paket (80 Soal):</span>
+          <strong id="currentPackName" style="color: var(--purple);">🔀 Paket Acak Campuran</strong>
+        </div>
+      </div>
+      <div class="package-buttons">
+        <button class="btn-pack btn-random-mix active" onclick="changePackage('RANDOM', this)">🔀 Acak Campuran</button>
+        <button class="btn-pack" onclick="changePackage('A', this)">Paket A</button>
+        <button class="btn-pack" onclick="changePackage('B', this)">Paket B</button>
+        <button class="btn-pack" onclick="changePackage('C', this)">Paket C</button>
+        <button class="btn-pack" onclick="changePackage('D', this)">Paket D</button>
+        <button class="btn-pack" onclick="changePackage('E', this)">Paket E</button>
+      </div>
+      <div class="composition-badge-box" id="compositionBox">
+        🎲 Komposisi Acak: Memuat 80 soal...
+      </div>
+    </div>
+
+    <!-- Filter Sesi -->
+    <div class="section-tabs">
+      <button class="tab-btn active" onclick="switchSection(1, this)">1. 文字・語彙</button>
+      <button class="tab-btn" onclick="switchSection(2, this)">2. 文法・読解</button>
+      <button class="tab-btn" onclick="switchSection(3, this)">3. 聴解</button>
+    </div>
+
+    <!-- Lembar Navigasi Soal -->
+    <div class="question-nav-card">
+      <div class="question-nav-title">
+        <span>Navigasi Soal</span>
+        <span id="answeredCountText">0 / 80 Terjawab</span>
+      </div>
+      <div class="question-grid-chips" id="chipsContainer"></div>
+    </div>
+
+    <!-- Area Soal Aktif -->
+    <div id="questionContainer"></div>
+  </div>
+
+  <!-- Bottom Control Bar -->
+  <div class="exam-bottom-bar" id="examBottomBar">
+    <div class="bottom-inner">
+      <button class="btn-nav-exam" id="btnPrev" onclick="navigateQuestion(-1)">← Sebelumnya</button>
+      <button class="btn-nav-exam" id="btnNext" onclick="navigateQuestion(1)">Selanjutnya →</button>
+      <button class="btn-nav-exam btn-submit-exam" onclick="submitExam()">Kirim Ujian</button>
+    </div>
+  </div>
+
+  <!-- Modal Hasil Nilai -->
+  <div class="result-modal-overlay" id="resultModal">
+    <div class="result-modal-card">
+      <h3 style="font-size: 1.05rem; font-weight: 800;">Laporan Hasil Ujian JLPT N5</h3>
+      <div class="score-circle" id="scoreTotalText">0 / 180</div>
+      <div id="statusBadge" class="pass-badge pass">合格 (LULUS)</div>
+
+      <table class="score-table">
+        <tr>
+          <th>Sesi Ujian</th>
+          <th>Skor</th>
+          <th>Batas Lulus</th>
+        </tr>
+        <tr>
+          <td>言語知識・読解 (58 Soal)</td>
+          <td id="scoreGengoText" style="font-weight: 800;">0 / 120</td>
+          <td>Min. 38 Poin</td>
+        </tr>
+        <tr>
+          <td>聴解 (22 Soal)</td>
+          <td id="scoreChoukaiText" style="font-weight: 800;">0 / 60</td>
+          <td>Min. 19 Poin</td>
+        </tr>
+      </table>
+
+      <!-- Menu Tombol Aksi Hasil Nilai -->
+      <button class="btn-nav-exam btn-submit-exam" style="width: 100%; margin-bottom: 6px;" onclick="retryCurrentPackage()">
+        🔄 Coba Kerjakan Kembali
+      </button>
+      <button class="btn-nav-exam" style="width: 100%;" onclick="loadNextMixedPackage()">
+        ✨ Buat Paket Acak Baru
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // TEMPLATE DATA MASTER 5 PAKET SOAL JLPT N5
+    // =========================================================================
+    const PACK_DATA = {
+      "A": {
+        kanjiReadings: [
+          ["学校", "がっこう", "がこう", "かっこう", "かこう", 0],
+          ["起きます", "おきます", "ねます", "いきます", "きます", 0],
+          ["三つ", "みっつ", "ひとつ", "ふたつ", "よっつ", 0],
+          ["川", "かわ", "やま", "うみ", "いけ", 0],
+          ["雨", "あめ", "ゆき", "かぜ", "くも", 0],
+          ["男の子", "おとこのこ", "おんなのこ", "おとな", "こども", 0],
+          ["父", "ちち", "はは", "あに", "あね", 0],
+          ["入口", "いりぐち", "でぐち", "きたぐち", "みなみぐち", 0],
+          ["高い", "たかい", "ひくい", "やすい", "ながい", 0],
+          ["出ます", "でます", "はいります", "あけます", "しめます", 0],
+          ["飲みます", "のみます", "たべます", "みます", "ききます", 0],
+          ["先週", "せんしゅう", "こんしゅう", "らいしゅう", "まいしゅう", 0]
+        ],
+        kanjiWritings: [
+          ["せんせい", "先生", "生徒", "学生", "医者", 0],
+          ["くるま", "車", "電車", "自転車", "飛行機", 0],
+          ["まえ", "前", "後", "右", "左", 0],
+          ["ごご", "午後", "午前", "今夜", "毎日", 0],
+          ["おおい", "多い", "少い", "長い", "短い", 0],
+          ["やま", "山", "川", "海", "木", 0],
+          ["ちいさい", "小さい", "大きい", "新しい", "古い", 0],
+          ["はいります", "入ります", "出ます", "行きます", "来ます", 0]
+        ],
+        vocabContext: [
+          ["ごはんを たべる まえに、「（  ）」と 言います。", ["いただきます", "ごちそうさま", "いってきます", "ただいま"], 0],
+          ["すみません、この とけいは （  ）ですか。… 3,000円です。", ["いくら", "なんじ", "だれ", "どこ"], 0],
+          ["きょうは あついですね。（  ）を あけましょう。", ["まど", "ドア", "ラジオ", "テレビ"], 0],
+          ["きのうは しごとを やすみました。一日中 （  ）に いました。", ["ベッド", "プール", "かいしゃ", "がっこう"], 0],
+          ["あさ （  ）を あらってから、ごはんを たべます。", ["かお", "あたま", "みみ", "め"], 0],
+          ["テーブルの 上を ふきんで （  ）ください。", ["ふいて", "のんで", "おいて", "はいて"], 0]
+        ],
+        vocabParaphrase: [
+          ["<span class='underline-target'>きのうの ばん</span>、テレビを 見ました。", ["ゆうべ", "おととい", "けさ", "こんばん"], 0],
+          ["この へやは <span class='underline-target'>あかるい</span>です。", ["くらくない", "しずかではない", "ひろくない", "せまくない"], 0]
+        ]
+      },
+      "B": {
+        kanjiReadings: [
+          ["大学", "だいがく", "たいがく", "おおがく", "だいがっこう", 0],
+          ["寝ます", "ねます", "おきます", "いきます", "みます", 0],
+          ["四つ", "よっつ", "みっつ", "いつつ", "むっつ", 0],
+          ["山", "やま", "かわ", "き", "うみ", 0],
+          ["雪", "ゆき", "あめ", "かぜ", "くも", 0],
+          ["女の子", "おんなのこ", "おとこのこ", "こども", "おとな", 0],
+          ["母", "はは", "ちち", "あね", "あに", 0],
+          ["出口", "でぐち", "いりぐち", "ひがしぐち", "にしぐち", 0],
+          ["安い", "やすい", "たかい", "ひくい", "おもい", 0],
+          ["入ります", "はいります", "でます", "いきます", "きます", 0],
+          ["食べます", "たべます", "のみます", "かいます", "あいます", 0],
+          ["来週", "らいしゅう", "せんしゅう", "こんしゅう", "まいしゅう", 0]
+        ],
+        kanjiWritings: [
+          ["がくせい", "学生", "先生", "生徒", "会社員", 0],
+          ["でんしゃ", "電車", "車", "自転車", "バス", 0],
+          ["うしろ", "後", "前", "中", "外", 0],
+          ["ごぜん", "午前", "午後", "毎朝", "今朝", 0],
+          ["すくない", "少ない", "多い", "短い", "近い", 0],
+          ["かわ", "川", "山", "海", "池", 0],
+          ["おおきい", "大きい", "小さい", "古い", "高い", 0],
+          ["でます", "出ます", "入ります", "行きます", "帰ります", 0]
+        ],
+        vocabContext: [
+          ["ごはんを たべた あとに、「（  ）」と 言います。", ["ごちそうさまでした", "いただきます", "いってきます", "おやすみ"], 0],
+          ["いま 何時ですか。… ちょうど （  ）です。", ["3時", "3円", "3人", "3日"], 0],
+          ["さむいですから、（  ）を しめて ください。", ["ドア", "カーテン", "ラジオ", "かばん"], 0],
+          ["やすみの 日は 家で （  ）を 読みます。", ["ほん", "ベッド", "プール", "テレビ"], 0],
+          ["夜 ねる まえに （  ）を みがきます。", ["は", "て", "あし", "め"], 0],
+          ["ノートに えんぴつで なまえを （  ）ください。", ["かいて", "きいて", "よんで", "けして"], 0]
+        ],
+        vocabParaphrase: [
+          ["<span class='underline-target'>きょうの あさ</span>、雨が ふりました。", ["けさ", "ゆうべ", "あした", "おととい"], 0],
+          ["この へやは <span class='underline-target'>せまい</span>です。", ["ひろくない", "あかるくない", "しずかではない", "たかくない"], 0]
+        ]
+      },
+      "C": {
+        kanjiReadings: [
+          ["高校", "こうこう", "こうこ", "ごうこう", "かっこう", 0],
+          ["行きます", "いきます", "きます", "かえります", "あるきます", 0],
+          ["二つ", "ふたつ", "ひとつ", "みっつ", "よっつ", 0],
+          ["海", "うみ", "かわ", "やま", "いけ", 0],
+          ["風", "かぜ", "あめ", "ゆき", "くも", 0],
+          ["大人", "おとな", "こども", "おとこ", "おんな", 0],
+          ["兄", "あに", "おとうと", "ちち", "あね", 0],
+          ["東口", "ひがしぐち", "にしぐち", "みなみぐち", "きたぐち", 0],
+          ["新しい", "あたらしい", "ふるい", "やすい", "たかい", 0],
+          ["開けます", "あけます", "しめます", "でます", "はいります", 0],
+          ["買います", "かいます", "うります", "のみます", "みます", 0],
+          ["今週", "こんしゅう", "せんしゅう", "らいしゅう", "まいしゅう", 0]
+        ],
+        kanjiWritings: [
+          ["いしゃ", "医者", "学者", "先生", "店員", 0],
+          ["じてんしゃ", "自転車", "電車", "自動車", "単車", 0],
+          ["みぎ", "右", "左", "北", "南", 0],
+          ["こんばん", "今晩", "昨晩", "今朝", "毎晩", 0],
+          ["ながい", "長い", "短い", "多い", "広い", 0],
+          ["うみ", "海", "川", "山", "木", 0],
+          ["あたらし", "新しい", "古い", "高い", "安い", 0],
+          ["いきます", "行きます", "来ます", "帰ります", "入ります", 0]
+        ],
+        vocabContext: [
+          ["いえを でるときに、「（  ）」と 言います。", ["いってきます", "ただいま", "おかえり", "ごちそうさま"], 0],
+          ["えきまで （  ）で 行きますか。… バスで 行きます。", ["なに", "なんじ", "だれ", "どこ"], 0],
+          ["へやが くらいですから、（  ）を つけて ください。", ["でんき", "テレビ", "エアコン", "まど"], 0],
+          ["あした ともだちと （  ）へ えいがを 見に 行きます。", ["えいがかん", "としょかん", "ぎんこう", "びょういん"], 0],
+          ["まいあさ シャワーを （  ）ます。", ["あび", "はいり", "のり", "つけ"], 0],
+          ["しゃしんを （  ）ください。", ["とって", "かいて", "よんで", "きいて"], 0]
+        ],
+        vocabParaphrase: [
+          ["あの ひとは <span class='underline-target'>親切</span>です。", ["やさしいです", "きびしいです", "おもしろいです", "たかいです"], 0],
+          ["この 本は <span class='underline-target'>やさしい</span>です。", ["むずかしくない", "たかくない", "あたらしくない", "おもしろくない"], 0]
+        ]
+      },
+      "D": {
+        kanjiReadings: [
+          ["先生", "せんせい", "がくせい", "いしゃ", "てんいん", 0],
+          ["来ます", "きます", "いきます", "かえります", "みます", 0],
+          ["一つ", "ひとつ", "ふたつ", "みっつ", "よっつ", 0],
+          ["木", "き", "ほん", "やま", "かわ", 0],
+          ["空", "そら", "あめ", "うみ", "かわ", 0],
+          ["子ども", "こども", "おとな", "おとこ", "おんな", 0],
+          ["姉", "あね", "いもうと", "はは", "ちち", 0],
+          ["西口", "にしぐち", "ひがしぐち", "きたぐち", "みなみぐち", 0],
+          ["古い", "ふるい", "あたらしい", "やすい", "たかい", 0],
+          ["閉めます", "しめます", "あけます", "でます", "はいります", 0],
+          ["見ます", "みます", "ききます", "よみます", "かきます", 0],
+          ["毎年", "まいとし", "まいねん", "ことし", "きょねん", 0]
+        ],
+        kanjiWritings: [
+          ["かいしゃいん", "会社員", "公務員", "銀行員", "店員", 0],
+          ["ひこうき", "飛行機", "電車", "新幹線", "船", 0],
+          ["ひだり", "左", "右", "東", "西", 0],
+          ["まいあさ", "毎朝", "毎晩", "今朝", "今晩", 0],
+          ["みじかい", "短い", "長い", "小さい", "大きい", 0],
+          ["き", "木", "本", "林", "森", 0],
+          ["ふるい", "古い", "新しい", "高い", "安い", 0],
+          ["きます", "来ます", "行きます", "帰ります", "出ます", 0]
+        ],
+        vocabContext: [
+          ["いえに かえったときに、「（  ）」と 言います。", ["ただいま", "いってきます", "おかえりなさい", "ごめんください"], 0],
+          ["ここは （  ）ですか。… きょうしつです。", ["どこ", "だれ", "なんじ", "いくら"], 0],
+          ["おなかが すきましたから、（  ）へ 行きましょう。", ["しょくどう", "ぎんこう", "びょういん", "ゆうびんきょく"], 0],
+          ["ゆうびんきょくで （  ）を 買いました。", ["きって", "きっぷ", "チケット", "ノート"], 0],
+          ["ともだちに でんわを （  ）ます。", ["かけ", "つけ", "いれ", "きき"], 0],
+          ["プールで 1時間 （  ）ました。", ["およぎ", "はしり", "あるき", "あそび"], 0]
+        ],
+        vocabParaphrase: [
+          ["あの レストランは <span class='underline-target'>有名</span>です。", ["よく知られています", "おいしいです", "たかいです", "きれいです"], 0],
+          ["この まちは <span class='underline-target'>にぎやか</span>です。", ["ひとが多いです", "しずかです", "せまいです", "暗いです"], 0]
+        ]
+      },
+      "E": {
+        kanjiReadings: [
+          ["学生", "がくせい", "せんせい", "せいと", "いしゃ", 0],
+          ["帰ります", "かえります", "いきます", "きます", "はいります", 0],
+          ["五つ", "いつつ", "よっつ", "むっつ", "ななつ", 0],
+          ["花", "はな", "き", "かわ", "くさ", 0],
+          ["月", "つき", "ひ", "みず", "き", 0],
+          ["友だち", "ともだち", "こども", "かぞく", "せんせい", 0],
+          ["弟", "おとうと", "あに", "いもうと", "あね", 0],
+          ["北口", "きたぐち", "みなみぐち", "ひがしぐち", "にしぐち", 0],
+          ["重い", "おもい", "かるい", "たかい", "ひくい", 0],
+          ["つけます", "つけます", "けします", "あけます", "しめます", 0],
+          ["聞きます", "ききます", "みます", "よみます", "はなします", 0],
+          ["去年", "きょねん", "ことし", "らいねん", "おととし", 0]
+        ],
+        kanjiWritings: [
+          ["ぎんこういん", "銀行員", "会社員", "公務員", "店員", 0],
+          ["ふね", "船", "飛行機", "電車", "車", 0],
+          ["なか", "中", "外", "前", "後", 0],
+          ["まいばん", "毎晩", "毎朝", "今晩", "昨晩", 0],
+          ["ひろい", "広い", "狭い", "高い", "低い", 0],
+          ["はな", "花", "木", "草", "山", 0],
+          ["たかい", "高い", "安い", "低い", "重い", 0],
+          ["かえります", "帰ります", "行きます", "来ます", "入ります", 0]
+        ],
+        vocabContext: [
+          ["かえってきた ひとに、「（  ）」と 言います。", ["おかえりなさい", "ただいま", "いってらっしゃい", "いただきます"], 0],
+          ["あの かたは （  ）ですか。… たなか先生です。", ["どなた", "どこ", "なんじ", "いくら"], 0],
+          ["びょういんで （  ）を もらいました。", ["くすり", "きっぷ", "きって", "ほん"], 0],
+          ["ぎんこうで お金を （  ）ました。", ["おろし", "いれ", "かい", "うり"], 0],
+          ["こうえんで いぬと （  ）ます。", ["さんぽし", "べんきょうし", "そうじし", "せんたくし"], 0],
+          ["にもつを つくえの 上に （  ）ください。", ["おいて", "のんで", "たべて", "ふいて"], 0]
+        ],
+        vocabParaphrase: [
+          ["この くつは <span class='underline-target'>かるい</span>です。", ["おもくない", "たかくない", "ちいさくない", "あたらしくない"], 0],
+          ["この 料理は <span class='underline-target'>からい</span>です。", ["あまくない", "まずい", "おいしくない", "つめたい"], 0]
+        ]
+      }
+    };
+
+    function generateFull80QuestionsForPackage(packKey) {
+      const data = PACK_DATA[packKey];
+      const list = [];
+      let qNum = 1;
+
+      // Sesi 1: Moji-Goi (1 - 28)
+      data.kanjiReadings.forEach((item) => {
+        list.push({
+          id: qNum++, sec: 1, origin: `Paket ${packKey}`,
+          title: "問題 1: 漢字の読み方",
+          ins: "＿＿＿の ことばは どう よみますか。1・2・3・4から いちばん いい ものを ひとつ えらんで ください。",
+          text: `この 文の <span class='underline-target'>${item[0]}</span> は どう よみますか。`,
+          opts: [item[1], item[2], item[3], item[4]],
+          ans: item[5]
+        });
+      });
+
+      data.kanjiWritings.forEach((item) => {
+        list.push({
+          id: qNum++, sec: 1, origin: `Paket ${packKey}`,
+          title: "問題 2: 表記（ひらがな→漢字）",
+          ins: "＿＿＿の ことばは どう かきますか。1・2・3・4から えらんで ください。",
+          text: `この <span class='underline-target'>${item[0]}</span> は どう かきますか。`,
+          opts: [item[1], item[2], item[3], item[4]],
+          ans: item[5]
+        });
+      });
+
+      data.vocabContext.forEach((item) => {
+        list.push({
+          id: qNum++, sec: 1, origin: `Paket ${packKey}`,
+          title: "問題 3: 語彙（文脈規定）",
+          ins: "（  ）に なにを いれますか。1・2・3・4から えらんで ください。",
+          text: item[0],
+          opts: item[1],
+          ans: item[2]
+        });
+      });
+
+      data.vocabParaphrase.forEach((item) => {
+        list.push({
+          id: qNum++, sec: 1, origin: `Paket ${packKey}`,
+          title: "問題 4: 言い換え類義",
+          ins: "＿＿＿の ぶんと だいたい おなじ いみの ぶんは どれですか。",
+          text: item[0],
+          opts: item[1],
+          ans: item[2]
+        });
+      });
+
+      // Sesi 2: Bunpou & Dokkai (29 - 58)
+      const grammarParticles = [
+        ["わたしは きのう 図書館（  ）本を よみました。", ["で", "に", "へ", "を"], 0],
+        ["日曜日、ともだち（  ）映画を 見に行きます。", ["と", "に", "で", "を"], 0],
+        ["毎朝 バス（  ）乗って 会社へ 行きます。", ["に", "で", "を", "へ"], 0],
+        ["ここで 写真を （  ）は いけません。", ["とって", "とる", "とり", "とった"], 0],
+        ["きのうの テストは あまり （  ）。", ["むずかしくなかったです", "むずかしいです", "むずかしくないです", "むずかしかったです"], 0],
+        ["りんご（  ）みかんを 買いました。", ["や", "の", "か", "も"], 0],
+        ["すずきさんは ピアノを ひくこと（  ）できます。", ["が", "を", "に", "で"], 0],
+        ["あしたは 天気が （  ）いいですね。", ["よく", "よくて", "いいね", "いい"], 0],
+        ["駅まで （  ）行きますか。… 歩いて 行きます。", ["どうやって", "どうして", "どのくらい", "いくら"], 0],
+        ["のどが かわきましたから、水を （  ）たいです。", ["のみ", "のむ", "のんで", "のんだ"], 0],
+        ["まだ ひるごはんを （  ）いません。", ["たべて", "たべる", "たべた", "たべ"], 0],
+        ["この ケーキは わたし（  ）つくりました。", ["が", "を", "で", "に"], 0],
+        ["教室（  ）だれも いません。", ["には", "では", "にはも", "ではも"], 0],
+        ["テレビを （  ）ながら、ごはんを たべます。", ["み", "みる", "みて", "みた"], 0]
+      ];
+
+      grammarParticles.forEach((item, idx) => {
+        list.push({
+          id: qNum++, sec: 2, origin: `Paket ${packKey}`,
+          title: `問題 1: 文法形式判断 (${idx + 1})`,
+          ins: "（  ）に なにを いれますか。1・2・3・4から えらんで ください。",
+          text: item[0],
+          opts: item[1],
+          ans: item[2]
+        });
+      });
+
+      const starSentences = [
+        ["わたしは ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ 行きます。<br>(1: へ / 2: 電車 / 3: で / 4: 会社)", ["へ", "電車", "で", "会社"], 1],
+        ["机の ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ あります。<br>(1: ほんが / 2: 上 / 3: に / 4: の)", ["ほんが", "上", "に", "の"], 2],
+        ["きのう ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ 高かったです。<br>(1: は / 2: シャツ / 3: 買った / 4: とても)", ["は", "シャツ", "買った", "とても"], 0],
+        ["この ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ ですか。<br>(1: は / 2: だれ / 3: カメラ / 4: の)", ["は", "だれ", "カメラ", "の"], 1],
+        ["あした ＿＿＿ ＿＿＿ ＿★＿ ＿＿＿ 行きましょう。<br>(1: に / 2: 映画 / 3: を / 4: 見)", ["に", "映画", "を", "見"], 0]
+      ];
+
+      starSentences.forEach((item, idx) => {
+        list.push({
+          id: qNum++, sec: 2, origin: `Paket ${packKey}`,
+          title: `問題 2: 文の組み立て (${idx + 1})`,
+          ins: "★に はいる ものは どれですか。1・2・3・4から えらんで ください。",
+          text: item[0],
+          opts: item[1],
+          ans: item[2]
+        });
+      });
+
+      for (let i = 1; i <= 3; i++) {
+        list.push({
+          id: qNum++, sec: 2, origin: `Paket ${packKey}`,
+          title: `問題 3: 文章の文法 (${i})`,
+          ins: "文章を よんで、問いに こたえて ください。",
+          passage: `きのう わたしは ともだちと デパートへ 行きました。そこで シャツと くつを 買いました。そのあと、きっさてんで コーヒーを [ ${i} ]。とても たのしかったです。`,
+          text: `[ ${i} ] に なにを 入れますか。`,
+          opts: ["飲みました", "飲みます", "飲んで", "飲まない"],
+          ans: 0
+        });
+      }
+
+      for (let i = 1; i <= 8; i++) {
+        list.push({
+          id: qNum++, sec: 2, origin: `Paket ${packKey}`,
+          title: `問題 4・5・6: 読解 (${i})`,
+          ins: "つぎの ぶんしょう（または 案内）を よんで、質問に こたえて ください。",
+          passage: `わたしは 毎週 土曜日に 日本語の クラスへ 行きます。クラスは 朝 9時から 12時までです。午後は 家で 宿題を します。日曜日は 勉強を しません。友だちと 公園へ 行きます。`,
+          text: `質問 ${i}: この 人は 日曜日に なにを しますか。`,
+          opts: ["友だちと 公園へ 行く", "日本語の クラスへ 行く", "家で 宿題を する", "朝 9時に 起きる"],
+          ans: 0
+        });
+      }
+
+      // Sesi 3: Choukai (59 - 80)
+      const choukaiScripts = [
+        ["男の人と 女の人が 話しています。男の人は 何を 買いますか。男：「パンと 牛乳を 買ってきて くれる？」女：「牛乳は まだ あるよ。」男：「じゃあ、パンだけ 買ってくるね。」", "男の人は 何を 買いますか。", ["パンだけ", "牛乳だけ", "パンと 牛乳", "何も 買わない"], 0],
+        ["女の人と 男の人が 話しています。あした 何時に 会いますか。女：「あした 8時に 会いましょうか。」男：「8時は 早いです。9時は どうですか。」女：「いいですよ。じゃあ 9時に。」", "ふたりは あした 何時に 会いますか。", ["9時", "8時", "7時", "10時"], 0],
+        ["先生が 話しています。学生は あした 何を 持ってきますか。先生：「あしたは 鉛筆と 消しゴムを 忘れずに 持ってきて ください。ノートは いりません。」", "学生は 何を 持ってきますか。", ["鉛筆と 消しゴム", "ノートだけ", "教科書と ノート", "消しゴムだけ"], 0],
+        ["病院で 医者と 女の人が 話しています。女の人は 薬を いつ 飲みますか。医者：「この 薬は ごはんを 食べた 後で 飲んで ください。」", "女の人は 薬を いつ 飲みますか。", ["ごはんの 後", "ごはんの 前", "寝る 前", "朝 起きて すぐ"], 0],
+        ["男の人と 女の人が 話しています。女の人は どの 傘を とりますか。男：「そこの 黒い 傘を 取って くれる？」女：「これ？ 大きいほう？」男：「ううん、小さいほうだよ。」", "女の人は どの 傘を 取りますか。", ["小さい 黒い 傘", "大きい 黒い 傘", "白い 傘", "赤い 傘"], 0],
+        ["女の人と 男の人が 話しています。男の人は これから どこへ 行きますか。女：「これから お昼ごはん？」男：「ううん、まず 郵便局へ 行くよ。」", "男の人は これから どこへ 行きますか。", ["郵便局", "食堂", "銀行", "教室"], 0],
+        ["男の人と 女の人が 話しています。男の人は どうして きのう 休みましたか。男：「あたまが 痛くて、熱も あったんだ。」", "男の人は どうして 休みましたか。", ["頭が 痛くて 熱が あったから", "天気が 悪かったから", "仕事が なかったから", "寝坊したから"], 0],
+        ["女の人が 話しています。女の人の 好きな 季節は いつですか。女：「わたしは 桜が さく 春が いちばん 好きです。」", "女の人の 好きな 季節は いつですか。", ["春", "夏", "秋", "冬"], 0],
+        ["ふたりは どこで 昼ごはんを 食べますか。女：「きょうは 公園で お弁当を 食べない？」男：「いいね、そうしよう。」", "ふたりは どこで 食べますか。", ["公園", "レストラン", "教室", "家"], 0],
+        ["男の人は 何色の シャツを 買いますか。男：「青を ください。」", "男の人は 何色を 買いますか。", ["青", "白", "黒", "赤"], 0],
+        ["テストは 何曜日ですか。男：「木曜日に かわったよ。」", "テストは 何曜日ですか。", ["木曜日", "水曜日", "金曜日", "土曜日"], 0],
+        ["田中さんの 部屋は 何階ですか。男：「4階の 402号室ですよ。」", "田中さんの 部屋は 何階ですか。", ["4階", "2階", "3階", "5階"], 0],
+        ["朝、先生に 会いました。何と 言いますか。", "朝 先生に 会ったとき、何と 言いますか。", ["おはようございます", "こんばんは", "おやすみなさい", "さようなら"], 0],
+        ["ごはんを ごちそうに なりました。何と 言いますか。", "ごはんを ごちそうになった後、何と 言いますか。", ["ごちそうさまでした", "いただきます", "いってらっしゃい", "おかえりなさい"], 0],
+        ["人に ぶつかりました。何と 言いますか。", "人に ぶつかったとき、何と 言いますか。", ["すみません", "どういたしまして", "おねがいします", "ごちそうさま"], 0],
+        ["プレゼントを もらいました。何と 言いますか。", "プレゼントを もらったとき、何と 言いますか。", ["ありがとうございます", "ごめんなさい", "失礼します", "どうぞ"], 0],
+        ["部屋に 入るとき、何と 言いますか。", "部屋に 入るとき、何と 言いますか。", ["失礼します", "さようなら", "ただいま", "いってきます"], 0],
+        ["「お名前は 何ですか。」", "「お名前は 何ですか。」", ["田中です", "アメリカです", "会社員です", "20歳です"], 0],
+        ["「いっしょに お茶を 飲みませんか。」", "「いっしょに お茶を 飲みませんか。」", ["ええ、飲みましょう", "はい、お茶です", "いいえ、飲みません", "ごちそうさま"], 0],
+        ["「駅まで どうやって 行きますか。」", "「駅まで どうやって 行きますか。」", ["バスで 行きます", "10分です", "ともだちと 行きます", "駅です"], 0],
+        ["「その 傘は あなたの ですか。」", "「その 傘は あなたの ですか。」", ["はい、そうです", "いいえ、あります", "傘です", "あそこです"], 0],
+        ["「きのう どこへ 行きましたか。」", "「きのう どこへ 行きましたか。」", ["どこへも 行きませんでした", "映画を 見ました", "日曜日でした", "12時でした"], 0]
+      ];
+
+      choukaiScripts.forEach((item, idx) => {
+        list.push({
+          id: qNum++, sec: 3, origin: `Paket ${packKey}`,
+          title: `問題 ${idx < 12 ? '1・2: 課題・ポイント理解' : '3・4: 発話・即時応答'} (${idx + 1})`,
+          ins: "音声を きいて、質問に こたえて ください。1・2・3・4から えらんで ください。",
+          audioText: item[0],
+          text: item[1],
+          opts: item[2],
+          ans: item[3]
+        });
+      });
+
+      return list;
+    }
+
+    const ALL_FULL_PACKAGES = {
+      "A": generateFull80QuestionsForPackage("A"),
+      "B": generateFull80QuestionsForPackage("B"),
+      "C": generateFull80QuestionsForPackage("C"),
+      "D": generateFull80QuestionsForPackage("D"),
+      "E": generateFull80QuestionsForPackage("E")
+    };
+
+    let currentPackKey = "RANDOM";
+    let activeQuestions = [];
+    let currentQIndex = 0;
+    let userAnswers = {};
+    let currentFilteredSection = 0;
+    let timeLeft = 85 * 60;
+    let timerInterval = null;
+    let isStudyModeActive = false;
+    let lastScrollY = window.scrollY;
+
+    // =========================================================================
+    // SMART SCROLL BEHAVIOR (MOBILE OPTIMIZATION)
+    // =========================================================================
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const header = document.getElementById('examHeader');
+      if (!header) return;
+
+      if (isStudyModeActive) {
+        // Mode Belajar: Scroll ke bawah sembunyikan penuh, scroll ke atas tampilkan
+        if (currentScrollY > lastScrollY && currentScrollY > 60) {
+          header.classList.add('study-hide');
+        } else {
+          header.classList.remove('study-hide');
+        }
+      } else {
+        // Mode Ujian: Scroll ke bawah hanya tampilkan badge timer floating agar area soal luas
+        if (currentScrollY > 40) {
+          header.classList.add('exam-scrolled');
+        } else {
+          header.classList.remove('exam-scrolled');
+        }
+      }
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    function generateDynamicMixed80Package() {
+      const keys = ["A", "B", "C", "D", "E"];
+      const TOTAL_QUESTIONS = 80;
+      const pickedList = [];
+      const stats = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+
+      for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        stats[randomKey]++;
+
+        const baseQuestion = ALL_FULL_PACKAGES[randomKey][i];
+        pickedList.push({
+          ...baseQuestion,
+          id: i + 1,
+          origin: `Paket ${randomKey}`
+        });
+      }
+
+      const pctInfo = keys
+        .map(k => `${k}: ${Math.round((stats[k] / TOTAL_QUESTIONS) * 100)}% (${stats[k]} soal)`)
+        .join(" | ");
+
+      const compositionBox = document.getElementById('compositionBox');
+      if (compositionBox) {
+        compositionBox.style.display = 'block';
+        compositionBox.innerHTML = `🎲 <strong>Komposisi 80 Soal Terpilih:</strong> ${pctInfo}`;
+      }
+
+      return pickedList;
+    }
+
+    function loadPackage(packKey) {
+      currentPackKey = packKey;
+      userAnswers = {};
+      currentQIndex = 0;
+
+      const compositionBox = document.getElementById('compositionBox');
+
+      if (packKey === "RANDOM") {
+        activeQuestions = generateDynamicMixed80Package();
+        document.getElementById('currentPackName').innerText = "🔀 Paket Acak Campuran";
+        document.getElementById('currentPackName').style.color = "var(--purple)";
+      } else {
+        if (compositionBox) compositionBox.style.display = 'none';
+        activeQuestions = ALL_FULL_PACKAGES[packKey] || ALL_FULL_PACKAGES["A"];
+        const packNames = {
+          "A": "Paket A (80 Soal Lengkap)",
+          "B": "Paket B (80 Soal Lengkap)",
+          "C": "Paket C (80 Soal Lengkap)",
+          "D": "Paket D (80 Soal Lengkap)",
+          "E": "Paket E (80 Soal Lengkap)"
+        };
+        document.getElementById('currentPackName').innerText = packNames[packKey];
+        document.getElementById('currentPackName').style.color = "var(--primary)";
+      }
+
+      document.querySelectorAll('.btn-pack').forEach(btn => {
+        if (packKey === "RANDOM") {
+          btn.classList.toggle('active', btn.classList.contains('btn-random-mix'));
+        } else {
+          btn.classList.toggle('active', btn.innerText.includes(`Paket ${packKey}`));
+        }
+      });
+
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function changePackage(packKey, btn) {
+      loadPackage(packKey);
+    }
+
+    function loadNextMixedPackage() {
+      document.getElementById('resultModal').style.display = 'none';
+      loadPackage("RANDOM");
+      resetTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function retryCurrentPackage() {
+      document.getElementById('resultModal').style.display = 'none';
+      userAnswers = {};
+      currentQIndex = 0;
+      renderChips();
+      renderCurrentQuestion();
+      resetTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchSection(secNum, btn) {
+      currentFilteredSection = secNum;
+      document.querySelectorAll('.section-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const firstIdx = activeQuestions.findIndex(q => q.sec === secNum);
+      if (firstIdx !== -1) currentQIndex = firstIdx;
+      
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function renderChips() {
+      const container = document.getElementById('chipsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      activeQuestions.forEach((q, idx) => {
+        if (currentFilteredSection === 0 || q.sec === currentFilteredSection) {
+          const chip = document.createElement('div');
+          chip.className = `q-chip ${idx === currentQIndex ? 'active' : ''} ${userAnswers[idx] !== undefined ? 'answered' : ''}`;
+          chip.innerText = idx + 1;
+          chip.onclick = () => {
+            currentQIndex = idx;
+            renderChips();
+            renderCurrentQuestion();
+          };
+          container.appendChild(chip);
+        }
+      });
+
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById('answeredCountText').innerText = `${answeredCount} / ${activeQuestions.length} Terjawab`;
+    }
+
+    function playNativeVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Browser Anda belum mendukung pemutar audio.");
+      }
+    }
+
+    function renderCurrentQuestion() {
+      const q = activeQuestions[currentQIndex];
+      const container = document.getElementById('questionContainer');
+      if (!q || !container) return;
+
+      const headerTitle = document.getElementById('headerCategoryText');
+      if (q.sec === 1) headerTitle.innerText = "Sesi 1: 言語知識 (文字・語彙)";
+      else if (q.sec === 2) headerTitle.innerText = "Sesi 2: 文法・読解";
+      else if (q.sec === 3) headerTitle.innerText = "Sesi 3: 聴解 (Choukai)";
+
+      let audioBoxHtml = '';
+      if (q.audioText) {
+        audioBoxHtml = `
+          <div class="audio-player-box">
+            <span style="font-size:0.75rem; font-weight:700; color:#0369a1;">🎧 Audio Listening</span>
+            <button class="btn-audio-play" onclick="playNativeVoice('${q.audioText.replace(/'/g, "\\'")}')">🔊 Putar</button>
+          </div>
+        `;
+      }
+
+      let passageHtml = '';
+      if (q.passage) {
+        passageHtml = `<div class="reading-passage">${q.passage}</div>`;
+      }
+
+      let optionsHtml = '';
+      q.opts.forEach((opt, oIdx) => {
+        const isSelected = userAnswers[currentQIndex] === oIdx;
+        optionsHtml += `
+          <div class="option-item ${isSelected ? 'selected' : ''}" onclick="selectOption(${oIdx})">
+            <span class="option-number">${oIdx + 1}</span>
+            <span class="option-text-jp">${opt}</span>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="mondai-card">
+          <div class="mondai-tag-wrapper">
+            <span class="mondai-tag">${q.title} &bull; No. ${currentQIndex + 1} / ${activeQuestions.length}</span>
+            ${q.origin ? `<span class="origin-badge">Sumber: ${q.origin}</span>` : ''}
+          </div>
+          <div class="mondai-instruction">${q.ins}</div>
+          ${audioBoxHtml}
+          ${passageHtml}
+          <div class="question-text-jp">${q.text}</div>
+          <div class="options-group">
+            ${optionsHtml}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btnPrev').disabled = (currentQIndex === 0);
+      document.getElementById('btnNext').disabled = (currentQIndex === activeQuestions.length - 1);
+    }
+
+    function selectOption(oIdx) {
+      userAnswers[currentQIndex] = oIdx;
+      renderChips();
+      renderCurrentQuestion();
+    }
+
+    function navigateQuestion(step) {
+      const newIndex = currentQIndex + step;
+      if (newIndex >= 0 && newIndex < activeQuestions.length) {
+        currentQIndex = newIndex;
+        renderChips();
+        renderCurrentQuestion();
+      }
+    }
+
+    function resetTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timeLeft = 85 * 60;
+      startTimer();
+    }
+
+    function startTimer() {
+      const timerDisplay = document.getElementById('timerDisplay');
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitExam();
+          return;
+        }
+        timeLeft--;
+        const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const secs = (timeLeft % 60).toString().padStart(2, '0');
+        if (timerDisplay) timerDisplay.innerText = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function submitExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      let correctSec1 = 0;
+      let correctSec2 = 0;
+      let correctSec3 = 0;
+
+      let totalSec1 = 0;
+      let totalSec2 = 0;
+      let totalSec3 = 0;
+
+      activeQuestions.forEach((q, idx) => {
+        if (q.sec === 1) {
+          totalSec1++;
+          if (userAnswers[idx] === q.ans) correctSec1++;
+        } else if (q.sec === 2) {
+          totalSec2++;
+          if (userAnswers[idx] === q.ans) correctSec2++;
+        } else if (q.sec === 3) {
+          totalSec3++;
+          if (userAnswers[idx] === q.ans) correctSec3++;
+        }
+      });
+
+      const totGengo = (totalSec1 + totalSec2) || 58;
+      const totChoukai = totalSec3 || 22;
+
+      const gengoRawScore = ((correctSec1 + correctSec2) / totGengo) * 120;
+      const choukaiRawScore = (correctSec3 / totChoukai) * 60;
+
+      const gengoScore = Math.round(gengoRawScore);
+      const choukaiScore = Math.round(choukaiRawScore);
+      const totalScore = gengoScore + choukaiScore;
+
+      const isTotalPassed = totalScore >= 80;
+      const isGengoPassed = gengoScore >= 38;
+      const isChoukaiPassed = choukaiScore >= 19;
+      const isFullyPassed = isTotalPassed && isGengoPassed && isChoukaiPassed;
+
+      document.getElementById('scoreTotalText').innerText = `${totalScore} / 180`;
+      document.getElementById('scoreGengoText').innerText = `${gengoScore} / 120 (Benar: ${correctSec1 + correctSec2}/${totGengo})`;
+      document.getElementById('scoreChoukaiText').innerText = `${choukaiScore} / 60 (Benar: ${correctSec3}/${totChoukai})`;
+
+      const statusBadge = document.getElementById('statusBadge');
+      if (isFullyPassed) {
+        statusBadge.className = 'pass-badge pass';
+        statusBadge.innerText = '合格 (LULUS JLPT N5)';
+      } else {
+        statusBadge.className = 'pass-badge fail';
+        statusBadge.innerText = '不合格 (BELUM LULUS)';
+      }
+
+      document.getElementById('resultModal').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startExamFromModal() {
+      isStudyModeActive = false;
+      const header = document.getElementById('examHeader');
+      header.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('studyContainer').style.display = 'none';
+      document.getElementById('studyHeaderBar').style.display = 'none';
+
+      document.getElementById('examBadgeGroup').style.display = 'flex';
+      document.getElementById('examContainer').style.display = 'block';
+      document.getElementById('examBottomBar').style.display = 'block';
+      document.getElementById('timerBadgeBox').style.display = 'inline-flex';
+
+      loadPackage("RANDOM");
+      startTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openStudyMode() {
+      isStudyModeActive = true;
+      const header = document.getElementById('examHeader');
+      header.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('examContainer').style.display = 'none';
+      document.getElementById('examBottomBar').style.display = 'none';
+      document.getElementById('timerBadgeBox').style.display = 'none';
+      document.getElementById('examBadgeGroup').style.display = 'none'; // Sembunyikan badge/judul JLPT N5 di header saat belajar
+
+      document.getElementById('studyContainer').style.display = 'block';
+      document.getElementById('studyHeaderBar').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function exitStudyMode() {
+      startExamFromModal();
+    }
+  </script>
+</body>
+</html>
