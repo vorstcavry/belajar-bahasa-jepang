@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>E-Card Meishi List N5 - 244 Kosakata Kata Benda Bergambar</title>
+
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #818cf8;
+      --primary-dark: #6366f1;
+      --accent: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
+      --card-hover-bg: #1e1b4b;
+      --card-active-bg: #312e81;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #4338ca;
+      --primary-dark: #312e81;
+      --accent: #06b6d4;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
+      --card-hover-bg: #f8fafc;
+      --card-active-bg: #e0e7ff;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #312e81 0%, #0891b2 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #e0f2fe;
+      font-size: 0.85rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-body);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Grid Layout E-Card */
+    .ecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .ecard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+
+    /* E-Card Item */
+    .meishi-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 120px;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .meishi-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--primary);
+      background: var(--card-hover-bg);
+      box-shadow: 0 6px 14px var(--shadow-color);
+    }
+
+    .meishi-card:active, .meishi-card.playing {
+      transform: scale(0.94);
+      background: var(--card-active-bg);
+      border-color: var(--primary);
+    }
+
+    .card-no {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .card-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .card-romaji {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .card-id {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1040px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-controls">
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Kosakata Bergambar JLPT N5</span>
+        <h1>E-Card Meishi List (えカード めいし リスト)</h1>
+        <p>Katalog lengkap 244 kata benda bergambar. Khusus negara dilengkapi ilustrasi figur orang &amp; bendera.</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
+    </header>
+
+    <div class="search-filter-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kosakata (contoh: jepang, mobil, hon, kuruma)..." onkeyup="filterCards()">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua (244)</button>
+        <button class="filter-btn" onclick="setCategory('negara', this)">🌍 Negara</button>
+        <button class="filter-btn" onclick="setCategory('kantor', this)">📚 Alat Tulis &amp; Kantor</button>
+        <button class="filter-btn" onclick="setCategory('tempat', this)">🏢 Tempat &amp; Bangunan</button>
+        <button class="filter-btn" onclick="setCategory('transportasi', this)">🚆 Transportasi</button>
+        <button class="filter-btn" onclick="setCategory('makanan', this)">🍱 Makanan &amp; Minuman</button>
+        <button class="filter-btn" onclick="setCategory('pakaian', this)">👔 Pakaian</button>
+        <button class="filter-btn" onclick="setCategory('keluarga', this)">👨‍👩‍👧‍👦 Orang &amp; Keluarga</button>
+        <button class="filter-btn" onclick="setCategory('alam', this)">🌤️ Alam, Cuaca &amp; Posisi</button>
+        <button class="filter-btn" onclick="setCategory('tubuh', this)">👤 Bagian Tubuh</button>
+      </div>
+    </div>
+
+    <div class="ecard-grid" id="meishiContainer"></div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA 244 KOSAKATA KATA BENDA (MEISHI) ---
+    const meishiList = [
+      { no: 1, jp: "せかい", r: "sekai", id: "Dunia", icon: "🧑‍🤝‍🧑 🌍", cat: "negara" },
+      { no: 2, jp: "アジア", r: "ajia", id: "Asia", icon: "🧑 🌏", cat: "negara" },
+      { no: 3, jp: "ヨーロッパ", r: "yooroppa", id: "Eropa", icon: "🧑 🇪🇺", cat: "negara" },
+      { no: 4, jp: "アフリカ", r: "afurika", id: "Afrika", icon: "🧑 🌍", cat: "negara" },
+      { no: 5, jp: "にほん", r: "nihon", id: "Jepang", icon: "🧑 🇯🇵", cat: "negara" },
+      { no: 6, jp: "インドネシア", r: "indoneshia", id: "Indonesia", icon: "🧑 🇮🇩", cat: "negara" },
+      { no: 7, jp: "ちゅうごく", r: "chuugoku", id: "China", icon: "🧑 🇨🇳", cat: "negara" },
+      { no: 8, jp: "かんこく", r: "kankoku", id: "Korea Selatan", icon: "🧑 🇰🇷", cat: "negara" },
+      { no: 9, jp: "マレーシア", r: "mareeshia", id: "Malaysia", icon: "🧑 🇲🇾", cat: "negara" },
+      { no: 10, jp: "タイ", r: "tai", id: "Thailand", icon: "🧑 🇹🇭", cat: "negara" },
+      { no: 11, jp: "フィリピン", r: "firipin", id: "Filipina", icon: "🧑 🇵🇭", cat: "negara" },
+      { no: 12, jp: "ベトナム", r: "betonamu", id: "Vietnam", icon: "🧑 🇻🇳", cat: "negara" },
+      { no: 13, jp: "シンガポール", r: "shingapooru", id: "Singapura", icon: "🧑 🇸🇬", cat: "negara" },
+      { no: 14, jp: "ブルネイ", r: "burunei", id: "Brunei", icon: "🧑 🇧🇳", cat: "negara" },
+      { no: 15, jp: "ホンコン", r: "honkon", id: "Hong Kong", icon: "🧑 🇭🇰", cat: "negara" },
+      { no: 16, jp: "インド", r: "indo", id: "India", icon: "🧑 🇮🇳", cat: "negara" },
+      { no: 17, jp: "サウジアラビア", r: "saujiarabia", id: "Saudi Arabia", icon: "🧑 🇸🇦", cat: "negara" },
+      { no: 18, jp: "オーストラリア", r: "oosutoraria", id: "Australia", icon: "🧑 🇦🇺", cat: "negara" },
+      { no: 19, jp: "イギリス", r: "igirisu", id: "Inggris", icon: "🧑 🇬🇧", cat: "negara" },
+      { no: 20, jp: "ドイツ", r: "doitsu", id: "Jerman", icon: "🧑 🇩🇪", cat: "negara" },
+      { no: 21, jp: "フランス", r: "furansu", id: "Perancis", icon: "🧑 🇫🇷", cat: "negara" },
+      { no: 22, jp: "イタリア", r: "itaria", id: "Italia", icon: "🧑 🇮🇹", cat: "negara" },
+      { no: 23, jp: "オランダ", r: "oranda", id: "Belanda", icon: "🧑 🇳🇱", cat: "negara" },
+      { no: 24, jp: "スペイン", r: "supein", id: "Spanyol", icon: "🧑 🇪🇸", cat: "negara" },
+      { no: 25, jp: "ロシア", r: "roshia", id: "Rusia", icon: "🧑 🇷🇺", cat: "negara" },
+      { no: 26, jp: "アメリカ", r: "amerika", id: "Amerika", icon: "🧑 🇺🇸", cat: "negara" },
+      { no: 27, jp: "カナダ", r: "kanada", id: "Kanada", icon: "🧑 🇨🇦", cat: "negara" },
+      { no: 28, jp: "ほん", r: "hon", id: "Buku", icon: "📖", cat: "kantor" },
+      { no: 29, jp: "じしょ", r: "jisho", id: "Kamus", icon: "📕", cat: "kantor" },
+      { no: 30, jp: "しんぶん", r: "shinbun", id: "Koran", icon: "📰", cat: "kantor" },
+      { no: 31, jp: "ざっし", r: "zasshi", id: "Majalah", icon: "📑", cat: "kantor" },
+      { no: 32, jp: "はこ", r: "hako", id: "Kotak", icon: "📦", cat: "kantor" },
+      { no: 33, jp: "かばん", r: "kaban", id: "Tas", icon: "🎒", cat: "kantor" },
+      { no: 34, jp: "かぎ", r: "kagi", id: "Kunci", icon: "🔑", cat: "kantor" },
+      { no: 35, jp: "えんぴつ", r: "enpitsu", id: "Pensil", icon: "✏️", cat: "kantor" },
+      { no: 36, jp: "ボールペン", r: "boorupen", id: "Ballpoint", icon: "🖊️", cat: "kantor" },
+      { no: 37, jp: "ペン", r: "pen", id: "Pena", icon: "🖋️", cat: "kantor" },
+      { no: 38, jp: "ノート", r: "nooto", id: "Buku Catatan", icon: "📓", cat: "kantor" },
+      { no: 39, jp: "かみ", r: "kami", id: "Kertas", icon: "📄", cat: "kantor" },
+      { no: 40, jp: "たばこ", r: "tabako", id: "Rokok", icon: "🚬", cat: "kantor" },
+      { no: 41, jp: "マッチ", r: "macchi", id: "Korek Api", icon: "🪵", cat: "kantor" },
+      { no: 42, jp: "はいざら", r: "haizara", id: "Asbak", icon: "🪙", cat: "kantor" },
+      { no: 43, jp: "ライター", r: "raitaa", id: "Korek Gas", icon: "🔥", cat: "kantor" },
+      { no: 44, jp: "つくえ", r: "tsukue", id: "Meja", icon: "🪵", cat: "kantor" },
+      { no: 45, jp: "いす", r: "isu", id: "Kursi", icon: "🪑", cat: "kantor" },
+      { no: 46, jp: "まど", r: "mado", id: "Jendela", icon: "🪟", cat: "tempat" },
+      { no: 47, jp: "でんき", r: "denki", id: "Lampu Listrik", icon: "💡", cat: "tempat" },
+      { no: 48, jp: "スイッチ", r: "suicchi", id: "Saklar", icon: "🔘", cat: "tempat" },
+      { no: 49, jp: "ドア", r: "doa", id: "Pintu", icon: "🚪", cat: "tempat" },
+      { no: 50, jp: "テレビ", r: "terebi", id: "Televisi", icon: "📺", cat: "tempat" },
+      { no: 51, jp: "ラジオ", r: "rajio", id: "Radio", icon: "📻", cat: "tempat" },
+      { no: 52, jp: "とけい", r: "tokei", id: "Jam", icon: "⏰", cat: "tempat" },
+      { no: 53, jp: "カメラ", r: "kamera", id: "Kamera", icon: "📷", cat: "tempat" },
+      { no: 54, jp: "じどうしゃ", r: "jidousha", id: "Mobil", icon: "🚗", cat: "transportasi" },
+      { no: 55, jp: "いえ", r: "ie", id: "Rumah", icon: "🏠", cat: "tempat" },
+      { no: 56, jp: "にわ", r: "niwa", id: "Halaman", icon: "🏡", cat: "tempat" },
+      { no: 57, jp: "かいしゃ", r: "kaisha", id: "Perusahaan", icon: "🏢", cat: "tempat" },
+      { no: 58, jp: "じむしょ", r: "jimusho", id: "Kantor", icon: "💼", cat: "tempat" },
+      { no: 59, jp: "うけつけ", r: "uketsuke", id: "Bagian Penerima Tamu", icon: "💁‍♀️", cat: "tempat" },
+      { no: 60, jp: "ロビー", r: "robii", id: "Lobby", icon: "🛋️", cat: "tempat" },
+      { no: 61, jp: "へや", r: "heya", id: "Kamar", icon: "🛏️", cat: "tempat" },
+      { no: 62, jp: "おてあらい", r: "otearai", id: "Toilet", icon: "🚻", cat: "tempat" },
+      { no: 63, jp: "きょうしつ", r: "kyoushitsu", id: "Ruang Kelas", icon: "🏫", cat: "tempat" },
+      { no: 64, jp: "しょくどう", r: "shokudou", id: "Kantin", icon: "🍽️", cat: "tempat" },
+      { no: 65, jp: "せんもん", r: "senmon", id: "Jurusan / Keahlian", icon: "🎓", cat: "kantor" },
+      { no: 66, jp: "でんき", r: "denki", id: "Listrik", icon: "⚡", cat: "tempat" },
+      { no: 67, jp: "きかい", r: "kikai", id: "Mesin", icon: "⚙️", cat: "kantor" },
+      { no: 68, jp: "コンピューター", r: "konpyuutaa", id: "Komputer", icon: "💻", cat: "kantor" },
+      { no: 69, jp: "あさ", r: "asa", id: "Pagi", icon: "🌅", cat: "alam" },
+      { no: 70, jp: "ひる", r: "hiru", id: "Siang", icon: "☀️", cat: "alam" },
+      { no: 71, jp: "ばん", r: "ban", id: "Malam", icon: "🌙", cat: "alam" },
+      { no: 72, jp: "ごぜん", r: "gozen", id: "Waktu Sebelum Jam 12", icon: "🕚", cat: "alam" },
+      { no: 73, jp: "ごご", r: "gogo", id: "Waktu Setelah Jam 12", icon: "🕐", cat: "alam" },
+      { no: 74, jp: "えき", r: "eki", id: "Stasiun", icon: "🚉", cat: "transportasi" },
+      { no: 75, jp: "こうじょう", r: "koujou", id: "Pabrik", icon: "🏭", cat: "tempat" },
+      { no: 76, jp: "ぎんこう", r: "ginkou", id: "Bank", icon: "🏦", cat: "tempat" },
+      { no: 77, jp: "びょういん", r: "byouin", id: "Rumah Sakit", icon: "🏥", cat: "tempat" },
+      { no: 78, jp: "デパート", r: "depaato", id: "Department Store", icon: "🏬", cat: "tempat" },
+      { no: 79, jp: "ほんや", r: "hon-ya", id: "Toko Buku", icon: "📚", cat: "tempat" },
+      { no: 80, jp: "とこや", r: "tokoya", id: "Pangkas Rambut", icon: "💈", cat: "tempat" },
+      { no: 81, jp: "たんじょうび", r: "tanjoubi", id: "Hari Ulang Tahun", icon: "🎂", cat: "keluarga" },
+      { no: 82, jp: "ひこうき", r: "hikouki", id: "Pesawat Terbang", icon: "✈️", cat: "transportasi" },
+      { no: 83, jp: "しんかんせん", r: "shinkansen", id: "Kereta Super Cepat", icon: "🚅", cat: "transportasi" },
+      { no: 84, jp: "でんしゃ", r: "densha", id: "Kereta Listrik", icon: "🚃", cat: "transportasi" },
+      { no: 85, jp: "ちかてつ", r: "chikatetsu", id: "Kereta Bawah Tanah", icon: "🚇", cat: "transportasi" },
+      { no: 86, jp: "タクシー", r: "takushii", id: "Taksi", icon: "🚕", cat: "transportasi" },
+      { no: 87, jp: "バス", r: "basu", id: "Bis", icon: "🚌", cat: "transportasi" },
+      { no: 88, jp: "じてんしゃ", r: "jitensha", id: "Sepeda", icon: "🚲", cat: "transportasi" },
+      { no: 89, jp: "あるいて", r: "aruite", id: "Berjalan", icon: "🚶", cat: "transportasi" },
+      { no: 90, jp: "ふね", r: "fune", id: "Kapal Laut", icon: "🚢", cat: "transportasi" },
+      { no: 91, jp: "ひとり(で)", r: "hitori(de)", id: "Sendirian", icon: "🧍", cat: "keluarga" },
+      { no: 92, jp: "ともだち(と)", r: "tomodachi(to)", id: "(Bersama) Teman", icon: "🧑‍🤝‍🧑", cat: "keluarga" },
+      { no: 93, jp: "こいびと(と)", r: "koibito(to)", id: "(Bersama) Pacar", icon: "👩‍❤️‍👨", cat: "keluarga" },
+      { no: 94, jp: "あさごはん", r: "asagohan", id: "Sarapan / Makan Pagi", icon: "🥞", cat: "makanan" },
+      { no: 95, jp: "ひるごはん", r: "hirugohan", id: "Makan Siang", icon: "🍱", cat: "makanan" },
+      { no: 96, jp: "ばんごはん", r: "bangohan", id: "Makan Malam", icon: "🍲", cat: "makanan" },
+      { no: 97, jp: "たべもの", r: "tabemono", id: "Makanan", icon: "🍕", cat: "makanan" },
+      { no: 98, jp: "ごはん", r: "gohan", id: "Nasi", icon: "🍚", cat: "makanan" },
+      { no: 99, jp: "パン", r: "pan", id: "Roti", icon: "🍞", cat: "makanan" },
+      { no: 100, jp: "にく", r: "niku", id: "Daging", icon: "🥩", cat: "makanan" },
+      { no: 101, jp: "さかな", r: "sakana", id: "Ikan", icon: "🐟", cat: "makanan" },
+      { no: 102, jp: "たまご", r: "tamago", id: "Telur", icon: "🥚", cat: "makanan" },
+      { no: 103, jp: "やさい", r: "yasai", id: "Sayuran", icon: "🥦", cat: "makanan" },
+      { no: 104, jp: "くだもの", r: "kudamono", id: "Buah-buahan", icon: "🍉", cat: "makanan" },
+      { no: 105, jp: "りんご", r: "ringo", id: "Apel", icon: "🍎", cat: "makanan" },
+      { no: 106, jp: "みかん", r: "mikan", id: "Jeruk", icon: "🍊", cat: "makanan" },
+      { no: 107, jp: "バナナ", r: "banana", id: "Pisang", icon: "🍌", cat: "makanan" },
+      { no: 108, jp: "ぶどう", r: "budou", id: "Anggur", icon: "🍇", cat: "makanan" },
+      { no: 109, jp: "パイナップル", r: "painappuru", id: "Nanas", icon: "🍍", cat: "makanan" },
+      { no: 110, jp: "すいか", r: "suika", id: "Semangka", icon: "🍉", cat: "makanan" },
+      { no: 111, jp: "のみもの", r: "nomimono", id: "Minuman", icon: "🥤", cat: "makanan" },
+      { no: 112, jp: "コーヒー", r: "koohii", id: "Kopi", icon: "☕", cat: "makanan" },
+      { no: 113, jp: "こうちゃ", r: "koucha", id: "Teh", icon: "🫖", cat: "makanan" },
+      { no: 114, jp: "おちゃ", r: "ocha", id: "Teh Jepang", icon: "🍵", cat: "makanan" },
+      { no: 115, jp: "ぎゅうにゅう", r: "gyuunyuu", id: "Susu Sapi", icon: "🥛", cat: "makanan" },
+      { no: 116, jp: "ジュース", r: "juusu", id: "Jus", icon: "🧃", cat: "makanan" },
+      { no: 117, jp: "ビール", r: "biiru", id: "Bir", icon: "🍺", cat: "makanan" },
+      { no: 118, jp: "ウイスキー", r: "uisukii", id: "Wisky", icon: "🥃", cat: "makanan" },
+      { no: 119, jp: "おさけ", r: "osake", id: "Sake", icon: "🍶", cat: "makanan" },
+      { no: 120, jp: "みず", r: "mizu", id: "Air", icon: "💧", cat: "makanan" },
+      { no: 121, jp: "シャツ", r: "shatsu", id: "Pakaian / Kemeja", icon: "👔", cat: "pakaian" },
+      { no: 122, jp: "ネクタイ", r: "nekutai", id: "Dasi", icon: "👔", cat: "pakaian" },
+      { no: 123, jp: "くつ", r: "kutsu", id: "Sepatu", icon: "👞", cat: "pakaian" },
+      { no: 124, jp: "くすり", r: "kusuri", id: "Obat", icon: "💊", cat: "kantor" },
+      { no: 125, jp: "はな", r: "hana", id: "Bunga", icon: "🌸", cat: "alam" },
+      { no: 126, jp: "てがみ", r: "tegami", id: "Surat", icon: "✉️", cat: "kantor" },
+      { no: 127, jp: "きって", r: "kitte", id: "Perangko", icon: "💌", cat: "kantor" },
+      { no: 128, jp: "ふうとう", r: "fuutou", id: "Amplop", icon: "📨", cat: "kantor" },
+      { no: 129, jp: "エアメール", r: "eameeru", id: "Pos Udara", icon: "🛩️", cat: "kantor" },
+      { no: 130, jp: "はがき", r: "hagaki", id: "Kartu Pos", icon: "🏷️", cat: "kantor" },
+      { no: 131, jp: "えはがき", r: "ehagaki", id: "Kartu Pos Bergambar", icon: "🖼️", cat: "kantor" },
+      { no: 132, jp: "きっぷ", r: "kippu", id: "Karcis / Tiket", icon: "🎫", cat: "transportasi" },
+      { no: 133, jp: "えいが", r: "eiga", id: "Film", icon: "🎬", cat: "kantor" },
+      { no: 134, jp: "こうぎ", r: "kougi", id: "Kuliah", icon: "🧑‍🏫", cat: "kantor" },
+      { no: 135, jp: "はし", r: "hashi", id: "Sumpit", icon: "🥢", cat: "makanan" },
+      { no: 136, jp: "スプーン", r: "supuun", id: "Sendok", icon: "🥄", cat: "makanan" },
+      { no: 137, jp: "フォーク", r: "fooku", id: "Garpu", icon: "🍴", cat: "makanan" },
+      { no: 138, jp: "ナイフ", r: "naifu", id: "Pisau", icon: "🔪", cat: "makanan" },
+      { no: 139, jp: "ドライバー", r: "doraibaa", id: "Obeng", icon: "🪛", cat: "kantor" },
+      { no: 140, jp: "スパナ", r: "supana", id: "Kunci Pas", icon: "🔧", cat: "kantor" },
+      { no: 141, jp: "ペンチ", r: "penchi", id: "Tang", icon: "🛠️", cat: "kantor" },
+      { no: 142, jp: "はさみ", r: "hasami", id: "Gunting", icon: "✂️", cat: "kantor" },
+      { no: 143, jp: "ナイフ", r: "naifu", id: "Pisau Lipat", icon: "🗡️", cat: "kantor" },
+      { no: 144, jp: "かぞく", r: "kazoku", id: "Keluarga", icon: "👨‍👩‍👧‍👦", cat: "keluarga" },
+      { no: 145, jp: "きょうだい", r: "kyoudai", id: "Saudara", icon: "🧑‍🤝‍🧑", cat: "keluarga" },
+      { no: 146, jp: "おとうさん", r: "otousan", id: "Bapak (Orang Lain)", icon: "👨", cat: "keluarga" },
+      { no: 147, jp: "おかあさん", r: "okaasan", id: "Ibu (Orang Lain)", icon: "👩", cat: "keluarga" },
+      { no: 148, jp: "おにいさん", r: "oniisan", id: "Kakak Laki-laki (Orang Lain)", icon: "👦", cat: "keluarga" },
+      { no: 149, jp: "おねえさん", r: "oneesan", id: "Kakak Perempuan (Orang Lain)", icon: "👧", cat: "keluarga" },
+      { no: 150, jp: "おとうとさん", r: "otoutosan", id: "Adik Laki-laki (Orang Lain)", icon: "👶", cat: "keluarga" },
+      { no: 151, jp: "いもうとさん", r: "imoutosan", id: "Adik Perempuan (Orang Lain)", icon: "🧒", cat: "keluarga" },
+      { no: 152, jp: "にもつ", r: "nimotsu", id: "Barang / Bawaan", icon: "🧳", cat: "kantor" },
+      { no: 153, jp: "カタログ", r: "katarogu", id: "Katalog", icon: "📖", cat: "kantor" },
+      { no: 154, jp: "レポート", r: "repooto", id: "Laporan", icon: "📊", cat: "kantor" },
+      { no: 155, jp: "おかね", r: "okane", id: "Uang", icon: "💵", cat: "kantor" },
+      { no: 156, jp: "やま", r: "yama", id: "Gunung", icon: "⛰️", cat: "alam" },
+      { no: 157, jp: "かわ", r: "kawa", id: "Sungai", icon: "🏞️", cat: "alam" },
+      { no: 158, jp: "まち", r: "machi", id: "Kota", icon: "🏙️", cat: "tempat" },
+      { no: 159, jp: "うみ", r: "umi", id: "Laut", icon: "🌊", cat: "alam" },
+      { no: 160, jp: "ぶたにく", r: "butaniku", id: "Daging Babi", icon: "🥓", cat: "makanan" },
+      { no: 161, jp: "とりにく", r: "toriniku", id: "Daging Ayam", icon: "🍗", cat: "makanan" },
+      { no: 162, jp: "ぎゅうにく", r: "gyuuniku", id: "Daging Sapi", icon: "🥩", cat: "makanan" },
+      { no: 163, jp: "りょうり", r: "ryouri", id: "Masakan", icon: "🍳", cat: "makanan" },
+      { no: 164, jp: "スポーツ", r: "supootsu", id: "Olahraga", icon: "🏅", cat: "kantor" },
+      { no: 165, jp: "ピンポン", r: "pinpon", id: "Pingpong / Tenis Meja", icon: "🏓", cat: "kantor" },
+      { no: 166, jp: "テニス", r: "tenisu", id: "Tenis", icon: "🎾", cat: "kantor" },
+      { no: 167, jp: "サッカー", r: "sakkaa", id: "Sepak Bola", icon: "⚽", cat: "kantor" },
+      { no: 168, jp: "スキー", r: "sukii", id: "Ski", icon: "🎿", cat: "kantor" },
+      { no: 169, jp: "やきゅう", r: "yakyuu", id: "Bisbol", icon: "⚾", cat: "kantor" },
+      { no: 170, jp: "おんがく", r: "ongaku", id: "Musik", icon: "🎵", cat: "kantor" },
+      { no: 171, jp: "うた", r: "uta", id: "Lagu", icon: "🎤", cat: "kantor" },
+      { no: 172, jp: "ギター", r: "gitaa", id: "Gitar", icon: "🎸", cat: "kantor" },
+      { no: 173, jp: "ダンス", r: "dansu", id: "Dansa", icon: "💃", cat: "kantor" },
+      { no: 174, jp: "かんじ", r: "kanji", id: "Huruf Kanji", icon: "漢", cat: "kantor" },
+      { no: 175, jp: "ひらがな", r: "hiragana", id: "Huruf Hiragana", icon: "あ", cat: "kantor" },
+      { no: 176, jp: "かたかな", r: "katakana", id: "Huruf Katakana", icon: "ア", cat: "kantor" },
+      { no: 177, jp: "ローマじ", r: "roomaji", id: "Huruf Romawi", icon: "🔤", cat: "kantor" },
+      { no: 178, jp: "ゆうびんきょく", r: "yuubinkyoku", id: "Kantor Pos", icon: "🏣", cat: "tempat" },
+      { no: 179, jp: "ポスト", r: "posuto", id: "Bis Surat", icon: "📮", cat: "tempat" },
+      { no: 180, jp: "レストラン", r: "resutoran", id: "Restoran", icon: "🍽️", cat: "tempat" },
+      { no: 181, jp: "がっこう", r: "gakkou", id: "Sekolah", icon: "🏫", cat: "tempat" },
+      { no: 182, jp: "たいしかん", r: "taishikan", id: "Kantor Kedutaan Besar", icon: "🏛️", cat: "tempat" },
+      { no: 183, jp: "パスポート", r: "pasupooto", id: "Pasport", icon: "🛂", cat: "kantor" },
+      { no: 184, jp: "こうえん", r: "kouen", id: "Taman", icon: "🌳", cat: "tempat" },
+      { no: 185, jp: "ビル", r: "biru", id: "Gedung", icon: "🏢", cat: "tempat" },
+      { no: 186, jp: "おとこのひと", r: "otokonohito", id: "Laki-laki", icon: "👨", cat: "keluarga" },
+      { no: 187, jp: "おんなのひと", r: "onnanohito", id: "Perempuan", icon: "👩", cat: "keluarga" },
+      { no: 188, jp: "うえ", r: "ue", id: "Atas", icon: "⬆️", cat: "alam" },
+      { no: 189, jp: "した", r: "shita", id: "Bawah", icon: "⬇️", cat: "alam" },
+      { no: 190, jp: "まえ", r: "mae", id: "Depan", icon: "⬅️", cat: "alam" },
+      { no: 191, jp: "うしろ", r: "ushiro", id: "Belakang", icon: "➡️", cat: "alam" },
+      { no: 192, jp: "みぎ", r: "migi", id: "Kanan", icon: "👉", cat: "alam" },
+      { no: 193, jp: "ひだり", r: "hidari", id: "Kiri", icon: "👈", cat: "alam" },
+      { no: 194, jp: "なか", r: "naka", id: "Dalam", icon: "📥", cat: "alam" },
+      { no: 195, jp: "そと", r: "soto", id: "Luar", icon: "📤", cat: "alam" },
+      { no: 196, jp: "あいだ", r: "aida", id: "Antara", icon: "↔️", cat: "alam" },
+      { no: 197, jp: "てんき", r: "tenki", id: "Cuaca", icon: "🌤️", cat: "alam" },
+      { no: 198, jp: "はれ", r: "hare", id: "Cerah", icon: "☀️", cat: "alam" },
+      { no: 199, jp: "くもり", r: "kumori", id: "Mendung", icon: "☁️", cat: "alam" },
+      { no: 200, jp: "あめ", r: "ame", id: "Hujan", icon: "🌧️", cat: "alam" },
+      { no: 201, jp: "ゆき", r: "yuki", id: "Salju", icon: "❄️", cat: "alam" },
+      { no: 202, jp: "りょこう", r: "ryokou", id: "Rekreasi / Tamasya", icon: "🏖️", cat: "kantor" },
+      { no: 203, jp: "おみやげ", r: "omiyage", id: "Oleh-oleh", icon: "🎁", cat: "kantor" },
+      { no: 204, jp: "しごと", r: "shigoto", id: "Pekerjaan", icon: "💼", cat: "keluarga" },
+      { no: 205, jp: "せんせい", r: "sensei", id: "Guru", icon: "🧑‍🏫", cat: "keluarga" },
+      { no: 206, jp: "サラリーマン", r: "sarariiman", id: "Karyawan", icon: "👨‍💼", cat: "keluarga" },
+      { no: 207, jp: "おまわりさん", r: "omawarisan", id: "Polisi", icon: "👮", cat: "keluarga" },
+      { no: 208, jp: "おいしゃさん", r: "oishasan", id: "Dokter", icon: "👨‍⚕️", cat: "keluarga" },
+      { no: 209, jp: "エンジニア", r: "enjinia", id: "Ahli Mesin / Teknisi", icon: "👷", cat: "keluarga" },
+      { no: 210, jp: "ラジカセ", r: "rajikase", id: "Radio Kaset", icon: "📻", cat: "tempat" },
+      { no: 211, jp: "しお", r: "shio", id: "Garam", icon: "🧂", cat: "makanan" },
+      { no: 212, jp: "さとう", r: "satou", id: "Gula", icon: "🍬", cat: "makanan" },
+      { no: 213, jp: "しょうゆ", r: "shouyu", id: "Kecap Asin", icon: "🍶", cat: "makanan" },
+      { no: 214, jp: "せっけん", r: "sekken", id: "Sabun Mandi", icon: "🧼", cat: "kantor" },
+      { no: 215, jp: "タオル", r: "taoru", id: "Handuk", icon: "🧖", cat: "kantor" },
+      { no: 216, jp: "はみがき", r: "hamigaki", id: "Pasta Gigi", icon: "🪥", cat: "kantor" },
+      { no: 217, jp: "ハブラシ", r: "haburashi", id: "Sikat Gigi", icon: "🪥", cat: "kantor" },
+      { no: 218, jp: "シャンプー", r: "shanpuu", id: "Shampo", icon: "🧴", cat: "kantor" },
+      { no: 219, jp: "かさ", r: "kasa", id: "Payung", icon: "☂️", cat: "pakaian" },
+      { no: 220, jp: "ふく", r: "fuku", id: "Pakaian", icon: "👗", cat: "pakaian" },
+      { no: 221, jp: "きもの", r: "kimono", id: "Pakaian Khas Jepang", icon: "👘", cat: "pakaian" },
+      { no: 222, jp: "かお", r: "kao", id: "Wajah", icon: "😀", cat: "tubuh" },
+      { no: 223, jp: "かみ", r: "kami", id: "Rambut", icon: "💇", cat: "tubuh" },
+      { no: 224, jp: "め", r: "me", id: "Mata", icon: "👁️", cat: "tubuh" },
+      { no: 225, jp: "みみ", r: "mimi", id: "Telinga", icon: "👂", cat: "tubuh" },
+      { no: 226, jp: "はな", r: "hana", id: "Hidung", icon: "👃", cat: "tubuh" },
+      { no: 227, jp: "くち", r: "kuchi", id: "Mulut", icon: "👄", cat: "tubuh" },
+      { no: 228, jp: "は", r: "ha", id: "Gigi", icon: "🦷", cat: "tubuh" },
+      { no: 229, jp: "て", r: "te", id: "Tangan", icon: "✋", cat: "tubuh" },
+      { no: 230, jp: "あし", r: "ashi", id: "Kaki", icon: "🦶", cat: "tubuh" },
+      { no: 231, jp: "でんきせいひん", r: "denkiseihin", id: "Peralatan Listrik", icon: "🔌", cat: "tempat" },
+      { no: 232, jp: "れいぞうこ", r: "reizouko", id: "Lemari Es", icon: "🧊", cat: "tempat" },
+      { no: 233, jp: "すいはんき", r: "suihanki", id: "Rice Cooker", icon: "🍚", cat: "tempat" },
+      { no: 234, jp: "そうじき", r: "soujiki", id: "Penghisap Debu", icon: "🧹", cat: "tempat" },
+      { no: 235, jp: "せんたくき", r: "sentakuki", id: "Mesin Cuci", icon: "🧺", cat: "tempat" },
+      { no: 236, jp: "オーバー", r: "oobaa", id: "Mantel", icon: "🧥", cat: "pakaian" },
+      { no: 237, jp: "コート", r: "kooto", id: "Jas Hujan", icon: "🧥", cat: "pakaian" },
+      { no: 238, jp: "セーター", r: "seetaa", id: "Sweater", icon: "🧶", cat: "pakaian" },
+      { no: 239, jp: "ぼうし", r: "boushi", id: "Topi", icon: "🧢", cat: "pakaian" },
+      { no: 240, jp: "てぶくろ", r: "tebukuro", id: "Sarung Tangan", icon: "🧤", cat: "pakaian" },
+      { no: 241, jp: "マフラー", r: "mafuraa", id: "Syal", icon: "🧣", cat: "pakaian" },
+      { no: 242, jp: "こうさてん", r: "kousaten", id: "Perempatan", icon: "🚦", cat: "tempat" },
+      { no: 243, jp: "しんごう", r: "shingou", id: "Lampu Merah", icon: "🚥", cat: "transportasi" },
+      { no: 244, jp: "しゅみ", r: "shumi", id: "Hobi", icon: "🎨", cat: "kantor" }
+    ];
+
+    let currentCategory = 'all';
+
+    // --- 3. SPEECH SYNTHESIS ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(soundText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') || 
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // --- 4. RENDER FUNCTION ---
+    function renderCards(data) {
+      const container = document.getElementById('meishiContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Kosakata tidak ditemukan...</div>';
+        return;
+      }
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'meishi-card';
+        card.onclick = () => playAudio(item.jp, card);
+
+        card.innerHTML = `
+          <span class="card-no">#${item.no}</span>
+          <div class="card-icon">${item.icon}</div>
+          <div class="card-jp">${item.jp}</div>
+          <div class="card-romaji">${item.r}</div>
+          <div class="card-id">${item.id}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 5. FILTER & SEARCH LOGIC ---
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      const filtered = meishiList.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchSearch = item.jp.includes(query) || 
+                            item.r.toLowerCase().includes(query) || 
+                            item.id.toLowerCase().includes(query) ||
+                            item.no.toString() === query;
+        return matchCategory && matchSearch;
+      });
+
+      renderCards(filtered);
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterCards();
+    }
+
+    // Inisialisasi Pertama
+    renderCards(meishiList);
+  </script>
+
+</body>
+</html>
