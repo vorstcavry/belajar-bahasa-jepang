@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>E-Card Keiyoushi List N5 - 71 Kata Sifat Bergambar</title>
+  <title>E-Card Doushi List N5 - 136 Kosakata Kata Kerja Bergambar</title>
 
   <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
   <script>
@@ -22,8 +22,8 @@
 
     /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
-      --primary: #fbbf24;
-      --primary-dark: #d97706;
+      --primary: #4ade80;
+      --primary-dark: #16a34a;
       --accent: #38bdf8;
       --bg-body: #0f172a;
       --bg-card: #1e293b;
@@ -38,20 +38,19 @@
       --filter-btn-bg: #0f172a;
       --filter-btn-border: #334155;
       --filter-btn-text: #94a3b8;
-      --card-hover-bg: #451a03;
-      --card-active-bg: #78350f;
+      --card-hover-bg: #052e16;
+      --card-active-bg: #14532d;
+      --group-pill-bg: #052e16;
+      --group-pill-text: #86efac;
+      --group-pill-border: #16a34a;
       --footer-bg: #1e293b;
       --footer-border: #334155;
-
-      /* Badge Tipe Sifat Dark */
-      --badge-i-bg: #78350f; --badge-i-text: #fde68a; --badge-i-border: #d97706;
-      --badge-na-bg: #1e1b4b; --badge-na-text: #c7d2fe; --badge-na-border: #6366f1;
     }
 
     /* ================= TEMA TERANG (LIGHT MODE) ================= */
     html.light-theme, body.light-theme {
-      --primary: #d97706;
-      --primary-dark: #b45309;
+      --primary: #059669;
+      --primary-dark: #047857;
       --accent: #0284c7;
       --bg-body: #f8fafc;
       --bg-card: #ffffff;
@@ -66,14 +65,13 @@
       --filter-btn-bg: #f8fafc;
       --filter-btn-border: #cbd5e1;
       --filter-btn-text: #475569;
-      --card-hover-bg: #fefce8;
-      --card-active-bg: #fef3c7;
+      --card-hover-bg: #f0fdf4;
+      --card-active-bg: #dcfce7;
+      --group-pill-bg: #dcfce7;
+      --group-pill-text: #15803d;
+      --group-pill-border: #86efac;
       --footer-bg: #ffffff;
       --footer-border: #e2e8f0;
-
-      /* Badge Tipe Sifat Light */
-      --badge-i-bg: #fef3c7; --badge-i-text: #b45309; --badge-i-border: #fde68a;
-      --badge-na-bg: #e0e7ff; --badge-na-text: #4338ca; --badge-na-border: #c7d2fe;
     }
 
     * {
@@ -112,7 +110,14 @@
       gap: 10px;
     }
 
-    .btn-back-hub {
+    .nav-links-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -120,7 +125,7 @@
       border: 1.5px solid var(--toggle-btn-border);
       color: var(--text-main);
       font-weight: 700;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       padding: 8px 14px;
       border-radius: 12px;
       text-decoration: none;
@@ -128,8 +133,8 @@
       transition: transform 0.2s ease;
     }
 
-    .btn-back-hub:hover {
-      transform: translateX(-3px);
+    .btn-nav-link:hover {
+      transform: translateY(-2px);
     }
 
     .theme-toggle-btn {
@@ -154,7 +159,7 @@
 
     /* Header */
     .chapter-header {
-      background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #0284c7 100%);
+      background: linear-gradient(135deg, #065f46 0%, #0369a1 100%);
       color: #ffffff;
       border-radius: 14px;
       padding: 20px 18px;
@@ -190,7 +195,7 @@
     }
 
     .chapter-header p {
-      color: #fef3c7;
+      color: #d1fae5;
       font-size: 0.85rem;
     }
 
@@ -282,7 +287,7 @@
     }
 
     /* E-Card Item */
-    .keiyoushi-card {
+    .doushi-card {
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       border-radius: 12px;
@@ -300,14 +305,14 @@
       box-shadow: 0 2px 4px var(--shadow-color);
     }
 
-    .keiyoushi-card:hover {
+    .doushi-card:hover {
       transform: translateY(-2px) scale(1.02);
       border-color: var(--primary);
       background: var(--card-hover-bg);
       box-shadow: 0 6px 14px var(--shadow-color);
     }
 
-    .keiyoushi-card:active, .keiyoushi-card.playing {
+    .doushi-card:active, .doushi-card.playing {
       transform: scale(0.94);
       background: var(--card-active-bg);
       border-color: var(--primary);
@@ -322,26 +327,17 @@
       color: var(--text-muted);
     }
 
-    .type-badge {
+    .group-pill {
       position: absolute;
       top: 6px;
       right: 8px;
       font-size: 0.58rem;
       font-weight: 800;
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 4px;
-    }
-
-    .badge-i {
-      background: var(--badge-i-bg);
-      color: var(--badge-i-text);
-      border: 1px solid var(--badge-i-border);
-    }
-
-    .badge-na {
-      background: var(--badge-na-bg);
-      color: var(--badge-na-text);
-      border: 1px solid var(--badge-na-border);
+      background: var(--group-pill-bg);
+      color: var(--group-pill-text);
+      border: 1px solid var(--group-pill-border);
     }
 
     .card-icon {
@@ -376,36 +372,6 @@
       font-weight: 600;
       color: var(--text-muted);
       line-height: 1.2;
-    }
-
-    /* Grammatical Rules Box */
-    .rule-box {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border-color);
-      border-radius: 12px;
-      padding: 16px 16px;
-      margin-top: 24px;
-      font-size: 0.84rem;
-      color: var(--text-main);
-      box-shadow: 0 2px 6px var(--shadow-color);
-    }
-
-    .rule-box h3 {
-      font-size: 0.95rem;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    .rule-box ul {
-      margin-left: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      color: var(--text-muted);
-    }
-
-    .rule-box strong {
-      color: var(--text-heading);
     }
 
     /* Footer Section */
@@ -487,9 +453,14 @@
   <div class="container">
     <!-- Top Navigation Controls -->
     <div class="top-controls">
-      <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
-        <span>←</span> Beranda Hub
-      </a>
+      <div class="nav-links-left">
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-benda.html" class="btn-nav-link">
+          <span>📦</span> Kata Benda
+        </a>
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-kerja.html" class="btn-nav-link" style="border-color: var(--primary);">
+          <span>🏃</span> Kata Kerja
+        </a>
+      </div>
       <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
         <span id="themeIcon">🌙</span>
       </button>
@@ -498,39 +469,28 @@
     <!-- Header -->
     <header class="chapter-header">
       <div>
-        <span class="badge-series">Modul Kata Sifat Bergambar JLPT N5</span>
-        <h1>E-Card Keiyoushi List (えカード けいようし リスト)</h1>
-        <p>Katalog lengkap 71 kata sifat bergambar N5 lengkap dengan klasifikasi pembeda Kata Sifat-I (い) dan Kata Sifat-Na (な).</p>
+        <span class="badge-series">Modul Kosakata Bergambar JLPT N5</span>
+        <h1>E-Card Doushi List (えカード どうし リスト)</h1>
+        <p>Katalog lengkap 136 kata kerja bentuk ~ます (~masu) dilengkapi label klasifikasi Golongan 1, 2, dan 3.</p>
       </div>
       <div class="page-badge">Made by Vorst Cavry</div>
     </header>
 
     <!-- Search & Filter Controls -->
     <div class="search-filter-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kata sifat (contoh: panas, dingin, takai, sifat-i, sifat-na)..." onkeyup="filterCards()">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kata kerja (contoh: makan, tabemasu, grup 1, ikimasu)..." onkeyup="filterCards()">
       <div class="filter-tags">
-        <button class="filter-btn active" onclick="setCategory('all', this)">Semua (71)</button>
-        <button class="filter-btn" onclick="setCategory('sifat-i', this)">🟡 Sifat-I (い)</button>
-        <button class="filter-btn" onclick="setCategory('sifat-na', this)">🟣 Sifat-Na (な)</button>
-        <button class="filter-btn" onclick="setCategory('ukuran', this)">📏 Ukuran &amp; Jumlah</button>
-        <button class="filter-btn" onclick="setCategory('suhu', this)">🌡️ Suhu &amp; Cuaca</button>
-        <button class="filter-btn" onclick="setCategory('rasa', this)">🍱 Rasa Makanan</button>
-        <button class="filter-btn" onclick="setCategory('perasaan', this)">😊 Kondisi &amp; Perasaan</button>
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua (136)</button>
+        <button class="filter-btn" onclick="setCategory('grup1', this)">1️⃣ Golongan 1 (Godan)</button>
+        <button class="filter-btn" onclick="setCategory('grup2', this)">2️⃣ Golongan 2 (Ichidan)</button>
+        <button class="filter-btn" onclick="setCategory('grup3', this)">3️⃣ Golongan 3 (Irreguler)</button>
+        <button class="filter-btn" onclick="setCategory('harian', this)">🍽️ Aktivitas Harian</button>
+        <button class="filter-btn" onclick="setCategory('gerak', this)">🚶 Gerakan &amp; Arah</button>
       </div>
     </div>
 
-    <!-- Container Grid 71 Kartu -->
-    <div class="ecard-grid" id="keiyoushiContainer"></div>
-
-    <!-- Info Box Aturan Perubahan Kata Sifat -->
-    <div class="rule-box">
-      <h3>📌 Panduan Penggunaan Kata Sifat Bahasa Jepang (形容詞)</h3>
-      <ul>
-        <li><span class="type-badge badge-i" style="position:static;">Sifat-I</span> <strong>Kata Sifat-I (い形容詞):</strong> Selalu berakhiran huruf <strong>い (i)</strong>. Bentuk negatifnya mengubah <em>~い</em> menjadi <strong>〜くない (~kunai / ~ku arimasen)</strong>, dan bentuk lampau menjadi <strong>〜かった (~katta desu)</strong>.</li>
-        <li><span class="type-badge badge-na" style="position:static;">Sifat-Na</span> <strong>Kata Sifat-Na (な形容詞):</strong> Bila menerangkan kata benda, wajib menambahkan <strong>な (na)</strong> di tengahnya (contoh: <em>しずか<strong>な</strong> まち</em>). Negatifnya memakai <strong>〜じゃありません (~ja arimasen)</strong>, dan lampau memakai <strong>〜でした (~deshita)</strong>.</li>
-        <li><strong>Pengecualian Khusus:</strong> Kata <em>きれい (kirei)</em> dan <em>ゆうめい (yuumei)</em> berakhiran 'i' tetapi tergolong ke dalam <strong>Kata Sifat-Na</strong>.</li>
-      </ul>
-    </div>
+    <!-- Container Grid Kartu -->
+    <div class="ecard-grid" id="doushiContainer"></div>
 
     <!-- Kontak & Donasi Section -->
     <div class="footer-section">
@@ -591,82 +551,148 @@
       applyThemeState(!isCurrentlyLight);
     });
 
-    // --- 2. DATA 71 KATA SIFAT (KEIYOUSHI) N5 ---
-    const keiyoushiList = [
-      // Sifat-I
-      { no: 1, jp: "おおきい", r: "ookii", id: "Besar", icon: "🐘", type: "i", cat: "ukuran" },
-      { no: 2, jp: "ちいさい", r: "chiisai", id: "Kecil", icon: "🐁", type: "i", cat: "ukuran" },
-      { no: 3, jp: "あたらしい", r: "atarashii", id: "Baru", icon: "✨", type: "i", cat: "perasaan" },
-      { no: 4, jp: "ふるい", r: "furui", id: "Lama / Kuno", icon: "🏺", type: "i", cat: "perasaan" },
-      { no: 5, jp: "いい / よい", r: "ii / yoi", id: "Bagus / Baik", icon: "👍", type: "i", cat: "perasaan" },
-      { no: 6, jp: "わるい", r: "warui", id: "Buruk / Jelek", icon: "👎", type: "i", cat: "perasaan" },
-      { no: 7, jp: "あつい", r: "atsui", id: "Panas (Suhu Udara)", icon: "☀️", type: "i", cat: "suhu" },
-      { no: 8, jp: "あつい", r: "atsui", id: "Panas (Benda)", icon: "☕", type: "i", cat: "suhu" },
-      { no: 9, jp: "さむい", r: "samui", id: "Dingin (Suhu Udara)", icon: "❄️", type: "i", cat: "suhu" },
-      { no: 10, jp: "つめたい", r: "tsumetai", id: "Dingin (Benda)", icon: "🧊", type: "i", cat: "suhu" },
-      { no: 11, jp: "むずかしい", r: "muzukashii", id: "Sulit / Sukar", icon: "🤯", type: "i", cat: "perasaan" },
-      { no: 12, jp: "やさしい", r: "yasashii", id: "Mudah / Gampang", icon: "👌", type: "i", cat: "perasaan" },
-      { no: 13, jp: "たかい", r: "takai", id: "Mahal / Tinggi", icon: "📈", type: "i", cat: "ukuran" },
-      { no: 14, jp: "やすい", r: "yasui", id: "Murah", icon: "🏷️", type: "i", cat: "ukuran" },
-      { no: 15, jp: "ひくい", r: "hikui", id: "Rendah", icon: "📉", type: "i", cat: "ukuran" },
-      { no: 16, jp: "おもしろい", r: "omoshiroi", id: "Menarik / Lucu", icon: "🎪", type: "i", cat: "perasaan" },
-      { no: 17, jp: "おいしい", r: "oishii", id: "Enak / Lezat", icon: "😋", type: "i", cat: "rasa" },
-      { no: 18, jp: "まずい", r: "mazui", id: "Tidak Enak", icon: "🤢", type: "i", cat: "rasa" },
-      { no: 19, jp: "いそがしい", r: "isogashii", id: "Sibuk", icon: "🏃‍♂️", type: "i", cat: "perasaan" },
-      { no: 20, jp: "たのしい", r: "tanoshii", id: "Menyenangkan", icon: "🎉", type: "i", cat: "perasaan" },
-      { no: 21, jp: "しろい", r: "shiroi", id: "Putih", icon: "⚪", type: "i", cat: "perasaan" },
-      { no: 22, jp: "くろい", r: "kuroi", id: "Hitam", icon: "⚫", type: "i", cat: "perasaan" },
-      { no: 23, jp: "あかい", r: "akai", id: "Merah", icon: "🔴", type: "i", cat: "perasaan" },
-      { no: 24, jp: "あおい", r: "aoi", id: "Biru", icon: "🔵", type: "i", cat: "perasaan" },
-      { no: 25, jp: "ちかい", r: "chikai", id: "Dekat", icon: "📍", type: "i", cat: "ukuran" },
-      { no: 26, jp: "とおい", r: "tooi", id: "Jauh", icon: "🗺️", type: "i", cat: "ukuran" },
-      { no: 27, jp: "はやい", r: "hayai", id: "Cepat (Kecepatan)", icon: "🚅", type: "i", cat: "ukuran" },
-      { no: 28, jp: "はやい", r: "hayai", id: "Pagi / Awal (Waktu)", icon: "⏰", type: "i", cat: "perasaan" },
-      { no: 29, jp: "おそい", r: "osoi", id: "Lambat / Terlambat", icon: "🐢", type: "i", cat: "ukuran" },
-      { no: 30, jp: "おおい", r: "ooi", id: "Banyak (Orang/Benda)", icon: "👥", type: "i", cat: "ukuran" },
-      { no: 31, jp: "すくない", r: "sukunai", id: "Sedikit", icon: "👤", type: "i", cat: "ukuran" },
-      { no: 32, jp: "あたたかい", r: "atatakai", id: "Hangat", icon: "🌤️", type: "i", cat: "suhu" },
-      { no: 33, jp: "すずしい", r: "suzushii", id: "Sejuk", icon: "🍃", type: "i", cat: "suhu" },
-      { no: 34, jp: "あまい", r: "amai", id: "Manis", icon: "🍬", type: "i", cat: "rasa" },
-      { no: 35, jp: "からい", r: "karai", id: "Pedas / Asin", icon: "🌶️", type: "i", cat: "rasa" },
-      { no: 36, jp: "にがい", r: "nigai", id: "Pahit", icon: "☕", type: "i", cat: "rasa" },
-      { no: 37, jp: "すっぱい", r: "suppai", id: "Asam / Masam", icon: "🍋", type: "i", cat: "rasa" },
-      { no: 38, jp: "おもい", r: "omoi", id: "Berat", icon: "🏋️", type: "i", cat: "ukuran" },
-      { no: 39, jp: "かるい", r: "karui", id: "Ringan", icon: "🪶", type: "i", cat: "ukuran" },
-      { no: 40, jp: "ひろい", r: "hiroi", id: "Luas / Lebar", icon: "🏞️", type: "i", cat: "ukuran" },
-      { no: 41, jp: "せまい", r: "semai", id: "Sempit", icon: "🚪", type: "i", cat: "ukuran" },
-      { no: 42, jp: "わかい", r: "wakai", id: "Muda", icon: "🧒", type: "i", cat: "perasaan" },
-      { no: 43, jp: "ながい", r: "nagai", id: "Panjang", icon: "📏", type: "i", cat: "ukuran" },
-      { no: 44, jp: "みじかい", r: "mijikai", id: "Pendek", icon: "📐", type: "i", cat: "ukuran" },
-      { no: 45, jp: "あかるい", r: "akarui", id: "Terang", icon: "💡", type: "i", cat: "suhu" },
-      { no: 46, jp: "くらい", r: "kurai", id: "Gelap", icon: "🌑", type: "i", cat: "suhu" },
-      { no: 47, jp: "あぶない", r: "abunai", id: "Bahaya", icon: "⚠️", type: "i", cat: "perasaan" },
-      { no: 48, jp: "ほしい", r: "hoshii", id: "Ingin / Mau", icon: "✨", type: "i", cat: "perasaan" },
-      { no: 49, jp: "いたい", r: "itai", id: "Sakit", icon: "🤕", type: "i", cat: "perasaan" },
-      { no: 50, jp: "ねむい", r: "nemui", id: "Mengantuk", icon: "🥱", type: "i", cat: "perasaan" },
-      { no: 51, jp: "つよい", r: "tsuyoi", id: "Kuat", icon: "💪", type: "i", cat: "perasaan" },
-      { no: 52, jp: "よわい", r: "yowai", id: "Lemah", icon: "🥀", type: "i", cat: "perasaan" },
+    // --- 2. DATA KATA KERJA (DOUSHI) N5 ---
+    const doushiList = [
+      { no: 1, jp: "あいます", r: "aimasu", id: "Bertemu", icon: "🤝", grp: "Grup 1", cat: "grup1" },
+      { no: 2, jp: "あそびます", r: "asobimasu", id: "Bermain", icon: "🎮", grp: "Grup 1", cat: "grup1" },
+      { no: 3, jp: "あらいます", r: "araimasu", id: "Mencuci", icon: "🧼", grp: "Grup 1", cat: "grup1" },
+      { no: 4, jp: "あります", r: "arimasu", id: "Ada (Benda Mati)", icon: "📦", grp: "Grup 1", cat: "grup1" },
+      { no: 5, jp: "あるきます", r: "arukimasu", id: "Berjalan Kaki", icon: "🚶", grp: "Grup 1", cat: "gerak" },
+      { no: 6, jp: "いいます", r: "iimasu", id: "Berkata / Mengatakan", icon: "🗣️", grp: "Grup 1", cat: "grup1" },
+      { no: 7, jp: "いきます", r: "ikimasu", id: "Pergi", icon: "🏃", grp: "Grup 1", cat: "gerak" },
+      { no: 8, jp: "いそぎます", r: "isogimasu", id: "Buru-buru", icon: "💨", grp: "Grup 1", cat: "grup1" },
+      { no: 9, jp: "うごきます", r: "ugokimasu", id: "Bergerak / Bekerja (Mesin)", icon: "⚙️", grp: "Grup 1", cat: "grup1" },
+      { no: 10, jp: "うたいます", r: "utaimasu", id: "Menyanyi", icon: "🎤", grp: "Grup 1", cat: "grup1" },
+      { no: 11, jp: "うります", r: "urimasu", id: "Menjual", icon: "🏷️", grp: "Grup 1", cat: "grup1" },
+      { no: 12, jp: "おきます", r: "okimasu", id: "Meletakkan", icon: "📥", grp: "Grup 1", cat: "grup1" },
+      { no: 13, jp: "おくります", r: "okurimasu", id: "Mengirim", icon: "📦", grp: "Grup 1", cat: "grup1" },
+      { no: 14, jp: "おします", r: "oshimasu", id: "Menekan / Mendorong", icon: "🔘", grp: "Grup 1", cat: "grup1" },
+      { no: 15, jp: "おもいだします", r: "omoidashimasu", id: "Mengingat", icon: "💭", grp: "Grup 1", cat: "grup1" },
+      { no: 16, jp: "おもいます", r: "omoimasu", id: "Berpikir / Berpendapat", icon: "🤔", grp: "Grup 1", cat: "grup1" },
+      { no: 17, jp: "およぎます", r: "oyogimasu", id: "Berenang", icon: "🏊", grp: "Grup 1", cat: "grup1" },
+      { no: 18, jp: "おろします", r: "oroshimasu", id: "Menurunkan / Mengambil Uang", icon: "🏧", grp: "Grup 1", cat: "grup1" },
+      { no: 19, jp: "おわります", r: "owarimasu", id: "Selesai / Berakhir", icon: "🏁", grp: "Grup 1", cat: "grup1" },
+      { no: 20, jp: "かいます", r: "kaimasu", id: "Membeli", icon: "🛍️", grp: "Grup 1", cat: "harian" },
+      { no: 21, jp: "かえします", r: "kaeshimasu", id: "Mengembalikan", icon: "🔄", grp: "Grup 1", cat: "grup1" },
+      { no: 22, jp: "かえります", r: "kaerimasu", id: "Pulang", icon: "🏠", grp: "Grup 1", cat: "gerak" },
+      { no: 23, jp: "かかります", r: "kakarimasu", id: "Memakan Waktu / Biaya", icon: "⏱️", grp: "Grup 1", cat: "grup1" },
+      { no: 24, jp: "かきます", r: "kakimasu", id: "Menulis / Menggambar", icon: "✍️", grp: "Grup 1", cat: "harian" },
+      { no: 25, jp: "かします", r: "kashimasu", id: "Meminjamkan", icon: "🤝", grp: "Grup 1", cat: "grup1" },
+      { no: 26, jp: "かちます", r: "kachimasu", id: "Menang", icon: "🏆", grp: "Grup 1", cat: "grup1" },
+      { no: 27, jp: "ききます", r: "kikimasu", id: "Mendengar / Bertanya", icon: "🎧", grp: "Grup 1", cat: "harian" },
+      { no: 28, jp: "きります", r: "kirimasu", id: "Memotong", icon: "✂️", grp: "Grup 1", cat: "grup1" },
+      { no: 29, jp: "けします", r: "keshimasu", id: "Memadamkan / Mematikan", icon: "🔌", grp: "Grup 1", cat: "grup1" },
+      { no: 30, jp: "さわります", r: "sawarimasu", id: "Menyentuh", icon: "👆", grp: "Grup 1", cat: "grup1" },
+      { no: 31, jp: "すいます", r: "suimasu", id: "Merokok / Menghisap", icon: "🚬", grp: "Grup 1", cat: "grup1" },
+      { no: 32, jp: "すみます", r: "sumimasu", id: "Tinggal / Bermukim", icon: "🏡", grp: "Grup 1", cat: "grup1" },
+      { no: 33, jp: "すわります", r: "suwarimasu", id: "Duduk", icon: "🪑", grp: "Grup 1", cat: "grup1" },
+      { no: 34, jp: "だします", r: "dashimasu", id: "Mengeluarkan / Menyerahkan", icon: "📤", grp: "Grup 1", cat: "grup1" },
+      { no: 35, jp: "たちます", r: "tachimasu", id: "Berdiri", icon: "🧍", grp: "Grup 1", cat: "grup1" },
+      { no: 36, jp: "つかいます", r: "tsukaimasu", id: "Menggunakan", icon: "📱", grp: "Grup 1", cat: "grup1" },
+      { no: 37, jp: "つきます", r: "tsukimasu", id: "Tiba / Sampai", icon: "📍", grp: "Grup 1", cat: "gerak" },
+      { no: 38, jp: "つくります", r: "tsukurimasu", id: "Membuat", icon: "🛠️", grp: "Grup 1", cat: "grup1" },
+      { no: 39, jp: "つれていきます", r: "tsurete ikimasu", id: "Mengajak Pergi", icon: "🧑‍🤝‍🧑", grp: "Grup 1", cat: "gerak" },
+      { no: 40, jp: "てつだいます", r: "tetsudaimasu", id: "Membantu", icon: "🤲", grp: "Grup 1", cat: "grup1" },
+      { no: 41, jp: "とまります", r: "tomarimasu", id: "Berhenti / Menginap", icon: "🛑", grp: "Grup 1", cat: "grup1" },
+      { no: 42, jp: "とります", r: "torimasu", id: "Mengambil / Memotret", icon: "📸", grp: "Grup 1", cat: "harian" },
+      { no: 43, jp: "ならいます", r: "naraimasu", id: "Belajar (dari Guru)", icon: "🧑‍🏫", grp: "Grup 1", cat: "grup1" },
+      { no: 44, jp: "のぼります", r: "noborimasu", id: "Mendaki", icon: "🧗", grp: "Grup 1", cat: "gerak" },
+      { no: 45, jp: "のみます", r: "nomimasu", id: "Minum", icon: "🥤", grp: "Grup 1", cat: "harian" },
+      { no: 46, jp: "のります", r: "norimasu", id: "Naik Kendaraan", icon: "🚌", grp: "Grup 1", cat: "gerak" },
+      { no: 47, jp: "はいります", r: "hairimasu", id: "Masuk", icon: "🚪", grp: "Grup 1", cat: "gerak" },
+      { no: 48, jp: "はきます", r: "hakimasu", id: "Memakai (Sepatu/Celana)", icon: "👖", grp: "Grup 1", cat: "harian" },
+      { no: 49, jp: "はたらきます", r: "hatarakimasu", id: "Bekerja", icon: "💼", grp: "Grup 1", cat: "harian" },
+      { no: 50, jp: "はなします", r: "hanashimasu", id: "Berbicara", icon: "💬", grp: "Grup 1", cat: "harian" },
+      { no: 51, jp: "はらいます", r: "haraimasu", id: "Membayar", icon: "💳", grp: "Grup 1", cat: "harian" },
+      { no: 52, jp: "ひきます", r: "hikimasu", id: "Menarik / Memainkan (Gitar)", icon: "🎸", grp: "Grup 1", cat: "grup1" },
+      { no: 53, jp: "ふきます", r: "fukimasu", id: "Bertiup (Angin)", icon: "💨", grp: "Grup 1", cat: "grup1" },
+      { no: 54, jp: "ふります", r: "furimasu", id: "Turun (Hujan/Salju)", icon: "🌧️", grp: "Grup 1", cat: "grup1" },
+      { no: 55, jp: "まがります", r: "magarimasu", id: "Berbelok", icon: "↩️", grp: "Grup 1", cat: "gerak" },
+      { no: 56, jp: "まちます", r: "machimasu", id: "Menunggu", icon: "⏳", grp: "Grup 1", cat: "grup1" },
+      { no: 57, jp: "まわします", r: "mawashimasu", id: "Memutar", icon: "🔄", grp: "Grup 1", cat: "grup1" },
+      { no: 58, jp: "もちます", r: "mochimasu", id: "Membawa / Memegang", icon: "🎒", grp: "Grup 1", cat: "grup1" },
+      { no: 59, jp: "もっていきます", r: "motte ikimasu", id: "Membawa Pergi", icon: "📦", grp: "Grup 1", cat: "gerak" },
+      { no: 60, jp: "もらいます", r: "moraimasu", id: "Menerima", icon: "🎁", grp: "Grup 1", cat: "grup1" },
+      { no: 61, jp: "やすみます", r: "yasumimasu", id: "Istirahat / Libur", icon: "🛌", grp: "Grup 1", cat: "harian" },
+      { no: 62, jp: "よびます", r: "yobimasu", id: "Memanggil", icon: "📢", grp: "Grup 1", cat: "grup1" },
+      { no: 63, jp: "よみます", r: "yomimasu", id: "Membaca", icon: "📖", grp: "Grup 1", cat: "harian" },
+      { no: 64, jp: "わかります", r: "wakarimasu", id: "Mengerti / Paham", icon: "💡", grp: "Grup 1", cat: "grup1" },
+      { no: 65, jp: "わたします", r: "watashimasu", id: "Menyerahkan", icon: "🤲", grp: "Grup 1", cat: "grup1" },
+      { no: 66, jp: "わたります", r: "watarimasu", id: "Menyeberang", icon: "🚶‍♂️", grp: "Grup 1", cat: "gerak" },
+      
+      // Golongan 2 (Ichidan)
+      { no: 67, jp: "あけます", r: "akemasu", id: "Membuka", icon: "🚪", grp: "Grup 2", cat: "grup2" },
+      { no: 68, jp: "あげます", r: "agemasu", id: "Memberi", icon: "🎁", grp: "Grup 2", cat: "grup2" },
+      { no: 69, jp: "あつめます", r: "atsumemasu", id: "Mengumpulkan", icon: "📚", grp: "Grup 2", cat: "grup2" },
+      { no: 70, jp: "あびます", r: "abimasu", id: "Mandi", icon: "🚿", grp: "Grup 2", cat: "harian" },
+      { no: 71, jp: "います", r: "imasu", id: "Ada (Makhluk Hidup)", icon: "🐱", grp: "Grup 2", cat: "grup2" },
+      { no: 72, jp: "いれます", r: "iremasu", id: "Memasukkan", icon: "📥", grp: "Grup 2", cat: "grup2" },
+      { no: 73, jp: "うまれます", r: "umaremasu", id: "Lahir", icon: "👶", grp: "Grup 2", cat: "grup2" },
+      { no: 74, jp: "おきます", r: "okimasu", id: "Bangun Tidur", icon: "⏰", grp: "Grup 2", cat: "harian" },
+      { no: 75, jp: "おしえます", r: "oshiemasu", id: "Mengajar / Memberitahu", icon: "🧑‍🏫", grp: "Grup 2", cat: "grup2" },
+      { no: 76, jp: "おります", r: "orimasu", id: "Turun Kendaraan", icon: "🚉", grp: "Grup 2", cat: "gerak" },
+      { no: 77, jp: "かえます", r: "kaemasu", id: "Mengganti / Menukar", icon: "🔄", grp: "Grup 2", cat: "grup2" },
+      { no: 78, jp: "かけます", r: "kakemasu", id: "Menelepon / Memakai Kacamata", icon: "📞", grp: "Grup 2", cat: "harian" },
+      { no: 79, jp: "かります", r: "karimasu", id: "Meminjam", icon: "🤝", grp: "Grup 2", cat: "grup2" },
+      { no: 80, jp: "かんがえます", r: "kangaemasu", id: "Memikirkan", icon: "🧠", grp: "Grup 2", cat: "grup2" },
+      { no: 81, jp: "きえます", r: "kiemasu", id: "Padam / Mati (Lampu)", icon: "💡", grp: "Grup 2", cat: "grup2" },
+      { no: 82, jp: "きます", r: "kimasu", id: "Memakai (Baju)", icon: "👔", grp: "Grup 2", cat: "harian" },
+      { no: 83, jp: "きをつけます", r: "ki o tsukemasu", id: "Berhati-hati", icon: "⚠️", grp: "Grup 2", cat: "grup2" },
+      { no: 84, jp: "くれます", r: "kuremasu", id: "Memberi (ke saya)", icon: "🎁", grp: "Grup 2", cat: "grup2" },
+      { no: 85, jp: "しめます", r: "shimemasu", id: "Menutup", icon: "🚪", grp: "Grup 2", cat: "grup2" },
+      { no: 86, jp: "しらべます", r: "shirabemasu", id: "Memeriksa / Mencari Tahu", icon: "🔍", grp: "Grup 2", cat: "grup2" },
+      { no: 87, jp: "すてます", r: "sutemasu", id: "Membuang", icon: "🗑️", grp: "Grup 2", cat: "grup2" },
+      { no: 88, jp: "たべます", r: "tabemasu", id: "Makan", icon: "🍱", grp: "Grup 2", cat: "harian" },
+      { no: 89, jp: "つづけます", r: "tsuzukemasu", id: "Melanjutkan", icon: "⏩", grp: "Grup 2", cat: "grup2" },
+      { no: 90, jp: "つけます", r: "tsukemasu", id: "Menyalakan", icon: "💡", grp: "Grup 2", cat: "grup2" },
+      { no: 91, jp: "でます", r: "demasu", id: "Keluar", icon: "🚪", grp: "Grup 2", cat: "gerak" },
+      { no: 92, jp: "とめます", r: "tomemasu", id: "Menghentikan / Memarkir", icon: "🅿️", grp: "Grup 2", cat: "grup2" },
+      { no: 93, jp: "ならべます", r: "narabemasu", id: "Menjajarkan", icon: "📊", grp: "Grup 2", cat: "grup2" },
+      { no: 94, jp: "ねます", r: "nemasu", id: "Tidur", icon: "🛌", grp: "Grup 2", cat: "harian" },
+      { no: 95, jp: "のりかえます", r: "norikaemasu", id: "Pindah Kendaraan", icon: "🔄", grp: "Grup 2", cat: "gerak" },
+      { no: 96, jp: "みせます", r: "misemasu", id: "Memperlihatkan", icon: "👀", grp: "Grup 2", cat: "grup2" },
+      { no: 97, jp: "みます", r: "mimasu", id: "Melihat / Menonton", icon: "📺", grp: "Grup 2", cat: "harian" },
+      { no: 98, jp: "むかえます", r: "mukaemasu", id: "Menjemput", icon: "🚗", grp: "Grup 2", cat: "gerak" },
+      { no: 99, jp: "やめます", r: "yamemasu", id: "Berhenti (Kerja/Kebiasaan)", icon: "🛑", grp: "Grup 2", cat: "grup2" },
+      { no: 100, jp: "わすれます", r: "wasuremasu", id: "Lupa", icon: "❓", grp: "Grup 2", cat: "grup2" },
 
-      // Sifat-Na
-      { no: 53, jp: "しんせつ(な)", r: "shinsetsu(na)", id: "Ramah / Baik Hati", icon: "🤝", type: "na", cat: "perasaan" },
-      { no: 54, jp: "べんり(な)", r: "benri(na)", id: "Praktis", icon: "📱", type: "na", cat: "perasaan" },
-      { no: 55, jp: "ふべん(な)", r: "fuben(na)", id: "Tidak Praktis", icon: "📦", type: "na", cat: "perasaan" },
-      { no: 56, jp: "ゆうめい(な)", r: "yuumei(na)", id: "Terkenal", icon: "🌟", type: "na", cat: "perasaan" },
-      { no: 57, jp: "きれい(な)", r: "kirei(na)", id: "Cantik / Bersih", icon: "🌺", type: "na", cat: "perasaan" },
-      { no: 58, jp: "しずか(な)", r: "shizuka(na)", id: "Tenang / Sunyi", icon: "🤫", type: "na", cat: "perasaan" },
-      { no: 59, jp: "にぎやか(な)", r: "nigiyaka(na)", id: "Ramai", icon: "🎉", type: "na", cat: "perasaan" },
-      { no: 60, jp: "ひま(な)", r: "hima(na)", id: "Senggang / Luang", icon: "🛋️", type: "na", cat: "perasaan" },
-      { no: 61, jp: "げんき(な)", r: "genki(na)", id: "Sehat / Semangat", icon: "🏃", type: "na", cat: "perasaan" },
-      { no: 62, jp: "すき(な)", r: "suki(na)", id: "Suka", icon: "❤️", type: "na", cat: "perasaan" },
-      { no: 63, jp: "きらい(な)", r: "kirai(na)", id: "Benci / Tidak Suka", icon: "💔", type: "na", cat: "perasaan" },
-      { no: 64, jp: "じょうず(な)", r: "jouzu(na)", id: "Pintar / Mahir", icon: "🎓", type: "na", cat: "perasaan" },
-      { no: 65, jp: "へた(な)", r: "heta(na)", id: "Payah / Tidak Mahir", icon: "📉", type: "na", cat: "perasaan" },
-      { no: 66, jp: "かんたん(な)", r: "kantan(na)", id: "Sederhana / Mudah", icon: "📝", type: "na", cat: "perasaan" },
-      { no: 67, jp: "たいへん(な)", r: "taihen(na)", id: "Berat / Repot", icon: "💦", type: "na", cat: "perasaan" },
-      { no: 68, jp: "たいせつ(な)", r: "taisetsu(na)", id: "Penting / Berharga", icon: "💎", type: "na", cat: "perasaan" },
-      { no: 69, jp: "だいじょうぶ(な)", r: "daijoubu(na)", id: "Tidak Apa-apa", icon: "🙆‍♂️", type: "na", cat: "perasaan" },
-      { no: 70, jp: "ひつよう(な)", r: "hitsuyou(na)", id: "Perlu / Butuh", icon: "📌", type: "na", cat: "perasaan" },
-      { no: 71, jp: "むり(な)", r: "muri(na)", id: "Mustahil / Terlalu Berat", icon: "🚫", type: "na", cat: "perasaan" }
+      // Golongan 3 (Irreguler / Suru & Kuru)
+      { no: 101, jp: "きます", r: "kimasu", id: "Datang", icon: "🏃‍♂️", grp: "Grup 3", cat: "grup3" },
+      { no: 102, jp: "します", r: "shimasu", id: "Melakukan", icon: "⚡", grp: "Grup 3", cat: "grup3" },
+      { no: 103, jp: "あんないします", r: "annaishimasu", id: "Memandu", icon: "💁‍♂️", grp: "Grup 3", cat: "grup3" },
+      { no: 104, jp: "うんてんします", r: "untenshimasu", id: "Menyetir", icon: "🚗", grp: "Grup 3", cat: "gerak" },
+      { no: 105, jp: "かいものします", r: "kaimonoshimasu", id: "Berbelanja", icon: "🛍️", grp: "Grup 3", cat: "harian" },
+      { no: 106, jp: "けっこんします", r: "kekkonshimasu", id: "Menikah", icon: "💍", grp: "Grup 3", cat: "grup3" },
+      { no: 107, jp: "けんがくします", r: "kengakushimasu", id: "Meninjau / Studi Lapangan", icon: "🏭", grp: "Grup 3", cat: "grup3" },
+      { no: 108, jp: "けんきゅうします", r: "kenkyuushimasu", id: "Meneliti", icon: "🔬", grp: "Grup 3", cat: "grup3" },
+      { no: 109, jp: "コピーします", r: "kopiishimasu", id: "Memfotokopi", icon: "📄", grp: "Grup 3", cat: "grup3" },
+      { no: 110, jp: "さんぽします", r: "sanposhimasu", id: "Jalan-jalan", icon: "🚶‍♀️", grp: "Grup 3", cat: "gerak" },
+      { no: 111, jp: "ざんぎょうします", r: "zangyoushimasu", id: "Lembur", icon: "🌙", grp: "Grup 3", cat: "harian" },
+      { no: 112, jp: "しゅうりします", r: "shuurishimasu", id: "Memperbaiki", icon: "🔧", grp: "Grup 3", cat: "grup3" },
+      { no: 113, jp: "しゅっちょうします", r: "shucchoushimasu", id: "Dinas Luar Kota", icon: "🧳", grp: "Grup 3", cat: "gerak" },
+      { no: 114, jp: "しょうかいします", r: "shoukaishimasu", id: "Memperkenalkan", icon: "👥", grp: "Grup 3", cat: "grup3" },
+      { no: 115, jp: "しょくじします", r: "shokujishimasu", id: "Makan Bersama", icon: "🍽️", grp: "Grup 3", cat: "harian" },
+      { no: 116, jp: "しんぱいします", r: "shinpaishimasu", id: "Khawatir", icon: "😟", grp: "Grup 3", cat: "grup3" },
+      { no: 117, jp: "せつめいします", r: "setsumeishimasu", id: "Menjelaskan", icon: "📋", grp: "Grup 3", cat: "grup3" },
+      { no: 118, jp: "せんたくします", r: "sentakushimasu", id: "Mencuci Baju", icon: "🧺", grp: "Grup 3", cat: "harian" },
+      { no: 119, jp: "そうじします", r: "soujishimasu", id: "Membersihkan", icon: "🧹", grp: "Grup 3", cat: "harian" },
+      { no: 120, jp: "つれてきます", r: "tsuretekimasu", id: "Mengajak Datang", icon: "🧑‍🤝‍🧑", grp: "Grup 3", cat: "gerak" },
+      { no: 121, jp: "でんわします", r: "denwashimasu", id: "Menelepon", icon: "📱", grp: "Grup 3", cat: "harian" },
+      { no: 122, jp: "べんきょうします", r: "benkyoushimasu", id: "Belajar", icon: "📚", grp: "Grup 3", cat: "harian" },
+      { no: 123, jp: "もってきます", r: "mottekimasu", id: "Membawa Datang", icon: "📦", grp: "Grup 3", cat: "gerak" },
+      { no: 124, jp: "よやくします", r: "yoyakushimasu", id: "Memesan / Reservasi", icon: "📅", grp: "Grup 3", cat: "grup3" },
+      { no: 125, jp: "りゅうがくします", r: "ryuugakushimasu", id: "Studi Luar Negeri", icon: "🎓", grp: "Grup 3", cat: "gerak" },
+      { no: 126, jp: "りょこうします", r: "ryokoushimasu", id: "Berwisata", icon: "🏖️", grp: "Grup 3", cat: "gerak" },
+      { no: 127, jp: "れんしゅうします", r: "renshuushimasu", id: "Berlatih", icon: "🎯", grp: "Grup 3", cat: "grup3" },
+      { no: 128, jp: "れんらくします", r: "renrakushimasu", id: "Menghubungi", icon: "✉️", grp: "Grup 3", cat: "grup3" },
+      { no: 129, jp: "ダンスします", r: "dansushimasu", id: "Berdansa", icon: "💃", grp: "Grup 3", cat: "grup3" },
+      { no: 130, jp: "デザインします", r: "dezainshimasu", id: "Mendesain", icon: "🎨", grp: "Grup 3", cat: "grup3" },
+      { no: 131, jp: "ドライブします", r: "doraibushimasu", id: "Berkendara Jalan-jalan", icon: "🚗", grp: "Grup 3", cat: "gerak" },
+      { no: 132, jp: "パーティーします", r: "paatiishimasu", id: "Pesta", icon: "🎉", grp: "Grup 3", cat: "grup3" },
+      { no: 133, jp: "チェックします", r: "chekkushimasu", id: "Mengecek", icon: "✅", grp: "Grup 3", cat: "grup3" },
+      { no: 134, jp: "テストします", r: "tesutoshimasu", id: "Menguji", icon: "📝", grp: "Grup 3", cat: "grup3" },
+      { no: 135, jp: "キャンセルします", r: "kyanserushimasu", id: "Membatalkan", icon: "❌", grp: "Grup 3", cat: "grup3" },
+      { no: 136, jp: "サインします", r: "sainshimasu", id: "Tanda Tangan", icon: "✍️", grp: "Grup 3", cat: "grup3" }
     ];
 
     let currentCategory = 'all';
@@ -694,8 +720,7 @@
       window.speechSynthesis.cancel();
 
       setTimeout(() => {
-        const cleanText = soundText.replace(/\(.*?\)/g, '').replace(/\//g, ' ').trim();
-        const utterance = new SpeechSynthesisUtterance(cleanText);
+        const utterance = new SpeechSynthesisUtterance(soundText);
         utterance.lang = 'ja-JP';
         utterance.rate = 0.95;
         utterance.pitch = 1.15;
@@ -715,25 +740,22 @@
 
     // --- 4. RENDER FUNCTION ---
     function renderCards(data) {
-      const container = document.getElementById('keiyoushiContainer');
+      const container = document.getElementById('doushiContainer');
       container.innerHTML = '';
 
       if (data.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Kata sifat tidak ditemukan...</div>';
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Kata kerja tidak ditemukan...</div>';
         return;
       }
 
       data.forEach(item => {
         const card = document.createElement('div');
-        card.className = 'keiyoushi-card';
+        card.className = 'doushi-card';
         card.onclick = () => playAudio(item.jp, card);
-
-        const typeBadgeText = item.type === 'i' ? 'Sifat-I' : 'Sifat-Na';
-        const typeBadgeClass = item.type === 'i' ? 'badge-i' : 'badge-na';
 
         card.innerHTML = `
           <span class="card-no">#${item.no}</span>
-          <span class="type-badge ${typeBadgeClass}">${typeBadgeText}</span>
+          <span class="group-pill">${item.grp}</span>
           <div class="card-icon">${item.icon}</div>
           <div class="card-jp">${item.jp}</div>
           <div class="card-romaji">${item.r}</div>
@@ -747,21 +769,12 @@
     function filterCards() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
       
-      const filtered = keiyoushiList.filter(item => {
-        let matchCategory = false;
-        if (currentCategory === 'all') {
-          matchCategory = true;
-        } else if (currentCategory === 'sifat-i') {
-          matchCategory = (item.type === 'i');
-        } else if (currentCategory === 'sifat-na') {
-          matchCategory = (item.type === 'na');
-        } else {
-          matchCategory = (item.cat === currentCategory);
-        }
-
+      const filtered = doushiList.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
         const matchSearch = item.jp.includes(query) || 
                             item.r.toLowerCase().includes(query) || 
                             item.id.toLowerCase().includes(query) ||
+                            item.grp.toLowerCase().includes(query) ||
                             item.no.toString() === query;
         return matchCategory && matchSearch;
       });
@@ -776,8 +789,7 @@
       filterCards();
     }
 
-    // Inisialisasi Pertama
-    renderCards(keiyoushiList);
+    renderCards(doushiList);
   </script>
 
 </body>
