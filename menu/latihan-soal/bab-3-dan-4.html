@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Evaluasi Bab 3 &amp; 4 - Minna no Nihongo</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        } else {
+          document.documentElement.classList.remove('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #818cf8;
+      --primary-hover: #6366f1;
+      --primary-light: #1e1b4b;
+      --bg: #0b0f19;
+      --card-bg: #151c2e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #4ade80;
+      --success-hover: #22c55e;
+      --danger: #f87171;
+      --border: #243049;
+      --accent: #fbbf24;
+      --header-bg: rgba(15, 23, 42, 0.92);
+      --header-border: rgba(51, 65, 85, 0.7);
+      --eval-bg: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      --q-box-bg: #0f172a;
+      --q-box-border: #243049;
+      --input-bg: #1e293b;
+      --input-border: #384969;
+      --input-text: #f8fafc;
+      --feedback-correct-bg: #064e3b;
+      --feedback-correct-text: #86efac;
+      --feedback-wrong-bg: #450a0a;
+      --feedback-wrong-text: #fca5a5;
+      --bottom-bar-bg: rgba(15, 23, 42, 0.92);
+      --bottom-bar-border: #243049;
+      --glass-btn-bg: #1e293b;
+      --glass-btn-border: #334155;
+      --glass-pill-bg: rgba(30, 41, 59, 0.75);
+      --glass-pill-border: rgba(71, 85, 105, 0.5);
+      --dropdown-bg: #1e293b;
+      --dropdown-hover: #0f172a;
+      --floating-timer-bg: #1e293b;
+      --floating-timer-border: #6366f1;
+      --jp-font: 'Noto Sans JP', "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --success-hover: #15803d;
+      --danger: #dc2626;
+      --border: #e2e8f0;
+      --accent: #f59e0b;
+      --header-bg: rgba(255, 255, 255, 0.95);
+      --header-border: rgba(226, 232, 240, 0.85);
+      --eval-bg: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      --q-box-bg: #f8fafc;
+      --q-box-border: #e2e8f0;
+      --input-bg: #ffffff;
+      --input-border: #cbd5e1;
+      --input-text: #0f172a;
+      --feedback-correct-bg: #dcfce7;
+      --feedback-correct-text: #15803d;
+      --feedback-wrong-bg: #fee2e2;
+      --feedback-wrong-text: #b91c1c;
+      --bottom-bar-bg: rgba(255, 255, 255, 0.95);
+      --bottom-bar-border: #e2e8f0;
+      --glass-btn-bg: #ffffff;
+      --glass-btn-border: #cbd5e1;
+      --glass-pill-bg: rgba(241, 245, 249, 0.85);
+      --glass-pill-border: rgba(203, 213, 225, 0.7);
+      --dropdown-bg: #ffffff;
+      --dropdown-hover: #f1f5f9;
+      --floating-timer-bg: #ffffff;
+      --floating-timer-border: #4f46e5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 120px;
+      overflow-x: hidden;
+    }
+
+    /* Modal Pop-up */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 28px 22px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 30px -5px rgba(0,0,0,0.35);
+      border: 1.5px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-start, .btn-study-modal, .btn-back-modal {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: white;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+    .btn-start:hover { transform: translateY(-2px); }
+
+    .btn-study-modal {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-back-modal {
+      background: var(--q-box-bg);
+      color: var(--text-muted);
+      border: 1.5px solid var(--border);
+    }
+
+    /* ================= HEADER ATAS DENGAN SMART SCROLL ================= */
+    .top-header {
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--header-border);
+      padding: 10px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.12);
+      transition: transform 0.25s ease, background 0.2s ease, padding 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Mode Belajar: Scroll ke bawah sembunyikan penuh */
+    .top-header.study-hide {
+      transform: translateY(-100%);
+    }
+
+    /* Mode Ujian: Saat discroll ke bawah, bersihkan background dan posisikan timer di pojok kanan atas */
+    .top-header.exam-scrolled {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      pointer-events: none;
+      padding: 10px 14px 0 0;
+    }
+
+    .top-header.exam-scrolled .header-top-row,
+    .top-header.exam-scrolled .stat-pill:not(.timer-pill) {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-12px);
+    }
+
+    .top-header.exam-scrolled .header-bottom-row {
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .top-header.exam-scrolled .stat-pill.timer-pill {
+      pointer-events: auto;
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: var(--floating-timer-bg);
+      border: 1.5px solid var(--floating-timer-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      padding: 6px 14px;
+      border-radius: 50px;
+      z-index: 200;
+    }
+
+    .header-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .header-top-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--glass-btn-bg);
+      border: 1.5px solid var(--glass-btn-border);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .btn-back-nav:hover {
+      transform: translateX(-2px);
+      border-color: var(--primary);
+    }
+
+    .title-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .badge-series-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 1px 8px;
+      border-radius: 20px;
+      margin-bottom: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .header-title {
+      font-size: clamp(0.92rem, 3.2vw, 1.15rem);
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .header-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    /* Tombol Persegi Tema & Pindah Bab */
+    .btn-square-control {
+      background: var(--glass-btn-bg);
+      border: 1.5px solid var(--glass-btn-border);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      user-select: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+
+    .btn-square-control:hover {
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    /* Dropdown Pop-up Menu Bab */
+    .chapter-menu-dropdown {
+      display: none;
+      position: absolute;
+      top: 46px;
+      right: 0;
+      background: var(--dropdown-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      width: 240px;
+      max-height: 360px;
+      overflow-y: auto;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+      z-index: 110;
+    }
+
+    .chapter-menu-dropdown.show {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chapter-menu-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      padding: 0 4px;
+    }
+
+    .chapter-menu-item {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.15s;
+    }
+
+    .chapter-menu-item:hover {
+      background-color: var(--dropdown-hover);
+      color: var(--primary);
+    }
+
+    .chapter-menu-item.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Floating Stats Bar */
+    .header-bottom-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-pill {
+      background: var(--glass-pill-bg);
+      border: 1px solid var(--glass-pill-border);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.74rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-main);
+      white-space: nowrap;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .stat-pill strong {
+      color: var(--primary);
+    }
+
+    .stat-pill.timer-pill strong {
+      color: #38bdf8;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .study-header-bar {
+      display: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-finished-study {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 14px auto;
+      padding: 0 10px;
+    }
+
+    /* Dashboard Hasil */
+    .eval-result-box {
+      display: none;
+      background: var(--eval-bg);
+      color: white;
+      border-radius: 20px;
+      padding: 22px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+      text-align: center;
+      border: 2px solid var(--primary);
+    }
+
+    .eval-header-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .eval-score-big {
+      font-size: clamp(2.4rem, 6vw, 3.4rem);
+      font-weight: 900;
+      color: #38bdf8;
+      line-height: 1.1;
+      margin: 4px 0;
+    }
+
+    .eval-status-badge {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+    .status-pass { background: #22c55e; color: #ffffff; }
+    .status-fail { background: #ef4444; color: #ffffff; }
+
+    .eval-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px 10px;
+      border-radius: 14px;
+    }
+
+    .stat-card-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-label { font-size: 0.75rem; color: #c7d2fe; font-weight: 600; }
+    .stat-value { font-size: 1.25rem; font-weight: 800; }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      border: 1.5px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      margin-bottom: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .section-card { padding: 22px; }
+      .container { padding: 0 16px; }
+    }
+
+    .q-box {
+      background: var(--q-box-bg);
+      border: 1.5px solid var(--q-box-border);
+      border-radius: 14px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .q-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .q-japanese {
+      font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+      font-family: var(--jp-font);
+      color: var(--text-main);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .q-japanese::-webkit-scrollbar { display: none; }
+
+    .input-group {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1.5px solid var(--input-border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      background: var(--input-bg);
+      color: var(--input-text);
+      outline: none;
+    }
+
+    input[type="text"]:focus { border-color: var(--primary); }
+
+    .btn-check {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .btn-check:hover { background: var(--primary-hover); }
+
+    .feedback {
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 2px;
+      display: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: var(--feedback-correct-bg);
+      color: var(--feedback-correct-text);
+      border-left: 4px solid var(--success);
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: var(--feedback-wrong-bg);
+      color: var(--feedback-wrong-text);
+      border-left: 4px solid var(--danger);
+    }
+
+    /* Study Cards */
+    .study-sec-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 18px 0 10px;
+    }
+
+    .study-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .study-card-item {
+      background: var(--q-box-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .study-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .jp-line-single {
+      font-family: var(--jp-font);
+      font-size: clamp(1rem, 4.2vw, 1.18rem);
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .study-romaji {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .study-card-bottom {
+      font-size: 0.86rem;
+      color: var(--text-main);
+      font-weight: 600;
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+      margin-top: 2px;
+    }
+
+    /* Toolbar Bawah */
+    .bottom-actions {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bottom-bar-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 14px;
+      border-top: 1.5px solid var(--bottom-bar-border);
+      box-shadow: 0 -8px 20px rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 99;
+    }
+
+    .action-btn {
+      flex: 1;
+      max-width: 220px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; }
+    .btn-primary:hover { opacity: 0.92; }
+    .btn-secondary { background: var(--border); color: var(--text-main); }
+    .btn-secondary:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <!-- MODAL AWAL -->
+  <div class="modal-overlay" id="start-modal">
+    <div class="modal-card">
+      <div style="font-size: 2.8rem; margin-bottom: 6px;">📚</div>
+      <h3 class="modal-title">Evaluasi Bab 3 &amp; 4</h3>
+      <p class="modal-desc">
+        Ujian lengkap <strong>65 Soal (7 Bagian)</strong> materi Bab 3 &amp; 4 dengan batas waktu <strong>60 Menit</strong>.<br>
+        Pelajari rangkuman materi terlebih dahulu atau langsung mulai kuis.
+      </p>
+      <div class="modal-buttons">
+        <button class="btn-study-modal" onclick="openStudyMode()">📖 Buka Modul Belajar</button>
+        <button class="btn-start" onclick="startQuiz()">🚀 Langsung Mulai Ujian</button>
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-back-modal">← Kembali ke Menu</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP HEADER (DENGAN SMART SCROLL & FLOATING TIMER DI POJOK KANAN ATAS) -->
+  <header class="top-header" id="topHeader">
+    <div class="header-content">
+      
+      <!-- Baris Atas: Tombol Balik, Judul & Kontrol Persegi (Tema & Pindah Bab) -->
+      <div class="header-top-row">
+        <a href="/belajar-bahasa-jepang/menu/latihan-soal/latihan-soal.html" class="btn-back-nav">
+          <span>←</span> Kembali
+        </a>
+
+        <div class="title-wrapper">
+          <span class="badge-series-pill">Minna no Nihongo N5</span>
+          <h1 class="header-title" id="header-title">Evaluasi Bab 3 &amp; 4</h1>
+        </div>
+
+        <div class="header-actions-right">
+          <!-- Tombol Persegi Pindah Bab (☰) -->
+          <button class="btn-square-control" id="chapterMenuBtn" type="button" title="Pindah Bab" onclick="toggleChapterMenu(event)">
+            <span>☰</span>
+          </button>
+
+          <!-- Dropdown Menu Pindah Bab 1 - 50 -->
+          <div class="chapter-menu-dropdown" id="chapterMenuDropdown">
+            <div class="chapter-menu-title">Pilih Bab Evaluasi:</div>
+            <div id="chapterMenuList"></div>
+          </div>
+
+          <!-- Tombol Persegi Ganti Tema -->
+          <button class="btn-square-control" id="themeToggleBtn" type="button" title="Ubah Tema">
+            <span id="themeIcon">🌙</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Baris Bawah: Floating Pill Stats (Timer beralih ke pojok kanan atas saat scroll) -->
+      <div class="header-bottom-row" id="headerBottomRow">
+        <div class="stats-bar" id="stats-bar">
+          <div class="stat-pill timer-pill">⏱️ <strong id="timer">60:00</strong></div>
+          <div class="stat-pill">⭐ <strong id="score-display">0/65</strong></div>
+          <div class="stat-pill">📊 <strong id="progress-display">0%</strong></div>
+        </div>
+
+        <div class="study-header-bar" id="study-header-bar">
+          <button class="btn-finished-study" onclick="exitStudyMode()">
+            ✅ Selesai Belajar &amp; Mulai Ujian
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- AREA 1: MODUL MATERI -->
+  <div class="container" id="study-container" style="display: none;">
+    <div class="section-card">
+      <div class="section-title">
+        <span>📘 Modul Ringkasan Materi (Bab 3 &amp; 4)</span>
+        <span class="badge" style="background:#dcfce7; color:#15803d;">Lengkap 7 Bagian</span>
+      </div>
+      <p class="section-desc">Pahami seluruh kosakata lokasi, waktu, kata kerja bentuk masu, aturan partikel, dan pola terjemahan sebelum memulai kuis.</p>
+
+      <h4 class="study-sec-title">1. Kosakata Jepang ke Indonesia (Tempat &amp; Waktu)</h4>
+      <div class="study-list">
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">1. ここ / そこ / あそこ</span><span class="study-romaji">koko / soko / asoko</span></div><div class="study-card-bottom">🇮🇩 Di sini / Di situ / Di sana</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">2. うけつけ</span><span class="study-romaji">uketsuke</span></div><div class="study-card-bottom">🇮🇩 Meja Informasi / Resepsionis / Tempat Penerimaan Tamu</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">3. じむしょ</span><span class="study-romaji">jimusho</span></div><div class="study-card-bottom">🇮🇩 Kantor</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">4. かいぎしつ</span><span class="study-romaji">kaigishitsu</span></div><div class="study-card-bottom">🇮🇩 Ruang Rapat / Ruang Pertemuan</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">5. しょくどう</span><span class="study-romaji">shokudou</span></div><div class="study-card-bottom">🇮🇩 Kantin / Ruang Makan</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">6. おてあらい / トイレ</span><span class="study-romaji">otearai / toire</span></div><div class="study-card-bottom">🇮🇩 Kamar Kecil / Toilet</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">7. いま</span><span class="study-romaji">ima</span></div><div class="study-card-bottom">🇮🇩 Sekarang / Saat ini</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">8. ごぜん / ごご</span><span class="study-romaji">gozen / gogo</span></div><div class="study-card-bottom">🇮🇩 Pagi (a.m.) / Sore (p.m.)</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">9. おきます / ねます</span><span class="study-romaji">okimasu / nemasu</span></div><div class="study-card-bottom">🇮🇩 Bangun tidur / Tidur</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">10. やすみ</span><span class="study-romaji">yasumi</span></div><div class="study-card-bottom">🇮🇩 Hari libur / Istirahat</div></div>
+      </div>
+
+      <h4 class="study-sec-title">2. Kosakata Indonesia ke Jepang</h4>
+      <div class="study-list">
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">1. Ruang Kelas</span><span class="study-romaji">kyoushitsu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 きょうしつ</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">2. Kamar / Ruangan</span><span class="study-romaji">heya</span></div><div class="study-card-bottom jp-line-single">🇯🇵 へや</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">3. Lift / Elevator</span><span class="study-romaji">erebeetaa</span></div><div class="study-card-bottom jp-line-single">🇯🇵 エレベーター</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">4. Eskalator</span><span class="study-romaji">esukareetaa</span></div><div class="study-card-bottom jp-line-single">🇯🇵 エスカレーター</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">5. Tangga</span><span class="study-romaji">kaidan</span></div><div class="study-card-bottom jp-line-single">🇯🇵 かいだん</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">6. Bekerja</span><span class="study-romaji">hatarakimasu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 はたらきます / はたらく</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">7. Belajar</span><span class="study-romaji">benkyoushimasu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 べんきょうします / べんきょうする</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">8. Bank</span><span class="study-romaji">ginkou</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ぎんこう</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">9. Kantor Pos</span><span class="study-romaji">yuubinkyoku</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ゆうびんきょく</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">10. Perpustakaan</span><span class="study-romaji">toshokan</span></div><div class="study-card-bottom jp-line-single">🇯🇵 としょかん</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AREA 2: KONTAINER SOAL (QUIZ MODE) -->
+  <div class="container" id="quiz-container">
+
+    <!-- DASHBOARD NILAI HASIL EVALUASI -->
+    <div class="eval-result-box" id="eval-result-box">
+      <span class="eval-header-tag">📊 LAPORAN HASIL EVALUASI UJIAN</span>
+      <div class="eval-score-big" id="eval-percent-text">0%</div>
+      <div class="eval-status-badge status-pass" id="eval-status-badge">LULUS</div>
+      <p style="font-size: 0.88rem; color: #e0e7ff;" id="eval-desc-text">Kerja bagus! Pembahasan jawaban telah dibuka di bawah ini.</p>
+      
+      <div class="eval-stats-grid">
+        <div class="stat-card-item">
+          <span class="stat-label">Jawaban Benar</span>
+          <span class="stat-value" id="eval-correct-val" style="color: #4ade80;">0</span>
+        </div>
+        <div class="stat-card-item">
+          <span class="stat-label">Salah / Kosong</span>
+          <span class="stat-value" id="eval-wrong-val" style="color: #f87171;">0</span>
+        </div>
+        <div class="stat-card-item">
+          <span class="stat-label">Total Soal</span>
+          <span class="stat-value" id="eval-total-val" style="color: #38bdf8;">65</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 1: KOSA KATA JEPANG KE INDONESIA -->
+    <div class="section-card">
+      <div class="section-title"><span>1. Kosa Kata Jepang ke Indonesia</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Tuliskan arti dalam bahasa Indonesia baku yang tepat.</p>
+      <div class="grid-2">
+        <div class="q-box" data-id="v1" data-ans='["di sini", "disini", "sebelah sini"]'><span class="q-japanese">1. ここ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v2" data-ans='["resepsionis", "meja informasi", "bagian penerima tamu", "tempat penerima tamu", "tempat penerimaan tamu", "penerima tamu", "meja penerima tamu"]'><span class="q-japanese">2. うけつけ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v3" data-ans='["kantor", "ruang kantor"]'><span class="q-japanese">3. じむしょ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v4" data-ans='["ruang rapat", "ruang pertemuan"]'><span class="q-japanese">4. かいぎしつ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v5" data-ans='["kantin", "ruang makan", "tempat makan"]'><span class="q-japanese">5. しょくどう</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v6" data-ans='["toilet", "kamar kecil", "kamar mandi"]'><span class="q-japanese">6. おてあらい</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v7" data-ans='["sekarang", "saat ini"]'><span class="q-japanese">7. いま</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v8" data-ans='["pagi", "pagi hari", "am", "a.m.", "sebelum tengah hari", "waktu pagi"]'><span class="q-japanese">8. ごぜん</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v9" data-ans='["bangun", "bangun tidur"]'><span class="q-japanese">9. おきます</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="v10" data-ans='["libur", "istirahat", "hari libur"]'><span class="q-japanese">10. やすみ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 2: KOSA KATA INDONESIA KE JEPANG -->
+    <div class="section-card">
+      <div class="section-title"><span>2. Kosa Kata Indonesia ke Jepang</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Tuliskan dalam Hiragana / Katakana / Romaji.</p>
+      <div class="grid-2">
+        <div class="q-box" data-id="ij1" data-ans='["きょうしつ", "kyoushitsu", "kyoshitsu", "kyoushitu"]'><span class="q-label">1. Ruang Kelas</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij2" data-ans='["へや", "heya"]'><span class="q-label">2. Kamar / Ruangan</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij3" data-ans='["エレベーター", "えれべーたー", "erebeetaa", "erebeta", "erebe-ta-"]'><span class="q-label">3. Lift / Elevator</span><div class="input-group"><input type="text" placeholder="Katakana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij4" data-ans='["エスカレーター", "えすかれーたー", "esukareetaa", "esukareta", "esukare-ta-"]'><span class="q-label">4. Eskalator</span><div class="input-group"><input type="text" placeholder="Katakana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij5" data-ans='["かいだん", "kaidan"]'><span class="q-label">5. Tangga</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij6" data-ans='["はたらきます", "はたらく", "hatarakimasu", "hataraku"]'><span class="q-label">6. Bekerja</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij7" data-ans='["べんきょうします", "べんきょうする", "benkyoushimasu", "benkyoshimasu", "benkyousuru"]'><span class="q-label">7. Belajar</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij8" data-ans='["ぎんこう", "ginkou", "ginko"]'><span class="q-label">8. Bank</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij9" data-ans='["ゆうびんきょく", "yuubinkyoku", "yubinkyoku"]'><span class="q-label">9. Kantor Pos</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij10" data-ans='["としょかん", "toshokan"]'><span class="q-label">10. Perpustakaan</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 3: CARA BACA KANJI -->
+    <div class="section-card">
+      <div class="section-title"><span>3. Cara Baca Kanji ke Hiragana</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Ketik cara baca huruf kanji berikut menggunakan Hiragana.</p>
+      <div class="grid-2">
+        <div class="q-box" data-id="k1" data-ans='["きょうしつ", "kyoushitsu", "kyoshitsu"]'><span class="q-japanese">1. 教室</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k2" data-ans='["へや", "heya"]'><span class="q-japanese">2. 部屋</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k3" data-ans='["しょくどう", "shokudou", "shokudo"]'><span class="q-japanese">3. 食堂</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k4" data-ans='["かいしゃ", "kaisha"]'><span class="q-japanese">4. 会社</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k5" data-ans='["ぎんこう", "ginkou", "ginko"]'><span class="q-japanese">5. 銀行</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k6" data-ans='["いま", "ima"]'><span class="q-japanese">6. 今</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k7" data-ans='["なんじ", "nanji"]'><span class="q-japanese">7. 何時</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k8" data-ans='["ごぜん", "gozen"]'><span class="q-japanese">8. 午前</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k9" data-ans='["ごご", "gogo"]'><span class="q-japanese">9. 午後</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k10" data-ans='["やすみ", "yasumi"]'><span class="q-japanese">10. 休み</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 4: MENYUSUN KALIMAT -->
+    <div class="section-card">
+      <div class="section-title"><span>4. Rangkailah Kata Menjadi Kalimat Benar</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Susunlah kata-kata yang diacak menjadi kalimat baku yang tepat.</p>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="q-box" data-id="s1" data-ans='["ここはきょうしつです", "koko wa kyoushitsu desu", "koko wa kyoshitsu desu"]'><span class="q-japanese">1. ですーきょうしつーはーここ</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s2" data-ans='["おてあらいはあちらです", "otearai wa achira desu"]'><span class="q-japanese">2. あちらーおてあらいーですーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s3" data-ans='["かいぎしつはどこですか", "かいぎしつはどちらですか", "kaigishitsu wa doko desu ka", "kaigishitsu wa dochira desu ka"]'><span class="q-japanese">3. どこーはーかいぎしつーですか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s4" data-ans='["このくつはいくらですか", "kono kutsu wa ikura desu ka"]'><span class="q-japanese">4. いくらーはーくつーこのーですか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s5" data-ans='["いまなんじですか", "ima nanji desu ka"]'><span class="q-japanese">5. ですかーなんじーいま</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s6" data-ans='["わたしはまいあさ6じにおきます", "わたしはまいあさろくじにおきます", "まいあさわたしは6じにおきます", "まいあさわたしはろくじにおきます", "watashi wa maiasa rokuji ni okimasu", "maiasa watashi wa rokuji ni okimasu"]'><span class="q-japanese">6. 6じにーわたしーまいあさーはーおきます</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s7" data-ans='["ぎんこうは9じから3じまでです", "ぎんこうはくじからさんじまでです", "ginkou wa kuji kara sanji made desu", "ginkou wa 9-ji kara 3-ji made desu"]'><span class="q-japanese">7. 3じまでー9じからーぎんこうーですーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s8" data-ans='["きのうのばんはたらきましたか", "kinou no ban hatarakimashita ka"]'><span class="q-japanese">8. はたらきましたーきのうのばんーか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s9" data-ans='["あさってはやすみではありません", "あさってはやすみじゃありません", "asatte wa yasumi dewa arimasen", "asatte wa yasumi ja arimasen"]'><span class="q-japanese">9. ありませんーやすみーはーあさってーでは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="s10" data-ans='["としょかんはなんじにおわりますか", "toshokan wa nanji ni owarimasu ka"]'><span class="q-japanese">10. おわりますかーはーなんじにーとしょかん</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 5: MELENGKAPI KALIMAT -->
+    <div class="section-card">
+      <div class="section-title"><span>5. Lengkapilah Kalimat (Partikel &amp; Tata Bahasa)</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Isilah titik-titik dengan partikel atau kata yang tepat (contoh: は どこ, から まで).</p>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="q-box" data-id="lk1" data-ans='["は どこ", "は どちら", "wa doko", "wa dochira"]'><span class="q-japanese">1. すみません、じむしょ ___ ___ ですか。</span><div class="input-group"><input type="text" placeholder="Contoh: は どこ"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk2" data-ans='["は の", "wa no"]'><span class="q-japanese">2. ここ ___ パワーでんき ___ うけつけです。</span><div class="input-group"><input type="text" placeholder="Contoh: は の"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk3" data-ans='["は いくら", "wa ikura"]'><span class="q-japanese">3. その とけい ___ ___ ですか。… 3,000えんです。</span><div class="input-group"><input type="text" placeholder="Contoh: は いくら"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk4" data-ans='["の は", "no wa"]'><span class="q-japanese">4. スントコさん ___ おくに ___ どちらですか。</span><div class="input-group"><input type="text" placeholder="Contoh: の は"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk5" data-ans='["に ねます", "ni nemasu"]'><span class="q-japanese">5. まいばん 11じ ___ ___ 。(Setiap malam tidur pada jam 11.)</span><div class="input-group"><input type="text" placeholder="Contoh: に ねます"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk6" data-ans='["から まで", "kara made"]'><span class="q-japanese">6. かいしゃは 8じはん ___ 5じ ___ です。</span><div class="input-group"><input type="text" placeholder="Contoh: から まで"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk7" data-ans='["は ではありません", "は じゃありません", "は では", "は じゃ", "wa dewa arimasen", "wa ja arimasen", "wa dewa", "wa ja"]'><span class="q-japanese">7. にちようび ___ やすみ ___ 。(Hari Minggu BUKAN hari libur.)</span><div class="input-group"><input type="text" placeholder="Contoh: は ではありません"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk8" data-ans='["は しませんでした", "は べんきょうしませんでした", "wa shimasen deshita", "wa benkyou shimasen deshita"]'><span class="q-japanese">8. きのうの ばん ___ べんきょう ___ 。(Kemarin malam TIDAK belajar.)</span><div class="input-group"><input type="text" placeholder="Contoh: は しませんでした"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk9" data-ans='["は と", "wa to"]'><span class="q-japanese">9. やすみ ___ どようび ___ にちようびです。</span><div class="input-group"><input type="text" placeholder="Contoh: は と"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="lk10" data-ans='["から はたらきます", "kara hatarakimasu"]'><span class="q-japanese">10. わたしは あしたの 9じ ___ ___ 。(Saya bekerja dari jam 9 besok.)</span><div class="input-group"><input type="text" placeholder="Contoh: から はたらきます"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 6: TERJEMAHAN INDONESIA KE JEPANG -->
+    <div class="section-card">
+      <div class="section-title"><span>6. Terjemahkan ke Bahasa Jepang</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Terjemahkan kalimat baku berikut ke dalam Bahasa Jepang (Hiragana/Katakana/Romaji).</p>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="q-box" data-id="tij1" data-ans='["かいぎしつはあそこです", "かいぎしつはあちらです", "kaigishitsu wa asoko desu", "kaigishitsu wa achira desu"]'><span class="q-label">1. RUANG RAPAT BERADA DI SANA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij2" data-ans='["おてあらいはどちらですか", "トイレはどちらですか", "おてあらいはどこですか", "トイレはどこですか", "otearai wa dochira desu ka", "toire wa dochira desu ka", "otearai wa doko desu ka", "toire wa doko desu ka"]'><span class="q-label">2. TOILET BERADA DI SEBELAH MANA (SOPAN)</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij3" data-ans='["このとけいはいくらですか", "kono tokei wa ikura desu ka"]'><span class="q-label">3. JAM INI BERAPA HARGANYA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij4" data-ans='["かいしゃは8じから5じまでです", "かいしゃははちじからごじまでです", "じむしょは8じから5じまでです", "じむしょははちじからごじまでです", "kaisha wa hachiji kara goji made desu", "jimusho wa hachiji kara goji made desu"]'><span class="q-label">4. KANTOR BUKA DARI PUKUL 8 SAMPAI PUKUL 5</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij5" data-ans='["わたしはまいあさ6じにおきます", "わたしはまいあさろくじにおきます", "まいあさわたしは6じにおきます", "まいあさわたしはろくじにおきます", "watashi wa maiasa rokuji ni okimasu", "maiasa watashi wa rokuji ni okimasu"]'><span class="q-label">5. SETIAP PAGI SAYA BANGUN PUKUL 6</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij6" data-ans='["いまなんじなんぷんですか", "いまなんじですか", "いまはなんじなんぷんですか", "いまはなんじですか", "ima nanji nanpun desu ka", "ima nanji desu ka"]'><span class="q-label">6. SEKARANG PUKUL BERAPA LEWAT BERAPA MENIT</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij7" data-ans='["きのうのばんべんきょうしませんでした", "わたしはきのうのばんべんきょうしませんでした", "ゆうべべんきょうしませんでした", "kinou no ban benkyou shimasen deshita", "watashi wa kinou no ban benkyou shimasen deshita"]'><span class="q-label">7. KEMARIN MALAM SAYA TIDAK BELAJAR</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij8" data-ans='["ぎんこうのやすみはどようびとにちようびです", "ginkou no yasumi wa doyoubi to nichiyoubi desu"]'><span class="q-label">8. HARI LIBUR BANK ADALAH HARI SABTU DAN HARI MINGGU</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij9" data-ans='["ここはパワーでんきのうけつけです", "ここはpower denkiのうけつけです", "koko wa pawaa denki no uketsuke desu", "koko wa power denki no uketsuke desu"]'><span class="q-label">9. DI SINI ADALAH BAGIAN RESEPSIONIS POWER DENKI</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tij10" data-ans='["あさってはやすみではありません", "あさってはやすみじゃありません", "asatte wa yasumi dewa arimasen", "asatte wa yasumi ja arimasen"]'><span class="q-label">10. LUSA BUKAN HARI LIBUR</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+    <!-- BAGIAN 7: TERJEMAHAN JEPANG KE INDONESIA -->
+    <div class="section-card">
+      <div class="section-title"><span>7. Terjemahkan ke Bahasa Indonesia</span><span class="badge">5 Soal</span></div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="q-box" data-id="tji1" data-ans='["toilet berada di sebelah sana", "kamar kecil berada di sebelah sana", "toilet ada di sebelah sana", "kamar kecil ada di sebelah sana", "toilet di sebelah sana", "kamar kecil di sebelah sana", "toilet berada di sana", "kamar kecil berada di sana", "toilet ada di sana", "kamar kecil ada di sana", "toilet di sana", "kamar kecil di sana", "di sebelah sana adalah toilet", "di sana adalah toilet"]'><span class="q-japanese">1. おてあらいは あちらです。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tji2" data-ans='["bank buka dari pukul 9 sampai pukul 3", "bank buka dari jam 9 sampai jam 3", "bank dari pukul 9 sampai pukul 3", "bank dari jam 9 sampai jam 3", "kantor bank buka dari pukul 9 sampai pukul 3", "kantor bank buka dari jam 9 sampai jam 3"]'><span class="q-japanese">2. ぎんこうは 9じから 3じまでです。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tji3" data-ans='["saya setiap hari bangun pukul 6", "saya setiap hari bangun jam 6", "setiap hari saya bangun pukul 6", "setiap hari saya bangun jam 6", "saya bangun pukul 6 setiap hari", "saya bangun jam 6 setiap hari"]'><span class="q-japanese">3. わたしは まいにち 6じに おきます。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tji4" data-ans='["kemarin saya belajar dari pukul 7 sampai pukul 9", "kemarin saya belajar dari jam 7 sampai jam 9", "kemarin saya telah belajar dari pukul 7 sampai pukul 9", "kemarin saya telah belajar dari jam 7 sampai jam 9", "kemarin belajar dari pukul 7 sampai pukul 9", "kemarin belajar dari jam 7 sampai jam 9"]'><span class="q-japanese">4. きのう 7じから 9じまで べんきょうしました。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tji5" data-ans='["hari libur department store adalah hari apa", "hari libur departemen store adalah hari apa", "hari libur toserba adalah hari apa", "department store libur pada hari apa", "department store libur hari apa", "departemen store libur hari apa", "toko serba ada libur hari apa", "toserba libur hari apa", "pada hari apa department store libur"]'><span class="q-japanese">5. デパートの やすみは なんようびですか。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FLOATING BOTTOM BAR -->
+  <div class="bottom-actions" id="bottom-actions">
+    <button class="action-btn btn-primary" onclick="submitExam()">✅ Selesai &amp; Evaluasi</button>
+    <button class="action-btn btn-secondary" onclick="resetForm()">🔄 Reset Ujian</button>
+  </div>
+
+  <script>
+    // ================= 1. PENGATURAN TEMA GELAP/TERANG =================
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
+
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        if (bodyEl) bodyEl.classList.add('light-theme');
+        if (themeIcon) themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        if (bodyEl) bodyEl.classList.remove('light-theme');
+        if (themeIcon) themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
+
+    function initTheme() {
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        applyThemeState(true);
+      } else {
+        applyThemeState(false);
+      }
+    }
+
+    initTheme();
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isCurrentlyLight = rootHtml.classList.contains('light-theme') || (bodyEl && bodyEl.classList.contains('light-theme'));
+        applyThemeState(!isCurrentlyLight);
+      });
+    }
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'theme_preference') {
+        applyThemeState(event.newValue === 'light');
+      }
+    });
+
+    // ================= 2. GENERATOR DROPDOWN MENU BAB 1 S.D. 50 =================
+    function populateChapterMenu() {
+      const container = document.getElementById('chapterMenuList');
+      if (!container) return;
+      container.innerHTML = '';
+
+      // Bab 1 s.d 10 (Format: bab-X-dan-Y.html)
+      const earlyPairs = [
+        { label: "Bab 1 & 2", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-1-dan-2.html" },
+        { label: "Bab 3 & 4 (Aktif)", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-3-dan-4.html", current: true },
+        { label: "Bab 5 & 6", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-5-dan-6.html" },
+        { label: "Bab 7 & 8", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-7-dan-8.html" },
+        { label: "Bab 9 & 10", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-9-dan-10.html" }
+      ];
+
+      earlyPairs.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.className = `chapter-menu-item ${item.current ? 'active' : ''}`;
+        a.innerHTML = `<span>${item.label}</span> ${item.current ? '📍' : '→'}`;
+        container.appendChild(a);
+      });
+
+      // Bab 11 s.d 50 (Format: bab-X.html)
+      for (let i = 11; i <= 50; i++) {
+        const a = document.createElement('a');
+        a.href = `/belajar-bahasa-jepang/menu/latihan-soal/bab-${i}.html`;
+        a.className = 'chapter-menu-item';
+        a.innerHTML = `<span>Bab ${i}</span> <span>→</span>`;
+        container.appendChild(a);
+      }
+    }
+
+    function toggleChapterMenu(e) {
+      if (e) e.stopPropagation();
+      const dropdown = document.getElementById('chapterMenuDropdown');
+      if (dropdown) dropdown.classList.toggle('show');
+    }
+
+    // Tutup pop-up saat klik di luar
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('chapterMenuDropdown');
+      const btn = document.getElementById('chapterMenuBtn');
+      if (dropdown && !dropdown.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+
+    populateChapterMenu();
+
+    // ================= 3. SMART SCROLL BEHAVIOR (FLOATING TIMER POJOK KANAN ATAS) =================
+    let lastScrollY = window.scrollY;
+    let isStudyModeActive = false;
+    const headerEl = document.getElementById('topHeader');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      if (!headerEl) return;
+
+      if (isStudyModeActive) {
+        // Mode Belajar: Scroll ke bawah sembunyikan penuh, scroll ke atas munculkan
+        if (currentScrollY > lastScrollY && currentScrollY > 60) {
+          headerEl.classList.add('study-hide');
+        } else {
+          headerEl.classList.remove('study-hide');
+        }
+      } else {
+        // Mode Ujian: Scroll ke bawah hanya pertahankan Timer Floating di pojok kanan atas tanpa blur background
+        if (currentScrollY > 40) {
+          headerEl.classList.add('exam-scrolled');
+          const dropdown = document.getElementById('chapterMenuDropdown');
+          if (dropdown) dropdown.classList.remove('show');
+        } else {
+          headerEl.classList.remove('exam-scrolled');
+        }
+      }
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    // ================= 4. LOGIKA KUIS & EVALUASI =================
+    const answeredCorrectly = new Set();
+    const TOTAL_QUESTIONS = 65;
+    let timerInterval = null;
+    let totalSeconds = 60 * 60; // 1 Jam
+    let isExamFinished = false;
+
+    function cleanStr(str) {
+      return (str || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[、。？！?!.,\/\-\_\(\)\~]/g, '')
+        .replace(/\s+/g, ' ');
+    }
+
+    function checkSingle(btn, isAutoSubmit = false) {
+      const box = btn.closest('.q-box');
+      if (!box) return;
+
+      const input = box.querySelector('input[type="text"]');
+      const feedback = box.querySelector('.feedback');
+      const rawUserAns = cleanStr(input.value);
+      const validAnswers = JSON.parse(box.getAttribute('data-ans') || '[]');
+      const qId = box.getAttribute('data-id');
+
+      if (!rawUserAns) {
+        if (!isAutoSubmit) {
+          feedback.className = 'feedback incorrect';
+          feedback.innerHTML = '⚠️ Masukkan jawaban terlebih dahulu.';
+        } else {
+          feedback.className = 'feedback incorrect';
+          feedback.innerHTML = '❌ <strong>Tidak Dijawab.</strong> Jawaban baku benar: <code>' + validAnswers[0] + '</code>';
+        }
+        answeredCorrectly.delete(qId);
+        updateScore();
+        return;
+      }
+
+      const isMatch = validAnswers.some(ans => {
+        const cleanAns = cleanStr(ans);
+        return rawUserAns === cleanAns;
+      });
+
+      if (isMatch) {
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = '✅ <strong>Benar!</strong> Jawaban baku: <code>' + validAnswers[0] + '</code>';
+        answeredCorrectly.add(qId);
+      } else {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = '❌ <strong>Salah.</strong> Jawaban Anda: "<em>' + input.value + '</em>"<br>💡 Solusi baku: <code>' + validAnswers[0] + '</code>';
+        answeredCorrectly.delete(qId);
+      }
+
+      updateScore();
+    }
+
+    function updateScore() {
+      const score = answeredCorrectly.size;
+      const scoreElem = document.getElementById('score-display');
+      const progressElem = document.getElementById('progress-display');
+      
+      if (scoreElem) scoreElem.innerText = `${score}/65`;
+      if (progressElem) {
+        const percentage = Math.round((score / TOTAL_QUESTIONS) * 100);
+        progressElem.innerText = `${percentage}%`;
+      }
+    }
+
+    function submitExam() {
+      if (isExamFinished) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      clearInterval(timerInterval);
+      isExamFinished = true;
+
+      const allBoxes = document.querySelectorAll('#quiz-container .q-box');
+      allBoxes.forEach(box => {
+        const btn = box.querySelector('.btn-check');
+        if (btn) checkSingle(btn, true);
+
+        const input = box.querySelector('input[type="text"]');
+        if (input) input.disabled = true;
+        if (btn) btn.disabled = true;
+      });
+
+      const score = answeredCorrectly.size;
+      const percent = Math.round((score / TOTAL_QUESTIONS) * 100);
+
+      const evalBox = document.getElementById('eval-result-box');
+      const percentText = document.getElementById('eval-percent-text');
+      const statusBadge = document.getElementById('eval-status-badge');
+      const descText = document.getElementById('eval-desc-text');
+      const correctVal = document.getElementById('eval-correct-val');
+      const wrongVal = document.getElementById('eval-wrong-val');
+      const totalVal = document.getElementById('eval-total-val');
+
+      percentText.innerText = `${percent}% (Skor: ${score})`;
+      correctVal.innerText = score;
+      wrongVal.innerText = TOTAL_QUESTIONS - score;
+      totalVal.innerText = TOTAL_QUESTIONS;
+
+      if (percent >= 70) {
+        statusBadge.className = 'eval-status-badge status-pass';
+        statusBadge.innerText = '🎉 LULUS (SANGAT BAIK)';
+        descText.innerText = 'Selamat! Anda telah menguasai materi Bab 3 & 4 dengan sangat baik.';
+      } else {
+        statusBadge.className = 'eval-status-badge status-fail';
+        statusBadge.innerText = '⚠️ PERLU BELAJAR LAGI';
+        descText.innerText = 'Nilai Anda belum mencapai standar kelulusan (70%). Silakan pelajari kunci jawaban di bawah ini.';
+      }
+
+      evalBox.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      const timerElem = document.getElementById('timer');
+      timerInterval = setInterval(() => {
+        if (totalSeconds <= 0) {
+          clearInterval(timerInterval);
+          submitExam();
+          return;
+        }
+        totalSeconds--;
+        const min = Math.floor(totalSeconds / 60);
+        const sec = totalSeconds % 60;
+        if (timerElem) {
+          timerElem.innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+          if (totalSeconds <= 300) timerElem.style.color = '#f87171';
+        }
+      }, 1000);
+    }
+
+    function startQuiz() {
+      isStudyModeActive = false;
+      headerEl.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('study-container').style.display = 'none';
+      document.getElementById('study-header-bar').style.display = 'none';
+      
+      document.getElementById('quiz-container').style.display = 'block';
+      document.getElementById('bottom-actions').style.display = 'flex';
+      document.getElementById('stats-bar').style.display = 'flex';
+      document.getElementById('header-title').innerText = "Evaluasi Bab 3 & 4";
+
+      startTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openStudyMode() {
+      isStudyModeActive = true;
+      headerEl.classList.remove('study-hide', 'exam-scrolled');
+
+      document.getElementById('start-modal').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'none';
+      document.getElementById('bottom-actions').style.display = 'none';
+      
+      document.getElementById('study-container').style.display = 'block';
+      document.getElementById('stats-bar').style.display = 'none';
+      document.getElementById('study-header-bar').style.display = 'flex';
+      
+      document.getElementById('header-title').innerText = "Modul Materi Bab 3 & 4";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function exitStudyMode() {
+      startQuiz();
+    }
+
+    function resetForm() {
+      clearInterval(timerInterval);
+      totalSeconds = 60 * 60;
+      isExamFinished = false;
+
+      const timerElem = document.getElementById('timer');
+      if (timerElem) {
+        timerElem.innerText = "60:00";
+        timerElem.style.color = '';
+      }
+
+      document.querySelectorAll('#quiz-container input[type="text"]').forEach(input => {
+        input.value = '';
+        input.disabled = false;
+      });
+      document.querySelectorAll('#quiz-container .btn-check').forEach(btn => btn.disabled = false);
+      document.querySelectorAll('#quiz-container .feedback').forEach(fb => {
+        fb.className = 'feedback';
+        fb.style.display = 'none';
+      });
+
+      const evalBox = document.getElementById('eval-result-box');
+      if (evalBox) evalBox.style.display = 'none';
+
+      answeredCorrectly.clear();
+      updateScore();
+      document.getElementById('start-modal').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    updateScore();
+  </script>
+</body>
+</html>
