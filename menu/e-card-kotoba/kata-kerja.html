@@ -175,7 +175,7 @@
       transform: scale(1.08);
     }
 
-    /* Header Asal */
+    /* Header */
     .chapter-header {
       background: linear-gradient(135deg, #065f46 0%, #0369a1 100%);
       color: #ffffff;
@@ -295,56 +295,23 @@
       margin-bottom: 24px;
     }
 
-    /* Base Styling untuk Kartu */
+    /* Card Styling Asli */
     .doushi-card {
-      background: transparent;
-      border-radius: 12px;
-      perspective: 1000px; /* Diperlukan untuk efek 3D Flip */
-      min-height: 230px;
-    }
-
-    /* Inner Wrapper Flip Animation */
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 230px;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-      border-radius: 12px;
-    }
-
-    .doushi-card.flipped .card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .card-front, .card-back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       border-radius: 12px;
       padding: 14px 12px;
+      box-shadow: 0 2px 4px var(--shadow-color);
       display: flex;
       flex-direction: column;
-      box-shadow: 0 2px 4px var(--shadow-color);
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
     }
 
-    .card-front:hover {
+    .doushi-card:hover {
       border-color: var(--primary);
       box-shadow: 0 6px 14px var(--shadow-color);
-    }
-
-    /* Card Back (Terbalik) */
-    .card-back {
-      transform: rotateY(180deg);
-      justify-content: space-between;
-      border-color: var(--primary-dark);
     }
 
     .card-top {
@@ -414,7 +381,6 @@
       color: var(--text-muted);
     }
 
-    /* Grid Perubahan Bentuk di Dalam Kad */
     .forms-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -443,22 +409,22 @@
       color: var(--text-main);
     }
 
-    /* Mode Flashcard Front Center Content */
-    .flashcard-front-center {
+    /* Style Tambahan Khusus Mode Flashcard (Flip Mode) */
+    .flashcard-front {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex: 1;
+      min-height: 180px;
       text-align: center;
       gap: 6px;
     }
 
-    .flashcard-front-center .card-icon {
+    .flashcard-front .card-icon {
       font-size: 3rem;
     }
 
-    .flashcard-front-center .card-jp {
+    .flashcard-front .card-jp {
       font-size: 1.5rem;
     }
 
@@ -479,11 +445,11 @@
       border-color: var(--primary);
     }
 
-    .flip-hint {
+    .hint-text {
       font-size: 0.68rem;
       color: var(--text-muted);
       text-align: center;
-      margin-top: 6px;
+      margin-top: 8px;
       font-weight: 600;
     }
 
@@ -575,7 +541,7 @@
       </div>
     </div>
 
-    <!-- Header Asal -->
+    <!-- Header -->
     <header class="chapter-header">
       <div>
         <span class="badge-series">Modul Kosakata Bergambar JLPT N5</span>
@@ -585,7 +551,7 @@
       <div class="page-badge">Made by Vorst Cavry</div>
     </header>
 
-    <!-- Search & Filter Controls -->
+    <!-- Search & Filter Bar -->
     <div class="search-filter-box">
       <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kata kerja (contoh: makan, tabemasu, grup 1, ikimasu)..." onkeyup="filterCards()">
       <div class="filter-tags">
@@ -659,8 +625,8 @@
       applyThemeState(!isCurrentlyLight);
     });
 
-    // --- 2. MANAGEMENT MODE TAMPILAN (FLIP VS KAMUS) ---
-    let displayMode = 'flip'; // 'flip' atau 'dictionary'
+    // --- 2. MANAGEMENT MODE TAMPILAN (DICTIONARY VS FLIP) ---
+    let displayMode = 'dictionary'; // Default mode asli
     const modeToggleBtn = document.getElementById('modeToggleBtn');
     const modeIcon = document.getElementById('modeIcon');
     const modeText = document.getElementById('modeText');
@@ -671,17 +637,17 @@
     } catch(e) {}
 
     function updateModeUI() {
-      if (displayMode === 'flip') {
-        modeIcon.textContent = '📖';
-        modeText.textContent = 'Mode Kamus';
-      } else {
+      if (displayMode === 'dictionary') {
         modeIcon.textContent = '🔄';
         modeText.textContent = 'Mode Flip';
+      } else {
+        modeIcon.textContent = '📖';
+        modeText.textContent = 'Mode Kamus';
       }
     }
 
     modeToggleBtn.addEventListener('click', () => {
-      displayMode = displayMode === 'flip' ? 'dictionary' : 'flip';
+      displayMode = displayMode === 'dictionary' ? 'flip' : 'dictionary';
       try { localStorage.setItem('doushi_display_mode', displayMode); } catch(e) {}
       updateModeUI();
       filterCards();
@@ -695,7 +661,7 @@
       { no: 1, jp: "いきます", r: "ikimasu", id: "Pergi", icon: "🏃", grp: "Grup 1", cat: "grup1", ru: "行く", masen: "行きません", mashita: "行きました", te: "行って", nai: "行かない", ta: "行った" },
       { no: 2, jp: "かいます", r: "kaimasu", id: "Membeli", icon: "🛍️", grp: "Grup 1", cat: "grup1", ru: "買う", masen: "買いません", mashita: "買いました", te: "買って", nai: "買わない", ta: "買った" },
       { no: 3, jp: "かきます", r: "kakimasu", id: "Menulis", icon: "✍️", grp: "Grup 1", cat: "grup1", ru: "書く", masen: "書きません", mashita: "書きました", te: "書いて", nai: "書かない", ta: "書いた" },
-      { no: 4, jp: "ききます", r: "kikimasu", id: "Mendengar", icon: "🎧", grp: "Grup 1", cat: "grup1", ru: "聞く", masen: "聞きません", mashita: "聞きました", te: "聞いて", nai: "聞かない", ta: "聞いた" },
+      { no: 4, jp: "ききます", r: "kikimasu", id: "Mendengar", icon: "🎧", grp: "Grup 1", cat: "grup1", ru: "聞く", masen: "聞きません", mashita: "聞きました", te: "聞いて", nai: "書かない", ta: "聞いた" },
       { no: 5, jp: "のみます", r: "nomimasu", id: "Minum", icon: "🥤", grp: "Grup 1", cat: "grup1", ru: "飲む", masen: "飲みません", mashita: "飲みました", te: "飲んで", nai: "飲まない", ta: "飲んだ" },
       { no: 6, jp: "よみます", r: "yomimasu", id: "Membaca", icon: "📖", grp: "Grup 1", cat: "grup1", ru: "読む", masen: "読みません", mashita: "読みたい", te: "読んで", nai: "読まない", ta: "読んだ" },
       { no: 7, jp: "はなします", r: "hanashimasu", id: "Berbicara", icon: "💬", grp: "Grup 1", cat: "grup1", ru: "話す", masen: "話しはせん", mashita: "話しました", te: "話して", nai: "話さない", ta: "話した" },
@@ -732,7 +698,7 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // --- 5. RENDER FUNCTION (MODE FLIP VS MODE KAMUS) ---
+    // --- 5. RENDER FUNCTION ---
     function renderCards(data) {
       const container = document.getElementById('doushiContainer');
       container.innerHTML = '';
@@ -747,31 +713,57 @@
         card.className = 'doushi-card';
         const isSp = item.cat === 'spesial';
 
-        if (displayMode === 'flip') {
-          // MODE FLIP CARD INTERAKTIF
+        if (displayMode === 'dictionary') {
+          // TAMPILAN KAMUS ASLI
           card.innerHTML = `
-            <div class="card-inner">
-              <!-- SISI DEPAN -->
-              <div class="card-front">
+            <div class="card-top">
+              <span class="card-no">#${item.no}</span>
+              <span class="group-pill ${isSp ? 'sp' : ''}">${item.grp}</span>
+            </div>
+            <div class="card-main">
+              <div class="card-icon">${item.icon}</div>
+              <div class="card-title-box">
+                <div class="card-jp">${item.jp}</div>
+                <div class="card-romaji">${item.r}</div>
+                <div class="card-id">${item.id}</div>
+              </div>
+            </div>
+            <div class="forms-grid">
+              <div class="form-item"><span class="form-label">Kamus (~る)</span><span class="form-val">${item.ru}</span></div>
+              <div class="form-item"><span class="form-label">Negatif (~ません)</span><span class="form-val">${item.masen}</span></div>
+              <div class="form-item"><span class="form-label">Nai (~ない)</span><span class="form-val">${item.nai}</span></div>
+              <div class="form-item"><span class="form-label">Lampau (~ました)</span><span class="form-val">${item.mashita}</span></div>
+              <div class="form-item"><span class="form-label">Te (~て)</span><span class="form-val">${item.te}</span></div>
+              <div class="form-item"><span class="form-label">Ta (~た)</span><span class="form-val">${item.ta}</span></div>
+            </div>
+          `;
+          card.onclick = () => playAudio(item.jp);
+
+        } else {
+          // TAMPILAN MODE FLIP
+          let isFlipped = false;
+
+          const renderFlipState = () => {
+            if (!isFlipped) {
+              card.innerHTML = `
                 <div class="card-top">
                   <span class="card-no">#${item.no}</span>
                   <button class="audio-btn" onclick="playAudio('${item.jp}', event)" title="Putar Audio">🔊</button>
                 </div>
-                <div class="flashcard-front-center">
+                <div class="flashcard-front">
                   <div class="card-icon">${item.icon}</div>
                   <div class="card-jp">${item.jp}</div>
                   <div class="card-romaji">${item.r}</div>
                 </div>
-                <div class="flip-hint">💡 Klik kartu untuk balikkan</div>
-              </div>
-
-              <!-- SISI BELAKANG -->
-              <div class="card-back">
+                <div class="hint-text">💡 Klik untuk lihat detail perubahan</div>
+              `;
+            } else {
+              card.innerHTML = `
                 <div class="card-top">
                   <span class="group-pill ${isSp ? 'sp' : ''}">${item.grp}</span>
                   <span class="card-id" style="font-size:0.9rem; font-weight:800; color:var(--text-heading);">${item.id}</span>
                 </div>
-                <div class="forms-grid">
+                <div class="forms-grid" style="margin-top: 10px;">
                   <div class="form-item"><span class="form-label">Kamus (~る)</span><span class="form-val">${item.ru}</span></div>
                   <div class="form-item"><span class="form-label">Negatif (~ません)</span><span class="form-val">${item.masen}</span></div>
                   <div class="form-item"><span class="form-label">Nai (~ない)</span><span class="form-val">${item.nai}</span></div>
@@ -779,42 +771,17 @@
                   <div class="form-item"><span class="form-label">Te (~て)</span><span class="form-val">${item.te}</span></div>
                   <div class="form-item"><span class="form-label">Ta (~た)</span><span class="form-val">${item.ta}</span></div>
                 </div>
-                <div class="flip-hint">💡 Klik kartu untuk kembali</div>
-              </div>
-            </div>
-          `;
-
-          card.onclick = () => {
-            card.classList.toggle('flipped');
+                <div class="hint-text">💡 Klik untuk balikkan kartu</div>
+              `;
+            }
           };
 
-        } else {
-          // MODE KAMUS / GRID LANGSUNG
-          card.innerHTML = `
-            <div class="card-front" style="position:relative; height:100%;">
-              <div class="card-top">
-                <span class="card-no">#${item.no}</span>
-                <span class="group-pill ${isSp ? 'sp' : ''}">${item.grp}</span>
-              </div>
-              <div class="card-main">
-                <div class="card-icon">${item.icon}</div>
-                <div class="card-title-box">
-                  <div class="card-jp">${item.jp}</div>
-                  <div class="card-romaji">${item.r}</div>
-                  <div class="card-id">${item.id}</div>
-                </div>
-              </div>
-              <div class="forms-grid">
-                <div class="form-item"><span class="form-label">Kamus (~る)</span><span class="form-val">${item.ru}</span></div>
-                <div class="form-item"><span class="form-label">Negatif (~ません)</span><span class="form-val">${item.masen}</span></div>
-                <div class="form-item"><span class="form-label">Nai (~ない)</span><span class="form-val">${item.nai}</span></div>
-                <div class="form-item"><span class="form-label">Lampau (~ました)</span><span class="form-val">${item.mashita}</span></div>
-                <div class="form-item"><span class="form-label">Te (~て)</span><span class="form-val">${item.te}</span></div>
-                <div class="form-item"><span class="form-label">Ta (~た)</span><span class="form-val">${item.ta}</span></div>
-              </div>
-            </div>
-          `;
-          card.onclick = () => playAudio(item.jp);
+          renderFlipState();
+
+          card.onclick = () => {
+            isFlipped = !isFlipped;
+            renderFlipState();
+          };
         }
 
         container.appendChild(card);
