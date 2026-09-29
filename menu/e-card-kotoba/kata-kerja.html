@@ -2,23 +2,76 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabel Perubahan Kata Kerja N5 - Bahasa Jepang</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;800&display=swap" rel="stylesheet">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>E-Card Doushi List N5 - Perubahan Bentuk Kata Kerja</title>
+
+  <!-- Inisialisasi Tema Instan untuk Mencegah Efek Kedip (FOUC) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('theme_preference');
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
+      --primary: #4ade80;
+      --primary-dark: #16a34a;
+      --accent: #38bdf8;
       --bg-body: #0f172a;
       --bg-card: #1e293b;
-      --bg-header: #0284c7;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --accent: #38bdf8;
+      --text-heading: #ffffff;
       --border-color: #334155;
-      --grp1-color: #3b82f6;
-      --grp2-color: #10b981;
-      --grp3-color: #f59e0b;
-      --sp-color: #ec4899;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --filter-btn-bg: #0f172a;
+      --filter-btn-border: #334155;
+      --filter-btn-text: #94a3b8;
+      --card-hover-bg: #1e293b;
+      --card-active-bg: #14532d;
+      --group-pill-bg: #052e16;
+      --group-pill-text: #86efac;
+      --group-pill-border: #16a34a;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+    }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --accent: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --filter-btn-bg: #f8fafc;
+      --filter-btn-border: #cbd5e1;
+      --filter-btn-text: #475569;
+      --card-hover-bg: #ffffff;
+      --card-active-bg: #dcfce7;
+      --group-pill-bg: #dcfce7;
+      --group-pill-text: #15803d;
+      --group-pill-border: #86efac;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
     }
 
     * {
@@ -26,410 +79,775 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     body {
       background-color: var(--bg-body);
       color: var(--text-main);
-      padding: 20px 12px 60px;
-      line-height: 1.5;
+      line-height: 1.6;
+      padding: 12px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1040px;
       margin: 0 auto;
+      width: 100%;
+      position: relative;
     }
 
-    /* Header Section */
-    .page-header {
-      text-align: center;
-      margin-bottom: 24px;
-      padding: 24px 16px;
-      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
-      border-radius: 16px;
-      color: #ffffff;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
     }
 
-    .page-header h1 {
-      font-size: clamp(1.4rem, 4vw, 2.2rem);
-      font-weight: 800;
-      margin-bottom: 6px;
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
     }
 
-    .page-header p {
-      font-size: 0.95rem;
-      opacity: 0.9;
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
     }
 
-    /* Guide Box / Rumus Ringkas */
-    .rules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .rule-card {
-      background: var(--bg-card);
-      border-left: 5px solid #ccc;
-      border-radius: 10px;
-      padding: 14px;
-      border-top: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .rule-card.grp1 { border-left-color: var(--grp1-color); }
-    .rule-card.grp2 { border-left-color: var(--grp2-color); }
-    .rule-card.grp3 { border-left-color: var(--grp3-color); }
-    .rule-card.sp { border-left-color: var(--sp-color); }
-
-    .rule-card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
+    .right-controls {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .rule-card p {
+    .mode-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      font-weight: 700;
       font-size: 0.82rem;
-      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
     }
 
-    /* Controls: Search & Filter */
-    .controls-bar {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      padding: 14px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    .mode-toggle-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header Asal */
+    .chapter-header {
+      background: linear-gradient(135deg, #065f46 0%, #0369a1 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge-series {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-header h1 {
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .chapter-header p {
+      color: #d1fae5;
+      font-size: 0.85rem;
+    }
+
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px var(--shadow-color);
     }
 
     .search-input {
-      flex: 1;
-      min-width: 240px;
+      width: 100%;
       padding: 10px 14px;
       border-radius: 8px;
-      border: 1px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       background: var(--bg-body);
-      color: #fff;
-      font-size: 0.9rem;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
       outline: none;
     }
 
     .search-input:focus {
-      border-color: var(--accent);
+      border-color: var(--primary);
     }
 
-    .filter-btn-group {
+    .filter-tags {
       display: flex;
       gap: 6px;
-      flex-wrap: wrap;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      display: none;
     }
 
     .filter-btn {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background: var(--bg-body);
-      color: var(--text-muted);
-      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--filter-btn-border);
+      background: var(--filter-btn-bg);
+      color: var(--filter-btn-text);
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-    }
-
-    /* Table Styling */
-    .table-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      background: var(--bg-card);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
       white-space: nowrap;
-      font-size: 0.88rem;
     }
 
-    th, td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border-color);
+    .filter-btn.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary);
     }
 
-    th {
-      background: #0f172a;
-      color: var(--accent);
-      font-weight: 700;
-      position: sticky;
+    /* Grid Layout E-Card */
+    .ecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Base Styling untuk Kartu */
+    .doushi-card {
+      background: transparent;
+      border-radius: 12px;
+      perspective: 1000px; /* Diperlukan untuk efek 3D Flip */
+      min-height: 230px;
+    }
+
+    /* Inner Wrapper Flip Animation */
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 230px;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+
+    .doushi-card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
       top: 0;
-      z-index: 2;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 4px var(--shadow-color);
     }
 
-    tr:hover {
-      background-color: rgba(56, 189, 248, 0.05);
+    .card-front:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 14px var(--shadow-color);
     }
 
-    .jp-text {
+    /* Card Back (Terbalik) */
+    .card-back {
+      transform: rotateY(180deg);
+      justify-content: space-between;
+      border-color: var(--primary-dark);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .card-no {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .group-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--group-pill-bg);
+      color: var(--group-pill-text);
+      border: 1px solid var(--group-pill-border);
+    }
+
+    .group-pill.sp {
+      background: rgba(236, 72, 153, 0.15);
+      color: #f472b6;
+      border-color: #ec4899;
+    }
+
+    .card-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .card-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-jp {
       font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-heading);
     }
 
-    .kanji {
-      color: #38bdf8;
+    .card-romaji {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
     }
 
-    .kana {
+    .card-id {
       font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Grid Perubahan Bentuk di Dalam Kad */
+    .forms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      font-size: 0.76rem;
+      margin-top: 4px;
+    }
+
+    .form-item {
+      background: var(--bg-body);
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-label {
+      font-size: 0.62rem;
       color: var(--text-muted);
       display: block;
+      font-weight: 700;
     }
 
-    /* Group Badges */
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
+    .form-val {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
-    .badge-g1 { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid var(--grp1-color); }
-    .badge-g2 { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid var(--grp2-color); }
-    .badge-g3 { background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid var(--grp3-color); }
-    .badge-sp { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid var(--sp-color); }
+    /* Mode Flashcard Front Center Content */
+    .flashcard-front-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      gap: 6px;
+    }
 
-    .btn-audio {
-      background: none;
-      border: none;
+    .flashcard-front-center .card-icon {
+      font-size: 3rem;
+    }
+
+    .flashcard-front-center .card-jp {
+      font-size: 1.5rem;
+    }
+
+    .audio-btn {
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-size: 1rem;
-      margin-left: 4px;
-      vertical-align: middle;
-      opacity: 0.7;
-      transition: opacity 0.2s;
+      font-size: 0.9rem;
     }
 
-    .btn-audio:hover { opacity: 1; }
+    .audio-btn:hover {
+      border-color: var(--primary);
+    }
 
-    @media (max-width: 768px) {
-      body { padding: 10px 6px; }
-      th, td { padding: 10px 8px; font-size: 0.82rem; }
+    .flip-hint {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1040px;
+      margin-top: 36px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    
-    <!-- Header -->
-    <header class="page-header">
-      <h1>Tabel Perubahan Kata Kerja N5</h1>
-      <p>Modul Lengkap Perubahan Bentuk Kata Kerja (動詞の活用) Bahasa Jepang</p>
+    <!-- Top Navigation Controls -->
+    <div class="top-controls">
+      <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/e-card-kotoba.html" class="btn-back-hub">
+        <span>←</span> Kembali
+      </a>
+      
+      <div class="right-controls">
+        <button class="mode-toggle-btn" id="modeToggleBtn" type="button" title="Ganti Mode Tampilan">
+          <span id="modeIcon">🔄</span> <span id="modeText">Mode Flip</span>
+        </button>
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Header Asal -->
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Modul Kosakata Bergambar JLPT N5</span>
+        <h1>E-Card Doushi List (えカード どうし リスト)</h1>
+        <p>Katalog lengkap kata kerja beserta perubahan bentuknya (~ます, ~ません, ~ました, ~て, ~る, ~ない, ~た, dan lain-lain).</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
     </header>
 
-    <!-- Panduan Kelompok Kata Kerja -->
-    <div class="rules-grid">
-      <div class="rule-card grp1">
-        <h3><span class="badge badge-g1">Kelompok 1</span> 五段 (Godan)</h3>
-        <p>Berakhiran vokal <b>-u</b> (う, く, す, つ, ぬ, む, ぶ, ぐ, る). Perubahan bentuk mengikuti pergeseran baris vokal AIUEO.</p>
-      </div>
-
-      <div class="rule-card grp2">
-        <h3><span class="badge badge-g2">Kelompok 2</span> 一段 (Ichidan)</h3>
-        <p>Berakhiran <b>-iru</b> atau <b>-eru</b>. Untuk mengubah bentuk, cukup hilangkan <b>る (ru)</b> lalu tambahkan akhiran yang sesuai.</p>
-      </div>
-
-      <div class="rule-card grp3">
-        <h3><span class="badge badge-g3">Kelompok 3</span> Irreguler</h3>
-        <p>Terdiri dari kata kerja dasar <b>する (suru)</b> dan <b>来る (kuru)</b> serta gabungan Kata Benda + する.</p>
-      </div>
-
-      <div class="rule-card sp">
-        <h3><span class="badge badge-sp">Spesial</span> Pengecualian N5</h3>
-        <p>Secara fisik berakhiran <i>-iru/-eru</i>, namun masuk klasifikasi <b>Kelompok 1 (Godan)</b>. Contoh: Kaerimasu, Hashirimasu.</p>
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari kata kerja (contoh: makan, tabemasu, grup 1, ikimasu)..." onkeyup="filterCards()">
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="setCategory('all', this)">Semua</button>
+        <button class="filter-btn" onclick="setCategory('grup1', this)">1️⃣ Golongan 1 (Godan)</button>
+        <button class="filter-btn" onclick="setCategory('grup2', this)">2️⃣ Golongan 2 (Ichidan)</button>
+        <button class="filter-btn" onclick="setCategory('grup3', this)">3️⃣ Golongan 3 (Irreguler)</button>
+        <button class="filter-btn" onclick="setCategory('spesial', this)">⭐ Spesial (Pengecualian)</button>
       </div>
     </div>
 
-    <!-- Filter & Search Controls -->
-    <div class="controls-bar">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari Kata Kerja (Contoh: makan, ikimasu, taberu, 行きます)..." onkeyup="filterData()">
+    <!-- Container Grid Kartu E-Card -->
+    <div class="ecard-grid" id="doushiContainer"></div>
+
+    <!-- Kontak & Donasi Section -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
       
-      <div class="filter-btn-group">
-        <button class="filter-btn active" onclick="setFilter('all', this)">Semua</button>
-        <button class="filter-btn" onclick="setFilter('g1', this)">Kelompok 1</button>
-        <button class="filter-btn" onclick="setFilter('g2', this)">Kelompok 2</button>
-        <button class="filter-btn" onclick="setFilter('g3', this)">Kelompok 3</button>
-        <button class="filter-btn" onclick="setFilter('sp', this)">Spesial (Pengecualian)</button>
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
       </div>
     </div>
-
-    <!-- Table Result -->
-    <div class="table-wrapper">
-      <table id="verbTable">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Kelompok</th>
-            <th>Arti (ID)</th>
-            <th>Bentuk Masu (~ます)</th>
-            <th>Bentuk Kamus (~る)</th>
-            <th>Negatif (~ません)</th>
-            <th>Bentuk Nai (~ない)</th>
-            <th>Lampau (~ました)</th>
-            <th>Bentuk Te (~て)</th>
-            <th>Bentuk Ta (~た)</th>
-            <th>Potensial (~れる)</th>
-            <th>Maksud (~よう)</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <!-- Data diisi oleh JavaScript -->
-        </tbody>
-      </table>
-    </div>
-
   </div>
 
   <script>
-    // Database Kata Kerja N5 Lengkap dengan Perubahan Bentuk
-    const verbList = [
-      // KELOMPOK 1 (Godan)
-      { g: 'g1', id: 'Pergi', masu: '行きます', r_masu: 'ikimasu', ru: '行く', nai: '行かない', masen: '行きません', mashita: '行きました', te: '行って', ta: '行った', pot: '行ける', vol: '行こう' },
-      { g: 'g1', id: 'Membeli', masu: '買います', r_masu: 'kaimasu', ru: '買う', nai: '買わない', masen: '買いません', mashita: '買いはした', te: '買って', ta: '買った', pot: '買える', vol: '買おう' },
-      { g: 'g1', id: 'Menulis', masu: '書きます', r_masu: 'kakimasu', ru: '書く', nai: '書かない', masen: '書きません', mashita: '書きました', te: '書いて', ta: '書いた', pot: '書ける', vol: '書こう' },
-      { g: 'g1', id: 'Mendengar', masu: '聞きます', r_masu: 'kikimasu', ru: '聞く', nai: '聞かない', masen: '聞きません', mashita: '聞きました', te: '聞いて', ta: '聞いた', pot: '聞ける', vol: '聞こう' },
-      { g: 'g1', id: 'Membaca', masu: '読みます', r_masu: 'yomimasu', ru: '読む', nai: '読まない', masen: '読みません', mashita: '読みました', te: '読んで', ta: '読んだ', pot: '読める', vol: '読もう' },
-      { g: 'g1', id: 'Minum', masu: '飲みます', r_masu: 'nomimasu', ru: '飲む', nai: '飲まない', masen: '飲みません', mashita: '飲みました', te: '飲んで', ta: '飲んだ', pot: '飲める', vol: '飲もう' },
-      { g: 'g1', id: 'Berenang', masu: '泳ぎます', r_masu: 'oyogimasu', ru: '泳ぐ', nai: '泳がない', masen: '泳ぎません', mashita: '泳ぎました', te: '泳いで', ta: '泳いだ', pot: '泳げる', vol: '泳ごう' },
-      { g: 'g1', id: 'Berbicara', masu: '話します', r_masu: 'hanashimasu', ru: '話す', nai: '話さない', masen: '話しはせん', mashita: '話しました', te: '話して', ta: '話した', pot: '話せる', vol: '話そう' },
-      { g: 'g1', id: 'Menunggu', masu: '待ちます', r_masu: 'machimasu', ru: '待つ', nai: '待たない', masen: '待ちません', mashita: '待ちました', te: '待って', ta: '待った', pot: '待てる', vol: '待とう' },
-      { g: 'g1', id: 'Bermain', masu: '遊びます', r_masu: 'asobimasu', ru: '遊ぶ', nai: '遊ばない', masen: '遊びません', mashita: '遊びました', te: '遊んで', ta: '遊んだ', pot: '遊べる', vol: '遊ぼう' },
-      { g: 'g1', id: 'Berdiri', masu: '立ちます', r_masu: 'tachimasu', ru: '立つ', nai: '立たない', masen: '立ちません', mashita: '立ちました', te: '立って', ta: '立った', pot: '立てる', vol: '立とう' },
+    // --- 1. SINKRONISASI TEMA GELAP / TERANG ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
 
-      // KELOMPOK 2 (Ichidan)
-      { g: 'g2', id: 'Makan', masu: '食べます', r_masu: 'tabemasu', ru: '食べる', nai: '食べない', masen: '食べません', mashita: '食べました', te: '食べて', ta: '食べた', pot: '食べられる', vol: '食べよう' },
-      { g: 'g2', id: 'Melihat', masu: '見ます', r_masu: 'mimasu', ru: '見る', nai: '見ない', masen: '見ません', mashita: '見ました', te: '見て', ta: '見た', pot: '見られる', vol: '見よう' },
-      { g: 'g2', id: 'Tidur', masu: '寝ます', r_masu: 'nemasu', ru: '寝る', nai: '寝ない', masen: '寝ません', mashita: '寝ました', te: '寝て', ta: '寝た', pot: '寝られる', vol: '寝よう' },
-      { g: 'g2', id: 'Bangun', masu: '起きます', r_masu: 'okimasu', ru: '起きる', nai: '起きない', masen: '起きません', mashita: '起きはした', te: '起きて', ta: '起きた', pot: '起きられる', vol: '起きよう' },
-      { g: 'g2', id: 'Membuka', masu: '開けます', r_masu: 'akemasu', ru: '開ける', nai: '開けない', masen: '開けません', mashita: '開けました', te: '開けて', ta: '開けた', pot: '開けられる', vol: '開けよう' },
-      { g: 'g2', id: 'Menutup', masu: '閉めます', r_masu: 'shimemasu', ru: '閉める', nai: '閉めない', masen: '閉めません', mashita: '閉めました', te: '閉めて', ta: '閉めた', pot: '閉められる', vol: '閉めよう' },
-      { g: 'g2', id: 'Ada (Mhlk Hidup)', masu: '居ます', r_masu: 'imasu', ru: '居る', nai: '居ない', masen: '居ません', mashita: '居ました', te: '居て', ta: '居た', pot: '居られる', vol: '居よう' },
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
+      } else {
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
+      }
+    }
 
-      // KELOMPOK 3 (Irreguler)
-      { g: 'g3', id: 'Melakukan', masu: 'します', r_masu: 'shimasu', ru: 'する', nai: 'しない', masen: 'しません', mashita: 'しました', te: 'して', ta: 'した', pot: 'できる', vol: 'しよう' },
-      { g: 'g3', id: 'Datang', masu: '来ます', r_masu: 'kimasu', ru: '来る', nai: '来ない', masen: '来ません', mashita: '来ました', te: '来て', ta: '来ました', pot: '来られる', vol: '来よう' },
-      { g: 'g3', id: 'Belajar', masu: '勉強します', r_masu: 'benkyou shimasu', ru: '勉強する', nai: '勉強しない', masen: '勉強しません', mashita: '勉強しました', te: '勉強して', ta: '勉強した', pot: '勉強できる', vol: '勉強しよう' },
-      { g: 'g3', id: 'Membersihkan', masu: '掃除します', r_masu: 'souji shimasu', ru: '掃除する', nai: '掃除しない', masen: '掃除しません', mashita: '掃除しました', te: '掃除して', ta: '掃除した', pot: '掃除できる', vol: '掃除しよう' },
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
 
-      // SPESIAL / PENGECUALIAN N5 (Grup 1 tapi mirip bentuk Grup 2)
-      { g: 'sp', id: 'Pulang', masu: '帰ります', r_masu: 'kaerimasu', ru: '帰る', nai: '帰らない', masen: '帰りません', mashita: '帰りました', te: '帰って', ta: '帰った', pot: '帰れる', vol: '帰ろう' },
-      { g: 'sp', id: 'Berlari', masu: '走ります', r_masu: 'hashirimasu', ru: '走る', nai: '走らない', masen: '走りません', mashita: '走りました', te: '走って', ta: '走った', pot: '走れる', vol: '走ろう' },
-      { g: 'sp', id: 'Memotong', masu: '切ります', r_masu: 'kirimasu', ru: '切る', nai: '切らない', masen: '切りません', mashita: '切りました', te: '切って', ta: '切った', pot: '切れる', vol: '切ろう' },
-      { g: 'sp', id: 'Masuk', masu: '入ります', r_masu: 'hairimasu', ru: '入る', nai: '入らない', masen: '入りません', mashita: '入りました', te: '入って', ta: '入った', pot: '入れる', vol: '入ろう' },
-      { g: 'sp', id: 'Membutuhkan', masu: '要ります', r_masu: 'irimasu', ru: '要る', nai: '要らない', masen: '要りません', mashita: '要りました', te: '要って', ta: '要った', pot: '要れる', vol: '要ろう' },
-      { g: 'sp', id: 'Paham/Tahu', masu: '知ります', r_masu: 'shirimasu', ru: '知る', nai: '知らない', masen: '知りません', mashita: '知りました', te: '知って', ta: '知った', pot: '知れる', vol: '知ろう' }
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. MANAGEMENT MODE TAMPILAN (FLIP VS KAMUS) ---
+    let displayMode = 'flip'; // 'flip' atau 'dictionary'
+    const modeToggleBtn = document.getElementById('modeToggleBtn');
+    const modeIcon = document.getElementById('modeIcon');
+    const modeText = document.getElementById('modeText');
+
+    try {
+      const savedMode = localStorage.getItem('doushi_display_mode');
+      if (savedMode) displayMode = savedMode;
+    } catch(e) {}
+
+    function updateModeUI() {
+      if (displayMode === 'flip') {
+        modeIcon.textContent = '📖';
+        modeText.textContent = 'Mode Kamus';
+      } else {
+        modeIcon.textContent = '🔄';
+        modeText.textContent = 'Mode Flip';
+      }
+    }
+
+    modeToggleBtn.addEventListener('click', () => {
+      displayMode = displayMode === 'flip' ? 'dictionary' : 'flip';
+      try { localStorage.setItem('doushi_display_mode', displayMode); } catch(e) {}
+      updateModeUI();
+      filterCards();
+    });
+
+    updateModeUI();
+
+    // --- 3. DATA KATA KERJA DENGAN PERUBAHAN BENTUK LENGKAP ---
+    const doushiList = [
+      // KELOMPOK 1
+      { no: 1, jp: "いきます", r: "ikimasu", id: "Pergi", icon: "🏃", grp: "Grup 1", cat: "grup1", ru: "行く", masen: "行きません", mashita: "行きました", te: "行って", nai: "行かない", ta: "行った" },
+      { no: 2, jp: "かいます", r: "kaimasu", id: "Membeli", icon: "🛍️", grp: "Grup 1", cat: "grup1", ru: "買う", masen: "買いません", mashita: "買いました", te: "買って", nai: "買わない", ta: "買った" },
+      { no: 3, jp: "かきます", r: "kakimasu", id: "Menulis", icon: "✍️", grp: "Grup 1", cat: "grup1", ru: "書く", masen: "書きません", mashita: "書きました", te: "書いて", nai: "書かない", ta: "書いた" },
+      { no: 4, jp: "ききます", r: "kikimasu", id: "Mendengar", icon: "🎧", grp: "Grup 1", cat: "grup1", ru: "聞く", masen: "聞きません", mashita: "聞きました", te: "聞いて", nai: "聞かない", ta: "聞いた" },
+      { no: 5, jp: "のみます", r: "nomimasu", id: "Minum", icon: "🥤", grp: "Grup 1", cat: "grup1", ru: "飲む", masen: "飲みません", mashita: "飲みました", te: "飲んで", nai: "飲まない", ta: "飲んだ" },
+      { no: 6, jp: "よみます", r: "yomimasu", id: "Membaca", icon: "📖", grp: "Grup 1", cat: "grup1", ru: "読む", masen: "読みません", mashita: "読みたい", te: "読んで", nai: "読まない", ta: "読んだ" },
+      { no: 7, jp: "はなします", r: "hanashimasu", id: "Berbicara", icon: "💬", grp: "Grup 1", cat: "grup1", ru: "話す", masen: "話しはせん", mashita: "話しました", te: "話して", nai: "話さない", ta: "話した" },
+      { no: 8, jp: "まちます", r: "machimasu", id: "Menunggu", icon: "⏳", grp: "Grup 1", cat: "grup1", ru: "待つ", masen: "待ちません", mashita: "待ちました", te: "待って", nai: "待たない", ta: "待った" },
+      { no: 9, jp: "あそびます", r: "asobimasu", id: "Bermain", icon: "🎮", grp: "Grup 1", cat: "grup1", ru: "遊ぶ", masen: "遊びません", mashita: "遊びました", te: "遊んで", nai: "遊ばない", ta: "遊んだ" },
+
+      // KELOMPOK 2
+      { no: 10, jp: "たべます", r: "tabemasu", id: "Makan", icon: "🍱", grp: "Grup 2", cat: "grup2", ru: "食べる", masen: "食べません", mashita: "食べました", te: "食べて", nai: "食べない", ta: "食べた" },
+      { no: 11, jp: "みます", r: "mimasu", id: "Melihat", icon: "📺", grp: "Grup 2", cat: "grup2", ru: "見る", masen: "見ません", mashita: "見ました", te: "見て", nai: "見ない", ta: "見た" },
+      { no: 12, jp: "ねます", r: "nemasu", id: "Tidur", icon: "🛌", grp: "Grup 2", cat: "grup2", ru: "寝る", masen: "寝ません", mashita: "寝ました", te: "寝て", nai: "寝ない", ta: "寝た" },
+      { no: 13, jp: "おきます", r: "okimasu", id: "Bangun", icon: "⏰", grp: "Grup 2", cat: "grup2", ru: "起きる", masen: "起きません", mashita: "起きはした", te: "起きて", nai: "起きない", ta: "起きた" },
+
+      // KELOMPOK 3
+      { no: 14, jp: "します", r: "shimasu", id: "Melakukan", icon: "⚡", grp: "Grup 3", cat: "grup3", ru: "する", masen: "しません", mashita: "しました", te: "して", nai: "しない", ta: "した" },
+      { no: 15, jp: "きます", r: "kimasu", id: "Datang", icon: "🏃‍♂️", grp: "Grup 3", cat: "grup3", ru: "来る", masen: "来ません", mashita: "来ました", te: "来て", nai: "来ない", ta: "来た" },
+      { no: 16, jp: "べんきょうします", r: "benkyou shimasu", id: "Belajar", icon: "📚", grp: "Grup 3", cat: "grup3", ru: "勉強する", masen: "勉強しません", mashita: "勉強しました", te: "勉強して", nai: "勉強しない", ta: "勉強した" },
+
+      // SPESIAL / PENGECUALIAN
+      { no: 17, jp: "かえります", r: "kaerimasu", id: "Pulang", icon: "🏠", grp: "Spesial", cat: "spesial", ru: "帰る", masen: "帰りません", mashita: "帰りました", te: "帰って", nai: "帰らない", ta: "帰った" },
+      { no: 18, jp: "はしります", r: "hashirimasu", id: "Berlari", icon: "🏃", grp: "Spesial", cat: "spesial", ru: "走る", masen: "走りません", mashita: "走りました", te: "走って", nai: "走らない", ta: "走った" },
+      { no: 19, jp: "きります", r: "kirimasu", id: "Memotong", icon: "✂️", grp: "Spesial", cat: "spesial", ru: "切る", masen: "切りません", mashita: "切りました", te: "切って", nai: "切らない", ta: "切った" }
     ];
 
-    let activeFilter = 'all';
+    let currentCategory = 'all';
 
-    function getGroupBadge(grp) {
-      switch(grp) {
-        case 'g1': return '<span class="badge badge-g1">Grup 1</span>';
-        case 'g2': return '<span class="badge badge-g2">Grup 2</span>';
-        case 'g3': return '<span class="badge badge-g3">Grup 3</span>';
-        case 'sp': return '<span class="badge badge-sp">Spesial</span>';
-        default: return '';
-      }
+    // --- 4. SPEECH SYNTHESIS ENGINE ---
+    function playAudio(soundText, e) {
+      if (e) e.stopPropagation();
+      if (!soundText || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(soundText);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.95;
+      window.speechSynthesis.speak(utterance);
     }
 
-    function playAudio(text) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'ja-JP';
-        msg.rate = 0.9;
-        window.speechSynthesis.speak(msg);
-      }
-    }
-
-    function renderTable(data) {
-      const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = '';
+    // --- 5. RENDER FUNCTION (MODE FLIP VS MODE KAMUS) ---
+    function renderCards(data) {
+      const container = document.getElementById('doushiContainer');
+      container.innerHTML = '';
 
       if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding: 20px; color: var(--text-muted);">Data kata kerja tidak ditemukan...</td></tr>';
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted); font-weight:700;">Kata kerja tidak ditemukan...</div>';
         return;
       }
 
-      data.forEach((item, idx) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${idx + 1}</td>
-          <td>${getGroupBadge(item.g)}</td>
-          <td><b>${item.id}</b></td>
-          <td>
-            <span class="jp-text kanji">${item.masu}</span>
-            <button class="btn-audio" title="Dengar" onclick="playAudio('${item.masu}')">🔊</button>
-            <span class="kana">${item.r_masu}</span>
-          </td>
-          <td><span class="jp-text">${item.ru}</span></td>
-          <td><span class="jp-text">${item.masen}</span></td>
-          <td><span class="jp-text">${item.nai}</span></td>
-          <td><span class="jp-text">${item.mashita}</span></td>
-          <td><span class="jp-text">${item.te}</span></td>
-          <td><span class="jp-text">${item.ta}</span></td>
-          <td><span class="jp-text">${item.pot}</span></td>
-          <td><span class="jp-text">${item.vol}</span></td>
-        `;
-        tbody.appendChild(row);
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'doushi-card';
+        const isSp = item.cat === 'spesial';
+
+        if (displayMode === 'flip') {
+          // MODE FLIP CARD INTERAKTIF
+          card.innerHTML = `
+            <div class="card-inner">
+              <!-- SISI DEPAN -->
+              <div class="card-front">
+                <div class="card-top">
+                  <span class="card-no">#${item.no}</span>
+                  <button class="audio-btn" onclick="playAudio('${item.jp}', event)" title="Putar Audio">🔊</button>
+                </div>
+                <div class="flashcard-front-center">
+                  <div class="card-icon">${item.icon}</div>
+                  <div class="card-jp">${item.jp}</div>
+                  <div class="card-romaji">${item.r}</div>
+                </div>
+                <div class="flip-hint">💡 Klik kartu untuk balikkan</div>
+              </div>
+
+              <!-- SISI BELAKANG -->
+              <div class="card-back">
+                <div class="card-top">
+                  <span class="group-pill ${isSp ? 'sp' : ''}">${item.grp}</span>
+                  <span class="card-id" style="font-size:0.9rem; font-weight:800; color:var(--text-heading);">${item.id}</span>
+                </div>
+                <div class="forms-grid">
+                  <div class="form-item"><span class="form-label">Kamus (~る)</span><span class="form-val">${item.ru}</span></div>
+                  <div class="form-item"><span class="form-label">Negatif (~ません)</span><span class="form-val">${item.masen}</span></div>
+                  <div class="form-item"><span class="form-label">Nai (~ない)</span><span class="form-val">${item.nai}</span></div>
+                  <div class="form-item"><span class="form-label">Lampau (~ました)</span><span class="form-val">${item.mashita}</span></div>
+                  <div class="form-item"><span class="form-label">Te (~て)</span><span class="form-val">${item.te}</span></div>
+                  <div class="form-item"><span class="form-label">Ta (~た)</span><span class="form-val">${item.ta}</span></div>
+                </div>
+                <div class="flip-hint">💡 Klik kartu untuk kembali</div>
+              </div>
+            </div>
+          `;
+
+          card.onclick = () => {
+            card.classList.toggle('flipped');
+          };
+
+        } else {
+          // MODE KAMUS / GRID LANGSUNG
+          card.innerHTML = `
+            <div class="card-front" style="position:relative; height:100%;">
+              <div class="card-top">
+                <span class="card-no">#${item.no}</span>
+                <span class="group-pill ${isSp ? 'sp' : ''}">${item.grp}</span>
+              </div>
+              <div class="card-main">
+                <div class="card-icon">${item.icon}</div>
+                <div class="card-title-box">
+                  <div class="card-jp">${item.jp}</div>
+                  <div class="card-romaji">${item.r}</div>
+                  <div class="card-id">${item.id}</div>
+                </div>
+              </div>
+              <div class="forms-grid">
+                <div class="form-item"><span class="form-label">Kamus (~る)</span><span class="form-val">${item.ru}</span></div>
+                <div class="form-item"><span class="form-label">Negatif (~ません)</span><span class="form-val">${item.masen}</span></div>
+                <div class="form-item"><span class="form-label">Nai (~ない)</span><span class="form-val">${item.nai}</span></div>
+                <div class="form-item"><span class="form-label">Lampau (~ました)</span><span class="form-val">${item.mashita}</span></div>
+                <div class="form-item"><span class="form-label">Te (~て)</span><span class="form-val">${item.te}</span></div>
+                <div class="form-item"><span class="form-label">Ta (~た)</span><span class="form-val">${item.ta}</span></div>
+              </div>
+            </div>
+          `;
+          card.onclick = () => playAudio(item.jp);
+        }
+
+        container.appendChild(card);
       });
     }
 
-    function filterData() {
+    // --- 6. FILTER & SEARCH LOGIC ---
+    function filterCards() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
-      const filtered = verbList.filter(item => {
-        const matchGroup = (activeFilter === 'all') || (item.g === activeFilter);
-        const matchSearch = item.id.toLowerCase().includes(query) ||
-                            item.masu.includes(query) ||
-                            item.r_masu.toLowerCase().includes(query) ||
-                            item.ru.includes(query);
-        return matchGroup && matchSearch;
+      const filtered = doushiList.filter(item => {
+        const matchCategory = (currentCategory === 'all') || (item.cat === currentCategory);
+        const matchSearch = item.jp.includes(query) || 
+                            item.r.toLowerCase().includes(query) || 
+                            item.id.toLowerCase().includes(query) || 
+                            item.grp.toLowerCase().includes(query) ||
+                            item.ru.includes(query) ||
+                            item.no.toString() === query;
+        return matchCategory && matchSearch;
       });
 
-      renderTable(filtered);
+      renderCards(filtered);
     }
 
-    function setFilter(grp, btn) {
-      activeFilter = grp;
+    function setCategory(cat, btn) {
+      currentCategory = cat;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterData();
+      if (btn) btn.classList.add('active');
+      filterCards();
     }
 
-    // Initial Load
-    renderTable(verbList);
+    renderCards(doushiList);
   </script>
+
 </body>
 </html>
