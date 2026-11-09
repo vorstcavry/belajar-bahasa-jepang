@@ -207,12 +207,10 @@
       transition: transform 0.25s ease, background 0.2s ease, padding 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* Mode Belajar: Scroll ke bawah sembunyikan penuh */
     .top-header.study-hide {
       transform: translateY(-100%);
     }
 
-    /* Mode Ujian: Saat discroll ke bawah, bersihkan background dan posisikan timer di pojok kanan atas */
     .top-header.exam-scrolled {
       background: transparent !important;
       backdrop-filter: none !important;
@@ -323,7 +321,6 @@
       position: relative;
     }
 
-    /* Tombol Persegi Tema & Pindah Bab */
     .btn-square-control {
       background: var(--glass-btn-bg);
       border: 1.5px solid var(--glass-btn-border);
@@ -346,7 +343,6 @@
       transform: scale(1.05);
     }
 
-    /* Dropdown Pop-up Menu Bab */
     .chapter-menu-dropdown {
       display: none;
       position: absolute;
@@ -402,7 +398,6 @@
       color: var(--primary);
     }
 
-    /* Floating Stats Bar */
     .header-bottom-row {
       width: 100%;
       display: flex;
@@ -768,7 +763,7 @@
       <div style="font-size: 2.8rem; margin-bottom: 6px;">📚</div>
       <h3 class="modal-title">Evaluasi Bab 3 &amp; 4</h3>
       <p class="modal-desc">
-        Ujian lengkap <strong>65 Soal (7 Bagian)</strong> materi Bab 3 &amp; 4 dengan batas waktu <strong>60 Menit</strong>.<br>
+        Ujian lengkap <strong>65 Soal (7 Bagian)</strong> materi Bab 3 &amp; 4 sesuai Lembar Soal Ujian dengan batas waktu <strong>55 Menit</strong>.<br>
         Pelajari rangkuman materi terlebih dahulu atau langsung mulai kuis.
       </p>
       <div class="modal-buttons">
@@ -816,7 +811,7 @@
       <!-- Baris Bawah: Floating Pill Stats (Timer beralih ke pojok kanan atas saat scroll) -->
       <div class="header-bottom-row" id="headerBottomRow">
         <div class="stats-bar" id="stats-bar">
-          <div class="stat-pill timer-pill">⏱️ <strong id="timer">60:00</strong></div>
+          <div class="stat-pill timer-pill">⏱️ <strong id="timer">55:00</strong></div>
           <div class="stat-pill">⭐ <strong id="score-display">0/65</strong></div>
           <div class="stat-pill">📊 <strong id="progress-display">0%</strong></div>
         </div>
@@ -831,51 +826,51 @@
     </div>
   </header>
 
-  <!-- AREA 1: MODUL MATERI -->
+  <!-- AREA 1: MODUL MATERI TERBARU SESUAI LEMBAR SOAL -->
   <div class="container" id="study-container" style="display: none;">
     <div class="section-card">
       <div class="section-title">
-        <span>📘 Modul Ringkasan Materi (Bab 3 &amp; 4)</span>
-        <span class="badge" style="background:#dcfce7; color:#15803d;">Lengkap 7 Bagian</span>
+        <span>📘 Modul Ringkasan Materi (Bab 3 &amp; 4 - Lembar Evaluasi Persis Gambar)</span>
+        <span class="badge" style="background:#dcfce7; color:#15803d;">Lengkap 7 Bagian (65 Soal)</span>
       </div>
-      <p class="section-desc">Pahami seluruh kosakata lokasi, waktu, kata kerja bentuk masu, aturan partikel, dan pola terjemahan sebelum memulai kuis.</p>
+      <p class="section-desc">Pahami seluruh kosakata Jepang-Indonesia, Indonesia-Jepang, cara baca Kanji, penyusunan kata, melengkapi kalimat, serta terjemahan 2 arah dari lembar ujian ini.</p>
 
-      <h4 class="study-sec-title">1. Kosakata Jepang ke Indonesia (Tempat &amp; Waktu)</h4>
+      <h4 class="study-sec-title">1. Kosa Kata Jepang ke Indonesia (Lembar Depan 1-10)</h4>
       <div class="study-list">
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">1. ここ / そこ / あそこ</span><span class="study-romaji">koko / soko / asoko</span></div><div class="study-card-bottom">🇮🇩 Di sini / Di situ / Di sana</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">2. うけつけ</span><span class="study-romaji">uketsuke</span></div><div class="study-card-bottom">🇮🇩 Meja Informasi / Resepsionis / Tempat Penerimaan Tamu</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">3. じむしょ</span><span class="study-romaji">jimusho</span></div><div class="study-card-bottom">🇮🇩 Kantor</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">4. かいぎしつ</span><span class="study-romaji">kaigishitsu</span></div><div class="study-card-bottom">🇮🇩 Ruang Rapat / Ruang Pertemuan</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">5. しょくどう</span><span class="study-romaji">shokudou</span></div><div class="study-card-bottom">🇮🇩 Kantin / Ruang Makan</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">6. おてあらい / トイレ</span><span class="study-romaji">otearai / toire</span></div><div class="study-card-bottom">🇮🇩 Kamar Kecil / Toilet</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">7. いま</span><span class="study-romaji">ima</span></div><div class="study-card-bottom">🇮🇩 Sekarang / Saat ini</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">8. ごぜん / ごご</span><span class="study-romaji">gozen / gogo</span></div><div class="study-card-bottom">🇮🇩 Pagi (a.m.) / Sore (p.m.)</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">9. おきます / ねます</span><span class="study-romaji">okimasu / nemasu</span></div><div class="study-card-bottom">🇮🇩 Bangun tidur / Tidur</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">10. やすみ</span><span class="study-romaji">yasumi</span></div><div class="study-card-bottom">🇮🇩 Hari libur / Istirahat</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">1. そちら</span><span class="study-romaji">sochira</span></div><div class="study-card-bottom">🇮🇩 Di situ / Sebelah situ (Bentuk Sopan)</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">2. ちゅうぞう</span><span class="study-romaji">chuuzou</span></div><div class="study-card-bottom">🇮🇩 Pengecoran / Penjelangan (Casting)</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">3. げんば</span><span class="study-romaji">genba</span></div><div class="study-card-bottom">🇮🇩 Tempat Kerja Lapangan / Site</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">4. かい</span><span class="study-romaji">kai</span></div><div class="study-card-bottom">🇮🇩 Lantai / Tingkat</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">5. たいしかん</span><span class="study-romaji">taishikan</span></div><div class="study-card-bottom">🇮🇩 Kedutaan Besar / Kantor Kedutaan</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">6. おととい</span><span class="study-romaji">ototoi</span></div><div class="study-card-bottom">🇮🇩 Kemarin lusa / 2 Hari yang lalu</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">7. そうこ</span><span class="study-romaji">souko</span></div><div class="study-card-bottom">🇮🇩 Gudang</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">8. ふろば / おてあらい</span><span class="study-romaji">furoba / otearai</span></div><div class="study-card-bottom">🇮🇩 Kamar mandi / Kamar kecil</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">9. ひるやすみ</span><span class="study-romaji">hiruyasumi</span></div><div class="study-card-bottom">🇮🇩 Istirahat siang</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span class="jp-line-single">10. おわります</span><span class="study-romaji">owarimasu</span></div><div class="study-card-bottom">🇮🇩 Selesai / Berakhir</div></div>
       </div>
 
-      <h4 class="study-sec-title">2. Kosakata Indonesia ke Jepang</h4>
+      <h4 class="study-sec-title">2. Kosa Kata Indonesia ke Jepang (Lembar Depan 1-10)</h4>
       <div class="study-list">
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">1. Ruang Kelas</span><span class="study-romaji">kyoushitsu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 きょうしつ</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">2. Kamar / Ruangan</span><span class="study-romaji">heya</span></div><div class="study-card-bottom jp-line-single">🇯🇵 へや</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">3. Lift / Elevator</span><span class="study-romaji">erebeetaa</span></div><div class="study-card-bottom jp-line-single">🇯🇵 エレベーター</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">4. Eskalator</span><span class="study-romaji">esukareetaa</span></div><div class="study-card-bottom jp-line-single">🇯🇵 エスカレーター</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">5. Tangga</span><span class="study-romaji">kaidan</span></div><div class="study-card-bottom jp-line-single">🇯🇵 かいだん</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">6. Bekerja</span><span class="study-romaji">hatarakimasu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 はたらきます / はたらく</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">7. Belajar</span><span class="study-romaji">benkyoushimasu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 べんきょうします / べんきょうする</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">8. Bank</span><span class="study-romaji">ginkou</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ぎんこう</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">9. Kantor Pos</span><span class="study-romaji">yuubinkyoku</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ゆうびんきょく</div></div>
-        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">10. Perpustakaan</span><span class="study-romaji">toshokan</span></div><div class="study-card-bottom jp-line-single">🇯🇵 としょかん</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">1. Asrama</span><span class="study-romaji">ryou</span></div><div class="study-card-bottom jp-line-single">🇯🇵 りょう</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">2. Kantor Pos</span><span class="study-romaji">yuubinkyoku</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ゆうびんきょく</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">3. Rabu</span><span class="study-romaji">suiyoubi</span></div><div class="study-card-bottom jp-line-single">🇯🇵 すいようび</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">4. Setiap Hari</span><span class="study-romaji">mainichi</span></div><div class="study-card-bottom jp-line-single">🇯🇵 まいにち</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">5. Libur</span><span class="study-romaji">yasumi / yasumimasu</span></div><div class="study-card-bottom jp-line-single">🇯🇵 やすみ / やすみます</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">6. Dapur</span><span class="study-romaji">daidokoro</span></div><div class="study-card-bottom jp-line-single">🇯🇵 だいどころ</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">7. Pengecoran</span><span class="study-romaji">chuuzou</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ちゅうぞう</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">8. Sarapan</span><span class="study-romaji">asagohan</span></div><div class="study-card-bottom jp-line-single">🇯🇵 あさごはん</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">9. Lusa</span><span class="study-romaji">asatte</span></div><div class="study-card-bottom jp-line-single">🇯🇵 あさって</div></div>
+        <div class="study-card-item"><div class="study-card-top"><span style="font-weight:700; color:var(--text-main); font-size:0.9rem;">10. Kamar Mandi</span><span class="study-romaji">furoba / otearai</span></div><div class="study-card-bottom jp-line-single">🇯🇵 ふろば / おてあらい</div></div>
       </div>
     </div>
   </div>
 
-  <!-- AREA 2: KONTAINER SOAL (QUIZ MODE) -->
+  <!-- AREA 2: KONTAINER SOAL (QUIZ MODE PERSIS 100% GAMBAR TERBARU) -->
   <div class="container" id="quiz-container">
 
     <!-- DASHBOARD NILAI HASIL EVALUASI -->
     <div class="eval-result-box" id="eval-result-box">
-      <span class="eval-header-tag">📊 LAPORAN HASIL EVALUASI UJIAN</span>
+      <span class="eval-header-tag">📊 LAPORAN HASIL EVALUASI UJIAN (BAB 3 &amp; 4)</span>
       <div class="eval-score-big" id="eval-percent-text">0%</div>
       <div class="eval-status-badge status-pass" id="eval-status-badge">LULUS</div>
       <p style="font-size: 0.88rem; color: #e0e7ff;" id="eval-desc-text">Kerja bagus! Pembahasan jawaban telah dibuka di bawah ini.</p>
@@ -898,121 +893,122 @@
 
     <!-- BAGIAN 1: KOSA KATA JEPANG KE INDONESIA -->
     <div class="section-card">
-      <div class="section-title"><span>1. Kosa Kata Jepang ke Indonesia</span><span class="badge">10 Soal</span></div>
-      <p class="section-desc">Tuliskan arti dalam bahasa Indonesia baku yang tepat.</p>
+      <div class="section-title"><span>1. KOSA KATA JEPANG KE INDONESIA</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Tuliskan arti kata bahasa Jepang berikut ke dalam Bahasa Indonesia.</p>
       <div class="grid-2">
-        <div class="q-box" data-id="v1" data-ans='["di sini", "disini", "sebelah sini"]'><span class="q-japanese">1. ここ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v2" data-ans='["resepsionis", "meja informasi", "bagian penerima tamu", "tempat penerima tamu", "tempat penerimaan tamu", "penerima tamu", "meja penerima tamu"]'><span class="q-japanese">2. うけつけ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v3" data-ans='["kantor", "ruang kantor"]'><span class="q-japanese">3. じむしょ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v4" data-ans='["ruang rapat", "ruang pertemuan"]'><span class="q-japanese">4. かいぎしつ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v5" data-ans='["kantin", "ruang makan", "tempat makan"]'><span class="q-japanese">5. しょくどう</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v6" data-ans='["toilet", "kamar kecil", "kamar mandi"]'><span class="q-japanese">6. おてあらい</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v7" data-ans='["sekarang", "saat ini"]'><span class="q-japanese">7. いま</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v8" data-ans='["pagi", "pagi hari", "am", "a.m.", "sebelum tengah hari", "waktu pagi"]'><span class="q-japanese">8. ごぜん</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v9" data-ans='["bangun", "bangun tidur"]'><span class="q-japanese">9. おきます</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="v10" data-ans='["libur", "istirahat", "hari libur"]'><span class="q-japanese">10. やすみ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji1" data-ans='["di situ", "disitu", "situ", "sebelah situ", "sebelah disitu"]'><span class="q-japanese">1. そちら</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji2" data-ans='["pengecoran", "penjelangan", "casting"]'><span class="q-japanese">2. ちゅうぞう</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji3" data-ans='["tempat kerja lapangan", "lapangan", "lokasi kerja", "site"]'><span class="q-japanese">3. げんば</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji4" data-ans='["lantai", "tingkat"]'><span class="q-japanese">4. かい</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji5" data-ans='["kedutaan besar", "kantor kedutaan", "kedutaan"]'><span class="q-japanese">5. たいしかん</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji6" data-ans='["kemarin lusa", "dua hari yang lalu", "2 hari yang lalu"]'><span class="q-japanese">6. おとtoi</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji7" data-ans='["gudang"]'><span class="q-japanese">7. そうこ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji8" data-ans='["kamar mandi", "tempat mandi", "kamar kecil"]'><span class="q-japanese">8. ふろば</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji9" data-ans='["istirahat siang", "libur siang"]'><span class="q-japanese">9. ひるやすみ</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ji10" data-ans='["selesai", "berakhir"]'><span class="q-japanese">10. おわります</span><div class="input-group"><input type="text" placeholder="Tulis artinya..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
     <!-- BAGIAN 2: KOSA KATA INDONESIA KE JEPANG -->
     <div class="section-card">
-      <div class="section-title"><span>2. Kosa Kata Indonesia ke Jepang</span><span class="badge">10 Soal</span></div>
+      <div class="section-title"><span>2. KOSA KATA INDONESIA KE JEPANG</span><span class="badge">10 Soal</span></div>
       <p class="section-desc">Tuliskan dalam Hiragana / Katakana / Romaji.</p>
       <div class="grid-2">
-        <div class="q-box" data-id="ij1" data-ans='["きょうしつ", "kyoushitsu", "kyoshitsu", "kyoushitu"]'><span class="q-label">1. Ruang Kelas</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij2" data-ans='["へや", "heya"]'><span class="q-label">2. Kamar / Ruangan</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij3" data-ans='["エレベーター", "えれべーたー", "erebeetaa", "erebeta", "erebe-ta-"]'><span class="q-label">3. Lift / Elevator</span><div class="input-group"><input type="text" placeholder="Katakana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij4" data-ans='["エスカレーター", "えすかれーたー", "esukareetaa", "esukareta", "esukare-ta-"]'><span class="q-label">4. Eskalator</span><div class="input-group"><input type="text" placeholder="Katakana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij5" data-ans='["かいだん", "kaidan"]'><span class="q-label">5. Tangga</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij6" data-ans='["はたらきます", "はたらく", "hatarakimasu", "hataraku"]'><span class="q-label">6. Bekerja</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij7" data-ans='["べんきょうします", "べんきょうする", "benkyoushimasu", "benkyoshimasu", "benkyousuru"]'><span class="q-label">7. Belajar</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij8" data-ans='["ぎんこう", "ginkou", "ginko"]'><span class="q-label">8. Bank</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij9" data-ans='["ゆうびんきょく", "yuubinkyoku", "yubinkyoku"]'><span class="q-label">9. Kantor Pos</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="ij10" data-ans='["としょかん", "toshokan"]'><span class="q-label">10. Perpustakaan</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij1" data-ans='["りょう", "ryou", "ryo"]'><span class="q-label">1. ASRAMA</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij2" data-ans='["ゆうびんきょく", "yuubinkyoku", "yubinkyoku"]'><span class="q-label">2. KANTOR POS</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij3" data-ans='["すいようび", "suiyoubi", "suiyobi"]'><span class="q-label">3. RABU</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij4" data-ans='["まいにち", "mainichi"]'><span class="q-label">4. SATIAP HARI</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij5" data-ans='["やすみます", "やすみ", "yasumimasu", "yasumi"]'><span class="q-label">5. LIBUR</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij6" data-ans='["だいどころ", "daidokoro"]'><span class="q-label">6. DAPUR</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij7" data-ans='["ちゅうぞう", "chuuzou", "chuzo"]'><span class="q-label">7. PENGECORAN</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij8" data-ans='["あさごはん", "asagohan"]'><span class="q-label">8. SARAPAN</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij9" data-ans='["あさって", "asatte"]'><span class="q-label">9. LUSA</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="ij10" data-ans='["ふろば", "おてあらい", "furoba", "otearai"]'><span class="q-label">10. KAMAR MANDI</span><div class="input-group"><input type="text" placeholder="Hiragana / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
-    <!-- BAGIAN 3: CARA BACA KANJI -->
+    <!-- BAGIAN 3: TULISLAH CARA BACA YANG SESUAI PADA KANJI BERIKUT MENGGUNAKAN HIRAGANA -->
     <div class="section-card">
-      <div class="section-title"><span>3. Cara Baca Kanji ke Hiragana</span><span class="badge">10 Soal</span></div>
-      <p class="section-desc">Ketik cara baca huruf kanji berikut menggunakan Hiragana.</p>
+      <div class="section-title"><span>3. TULISLAH CARA BACA YANG SESUAI PADA KANJI BERIKUT MENGGUNAKAN HIRAGANA</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Ketik cara baca huruf kanji/kata berikut dalam Hiragana.</p>
       <div class="grid-2">
-        <div class="q-box" data-id="k1" data-ans='["きょうしつ", "kyoushitsu", "kyoshitsu"]'><span class="q-japanese">1. 教室</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k2" data-ans='["へや", "heya"]'><span class="q-japanese">2. 部屋</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k3" data-ans='["しょくどう", "shokudou", "shokudo"]'><span class="q-japanese">3. 食堂</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k4" data-ans='["かいしゃ", "kaisha"]'><span class="q-japanese">4. 会社</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k5" data-ans='["ぎんこう", "ginkou", "ginko"]'><span class="q-japanese">5. 銀行</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k6" data-ans='["いま", "ima"]'><span class="q-japanese">6. 今</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k7" data-ans='["なんじ", "nanji"]'><span class="q-japanese">7. 何時</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k8" data-ans='["ごぜん", "gozen"]'><span class="q-japanese">8. 午前</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k9" data-ans='["ごご", "gogo"]'><span class="q-japanese">9. 午後</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="k10" data-ans='["やすみ", "yasumi"]'><span class="q-japanese">10. 休み</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k1" data-ans='["かいしゃ", "kaisha"]'><span class="q-japanese">1. 会社</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k2" data-ans='["だいどころ", "daidokoro"]'><span class="q-japanese">2. 台所</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k3" data-ans='["でんき", "denki"]'><span class="q-japanese">3. 電気</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k4" data-ans='["へや", "heya"]'><span class="q-japanese">4. 部屋</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k5" data-ans='["べんきょうします", "benkyoushimasu", "benkyoshimasu"]'><span class="q-japanese">5. 勉強します</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k6" data-ans='["ひるやすみ", "hiruyasumi"]'><span class="q-japanese">6. 昼休み</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k7" data-ans='["きょう", "kyou", "kyo"]'><span class="q-japanese">7. 今日</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k8" data-ans='["ぎんこう", "ginkou", "ginko"]'><span class="q-japanese">8. 銀行</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k9" data-ans='["あさ", "asa"]'><span class="q-japanese">9. 朝</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="k10" data-ans='["あした", "ashita"]'><span class="q-japanese">10. 明日</span><div class="input-group"><input type="text" placeholder="Hiragana..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
-    <!-- BAGIAN 4: MENYUSUN KALIMAT -->
+    <!-- BAGIAN 4: RANGKAILAH KATA DI BAWAH INI AGAR MENJADI KALIMAT YANG BENAR -->
     <div class="section-card">
-      <div class="section-title"><span>4. Rangkailah Kata Menjadi Kalimat Benar</span><span class="badge">10 Soal</span></div>
-      <p class="section-desc">Susunlah kata-kata yang diacak menjadi kalimat baku yang tepat.</p>
+      <div class="section-title"><span>4. RANGKAILAH KATA DI BAWAH INI AGAR MENJADI KALIMAT YANG BENAR</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Rangkaikan kata-kata acak berikut menjadi kalimat baku bahasa Jepang yang tepat.</p>
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div class="q-box" data-id="s1" data-ans='["ここはきょうしつです", "koko wa kyoushitsu desu", "koko wa kyoshitsu desu"]'><span class="q-japanese">1. ですーきょうしつーはーここ</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s2" data-ans='["おてあらいはあちらです", "otearai wa achira desu"]'><span class="q-japanese">2. あちらーおてあらいーですーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s3" data-ans='["かいぎしつはどこですか", "かいぎしつはどちらですか", "kaigishitsu wa doko desu ka", "kaigishitsu wa dochira desu ka"]'><span class="q-japanese">3. どこーはーかいぎしつーですか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s4" data-ans='["このくつはいくらですか", "kono kutsu wa ikura desu ka"]'><span class="q-japanese">4. いくらーはーくつーこのーですか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s5" data-ans='["いまなんじですか", "ima nanji desu ka"]'><span class="q-japanese">5. ですかーなんじーいま</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s6" data-ans='["わたしはまいあさ6じにおきます", "わたしはまいあさろくじにおきます", "まいあさわたしは6じにおきます", "まいあさわたしはろくじにおきます", "watashi wa maiasa rokuji ni okimasu", "maiasa watashi wa rokuji ni okimasu"]'><span class="q-japanese">6. 6じにーわたしーまいあさーはーおきます</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s7" data-ans='["ぎんこうは9じから3じまでです", "ぎんこうはくじからさんじまでです", "ginkou wa kuji kara sanji made desu", "ginkou wa 9-ji kara 3-ji made desu"]'><span class="q-japanese">7. 3じまでー9じからーぎんこうーですーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s8" data-ans='["きのうのばんはたらきましたか", "kinou no ban hatarakimashita ka"]'><span class="q-japanese">8. はたらきましたーきのうのばんーか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s9" data-ans='["あさってはやすみではありません", "あさってはやすみじゃありません", "asatte wa yasumi dewa arimasen", "asatte wa yasumi ja arimasen"]'><span class="q-japanese">9. ありませんーやすみーはーあさってーでは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="s10" data-ans='["としょかんはなんじにおわりますか", "toshokan wa nanji ni owarimasu ka"]'><span class="q-japanese">10. おわりますかーはーなんじにーとしょかん</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk1" data-ans='["ここはだいどころです", "koko wa daidokoro desu"]'><span class="q-japanese">1. ここーですーだいどころーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk2" data-ans='["あそこはアグスさんのかいしゃです", "asoko wa agusu san no kaisha desu"]'><span class="q-japanese">2. のーかいしゃーはーアグスさんーですーあそこ</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk3" data-ans='["わたしはにちようびとどようびやすみます", "わたしはどようびとにちようびやすみます", "watashi wa nichiyoubi to doyoubi yasumimasu"]'><span class="q-japanese">3. にーにちようびーとーわたしーどようびーやすみますーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk4" data-ans='["いまなんじですか", "ima nanji desu ka"]'><span class="q-japanese">4. なんじーですーいまーか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk5" data-ans='["これはいカメラのどこですか", "これはどこのカメラですか", "kore wa kamera no doko desu ka"]'><span class="q-japanese">5. カメラのーこれーかーですーはーどこ</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk6" data-ans='["このめがねは5800えんです", "このめがねは5,800えんです", "kono megane wa 5800 en desu"]'><span class="q-japanese">6. めがねはーこのーえんですー5800</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk7" data-ans='["きのうダダンさんは8じから5じまではたらきました", "kinou dadan san wa 8ji kara 5ji made hatarakimashita"]'><span class="q-japanese">7. はたらきましたーはー8じーダダンさんーからーきのうー5じーまで</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk8" data-ans='["ヤマダさんはこんばんなんじにべんきょうしますか", "ヤマダさんはなんじにこんばんべんきょうしますか", "yamada san wa konban nanji ni benkyoushimasu ka"]'><span class="q-japanese">8. かーヤマダさんーなんじーべんきょうしますーこんばんーにーは</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk9" data-ans='["なんようびからなんようびまでやすみですか", "nanyoubi kara nanyoubi made yasumi desu ka"]'><span class="q-japanese">9. なんようびーですーやすみーからーはーまでーなんようびーか</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="rk10" data-ans='["ナナさんのかいしゃはどこですか", "nana san no kaisha wa doko desu ka"]'><span class="q-japanese">10. かーナナさんーですーはーどこーのーかいしゃ</span><div class="input-group"><input type="text" placeholder="Tulis kalimat utuh..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
-    <!-- BAGIAN 5: MELENGKAPI KALIMAT -->
+    <!-- BAGIAN 5: LENGKAPILAH KALIMAT DI BAWAH INI AGAR MENJADI KALIMAT YANG BENAR (LEMBAR BALAKANG 1-10) -->
     <div class="section-card">
-      <div class="section-title"><span>5. Lengkapilah Kalimat (Partikel &amp; Tata Bahasa)</span><span class="badge">10 Soal</span></div>
-      <p class="section-desc">Isilah titik-titik dengan partikel atau kata yang tepat (contoh: は どこ, から まで).</p>
+      <div class="section-title"><span>5. LENGKAPILAH KALIMAT DI BAWAH INI AGAR MENJADI KALIMAT YANG BENAR</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Isilah titik-titik dengan partikel/kata yang tepat sesuai lembar belakang soal 1-10.</p>
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div class="q-box" data-id="lk1" data-ans='["は どこ", "は どちら", "wa doko", "wa dochira"]'><span class="q-japanese">1. すみません、じむしょ ___ ___ ですか。</span><div class="input-group"><input type="text" placeholder="Contoh: は どこ"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk2" data-ans='["は の", "wa no"]'><span class="q-japanese">2. ここ ___ パワーでんき ___ うけつけです。</span><div class="input-group"><input type="text" placeholder="Contoh: は の"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk3" data-ans='["は いくら", "wa ikura"]'><span class="q-japanese">3. その とけい ___ ___ ですか。… 3,000えんです。</span><div class="input-group"><input type="text" placeholder="Contoh: は いくら"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk4" data-ans='["の は", "no wa"]'><span class="q-japanese">4. スントコさん ___ おくに ___ どちらですか。</span><div class="input-group"><input type="text" placeholder="Contoh: の は"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk5" data-ans='["に ねます", "ni nemasu"]'><span class="q-japanese">5. まいばん 11じ ___ ___ 。(Setiap malam tidur pada jam 11.)</span><div class="input-group"><input type="text" placeholder="Contoh: に ねます"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk6" data-ans='["から まで", "kara made"]'><span class="q-japanese">6. かいしゃは 8じはん ___ 5じ ___ です。</span><div class="input-group"><input type="text" placeholder="Contoh: から まで"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk7" data-ans='["は ではありません", "は じゃありません", "は では", "は じゃ", "wa dewa arimasen", "wa ja arimasen", "wa dewa", "wa ja"]'><span class="q-japanese">7. にちようび ___ やすみ ___ 。(Hari Minggu BUKAN hari libur.)</span><div class="input-group"><input type="text" placeholder="Contoh: は ではありません"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk8" data-ans='["は しませんでした", "は べんきょうしませんでした", "wa shimasen deshita", "wa benkyou shimasen deshita"]'><span class="q-japanese">8. きのうの ばん ___ べんきょう ___ 。(Kemarin malam TIDAK belajar.)</span><div class="input-group"><input type="text" placeholder="Contoh: は しませんでした"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk9" data-ans='["は と", "wa to"]'><span class="q-japanese">9. やすみ ___ どようび ___ にちようびです。</span><div class="input-group"><input type="text" placeholder="Contoh: は と"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="lk10" data-ans='["から はたらきます", "kara hatarakimasu"]'><span class="q-japanese">10. わたしは あしたの 9じ ___ ___ 。(Saya bekerja dari jam 9 besok.)</span><div class="input-group"><input type="text" placeholder="Contoh: から はたらきます"><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb1" data-ans='["は 9じから4じまでです", "は9じから4じまでです", "wa 9ji kara 4ji made desu"]'><span class="q-japanese">1. たなかさんのかいしゃは 9じから4じまでです。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb2" data-ans='["は なんじからですか 10じからです", "はなんじからですか 10じからです", "wa nanji kara desu ka 10ji kara desu"]'><span class="q-japanese">2. べんきょうは なんじからですか。10じからです。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb3" data-ans='["は なんじから はたらきましたか 8じからはたらきました", "wa nanji kara hatarakimashita ka 8ji kara hatarakimashita"]'><span class="q-japanese">3. アグスさん きのうは なんじから はたらきましたか。8じからはたらきました。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb4" data-ans='["の パソコンは かいしゃの です", "no pasokon wa kaisha no desu"]'><span class="q-japanese">4. デルの パソコンは かいしゃの です。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb5" data-ans='["の へやは 10かいです", "no heya wa 10kai desu"]'><span class="q-japanese">5. しずかさんの へやは 10かいです。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb6" data-ans='["かばんは いくらですか", "kaban wa ikura desu ka"]'><span class="q-japanese">6. ダダンさん かばんは いくらですか。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb7" data-ans='["これは ちゅうごくの ライターではありません", "kore wa chuugoku no raitaa dewa arimasen"]'><span class="q-japanese">7. これ は ちゅうごくの ライターではありません。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb8" data-ans='["わたしは ゆうべ 9じから 10じまでべんきょうしました", "watashi wa yuube 9ji kara 10ji made benkyoushimashita"]'><span class="q-japanese">8. わたしは ゆうべ 9じから 10じまで べんきょうしました。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb9" data-ans='["ここは そうこです あそこも そうこです", "koko wa souko desu asoko mo souko desu"]'><span class="q-japanese">9. ここは そうこです。あそこも そうこです。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tb10" data-ans='["その とけいは どこのですか フランスのです", "sono tokei wa doko no desu ka furansu no desu"]'><span class="q-japanese">10. その とけいは どこのですか。フランスのです。</span><div class="input-group"><input type="text" placeholder="Isi partikel/kata..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
-    <!-- BAGIAN 6: TERJEMAHAN INDONESIA KE JEPANG -->
+    <!-- BAGIAN 6: TERJEMAHKAN KALIMAT DI BAWAH INI KEDALAM BAHASA JEPANG YANG BENAR (LEMBAR BALAKANG 1-10) -->
     <div class="section-card">
-      <div class="section-title"><span>6. Terjemahkan ke Bahasa Jepang</span><span class="badge">10 Soal</span></div>
-      <p class="section-desc">Terjemahkan kalimat baku berikut ke dalam Bahasa Jepang (Hiragana/Katakana/Romaji).</p>
+      <div class="section-title"><span>6. TERJEMAHKAN KALIMAT DI BAWAH INI KEDALAM BAHASA JEPANG YANG BENAR</span><span class="badge">10 Soal</span></div>
+      <p class="section-desc">Terjemahkan kalimat Indonesia baku berikut ke dalam Bahasa Jepang (Hiragana/Katakana/Romaji).</p>
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div class="q-box" data-id="tij1" data-ans='["かいぎしつはあそこです", "かいぎしつはあちらです", "kaigishitsu wa asoko desu", "kaigishitsu wa achira desu"]'><span class="q-label">1. RUANG RAPAT BERADA DI SANA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij2" data-ans='["おてあらいはどちらですか", "トイレはどちらですか", "おてあらいはどこですか", "トイレはどこですか", "otearai wa dochira desu ka", "toire wa dochira desu ka", "otearai wa doko desu ka", "toire wa doko desu ka"]'><span class="q-label">2. TOILET BERADA DI SEBELAH MANA (SOPAN)</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij3" data-ans='["このとけいはいくらですか", "kono tokei wa ikura desu ka"]'><span class="q-label">3. JAM INI BERAPA HARGANYA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij4" data-ans='["かいしゃは8じから5じまでです", "かいしゃははちじからごじまでです", "じむしょは8じから5じまでです", "じむしょははちじからごじまでです", "kaisha wa hachiji kara goji made desu", "jimusho wa hachiji kara goji made desu"]'><span class="q-label">4. KANTOR BUKA DARI PUKUL 8 SAMPAI PUKUL 5</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij5" data-ans='["わたしはまいあさ6じにおきます", "わたしはまいあさろくじにおきます", "まいあさわたしは6じにおきます", "まいあさわたしはろくじにおきます", "watashi wa maiasa rokuji ni okimasu", "maiasa watashi wa rokuji ni okimasu"]'><span class="q-label">5. SETIAP PAGI SAYA BANGUN PUKUL 6</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij6" data-ans='["いまなんじなんぷんですか", "いまなんじですか", "いまはなんじなんぷんですか", "いまはなんじですか", "ima nanji nanpun desu ka", "ima nanji desu ka"]'><span class="q-label">6. SEKARANG PUKUL BERAPA LEWAT BERAPA MENIT</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij7" data-ans='["きのうのばんべんきょうしませんでした", "わたしはきのうのばんべんきょうしませんでした", "ゆうべべんきょうしませんでした", "kinou no ban benkyou shimasen deshita", "watashi wa kinou no ban benkyou shimasen deshita"]'><span class="q-label">7. KEMARIN MALAM SAYA TIDAK BELAJAR</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij8" data-ans='["ぎんこうのやすみはどようびとにちようびです", "ginkou no yasumi wa doyoubi to nichiyoubi desu"]'><span class="q-label">8. HARI LIBUR BANK ADALAH HARI SABTU DAN HARI MINGGU</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij9" data-ans='["ここはパワーでんきのうけつけです", "ここはpower denkiのうけつけです", "koko wa pawaa denki no uketsuke desu", "koko wa power denki no uketsuke desu"]'><span class="q-label">9. DI SINI ADALAH BAGIAN RESEPSIONIS POWER DENKI</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tij10" data-ans='["あさってはやすみではありません", "あさってはやすみじゃありません", "asatte wa yasumi dewa arimasen", "asatte wa yasumi ja arimasen"]'><span class="q-label">10. LUSA BUKAN HARI LIBUR</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang / Romaji..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp1" data-ans='["ブディさんのきょうしつはなんかいですか", "budi san no kyoushitsu wa nankai desu ka"]'><span class="q-label">1. RUANG KELAS SAUDARA BUDI LANTAI BERAPA?</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp2" data-ans='["このベッドはちゅうごくからです", "kono beddo wa chuugoku kara desu"]'><span class="q-label">2. INI RANJANG BUATAN DARI CHINA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp3" data-ans='["たなかさんのへやはここではありません", "たなかさんのへやはここじゃありません", "tanaka san no heya wa koko dewa arimasen"]'><span class="q-label">3. KAMAR SAUDARA TANAKA BUKAN DISINI</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp4" data-ans='["ひるやすみは12じから1じまでです", "hiruyasumi wa 12ji kara 1ji made desu"]'><span class="q-label">4. ISTIRAHAT SIANG DARI JAM 12 SAMPAI JAM 1</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp5" data-ans='["まいあさシティさんはなんじにおきますか", "maiasa siti san wa nanji ni okimasu ka"]'><span class="q-label">5. SETIAP PAGI SAUDARA SITI BANGUN PADA JAM BERAPA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp6" data-ans='["じゅぎょうは4じにおわります", "じゅぎょうはよじにおわります", "jugyou wa 4ji ni owarimasu", "jugyou wa yoji ni owarimasu"]'><span class="q-label">6. PELAJARAN SELESAI PADA JAM 4</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp7" data-ans='["サクラスーパーはどこですか", "sakura suupaa wa doko desu ka"]'><span class="q-label">7. SUPERMARKET SAKURA DI MANA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp8" data-ans='["このじしょはわたしのではありません", "このじしょはわたしじゃありません", "kono jisho wa watashi no dewa arimasen"]'><span class="q-label">8. KAMUS INI BUKAN MILIK SAYA</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp9" data-ans='["わたしはきのうのばん7じから10じまでべんきょうしました", "watashi wa kinou no ban 7ji kara 10ji made benkyoushimashita"]'><span class="q-label">9. SAYA KEMARIN MALAM BELAJAR DARI JAM 7 SAMPAI JAM 10</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tjp10" data-ans='["それはにほんのけいたいでんわですか", "sore wa nihon no keitai denwa desu ka"]'><span class="q-label">10. ITU APAKAH HANDPHON BUATAN DARI JEPANG</span><div class="input-group"><input type="text" placeholder="Bahasa Jepang..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
-    <!-- BAGIAN 7: TERJEMAHAN JEPANG KE INDONESIA -->
+    <!-- BAGIAN 7: TERJEMAHKAN KALIMAT DI BAWAH INI KEDALAM BAHASA INDONESIA YANG BENAR (LEMBAR BALAKANG 1-5) -->
     <div class="section-card">
-      <div class="section-title"><span>7. Terjemahkan ke Bahasa Indonesia</span><span class="badge">5 Soal</span></div>
+      <div class="section-title"><span>7. TERJEMAHKAN KALIMAT DI BAWAH INI KEDALAM BAHASA INDONESIA YANG BENAR</span><span class="badge">5 Soal</span></div>
+      <p class="section-desc">Terjemahkan kalimat bahasa Jepang berikut ke dalam Bahasa Indonesia baku.</p>
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div class="q-box" data-id="tji1" data-ans='["toilet berada di sebelah sana", "kamar kecil berada di sebelah sana", "toilet ada di sebelah sana", "kamar kecil ada di sebelah sana", "toilet di sebelah sana", "kamar kecil di sebelah sana", "toilet berada di sana", "kamar kecil berada di sana", "toilet ada di sana", "kamar kecil ada di sana", "toilet di sana", "kamar kecil di sana", "di sebelah sana adalah toilet", "di sana adalah toilet"]'><span class="q-japanese">1. おてあらいは あちらです。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tji2" data-ans='["bank buka dari pukul 9 sampai pukul 3", "bank buka dari jam 9 sampai jam 3", "bank dari pukul 9 sampai pukul 3", "bank dari jam 9 sampai jam 3", "kantor bank buka dari pukul 9 sampai pukul 3", "kantor bank buka dari jam 9 sampai jam 3"]'><span class="q-japanese">2. ぎんこうは 9じから 3じまでです。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tji3" data-ans='["saya setiap hari bangun pukul 6", "saya setiap hari bangun jam 6", "setiap hari saya bangun pukul 6", "setiap hari saya bangun jam 6", "saya bangun pukul 6 setiap hari", "saya bangun jam 6 setiap hari"]'><span class="q-japanese">3. わたしは まいにち 6じに おきます。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tji4" data-ans='["kemarin saya belajar dari pukul 7 sampai pukul 9", "kemarin saya belajar dari jam 7 sampai jam 9", "kemarin saya telah belajar dari pukul 7 sampai pukul 9", "kemarin saya telah belajar dari jam 7 sampai jam 9", "kemarin belajar dari pukul 7 sampai pukul 9", "kemarin belajar dari jam 7 sampai jam 9"]'><span class="q-japanese">4. きのう 7じから 9じまで べんきょうしました。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
-        <div class="q-box" data-id="tji5" data-ans='["hari libur department store adalah hari apa", "hari libur departemen store adalah hari apa", "hari libur toserba adalah hari apa", "department store libur pada hari apa", "department store libur hari apa", "departemen store libur hari apa", "toko serba ada libur hari apa", "toserba libur hari apa", "pada hari apa department store libur"]'><span class="q-japanese">5. デパートの やすみは なんようびですか。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tind1" data-ans='["kantor perusahaan ada dimana", "kantor perusahaan di mana", "dimana kantor perusahaan", "kantor perusahaan berada di mana"]'><span class="q-japanese">1. かいしゃのじむしょはどこですか。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tind2" data-ans='["harga mobil guru adalah 333.123 yen", "harga mobil guru 333.123 yen", "harga mobil guru adalah 333123 yen"]'><span class="q-japanese">2. せんせいのくるまは333.123えんです。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tind3" data-ans='["saudara yamada besok malam tidur pada jam 9", "saudara yamada besok malam tidur jam 9", "yamada besok malam tidur pada jam 9"]'><span class="q-japanese">3. やまださんはあしたのばん9じにねます。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tind4" data-ans='["permisi bekerja dari jam berapa sampai jam berapa", "permisi pekerjaan dari jam berapa sampai jam berapa", "permisi kerja dari jam berapa sampai jam berapa"]'><span class="q-japanese">4. すみません、しごとはなんじからなんじまでですか。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
+        <div class="q-box" data-id="tind5" data-ans='["saya kemarin pagi bekerja pada jam 7", "saya kemarin pagi bekerja jam 7", "kemarin pagi saya bekerja pada jam 7"]'><span class="q-japanese">5. わたしはきのうのあき7じにはたらきました。</span><div class="input-group"><input type="text" placeholder="Terjemahan baku..."><button class="btn-check" onclick="checkSingle(this)">Cek</button></div><div class="feedback"></div></div>
       </div>
     </div>
 
@@ -1077,7 +1073,6 @@
       if (!container) return;
       container.innerHTML = '';
 
-      // Bab 1 s.d 10 (Format: bab-X-dan-Y.html)
       const earlyPairs = [
         { label: "Bab 1 & 2", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-1-dan-2.html" },
         { label: "Bab 3 & 4 (Aktif)", url: "/belajar-bahasa-jepang/menu/latihan-soal/bab-3-dan-4.html", current: true },
@@ -1094,7 +1089,6 @@
         container.appendChild(a);
       });
 
-      // Bab 11 s.d 50 (Format: bab-X.html)
       for (let i = 11; i <= 50; i++) {
         const a = document.createElement('a');
         a.href = `/belajar-bahasa-jepang/menu/latihan-soal/bab-${i}.html`;
@@ -1110,7 +1104,6 @@
       if (dropdown) dropdown.classList.toggle('show');
     }
 
-    // Tutup pop-up saat klik di luar
     document.addEventListener('click', (e) => {
       const dropdown = document.getElementById('chapterMenuDropdown');
       const btn = document.getElementById('chapterMenuBtn');
@@ -1121,7 +1114,7 @@
 
     populateChapterMenu();
 
-    // ================= 3. SMART SCROLL BEHAVIOR (FLOATING TIMER POJOK KANAN ATAS) =================
+    // ================= 3. SMART SCROLL BEHAVIOR =================
     let lastScrollY = window.scrollY;
     let isStudyModeActive = false;
     const headerEl = document.getElementById('topHeader');
@@ -1131,14 +1124,12 @@
       if (!headerEl) return;
 
       if (isStudyModeActive) {
-        // Mode Belajar: Scroll ke bawah sembunyikan penuh, scroll ke atas munculkan
         if (currentScrollY > lastScrollY && currentScrollY > 60) {
           headerEl.classList.add('study-hide');
         } else {
           headerEl.classList.remove('study-hide');
         }
       } else {
-        // Mode Ujian: Scroll ke bawah hanya pertahankan Timer Floating di pojok kanan atas tanpa blur background
         if (currentScrollY > 40) {
           headerEl.classList.add('exam-scrolled');
           const dropdown = document.getElementById('chapterMenuDropdown');
@@ -1154,7 +1145,7 @@
     const answeredCorrectly = new Set();
     const TOTAL_QUESTIONS = 65;
     let timerInterval = null;
-    let totalSeconds = 60 * 60; // 1 Jam
+    let totalSeconds = 55 * 60; // 55 Menit
     let isExamFinished = false;
 
     function cleanStr(str) {
@@ -1325,12 +1316,12 @@
 
     function resetForm() {
       clearInterval(timerInterval);
-      totalSeconds = 60 * 60;
+      totalSeconds = 55 * 60;
       isExamFinished = false;
 
       const timerElem = document.getElementById('timer');
       if (timerElem) {
-        timerElem.innerText = "60:00";
+        timerElem.innerText = "55:00";
         timerElem.style.color = '';
       }
 
