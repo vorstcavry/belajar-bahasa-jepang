@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Buku Saku Master Bunpou N5 - Bab 1 s.d. 6</title>
+  <title>Buku Saku Master Bunpou N5 - Bab 1 s.d. 10</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
@@ -100,7 +100,6 @@
       min-height: 100vh;
     }
 
-    /* Container Adaptif Otomatis */
     .container {
       width: 100%;
       max-width: 1080px;
@@ -438,50 +437,6 @@
       font-weight: 800;
     }
 
-    /* Kosakata Grid Adaptif */
-    .vocab-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 600px) {
-      .vocab-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 900px) {
-      .vocab-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .vocab-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
-
-    .vocab-box h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      font-weight: 800;
-    }
-
-    .vocab-box ul {
-      list-style: none;
-      font-size: 0.82rem;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
     /* Kaiwa Dialog */
     .kaiwa-dialog {
       background: var(--bg);
@@ -633,10 +588,10 @@
     <header class="portal-header">
       <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
       <h1>📖 Modul Tata Bahasa &amp; Partikel N5</h1>
-      <p>Buku saku ringkasan pola tata bahasa, huruf partikel, dan percakapan Minna no Nihongo.</p>
+      <p>Buku saku ringkasan pola tata bahasa, huruf partikel, dan percakapan Minna no Nihongo (Bab 1 s.d. 10).</p>
     </header>
 
-    <!-- Tab Bar Navigasi Adaptif (Bab 1 s.d. Bab 6) -->
+    <!-- Tab Bar Navigasi Adaptif (Bab 1 s.d. Bab 10) -->
     <div class="tab-bar-container">
       <div class="tab-bar">
         <button class="tab-btn active" onclick="switchChapterTab('chapter1Tab', this)">Bab 1</button>
@@ -645,7 +600,11 @@
         <button class="tab-btn" onclick="switchChapterTab('chapter4Tab', this)">Bab 4</button>
         <button class="tab-btn" onclick="switchChapterTab('chapter5Tab', this)">Bab 5</button>
         <button class="tab-btn" onclick="switchChapterTab('chapter6Tab', this)">Bab 6</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapterNextTab', this)">Bab 7~50 🔒</button>
+        <button class="tab-btn" onclick="switchChapterTab('chapter7Tab', this)">Bab 7</button>
+        <button class="tab-btn" onclick="switchChapterTab('chapter8Tab', this)">Bab 8</button>
+        <button class="tab-btn" onclick="switchChapterTab('chapter9Tab', this)">Bab 9</button>
+        <button class="tab-btn" onclick="switchChapterTab('chapter10Tab', this)">Bab 10</button>
+        <button class="tab-btn" onclick="switchChapterTab('chapterNextTab', this)">Bab 11~50 🔒</button>
       </div>
     </div>
 
@@ -933,21 +892,123 @@
     <!-- ==================== BAB 4 ==================== -->
     <section id="chapter4Tab" class="chapter-content">
       <div class="full-card">
-        <h3>📌 Waktu, Jam &amp; Konjugasi Kata Kerja</h3>
-        <div class="formula-box">〜ます (Akan/Rutin) | 〜ません (Tidak) | 〜ました (Lampau)</div>
+        <h3>📌 Ikhtisar Bab 4: Waktu, Jam &amp; Perubahan Kata Kerja</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Waktu &amp; Partikel</th>
+                <th>Fungsi / Penggunaan</th>
+                <th>Bentuk Kata Kerja (ます)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>〜じ / 〜ふん</code></td>
+                <td>Menyatakan Jam dan Menit</td>
+                <td><strong>〜ます</strong> (Positif Masa Depan/Rutin)</td>
+              </tr>
+              <tr>
+                <td><span class="pt">に</span></td>
+                <td>Penanda waktu spesifik (titik waktu angka)</td>
+                <td><strong>〜ません</strong> (Negatif Masa Depan/Rutin)</td>
+              </tr>
+              <tr>
+                <td><span class="pt">から</span> 〜 <span class="pt">まで</span></td>
+                <td>Dari (titik awal) ~ Sampai (titik akhir)</td>
+                <td><strong>〜ました</strong> (Positif Lampau)</td>
+              </tr>
+              <tr>
+                <td><span class="pt">と</span></td>
+                <td>Penghubung kata benda ("dan")</td>
+                <td><strong>〜ませんでした</strong> (Negatif Lampau)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="alert-danger alert-box">🚫 Waktu relatif (きょう, あした, まいにち) DILARANG memakai partikel <span class="pt">に</span>.</div>
-        <ul class="examples-list">
-          <li class="example-item">
-            <div class="jp-text">まいあさ 6じ <span class="pt">に</span> おきます。</div>
-            <div class="romaji">Maiasa roku-ji ni okimasu.</div>
-            <div class="id-text">Saya bangun pada pukul 6 setiap pagi.</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">9じ <span class="pt">から</span> 5じ <span class="pt">まで</span> はたらきます。</div>
-            <div class="romaji">Ku-ji kara go-ji made hatarakimasu.</div>
-            <div class="id-text">Bekerja dari jam 9 sampai jam 5.</div>
-          </li>
-        </ul>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Waktu Spesifik (に) &amp; Rentang (から・まで)</div>
+            <span class="card-badge badge-positive">Penanda Waktu</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Waktu Angka] + <span class="pt">に</span> + [KK] | [Awal] + <span class="pt">から</span> + [Akhir] + <span class="pt">まで</span></div>
+            <p class="function-desc">Menyatakan waktu terjadinya kegiatan atau rentang jam kerja/operasional.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">まいあさ 6じ <span class="pt">に</span> おきます。</div>
+                <div class="romaji">Maiasa roku-ji ni okimasu.</div>
+                <div class="id-text">Saya bangun pada pukul 6 setiap pagi.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">ぎんこう <span class="pt">は</span> 9じ <span class="pt">から</span> 3じ <span class="pt">まで</span> です。</div>
+                <div class="romaji">Ginkou wa ku-ji kara san-ji made desu.</div>
+                <div class="id-text">Bank buka dari jam 9 sampai jam 3.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Konjugasi Dasar Kata Kerja</div>
+            <span class="card-badge badge-special">Perubahan Bentuk</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">〜ます | 〜ません | 〜ました | 〜ませんでした</div>
+            <p class="function-desc">Mengubah kata kerja sesuai waktu (lampau/non-lampau) dan bentuk (positif/negatif).</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">きのう べんきょうしました。</div>
+                <div class="romaji">Kinou benkyou shimashita.</div>
+                <div class="id-text">Kemarin saya telah belajar.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">あした はたらきません。</div>
+                <div class="romaji">Ashita hatarakimasen.</div>
+                <div class="id-text">Besok saya tidak bekerja.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 4</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">いま なんじ ですか。</div>
+              <div class="id">Sekarang jam berapa?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">4じ はん です。</div>
+              <div class="id">Jam 4 lewat 30 menit (setengah 5).</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">かいしゃ <span class="pt">は</span> なんじ <span class="pt">まで</span> ですか。</div>
+              <div class="id">Perusahaan buka sampai jam berapa?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">5じ <span class="pt">まで</span> です。</div>
+              <div class="id">Sampai jam 5.</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="bottom-nav">
@@ -959,24 +1020,108 @@
     <!-- ==================== BAB 5 ==================== -->
     <section id="chapter5Tab" class="chapter-content">
       <div class="full-card">
-        <h3>📌 Perpindahan Gerak: へ, で, と</h3>
-        <ul class="examples-list">
-          <li class="example-item">
-            <div class="jp-text">きょうと <span class="pt">へ</span> いきます。</div>
-            <div class="romaji">Kyouto e ikimasu.</div>
-            <div class="id-text">Pergi ke Kyoto (Partikel へ dibaca <em>'e'</em>).</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">でんしゃ <span class="pt">で</span> いきます。</div>
-            <div class="romaji">Densha de ikimasu.</div>
-            <div class="id-text">Pergi naik kereta (Sarana: で). Jalan kaki = あるいて.</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">かぞく <span class="pt">と</span> きました。</div>
-            <div class="romaji">Kazoku to kimashita.</div>
-            <div class="id-text">Datang bersama keluarga. Sendirian = ひとり で.</div>
-          </li>
-        </ul>
+        <h3>📌 Ikhtisar Bab 5: Perpindahan Gerak (へ, で, と)</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Partikel</th>
+                <th>Pelafalan</th>
+                <th>Fungsi Utama</th>
+                <th>Pola Kalimat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="pt">へ</span></td>
+                <td><strong>e</strong></td>
+                <td>Arah tujuan perpindahan tempat</td>
+                <td><code>[Tujuan] + へ + いきます/きます/かえります</code></td>
+              </tr>
+              <tr>
+                <td><span class="pt">で</span></td>
+                <td><strong>de</strong></td>
+                <td>Sarana / alat transportasi yang digunakan</td>
+                <td><code>[Kendaraan] + で + [KK Gerak]</code></td>
+              </tr>
+              <tr>
+                <td><span class="pt">と</span></td>
+                <td><strong>to</strong></td>
+                <td>Teman/rekan beraktivitas ("bersama")</td>
+                <td><code>[Orang] + と + [KK Gerak]</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert-box">💡 Pengecualian Transportasi: Jalan kaki menggunakan <strong>あるいて</strong> (tanpa partikel で). Sendirian = <strong>ひとり で</strong>.</div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Arah Tujuan (へ) &amp; Alat Transportasi (で)</div>
+            <span class="card-badge badge-positive">Arah &amp; Alat</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Tempat] + <span class="pt">へ</span> + [Kendaraan] + <span class="pt">で</span> + いきます</div>
+            <p class="function-desc">Menjelaskan pergi/datang/pulang ke suatu lokasi menggunakan sarana transportasi.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">きょうと <span class="pt">へ</span> いきます。</div>
+                <div class="romaji">Kyouto e ikimasu.</div>
+                <div class="id-text">Saya akan pergi ke Kyoto.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">でんしゃ <span class="pt">で</span> いきます。</div>
+                <div class="romaji">Densha de ikimasu.</div>
+                <div class="id-text">Pergi menggunakan kereta.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Rekan Beraktivitas (と) &amp; Kapan (いつ)</div>
+            <span class="card-badge badge-question">Teman &amp; Waktu</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Orang] + <span class="pt">と</span> + [KK Gerak] | いつ + [KK Gerak] + か</div>
+            <p class="function-desc">Menyatakan teman perjalanan atau menanyakan kapan aktivitas perpindahan dilakukan.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">かぞく <span class="pt">と</span> にほん <span class="pt">へ</span> きました。</div>
+                <div class="romaji">Kazoku to Nihon e kimashita.</div>
+                <div class="id-text">Saya datang ke Jepang bersama keluarga.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">いつ くに <span class="pt">へ</span> かえりますか。</div>
+                <div class="romaji">Itsu kuni e kaerimasu ka.</div>
+                <div class="id-text">Kapan Anda akan pulang ke negara asal?</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 5</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">日曜日 (にちようび) どこ <span class="pt">へ</span> いきましたか。</div>
+              <div class="id">Hari Minggu pergi ke mana?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">どこ <span class="pt">へ</span> も いเส้นでした。</div>
+              <div class="id">Tidak pergi ke mana-mana.</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="bottom-nav">
@@ -988,41 +1133,557 @@
     <!-- ==================== BAB 6 ==================== -->
     <section id="chapter6Tab" class="chapter-content">
       <div class="full-card">
-        <h3>📌 Objek (を), Lokasi (で) &amp; Bentuk Ajakan</h3>
-        <ul class="examples-list">
-          <li class="example-item">
-            <div class="jp-text">ごはん <span class="pt">を</span> たべます。</div>
-            <div class="romaji">Gohan o tabemasu.</div>
-            <div class="id-text">Makan nasi (Objek penderita: を dibaca <em>'o'</em>).</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">レストラン <span class="pt">で</span> たべます。</div>
-            <div class="romaji">Resutoran de tabemasu.</div>
-            <div class="id-text">Makan di restoran (Lokasi aktivitas: で).</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">えいが <span class="pt">を</span> みませんか。</div>
-            <div class="romaji">Eiga o mimasen ka.</div>
-            <div class="id-text">Maukah menonton film bersama? (Ajakan halus).</div>
-          </li>
-          <li class="example-item">
-            <div class="jp-text">えき <span class="pt">で</span> あいましょう。</div>
-            <div class="romaji">Eki de aimashou.</div>
-            <div class="id-text">Ayo kita bertemu di stasiun! (Ajakan langsung).</div>
-          </li>
-        </ul>
+        <h3>📌 Ikhtisar Bab 6: Objek (を), Tempat Kegiatan (で) &amp; Ajakan</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Partikel / Ungkapan</th>
+                <th>Cara Baca / Bentuk</th>
+                <th>Fungsi Utama</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="pt">を</span></td>
+                <td><strong>o</strong></td>
+                <td>Penanda objek penderita langsung kata kerja transitif</td>
+              </tr>
+              <tr>
+                <td><span class="pt">で</span></td>
+                <td><strong>de</strong></td>
+                <td>Lokasi berlangsungnya suatu aksi / kegiatan aktif</td>
+              </tr>
+              <tr>
+                <td><strong>〜ませんか</strong></td>
+                <td>Bentuk Ajakan Halus</td>
+                <td>Mengajak lawan bicara (Menanyakan kesediaan: "Maukah...?")</td>
+              </tr>
+              <tr>
+                <td><strong>〜ましょう</strong></td>
+                <td>Bentuk Ajakan Langsung</td>
+                <td>Mengajak secara positif dan mantap ("Ayo...!")</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Objek (を) &amp; Tempat Aktivitas (で)</div>
+            <span class="card-badge badge-positive">Aksi &amp; Tempat</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Tempat] + <span class="pt">で</span> + [Objek] + <span class="pt">を</span> + [Kata Kerja]</div>
+            <p class="function-desc">Menyatakan aktivitas melakukan sesuatu pada objek di tempat tertentu.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">ごはん <span class="pt">を</span> たべます。</div>
+                <div class="romaji">Gohan o tabemasu.</div>
+                <div class="id-text">Makan nasi.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">レストラン <span class="pt">で</span> ごはん <span class="pt">を</span> たべます。</div>
+                <div class="romaji">Resutoran de gohan o tabemasu.</div>
+                <div class="id-text">Makan nasi di restoran.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Ungkapan Ajakan (〜ませんか / 〜ましょう)</div>
+            <span class="card-badge badge-special">Ajakan</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[KK-masu hapus masu] + ませんか / ましょう</div>
+            <p class="function-desc">Digunakan untuk menawarkan ajakan secara sopan atau bersama-sama melakukan aktivitas.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">いっしょに コーヒー <span class="pt">を</span> のみませんか。</div>
+                <div class="romaji">Isshoni koohii o nomimasen ka.</div>
+                <div class="id-text">Maukah minum kopi bersama-sama?</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">ロビー <span class="pt">で</span> あいましょう。</div>
+                <div class="romaji">Robii de aimashou.</div>
+                <div class="id-text">Ayo kita bertemu di lobi!</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 6</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">あした いっしょに えいが <span class="pt">を</span> みませんか。</div>
+              <div class="id">Maukah besok menonton film bersama?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">ええ、いいですね。そうしましょう。</div>
+              <div class="id">Ya, bagus juga. Ayo kita lakukan.</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="bottom-nav">
         <button class="nav-link-btn" onclick="switchChapterTab('chapter5Tab', document.querySelectorAll('.tab-bar .tab-btn')[4])">← Bab 5</button>
-        <button class="nav-link-btn" disabled>Bab 7 (Segera)</button>
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter7Tab', document.querySelectorAll('.tab-bar .tab-btn')[6])">Bab 7 →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BAB 7 ==================== -->
+    <section id="chapter7Tab" class="chapter-content">
+      <div class="full-card">
+        <h3>📌 Ikhtisar Bab 7: Alat (で) &amp; Memberi / Menerima (に / あげます・もらいます)</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Pola / Partikel</th>
+                <th>Fungsi Utama</th>
+                <th>Pola Kalimat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="pt">で</span> (Alat/Metode)</td>
+                <td>Alat, bahan, atau bahasa yang digunakan</td>
+                <td><code>[Alat/Bahasa] + で + [KK]</code></td>
+              </tr>
+              <tr>
+                <td><strong>あげます</strong> / <span class="pt">に</span></td>
+                <td>Memberikan objek kepada penerima (Orang + に)</td>
+                <td><code>[Penerima] + に + [Benda] + を + あげます</code></td>
+              </tr>
+              <tr>
+                <td><strong>もらいます</strong> / <span class="pt">に</span></td>
+                <td>Menerima objek dari pemberi (Orang + に/から)</td>
+                <td><code>[Pemberi] + に/から + [Benda] + を + もらいます</code></td>
+              </tr>
+              <tr>
+                <td><strong>もう 〜ました</strong></td>
+                <td>Menyatakan tindakan yang sudah selesai dilakukan</td>
+                <td><code>もう + [KK bentuk ました]</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Alat / Bahasa (で)</div>
+            <span class="card-badge badge-positive">Alat &amp; Cara</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Alat / Bahasa] + <span class="pt">で</span> + [Kata Kerja]</div>
+            <p class="function-desc">Digunakan untuk menunjukkan alat, sarana, atau bahasa dalam melakukan sesuatu.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">はし <span class="pt">で</span> たべます。</div>
+                <div class="romaji">Hashi de tabemasu.</div>
+                <div class="id-text">Makan menggunakan sumpit.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">にほんご <span class="pt">で</span> レポート <span class="pt">を</span> かきます。</div>
+                <div class="romaji">Nihongo de repooto o kakimasu.</div>
+                <div class="id-text">Menulis laporan dalam bahasa Jepang.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. あげます / もらいます</div>
+            <span class="card-badge badge-special">Memberi &amp; Menerima</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Orang] + <span class="pt">に</span> + [Benda] + <span class="pt">を</span> + あげます / もらいます</div>
+            <p class="function-desc">Menunjukkan transaksi memberi (あげます) atau menerima (もらいます) benda.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">わたし <span class="pt">は</span> ヤマダさん <span class="pt">に</span> はな <span class="pt">を</span> あげました。</div>
+                <div class="romaji">Watashi wa Yamada-san ni hana o agemashita.</div>
+                <div class="id-text">Saya telah memberikan bunga kepada Tuan Yamada.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">わたし <span class="pt">は</span> サントスさん <span class="pt">に</span> ほん <span class="pt">を</span> もらいました。</div>
+                <div class="romaji">Watashi wa Santosu-san ni hon o moraimashita.</div>
+                <div class="id-text">Saya telah menerima buku dari Tuan Santos.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 7</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">もう ひるごはん <span class="pt">を</span> たべましたか。</div>
+              <div class="id">Apakah kamu sudah makan siang?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">いいえ、まだです。これから たべます。</div>
+              <div class="id">Belum. Baru mau makan sekarang.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter6Tab', document.querySelectorAll('.tab-bar .tab-btn')[5])">← Bab 6</button>
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter8Tab', document.querySelectorAll('.tab-bar .tab-btn')[7])">Bab 8 →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BAB 8 ==================== -->
+    <section id="chapter8Tab" class="chapter-content">
+      <div class="full-card">
+        <h3>📌 Ikhtisar Bab 8: Kata Sifat (い &amp; な)</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Jenis Kata Sifat</th>
+                <th>Bentuk Positif</th>
+                <th>Bentuk Negatif</th>
+                <th>Menerangkan KB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>KS-い</strong> (contoh: たかい)</td>
+                <td>たかい です</td>
+                <td>たかくない です / たかくありません</td>
+                <td>たかい ほん</td>
+              </tr>
+              <tr>
+                <td><strong>KS-な</strong> (contoh: しずか)</td>
+                <td>しずか です</td>
+                <td>しずか じゃありません</td>
+                <td>しずかな まち</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert-box">⚠️ Pengecualian Khusus: <strong>いい</strong> (Bagus) → Negatif: <strong>よくないです</strong>. <strong>きれい</strong> &amp; <strong>有名 (ゆうめい)</strong> adalah KS-な.</div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Predikat Kata Sifat</div>
+            <span class="card-badge badge-positive">Sifat Subjek</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [KS-い / KS-な] + です</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">ふじさん <span class="pt">は</span> たかい です。</div>
+                <div class="romaji">Fujisan wa takai desu.</div>
+                <div class="id-text">Gunung Fuji tinggi.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">ワットさん <span class="pt">は</span> しんせつ です。</div>
+                <div class="romaji">Watto-san wa shinsetsu desu.</div>
+                <div class="id-text">Tuan Watt ramah.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Modifikasi Kata Benda &amp; Bagaimana (どう)</div>
+            <span class="card-badge badge-question">Pertanyaan &amp; Modifikasi</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[KS-い + KB] / [KS-な + な + KB] | [Subjek] + <span class="pt">は</span> + どうですか</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">にほん <span class="pt">の</span> せいかつ <span class="pt">は</span> どう ですか。</div>
+                <div class="romaji">Nihon no seikatsu wa dou desu ka.</div>
+                <div class="id-text">Bagaimana kehidupan di Jepang?</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">きょうと <span class="pt">は</span> ふるい まち です。</div>
+                <div class="romaji">Kyouto wa furui machi desu.</div>
+                <div class="id-text">Kyoto adalah kota tua.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 8</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">にほん <span class="pt">の</span> たべもの <span class="pt">は</span> どうですか。</div>
+              <div class="id">Bagaimana makanan Jepang?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">おいしいですが、たかいです。</div>
+              <div class="id">Enak, tetapi mahal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter7Tab', document.querySelectorAll('.tab-bar .tab-btn')[6])">← Bab 7</button>
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter9Tab', document.querySelectorAll('.tab-bar .tab-btn')[8])">Bab 9 →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BAB 9 ==================== -->
+    <section id="chapter9Tab" class="chapter-content">
+      <div class="full-card">
+        <h3>📌 Ikhtisar Bab 9: Kesukaan, Keahlian, Kepemilikan (が) &amp; Alasan (から)</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Kata Kerja / Kata Sifat</th>
+                <th>Partikel Objek</th>
+                <th>Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>すき / きらい</strong></td>
+                <td><span class="pt">が</span></td>
+                <td>Menyatakan Suka / Benci</td>
+              </tr>
+              <tr>
+                <td><strong>じょうず / へた</strong></td>
+                <td><span class="pt">が</span></td>
+                <td>Menyatakan Pintar / Mahir / Bodoh</td>
+              </tr>
+              <tr>
+                <td><strong>わかります / あります</strong></td>
+                <td><span class="pt">が</span></td>
+                <td>Menyatakan Paham / Punya (Objek Abstrak/Benda)</td>
+              </tr>
+              <tr>
+                <td><strong>[Kalimat 1] から、[Kalimat 2]</strong></td>
+                <td>-</td>
+                <td>Menyatakan Sebab / Alasan ("Karena...")</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. [KB] が すき / あります / わかります</div>
+            <span class="card-badge badge-positive">Partikel が Objek</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Objek] + <span class="pt">が</span> + すき / あります / わかります</div>
+            <p class="function-desc">Objek kesukaan, keahlian, atau kepemilikan ditandai dengan partikel <span class="pt">が</span> (bukan を).</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">わたし <span class="pt">は</span> イタリアりょうり <span class="pt">が</span> すきです。</div>
+                <div class="romaji">Watashi wa Itaria-ryouri ga suki desu.</div>
+                <div class="id-text">Saya suka masakan Italia.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">わたし <span class="pt">は</span> にほんご <span class="pt">が</span> すこし わかります。</div>
+                <div class="romaji">Watashi wa Nihongo ga sukoshi wakarimasu.</div>
+                <div class="id-text">Saya sedikit paham bahasa Jepang.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Kalimat Alasan (〜から)</div>
+            <span class="card-badge badge-special">Sebab &amp; Akibat</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Alasan / Sebab] + から、[Akibat / Kesimpulan]</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">じかん <span class="pt">が</span> ありません から、しんぶん <span class="pt">を</span> よみません。</div>
+                <div class="romaji">Jikan ga arimasen kara, shinbun o yomimasen.</div>
+                <div class="id-text">Karena tidak ada waktu, saya tidak membaca koran.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 9</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">スポーツ <span class="pt">が</span> すきですか。</div>
+              <div class="id">Apakah kamu suka olahraga?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">はい、すきです。サッカー <span class="pt">が</span> いちばん すきです。</div>
+              <div class="id">Ya, suka. Saya paling suka sepak bola.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter8Tab', document.querySelectorAll('.tab-bar .tab-btn')[7])">← Bab 8</button>
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter10Tab', document.querySelectorAll('.tab-bar .tab-btn')[9])">Bab 10 →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BAB 10 ==================== -->
+    <section id="chapter10Tab" class="chapter-content">
+      <div class="full-card">
+        <h3>📌 Ikhtisar Bab 10: Keberadaan Benda / Orang (あります・います) &amp; Posisi</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Kata Kerja</th>
+                <th>Subjek Subjek</th>
+                <th>Partikel Lokasi</th>
+                <th>Contoh Posisi (の + Posisi)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>あります</strong></td>
+                <td>Benda mati / Tanaman</td>
+                <td><span class="pt">に</span></td>
+                <td>うえ (Atas), した (Bawah)</td>
+              </tr>
+              <tr>
+                <td><strong>います</strong></td>
+                <td>Manusia / Hewan</td>
+                <td><span class="pt">に</span></td>
+                <td>まえ (Depan), うしろ (Belakang)</td>
+              </tr>
+              <tr>
+                <td><strong>[KB] の [Posisi]</strong></td>
+                <td>Lokasi spesifik</td>
+                <td>-</td>
+                <td>なか (Dalam), となり (Samping)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. Keberadaan di Lokasi ([Tempat] に [Subjek] が います/あります)</div>
+            <span class="card-badge badge-positive">Lokasi Ada</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Tempat] + <span class="pt">に</span> + [Subjek] + <span class="pt">が</span> + あります / います</div>
+            <p class="function-desc">Menjelaskan keberadaan sesuatu di lokasi tertentu. Gunakan <strong>います</strong> untuk makhluk hidup dan <strong>あります</strong> untuk benda mati.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">きょうしつ <span class="pt">に</span> たなかさん <span class="pt">が</span> います。</div>
+                <div class="romaji">Kyoushitsu ni Tanaka-san ga imasu.</div>
+                <div class="id-text">Di ruang kelas ada Tuan Tanaka.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">つくえ <span class="pt">の</span> うえ <span class="pt">に</span> ほん <span class="pt">が</span> あります。</div>
+                <div class="romaji">Tsukue no ue ni hon ga arimasu.</div>
+                <div class="id-text">Di atas meja ada buku.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Letak Subjek ([Subjek] は [Tempat] に あります/います)</div>
+            <span class="card-badge badge-special">Letak Subjek</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Tempat] + <span class="pt">に</span> + あります / います</div>
+            <p class="function-desc">Menjelaskan lokasi spesifik dari topik/subjek yang sudah diketahui.</p>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">みずのさん <span class="pt">は</span> じむしょ <span class="pt">に</span> います。</div>
+                <div class="romaji">Mizuno-san wa jimusho ni imasu.</div>
+                <div class="id-text">Nona Mizuno ada di kantor.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">ゆうびんきょく <span class="pt">は</span> ぎんこう <span class="pt">の</span> となり <span class="pt">に</span> あります。</div>
+                <div class="romaji">Yuubinkyoku wa ginkou no tonari ni arimasu.</div>
+                <div class="id-text">Kantor pos berada di samping bank.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <h3>💬 Percakapan Bab 10</h3>
+        <div class="kaiwa-dialog">
+          <div class="kaiwa-line">
+            <div class="speaker">A:</div>
+            <div class="speech-content">
+              <div class="jp">すみません、パンや <span class="pt">は</span> どこ <span class="pt">に</span> ありますか。</div>
+              <div class="id">Permisi, toko roti ada di mana?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">B:</div>
+            <div class="speech-content">
+              <div class="jp">スーパー <span class="pt">の</span> なか <span class="pt">に</span> ありますよ。</div>
+              <div class="id">Ada di dalam supermarket lho.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="nav-link-btn" onclick="switchChapterTab('chapter9Tab', document.querySelectorAll('.tab-bar .tab-btn')[8])">← Bab 9</button>
+        <button class="nav-link-btn" onclick="switchChapterTab('chapterNextTab', document.querySelectorAll('.tab-bar .tab-btn')[10])">Bab 11 →</button>
       </div>
     </section>
 
     <!-- ==================== PLACEHOLDER ==================== -->
     <section id="chapterNextTab" class="chapter-content">
       <div class="full-card" style="text-align: center; padding: 30px 10px;">
-        <h2 style="font-size: 1.05rem; margin-bottom: 6px;">Bab 7 ~ 50 Segera Hadir</h2>
+        <h2 style="font-size: 1.05rem; margin-bottom: 6px;">Bab 11 ~ 50 Segera Hadir</h2>
         <p style="font-size: 0.82rem; color: var(--subtext);">Materi lanjutan akan terus diperbarui secara berkala.</p>
       </div>
     </section>
