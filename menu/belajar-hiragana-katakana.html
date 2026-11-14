@@ -25,6 +25,9 @@
       --primary-dark: #a5b4fc;
       --accent-hira: #f472b6;
       --accent-kata: #38bdf8;
+      --accent-green: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
       --bg-body: #0f172a;
       --bg-card: #1e293b;
       --bg-card-empty: #0f172a;
@@ -55,6 +58,9 @@
       --primary-dark: #312e81;
       --accent-hira: #ec4899;
       --accent-kata: #0284c7;
+      --accent-green: #059669;
+      --accent-amber: #d97706;
+      --accent-red: #dc2626;
       --bg-body: #f8fafc;
       --bg-card: #ffffff;
       --bg-card-empty: transparent;
@@ -205,7 +211,62 @@
       border-radius: 8px;
     }
 
-    /* Navigation Tabs */
+    /* ================= MODE NAVIGATION BAR ================= */
+    .mode-nav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+      background: var(--tab-nav-bg);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    @media (max-width: 720px) {
+      .mode-nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .mode-nav .mode-btn:first-child {
+        grid-column: span 2;
+      }
+    }
+
+    .mode-btn {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1.5px solid transparent;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--tab-btn-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-heading);
+      background: rgba(129, 140, 248, 0.08);
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+    }
+
+    html.light-theme .mode-btn.active,
+    body.light-theme .mode-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Navigation Tabs (Hiragana / Katakana) */
     .tab-nav {
       display: flex;
       gap: 8px;
@@ -379,6 +440,462 @@
       box-shadow: none;
     }
 
+    /* ================= SHARED GAME / PRACTICE STYLES ================= */
+    .practice-panel {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 14px var(--shadow-color);
+      margin-bottom: 20px;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .pill-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .action-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .action-btn.success {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #064e3b;
+    }
+
+    .stat-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      background: var(--rule-item-bg);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    /* ================= 1. FLASHCARD STYLES ================= */
+    .flashcard-wrapper {
+      perspective: 1000px;
+      max-width: 360px;
+      height: 270px;
+      margin: 10px auto 24px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-wrapper.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      border: 2px solid var(--border-color);
+      background: var(--rule-item-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      border-color: var(--primary);
+    }
+
+    .fc-type-tag {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(129, 140, 248, 0.15);
+      color: var(--primary);
+    }
+
+    .fc-audio-btn {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-heading);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 2;
+    }
+
+    .fc-kana {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.1;
+    }
+
+    .fc-romaji {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .fc-meaning {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .fc-hint {
+      position: absolute;
+      bottom: 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .fc-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ================= 2. COCOKAN HURUF (MATCHING) ================= */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 540px) {
+      .match-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .match-tile {
+      background: var(--rule-item-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.18s ease;
+    }
+
+    .match-tile.jp-tile {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.85rem;
+    }
+
+    .match-tile:hover:not(.matched) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .match-tile.selected {
+      border-color: var(--primary);
+      background: rgba(129, 140, 248, 0.2);
+      transform: scale(1.03);
+    }
+
+    .match-tile.matched {
+      border-color: var(--accent-green);
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--accent-green);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .match-tile.wrong {
+      border-color: var(--accent-red);
+      background: rgba(248, 113, 113, 0.2);
+      animation: shake 0.3s ease;
+    }
+
+    /* ================= 3. MINI KUIS STYLES ================= */
+    .quiz-box {
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quiz-prompt-card {
+      background: var(--rule-item-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 18px;
+      padding: 26px 20px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .quiz-question-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .quiz-target {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.15;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-opt-btn {
+      padding: 15px 12px;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .quiz-opt-btn.correct {
+      border-color: var(--accent-green);
+      background: rgba(52, 211, 153, 0.2);
+      color: var(--accent-green);
+    }
+
+    .quiz-opt-btn.wrong {
+      border-color: var(--accent-red);
+      background: rgba(248, 113, 113, 0.2);
+      color: var(--accent-red);
+    }
+
+    /* ================= 4. MENYUSUN HURUF (WORD BUILDER) ================= */
+    .scramble-box {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .word-clue-card {
+      background: var(--rule-item-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .word-meaning {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+    }
+
+    .word-romaji-hint {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .answer-slots {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 64px;
+      padding: 12px;
+      background: var(--rule-item-bg);
+      border: 2px dashed var(--border-color);
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .slot-chip, .pool-chip {
+      font-family: 'Noto Sans JP', sans-serif;
+      min-width: 52px;
+      height: 52px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .slot-chip {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 3px 8px rgba(99, 102, 241, 0.3);
+    }
+
+    .pool-letters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pool-chip {
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border: 2px solid var(--border-color);
+    }
+
+    .pool-chip:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .pool-chip:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .feedback-banner {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .feedback-banner.show {
+      display: block;
+    }
+
+    .feedback-banner.ok {
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green);
+    }
+
+    .feedback-banner.err {
+      background: rgba(248, 113, 113, 0.16);
+      color: var(--accent-red);
+      border: 1px solid var(--accent-red);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
     /* Rule Box */
     .rule-card {
       background: var(--bg-card);
@@ -506,67 +1023,230 @@
       <div>
         <span class="badge-series">Pondasi Huruf Dasar Jepang</span>
         <h1>Belajar Huruf Hiragana &amp; Katakana</h1>
-        <p>Ketuk kartu apa saja untuk mendengarkan pelafalan vokal dan konsonan yang akurat.</p>
+        <p>Pelajari tabel lengkap lalu uji hafalanmu lewat Flashcard, Cocokkan Huruf, Mini Kuis, dan Menyusun Kata.</p>
       </div>
       <div class="page-badge">Made by Vorst Cavry</div>
     </header>
 
-    <div class="tab-nav">
-      <button class="tab-btn active hira-tab" onclick="switchKana('hiragana')">
-        <span>🌸</span> Hiragana Lengkap
-      </button>
-      <button class="tab-btn kata-tab" onclick="switchKana('katakana')">
-        <span>⚡</span> Katakana + Modern
-      </button>
-    </div>
+    <!-- NAVIGASI MODE UTAMA -->
+    <nav class="mode-nav" aria-label="Mode Pembelajaran">
+      <button class="mode-btn active" data-mode="table" onclick="switchMode('table')">📖 Tabel Huruf</button>
+      <button class="mode-btn" data-mode="flashcard" onclick="switchMode('flashcard')">🃏 Flashcard</button>
+      <button class="mode-btn" data-mode="match" onclick="switchMode('match')">🧩 Cocokkan Huruf</button>
+      <button class="mode-btn" data-mode="quiz" onclick="switchMode('quiz')">🎯 Mini Kuis</button>
+      <button class="mode-btn" data-mode="scramble" onclick="switchMode('scramble')">🔤 Menyusun Huruf</button>
+    </nav>
 
-    <div class="info-bar" id="kanaInfoText">
-      🌸 <strong>Hiragana:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ).
-    </div>
+    <!-- ================= MODE 0: TABEL HURUF (ASLI) ================= -->
+    <section id="mode-table">
+      <div class="tab-nav">
+        <button class="tab-btn active hira-tab" onclick="switchKana('hiragana')">
+          <span>🌸</span> Hiragana Lengkap
+        </button>
+        <button class="tab-btn kata-tab" onclick="switchKana('katakana')">
+          <span>⚡</span> Katakana + Modern
+        </button>
+      </div>
 
-    <div id="hiraganaContainer" class="hira-theme">
-      <div class="section-title">1. Huruf Dasar (Gojuon - 46 Huruf)</div>
-      <div class="kana-grid" id="hiraBaseGrid"></div>
+      <div class="info-bar" id="kanaInfoText">
+        🌸 <strong>Hiragana:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ).
+      </div>
 
-      <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
-      <div class="kana-grid" id="hiraDakuGrid"></div>
+      <div id="hiraganaContainer" class="hira-theme">
+        <div class="section-title">1. Huruf Dasar (Gojuon - 46 Huruf)</div>
+        <div class="kana-grid" id="hiraBaseGrid"></div>
 
-      <div class="section-title">3. Yoon (Gabungan Huruf Kecil ゃ, ゅ, ょ)</div>
-      <div class="yoon-grid" id="hiraYoonGrid"></div>
-    </div>
+        <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+        <div class="kana-grid" id="hiraDakuGrid"></div>
 
-    <div id="katakanaContainer" class="kata-theme" style="display: none;">
-      <div class="section-title">1. Huruf Dasar Katakana (46 Huruf)</div>
-      <div class="kana-grid" id="kataBaseGrid"></div>
+        <div class="section-title">3. Yoon (Gabungan Huruf Kecil ゃ, ゅ, ょ)</div>
+        <div class="yoon-grid" id="hiraYoonGrid"></div>
+      </div>
 
-      <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
-      <div class="kana-grid" id="kataDakuGrid"></div>
+      <div id="katakanaContainer" class="kata-theme" style="display: none;">
+        <div class="section-title">1. Huruf Dasar Katakana (46 Huruf)</div>
+        <div class="kana-grid" id="kataBaseGrid"></div>
 
-      <div class="section-title">3. Yoon (Gabungan Huruf Kecil ャ, ュ, ョ)</div>
-      <div class="yoon-grid" id="kataYoonGrid"></div>
+        <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+        <div class="kana-grid" id="kataDakuGrid"></div>
 
-      <div class="section-title">4. Katakana Khusus / Modern (Kata Serapan Asing)</div>
-      <div class="tokushu-grid" id="kataSpecialGrid"></div>
-    </div>
+        <div class="section-title">3. Yoon (Gabungan Huruf Kecil ャ, ュ, ョ)</div>
+        <div class="yoon-grid" id="kataYoonGrid"></div>
 
-    <div class="rule-card">
-      <h3>📖 Aturan Turunan Huruf Kana (Wajib Dipahami)</h3>
-      <div class="rule-grid">
-        <div class="rule-item">
-          <strong>1. Dakuon (Tanda Kutip ゛):</strong> Mengubah konsonan tak bersuara menjadi bersuara (K &rarr; G, S &rarr; Z, T &rarr; D, H &rarr; B). Contoh: か (ka) &rarr; が (ga).
-        </div>
-        <div class="rule-item">
-          <strong>2. Handakuon (Tanda Bulat ゜):</strong> Khusus deret H berubah menjadi letupan P. Contoh: は (ha) &rarr; ぱ (pa).
-        </div>
-        <div class="rule-item">
-          <strong>3. Yoon (Gabungan Kecil ゃ, ゅ, ょ):</strong> Menggabungkan deret vokal 'i' dengan ya/yu/yo kecil. Contoh: き (ki) + ゃ (ya) = きゃ (kya).
-        </div>
-        <div class="rule-item">
-          <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Berfungsi sebagai konsonan rangkap (dobel) atau jeda ketukan. Contoh: きって (kitte - perangko).
+        <div class="section-title">4. Katakana Khusus / Modern (Kata Serapan Asing)</div>
+        <div class="tokushu-grid" id="kataSpecialGrid"></div>
+      </div>
+
+      <div class="rule-card">
+        <h3>📖 Aturan Turunan Huruf Kana (Wajib Dipahami)</h3>
+        <div class="rule-grid">
+          <div class="rule-item">
+            <strong>1. Dakuon (Tanda Kutip ゛):</strong> Mengubah konsonan tak bersuara menjadi bersuara (K &rarr; G, S &rarr; Z, T &rarr; D, H &rarr; B). Contoh: か (ka) &rarr; が (ga).
+          </div>
+          <div class="rule-item">
+            <strong>2. Handakuon (Tanda Bulat ゜):</strong> Khusus deret H berubah menjadi letupan P. Contoh: は (ha) &rarr; ぱ (pa).
+          </div>
+          <div class="rule-item">
+            <strong>3. Yoon (Gabungan Kecil ゃ, ゅ, ょ):</strong> Menggabungkan deret vokal 'i' dengan ya/yu/yo kecil. Contoh: き (ki) + ゃ (ya) = きゃ (kya).
+          </div>
+          <div class="rule-item">
+            <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Berfungsi sebagai konsonan rangkap (dobel) atau jeda ketukan. Contoh: きって (kitte - perangko).
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
+    <!-- ================= MODE 1: FLASHCARD ================= -->
+    <section id="mode-flashcard" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="fcScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" data-val="hiragana" onclick="setFcFilter('script', 'hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" data-val="katakana" onclick="setFcFilter('script', 'katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" data-val="both" onclick="setFcFilter('script', 'both', this)">🔀 Campur</button>
+        </div>
+        <div class="filter-group" id="fcGroupFilter">
+          <span class="filter-label">Cakupan:</span>
+          <button class="pill-btn active" data-val="base" onclick="setFcFilter('group', 'base', this)">Dasar (46)</button>
+          <button class="pill-btn" data-val="daku" onclick="setFcFilter('group', 'daku', this)">Dakuon</button>
+          <button class="pill-btn" data-val="yoon" onclick="setFcFilter('group', 'yoon', this)">Yoon</button>
+          <button class="pill-btn" data-val="all" onclick="setFcFilter('group', 'all', this)">Semua</button>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span class="stat-badge" id="fcCounter">Kartu 1 / 46</span>
+        <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 6px;">
+          <input type="checkbox" id="fcAutoAudio" checked> 🔊 Auto-suara saat ganti kartu
+        </label>
+      </div>
+
+      <div class="flashcard-wrapper" id="flashcardBox" onclick="flipFlashcard()">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <span class="fc-type-tag" id="fcTagFront">Hiragana</span>
+            <button class="fc-audio-btn" type="button" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Putar Suara">🔊</button>
+            <div class="fc-kana" id="fcFrontText">あ</div>
+            <div class="fc-hint">Ketuk kartu untuk melihat cara baca</div>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <span class="fc-type-tag" id="fcTagBack">Cara Baca</span>
+            <button class="fc-audio-btn" type="button" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Putar Suara">🔊</button>
+            <div class="fc-romaji" id="fcBackRomaji">a</div>
+            <div class="fc-meaning" id="fcBackMeaning">Huruf A (あ)</div>
+            <div class="fc-hint">Ketuk lagi untuk membalik</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-controls">
+        <button class="action-btn" onclick="prevFlashcard()">← Sebelumnya</button>
+        <button class="action-btn" onclick="shuffleFlashcards()">🔀 Acak Urutan</button>
+        <button class="action-btn primary" onclick="nextFlashcard()">Selanjutnya →</button>
+      </div>
+    </section>
+
+    <!-- ================= MODE 2: COCOKAN HURUF ================= -->
+    <section id="mode-match" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="matchScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setMatchFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setMatchFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setMatchFilter('both', this)">🔀 Campur</button>
+        </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="matchProgress">Cocok: 0 / 6</span>
+          <span class="stat-badge" id="matchMoves">Langkah: 0</span>
+        </div>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+        Pilih satu kartu huruf <strong>Kana</strong> dan pasangkan dengan kartu <strong>Romaji</strong> yang sesuai!
+      </p>
+
+      <div id="matchFeedback" class="feedback-banner"></div>
+      <div class="match-grid" id="matchGrid"></div>
+
+      <div style="text-align: center; margin-top: 16px;">
+        <button class="action-btn primary" onclick="initMatchGame()">🔄 Ronde Baru</button>
+      </div>
+    </section>
+
+    <!-- ================= MODE 3: MINI KUIS ================= -->
+    <section id="mode-quiz" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="quizScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setQuizFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setQuizFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setQuizFilter('both', this)">🔀 Campur</button>
+        </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="quizStepBadge">Soal: 1 / 10</span>
+          <span class="stat-badge" id="quizScoreBadge">Skor: 0</span>
+          <span class="stat-badge" id="quizStreakBadge">🔥 0</span>
+        </div>
+      </div>
+
+      <div class="quiz-box" id="quizActiveArea">
+        <div class="quiz-prompt-card">
+          <button class="fc-audio-btn" type="button" onclick="speakQuizTarget()" title="Dengar Suara">🔊</button>
+          <div class="quiz-question-label" id="quizPromptLabel">Apa bacaan huruf Hiragana ini?</div>
+          <div class="quiz-target" id="quizTargetText">あ</div>
+        </div>
+
+        <div id="quizFeedback" class="feedback-banner"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+
+      <div class="quiz-box" id="quizResultArea" style="display: none; padding: 20px 0;">
+        <div style="font-size: 3rem; margin-bottom: 8px;">🏆</div>
+        <h3 style="font-size: 1.4rem; color: var(--text-heading); margin-bottom: 6px;">Mini Kuis Selesai!</h3>
+        <p id="quizFinalSummary" style="color: var(--text-muted); margin-bottom: 20px; font-weight: 600;"></p>
+        <button class="action-btn primary" onclick="startQuiz()">🔄 Main Lagi</button>
+      </div>
+    </section>
+
+    <!-- ================= MODE 4: MENYUSUN HURUF ================= -->
+    <section id="mode-scramble" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="scrambleScriptFilter">
+          <span class="filter-label">Kosakata:</span>
+          <button class="pill-btn active" onclick="setScrambleFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setScrambleFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setScrambleFilter('both', this)">🔀 Campur</button>
+        </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="scrambleSolvedBadge">Tersusun: 0</span>
+        </div>
+      </div>
+
+      <div class="scramble-box">
+        <div class="word-clue-card">
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">SUSUN KOSAKATA BERIKUT:</div>
+          <div class="word-meaning" id="scrambleMeaning">Kucing</div>
+          <div class="word-romaji-hint" id="scrambleRomaji">neko</div>
+        </div>
+
+        <div id="scrambleFeedback" class="feedback-banner"></div>
+
+        <!-- Area Jawaban Terpilih -->
+        <div class="answer-slots" id="scrambleSlots" aria-label="Susunan Jawaban"></div>
+
+        <!-- Pilihan Potongan Huruf -->
+        <div class="pool-letters" id="scramblePool"></div>
+
+        <div class="fc-controls">
+          <button class="action-btn" onclick="clearScrambleSlots()">⌫ Hapus Susunan</button>
+          <button class="action-btn" onclick="speakScrambleWord()">🔊 Dengar Kata</button>
+          <button class="action-btn primary" onclick="checkScrambleAnswer()">✔ Cek Jawaban</button>
+          <button class="action-btn" onclick="nextScrambleWord()">Lewati →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (TETAP SAMA) -->
     <div class="footer-section">
       <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
       <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
@@ -611,7 +1291,6 @@
       }
     }
 
-    // Inisialisasi awal
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
 
@@ -647,33 +1326,33 @@
       { h: "ち", k: "チ", r: "chi", m: "Huruf Chi", s: "ち" },
       { h: "つ", k: "ツ", r: "tsu", m: "Huruf Tsu", s: "つ" },
       { h: "て", k: "テ", r: "te", m: "Huruf Te", s: "て" },
-      { h: "と", k: "ト", r: "to", m: "Huruf To", s: "to" },
+      { h: "と", k: "ト", r: "to", m: "Huruf To", s: "と" },
       { h: "な", k: "ナ", r: "na", m: "Huruf Na", s: "な" },
-      { h: "に", k: "ニ", r: "ni", m: "Huruf Ni", s: "ni" },
+      { h: "に", k: "ニ", r: "ni", m: "Huruf Ni", s: "に" },
       { h: "ぬ", k: "ヌ", r: "nu", m: "Huruf Nu", s: "ぬ" },
       { h: "ね", k: "ネ", r: "ne", m: "Huruf Ne", s: "ね" },
-      { h: "の", k: "ノ", r: "no", m: "Huruf No", s: "no" },
+      { h: "の", k: "ノ", r: "no", m: "Huruf No", s: "の" },
       { h: "は", k: "ハ", r: "ha", m: "Huruf Ha", s: "は" },
-      { h: "ひ", k: "ヒ", r: "hi", m: "Huruf Hi", s: "hi" },
+      { h: "ひ", k: "ヒ", r: "hi", m: "Huruf Hi", s: "ひ" },
       { h: "ふ", k: "フ", r: "fu", m: "Huruf Fu", s: "ふ" },
       { h: "へ", k: "ヘ", r: "he", m: "Huruf He", s: "へ" },
       { h: "ほ", k: "ホ", r: "ho", m: "Huruf Ho", s: "ほ" },
       { h: "ま", k: "マ", r: "ma", m: "Huruf Ma", s: "ま" },
       { h: "み", k: "ミ", r: "mi", m: "Huruf Mi", s: "み" },
       { h: "む", k: "ム", r: "mu", m: "Huruf Mu", s: "む" },
-      { h: "め", k: "メ", r: "me", m: "Huruf Me", s: "me" },
-      { h: "も", k: "モ", r: "mo", m: "Huruf Mo", s: "mo" },
+      { h: "め", k: "メ", r: "me", m: "Huruf Me", s: "め" },
+      { h: "も", k: "モ", r: "mo", m: "Huruf Mo", s: "も" },
       { h: "や", k: "ヤ", r: "ya", m: "Huruf Ya", s: "や" },
       { empty: true },
       { h: "ゆ", k: "ユ", r: "yu", m: "Huruf Yu", s: "ゆ" },
       { empty: true },
       { h: "よ", k: "ヨ", r: "yo", m: "Huruf Yo", s: "よ" },
       { h: "ら", k: "ラ", r: "ra", m: "Huruf Ra", s: "ら" },
-      { h: "り", k: "リ", r: "ri", m: "Huruf Ri", s: "ri" },
+      { h: "り", k: "リ", r: "ri", m: "Huruf Ri", s: "り" },
       { h: "る", k: "ル", r: "ru", m: "Huruf Ru", s: "る" },
       { h: "れ", k: "レ", r: "re", m: "Huruf Re", s: "れ" },
       { h: "ろ", k: "ロ", r: "ro", m: "Huruf Ro", s: "ろ" },
-      { h: "わ", k: "ワ", r: "wa", m: "Huruf Wa", s: "wa" },
+      { h: "わ", k: "ワ", r: "wa", m: "Huruf Wa", s: "わ" },
       { empty: true },
       { h: "を", k: "ヲ", r: "wo (o)", m: "Huruf Wo (Partikel O)", s: "を" },
       { empty: true },
@@ -701,11 +1380,11 @@
       { h: "ぶ", k: "ブ", r: "bu", m: "Huruf Bu", s: "ぶ" },
       { h: "べ", k: "ベ", r: "be", m: "Huruf Be", s: "べ" },
       { h: "ぼ", k: "ボ", r: "bo", m: "Huruf Bo", s: "ぼ" },
-      { h: "ぱ", k: "パ", r: "pa", m: "Huruf Pa", s: "pa" },
-      { h: "ぴ", k: "ピ", r: "pi", m: "Huruf Pi", s: "pi" },
-      { h: "ぷ", k: "プ", r: "pu", m: "Huruf Pu", s: "pu" },
-      { h: "ぺ", k: "ペ", r: "pe", m: "Huruf Pe", s: "pe" },
-      { h: "ぽ", k: "ポ", r: "po", m: "Huruf Po", s: "po" }
+      { h: "ぱ", k: "パ", r: "pa", m: "Huruf Pa", s: "ぱ" },
+      { h: "ぴ", k: "ピ", r: "pi", m: "Huruf Pi", s: "ぴ" },
+      { h: "ぷ", k: "プ", r: "pu", m: "Huruf Pu", s: "ぷ" },
+      { h: "ぺ", k: "ペ", r: "pe", m: "Huruf Pe", s: "ぺ" },
+      { h: "ぽ", k: "ポ", r: "po", m: "Huruf Po", s: "ぽ" }
     ];
 
     const yoonKana = [
@@ -770,6 +1449,38 @@
       { k: "シェ", r: "she", m: "Bunyi She", s: "シェ" }
     ];
 
+    // Data Kosakata untuk Fitur Menyusun Huruf
+    const wordBank = [
+      // Hiragana
+      { type: 'hiragana', chars: ['ね', 'こ'], romaji: 'neko', meaning: 'Kucing', word: 'ねこ' },
+      { type: 'hiragana', chars: ['い', 'ぬ'], romaji: 'inu', meaning: 'Anjing', word: 'いぬ' },
+      { type: 'hiragana', chars: ['さ', 'く', 'ら'], romaji: 'sakura', meaning: 'Bunga Sakura', word: 'さくら' },
+      { type: 'hiragana', chars: ['す', 'し'], romaji: 'sushi', meaning: 'Sushi', word: 'すし' },
+      { type: 'hiragana', chars: ['み', 'ず'], romaji: 'mizu', meaning: 'Air', word: 'みず' },
+      { type: 'hiragana', chars: ['た', 'べ', 'も', 'の'], romaji: 'tabemono', meaning: 'Makanan', word: 'たべもの' },
+      { type: 'hiragana', chars: ['と', 'も', 'だ', 'ち'], romaji: 'tomodachi', meaning: 'Teman', word: 'ともだち' },
+      { type: 'hiragana', chars: ['せ', 'ん', 'せ', 'い'], romaji: 'sensei', meaning: 'Guru', word: 'せんせい' },
+      { type: 'hiragana', chars: ['あ', 'り', 'が', 'と', 'う'], romaji: 'arigatou', meaning: 'Terima Kasih', word: 'ありがとう' },
+      { type: 'hiragana', chars: ['お', 'は', 'よ', 'う'], romaji: 'ohayou', meaning: 'Selamat Pagi', word: 'おはよう' },
+      { type: 'hiragana', chars: ['やま'], romaji: 'yama', meaning: 'Gunung', word: 'やま', overrideChars: ['や', 'ま'] },
+      { type: 'hiragana', chars: ['く', 'る', 'ま'], romaji: 'kuruma', meaning: 'Mobil', word: 'くるま' },
+      { type: 'hiragana', chars: ['でん', 'しゃ'], romaji: 'densha', meaning: 'Kereta Listrik', word: 'でんしゃ', overrideChars: ['で', 'ん', 'しゃ'] },
+      // Katakana
+      { type: 'katakana', chars: ['カ', 'メ', 'ラ'], romaji: 'kamera', meaning: 'Kamera', word: 'カメラ' },
+      { type: 'katakana', chars: ['テ', 'レ', 'ビ'], romaji: 'terebi', meaning: 'Televisi', word: 'テレビ' },
+      { type: 'katakana', chars: ['コ', 'ー', 'ヒ', 'ー'], romaji: 'koohii', meaning: 'Kopi', word: 'コーヒー' },
+      { type: 'katakana', chars: ['バ', 'ナ', 'ナ'], romaji: 'banana', meaning: 'Pisang', word: 'バナナ' },
+      { type: 'katakana', chars: ['ホ', 'テ', 'ル'], romaji: 'hoteru', meaning: 'Hotel', word: 'ホテル' },
+      { type: 'katakana', chars: ['パ', 'ソ', 'コ', 'ン'], romaji: 'pasokon', meaning: 'Komputer / PC', word: 'パソコン' },
+      { type: 'katakana', chars: ['ア', 'イ', 'ス'], romaji: 'aisu', meaning: 'Es / Es Krim', word: 'アイス' },
+      { type: 'katakana', chars: ['ス', 'マ', 'ホ'], romaji: 'sumaho', meaning: 'Smartphone', word: 'スマホ' },
+      { type: 'katakana', chars: ['ラ', 'ー', 'メ', 'ン'], romaji: 'raamen', meaning: 'Mie Ramen', word: 'ラーメン' },
+      { type: 'katakana', chars: ['タ', 'ク', 'シ', 'ー'], romaji: 'takushii', meaning: 'Taksi', word: 'タクシー' }
+    ].map(item => ({
+      ...item,
+      chars: item.overrideChars || item.chars
+    }));
+
     // --- 3. SPEECH SYNTHESIS ENGINE ---
     let voices = [];
     function updateVoices() {
@@ -811,6 +1522,36 @@
       }, 25);
     }
 
+    // Helper: Ambil pool kartu sesuai filter
+    function getKanaPool(script = 'hiragana', group = 'base') {
+      let source = [];
+      if (group === 'base') source = baseKana.filter(i => !i.empty);
+      else if (group === 'daku') source = dakuKana;
+      else if (group === 'yoon') source = yoonKana;
+      else source = [...baseKana.filter(i => !i.empty), ...dakuKana, ...yoonKana];
+
+      let pool = [];
+      source.forEach(item => {
+        if (script === 'hiragana' || script === 'both') {
+          pool.push({ kana: item.h, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana' });
+        }
+        if (script === 'katakana' || script === 'both') {
+          pool.push({ kana: item.k, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana' });
+        }
+      });
+      return pool;
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // --- 4. RENDER TABEL HURUF ASLI ---
     function create3TierCard(jpText, readingText, meaningText, soundText) {
       return `
         <div class="kana-card" onclick="playAudio('${soundText}', this)">
@@ -860,6 +1601,410 @@
       }
     }
 
+    // --- 5. NAVIGASI MODE UTAMA ---
+    function switchMode(mode) {
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+
+      ['table', 'flashcard', 'match', 'quiz', 'scramble'].forEach(m => {
+        const el = document.getElementById('mode-' + m);
+        if (el) el.style.display = (m === mode) ? 'block' : 'none';
+      });
+
+      if (mode === 'flashcard' && fcDeck.length === 0) initFlashcards();
+      if (mode === 'match' && matchTiles.length === 0) initMatchGame();
+      if (mode === 'quiz' && quizQuestions.length === 0) startQuiz();
+      if (mode === 'scramble' && !currentScramble) nextScrambleWord();
+    }
+
+    // --- 6. LOGIKA FITUR 1: FLASHCARD ---
+    let fcScript = 'hiragana';
+    let fcGroup = 'base';
+    let fcDeck = [];
+    let fcIndex = 0;
+
+    function setFcFilter(type, val, btn) {
+      if (type === 'script') {
+        fcScript = val;
+        document.querySelectorAll('#fcScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      } else {
+        fcGroup = val;
+        document.querySelectorAll('#fcGroupFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+      initFlashcards();
+    }
+
+    function initFlashcards() {
+      fcDeck = getKanaPool(fcScript, fcGroup);
+      fcIndex = 0;
+      renderFlashcard(false);
+    }
+
+    function renderFlashcard(autoSpeak = true) {
+      if (!fcDeck.length) return;
+      const card = fcDeck[fcIndex];
+      const box = document.getElementById('flashcardBox');
+      box.classList.remove('flipped');
+
+      document.getElementById('fcCounter').textContent = `Kartu ${fcIndex + 1} / ${fcDeck.length}`;
+      document.getElementById('fcTagFront').textContent = card.type;
+      document.getElementById('fcFrontText').textContent = card.kana;
+      document.getElementById('fcBackRomaji').textContent = card.romaji;
+      document.getElementById('fcBackMeaning').textContent = `${card.meaning} (${card.kana})`;
+
+      if (autoSpeak && document.getElementById('fcAutoAudio').checked) {
+        playAudio(card.sound);
+      }
+    }
+
+    function flipFlashcard() {
+      document.getElementById('flashcardBox').classList.toggle('flipped');
+    }
+
+    function nextFlashcard() {
+      fcIndex = (fcIndex + 1) % fcDeck.length;
+      renderFlashcard(true);
+    }
+
+    function prevFlashcard() {
+      fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+      renderFlashcard(true);
+    }
+
+    function shuffleFlashcards() {
+      fcDeck = shuffleArray(fcDeck);
+      fcIndex = 0;
+      renderFlashcard(true);
+    }
+
+    function speakCurrentFlashcard() {
+      if (fcDeck[fcIndex]) playAudio(fcDeck[fcIndex].sound);
+    }
+
+    // --- 7. LOGIKA FITUR 2: COCOKAN HURUF ---
+    let matchScript = 'hiragana';
+    let matchTiles = [];
+    let selectedTileIdx = null;
+    let matchedPairs = 0;
+    let matchMoves = 0;
+    let lockMatch = false;
+
+    function setMatchFilter(val, btn) {
+      matchScript = val;
+      document.querySelectorAll('#matchScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      initMatchGame();
+    }
+
+    function initMatchGame() {
+      const pool = shuffleArray(getKanaPool(matchScript, 'base')).slice(0, 6);
+      const rawTiles = [];
+      pool.forEach((item, idx) => {
+        rawTiles.push({ pairId: idx, label: item.kana, kind: 'jp', sound: item.sound, matched: false });
+        rawTiles.push({ pairId: idx, label: item.romaji, kind: 'romaji', sound: item.sound, matched: false });
+      });
+
+      matchTiles = shuffleArray(rawTiles);
+      selectedTileIdx = null;
+      matchedPairs = 0;
+      matchMoves = 0;
+      lockMatch = false;
+
+      const fb = document.getElementById('matchFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      updateMatchStats();
+      renderMatchGrid();
+    }
+
+    function updateMatchStats() {
+      document.getElementById('matchProgress').textContent = `Cocok: ${matchedPairs} / 6`;
+      document.getElementById('matchMoves').textContent = `Langkah: ${matchMoves}`;
+    }
+
+    function renderMatchGrid(wrongIndices = []) {
+      const grid = document.getElementById('matchGrid');
+      grid.innerHTML = '';
+      matchTiles.forEach((tile, i) => {
+        const div = document.createElement('div');
+        div.className = 'match-tile' + (tile.kind === 'jp' ? ' jp-tile' : '');
+        if (tile.matched) div.classList.add('matched');
+        if (selectedTileIdx === i) div.classList.add('selected');
+        if (wrongIndices.includes(i)) div.classList.add('wrong');
+        div.textContent = tile.label;
+        div.onclick = () => handleMatchClick(i);
+        grid.appendChild(div);
+      });
+    }
+
+    function handleMatchClick(idx) {
+      if (lockMatch || matchTiles[idx].matched || selectedTileIdx === idx) return;
+
+      if (matchTiles[idx].kind === 'jp') {
+        playAudio(matchTiles[idx].sound);
+      }
+
+      if (selectedTileIdx === null) {
+        selectedTileIdx = idx;
+        renderMatchGrid();
+        return;
+      }
+
+      const first = matchTiles[selectedTileIdx];
+      const second = matchTiles[idx];
+      matchMoves++;
+
+      if (first.pairId === second.pairId && first.kind !== second.kind) {
+        first.matched = true;
+        second.matched = true;
+        matchedPairs++;
+        selectedTileIdx = null;
+        updateMatchStats();
+        renderMatchGrid();
+
+        if (matchedPairs === 6) {
+          const fb = document.getElementById('matchFeedback');
+          fb.className = 'feedback-banner show ok';
+          fb.textContent = `🎉 Luar biasa! Semua huruf berhasil dicocokkan dalam ${matchMoves} langkah.`;
+        }
+      } else {
+        const prevIdx = selectedTileIdx;
+        selectedTileIdx = null;
+        lockMatch = true;
+        updateMatchStats();
+        renderMatchGrid([prevIdx, idx]);
+        setTimeout(() => {
+          lockMatch = false;
+          renderMatchGrid();
+        }, 500);
+      }
+    }
+
+    // --- 8. LOGIKA FITUR 3: MINI KUIS ---
+    let quizScript = 'hiragana';
+    let quizQuestions = [];
+    let quizIdx = 0;
+    let quizScore = 0;
+    let quizStreak = 0;
+    let quizAnswered = false;
+
+    function setQuizFilter(val, btn) {
+      quizScript = val;
+      document.querySelectorAll('#quizScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      startQuiz();
+    }
+
+    function startQuiz() {
+      const pool = getKanaPool(quizScript, 'all');
+      const selected = shuffleArray(pool).slice(0, 10);
+
+      quizQuestions = selected.map(target => {
+        const distractors = shuffleArray(
+          pool.filter(p => p.romaji !== target.romaji)
+        )
+          .filter((v, i, a) => a.findIndex(t => t.romaji === v.romaji) === i)
+          .slice(0, 3);
+
+        const options = shuffleArray([target, ...distractors]);
+        return { target, options };
+      });
+
+      quizIdx = 0;
+      quizScore = 0;
+      quizStreak = 0;
+      document.getElementById('quizActiveArea').style.display = 'block';
+      document.getElementById('quizResultArea').style.display = 'none';
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      quizAnswered = false;
+      const q = quizQuestions[quizIdx];
+
+      document.getElementById('quizStepBadge').textContent = `Soal: ${quizIdx + 1} / ${quizQuestions.length}`;
+      document.getElementById('quizScoreBadge').textContent = `Skor: ${quizScore}`;
+      document.getElementById('quizStreakBadge').textContent = `🔥 ${quizStreak}`;
+      document.getElementById('quizPromptLabel').textContent = `Apa cara baca huruf ${q.target.type} ini?`;
+      document.getElementById('quizTargetText').textContent = q.target.kana;
+
+      const fb = document.getElementById('quizFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      const optBox = document.getElementById('quizOptions');
+      optBox.innerHTML = '';
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.textContent = opt.romaji;
+        btn.onclick = () => submitQuizAnswer(opt, btn);
+        optBox.appendChild(btn);
+      });
+    }
+
+    function submitQuizAnswer(selectedOpt, btnEl) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = quizQuestions[quizIdx];
+      const isCorrect = selectedOpt.romaji === q.target.romaji;
+      const fb = document.getElementById('quizFeedback');
+
+      playAudio(q.target.sound);
+
+      document.querySelectorAll('.quiz-opt-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === q.target.romaji) b.classList.add('correct');
+      });
+
+      if (isCorrect) {
+        quizScore += 10;
+        quizStreak++;
+        btnEl.classList.add('correct');
+        fb.className = 'feedback-banner show ok';
+        fb.textContent = `✅ Tepat! ${q.target.kana} dibaca "${q.target.romaji}".`;
+      } else {
+        quizStreak = 0;
+        btnEl.classList.add('wrong');
+        fb.className = 'feedback-banner show err';
+        fb.textContent = `❌ Kurang tepat. ${q.target.kana} dibaca "${q.target.romaji}".`;
+      }
+
+      document.getElementById('quizScoreBadge').textContent = `Skor: ${quizScore}`;
+      document.getElementById('quizStreakBadge').textContent = `🔥 ${quizStreak}`;
+
+      setTimeout(() => {
+        quizIdx++;
+        if (quizIdx < quizQuestions.length) {
+          renderQuizQuestion();
+        } else {
+          document.getElementById('quizActiveArea').style.display = 'none';
+          document.getElementById('quizResultArea').style.display = 'block';
+          document.getElementById('quizFinalSummary').textContent = `Skor Akhir Kamu: ${quizScore} dari ${quizQuestions.length * 10} poin!`;
+        }
+      }, 1150);
+    }
+
+    function speakQuizTarget() {
+      if (quizQuestions[quizIdx]) playAudio(quizQuestions[quizIdx].target.sound);
+    }
+
+    // --- 9. LOGIKA FITUR 4: MENYUSUN HURUF ---
+    let scrambleScript = 'hiragana';
+    let currentScramble = null;
+    let scramblePoolItems = [];
+    let scrambleSelectedIndices = [];
+    let scrambleSolvedCount = 0;
+    let lastWordString = '';
+
+    function setScrambleFilter(val, btn) {
+      scrambleScript = val;
+      document.querySelectorAll('#scrambleScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      nextScrambleWord();
+    }
+
+    function nextScrambleWord() {
+      const filtered = wordBank.filter(w => scrambleScript === 'both' || w.type === scrambleScript);
+      let candidates = filtered.filter(w => w.word !== lastWordString);
+      if (!candidates.length) candidates = filtered;
+
+      currentScramble = candidates[Math.floor(Math.random() * candidates.length)];
+      lastWordString = currentScramble.word;
+
+      // Tambahkan 2-3 huruf pengecoh dari jenis aksara yang sama
+      const distractorPool = getKanaPool(currentScramble.type, 'base').map(i => i.kana);
+      const distractors = shuffleArray(distractorPool.filter(c => !currentScramble.chars.includes(c))).slice(0, 3);
+
+      scramblePoolItems = shuffleArray([...currentScramble.chars, ...distractors]);
+      scrambleSelectedIndices = [];
+
+      document.getElementById('scrambleMeaning').textContent = currentScramble.meaning;
+      document.getElementById('scrambleRomaji').textContent = `Petunjuk Romaji: ${currentScramble.romaji}`;
+
+      const fb = document.getElementById('scrambleFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      renderScrambleUI();
+    }
+
+    function renderScrambleUI() {
+      const slotsEl = document.getElementById('scrambleSlots');
+      const poolEl = document.getElementById('scramblePool');
+
+      slotsEl.innerHTML = '';
+      if (scrambleSelectedIndices.length === 0) {
+        slotsEl.innerHTML = '<span style="color: var(--text-muted); font-size: 0.85rem; align-self: center;">Ketuk huruf di bawah untuk menyusun kata...</span>';
+      } else {
+        scrambleSelectedIndices.forEach((poolIdx, slotPos) => {
+          const chip = document.createElement('button');
+          chip.className = 'slot-chip';
+          chip.textContent = scramblePoolItems[poolIdx];
+          chip.title = 'Ketuk untuk membatalkan huruf ini';
+          chip.onclick = () => {
+            scrambleSelectedIndices.splice(slotPos, 1);
+            renderScrambleUI();
+          };
+          slotsEl.appendChild(chip);
+        });
+      }
+
+      poolEl.innerHTML = '';
+      scramblePoolItems.forEach((char, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'pool-chip';
+        btn.textContent = char;
+        btn.disabled = scrambleSelectedIndices.includes(idx);
+        btn.onclick = () => {
+          playAudio(char);
+          scrambleSelectedIndices.push(idx);
+          renderScrambleUI();
+        };
+        poolEl.appendChild(btn);
+      });
+    }
+
+    function clearScrambleSlots() {
+      scrambleSelectedIndices = [];
+      const fb = document.getElementById('scrambleFeedback');
+      fb.className = 'feedback-banner';
+      renderScrambleUI();
+    }
+
+    function checkScrambleAnswer() {
+      if (!currentScramble) return;
+      const assembled = scrambleSelectedIndices.map(i => scramblePoolItems[i]).join('');
+      const fb = document.getElementById('scrambleFeedback');
+
+      if (!assembled) {
+        fb.className = 'feedback-banner show err';
+        fb.textContent = '⚠️ Susun hurufnya terlebih dahulu sebelum mengecek jawaban.';
+        return;
+      }
+
+      if (assembled === currentScramble.word) {
+        scrambleSolvedCount++;
+        document.getElementById('scrambleSolvedBadge').textContent = `Tersusun: ${scrambleSolvedCount}`;
+        fb.className = 'feedback-banner show ok';
+        fb.textContent = `🎉 Benar! "${currentScramble.word}" (${currentScramble.romaji}) = ${currentScramble.meaning}.`;
+        playAudio(currentScramble.word);
+        setTimeout(() => nextScrambleWord(), 1400);
+      } else {
+        fb.className = 'feedback-banner show err';
+        fb.textContent = `❌ Susunan "${assembled}" belum tepat. Coba periksa kembali urutannya!`;
+      }
+    }
+
+    function speakScrambleWord() {
+      if (currentScramble) playAudio(currentScramble.word);
+    }
+
+    // Inisialisasi awal tabel
     renderGrids();
   </script>
 
