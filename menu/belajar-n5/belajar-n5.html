@@ -2,12 +2,9 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Buku Saku Master Bunpou N5 - Bab 1 s.d. 10</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Belajar Huruf Kana - Hiragana &amp; Katakana</title>
+  
   <script>
     (function () {
       try {
@@ -20,65 +17,72 @@
   </script>
 
   <style>
-    /* ================= TEMA DARK (DEFAULT) ================= */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
       --primary: #818cf8;
-      --primary-dark: #6366f1;
-      --primary-subtle: rgba(99, 102, 241, 0.15);
-      --accent: #38bdf8;
-      --bg: #090d16;
-      --card-bg: #131b2e;
-      --card-header: #19243c;
-      --text: #f8fafc;
-      --subtext: #94a3b8;
-      --border: #23304d;
-      --success: #34d399;
-      --danger: #f87171;
-      --particle-bg: #854d0e;
-      --particle-text: #fef08a;
-      --particle-border: #eab308;
-      --formula-bg: #1e1b4b;
-      --formula-border: #6366f1;
-      --formula-text: #c7d2fe;
-      --alert-bg: #451a03;
-      --alert-border: #f59e0b;
-      --alert-text: #fde68a;
-      --alert-danger-bg: #450a0a;
-      --alert-danger-border: #ef4444;
-      --alert-danger-text: #fca5a5;
-      --footer-bg: #131b2e;
-      --footer-border: #23304d;
-      --font-jp: 'Noto Sans JP', sans-serif;
+      --primary-dark: #a5b4fc;
+      --accent-hira: #f472b6;
+      --accent-kata: #38bdf8;
+      --accent-green: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-empty: #0f172a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --border-dashed: #1e293b;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --tab-nav-bg: #1e293b;
+      --tab-btn-color: #94a3b8;
+      --rule-item-bg: #0f172a;
+      --rule-item-border: #334155;
+      --info-bar-bg: #1e293b;
+      --info-bar-border: #334155;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --hira-hover-bg: #831843;
+      --kata-hover-bg: #075985;
     }
 
-    /* ================= TEMA LIGHT ================= */
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
     html.light-theme, body.light-theme {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --primary-subtle: rgba(79, 70, 229, 0.08);
-      --accent: #0284c7;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --card-header: #f1f5f9;
-      --text: #0f172a;
-      --subtext: #64748b;
-      --border: #e2e8f0;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --particle-bg: #fef08a;
-      --particle-text: #854d0e;
-      --particle-border: #facc15;
-      --formula-bg: #eef2ff;
-      --formula-border: #818cf8;
-      --formula-text: #312e81;
-      --alert-bg: #fffbeb;
-      --alert-border: #f59e0b;
-      --alert-text: #92400e;
-      --alert-danger-bg: #fef2f2;
-      --alert-danger-border: #ef4444;
-      --alert-danger-text: #991b1b;
+      --primary: #4338ca;
+      --primary-dark: #312e81;
+      --accent-hira: #ec4899;
+      --accent-kata: #0284c7;
+      --accent-green: #059669;
+      --accent-amber: #d97706;
+      --accent-red: #dc2626;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-empty: transparent;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #cbd5e1;
+      --border-dashed: #e2e8f0;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --tab-nav-bg: #ffffff;
+      --tab-btn-color: #64748b;
+      --rule-item-bg: #f8fafc;
+      --rule-item-border: #f1f5f9;
+      --info-bar-bg: #ffffff;
+      --info-bar-border: #e2e8f0;
       --footer-bg: #ffffff;
       --footer-border: #e2e8f0;
+      --hira-hover-bg: #fdf2f8;
+      --kata-hover-bg: #f0f9ff;
     }
 
     * {
@@ -91,460 +95,938 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      padding: 12px 12px 80px;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 16px 10px 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
 
     .container {
+      max-width: 980px;
       width: 100%;
-      max-width: 1080px;
       margin: 0 auto;
+      position: relative;
     }
 
-    .jp {
-      font-family: var(--font-jp);
-    }
-
-    /* Highlight Huruf Partikel */
-    .pt {
-      display: inline-block;
-      background-color: var(--particle-bg);
-      color: var(--particle-text);
-      border: 1px solid var(--particle-border);
-      font-weight: 900;
-      padding: 1px 6px;
-      border-radius: 6px;
-      margin: 0 2px;
-      font-family: var(--font-jp);
-    }
-
-    /* Top Navigation Bar */
+    /* Top Floating Controls */
     .top-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 10px;
     }
 
     .btn-back-hub {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
       font-weight: 700;
       font-size: 0.84rem;
       padding: 8px 14px;
       border-radius: 12px;
       text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
     }
 
     .btn-back-hub:hover {
-      border-color: var(--primary);
-      color: var(--primary);
+      transform: translateX(-3px);
     }
 
     .theme-toggle-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
       width: 40px;
       height: 40px;
-      border-radius: 12px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.15rem;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
     }
 
-    /* Header Banner */
-    .portal-header {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #064e3b 100%);
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
+    .chapter-header {
+      background: linear-gradient(135deg, #312e81 0%, #db2777 100%);
       color: #ffffff;
-      border-radius: 16px;
-      padding: 22px 18px;
-      margin-bottom: 16px;
-      text-align: center;
-      box-shadow: 0 8px 18px -4px rgba(0,0,0,0.25);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .badge-top {
+    .badge-series {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #e0e7ff;
-      font-size: 0.72rem;
-      font-weight: 800;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      font-size: 0.75rem;
       padding: 3px 12px;
-      border-radius: 999px;
-      margin-bottom: 8px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .portal-header h1 {
-      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-      font-weight: 900;
-      margin-bottom: 6px;
-      line-height: 1.25;
+    .chapter-header h1 {
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #ffffff;
     }
 
-    .portal-header p {
-      color: #cbd5e1;
-      font-size: clamp(0.78rem, 2vw, 0.9rem);
-      max-width: 650px;
-      margin: 0 auto;
-      line-height: 1.5;
+    .chapter-header p {
+      color: #fce7f3;
+      font-size: 0.9rem;
     }
 
-    /* Tab Bar Navigasi Adaptif */
-    .tab-bar-container {
-      position: sticky;
-      top: 10px;
-      z-index: 99;
-      background: var(--bg);
-      padding: 4px 0 12px;
+    .page-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
     }
 
-    .tab-bar {
+    /* ================= MODE NAVIGATION BAR ================= */
+    .mode-nav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+      background: var(--tab-nav-bg);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    @media (max-width: 720px) {
+      .mode-nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .mode-nav .mode-btn:first-child {
+        grid-column: span 2;
+      }
+    }
+
+    .mode-btn {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1.5px solid transparent;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--tab-btn-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-heading);
+      background: rgba(129, 140, 248, 0.08);
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+    }
+
+    html.light-theme .mode-btn.active,
+    body.light-theme .mode-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Navigation Tabs (Hiragana / Katakana) */
+    .tab-nav {
       display: flex;
       gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      padding: 4px 2px;
-    }
-    .tab-bar::-webkit-scrollbar { display: none; }
-
-    @media (min-width: 768px) {
-      .tab-bar {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      margin-bottom: 20px;
+      background: var(--tab-nav-bg);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 2px 6px var(--shadow-color);
     }
 
     .tab-btn {
-      flex: 0 0 auto;
-      padding: 9px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--subtext);
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .tab-btn.active {
-      background: var(--primary-dark);
-      color: #ffffff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px var(--primary-subtle);
-    }
-
-    /* Chapter Content */
-    .chapter-content {
-      display: none;
-      animation: fadeIn 0.25s ease-out forwards;
-    }
-
-    .chapter-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive Grid Layout */
-    .grammar-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    @media (min-width: 768px) {
-      .grammar-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Card Scaffolding */
-    .full-card, .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 16px;
-      overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-    }
-
-    .full-card {
-      padding: 18px 16px;
-    }
-
-    .full-card h3 {
-      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 14px;
+      background: transparent;
+      color: var(--tab-btn-color);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      border-bottom: 1px dashed var(--border);
-      padding-bottom: 8px;
     }
 
-    .card-header {
-      background: var(--card-header);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+    .tab-btn.active.hira-tab {
+      background: #831843;
+      color: #fbcfe8;
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.25);
+    }
+    html.light-theme .tab-btn.active.hira-tab,
+    body.light-theme .tab-btn.active.hira-tab {
+      background: #fdf2f8;
+      color: var(--accent-hira);
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.15);
+    }
+
+    .tab-btn.active.kata-tab {
+      background: #075985;
+      color: #bae6fd;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+    html.light-theme .tab-btn.active.kata-tab,
+    body.light-theme .tab-btn.active.kata-tab {
+      background: #f0f9ff;
+      color: var(--accent-kata);
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Info Bar */
+    .info-bar {
+      background: var(--info-bar-bg);
+      border: 1.5px solid var(--info-bar-border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    /* Section Subtitle */
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin: 24px 0 10px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       gap: 8px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
     }
 
-    .card-title {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--primary);
+    /* Kana Grids */
+    .kana-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
-    .card-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
+    .yoon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
-    .badge-positive { background: rgba(52, 211, 153, 0.15); color: var(--success); }
-    .badge-negative { background: rgba(248, 113, 113, 0.15); color: var(--danger); }
-    .badge-question { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
-    .badge-special { background: var(--primary-subtle); color: var(--primary); }
-
-    .card-body {
-      padding: 16px;
+    .tokushu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
-    .formula-box {
-      background: var(--formula-bg);
-      border: 1px dashed var(--formula-border);
+    .sokuon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .kana-grid { gap: 5px; }
+      .yoon-grid { gap: 5px; }
+      .tokushu-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+      .sokuon-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    }
+
+    /* Card Item (Kana) */
+    .kana-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
       border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--formula-text);
-      margin-bottom: 10px;
-      line-height: 1.45;
-    }
-
-    .function-desc {
-      font-size: 0.84rem;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-
-    .alert-box {
-      background: var(--alert-bg);
-      border-left: 4px solid var(--alert-border);
-      padding: 9px 12px;
-      border-radius: 0 8px 8px 0;
-      font-size: 0.8rem;
-      color: var(--alert-text);
-      margin-bottom: 12px;
-      line-height: 1.45;
-    }
-
-    .alert-danger {
-      background: var(--alert-danger-bg);
-      border-left-color: var(--alert-danger-border);
-      color: var(--alert-danger-text);
-    }
-
-    /* List Contoh Kalimat */
-    .examples-list {
-      list-style: none;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      min-height: 96px;
+      user-select: none;
+      box-shadow: 0 2px 4px var(--shadow-color);
+      position: relative;
     }
 
-    .example-item {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
+    .kana-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 14px var(--shadow-color);
     }
 
-    .jp-text {
-      font-family: var(--font-jp);
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.4;
-      margin-bottom: 3px;
+    .kana-card:active, .kana-card.playing {
+      transform: scale(0.92);
     }
 
-    .romaji {
-      font-size: 0.78rem;
-      color: var(--subtext);
-      font-style: italic;
+    .hira-theme .kana-card:hover, .hira-theme .kana-card.playing {
+      border-color: var(--accent-hira);
+      background: var(--hira-hover-bg);
+    }
+
+    .kata-theme .kana-card:hover, .kata-theme .kana-card.playing {
+      border-color: var(--accent-kata);
+      background: var(--kata-hover-bg);
+    }
+
+    .kana-card.highlight-sokuon {
+      border-color: var(--accent-amber);
+      background: rgba(251, 191, 36, 0.08);
+    }
+
+    .sokuon-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--accent-amber);
+      margin-bottom: 4px;
+    }
+
+    .tier-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.15rem, 3.2vw, 1.5rem);
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.2;
       margin-bottom: 2px;
     }
 
-    .id-text {
+    .tier-reading {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .tier-meaning {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .kana-card.empty {
+      background: var(--bg-card-empty);
+      border: 1.5px dashed var(--border-dashed);
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    /* ================= SHARED GAME / PRACTICE STYLES ================= */
+    .practice-panel {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 14px var(--shadow-color);
+      margin-bottom: 20px;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .pill-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .action-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .stat-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      background: var(--rule-item-bg);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 8px;
       font-size: 0.82rem;
-      color: var(--text);
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    /* ================= 1. FLASHCARD STYLES ================= */
+    .flashcard-wrapper {
+      perspective: 1000px;
+      max-width: 360px;
+      height: 270px;
+      margin: 10px auto 24px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-wrapper.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      border: 2px solid var(--border-color);
+      background: var(--rule-item-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      border-color: var(--primary);
+    }
+
+    .fc-type-tag {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(129, 140, 248, 0.15);
+      color: var(--primary);
+    }
+
+    .fc-audio-btn {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-heading);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 2;
+    }
+
+    .fc-kana {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.1;
+    }
+
+    .fc-romaji {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .fc-meaning {
+      font-size: 0.92rem;
+      color: var(--text-muted);
       font-weight: 600;
     }
 
-    /* Tabel Responsif */
-    .table-wrapper {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
-      overflow-x: auto;
+    .fc-hint {
+      position: absolute;
+      bottom: 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
-    .styled-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-      text-align: left;
+    .fc-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .styled-table th, .styled-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border);
+    /* ================= 2. COCOKAN HURUF (MATCHING) ================= */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0;
     }
 
-    .styled-table th {
-      background-color: var(--card-header);
-      color: var(--text);
-      font-weight: 800;
+    @media (max-width: 540px) {
+      .match-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
-    /* Kaiwa Dialog */
-    .kaiwa-dialog {
-      background: var(--bg);
-      border: 1px solid var(--border);
+    .match-tile {
+      background: var(--rule-item-bg);
+      border: 2px solid var(--border-color);
       border-radius: 12px;
-      padding: 14px;
+      min-height: 76px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .kaiwa-line {
-      display: flex;
-      gap: 10px;
-      font-size: 0.85rem;
-    }
-
-    .speaker {
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
       font-weight: 800;
-      color: var(--primary);
-      min-width: 60px;
-    }
-
-    .speech-content .jp {
-      font-family: var(--font-jp);
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .speech-content .id {
-      font-size: 0.78rem;
-      color: var(--subtext);
-    }
-
-    /* Bottom Nav Buttons */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      gap: 10px;
-    }
-
-    .nav-link-btn {
-      flex: 1;
-      max-width: 240px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.82rem;
+      color: var(--text-heading);
       cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+      user-select: none;
+      transition: all 0.18s ease;
     }
 
-    .nav-link-btn:hover:not(:disabled) {
+    .match-tile.jp-tile {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.85rem;
+    }
+
+    .match-tile:hover:not(.matched) {
       border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .match-tile.selected {
+      border-color: var(--primary);
+      background: rgba(129, 140, 248, 0.2);
+      transform: scale(1.03);
+    }
+
+    .match-tile.matched {
+      border-color: var(--accent-green);
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--accent-green);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .match-tile.wrong {
+      border-color: var(--accent-red);
+      background: rgba(248, 113, 113, 0.2);
+      animation: shake 0.3s ease;
+    }
+
+    /* ================= 3. MINI KUIS STYLES ================= */
+    .quiz-box {
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quiz-prompt-card {
+      background: var(--rule-item-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 18px;
+      padding: 26px 20px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .quiz-question-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .quiz-target {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.15;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-opt-btn {
+      padding: 15px 12px;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      background: var(--rule-item-bg);
+      color: var(--text-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .quiz-opt-btn.correct {
+      border-color: var(--accent-green);
+      background: rgba(52, 211, 153, 0.2);
+      color: var(--accent-green);
+    }
+
+    .quiz-opt-btn.wrong {
+      border-color: var(--accent-red);
+      background: rgba(248, 113, 113, 0.2);
+      color: var(--accent-red);
+    }
+
+    /* ================= 4. MENYUSUN HURUF (WORD BUILDER) ================= */
+    .scramble-box {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .scramble-subfilters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .word-clue-card {
+      background: var(--rule-item-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .category-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(129, 140, 248, 0.16);
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .word-meaning {
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+    }
+
+    .word-romaji-hint {
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--primary);
     }
 
-    .nav-link-btn:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
+    .word-note-hint {
+      font-size: 0.78rem;
+      color: var(--accent-amber);
+      font-weight: 700;
+      margin-top: 4px;
     }
 
-    /* Footer & Kontak */
+    .answer-slots {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 64px;
+      padding: 12px;
+      background: var(--rule-item-bg);
+      border: 2px dashed var(--border-color);
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .slot-chip, .pool-chip {
+      font-family: 'Noto Sans JP', sans-serif;
+      min-width: 52px;
+      height: 52px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .slot-chip {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 3px 8px rgba(99, 102, 241, 0.3);
+    }
+
+    .pool-letters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pool-chip {
+      background: var(--bg-card);
+      color: var(--text-heading);
+      border: 2px solid var(--border-color);
+    }
+
+    .pool-chip:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .pool-chip:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .feedback-banner {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .feedback-banner.show {
+      display: block;
+    }
+
+    .feedback-banner.ok {
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green);
+    }
+
+    .feedback-banner.err {
+      background: rgba(248, 113, 113, 0.16);
+      color: var(--accent-red);
+      border: 1px solid var(--accent-red);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Rule Box */
+    .rule-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      padding: 20px;
+      margin-top: 24px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .rule-card h3 {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      font-size: 0.86rem;
+    }
+
+    .rule-item {
+      background: var(--rule-item-bg);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--rule-item-border);
+      color: var(--text-main);
+    }
+
+    .rule-item strong {
+      color: var(--primary);
+    }
+
+    /* Footer & Social Section */
     .footer-section {
       width: 100%;
+      max-width: 980px;
+      margin-top: 36px;
       background: var(--footer-bg);
-      border: 1px solid var(--footer-border);
-      border-radius: 16px;
-      padding: 22px 16px;
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
       text-align: center;
-      margin-top: 30px;
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .footer-title {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 800;
-      color: var(--text);
+      color: var(--text-heading);
       margin-bottom: 6px;
     }
 
     .footer-desc {
-      font-size: 0.8rem;
-      color: var(--subtext);
-      margin-bottom: 14px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
     }
 
     .social-group {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
     .social-btn {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 0.8rem;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
       font-weight: 700;
       text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
@@ -564,9 +1046,9 @@
     html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
 
     .copyright {
-      font-size: 0.74rem;
-      color: var(--subtext);
-      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
       padding-top: 12px;
     }
   </style>
@@ -574,9 +1056,8 @@
 <body>
 
   <div class="container">
-    <!-- Top Navigation Controls -->
     <div class="top-controls">
-      <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
+      <a href="../index.html" class="btn-back-hub">
         <span>←</span> Beranda Hub
       </a>
       <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
@@ -584,1120 +1065,266 @@
       </button>
     </div>
 
-    <!-- Header Portal -->
-    <header class="portal-header">
-      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
-      <h1>📖 Modul Tata Bahasa &amp; Partikel N5</h1>
-      <p>Buku saku ringkasan pola tata bahasa, huruf partikel, dan percakapan Minna no Nihongo (Bab 1 s.d. 10).</p>
+    <header class="chapter-header">
+      <div>
+        <span class="badge-series">Pondasi Huruf Dasar Jepang</span>
+        <h1>Belajar Huruf Hiragana &amp; Katakana</h1>
+        <p>Pelajari tabel lengkap (termasuk Sokuon っ/ッ) lalu latih hafalanmu lewat Flashcard, Cocokkan Huruf, Mini Kuis, &amp; Menyusun Kata.</p>
+      </div>
+      <div class="page-badge">Made by Vorst Cavry</div>
     </header>
 
-    <!-- Tab Bar Navigasi Adaptif (Bab 1 s.d. Bab 10) -->
-    <div class="tab-bar-container">
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchChapterTab('chapter1Tab', this)">Bab 1</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter2Tab', this)">Bab 2</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter3Tab', this)">Bab 3</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter4Tab', this)">Bab 4</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter5Tab', this)">Bab 5</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter6Tab', this)">Bab 6</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter7Tab', this)">Bab 7</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter8Tab', this)">Bab 8</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter9Tab', this)">Bab 9</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapter10Tab', this)">Bab 10</button>
-        <button class="tab-btn" onclick="switchChapterTab('chapterNextTab', this)">Bab 11~50 🔒</button>
-      </div>
-    </div>
+    <!-- NAVIGASI MODE UTAMA -->
+    <nav class="mode-nav" aria-label="Mode Pembelajaran">
+      <button class="mode-btn active" data-mode="table" onclick="switchMode('table')">📖 Tabel Huruf</button>
+      <button class="mode-btn" data-mode="flashcard" onclick="switchMode('flashcard')">🃏 Flashcard</button>
+      <button class="mode-btn" data-mode="match" onclick="switchMode('match')">🧩 Cocokkan Huruf</button>
+      <button class="mode-btn" data-mode="quiz" onclick="switchMode('quiz')">🎯 Mini Kuis</button>
+      <button class="mode-btn" data-mode="scramble" onclick="switchMode('scramble')">🔤 Menyusun Huruf</button>
+    </nav>
 
-    <!-- ==================== BAB 1 ==================== -->
-    <section id="chapter1Tab" class="chapter-content active">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Partikel Bab 1: は, も, の, か</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Partikel</th>
-                <th>Cara Baca</th>
-                <th>Fungsi Utama</th>
-                <th>Pola Kalimat</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="pt">は</span></td>
-                <td><strong>wa</strong></td>
-                <td>Penanda topik utama / subjek pembicaraan</td>
-                <td><code>[Topik] + は + [Predikat] + です</code></td>
-              </tr>
-              <tr>
-                <td><span class="pt">も</span></td>
-                <td><strong>mo</strong></td>
-                <td>Penyetara status ("juga / pun")</td>
-                <td><code>[Subjek Baru] + も + [Predikat]</code></td>
-              </tr>
-              <tr>
-                <td><span class="pt">の</span></td>
-                <td><strong>no</strong></td>
-                <td>Hubungan kepemilikan atau lembaga</td>
-                <td><code>[Pemilik] + の + [Benda]</code></td>
-              </tr>
-              <tr>
-                <td><span class="pt">か</span></td>
-                <td><strong>ka</strong></td>
-                <td>Partikel penanya akhir kalimat (?)</td>
-                <td><code>[Kalimat] + ですか</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- ================= MODE 0: TABEL HURUF ================= -->
+    <section id="mode-table">
+      <div class="tab-nav">
+        <button class="tab-btn active hira-tab" onclick="switchKana('hiragana')">
+          <span>🌸</span> Hiragana Lengkap
+        </button>
+        <button class="tab-btn kata-tab" onclick="switchKana('katakana')">
+          <span>⚡</span> Katakana + Modern
+        </button>
       </div>
 
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. [KB1] は [KB2] です</div>
-            <span class="card-badge badge-positive">Positif</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Topik] + <span class="pt">は</span> (wa) + [Status] + です (desu)</div>
-            <p class="function-desc">Menyatakan identitas diri, profesi, atau kewarganegaraan secara sopan.</p>
-            <div class="alert-box">⚠️ Huruf <span class="pt">は</span> sebagai penanda topik wajib dilafalkan <em>'wa'</em>.</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> マイク・ミラー です。</div>
-                <div class="romaji">Watashi wa Maiku Miraa desu.</div>
-                <div class="id-text">Saya adalah Mike Miller.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">サントスさん <span class="pt">は</span> ブラジルじん です。</div>
-                <div class="romaji">Santosu-san wa Burajiru-jin desu.</div>
-                <div class="id-text">Tuan Santos adalah orang Brazil.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. [KB1] は [KB2] じゃありません</div>
-            <span class="card-badge badge-negative">Negatif</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Predikat] + じゃありません</div>
-            <p class="function-desc">Penyangkalan sopan masa kini. Ragam resmi/tertulis memakai <em>ではありません</em>.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">サントスさん <span class="pt">は</span> がくせい じゃありません。</div>
-                <div class="romaji">Santosu-san wa gakusei ja arimasen.</div>
-                <div class="id-text">Tuan Santos bukan seorang mahasiswa.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> せんせい では ありません。</div>
-                <div class="romaji">Watashi wa sensei dewa arimasen.</div>
-                <div class="id-text">Saya bukan seorang guru.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="info-bar" id="kanaInfoText">
+        🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), Yoon (ゃ, ゅ, ょ), dan Sokuon / Tsu Kecil (っ).
       </div>
 
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 1</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">はじめまして。マイク・ミラーです。どうぞよろしく。</div>
-              <div class="id">Salam kenal. Saya Mike Miller. Mohon bimbingannya.</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">さとうです。ミラーさん <span class="pt">は</span> がくせい です <span class="pt">か</span>。</div>
-              <div class="id">Saya Sato. Apakah Tuan Miller seorang mahasiswa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">いいえ、IMC <span class="pt">の</span> しゃいんです。</div>
-              <div class="id">Bukan, saya karyawan perusahaan IMC.</div>
-            </div>
-          </div>
-        </div>
+      <!-- HIRAGANA -->
+      <div id="hiraganaContainer" class="hira-theme">
+        <div class="section-title">1. Huruf Dasar (Gojuon - 46 Huruf)</div>
+        <div class="kana-grid" id="hiraBaseGrid"></div>
+
+        <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+        <div class="kana-grid" id="hiraDakuGrid"></div>
+
+        <div class="section-title">3. Yoon (Gabungan Huruf Kecil ゃ, ゅ, ょ)</div>
+        <div class="yoon-grid" id="hiraYoonGrid"></div>
+
+        <div class="section-title">4. Sokuon / Tsu Kecil (っ) — Konsonan Rangkap &amp; Contoh</div>
+        <div class="sokuon-grid" id="hiraSokuonGrid"></div>
       </div>
 
-      <div class="bottom-nav">
-        <button class="nav-link-btn" disabled>← Awal</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter2Tab', document.querySelectorAll('.tab-bar .tab-btn')[1])">Bab 2 →</button>
+      <!-- KATAKANA -->
+      <div id="katakanaContainer" class="kata-theme" style="display: none;">
+        <div class="section-title">1. Huruf Dasar Katakana (46 Huruf)</div>
+        <div class="kana-grid" id="kataBaseGrid"></div>
+
+        <div class="section-title">2. Dakuon &amp; Handakuon (Tenten ゛ &amp; Maru ゜)</div>
+        <div class="kana-grid" id="kataDakuGrid"></div>
+
+        <div class="section-title">3. Yoon (Gabungan Huruf Kecil ャ, ュ, ョ)</div>
+        <div class="yoon-grid" id="kataYoonGrid"></div>
+
+        <div class="section-title">4. Sokuon / Tsu Kecil (ッ) &amp; Tanda Panjang (ー)</div>
+        <div class="sokuon-grid" id="kataSokuonGrid"></div>
+
+        <div class="section-title">5. Katakana Khusus / Modern (Kata Serapan Asing)</div>
+        <div class="tokushu-grid" id="kataSpecialGrid"></div>
+      </div>
+
+      <div class="rule-card">
+        <h3>📖 Aturan Turunan Huruf Kana (Wajib Dipahami)</h3>
+        <div class="rule-grid">
+          <div class="rule-item">
+            <strong>1. Dakuon (Tanda Kutip ゛):</strong> Mengubah konsonan tak bersuara menjadi bersuara (K &rarr; G, S &rarr; Z, T &rarr; D, H &rarr; B). Contoh: か (ka) &rarr; が (ga).
+          </div>
+          <div class="rule-item">
+            <strong>2. Handakuon (Tanda Bulat ゜):</strong> Khusus deret H berubah menjadi letupan P. Contoh: は (ha) &rarr; ぱ (pa).
+          </div>
+          <div class="rule-item">
+            <strong>3. Yoon (Gabungan Kecil ゃ, ゅ, ょ):</strong> Menggabungkan deret vokal 'i' dengan ya/yu/yo kecil. Contoh: き (ki) + ゃ (ya) = きゃ (kya).
+          </div>
+          <div class="rule-item">
+            <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Menggandakan konsonan huruf setelahnya (k, s, t, p) sehingga terdengar ada jeda hentakan 1 ketukan. Contoh: きって (ki-t-te = perangko), カップ (ka-p-pu = cangkir).
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ==================== BAB 2 ==================== -->
-    <section id="chapter2Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Kata Tunjuk Benda (Ko-So-A-Do)</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Mandiri (+ <span class="pt">は</span>)</th>
-                <th>Melekat (+ [KB])</th>
-                <th>Posisi Objek</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>これ</strong> (Kore)</td>
-                <td><strong>この</strong> (Kono)</td>
-                <td>Dekat pembicara (Ini)</td>
-              </tr>
-              <tr>
-                <td><strong>それ</strong> (Sore)</td>
-                <td><strong>その</strong> (Sono)</td>
-                <td>Dekat lawan bicara (Itu)</td>
-              </tr>
-              <tr>
-                <td><strong>あれ</strong> (Are)</td>
-                <td><strong>あの</strong> (Ano)</td>
-                <td>Jauh dari keduanya (Itu di sana)</td>
-              </tr>
-              <tr>
-                <td><strong>どれ</strong> (Dore)</td>
-                <td><strong>どの</strong> (Dono)</td>
-                <td>Tanya pilihan (Yang mana)</td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- ================= MODE 1: FLASHCARD ================= -->
+    <section id="mode-flashcard" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="fcScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" data-val="hiragana" onclick="setFcFilter('script', 'hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" data-val="katakana" onclick="setFcFilter('script', 'katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" data-val="both" onclick="setFcFilter('script', 'both', this)">🔀 Campur</button>
+        </div>
+        <div class="filter-group" id="fcGroupFilter">
+          <span class="filter-label">Cakupan:</span>
+          <button class="pill-btn active" data-val="base" onclick="setFcFilter('group', 'base', this)">Dasar (46)</button>
+          <button class="pill-btn" data-val="daku" onclick="setFcFilter('group', 'daku', this)">Dakuon</button>
+          <button class="pill-btn" data-val="yoon" onclick="setFcFilter('group', 'yoon', this)">Yoon</button>
+          <button class="pill-btn" data-val="sokuon" onclick="setFcFilter('group', 'sokuon', this)">Tsu Kecil (っ/ッ)</button>
+          <button class="pill-btn" data-val="all" onclick="setFcFilter('group', 'all', this)">Semua</button>
         </div>
       </div>
 
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. これ / それ / あれ は [KB] です</div>
-            <span class="card-badge badge-positive">Benda Mandiri</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Tunjuk Mandiri] + <span class="pt">は</span> + [Kata Benda] + です</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">これ <span class="pt">は</span> ほんです。</div>
-                <div class="romaji">Kore wa hon desu.</div>
-                <div class="id-text">Ini adalah buku.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">この ほん <span class="pt">は</span> わたし <span class="pt">の</span> です。</div>
-                <div class="romaji">Kono hon wa watashi no desu.</div>
-                <div class="id-text">Buku ini adalah milik saya.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+        <span class="stat-badge" id="fcCounter">Kartu 1 / 46</span>
+        <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 6px;">
+          <input type="checkbox" id="fcAutoAudio" checked> 🔊 Auto-suara saat ganti kartu
+        </label>
+      </div>
 
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. だれの [KB] ですか</div>
-            <span class="card-badge badge-question">Tanya Pemilik</span>
+      <div class="flashcard-wrapper" id="flashcardBox" onclick="flipFlashcard()">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <span class="fc-type-tag" id="fcTagFront">Hiragana</span>
+            <button class="fc-audio-btn" type="button" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Putar Suara">🔊</button>
+            <div class="fc-kana" id="fcFrontText">あ</div>
+            <div class="fc-hint">Ketuk kartu untuk melihat cara baca</div>
           </div>
-          <div class="card-body">
-            <div class="formula-box">[Tunjuk] + <span class="pt">は</span> + だれ <span class="pt">の</span> + [KB] + ですか</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">それ <span class="pt">は</span> だれ <span class="pt">の</span> かぎ です <span class="pt">か</span>。</div>
-                <div class="romaji">Sore wa dare no kagi desu ka.</div>
-                <div class="id-text">Itu kunci milik siapa? (サントスさんのです).</div>
-              </li>
-            </ul>
+          <div class="flashcard-face flashcard-back">
+            <span class="fc-type-tag" id="fcTagBack">Cara Baca</span>
+            <button class="fc-audio-btn" type="button" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Putar Suara">🔊</button>
+            <div class="fc-romaji" id="fcBackRomaji">a</div>
+            <div class="fc-meaning" id="fcBackMeaning">Huruf A (あ)</div>
+            <div class="fc-hint">Ketuk lagi untuk membalik</div>
           </div>
         </div>
       </div>
 
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter1Tab', document.querySelectorAll('.tab-bar .tab-btn')[0])">← Bab 1</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter3Tab', document.querySelectorAll('.tab-bar .tab-btn')[2])">Bab 3 →</button>
+      <div class="fc-controls">
+        <button class="action-btn" onclick="prevFlashcard()">← Sebelumnya</button>
+        <button class="action-btn" onclick="shuffleFlashcards()">🔀 Acak Urutan</button>
+        <button class="action-btn primary" onclick="nextFlashcard()">Selanjutnya →</button>
       </div>
     </section>
 
-    <!-- ==================== BAB 3 ==================== -->
-    <section id="chapter3Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Tempat, Fasilitas &amp; Arah Sopan</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Tempat Biasa</th>
-                <th>Arah / Sopan</th>
-                <th>Letak Posisi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>ここ</strong> (Koko)</td>
-                <td><strong>こちら</strong> (Kochira)</td>
-                <td>Di sini (Dekat penutur)</td>
-              </tr>
-              <tr>
-                <td><strong>そこ</strong> (Soko)</td>
-                <td><strong>そちら</strong> (Sochira)</td>
-                <td>Di situ (Dekat lawan bicara)</td>
-              </tr>
-              <tr>
-                <td><strong>あそこ</strong> (Asoko)</td>
-                <td><strong>あちら</strong> (Achira)</td>
-                <td>Di sana (Jauh dari keduanya)</td>
-              </tr>
-              <tr>
-                <td><strong>どこ</strong> (Doko)</td>
-                <td><strong>どちら</strong> (Dochira)</td>
-                <td>Tanya tempat / Asal instansi</td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- ================= MODE 2: COCOKAN HURUF ================= -->
+    <section id="mode-match" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="matchScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setMatchFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setMatchFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setMatchFilter('both', this)">🔀 Campur</button>
+        </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="matchProgress">Cocok: 0 / 6</span>
+          <span class="stat-badge" id="matchMoves">Langkah: 0</span>
         </div>
       </div>
 
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Harga &amp; Belanja ([KB] は いくらですか)</div>
-            <span class="card-badge badge-special">Harga</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Barang] + <span class="pt">は</span> + いくら (ikura) + ですか</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">この ワイン <span class="pt">は</span> いくら です <span class="pt">か</span>。</div>
-                <div class="romaji">Kono wain wa ikura desu ka.</div>
-                <div class="id-text">Anggur ini harganya berapa? (2,500えんです).</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">じゃ、この とけい <span class="pt">を</span> ください。</div>
-                <div class="romaji">Ja, kono tokei o kudasai.</div>
-                <div class="id-text">Kalau begitu tolong berikan jam tangan yang ini.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+        Pilih satu kartu huruf <strong>Kana</strong> dan pasangkan dengan kartu <strong>Romaji</strong> yang sesuai!
+      </p>
 
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter2Tab', document.querySelectorAll('.tab-bar .tab-btn')[1])">← Bab 2</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter4Tab', document.querySelectorAll('.tab-bar .tab-btn')[3])">Bab 4 →</button>
+      <div id="matchFeedback" class="feedback-banner"></div>
+      <div class="match-grid" id="matchGrid"></div>
+
+      <div style="text-align: center; margin-top: 16px;">
+        <button class="action-btn primary" onclick="initMatchGame()">🔄 Ronde Baru</button>
       </div>
     </section>
 
-    <!-- ==================== BAB 4 ==================== -->
-    <section id="chapter4Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 4: Waktu, Jam &amp; Perubahan Kata Kerja</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Waktu &amp; Partikel</th>
-                <th>Fungsi / Penggunaan</th>
-                <th>Bentuk Kata Kerja (ます)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>〜じ / 〜ふん</code></td>
-                <td>Menyatakan Jam dan Menit</td>
-                <td><strong>〜ます</strong> (Positif Masa Depan/Rutin)</td>
-              </tr>
-              <tr>
-                <td><span class="pt">に</span></td>
-                <td>Penanda waktu spesifik (titik waktu angka)</td>
-                <td><strong>〜ません</strong> (Negatif Masa Depan/Rutin)</td>
-              </tr>
-              <tr>
-                <td><span class="pt">から</span> 〜 <span class="pt">まで</span></td>
-                <td>Dari (titik awal) ~ Sampai (titik akhir)</td>
-                <td><strong>〜ました</strong> (Positif Lampau)</td>
-              </tr>
-              <tr>
-                <td><span class="pt">と</span></td>
-                <td>Penghubung kata benda ("dan")</td>
-                <td><strong>〜ませんでした</strong> (Negatif Lampau)</td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- ================= MODE 3: MINI KUIS ================= -->
+    <section id="mode-quiz" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="quizScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setQuizFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setQuizFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setQuizFilter('both', this)">🔀 Campur</button>
         </div>
-        <div class="alert-danger alert-box">🚫 Waktu relatif (きょう, あした, まいにち) DILARANG memakai partikel <span class="pt">に</span>.</div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Waktu Spesifik (に) &amp; Rentang (から・まで)</div>
-            <span class="card-badge badge-positive">Penanda Waktu</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Waktu Angka] + <span class="pt">に</span> + [KK] | [Awal] + <span class="pt">から</span> + [Akhir] + <span class="pt">まで</span></div>
-            <p class="function-desc">Menyatakan waktu terjadinya kegiatan atau rentang jam kerja/operasional.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">まいあさ 6じ <span class="pt">に</span> おきます。</div>
-                <div class="romaji">Maiasa roku-ji ni okimasu.</div>
-                <div class="id-text">Saya bangun pada pukul 6 setiap pagi.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ぎんこう <span class="pt">は</span> 9じ <span class="pt">から</span> 3じ <span class="pt">まで</span> です。</div>
-                <div class="romaji">Ginkou wa ku-ji kara san-ji made desu.</div>
-                <div class="id-text">Bank buka dari jam 9 sampai jam 3.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Konjugasi Dasar Kata Kerja</div>
-            <span class="card-badge badge-special">Perubahan Bentuk</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">〜ます | 〜ません | 〜ました | 〜ませんでした</div>
-            <p class="function-desc">Mengubah kata kerja sesuai waktu (lampau/non-lampau) dan bentuk (positif/negatif).</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">きのう べんきょうしました。</div>
-                <div class="romaji">Kinou benkyou shimashita.</div>
-                <div class="id-text">Kemarin saya telah belajar.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">あした はたらきません。</div>
-                <div class="romaji">Ashita hatarakimasen.</div>
-                <div class="id-text">Besok saya tidak bekerja.</div>
-              </li>
-            </ul>
-          </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="quizStepBadge">Soal: 1 / 10</span>
+          <span class="stat-badge" id="quizScoreBadge">Skor: 0</span>
+          <span class="stat-badge" id="quizStreakBadge">🔥 0</span>
         </div>
       </div>
 
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 4</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">いま なんじ ですか。</div>
-              <div class="id">Sekarang jam berapa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">4じ はん です。</div>
-              <div class="id">Jam 4 lewat 30 menit (setengah 5).</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">かいしゃ <span class="pt">は</span> なんじ <span class="pt">まで</span> ですか。</div>
-              <div class="id">Perusahaan buka sampai jam berapa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">5じ <span class="pt">まで</span> です。</div>
-              <div class="id">Sampai jam 5.</div>
-            </div>
-          </div>
+      <div class="quiz-box" id="quizActiveArea">
+        <div class="quiz-prompt-card">
+          <button class="fc-audio-btn" type="button" onclick="speakQuizTarget()" title="Dengar Suara">🔊</button>
+          <div class="quiz-question-label" id="quizPromptLabel">Apa bacaan huruf Hiragana ini?</div>
+          <div class="quiz-target" id="quizTargetText">あ</div>
         </div>
+
+        <div id="quizFeedback" class="feedback-banner"></div>
+        <div class="quiz-options" id="quizOptions"></div>
       </div>
 
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter3Tab', document.querySelectorAll('.tab-bar .tab-btn')[2])">← Bab 3</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter5Tab', document.querySelectorAll('.tab-bar .tab-btn')[4])">Bab 5 →</button>
+      <div class="quiz-box" id="quizResultArea" style="display: none; padding: 20px 0;">
+        <div style="font-size: 3rem; margin-bottom: 8px;">🏆</div>
+        <h3 style="font-size: 1.4rem; color: var(--text-heading); margin-bottom: 6px;">Mini Kuis Selesai!</h3>
+        <p id="quizFinalSummary" style="color: var(--text-muted); margin-bottom: 20px; font-weight: 600;"></p>
+        <button class="action-btn primary" onclick="startQuiz()">🔄 Main Lagi</button>
       </div>
     </section>
 
-    <!-- ==================== BAB 5 ==================== -->
-    <section id="chapter5Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 5: Perpindahan Gerak (へ, で, と)</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Partikel</th>
-                <th>Pelafalan</th>
-                <th>Fungsi Utama</th>
-                <th>Pola Kalimat</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="pt">へ</span></td>
-                <td><strong>e</strong></td>
-                <td>Arah tujuan perpindahan tempat</td>
-                <td><code>[Tujuan] + へ + いきます/きます/かえります</code></td>
-              </tr>
-              <tr>
-                <td><span class="pt">で</span></td>
-                <td><strong>de</strong></td>
-                <td>Sarana / alat transportasi yang digunakan</td>
-                <td><code>[Kendaraan] + で + [KK Gerak]</code></td>
-              </tr>
-              <tr>
-                <td><span class="pt">と</span></td>
-                <td><strong>to</strong></td>
-                <td>Teman/rekan beraktivitas ("bersama")</td>
-                <td><code>[Orang] + と + [KK Gerak]</code></td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- ================= MODE 4: MENYUSUN HURUF ================= -->
+    <section id="mode-scramble" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="scrambleScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setScrambleFilter('hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setScrambleFilter('katakana', this)">⚡ Katakana</button>
+          <button class="pill-btn" onclick="setScrambleFilter('both', this)">🔀 Campur</button>
         </div>
-        <div class="alert-box">💡 Pengecualian Transportasi: Jalan kaki menggunakan <strong>あるいて</strong> (tanpa partikel で). Sendirian = <strong>ひとり で</strong>.</div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Arah Tujuan (へ) &amp; Alat Transportasi (で)</div>
-            <span class="card-badge badge-positive">Arah &amp; Alat</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Tempat] + <span class="pt">へ</span> + [Kendaraan] + <span class="pt">で</span> + いきます</div>
-            <p class="function-desc">Menjelaskan pergi/datang/pulang ke suatu lokasi menggunakan sarana transportasi.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">きょうと <span class="pt">へ</span> いきます。</div>
-                <div class="romaji">Kyouto e ikimasu.</div>
-                <div class="id-text">Saya akan pergi ke Kyoto.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">でんしゃ <span class="pt">で</span> いきます。</div>
-                <div class="romaji">Densha de ikimasu.</div>
-                <div class="id-text">Pergi menggunakan kereta.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Rekan Beraktivitas (と) &amp; Kapan (いつ)</div>
-            <span class="card-badge badge-question">Teman &amp; Waktu</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Orang] + <span class="pt">と</span> + [KK Gerak] | いつ + [KK Gerak] + か</div>
-            <p class="function-desc">Menyatakan teman perjalanan atau menanyakan kapan aktivitas perpindahan dilakukan.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">かぞく <span class="pt">と</span> にほん <span class="pt">へ</span> きました。</div>
-                <div class="romaji">Kazoku to Nihon e kimashita.</div>
-                <div class="id-text">Saya datang ke Jepang bersama keluarga.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">いつ くに <span class="pt">へ</span> かえりますか。</div>
-                <div class="romaji">Itsu kuni e kaerimasu ka.</div>
-                <div class="id-text">Kapan Anda akan pulang ke negara asal?</div>
-              </li>
-            </ul>
-          </div>
+        <div class="stat-badges">
+          <span class="stat-badge" id="scrambleSolvedBadge">Tersusun: 0</span>
+          <span class="stat-badge" id="scramblePoolCount">Bank Kata: 0</span>
         </div>
       </div>
 
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 5</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">日曜日 (にちようび) どこ <span class="pt">へ</span> いきましたか。</div>
-              <div class="id">Hari Minggu pergi ke mana?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">どこ <span class="pt">へ</span> も いเส้นでした。</div>
-              <div class="id">Tidak pergi ke mana-mana.</div>
-            </div>
-          </div>
-        </div>
+      <!-- Filter Variasi Tema & Level -->
+      <div class="scramble-subfilters" id="scrambleCategoryFilter">
+        <button class="pill-btn active" onclick="setScrambleCat('all', this)">🌟 Semua Tema</button>
+        <button class="pill-btn" onclick="setScrambleCat('basic', this)">🌱 Kata Dasar (2-3 Huruf)</button>
+        <button class="pill-btn" onclick="setScrambleCat('dakuon', this)">゛ Dakuon / Handakuon</button>
+        <button class="pill-btn" onclick="setScrambleCat('yoon', this)">ゃ Yoon (Gabungan)</button>
+        <button class="pill-btn" onclick="setScrambleCat('sokuon', this)">っ/ッ Tsu Kecil (Dobel)</button>
+        <button class="pill-btn" onclick="setScrambleCat('daily', this)">🗣️ Salam &amp; Sehari-hari</button>
+        <button class="pill-btn" onclick="setScrambleCat('food_animal', this)">🍣 Hewan &amp; Makanan</button>
       </div>
 
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter4Tab', document.querySelectorAll('.tab-bar .tab-btn')[3])">← Bab 4</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter6Tab', document.querySelectorAll('.tab-bar .tab-btn')[5])">Bab 6 →</button>
+      <div class="scramble-box">
+        <div class="word-clue-card">
+          <span class="category-pill" id="scrambleCatBadge">Kata Dasar</span>
+          <div class="word-meaning" id="scrambleMeaning">Kucing</div>
+          <div class="word-romaji-hint" id="scrambleRomaji">Petunjuk Romaji: neko</div>
+          <div class="word-note-hint" id="scrambleNote"></div>
+        </div>
+
+        <div id="scrambleFeedback" class="feedback-banner"></div>
+
+        <!-- Area Jawaban Terpilih -->
+        <div class="answer-slots" id="scrambleSlots" aria-label="Susunan Jawaban"></div>
+
+        <!-- Pilihan Potongan Huruf -->
+        <div class="pool-letters" id="scramblePool"></div>
+
+        <div class="fc-controls">
+          <button class="action-btn" onclick="clearScrambleSlots()">⌫ Hapus</button>
+          <button class="action-btn" onclick="useScrambleHint()">💡 Bantuan 1 Huruf</button>
+          <button class="action-btn" onclick="speakScrambleWord()">🔊 Dengar</button>
+          <button class="action-btn primary" onclick="checkScrambleAnswer()">✔ Cek Jawaban</button>
+          <button class="action-btn" onclick="nextScrambleWord()">Berikutnya →</button>
+        </div>
       </div>
     </section>
 
-    <!-- ==================== BAB 6 ==================== -->
-    <section id="chapter6Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 6: Objek (を), Tempat Kegiatan (で) &amp; Ajakan</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Partikel / Ungkapan</th>
-                <th>Cara Baca / Bentuk</th>
-                <th>Fungsi Utama</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="pt">を</span></td>
-                <td><strong>o</strong></td>
-                <td>Penanda objek penderita langsung kata kerja transitif</td>
-              </tr>
-              <tr>
-                <td><span class="pt">で</span></td>
-                <td><strong>de</strong></td>
-                <td>Lokasi berlangsungnya suatu aksi / kegiatan aktif</td>
-              </tr>
-              <tr>
-                <td><strong>〜ませんか</strong></td>
-                <td>Bentuk Ajakan Halus</td>
-                <td>Mengajak lawan bicara (Menanyakan kesediaan: "Maukah...?")</td>
-              </tr>
-              <tr>
-                <td><strong>〜ましょう</strong></td>
-                <td>Bentuk Ajakan Langsung</td>
-                <td>Mengajak secara positif dan mantap ("Ayo...!")</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Objek (を) &amp; Tempat Aktivitas (で)</div>
-            <span class="card-badge badge-positive">Aksi &amp; Tempat</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Tempat] + <span class="pt">で</span> + [Objek] + <span class="pt">を</span> + [Kata Kerja]</div>
-            <p class="function-desc">Menyatakan aktivitas melakukan sesuatu pada objek di tempat tertentu.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">ごはん <span class="pt">を</span> たべます。</div>
-                <div class="romaji">Gohan o tabemasu.</div>
-                <div class="id-text">Makan nasi.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">レストラン <span class="pt">で</span> ごはん <span class="pt">を</span> たべます。</div>
-                <div class="romaji">Resutoran de gohan o tabemasu.</div>
-                <div class="id-text">Makan nasi di restoran.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Ungkapan Ajakan (〜ませんか / 〜ましょう)</div>
-            <span class="card-badge badge-special">Ajakan</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[KK-masu hapus masu] + ませんか / ましょう</div>
-            <p class="function-desc">Digunakan untuk menawarkan ajakan secara sopan atau bersama-sama melakukan aktivitas.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">いっしょに コーヒー <span class="pt">を</span> のみませんか。</div>
-                <div class="romaji">Isshoni koohii o nomimasen ka.</div>
-                <div class="id-text">Maukah minum kopi bersama-sama?</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ロビー <span class="pt">で</span> あいましょう。</div>
-                <div class="romaji">Robii de aimashou.</div>
-                <div class="id-text">Ayo kita bertemu di lobi!</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 6</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">あした いっしょに えいが <span class="pt">を</span> みませんか。</div>
-              <div class="id">Maukah besok menonton film bersama?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">ええ、いいですね。そうしましょう。</div>
-              <div class="id">Ya, bagus juga. Ayo kita lakukan.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter5Tab', document.querySelectorAll('.tab-bar .tab-btn')[4])">← Bab 5</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter7Tab', document.querySelectorAll('.tab-bar .tab-btn')[6])">Bab 7 →</button>
-      </div>
-    </section>
-
-    <!-- ==================== BAB 7 ==================== -->
-    <section id="chapter7Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 7: Alat (で) &amp; Memberi / Menerima (に / あげます・もらいます)</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Pola / Partikel</th>
-                <th>Fungsi Utama</th>
-                <th>Pola Kalimat</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="pt">で</span> (Alat/Metode)</td>
-                <td>Alat, bahan, atau bahasa yang digunakan</td>
-                <td><code>[Alat/Bahasa] + で + [KK]</code></td>
-              </tr>
-              <tr>
-                <td><strong>あげます</strong> / <span class="pt">に</span></td>
-                <td>Memberikan objek kepada penerima (Orang + に)</td>
-                <td><code>[Penerima] + に + [Benda] + を + あげます</code></td>
-              </tr>
-              <tr>
-                <td><strong>もらいます</strong> / <span class="pt">に</span></td>
-                <td>Menerima objek dari pemberi (Orang + に/から)</td>
-                <td><code>[Pemberi] + に/から + [Benda] + を + もらいます</code></td>
-              </tr>
-              <tr>
-                <td><strong>もう 〜ました</strong></td>
-                <td>Menyatakan tindakan yang sudah selesai dilakukan</td>
-                <td><code>もう + [KK bentuk ました]</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Alat / Bahasa (で)</div>
-            <span class="card-badge badge-positive">Alat &amp; Cara</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Alat / Bahasa] + <span class="pt">で</span> + [Kata Kerja]</div>
-            <p class="function-desc">Digunakan untuk menunjukkan alat, sarana, atau bahasa dalam melakukan sesuatu.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">はし <span class="pt">で</span> たべます。</div>
-                <div class="romaji">Hashi de tabemasu.</div>
-                <div class="id-text">Makan menggunakan sumpit.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">にほんご <span class="pt">で</span> レポート <span class="pt">を</span> かきます。</div>
-                <div class="romaji">Nihongo de repooto o kakimasu.</div>
-                <div class="id-text">Menulis laporan dalam bahasa Jepang.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. あげます / もらいます</div>
-            <span class="card-badge badge-special">Memberi &amp; Menerima</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Orang] + <span class="pt">に</span> + [Benda] + <span class="pt">を</span> + あげます / もらいます</div>
-            <p class="function-desc">Menunjukkan transaksi memberi (あげます) atau menerima (もらいます) benda.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> ヤマダさん <span class="pt">に</span> はな <span class="pt">を</span> あげました。</div>
-                <div class="romaji">Watashi wa Yamada-san ni hana o agemashita.</div>
-                <div class="id-text">Saya telah memberikan bunga kepada Tuan Yamada.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> サントスさん <span class="pt">に</span> ほん <span class="pt">を</span> もらいました。</div>
-                <div class="romaji">Watashi wa Santosu-san ni hon o moraimashita.</div>
-                <div class="id-text">Saya telah menerima buku dari Tuan Santos.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 7</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">もう ひるごはん <span class="pt">を</span> たべましたか。</div>
-              <div class="id">Apakah kamu sudah makan siang?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">いいえ、まだです。これから たべます。</div>
-              <div class="id">Belum. Baru mau makan sekarang.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter6Tab', document.querySelectorAll('.tab-bar .tab-btn')[5])">← Bab 6</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter8Tab', document.querySelectorAll('.tab-bar .tab-btn')[7])">Bab 8 →</button>
-      </div>
-    </section>
-
-    <!-- ==================== BAB 8 ==================== -->
-    <section id="chapter8Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 8: Kata Sifat (い &amp; な)</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Jenis Kata Sifat</th>
-                <th>Bentuk Positif</th>
-                <th>Bentuk Negatif</th>
-                <th>Menerangkan KB</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>KS-い</strong> (contoh: たかい)</td>
-                <td>たかい です</td>
-                <td>たかくない です / たかくありません</td>
-                <td>たかい ほん</td>
-              </tr>
-              <tr>
-                <td><strong>KS-な</strong> (contoh: しずか)</td>
-                <td>しずか です</td>
-                <td>しずか じゃありません</td>
-                <td>しずかな まち</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="alert-box">⚠️ Pengecualian Khusus: <strong>いい</strong> (Bagus) → Negatif: <strong>よくないです</strong>. <strong>きれい</strong> &amp; <strong>有名 (ゆうめい)</strong> adalah KS-な.</div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Predikat Kata Sifat</div>
-            <span class="card-badge badge-positive">Sifat Subjek</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [KS-い / KS-な] + です</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">ふじさん <span class="pt">は</span> たかい です。</div>
-                <div class="romaji">Fujisan wa takai desu.</div>
-                <div class="id-text">Gunung Fuji tinggi.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ワットさん <span class="pt">は</span> しんせつ です。</div>
-                <div class="romaji">Watto-san wa shinsetsu desu.</div>
-                <div class="id-text">Tuan Watt ramah.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Modifikasi Kata Benda &amp; Bagaimana (どう)</div>
-            <span class="card-badge badge-question">Pertanyaan &amp; Modifikasi</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[KS-い + KB] / [KS-な + な + KB] | [Subjek] + <span class="pt">は</span> + どうですか</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">にほん <span class="pt">の</span> せいかつ <span class="pt">は</span> どう ですか。</div>
-                <div class="romaji">Nihon no seikatsu wa dou desu ka.</div>
-                <div class="id-text">Bagaimana kehidupan di Jepang?</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">きょうと <span class="pt">は</span> ふるい まち です。</div>
-                <div class="romaji">Kyouto wa furui machi desu.</div>
-                <div class="id-text">Kyoto adalah kota tua.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 8</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">にほん <span class="pt">の</span> たべもの <span class="pt">は</span> どうですか。</div>
-              <div class="id">Bagaimana makanan Jepang?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">おいしいですが、たかいです。</div>
-              <div class="id">Enak, tetapi mahal.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter7Tab', document.querySelectorAll('.tab-bar .tab-btn')[6])">← Bab 7</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter9Tab', document.querySelectorAll('.tab-bar .tab-btn')[8])">Bab 9 →</button>
-      </div>
-    </section>
-
-    <!-- ==================== BAB 9 ==================== -->
-    <section id="chapter9Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 9: Kesukaan, Keahlian, Kepemilikan (が) &amp; Alasan (から)</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Kata Kerja / Kata Sifat</th>
-                <th>Partikel Objek</th>
-                <th>Fungsi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>すき / きらい</strong></td>
-                <td><span class="pt">が</span></td>
-                <td>Menyatakan Suka / Benci</td>
-              </tr>
-              <tr>
-                <td><strong>じょうず / へた</strong></td>
-                <td><span class="pt">が</span></td>
-                <td>Menyatakan Pintar / Mahir / Bodoh</td>
-              </tr>
-              <tr>
-                <td><strong>わかります / あります</strong></td>
-                <td><span class="pt">が</span></td>
-                <td>Menyatakan Paham / Punya (Objek Abstrak/Benda)</td>
-              </tr>
-              <tr>
-                <td><strong>[Kalimat 1] から、[Kalimat 2]</strong></td>
-                <td>-</td>
-                <td>Menyatakan Sebab / Alasan ("Karena...")</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. [KB] が すき / あります / わかります</div>
-            <span class="card-badge badge-positive">Partikel が Objek</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Objek] + <span class="pt">が</span> + すき / あります / わかります</div>
-            <p class="function-desc">Objek kesukaan, keahlian, atau kepemilikan ditandai dengan partikel <span class="pt">が</span> (bukan を).</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> イタリアりょうり <span class="pt">が</span> すきです。</div>
-                <div class="romaji">Watashi wa Itaria-ryouri ga suki desu.</div>
-                <div class="id-text">Saya suka masakan Italia.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> にほんご <span class="pt">が</span> すこし わかります。</div>
-                <div class="romaji">Watashi wa Nihongo ga sukoshi wakarimasu.</div>
-                <div class="id-text">Saya sedikit paham bahasa Jepang.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Kalimat Alasan (〜から)</div>
-            <span class="card-badge badge-special">Sebab &amp; Akibat</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Alasan / Sebab] + から、[Akibat / Kesimpulan]</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">じかん <span class="pt">が</span> ありません から、しんぶん <span class="pt">を</span> よみません。</div>
-                <div class="romaji">Jikan ga arimasen kara, shinbun o yomimasen.</div>
-                <div class="id-text">Karena tidak ada waktu, saya tidak membaca koran.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 9</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">スポーツ <span class="pt">が</span> すきですか。</div>
-              <div class="id">Apakah kamu suka olahraga?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">はい、すきです。サッカー <span class="pt">が</span> いちばん すきです。</div>
-              <div class="id">Ya, suka. Saya paling suka sepak bola.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter8Tab', document.querySelectorAll('.tab-bar .tab-btn')[7])">← Bab 8</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter10Tab', document.querySelectorAll('.tab-bar .tab-btn')[9])">Bab 10 →</button>
-      </div>
-    </section>
-
-    <!-- ==================== BAB 10 ==================== -->
-    <section id="chapter10Tab" class="chapter-content">
-      <div class="full-card">
-        <h3>📌 Ikhtisar Bab 10: Keberadaan Benda / Orang (あります・います) &amp; Posisi</h3>
-        <div class="table-wrapper">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>Kata Kerja</th>
-                <th>Subjek Subjek</th>
-                <th>Partikel Lokasi</th>
-                <th>Contoh Posisi (の + Posisi)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>あります</strong></td>
-                <td>Benda mati / Tanaman</td>
-                <td><span class="pt">に</span></td>
-                <td>うえ (Atas), した (Bawah)</td>
-              </tr>
-              <tr>
-                <td><strong>います</strong></td>
-                <td>Manusia / Hewan</td>
-                <td><span class="pt">に</span></td>
-                <td>まえ (Depan), うしろ (Belakang)</td>
-              </tr>
-              <tr>
-                <td><strong>[KB] の [Posisi]</strong></td>
-                <td>Lokasi spesifik</td>
-                <td>-</td>
-                <td>なか (Dalam), となり (Samping)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="grammar-grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">1. Keberadaan di Lokasi ([Tempat] に [Subjek] が います/あります)</div>
-            <span class="card-badge badge-positive">Lokasi Ada</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Tempat] + <span class="pt">に</span> + [Subjek] + <span class="pt">が</span> + あります / います</div>
-            <p class="function-desc">Menjelaskan keberadaan sesuatu di lokasi tertentu. Gunakan <strong>います</strong> untuk makhluk hidup dan <strong>あります</strong> untuk benda mati.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">きょうしつ <span class="pt">に</span> たなかさん <span class="pt">が</span> います。</div>
-                <div class="romaji">Kyoushitsu ni Tanaka-san ga imasu.</div>
-                <div class="id-text">Di ruang kelas ada Tuan Tanaka.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">つくえ <span class="pt">の</span> うえ <span class="pt">に</span> ほん <span class="pt">が</span> あります。</div>
-                <div class="romaji">Tsukue no ue ni hon ga arimasu.</div>
-                <div class="id-text">Di atas meja ada buku.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">2. Letak Subjek ([Subjek] は [Tempat] に あります/います)</div>
-            <span class="card-badge badge-special">Letak Subjek</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Tempat] + <span class="pt">に</span> + あります / います</div>
-            <p class="function-desc">Menjelaskan lokasi spesifik dari topik/subjek yang sudah diketahui.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">みずのさん <span class="pt">は</span> じむしょ <span class="pt">に</span> います。</div>
-                <div class="romaji">Mizuno-san wa jimusho ni imasu.</div>
-                <div class="id-text">Nona Mizuno ada di kantor.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ゆうびんきょく <span class="pt">は</span> ぎんこう <span class="pt">の</span> となり <span class="pt">に</span> あります。</div>
-                <div class="romaji">Yuubinkyoku wa ginkou no tonari ni arimasu.</div>
-                <div class="id-text">Kantor pos berada di samping bank.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="full-card">
-        <h3>💬 Percakapan Bab 10</h3>
-        <div class="kaiwa-dialog">
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">すみません、パンや <span class="pt">は</span> どこ <span class="pt">に</span> ありますか。</div>
-              <div class="id">Permisi, toko roti ada di mana?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">スーパー <span class="pt">の</span> なか <span class="pt">に</span> ありますよ。</div>
-              <div class="id">Ada di dalam supermarket lho.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-nav">
-        <button class="nav-link-btn" onclick="switchChapterTab('chapter9Tab', document.querySelectorAll('.tab-bar .tab-btn')[8])">← Bab 9</button>
-        <button class="nav-link-btn" onclick="switchChapterTab('chapterNextTab', document.querySelectorAll('.tab-bar .tab-btn')[10])">Bab 11 →</button>
-      </div>
-    </section>
-
-    <!-- ==================== PLACEHOLDER ==================== -->
-    <section id="chapterNextTab" class="chapter-content">
-      <div class="full-card" style="text-align: center; padding: 30px 10px;">
-        <h2 style="font-size: 1.05rem; margin-bottom: 6px;">Bab 11 ~ 50 Segera Hadir</h2>
-        <p style="font-size: 0.82rem; color: var(--subtext);">Materi lanjutan akan terus diperbarui secara berkala.</p>
-      </div>
-    </section>
-
-    <!-- Footer & Kontak Section -->
+    <!-- FOOTER (TETAP SAMA) -->
     <div class="footer-section">
       <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
       <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
       
       <div class="social-group">
-        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WA</a>
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
         <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
-        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 FB</a>
-        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 IG</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
       </div>
 
       <div class="social-group">
@@ -1713,7 +1340,7 @@
   </div>
 
   <script>
-    // --- 1. SINKRONISASI TEMA ---
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const rootHtml = document.documentElement;
@@ -1735,31 +1362,920 @@
 
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
     if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
       applyThemeState(true);
     } else {
       applyThemeState(false);
     }
 
-    if (themeBtn) {
-      themeBtn.addEventListener('click', () => {
-        const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
-        applyThemeState(!isCurrentlyLight);
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
+
+    // --- 2. DATA HURUF KANA ---
+    const baseKana = [
+      { h: "あ", k: "ア", r: "a", m: "Huruf A", s: "あ" },
+      { h: "い", k: "イ", r: "i", m: "Huruf I", s: "い" },
+      { h: "う", k: "ウ", r: "u", m: "Huruf U", s: "う" },
+      { h: "え", k: "エ", r: "e", m: "Huruf E", s: "え" },
+      { h: "お", k: "オ", r: "o", m: "Huruf O", s: "お" },
+      { h: "か", k: "カ", r: "ka", m: "Huruf Ka", s: "か" },
+      { h: "き", k: "キ", r: "ki", m: "Huruf Ki", s: "き" },
+      { h: "く", k: "ク", r: "ku", m: "Huruf Ku", s: "く" },
+      { h: "け", k: "ケ", r: "ke", m: "Huruf Ke", s: "け" },
+      { h: "こ", k: "コ", r: "ko", m: "Huruf Ko", s: "こ" },
+      { h: "さ", k: "サ", r: "sa", m: "Huruf Sa", s: "さ" },
+      { h: "し", k: "シ", r: "shi", m: "Huruf Shi", s: "し" },
+      { h: "す", k: "ス", r: "su", m: "Huruf Su", s: "す" },
+      { h: "せ", k: "セ", r: "se", m: "Huruf Se", s: "せ" },
+      { h: "そ", k: "ソ", r: "so", m: "Huruf So", s: "そ" },
+      { h: "た", k: "タ", r: "ta", m: "Huruf Ta", s: "た" },
+      { h: "ち", k: "チ", r: "chi", m: "Huruf Chi", s: "ち" },
+      { h: "つ", k: "ツ", r: "tsu", m: "Huruf Tsu", s: "つ" },
+      { h: "て", k: "テ", r: "te", m: "Huruf Te", s: "て" },
+      { h: "と", k: "ト", r: "to", m: "Huruf To", s: "と" },
+      { h: "な", k: "ナ", r: "na", m: "Huruf Na", s: "な" },
+      { h: "に", k: "ニ", r: "ni", m: "Huruf Ni", s: "に" },
+      { h: "ぬ", k: "ヌ", r: "nu", m: "Huruf Nu", s: "ぬ" },
+      { h: "ね", k: "ネ", r: "ne", m: "Huruf Ne", s: "ね" },
+      { h: "の", k: "ノ", r: "no", m: "Huruf No", s: "の" },
+      { h: "は", k: "ハ", r: "ha", m: "Huruf Ha", s: "は" },
+      { h: "ひ", k: "ヒ", r: "hi", m: "Huruf Hi", s: "ひ" },
+      { h: "ふ", k: "フ", r: "fu", m: "Huruf Fu", s: "ふ" },
+      { h: "へ", k: "ヘ", r: "he", m: "Huruf He", s: "へ" },
+      { h: "ほ", k: "ホ", r: "ho", m: "Huruf Ho", s: "ほ" },
+      { h: "ま", k: "マ", r: "ma", m: "Huruf Ma", s: "ま" },
+      { h: "み", k: "ミ", r: "mi", m: "Huruf Mi", s: "み" },
+      { h: "む", k: "ム", r: "mu", m: "Huruf Mu", s: "む" },
+      { h: "め", k: "メ", r: "me", m: "Huruf Me", s: "め" },
+      { h: "も", k: "モ", r: "mo", m: "Huruf Mo", s: "も" },
+      { h: "や", k: "ヤ", r: "ya", m: "Huruf Ya", s: "や" },
+      { empty: true },
+      { h: "ゆ", k: "ユ", r: "yu", m: "Huruf Yu", s: "ゆ" },
+      { empty: true },
+      { h: "よ", k: "ヨ", r: "yo", m: "Huruf Yo", s: "よ" },
+      { h: "ら", k: "ラ", r: "ra", m: "Huruf Ra", s: "ら" },
+      { h: "り", k: "リ", r: "ri", m: "Huruf Ri", s: "り" },
+      { h: "る", k: "ル", r: "ru", m: "Huruf Ru", s: "る" },
+      { h: "れ", k: "レ", r: "re", m: "Huruf Re", s: "れ" },
+      { h: "ろ", k: "ロ", r: "ro", m: "Huruf Ro", s: "ろ" },
+      { h: "わ", k: "ワ", r: "wa", m: "Huruf Wa", s: "わ" },
+      { empty: true },
+      { h: "を", k: "ヲ", r: "wo (o)", m: "Huruf Wo (Partikel O)", s: "を" },
+      { empty: true },
+      { h: "ん", k: "ン", r: "n", m: "Huruf N", s: "ん" }
+    ];
+
+    const dakuKana = [
+      { h: "が", k: "ガ", r: "ga", m: "Huruf Ga", s: "が" },
+      { h: "ぎ", k: "ギ", r: "gi", m: "Huruf Gi", s: "ぎ" },
+      { h: "ぐ", k: "グ", r: "gu", m: "Huruf Gu", s: "ぐ" },
+      { h: "げ", k: "ゲ", r: "ge", m: "Huruf Ge", s: "げ" },
+      { h: "ご", k: "ゴ", r: "go", m: "Huruf Go", s: "ご" },
+      { h: "ざ", k: "ザ", r: "za", m: "Huruf Za", s: "ざ" },
+      { h: "じ", k: "ジ", r: "ji", m: "Huruf Ji", s: "じ" },
+      { h: "ず", k: "ズ", r: "zu", m: "Huruf Zu", s: "ず" },
+      { h: "ぜ", k: "ゼ", r: "ze", m: "Huruf Ze", s: "ぜ" },
+      { h: "ぞ", k: "ゾ", r: "zo", m: "Huruf Zo", s: "ぞ" },
+      { h: "だ", k: "ダ", r: "da", m: "Huruf Da", s: "だ" },
+      { h: "ぢ", k: "ヂ", r: "ji (di)", m: "Huruf Ji (Di)", s: "ぢ" },
+      { h: "づ", k: "ヅ", r: "zu (du)", m: "Huruf Zu (Du)", s: "づ" },
+      { h: "で", k: "デ", r: "de", m: "Huruf De", s: "で" },
+      { h: "ど", k: "ド", r: "do", m: "Huruf Do", s: "ど" },
+      { h: "ば", k: "バ", r: "ba", m: "Huruf Ba", s: "ば" },
+      { h: "び", k: "ビ", r: "bi", m: "Huruf Bi", s: "び" },
+      { h: "ぶ", k: "ブ", r: "bu", m: "Huruf Bu", s: "ぶ" },
+      { h: "べ", k: "ベ", r: "be", m: "Huruf Be", s: "べ" },
+      { h: "ぼ", k: "ボ", r: "bo", m: "Huruf Bo", s: "ぼ" },
+      { h: "ぱ", k: "パ", r: "pa", m: "Huruf Pa", s: "ぱ" },
+      { h: "ぴ", k: "ピ", r: "pi", m: "Huruf Pi", s: "ぴ" },
+      { h: "ぷ", k: "プ", r: "pu", m: "Huruf Pu", s: "ぷ" },
+      { h: "ぺ", k: "ペ", r: "pe", m: "Huruf Pe", s: "ぺ" },
+      { h: "ぽ", k: "ポ", r: "po", m: "Huruf Po", s: "ぽ" }
+    ];
+
+    const yoonKana = [
+      { h: "きゃ", k: "キャ", r: "kya", m: "Bunyi Kya", s: "きゃ" },
+      { h: "きゅ", k: "キュ", r: "kyu", m: "Bunyi Kyu", s: "きゅ" },
+      { h: "きょ", k: "キョ", r: "kyo", m: "Bunyi Kyo", s: "きょ" },
+      { h: "しゃ", k: "シャ", r: "sha", m: "Bunyi Sha", s: "しゃ" },
+      { h: "しゅ", k: "シュ", r: "shu", m: "Bunyi Shu", s: "しゅ" },
+      { h: "しょ", k: "ショ", r: "sho", m: "Bunyi Sho", s: "しょ" },
+      { h: "ちゃ", k: "チャ", r: "cha", m: "Bunyi Cha", s: "ちゃ" },
+      { h: "ちゅ", k: "チュ", r: "chu", m: "Bunyi Chu", s: "ちゅ" },
+      { h: "ちょ", k: "チョ", r: "cho", m: "Bunyi Cho", s: "ちょ" },
+      { h: "にゃ", k: "ニャ", r: "nya", m: "Bunyi Nya", s: "にゃ" },
+      { h: "にゅ", k: "ニュ", r: "nyu", m: "Bunyi Nyu", s: "にゅ" },
+      { h: "にょ", k: "ニョ", r: "nyo", m: "Bunyi Nyo", s: "にょ" },
+      { h: "ひゃ", k: "ヒャ", r: "hya", m: "Bunyi Hya", s: "ひゃ" },
+      { h: "ひゅ", k: "ヒュ", r: "hyu", m: "Bunyi Hyu", s: "ひゅ" },
+      { h: "ひょ", k: "ヒョ", r: "hyo", m: "Bunyi Hyo", s: "ひょ" },
+      { h: "みゃ", k: "ミャ", r: "mya", m: "Bunyi Mya", s: "みゃ" },
+      { h: "みゅ", k: "ミュ", r: "myu", m: "Bunyi Myu", s: "みゅ" },
+      { h: "みょ", k: "ミョ", r: "myo", m: "Bunyi Myo", s: "みょ" },
+      { h: "りゃ", k: "リャ", r: "rya", m: "Bunyi Rya", s: "りゃ" },
+      { h: "りゅ", k: "リュ", r: "ryu", m: "Bunyi Ryu", s: "りゅ" },
+      { h: "りょ", k: "リョ", r: "ryo", m: "Bunyi Ryo", s: "りょ" },
+      { h: "ぎゃ", k: "ギャ", r: "gya", m: "Bunyi Gya", s: "ぎゃ" },
+      { h: "ぎゅ", k: "ギュ", r: "gyu", m: "Bunyi Gyu", s: "ぎゅ" },
+      { h: "ぎょ", k: "ギョ", r: "gyo", m: "Bunyi Gyo", s: "ぎょ" },
+      { h: "じゃ", k: "ジャ", r: "ja", m: "Bunyi Ja", s: "じゃ" },
+      { h: "じゅ", k: "ジュ", r: "ju", m: "Bunyi Ju", s: "じゅ" },
+      { h: "じょ", k: "ジョ", r: "jo", m: "Bunyi Jo", s: "じょ" },
+      { h: "びゃ", k: "ビャ", r: "bya", m: "Bunyi Bya", s: "びゃ" },
+      { h: "びゅ", k: "ビュ", r: "byu", m: "Bunyi Byu", s: "びゅ" },
+      { h: "びょ", k: "ビョ", r: "byo", m: "Bunyi Byo", s: "びょ" },
+      { h: "ぴゃ", k: "ピャ", r: "pya", m: "Bunyi Pya", s: "ぴゃ" },
+      { h: "ぴゅ", k: "ピュ", r: "pyu", m: "Bunyi Pyu", s: "ぴゅ" },
+      { h: "ぴょ", k: "ピョ", r: "pyo", m: "Bunyi Pyo", s: "ぴょ" }
+    ];
+
+    // Data Sokuon (Tsu Kecil) Hiragana & Katakana
+    const hiraSokuonData = [
+      { jp: "っ", r: "Sokuon (Tsu Kecil)", m: "Menggandakan konsonan berikutnya", s: "つ", badge: "Huruf Fungsi", highlight: true },
+      { jp: "きって", r: "ki-t-te", m: "Perangko (Dobel T)", s: "きって", badge: "Deret T" },
+      { jp: "がっこう", r: "ga-k-kou", m: "Sekolah (Dobel K)", s: "がっこう", badge: "Deret K" },
+      { jp: "ざっし", r: "za-s-shi", m: "Majalah (Dobel S)", s: "ざっし", badge: "Deret S" },
+      { jp: "きっぷ", r: "ki-p-pu", m: "Tiket / Karcis (Dobel P)", s: "きっぷ", badge: "Deret P" },
+      { jp: "いっしょ", r: "i-s-sho", m: "Bersama (Sokuon + Yoon)", s: "いっしょ", badge: "Kombinasi" },
+      { jp: "ちょっと", r: "cho-t-to", m: "Sebentar / Sedikit", s: "ちょっと", badge: "Percakapan" },
+      { jp: "ゆっくり", r: "yu-k-kuri", m: "Pelan-pelan", s: "ゆっくり", badge: "Kata Keterangan" }
+    ];
+
+    const kataSokuonData = [
+      { jp: "ッ", r: "Sokuon (Tsu Kecil)", m: "Menggandakan konsonan berikutnya", s: "ツ", badge: "Huruf Fungsi", highlight: true },
+      { jp: "カップ", r: "ka-p-pu", m: "Cangkir / Gelas (Dobel P)", s: "カップ", badge: "Deret P" },
+      { jp: "チケット", r: "chi-ke-t-to", m: "Tiket (Dobel T)", s: "チケット", badge: "Deret T" },
+      { jp: "サッカー", r: "sa-k-kaa", m: "Sepak Bola (Dobel K)", s: "サッカー", badge: "Deret K" },
+      { jp: "ベッド", r: "be-d-do", m: "Tempat Tidur (Dobel D)", s: "ベッド", badge: "Serapan Asing" },
+      { jp: "バッグ", r: "ba-g-gu", m: "Tas (Dobel G)", s: "バッグ", badge: "Serapan Asing" },
+      { jp: "メッセージ", r: "me-s-seeji", m: "Pesan (Dobel S)", s: "メッセージ", badge: "Deret S" },
+      { jp: "インターネット", r: "intaanetto", m: "Internet (Dobel T)", s: "インターネット", badge: "Teknologi" }
+    ];
+
+    const specialKatakana = [
+      { k: "ウィ", r: "wi", m: "Bunyi Wi", s: "ウィ" },
+      { k: "ウェ", r: "we", m: "Bunyi We", s: "ウェ" },
+      { k: "ウォ", r: "wo", m: "Bunyi Wo", s: "ウォ" },
+      { k: "ティ", r: "ti", m: "Bunyi Ti", s: "ティ" },
+      { k: "ディ", r: "di", m: "Bunyi Di", s: "ディ" },
+      { k: "デュ", r: "dyu / du", m: "Bunyi Dyu / Du", s: "デュ" },
+      { k: "ツァ", r: "tsa", m: "Bunyi Tsa", s: "ツァ" },
+      { k: "ツェ", r: "tse", m: "Bunyi Tse", s: "ツェ" },
+      { k: "ツォ", r: "tso", m: "Bunyi Tso", s: "ツォ" },
+      { k: "トゥ", r: "tu", m: "Bunyi Tu", s: "トゥ" },
+      { k: "ドゥ", r: "du", m: "Bunyi Du", s: "ドゥ" },
+      { k: "ファ", r: "fa", m: "Bunyi Fa", s: "ファ" },
+      { k: "フィ", r: "fi", m: "Bunyi Fi", s: "フィ" },
+      { k: "フェ", r: "fe", m: "Bunyi Fe", s: "フェ" },
+      { k: "フォ", r: "fo", m: "Bunyi Fo", s: "フォ" },
+      { k: "ヴァ", r: "va", m: "Bunyi Va", s: "ヴァ" },
+      { k: "ヴィ", r: "vi", m: "Bunyi Vi", s: "ヴィ" },
+      { k: "ヴ", r: "vu", m: "Bunyi Vu", s: "ヴ" },
+      { k: "ヴェ", r: "ve", m: "Bunyi Ve", s: "ヴェ" },
+      { k: "ヴォ", r: "vo", m: "Bunyi Vo", s: "ヴォ" },
+      { k: "チェ", r: "che", m: "Bunyi Che", s: "チェ" },
+      { k: "ジェ", r: "je", m: "Bunyi Je", s: "ジェ" },
+      { k: "シェ", r: "she", m: "Bunyi She", s: "シェ" }
+    ];
+
+    // --- BANK KOSAKATA LENGKAP UNTUK FITUR MENYUSUN HURUF ---
+    // Kategori: 'basic', 'dakuon', 'yoon', 'sokuon', 'daily', 'food_animal'
+    const wordBank = [
+      // === HIRAGANA ===
+      // 1. Basic & Food/Animal
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['ね', 'こ'], romaji: 'neko', meaning: 'Kucing', word: 'ねこ' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['い', 'ぬ'], romaji: 'inu', meaning: 'Anjing', word: 'いぬ' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['と', 'り'], romaji: 'tori', meaning: 'Burung', word: 'とり' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['さ', 'か', 'な'], romaji: 'sakana', meaning: 'Ikan', word: 'さかな' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Makanan & Dasar', chars: ['す', 'し'], romaji: 'sushi', meaning: 'Sushi', word: 'すし' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['さ', 'く', 'ら'], romaji: 'sakura', meaning: 'Bunga Sakura', word: 'さくら' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['や', 'ま'], romaji: 'yama', meaning: 'Gunung', word: 'やま' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['う', 'み'], romaji: 'umi', meaning: 'Laut', word: 'うみ' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['そ', 'ら'], romaji: 'sora', meaning: 'Langit', word: 'そら' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['く', 'る', 'ま'], romaji: 'kuruma', meaning: 'Mobil', word: 'くるま' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['と', 'け', 'い'], romaji: 'tokei', meaning: 'Jam / Arloji', word: 'とけい' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['ほ', 'ん'], romaji: 'hon', meaning: 'Buku', word: 'ほん' },
+
+      // 2. Dakuon & Handakuon (゛ / ゜)
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['み', 'ず'], romaji: 'mizu', meaning: 'Air', word: 'みず', note: 'Gunakan ず (zu) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['た', 'べ', 'も', 'の'], romaji: 'tabemono', meaning: 'Makanan', word: 'たべもの', note: 'Gunakan べ (be) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['ご', 'は', 'ん'], romaji: 'gohan', meaning: 'Nasi / Makanan', word: 'ごはん', note: 'Gunakan ご (go) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['り', 'ん', 'ご'], romaji: 'ringo', meaning: 'Apel', word: 'りんご', note: 'Gunakan ご (go) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['と', 'も', 'だ', 'ち'], romaji: 'tomodachi', meaning: 'Teman', word: 'ともだち', note: 'Gunakan だ (da) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['か', 'ぞ', 'く'], romaji: 'kazoku', meaning: 'Keluarga', word: 'かぞく', note: 'Gunakan ぞ (zo) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['め', 'が', 'ね'], romaji: 'megane', meaning: 'Kacamata', word: 'めがね', note: 'Gunakan が (ga) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Handakuon (゜)', chars: ['え', 'ん', 'ぴ', 'つ'], romaji: 'enpitsu', meaning: 'Pensil', word: 'えんぴつ', note: 'Gunakan ぴ (pi) dengan maru' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Handakuon (゜)', chars: ['さ', 'ん', 'ぽ'], romaji: 'sanpo', meaning: 'Jalan-jalan Santai', word: 'さんぽ', note: 'Gunakan ぽ (po) dengan maru' },
+
+      // 3. Yoon (ゃ, ゅ, ょ)
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['で', 'ん', 'しゃ'], romaji: 'densha', meaning: 'Kereta Listrik', word: 'でんしゃ', note: 'Gabungan し + ゃ = しゃ (sha)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['じ', 'て', 'ん', 'しゃ'], romaji: 'jitensha', meaning: 'Sepeda', word: 'じてんしゃ', note: 'Gabungan しゃ (sha)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['べ', 'ん', 'きょう'], romaji: 'benkyou', meaning: 'Belajar', word: 'べんきょう', note: 'Gabungan き + ょ = きょ (kyo)' },
+      { type: 'hiragana', cats: ['yoon', 'food_animal'], catLabel: 'Gabungan Yoon', chars: ['ぎゅう', 'にゅう'], romaji: 'gyuunyuu', meaning: 'Susu Sapi', word: 'ぎゅうにゅう', note: 'Gabungan ぎゅう & にゅう' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['りょ', 'こ', 'う'], romaji: 'ryokou', meaning: 'Wisata / Traveling', word: 'りょこう', note: 'Gabungan り + ょ = りょ (ryo)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['びょう', 'い', 'ん'], romaji: 'byouin', meaning: 'Rumah Sakit', word: 'びょういん', note: 'Gabungan び + ょ = びょ (byo)' },
+
+      // 4. Sokuon / Tsu Kecil (っ)
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['き', 'っ', 'て'], romaji: 'kitte', meaning: 'Perangko', word: 'きって', note: 'Tsu kecil (っ) menggandakan huruf T' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['が', 'っ', 'こ', 'う'], romaji: 'gakkou', meaning: 'Sekolah', word: 'がっこう', note: 'Tsu kecil (っ) menggandakan huruf K' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['ざ', 'っ', 'し'], romaji: 'zasshi', meaning: 'Majalah', word: 'ざっし', note: 'Tsu kecil (っ) menggandakan huruf S' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['き', 'っ', 'ぷ'], romaji: 'kippu', meaning: 'Tiket / Karcis', word: 'きっぷ', note: 'Tsu kecil (っ) menggandakan huruf P' },
+      { type: 'hiragana', cats: ['sokuon', 'yoon'], catLabel: 'Tsu Kecil + Yoon', chars: ['い', 'っ', 'しょ'], romaji: 'issho', meaning: 'Bersama-sama', word: 'いっしょ', note: 'Kombinasi っ (sokuon) + しょ (yoon)' },
+      { type: 'hiragana', cats: ['sokuon', 'daily'], catLabel: 'Tsu Kecil (っ)', chars: ['ちょ', 'っ', 'と'], romaji: 'chotto', meaning: 'Sebentar / Sedikit', word: 'ちょっと', note: 'Tsu kecil (っ) memberi jeda ketukan' },
+
+      // 5. Salam & Sehari-hari
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['あ', 'り', 'が', 'と', 'う'], romaji: 'arigatou', meaning: 'Terima Kasih', word: 'ありがとう' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['お', 'は', 'よ', 'う'], romaji: 'ohayou', meaning: 'Selamat Pagi', word: 'おはよう' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['こ', 'ん', 'に', 'ち', 'は'], romaji: 'konnichiwa', meaning: 'Halo / Selamat Siang', word: 'こんにちは', note: 'Partikel wa ditulis dengan は (ha)' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['す', 'み', 'ま', 'せ', 'ん'], romaji: 'sumimasen', meaning: 'Permisi / Maaf', word: 'すみません' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Profesi & Orang', chars: ['せ', 'ん', 'せ', 'い'], romaji: 'sensei', meaning: 'Guru / Pengajar', word: 'せんせい' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Profesi & Orang', chars: ['が', 'く', 'せ', 'い'], romaji: 'gakusei', meaning: 'Pelajar / Mahasiswa', word: 'がくせい' },
+
+      // === KATAKANA ===
+      // 1. Basic & Serapan
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['カ', 'メ', 'ラ'], romaji: 'kamera', meaning: 'Kamera', word: 'カメラ' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['ホ', 'テ', 'ル'], romaji: 'hoteru', meaning: 'Hotel', word: 'ホテル' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['タ', 'ク', 'シ', 'ー'], romaji: 'takushii', meaning: 'Taksi', word: 'タクシー', note: 'ー adalah tanda vokal panjang' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['ノ', 'ー', 'ト'], romaji: 'nooto', meaning: 'Buku Catatan', word: 'ノート' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['ア', 'イ', 'ス'], romaji: 'aisu', meaning: 'Es / Es Krim', word: 'アイス' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['ラ', 'ー', 'メ', 'ン'], romaji: 'raamen', meaning: 'Mie Ramen', word: 'ラーメン' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['カ', 'レ', 'ー'], romaji: 'karee', meaning: 'Kari', word: 'カレー' },
+
+      // 2. Dakuon & Handakuon Katakana
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['テ', 'レ', 'ビ'], romaji: 'terebi', meaning: 'Televisi', word: 'テレビ', note: 'Gunakan ビ (bi)' },
+      { type: 'katakana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon Katakana', chars: ['バ', 'ナ', 'ナ'], romaji: 'banana', meaning: 'Pisang', word: 'バナナ', note: 'Gunakan バ (ba)' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Handakuon Katakana', chars: ['パ', 'ソ', 'コ', 'ン'], romaji: 'pasokon', meaning: 'Komputer / PC', word: 'パソコン', note: 'Gunakan パ (pa)' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['ス', 'マ', 'ホ'], romaji: 'sumaho', meaning: 'Smartphone', word: 'スマホ' },
+      { type: 'katakana', cats: ['dakuon', 'food_animal'], catLabel: 'Handakuon Katakana', chars: ['パ', 'ン'], romaji: 'pan', meaning: 'Roti', word: 'パン' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['ゲ', 'ー', 'ム'], romaji: 'geemu', meaning: 'Game / Permainan', word: 'ゲーム' },
+
+      // 3. Yoon Katakana
+      { type: 'katakana', cats: ['yoon'], catLabel: 'Yoon Katakana', chars: ['シャ', 'ツ'], romaji: 'shatsu', meaning: 'Kemeja', word: 'シャツ', note: 'Gabungan シ + ャ = シャ (sha)' },
+      { type: 'katakana', cats: ['yoon', 'food_animal'], catLabel: 'Yoon Katakana', chars: ['ジュー', 'ス'], romaji: 'juusu', meaning: 'Jus Buah', word: 'ジュース', note: 'Gabungan ジ + ュ = ジュ (ju)' },
+      { type: 'katakana', cats: ['yoon', 'food_animal'], catLabel: 'Yoon Katakana', chars: ['チョ', 'コ'], romaji: 'choko', meaning: 'Cokelat', word: 'チョコ', note: 'Gabungan チ + ョ = チョ (cho)' },
+      { type: 'katakana', cats: ['yoon'], catLabel: 'Yoon Katakana', chars: ['ニュー', 'ス'], romaji: 'nyuusu', meaning: 'Berita', word: 'ニュース', note: 'Gabungan ニ + ュ = ニュ (nyu)' },
+
+      // 4. Sokuon / Tsu Kecil Katakana (ッ)
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['カ', 'ッ', 'プ'], romaji: 'kappu', meaning: 'Cangkir / Gelas', word: 'カップ', note: 'Tsu kecil (ッ) menggandakan huruf P' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['チ', 'ケ', 'ッ', 'ト'], romaji: 'chiketto', meaning: 'Tiket', word: 'チケット', note: 'Tsu kecil (ッ) menggandakan huruf T' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['サ', 'ッ', 'カ', 'ー'], romaji: 'sakkaa', meaning: 'Sepak Bola', word: 'サッカー', note: 'Tsu kecil (ッ) menggandakan huruf K' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['ベ', 'ッ', 'ド'], romaji: 'beddo', meaning: 'Tempat Tidur', word: 'ベッド', note: 'Tsu kecil (ッ) menggandakan huruf D' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['バ', 'ッ', 'グ'], romaji: 'baggu', meaning: 'Tas', word: 'バッグ', note: 'Tsu kecil (ッ) menggandakan huruf G' },
+      { type: 'katakana', cats: ['sokuon', 'daily'], catLabel: 'Tsu Kecil (ッ)', chars: ['メ', 'ッ', 'セ', 'ー', 'ジ'], romaji: 'messeeji', meaning: 'Pesan / Message', word: 'メッセージ', note: 'Tsu kecil (ッ) menggandakan huruf S' },
+
+      // 5. Daily Katakana
+      { type: 'katakana', cats: ['daily', 'food_animal'], catLabel: 'Kafe & Sehari-hari', chars: ['コ', 'ー', 'ヒ', 'ー'], romaji: 'koohii', meaning: 'Kopi', word: 'コーヒー' },
+      { type: 'katakana', cats: ['daily'], catLabel: 'Kafe & Sehari-hari', chars: ['ト', 'イ', 'レ'], romaji: 'toire', meaning: 'Toilet', word: 'トイレ' },
+      { type: 'katakana', cats: ['daily'], catLabel: 'Kafe & Sehari-hari', chars: ['レ', 'ス', 'ト', 'ラ', 'ン'], romaji: 'resutoran', meaning: 'Restoran', word: 'レストラン' }
+    ];
+
+    // --- 3. SPEECH SYNTHESIS ENGINE ---
+    let voices = [];
+    function updateVoices() {
+      if ('speechSynthesis' in window) {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+
+    function playAudio(soundText, element) {
+      if (!soundText || !('speechSynthesis' in window)) return;
+
+      if (element) {
+        element.classList.add('playing');
+        setTimeout(() => element.classList.remove('playing'), 200);
+      }
+
+      window.speechSynthesis.cancel();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(soundText);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.15;
+
+        const naturalVoice = voices.find(v => 
+          v.name.includes('Google') || 
+          v.name.includes('Nanami') || 
+          v.name.includes('Natural') || 
+          v.name.includes('Kyoko') ||
+          v.name.includes('Haruka')
+        );
+        if (naturalVoice) utterance.voice = naturalVoice;
+
+        window.speechSynthesis.speak(utterance);
+      }, 25);
+    }
+
+    // Helper: Ambil pool kartu sesuai filter
+    function getKanaPool(script = 'hiragana', group = 'base') {
+      if (group === 'sokuon') {
+        let sPool = [];
+        if (script === 'hiragana' || script === 'both') {
+          hiraSokuonData.forEach(item => {
+            sPool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana (Sokuon)' });
+          });
+        }
+        if (script === 'katakana' || script === 'both') {
+          kataSokuonData.forEach(item => {
+            sPool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana (Sokuon)' });
+          });
+        }
+        return sPool;
+      }
+
+      let source = [];
+      if (group === 'base') source = baseKana.filter(i => !i.empty);
+      else if (group === 'daku') source = dakuKana;
+      else if (group === 'yoon') source = yoonKana;
+      else source = [...baseKana.filter(i => !i.empty), ...dakuKana, ...yoonKana];
+
+      let pool = [];
+      source.forEach(item => {
+        if (script === 'hiragana' || script === 'both') {
+          pool.push({ kana: item.h, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana' });
+        }
+        if (script === 'katakana' || script === 'both') {
+          pool.push({ kana: item.k, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana' });
+        }
+      });
+
+      if (group === 'all') {
+        if (script === 'hiragana' || script === 'both') {
+          hiraSokuonData.slice(1, 5).forEach(item => {
+            pool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana (Sokuon)' });
+          });
+        }
+        if (script === 'katakana' || script === 'both') {
+          kataSokuonData.slice(1, 5).forEach(item => {
+            pool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana (Sokuon)' });
+          });
+        }
+      }
+      return pool;
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // --- 4. RENDER TABEL HURUF ASLI + SOKUON ---
+    function create3TierCard(jpText, readingText, meaningText, soundText) {
+      return `
+        <div class="kana-card" onclick="playAudio('${soundText}', this)">
+          <div class="tier-jp">${jpText}</div>
+          <div class="tier-reading">${readingText}</div>
+          <div class="tier-meaning">${meaningText}</div>
+        </div>`;
+    }
+
+    function createSokuonCard(item) {
+      const extraClass = item.highlight ? ' highlight-sokuon' : '';
+      return `
+        <div class="kana-card${extraClass}" onclick="playAudio('${item.s}', this)">
+          <span class="sokuon-badge">${item.badge}</span>
+          <div class="tier-jp">${item.jp}</div>
+          <div class="tier-reading">${item.r}</div>
+          <div class="tier-meaning">${item.m}</div>
+        </div>`;
+    }
+
+    function renderGrids() {
+      const hBase = document.getElementById('hiraBaseGrid');
+      const hDaku = document.getElementById('hiraDakuGrid');
+      const hYoon = document.getElementById('hiraYoonGrid');
+      const hSoku = document.getElementById('hiraSokuonGrid');
+
+      baseKana.forEach(i => hBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.h, i.r, i.m, i.s));
+      dakuKana.forEach(i => hDaku.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
+      yoonKana.forEach(i => hYoon.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
+      hiraSokuonData.forEach(i => hSoku.innerHTML += createSokuonCard(i));
+
+      const kBase = document.getElementById('kataBaseGrid');
+      const kDaku = document.getElementById('kataDakuGrid');
+      const kYoon = document.getElementById('kataYoonGrid');
+      const kSoku = document.getElementById('kataSokuonGrid');
+      const kSpec = document.getElementById('kataSpecialGrid');
+
+      baseKana.forEach(i => kBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.k, i.r, i.m, i.s));
+      dakuKana.forEach(i => kDaku.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+      yoonKana.forEach(i => kYoon.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+      kataSokuonData.forEach(i => kSoku.innerHTML += createSokuonCard(i));
+      specialKatakana.forEach(i => kSpec.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+    }
+
+    function switchKana(type) {
+      const hTab = document.querySelector('.hira-tab');
+      const kTab = document.querySelector('.kata-tab');
+      const hCon = document.getElementById('hiraganaContainer');
+      const kCon = document.getElementById('katakanaContainer');
+      const info = document.getElementById('kanaInfoText');
+
+      if (type === 'hiragana') {
+        hTab.classList.add('active');
+        kTab.classList.remove('active');
+        hCon.style.display = 'block';
+        kCon.style.display = 'none';
+        info.innerHTML = '🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), Yoon (ゃ, ゅ, ょ), dan Sokuon / Tsu Kecil (っ). Ketuk kartu untuk mendengar suara!';
+      } else {
+        kTab.classList.add('active');
+        hTab.classList.remove('active');
+        kCon.style.display = 'block';
+        hCon.style.display = 'none';
+        info.innerHTML = '⚡ <strong>Katakana Lengkap &amp; Modern:</strong> 46 Huruf Dasar, Dakuon, Yoon, Sokuon / Tsu Kecil (ッ), serta Kombinasi Kata Serapan Modern (wi, we, ti, di, fa, fi, va, vi, che, je).';
+      }
+    }
+
+    // --- 5. NAVIGASI MODE UTAMA ---
+    function switchMode(mode) {
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+
+      ['table', 'flashcard', 'match', 'quiz', 'scramble'].forEach(m => {
+        const el = document.getElementById('mode-' + m);
+        if (el) el.style.display = (m === mode) ? 'block' : 'none';
+      });
+
+      if (mode === 'flashcard' && fcDeck.length === 0) initFlashcards();
+      if (mode === 'match' && matchTiles.length === 0) initMatchGame();
+      if (mode === 'quiz' && quizQuestions.length === 0) startQuiz();
+      if (mode === 'scramble' && !currentScramble) nextScrambleWord();
+    }
+
+    // --- 6. LOGIKA FITUR 1: FLASHCARD ---
+    let fcScript = 'hiragana';
+    let fcGroup = 'base';
+    let fcDeck = [];
+    let fcIndex = 0;
+
+    function setFcFilter(type, val, btn) {
+      if (type === 'script') {
+        fcScript = val;
+        document.querySelectorAll('#fcScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      } else {
+        fcGroup = val;
+        document.querySelectorAll('#fcGroupFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+      initFlashcards();
+    }
+
+    function initFlashcards() {
+      fcDeck = getKanaPool(fcScript, fcGroup);
+      fcIndex = 0;
+      renderFlashcard(false);
+    }
+
+    function renderFlashcard(autoSpeak = true) {
+      if (!fcDeck.length) return;
+      const card = fcDeck[fcIndex];
+      const box = document.getElementById('flashcardBox');
+      box.classList.remove('flipped');
+
+      document.getElementById('fcCounter').textContent = `Kartu ${fcIndex + 1} / ${fcDeck.length}`;
+      document.getElementById('fcTagFront').textContent = card.type;
+      const frontEl = document.getElementById('fcFrontText');
+      frontEl.textContent = card.kana;
+      frontEl.style.fontSize = card.kana.length >= 4 ? '2.8rem' : (card.kana.length >= 2 ? '3.8rem' : '5rem');
+
+      document.getElementById('fcBackRomaji').textContent = card.romaji;
+      document.getElementById('fcBackMeaning').textContent = `${card.meaning} (${card.kana})`;
+
+      if (autoSpeak && document.getElementById('fcAutoAudio').checked) {
+        playAudio(card.sound);
+      }
+    }
+
+    function flipFlashcard() {
+      document.getElementById('flashcardBox').classList.toggle('flipped');
+    }
+
+    function nextFlashcard() {
+      fcIndex = (fcIndex + 1) % fcDeck.length;
+      renderFlashcard(true);
+    }
+
+    function prevFlashcard() {
+      fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+      renderFlashcard(true);
+    }
+
+    function shuffleFlashcards() {
+      fcDeck = shuffleArray(fcDeck);
+      fcIndex = 0;
+      renderFlashcard(true);
+    }
+
+    function speakCurrentFlashcard() {
+      if (fcDeck[fcIndex]) playAudio(fcDeck[fcIndex].sound);
+    }
+
+    // --- 7. LOGIKA FITUR 2: COCOKAN HURUF ---
+    let matchScript = 'hiragana';
+    let matchTiles = [];
+    let selectedTileIdx = null;
+    let matchedPairs = 0;
+    let matchMoves = 0;
+    let lockMatch = false;
+
+    function setMatchFilter(val, btn) {
+      matchScript = val;
+      document.querySelectorAll('#matchScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      initMatchGame();
+    }
+
+    function initMatchGame() {
+      const pool = shuffleArray(getKanaPool(matchScript, 'base')).slice(0, 6);
+      const rawTiles = [];
+      pool.forEach((item, idx) => {
+        rawTiles.push({ pairId: idx, label: item.kana, kind: 'jp', sound: item.sound, matched: false });
+        rawTiles.push({ pairId: idx, label: item.romaji, kind: 'romaji', sound: item.sound, matched: false });
+      });
+
+      matchTiles = shuffleArray(rawTiles);
+      selectedTileIdx = null;
+      matchedPairs = 0;
+      matchMoves = 0;
+      lockMatch = false;
+
+      const fb = document.getElementById('matchFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      updateMatchStats();
+      renderMatchGrid();
+    }
+
+    function updateMatchStats() {
+      document.getElementById('matchProgress').textContent = `Cocok: ${matchedPairs} / 6`;
+      document.getElementById('matchMoves').textContent = `Langkah: ${matchMoves}`;
+    }
+
+    function renderMatchGrid(wrongIndices = []) {
+      const grid = document.getElementById('matchGrid');
+      grid.innerHTML = '';
+      matchTiles.forEach((tile, i) => {
+        const div = document.createElement('div');
+        div.className = 'match-tile' + (tile.kind === 'jp' ? ' jp-tile' : '');
+        if (tile.matched) div.classList.add('matched');
+        if (selectedTileIdx === i) div.classList.add('selected');
+        if (wrongIndices.includes(i)) div.classList.add('wrong');
+        div.textContent = tile.label;
+        div.onclick = () => handleMatchClick(i);
+        grid.appendChild(div);
       });
     }
 
-    // --- 2. SWITCH TAB BAB ---
-    function switchChapterTab(tabId, btn) {
-      document.querySelectorAll('.tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+    function handleMatchClick(idx) {
+      if (lockMatch || matchTiles[idx].matched || selectedTileIdx === idx) return;
 
-      document.querySelectorAll('.chapter-content').forEach(c => c.classList.remove('active'));
-      const target = document.getElementById(tabId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (matchTiles[idx].kind === 'jp') {
+        playAudio(matchTiles[idx].sound);
+      }
+
+      if (selectedTileIdx === null) {
+        selectedTileIdx = idx;
+        renderMatchGrid();
+        return;
+      }
+
+      const first = matchTiles[selectedTileIdx];
+      const second = matchTiles[idx];
+      matchMoves++;
+
+      if (first.pairId === second.pairId && first.kind !== second.kind) {
+        first.matched = true;
+        second.matched = true;
+        matchedPairs++;
+        selectedTileIdx = null;
+        updateMatchStats();
+        renderMatchGrid();
+
+        if (matchedPairs === 6) {
+          const fb = document.getElementById('matchFeedback');
+          fb.className = 'feedback-banner show ok';
+          fb.textContent = `🎉 Luar biasa! Semua huruf berhasil dicocokkan dalam ${matchMoves} langkah.`;
+        }
+      } else {
+        const prevIdx = selectedTileIdx;
+        selectedTileIdx = null;
+        lockMatch = true;
+        updateMatchStats();
+        renderMatchGrid([prevIdx, idx]);
+        setTimeout(() => {
+          lockMatch = false;
+          renderMatchGrid();
+        }, 500);
       }
     }
+
+    // --- 8. LOGIKA FITUR 3: MINI KUIS ---
+    let quizScript = 'hiragana';
+    let quizQuestions = [];
+    let quizIdx = 0;
+    let quizScore = 0;
+    let quizStreak = 0;
+    let quizAnswered = false;
+
+    function setQuizFilter(val, btn) {
+      quizScript = val;
+      document.querySelectorAll('#quizScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      startQuiz();
+    }
+
+    function startQuiz() {
+      const pool = getKanaPool(quizScript, 'all');
+      const selected = shuffleArray(pool).slice(0, 10);
+
+      quizQuestions = selected.map(target => {
+        const distractors = shuffleArray(
+          pool.filter(p => p.romaji !== target.romaji)
+        )
+          .filter((v, i, a) => a.findIndex(t => t.romaji === v.romaji) === i)
+          .slice(0, 3);
+
+        const options = shuffleArray([target, ...distractors]);
+        return { target, options };
+      });
+
+      quizIdx = 0;
+      quizScore = 0;
+      quizStreak = 0;
+      document.getElementById('quizActiveArea').style.display = 'block';
+      document.getElementById('quizResultArea').style.display = 'none';
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      quizAnswered = false;
+      const q = quizQuestions[quizIdx];
+
+      document.getElementById('quizStepBadge').textContent = `Soal: ${quizIdx + 1} / ${quizQuestions.length}`;
+      document.getElementById('quizScoreBadge').textContent = `Skor: ${quizScore}`;
+      document.getElementById('quizStreakBadge').textContent = `🔥 ${quizStreak}`;
+      document.getElementById('quizPromptLabel').textContent = `Apa cara baca ${q.target.type} ini?`;
+      const targetEl = document.getElementById('quizTargetText');
+      targetEl.textContent = q.target.kana;
+      targetEl.style.fontSize = q.target.kana.length >= 3 ? '3rem' : '4.2rem';
+
+      const fb = document.getElementById('quizFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      const optBox = document.getElementById('quizOptions');
+      optBox.innerHTML = '';
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.textContent = opt.romaji;
+        btn.onclick = () => submitQuizAnswer(opt, btn);
+        optBox.appendChild(btn);
+      });
+    }
+
+    function submitQuizAnswer(selectedOpt, btnEl) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = quizQuestions[quizIdx];
+      const isCorrect = selectedOpt.romaji === q.target.romaji;
+      const fb = document.getElementById('quizFeedback');
+
+      playAudio(q.target.sound);
+
+      document.querySelectorAll('.quiz-opt-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === q.target.romaji) b.classList.add('correct');
+      });
+
+      if (isCorrect) {
+        quizScore += 10;
+        quizStreak++;
+        btnEl.classList.add('correct');
+        fb.className = 'feedback-banner show ok';
+        fb.textContent = `✅ Tepat! ${q.target.kana} dibaca "${q.target.romaji}".`;
+      } else {
+        quizStreak = 0;
+        btnEl.classList.add('wrong');
+        fb.className = 'feedback-banner show err';
+        fb.textContent = `❌ Kurang tepat. ${q.target.kana} dibaca "${q.target.romaji}".`;
+      }
+
+      document.getElementById('quizScoreBadge').textContent = `Skor: ${quizScore}`;
+      document.getElementById('quizStreakBadge').textContent = `🔥 ${quizStreak}`;
+
+      setTimeout(() => {
+        quizIdx++;
+        if (quizIdx < quizQuestions.length) {
+          renderQuizQuestion();
+        } else {
+          document.getElementById('quizActiveArea').style.display = 'none';
+          document.getElementById('quizResultArea').style.display = 'block';
+          document.getElementById('quizFinalSummary').textContent = `Skor Akhir Kamu: ${quizScore} dari ${quizQuestions.length * 10} poin!`;
+        }
+      }, 1150);
+    }
+
+    function speakQuizTarget() {
+      if (quizQuestions[quizIdx]) playAudio(quizQuestions[quizIdx].target.sound);
+    }
+
+    // --- 9. LOGIKA FITUR 4: MENYUSUN HURUF (VARIASI LENGKAP) ---
+    let scrambleScript = 'hiragana';
+    let scrambleCategory = 'all';
+    let currentScramble = null;
+    let scramblePoolItems = [];
+    let scrambleSelectedIndices = [];
+    let scrambleSolvedCount = 0;
+    let lastWordString = '';
+
+    function setScrambleFilter(val, btn) {
+      scrambleScript = val;
+      document.querySelectorAll('#scrambleScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      nextScrambleWord();
+    }
+
+    function setScrambleCat(cat, btn) {
+      scrambleCategory = cat;
+      document.querySelectorAll('#scrambleCategoryFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      nextScrambleWord();
+    }
+
+    function getFilteredScrambleWords() {
+      return wordBank.filter(w => {
+        const scriptOk = (scrambleScript === 'both' || w.type === scrambleScript);
+        const catOk = (scrambleCategory === 'all' || w.cats.includes(scrambleCategory));
+        return scriptOk && catOk;
+      });
+    }
+
+    function nextScrambleWord() {
+      let filtered = getFilteredScrambleWords();
+      if (!filtered.length) {
+        filtered = wordBank.filter(w => scrambleScript === 'both' || w.type === scrambleScript);
+      }
+
+      document.getElementById('scramblePoolCount').textContent = `Bank Kata: ${filtered.length}`;
+
+      let candidates = filtered.filter(w => w.word !== lastWordString);
+      if (!candidates.length) candidates = filtered;
+
+      currentScramble = candidates[Math.floor(Math.random() * candidates.length)];
+      lastWordString = currentScramble.word;
+
+      // Buat huruf pengecoh cerdas (termasuk sokuon/dakuon/yoon jika relevan)
+      const distractorPool = getKanaPool(currentScramble.type, 'base').map(i => i.kana);
+      if (currentScramble.type === 'hiragana') {
+        distractorPool.push('っ', 'が', 'ざ', 'だ', 'ば', 'ぱ', 'しゃ', 'ちょ', 'きょ');
+      } else {
+        distractorPool.push('ッ', 'ー', 'バ', 'パ', 'ガ', 'ジ', 'シャ', 'チョ', 'ジュ');
+      }
+
+      const distractors = shuffleArray(
+        [...new Set(distractorPool)].filter(c => !currentScramble.chars.includes(c))
+      ).slice(0, 3);
+
+      scramblePoolItems = shuffleArray([...currentScramble.chars, ...distractors]);
+      scrambleSelectedIndices = [];
+
+      const typeLabel = currentScramble.type === 'hiragana' ? '🌸 Hiragana' : '⚡ Katakana';
+      document.getElementById('scrambleCatBadge').textContent = `${typeLabel} • ${currentScramble.catLabel}`;
+      document.getElementById('scrambleMeaning').textContent = currentScramble.meaning;
+      document.getElementById('scrambleRomaji').textContent = `Petunjuk Romaji: ${currentScramble.romaji}`;
+
+      const noteEl = document.getElementById('scrambleNote');
+      if (currentScramble.note) {
+        noteEl.textContent = `💡 Catatan: ${currentScramble.note}`;
+        noteEl.style.display = 'block';
+      } else {
+        noteEl.textContent = '';
+        noteEl.style.display = 'none';
+      }
+
+      const fb = document.getElementById('scrambleFeedback');
+      fb.className = 'feedback-banner';
+      fb.textContent = '';
+
+      renderScrambleUI();
+    }
+
+    function renderScrambleUI() {
+      const slotsEl = document.getElementById('scrambleSlots');
+      const poolEl = document.getElementById('scramblePool');
+
+      slotsEl.innerHTML = '';
+      if (scrambleSelectedIndices.length === 0) {
+        slotsEl.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem; align-self: center;">Ketuk ${currentScramble.chars.length} potongan huruf di bawah untuk menyusun kata...</span>`;
+      } else {
+        scrambleSelectedIndices.forEach((poolIdx, slotPos) => {
+          const chip = document.createElement('button');
+          chip.className = 'slot-chip';
+          chip.textContent = scramblePoolItems[poolIdx];
+          chip.title = 'Ketuk untuk membatalkan huruf ini';
+          chip.onclick = () => {
+            scrambleSelectedIndices.splice(slotPos, 1);
+            renderScrambleUI();
+          };
+          slotsEl.appendChild(chip);
+        });
+      }
+
+      poolEl.innerHTML = '';
+      scramblePoolItems.forEach((char, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'pool-chip';
+        btn.textContent = char;
+        btn.disabled = scrambleSelectedIndices.includes(idx);
+        btn.onclick = () => {
+          if (char !== 'っ' && char !== 'ッ' && char !== 'ー') {
+            playAudio(char);
+          }
+          scrambleSelectedIndices.push(idx);
+          renderScrambleUI();
+        };
+        poolEl.appendChild(btn);
+      });
+    }
+
+    function clearScrambleSlots() {
+      scrambleSelectedIndices = [];
+      const fb = document.getElementById('scrambleFeedback');
+      fb.className = 'feedback-banner';
+      renderScrambleUI();
+    }
+
+    function useScrambleHint() {
+      if (!currentScramble) return;
+      // Cari posisi pertama yang belum sesuai dengan target chars
+      let validPrefixLen = 0;
+      for (let i = 0; i < scrambleSelectedIndices.length; i++) {
+        if (scramblePoolItems[scrambleSelectedIndices[i]] === currentScramble.chars[i]) {
+          validPrefixLen++;
+        } else {
+          break;
+        }
+      }
+
+      // Potong susunan yang salah setelah validPrefixLen
+      scrambleSelectedIndices = scrambleSelectedIndices.slice(0, validPrefixLen);
+
+      if (validPrefixLen < currentScramble.chars.length) {
+        const neededChar = currentScramble.chars[validPrefixLen];
+        const poolIdx = scramblePoolItems.findIndex((c, idx) => c === neededChar && !scrambleSelectedIndices.includes(idx));
+        if (poolIdx !== -1) {
+          scrambleSelectedIndices.push(poolIdx);
+          renderScrambleUI();
+        }
+      }
+    }
+
+    function checkScrambleAnswer() {
+      if (!currentScramble) return;
+      const assembled = scrambleSelectedIndices.map(i => scramblePoolItems[i]).join('');
+      const fb = document.getElementById('scrambleFeedback');
+
+      if (!assembled) {
+        fb.className = 'feedback-banner show err';
+        fb.textContent = '⚠️ Susun hurufnya terlebih dahulu sebelum mengecek jawaban.';
+        return;
+      }
+
+      if (assembled === currentScramble.word) {
+        scrambleSolvedCount++;
+        document.getElementById('scrambleSolvedBadge').textContent = `Tersusun: ${scrambleSolvedCount}`;
+        fb.className = 'feedback-banner show ok';
+        fb.textContent = `🎉 Benar! "${currentScramble.word}" (${currentScramble.romaji}) = ${currentScramble.meaning}.`;
+        playAudio(currentScramble.word);
+        setTimeout(() => nextScrambleWord(), 1500);
+      } else {
+        fb.className = 'feedback-banner show err';
+        fb.textContent = `❌ Susunan "${assembled}" belum tepat. Coba periksa kembali atau gunakan tombol "💡 Bantuan 1 Huruf"!`;
+      }
+    }
+
+    function speakScrambleWord() {
+      if (currentScramble) playAudio(currentScramble.word);
+    }
+
+    // Inisialisasi awal tabel
+    renderGrids();
   </script>
+
 </body>
 </html>
