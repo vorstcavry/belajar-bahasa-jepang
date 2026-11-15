@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Portal Berbagi Materi &amp; Galeri Hugging Face Dataset</title>
+  <title>Portal Berbagi Materi &amp; Galeri Google Drive Real-Time</title>
 
   <script>
     (function () {
@@ -19,6 +19,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
       --primary: #818cf8;
       --primary-dark: #6366f1;
@@ -51,6 +52,7 @@
       --preview-box-border: #4338ca;
     }
 
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
     html.light-theme, body.light-theme {
       --primary: #4f46e5;
       --primary-dark: #3730a3;
@@ -109,6 +111,7 @@
       position: relative;
     }
 
+    /* Top Navigation Controls */
     .top-controls {
       display: flex;
       justify-content: space-between;
@@ -130,6 +133,11 @@
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
     }
 
     .theme-toggle-btn {
@@ -145,8 +153,14 @@
       cursor: pointer;
       box-shadow: 0 2px 8px var(--shadow-color);
       font-size: 1.2rem;
+      user-select: none;
     }
 
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Header */
     .portal-header {
       background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #065f46 100%);
       color: #ffffff;
@@ -167,12 +181,14 @@
       padding: 3px 10px;
       border-radius: 999px;
       margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
 
     .portal-header h1 {
       font-size: clamp(1.2rem, 4.5vw, 1.8rem);
       font-weight: 800;
       margin-bottom: 6px;
+      line-height: 1.25;
       color: #ffffff;
     }
 
@@ -194,8 +210,14 @@
       padding: 7px 14px;
       border-radius: 10px;
       text-decoration: none;
+      transition: all 0.2s;
     }
 
+    .drive-link-btn:hover {
+      background: #059669;
+    }
+
+    /* Tab Bar Navigasi */
     .tab-bar {
       display: flex;
       background: var(--tab-bar-bg);
@@ -216,6 +238,7 @@
       font-weight: 700;
       color: var(--tab-btn-text);
       cursor: pointer;
+      transition: all 0.2s;
       text-align: center;
     }
 
@@ -225,6 +248,7 @@
       box-shadow: 0 2px 5px var(--shadow-color);
     }
 
+    /* Form Upload Responsif */
     .upload-section {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
@@ -269,6 +293,11 @@
       outline: none;
       background: var(--input-bg);
       color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
     }
 
     .dropzone {
@@ -278,6 +307,12 @@
       text-align: center;
       cursor: pointer;
       background: var(--dropzone-bg);
+      transition: all 0.2s;
+    }
+
+    .dropzone:hover {
+      border-color: var(--primary);
+      background: var(--dropzone-hover-bg);
     }
 
     .dropzone-icon {
@@ -295,6 +330,8 @@
       font-size: 0.72rem;
       color: var(--success);
       font-weight: 700;
+      display: inline-block;
+      margin-top: 2px;
     }
 
     .file-preview {
@@ -329,6 +366,7 @@
       width: 0%;
       background: linear-gradient(90deg, #4f46e5, #06b6d4);
       border-radius: 999px;
+      transition: width 0.3s ease;
     }
 
     .progress-status {
@@ -349,15 +387,22 @@
       font-size: 0.88rem;
       font-weight: 800;
       cursor: pointer;
+      transition: all 0.2s;
       box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
       margin-top: 6px;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary);
     }
 
     .btn-submit:disabled {
       background: #94a3b8;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
+    /* Filter Chips Bar */
     .gallery-filter-bar {
       display: flex;
       align-items: center;
@@ -365,7 +410,11 @@
       margin-bottom: 12px;
       overflow-x: auto;
       padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+
+    .gallery-filter-bar::-webkit-scrollbar { display: none; }
 
     .filter-chip {
       padding: 6px 12px;
@@ -377,6 +426,8 @@
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
     }
 
     .filter-chip.active {
@@ -395,8 +446,20 @@
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
+    .btn-refresh:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Galeri Grid Mobile */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -419,6 +482,7 @@
       display: flex;
       flex-direction: column;
       box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s;
     }
 
     .doc-thumb {
@@ -436,6 +500,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .doc-card:hover .doc-thumb img {
+      transform: scale(1.05);
     }
 
     .doc-type-badge {
@@ -460,6 +529,7 @@
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
+      backdrop-filter: blur(2px);
     }
 
     .doc-body {
@@ -475,6 +545,7 @@
       font-weight: 800;
       color: var(--text);
       margin-bottom: 3px;
+      line-height: 1.25;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -484,6 +555,7 @@
     .doc-desc {
       font-size: 0.72rem;
       color: var(--subtext);
+      line-height: 1.3;
       margin-bottom: 8px;
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -513,6 +585,7 @@
       border-radius: 6px;
       font-size: 0.7rem;
       font-weight: 700;
+      text-align: center;
       background: var(--preview-box-bg);
       color: var(--primary);
       border: none;
@@ -531,6 +604,7 @@
       color: var(--success);
     }
 
+    /* Modal Pop-up Preview */
     .preview-modal-overlay {
       position: fixed;
       top: 0;
@@ -538,6 +612,7 @@
       width: 100%;
       height: 100%;
       background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(5px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -562,7 +637,14 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      transform: scale(0.95);
+      transition: all 0.25s ease;
       border: 1px solid var(--border);
+    }
+
+    .preview-modal-overlay.active .preview-modal-box {
+      transform: scale(1);
     }
 
     .preview-modal-header {
@@ -578,6 +660,10 @@
       font-size: 0.9rem;
       font-weight: 800;
       color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10px;
     }
 
     .btn-close-modal {
@@ -589,6 +675,9 @@
       font-weight: 800;
       cursor: pointer;
       color: var(--subtext);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .preview-modal-body {
@@ -623,6 +712,11 @@
       padding: 20px;
     }
 
+    .preview-doc-placeholder .icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+
     .preview-modal-footer {
       padding: 10px 14px;
       background: var(--modal-bg);
@@ -642,12 +736,14 @@
       text-decoration: none;
     }
 
+    /* Log Aktivitas Styling */
     .log-container {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
       border-radius: 14px;
       padding: 14px;
       margin-bottom: 20px;
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .log-header {
@@ -657,6 +753,12 @@
       margin-bottom: 10px;
       padding-bottom: 6px;
       border-bottom: 1.5px solid var(--border);
+    }
+
+    .log-header h3 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
     }
 
     .btn-clear-log {
@@ -698,6 +800,12 @@
       color: var(--text);
     }
 
+    .log-time {
+      font-size: 0.68rem;
+      color: var(--subtext);
+      font-weight: 600;
+    }
+
     .log-filename {
       font-size: 0.75rem;
       color: var(--accent);
@@ -706,6 +814,7 @@
 
     .log-badge-success {
       display: inline-block;
+      align-self: flex-start;
       font-size: 0.62rem;
       font-weight: 800;
       background: var(--success-bg);
@@ -714,6 +823,7 @@
       border-radius: 4px;
     }
 
+    /* Footer & Kontak Section */
     .footer-section {
       width: 100%;
       background: var(--footer-bg);
@@ -721,7 +831,21 @@
       border-radius: 16px;
       padding: 20px 14px;
       text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
       margin-top: 10px;
+    }
+
+    .footer-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .footer-desc {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      margin-bottom: 12px;
     }
 
     .social-group {
@@ -741,15 +865,28 @@
       font-size: 0.78rem;
       font-weight: 700;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    .btn-wa { background: #14532d; color: #4ade80; }
-    .btn-email { background: #7f1d1d; color: #f87171; }
-    .btn-fb { background: #1e3a8a; color: #60a5fa; }
-    .btn-ig { background: #831843; color: #f472b6; }
-    .btn-saweria { background: #78350f; color: #fbbf24; }
-    .btn-trakteer { background: #7f1d1d; color: #f87171; }
-    .btn-kofi { background: #075985; color: #38bdf8; }
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
 
     .copyright {
       font-size: 0.72rem;
@@ -758,14 +895,17 @@
       padding-top: 10px;
     }
 
+    /* Loading Spinner */
     .loading-box {
       grid-column: 1/-1;
       text-align: center;
       padding: 30px;
       color: var(--subtext);
       font-weight: 700;
+      font-size: 0.85rem;
     }
 
+    /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 20px;
@@ -781,6 +921,8 @@
       transition: all 0.3s ease;
       opacity: 0;
       z-index: 10001;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .toast-msg.show {
@@ -793,15 +935,22 @@
 
   <div class="container">
     <div class="top-controls">
-      <a href="../index.html" class="btn-back-hub"><span>←</span> Beranda Hub</a>
-      <button class="theme-toggle-btn" id="themeToggleBtn" type="button"><span id="themeIcon">🌙</span></button>
+      <a href="../index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
     </div>
 
     <header class="portal-header">
       <div class="badge-top">COMMUNITY LEARNING HUB</div>
-      <h1>🤗 Portal Berbagi Materi <span>&amp; Galeri Hugging Face</span></h1>
-      <p>Unggah modul catatan, kanji, soal latihan, atau gambar materi ke Hugging Face Dataset.</p>
-      <a id="hfRepoHeaderLink" href="https://huggingface.co/datasets/" target="_blank" rel="noopener noreferrer" class="drive-link-btn">🤗 Buka Dataset Hugging Face ↗</a>
+      <h1>📁 Portal Berbagi Materi <span>&amp; Galeri Google Drive</span></h1>
+      <p>Unggah modul catatan, kanji, soal latihan, atau gambar materi. File langsung tersimpan di Drive dan otomatis dapat dipratinjau (*preview*) di galeri.</p>
+      
+      <a href="https://drive.google.com/drive/folders/1aZ9fleQfYCoQqB-_ledEj4bBthdwWzQK?usp=drive_link" target="_blank" rel="noopener noreferrer" class="drive-link-btn">
+        📂 Buka Folder Drive Utama ↗
+      </a>
     </header>
 
     <div class="tab-bar">
@@ -811,8 +960,8 @@
     </div>
 
     <section id="uploadTab" class="upload-section" style="display: none;">
-      <div class="section-title">📤 Upload Berkas Materi</div>
-      <p class="section-desc">Berkas akan langsung terunggah ke repository Hugging Face Dataset.</p>
+      <div class="section-title">📤 Upload Berkas Materi (Maksimal 25 MB)</div>
+      <p class="section-desc">Berkas akan langsung terunggah ke Google Drive dan tampil pada galeri.</p>
 
       <form id="uploadForm" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
@@ -822,7 +971,7 @@
 
         <div class="form-group">
           <label>Judul Materi / Catatan</label>
-          <input type="text" id="docTitle" class="form-input" placeholder="Contoh: Ringkasan Pola Kalimat" required>
+          <input type="text" id="docTitle" class="form-input" placeholder="Contoh: Ringkasan Pola Kalimat Bab 1-25 N5" required>
         </div>
 
         <div class="form-group">
@@ -831,23 +980,25 @@
             <option value="Tata Bahasa (Bunpou)">Tata Bahasa (Bunpou)</option>
             <option value="Kanji &amp; Kosakata">Kanji &amp; Kosakata</option>
             <option value="Latihan Soal &amp; Kuis">Latihan Soal &amp; Kuis</option>
+            <option value="Menyimak (Choukai)">Menyimak (Choukai)</option>
+            <option value="Audio / Video Materi">Audio / Video Materi</option>
             <option value="Lainnya">Lainnya</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Deskripsi Singkat</label>
-          <textarea id="docDescription" class="form-textarea" rows="2" placeholder="Tuliskan ringkasan..."></textarea>
+          <textarea id="docDescription" class="form-textarea" rows="2" placeholder="Tuliskan ringkasan isi berkas ini..."></textarea>
         </div>
 
         <div class="form-group">
-          <label>Pilih File</label>
+          <label>Pilih File (PDF, Word, Gambar, Audio, atau ZIP)</label>
           <div class="dropzone" id="dropzoneBox" onclick="document.getElementById('fileInput').click()">
             <div class="dropzone-icon">☁️</div>
-            <p>Ketuk untuk memilih berkas</p>
-            <span>✨ Pilih file PDF, Gambar, atau Dokumen</span>
+            <p>Ketuk untuk memilih berkas dari HP</p>
+            <span>✨ Maksimal ukuran: 25 MB</span>
           </div>
-          <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(this)">
+          <input type="file" id="fileInput" style="display: none;" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.mp4,.zip,.rar" onchange="handleFileSelect(this)">
           
           <div class="file-preview" id="filePreview">
             <span id="fileNameDisplay">nama_file.pdf</span>
@@ -862,7 +1013,9 @@
           </div>
         </div>
 
-        <button type="submit" id="btnSubmit" class="btn-submit">🚀 Kirim &amp; Simpan ke Hugging Face</button>
+        <button type="submit" id="btnSubmit" class="btn-submit">
+          🚀 Kirim &amp; Simpan ke Google Drive
+        </button>
       </form>
     </section>
 
@@ -874,6 +1027,7 @@
         <button class="filter-chip" onclick="filterGallery('doc', this)">📝 Dokumen</button>
         <button class="btn-refresh" onclick="fetchLiveGalleryFromDrive()">🔄 Sinkronkan</button>
       </div>
+
       <div class="gallery-grid" id="galleryContainer">
         <div class="loading-box">⏳ Memuat berkas galeri...</div>
       </div>
@@ -890,13 +1044,25 @@
     </section>
 
     <div class="footer-section">
-      <div style="font-size: 0.9rem; font-weight: 800; margin-bottom: 4px;">Dukung Proyek Ini</div>
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, saran materi, atau ingin memberikan dukungan donasi? Hubungi tautan resmi:</div>
+      
       <div class="social-group">
-        <a href="https://wa.me/6285726996330" target="_blank" class="social-btn btn-wa">💬 WA</a>
-        <a href="mailto:vorstcavry@gmail.com" target="_blank" class="social-btn btn-email">✉️ Email</a>
-        <a href="https://saweria.co/VorstCavry" target="_blank" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WA</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 FB</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 IG</a>
       </div>
-      <div class="copyright">&copy; 2026 Vorst Cavry &bull; Pembelajaran Bahasa Jepang</div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
     </div>
   </div>
 
@@ -909,15 +1075,15 @@
       <div class="preview-modal-body" id="modalPreviewContent"></div>
       <div class="preview-modal-footer">
         <span style="font-size: 0.72rem; color: var(--subtext);" id="modalUploaderInfo">Diunggah oleh: -</span>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive" id="modalDriveBtn">Buka di Hugging Face ↗</a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive" id="modalDriveBtn">Buka di Drive ↗</a>
       </div>
     </div>
   </div>
 
   <div class="toast-msg" id="toastMsg">Notifikasi</div>
 
-  <script src="config.js"></script>
   <script>
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const rootHtml = document.documentElement;
@@ -937,8 +1103,10 @@
       }
     }
 
+    // Inisialisasi tema awal
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
+
     if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
       applyThemeState(true);
     } else {
@@ -946,28 +1114,29 @@
     }
 
     themeBtn.addEventListener('click', () => {
-      applyThemeState(!rootHtml.classList.contains('light-theme'));
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
     });
 
-    const HF_TOKEN = (typeof CONFIG !== 'undefined' && CONFIG.HF_TOKEN) ? CONFIG.HF_TOKEN : "";
-    const HF_REPO_ID = (typeof CONFIG !== 'undefined' && CONFIG.HF_REPO_ID) ? CONFIG.HF_REPO_ID : "";
-    const HF_BRANCH = (typeof CONFIG !== 'undefined' && CONFIG.HF_BRANCH) ? CONFIG.HF_BRANCH : "main";
-    const HF_DATASET_URL = `https://huggingface.co/datasets/${HF_REPO_ID}`;
+    // --- 2. CONFIG GOOGLE APPS SCRIPT ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_WsyaNBClq2G0B8mdtxDaw_oMCyk7ynDtqaFILbqD-2qOBFqQCSdkGFhCsk7MSCHK/exec";
+    const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1aZ9fleQfYCoQqB-_ledEj4bBthdwWzQK?usp=drive_link";
+    const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
-    const headerRepoLink = document.getElementById('hfRepoHeaderLink');
-    if (headerRepoLink) headerRepoLink.href = HF_DATASET_URL;
+    let sharedDocuments = JSON.parse(localStorage.getItem('user_gallery_docs')) || [];
+    let uploadLogs = JSON.parse(localStorage.getItem('user_upload_logs')) || [];
 
-    let sharedDocuments = JSON.parse(localStorage.getItem('hf_gallery_docs')) || [];
-    let uploadLogs = JSON.parse(localStorage.getItem('hf_upload_logs')) || [];
     let selectedFile = null;
     let currentGalleryFilter = 'all';
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
       document.getElementById('uploadTab').style.display = 'none';
       document.getElementById('galleryTab').style.display = 'none';
       document.getElementById('logTab').style.display = 'none';
+
       document.getElementById(tabId).style.display = 'block';
 
       if (tabId === 'galleryTab') renderGallery(sharedDocuments);
@@ -976,7 +1145,14 @@
 
     function handleFileSelect(input) {
       if (input.files && input.files[0]) {
-        selectedFile = input.files[0];
+        const file = input.files[0];
+        if (file.size > MAX_FILE_SIZE) {
+          showToast(`❌ Ukuran file terlalu besar (${(file.size / 1024 / 1024).toFixed(2)} MB). Maksimal 25 MB!`);
+          clearFileSelection();
+          return;
+        }
+
+        selectedFile = file;
         document.getElementById('fileNameDisplay').innerText = `📄 ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`;
         document.getElementById('filePreview').style.display = 'flex';
         document.getElementById('dropzoneBox').style.display = 'none';
@@ -1007,27 +1183,18 @@
     }
 
     function updateProgress(percent, text) {
-      document.getElementById('progressBarFill').style.width = `${percent}%`;
-      document.getElementById('progressStatus').innerText = text;
+      const progressBar = document.getElementById('progressBarFill');
+      const progressStatus = document.getElementById('progressStatus');
+      progressBar.style.width = `${percent}%`;
+      progressStatus.innerText = text;
     }
 
-    function utf8ToBase64(str) {
-      const bytes = new TextEncoder().encode(str);
-      let binString = "";
-      for (let i = 0; i < bytes.byteLength; i++) {
-        binString += String.fromCharCode(bytes[i]);
-      }
-      return btoa(binString);
-    }
-
+    // --- 3. SUBMIT FORMULIR & AUTO-SHOW DI GALERI ---
     async function handleFormSubmit(e) {
       e.preventDefault();
+
       if (!selectedFile) {
         showToast("⚠️ Pilih file terlebih dahulu!");
-        return;
-      }
-      if (!HF_TOKEN || HF_TOKEN.includes("MASUKKAN_TOKEN")) {
-        showToast("⚠️ Token Hugging Face belum dikonfigurasi di config.js!");
         return;
       }
 
@@ -1035,193 +1202,182 @@
       const progressWrapper = document.getElementById('progressWrapper');
 
       btnSubmit.disabled = true;
-      btnSubmit.innerText = "⏳ Sedang Mengunggah...";
+      btnSubmit.innerText = "⏳ Sedang Mengunggah File...";
       progressWrapper.style.display = 'block';
       updateProgress(10, "Menyiapkan file... (10%)");
 
-      const uploader = document.getElementById('uploaderName').value.trim();
-      const title = document.getElementById('docTitle').value.trim();
+      const uploader = document.getElementById('uploaderName').value;
+      const title = document.getElementById('docTitle').value;
       const category = document.getElementById('docCategory').value;
-      const desc = document.getElementById('docDescription').value.trim();
+      const desc = document.getElementById('docDescription').value;
 
       try {
         const base64Data = await toBase64(selectedFile);
-        updateProgress(50, "Memproses indeks galeri... (50%)");
+        updateProgress(60, "Mengunggah langsung ke Google Drive... (60%)");
 
-        const timestamp = Date.now();
-        const safeName = selectedFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-        const targetPath = `uploads/${timestamp}_${safeName}`;
-        const fileUrl = `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/${targetPath}`;
-        const blobUrl = `https://huggingface.co/datasets/${HF_REPO_ID}/blob/${HF_BRANCH}/${targetPath}`;
+        const formData = new URLSearchParams();
+        formData.append("fileName", selectedFile.name);
+        formData.append("mimeType", selectedFile.type || "application/octet-stream");
+        formData.append("fileData", base64Data);
+        formData.append("uploader", uploader);
+        formData.append("title", title);
+        formData.append("category", category);
+        formData.append("description", desc);
 
-        let currentIndex = [];
-        try {
-          const prevIndexRes = await fetch(
-            `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/gallery_index.json?t=${timestamp}`,
-            { headers: { Authorization: `Bearer ${HF_TOKEN}` } }
-          );
-          if (prevIndexRes.ok) currentIndex = await prevIndexRes.json();
-        } catch (_) {}
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        updateProgress(100, "Selesai! (100%)");
+
+        if (result.status !== "success") {
+          throw new Error(result.message || "Gagal mengunggah berkas");
+        }
+
+        let fileType = 'doc';
+        let isImage = selectedFile.type.startsWith('image/');
+        let isMedia = selectedFile.type.startsWith('audio/') || selectedFile.type.startsWith('video/');
+        
+        if (isImage) fileType = 'image';
+        else if (selectedFile.name.endsWith('.pdf')) fileType = 'pdf';
+        else if (isMedia) fileType = 'media';
 
         const now = new Date();
         const dateString = now.getFullYear() + "-" + 
                            String(now.getMonth() + 1).padStart(2, '0') + "-" + 
                            String(now.getDate()).padStart(2, '0') + " " + 
                            String(now.getHours()).padStart(2, '0') + ":" + 
-                           String(now.getMinutes()).padStart(2, '0');
+                           String(now.getMinutes()).padStart(2, '0') + ":" + 
+                           String(now.getSeconds()).padStart(2, '0');
 
-        const newEntry = {
-          id: String(timestamp),
-          path: targetPath,
-          name: selectedFile.name,
-          title: title || selectedFile.name,
-          category: category || "Lainnya",
-          uploader: uploader || "Anonim",
-          description: desc || "",
-          mimeType: selectedFile.type || "application/octet-stream",
-          date: dateString,
-          url: fileUrl,
-          blobUrl: blobUrl
-        };
-
-        currentIndex.unshift(newEntry);
-        const updatedIndexBase64 = utf8ToBase64(JSON.stringify(currentIndex, null, 2));
-
-        updateProgress(75, "Mengirim ke Hugging Face (XHR)... (75%)");
-
-        const commitHeader = JSON.stringify({ key: "header", value: { summary: `Upload: ${title || selectedFile.name}`, description: desc } });
-        const fileOperation = JSON.stringify({ key: "file", value: { content: base64Data, path: targetPath, encoding: "base64" } });
-        const indexOperation = JSON.stringify({ key: "file", value: { content: updatedIndexBase64, path: "gallery_index.json", encoding: "base64" } });
-        const ndjsonBody = [commitHeader, fileOperation, indexOperation].join("\n");
-
-        await new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.open("POST", `https://huggingface.co/api/datasets/${HF_REPO_ID}/commit/${HF_BRANCH}`, true);
-          xhr.setRequestHeader("Authorization", `Bearer ${HF_TOKEN}`);
-          xhr.setRequestHeader("Content-Type", "application/x-ndjson");
-
-          xhr.upload.onprogress = (event) => {
-            if (event.lengthComputable) {
-              const percent = 50 + Math.round((event.loaded / event.total) * 45);
-              updateProgress(percent, `Mengunggah ke Hugging Face... (${percent}%)`);
-            }
-          };
-
-          xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status < 300) {
-              resolve(xhr.responseText);
-            } else {
-              reject(new Error(`Hugging Face Error (${xhr.status}): ${xhr.responseText || 'Gagal commit'}`));
-            }
-          };
-
-          xhr.onerror = () => reject(new Error("Gagal terhubung ke server (Network Error / CORS)."));
-          xhr.send(ndjsonBody);
-        });
-
-        updateProgress(100, "Selesai! (100%)");
-
-        let fileType = 'doc';
-        let isImage = selectedFile.type.startsWith('image/');
-        if (isImage) fileType = 'image';
-        else if (selectedFile.name.toLowerCase().endsWith('.pdf')) fileType = 'pdf';
+        const localBlobUrl = URL.createObjectURL(selectedFile);
 
         const newDoc = {
-          id: String(timestamp),
+          id: result.fileId || Date.now().toString(),
           title: title,
           category: category,
           type: fileType,
           uploader: uploader,
           date: dateString,
-          desc: desc || "Materi berhasil diunggah.",
-          thumbIcon: isImage ? '🖼️' : (fileType === 'pdf' ? '📄' : '📝'),
-          imgUrl: isImage ? URL.createObjectURL(selectedFile) : '',
-          previewUrl: fileUrl,
-          driveUrl: blobUrl
+          desc: desc || "Materi berhasil diunggah kontributor.",
+          thumbIcon: isImage ? '🖼️' : (fileType === 'pdf' ? '📄' : (fileType === 'media' ? '🎧' : '📝')),
+          imgUrl: isImage ? localBlobUrl : '',
+          previewUrl: localBlobUrl,
+          driveUrl: result.fileUrl || DRIVE_FOLDER_URL
         };
 
         sharedDocuments.unshift(newDoc);
-        localStorage.setItem('hf_gallery_docs', JSON.stringify(sharedDocuments));
+        localStorage.setItem('user_gallery_docs', JSON.stringify(sharedDocuments));
 
-        uploadLogs.unshift({
+        const newLog = {
           uploader: uploader,
           fileName: selectedFile.name,
           date: dateString,
           size: (selectedFile.size / 1024 / 1024).toFixed(2) + " MB",
-          status: "Berhasil Tayang"
-        });
-        localStorage.setItem('hf_upload_logs', JSON.stringify(uploadLogs));
+          status: "Berhasil Tayang di Galeri & Drive"
+        };
+
+        uploadLogs.unshift(newLog);
+        localStorage.setItem('user_upload_logs', JSON.stringify(uploadLogs));
 
         document.getElementById('uploadForm').reset();
         clearFileSelection();
         btnSubmit.disabled = false;
-        btnSubmit.innerText = "🚀 Kirim & Simpan ke Hugging Face";
+        btnSubmit.innerText = "🚀 Kirim & Simpan ke Google Drive";
 
-        showToast("✅ Berhasil diunggah ke Hugging Face!");
+        showToast("✅ Berhasil! File Anda langsung tayang di galeri.");
         switchTab('galleryTab', document.querySelector('.tab-bar .tab-btn:first-child'));
 
       } catch (err) {
         btnSubmit.disabled = false;
-        btnSubmit.innerText = "🚀 Kirim & Simpan ke Hugging Face";
+        btnSubmit.innerText = "🚀 Kirim & Simpan ke Google Drive";
         progressWrapper.style.display = 'none';
-        showToast("❌ Gagal: " + err.message);
-        console.error("Detail Error Upload:", err);
+        showToast("❌ Terjadi kendala saat mengunggah: " + err.message);
       }
     }
 
+    // --- 4. SINKRONISASI DAFTAR FILE GOOGLE DRIVE ---
     async function fetchLiveGalleryFromDrive() {
       const container = document.getElementById('galleryContainer');
-      container.innerHTML = '<div class="loading-box">⏳ Menyinkronkan daftar berkas...</div>';
-      const headers = HF_TOKEN && !HF_TOKEN.includes("MASUKKAN_TOKEN") ? { Authorization: `Bearer ${HF_TOKEN}` } : {};
+      container.innerHTML = '<div class="loading-box">⏳ Menyinkronkan daftar berkas dari Google Drive...</div>';
 
       try {
-        const indexRes = await fetch(`https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/gallery_index.json?t=${Date.now()}`, { headers });
-        if (indexRes.ok) {
-          const rawFiles = await indexRes.json();
-          sharedDocuments = rawFiles.map(file => {
-            const lowerName = (file.name || '').toLowerCase();
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
+
+        if (data && data.status === "success" && data.files) {
+          const driveDocs = data.files.map(file => {
             let fType = 'doc';
-            let isImg = /\.(jpg|jpeg|png|gif|webp)$/i.test(lowerName);
+            let isImg = file.mimeType.startsWith('image/');
+            let isMed = file.mimeType.startsWith('audio/') || file.mimeType.startsWith('video/');
             if (isImg) fType = 'image';
-            else if (lowerName.endsWith('.pdf')) fType = 'pdf';
+            else if (file.mimeType.includes('pdf')) fType = 'pdf';
+            else if (isMed) fType = 'media';
+
+            let uploader = "Kontributor Drive";
+            let desc = `Ukuran berkas: ${file.size}`;
+            if (file.description) {
+              desc = file.description;
+              if (file.description.includes("Pengunggah:")) {
+                uploader = file.description.split("Pengunggah:")[1].split("|")[0].trim();
+              }
+            }
+
+            const driveThumbnail = `https://drive.google.com/thumbnail?id=${file.id}&sz=w600`;
+            const drivePreviewIframe = `https://drive.google.com/file/d/${file.id}/preview`;
 
             return {
-              id: file.id || file.path,
-              title: file.title || file.name,
-              category: file.category || "Materi",
+              id: file.id,
+              title: file.name,
+              category: "Materi Terverifikasi",
               type: fType,
-              uploader: file.uploader || "Kontributor",
-              date: file.date || "",
-              desc: file.description || "",
-              thumbIcon: isImg ? '🖼️' : (fType === 'pdf' ? '📄' : '📝'),
-              imgUrl: isImg ? file.url : '',
-              previewUrl: file.url,
-              driveUrl: file.blobUrl || file.url
+              uploader: uploader,
+              date: file.date,
+              desc: desc,
+              thumbIcon: isImg ? '🖼️' : (fType === 'pdf' ? '📄' : (fType === 'media' ? '🎧' : '📝')),
+              imgUrl: isImg ? driveThumbnail : '',
+              previewUrl: isImg ? driveThumbnail : drivePreviewIframe,
+              driveUrl: file.url || DRIVE_FOLDER_URL
             };
           });
-          localStorage.setItem('hf_gallery_docs', JSON.stringify(sharedDocuments));
+
+          if (driveDocs.length > 0) {
+            sharedDocuments = driveDocs;
+            localStorage.setItem('user_gallery_docs', JSON.stringify(sharedDocuments));
+          }
         }
       } catch (e) {
-        console.log("Menggunakan cache lokal:", e);
+        console.log("Menggunakan cache galeri lokal:", e);
       }
+
       renderGallery(sharedDocuments);
-      showToast("🔄 Galeri diperbarui!");
+      showToast("🔄 Galeri berhasil diperbarui!");
     }
 
+    // --- 5. RENDER GALERI DOKUMEN & GAMBAR ---
     function renderGallery(docs) {
       const container = document.getElementById('galleryContainer');
       container.innerHTML = '';
-      const filtered = docs.filter(item => currentGalleryFilter === 'all' || item.type === currentGalleryFilter);
+
+      const filtered = docs.filter(item => {
+        if (currentGalleryFilter === 'all') return true;
+        return item.type === currentGalleryFilter;
+      });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--subtext); font-weight: 700;">Belum ada berkas.</div>';
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--subtext); font-weight: 700; font-size: 0.82rem;">Belum ada berkas pada kategori ini.</div>';
         return;
       }
 
       filtered.forEach(doc => {
         const card = document.createElement('div');
         card.className = 'doc-card';
-        let thumb = doc.type === 'image' && doc.imgUrl ? `<img src="${doc.imgUrl}" alt="${doc.title}">` : `<div style="font-size: 2.5rem;">${doc.thumbIcon}</div>`;
+        
+        let thumb = doc.type === 'image' && doc.imgUrl 
+          ? `<img src="${doc.imgUrl}" alt="${doc.title}" onerror="this.src='https://images.unsplash.com/photo-1528164344705-475426879c0d?w=500&auto=format&fit=crop&q=60'">` 
+          : `<div style="font-size: 2.5rem;">${doc.thumbIcon}</div>`;
 
         card.innerHTML = `
           <div class="doc-thumb" onclick="openPreviewModal('${doc.id}')">
@@ -1237,11 +1393,11 @@
             <div>
               <div class="doc-meta">
                 <span>👤 ${doc.uploader}</span>
-                <span>📅 ${doc.date ? doc.date.split(' ')[0] : ''}</span>
+                <span>📅 ${doc.date ? doc.date.split(' ')[0] : 'Baru saja'}</span>
               </div>
               <div class="btn-card-group">
                 <button class="btn-preview-action" onclick="openPreviewModal('${doc.id}')">🔍 Preview</button>
-                <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-drive-action">🤗 Repo</a>
+                <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-drive-action">📂 Drive</a>
               </div>
             </div>
           </div>
@@ -1250,6 +1406,7 @@
       });
     }
 
+    // --- 6. MODAL PREVIEW HANDLER ---
     function openPreviewModal(docId) {
       const doc = sharedDocuments.find(d => d.id === docId);
       if (!doc) return;
@@ -1264,31 +1421,46 @@
       if (doc.type === 'image') {
         previewContainer.innerHTML = `<img src="${doc.previewUrl || doc.imgUrl}" alt="${doc.title}">`;
       } else if (doc.type === 'pdf') {
-        const pdfSrc = doc.previewUrl.startsWith('blob:') ? doc.previewUrl : `https://docs.google.com/gview?url=${encodeURIComponent(doc.previewUrl)}&embedded=true`;
-        previewContainer.innerHTML = `<iframe src="${pdfSrc}"></iframe>`;
+        const pdfSrc = doc.previewUrl.startsWith('blob:') ? doc.previewUrl : `https://drive.google.com/file/d/${doc.id}/preview`;
+        previewContainer.innerHTML = `<iframe src="${pdfSrc}" allow="autoplay"></iframe>`;
       } else {
-        previewContainer.innerHTML = `<div class="preview-doc-placeholder"><div style="font-size: 3rem; margin-bottom: 8px;">${doc.thumbIcon}</div><p>${doc.title}</p></div>`;
+        previewContainer.innerHTML = `
+          <div class="preview-doc-placeholder">
+            <div class="icon">${doc.thumbIcon}</div>
+            <p style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">${doc.title}</p>
+            <p style="font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px;">${doc.desc}</p>
+            <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive">Buka &amp; Unduh Dokumen Lengkap di Drive ↗</a>
+          </div>
+        `;
       }
+
       document.getElementById('previewModal').classList.add('active');
     }
 
     function closePreviewModal(e) {
       if (e) e.preventDefault();
       document.getElementById('previewModal').classList.remove('active');
+      document.getElementById('modalPreviewContent').innerHTML = '';
     }
 
+    // --- 7. LOG AKTIVITAS ---
     function renderLogs() {
       const container = document.getElementById('logListContainer');
       container.innerHTML = '';
+
       if (uploadLogs.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 16px; color: var(--subtext); font-size: 0.78rem;">Belum ada riwayat aktivitas.</div>';
+        container.innerHTML = '<div style="text-align: center; padding: 16px; color: var(--subtext); font-weight: 600; font-size: 0.78rem;">Belum ada riwayat aktivitas pengunggahan.</div>';
         return;
       }
+
       uploadLogs.forEach(log => {
         const item = document.createElement('div');
         item.className = 'log-item';
         item.innerHTML = `
-          <div class="log-item-top"><span class="log-user">👤 ${log.uploader}</span><span style="font-size: 0.68rem; color: var(--subtext);">${log.date}</span></div>
+          <div class="log-item-top">
+            <span class="log-user">👤 ${log.uploader}</span>
+            <span class="log-time">${log.date}</span>
+          </div>
           <div class="log-filename">📄 ${log.fileName} (${log.size})</div>
           <span class="log-badge-success">✅ ${log.status}</span>
         `;
@@ -1297,11 +1469,11 @@
     }
 
     function clearLogHistory() {
-      if (confirm("Hapus seluruh catatan log aktivitas?")) {
+      if (confirm("Hapus seluruh catatan log aktivitas di perangkat ini?")) {
         uploadLogs = [];
-        localStorage.removeItem('hf_upload_logs');
+        localStorage.removeItem('user_upload_logs');
         renderLogs();
-        showToast("🗑️ Log dibersihkan.");
+        showToast("🗑️ Riwayat log berhasil dibersihkan.");
       }
     }
 
@@ -1319,6 +1491,7 @@
       setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
+    // Inisialisasi awal
     if (sharedDocuments.length === 0) {
       fetchLiveGalleryFromDrive();
     } else {
