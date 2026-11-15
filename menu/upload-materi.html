@@ -19,7 +19,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* ================= TEMA DEFAULT (DARK MODE) ================= */
     :root {
       --primary: #818cf8;
       --primary-dark: #6366f1;
@@ -52,7 +51,6 @@
       --preview-box-border: #4338ca;
     }
 
-    /* ================= TEMA TERANG (LIGHT MODE) ================= */
     html.light-theme, body.light-theme {
       --primary: #4f46e5;
       --primary-dark: #3730a3;
@@ -111,7 +109,6 @@
       position: relative;
     }
 
-    /* Top Navigation Controls */
     .top-controls {
       display: flex;
       justify-content: space-between;
@@ -133,11 +130,6 @@
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 0 2px 8px var(--shadow-color);
-      transition: transform 0.2s ease;
-    }
-
-    .btn-back-hub:hover {
-      transform: translateX(-3px);
     }
 
     .theme-toggle-btn {
@@ -153,14 +145,8 @@
       cursor: pointer;
       box-shadow: 0 2px 8px var(--shadow-color);
       font-size: 1.2rem;
-      user-select: none;
     }
 
-    .theme-toggle-btn:hover {
-      transform: scale(1.08);
-    }
-
-    /* Header */
     .portal-header {
       background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #065f46 100%);
       color: #ffffff;
@@ -181,14 +167,12 @@
       padding: 3px 10px;
       border-radius: 999px;
       margin-bottom: 8px;
-      letter-spacing: 0.5px;
     }
 
     .portal-header h1 {
       font-size: clamp(1.2rem, 4.5vw, 1.8rem);
       font-weight: 800;
       margin-bottom: 6px;
-      line-height: 1.25;
       color: #ffffff;
     }
 
@@ -210,14 +194,8 @@
       padding: 7px 14px;
       border-radius: 10px;
       text-decoration: none;
-      transition: all 0.2s;
     }
 
-    .drive-link-btn:hover {
-      background: #059669;
-    }
-
-    /* Tab Bar Navigasi */
     .tab-bar {
       display: flex;
       background: var(--tab-bar-bg);
@@ -238,7 +216,6 @@
       font-weight: 700;
       color: var(--tab-btn-text);
       cursor: pointer;
-      transition: all 0.2s;
       text-align: center;
     }
 
@@ -248,7 +225,6 @@
       box-shadow: 0 2px 5px var(--shadow-color);
     }
 
-    /* Form Upload Responsif */
     .upload-section {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
@@ -293,11 +269,6 @@
       outline: none;
       background: var(--input-bg);
       color: var(--text);
-      transition: border-color 0.2s;
-    }
-
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: var(--primary);
     }
 
     .dropzone {
@@ -307,12 +278,6 @@
       text-align: center;
       cursor: pointer;
       background: var(--dropzone-bg);
-      transition: all 0.2s;
-    }
-
-    .dropzone:hover {
-      border-color: var(--primary);
-      background: var(--dropzone-hover-bg);
     }
 
     .dropzone-icon {
@@ -330,8 +295,6 @@
       font-size: 0.72rem;
       color: var(--success);
       font-weight: 700;
-      display: inline-block;
-      margin-top: 2px;
     }
 
     .file-preview {
@@ -366,7 +329,6 @@
       width: 0%;
       background: linear-gradient(90deg, #4f46e5, #06b6d4);
       border-radius: 999px;
-      transition: width 0.3s ease;
     }
 
     .progress-status {
@@ -387,22 +349,15 @@
       font-size: 0.88rem;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s;
       box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
       margin-top: 6px;
-    }
-
-    .btn-submit:hover {
-      background: var(--primary);
     }
 
     .btn-submit:disabled {
       background: #94a3b8;
       cursor: not-allowed;
-      box-shadow: none;
     }
 
-    /* Filter Chips Bar */
     .gallery-filter-bar {
       display: flex;
       align-items: center;
@@ -410,11 +365,7 @@
       margin-bottom: 12px;
       overflow-x: auto;
       padding-bottom: 4px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
     }
-
-    .gallery-filter-bar::-webkit-scrollbar { display: none; }
 
     .filter-chip {
       padding: 6px 12px;
@@ -426,8 +377,6 @@
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
-      flex-shrink: 0;
-      transition: all 0.2s;
     }
 
     .filter-chip.active {
@@ -446,20 +395,8 @@
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
-      flex-shrink: 0;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
     }
 
-    .btn-refresh:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-
-    /* Galeri Grid Mobile */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -482,7 +419,6 @@
       display: flex;
       flex-direction: column;
       box-shadow: 0 2px 6px var(--shadow-color);
-      transition: transform 0.2s;
     }
 
     .doc-thumb {
@@ -500,11 +436,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .doc-card:hover .doc-thumb img {
-      transform: scale(1.05);
     }
 
     .doc-type-badge {
@@ -529,7 +460,6 @@
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
-      backdrop-filter: blur(2px);
     }
 
     .doc-body {
@@ -545,7 +475,6 @@
       font-weight: 800;
       color: var(--text);
       margin-bottom: 3px;
-      line-height: 1.25;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -555,7 +484,6 @@
     .doc-desc {
       font-size: 0.72rem;
       color: var(--subtext);
-      line-height: 1.3;
       margin-bottom: 8px;
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -585,7 +513,6 @@
       border-radius: 6px;
       font-size: 0.7rem;
       font-weight: 700;
-      text-align: center;
       background: var(--preview-box-bg);
       color: var(--primary);
       border: none;
@@ -604,7 +531,6 @@
       color: var(--success);
     }
 
-    /* Modal Pop-up Preview */
     .preview-modal-overlay {
       position: fixed;
       top: 0;
@@ -612,7 +538,6 @@
       width: 100%;
       height: 100%;
       background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(5px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -637,14 +562,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-      transform: scale(0.95);
-      transition: all 0.25s ease;
       border: 1px solid var(--border);
-    }
-
-    .preview-modal-overlay.active .preview-modal-box {
-      transform: scale(1);
     }
 
     .preview-modal-header {
@@ -660,10 +578,6 @@
       font-size: 0.9rem;
       font-weight: 800;
       color: var(--text);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding-right: 10px;
     }
 
     .btn-close-modal {
@@ -675,9 +589,6 @@
       font-weight: 800;
       cursor: pointer;
       color: var(--subtext);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .preview-modal-body {
@@ -712,11 +623,6 @@
       padding: 20px;
     }
 
-    .preview-doc-placeholder .icon {
-      font-size: 3.5rem;
-      margin-bottom: 10px;
-    }
-
     .preview-modal-footer {
       padding: 10px 14px;
       background: var(--modal-bg);
@@ -736,14 +642,12 @@
       text-decoration: none;
     }
 
-    /* Log Aktivitas Styling */
     .log-container {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
       border-radius: 14px;
       padding: 14px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .log-header {
@@ -753,12 +657,6 @@
       margin-bottom: 10px;
       padding-bottom: 6px;
       border-bottom: 1.5px solid var(--border);
-    }
-
-    .log-header h3 {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: var(--text);
     }
 
     .btn-clear-log {
@@ -800,12 +698,6 @@
       color: var(--text);
     }
 
-    .log-time {
-      font-size: 0.68rem;
-      color: var(--subtext);
-      font-weight: 600;
-    }
-
     .log-filename {
       font-size: 0.75rem;
       color: var(--accent);
@@ -814,7 +706,6 @@
 
     .log-badge-success {
       display: inline-block;
-      align-self: flex-start;
       font-size: 0.62rem;
       font-weight: 800;
       background: var(--success-bg);
@@ -823,7 +714,6 @@
       border-radius: 4px;
     }
 
-    /* Footer & Kontak Section */
     .footer-section {
       width: 100%;
       background: var(--footer-bg);
@@ -831,21 +721,7 @@
       border-radius: 16px;
       padding: 20px 14px;
       text-align: center;
-      box-shadow: 0 4px 12px var(--shadow-color);
       margin-top: 10px;
-    }
-
-    .footer-title {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .footer-desc {
-      font-size: 0.78rem;
-      color: var(--subtext);
-      margin-bottom: 12px;
     }
 
     .social-group {
@@ -865,28 +741,15 @@
       font-size: 0.78rem;
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.2s ease;
     }
 
-    .social-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
-    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
-    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
-    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
-    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
-    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
-    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
-
-    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
-    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
-    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
-    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
-    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
-    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
-    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .btn-wa { background: #14532d; color: #4ade80; }
+    .btn-email { background: #7f1d1d; color: #f87171; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; }
+    .btn-ig { background: #831843; color: #f472b6; }
+    .btn-saweria { background: #78350f; color: #fbbf24; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; }
+    .btn-kofi { background: #075985; color: #38bdf8; }
 
     .copyright {
       font-size: 0.72rem;
@@ -895,17 +758,14 @@
       padding-top: 10px;
     }
 
-    /* Loading Spinner */
     .loading-box {
       grid-column: 1/-1;
       text-align: center;
       padding: 30px;
       color: var(--subtext);
       font-weight: 700;
-      font-size: 0.85rem;
     }
 
-    /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 20px;
@@ -921,8 +781,6 @@
       transition: all 0.3s ease;
       opacity: 0;
       z-index: 10001;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .toast-msg.show {
@@ -935,22 +793,15 @@
 
   <div class="container">
     <div class="top-controls">
-      <a href="../index.html" class="btn-back-hub">
-        <span>←</span> Beranda Hub
-      </a>
-      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
-        <span id="themeIcon">🌙</span>
-      </button>
+      <a href="../index.html" class="btn-back-hub"><span>←</span> Beranda Hub</a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button"><span id="themeIcon">🌙</span></button>
     </div>
 
     <header class="portal-header">
       <div class="badge-top">COMMUNITY LEARNING HUB</div>
       <h1>🤗 Portal Berbagi Materi <span>&amp; Galeri Hugging Face</span></h1>
-      <p>Unggah modul catatan, kanji, soal latihan, atau gambar materi. File langsung tersimpan di Hugging Face Dataset dan otomatis dapat dipratinjau di galeri.</p>
-      
-      <a id="hfRepoHeaderLink" href="https://huggingface.co/datasets/username-anda/materi-jepang-storage" target="_blank" rel="noopener noreferrer" class="drive-link-btn">
-        🤗 Buka Dataset Hugging Face ↗
-      </a>
+      <p>Unggah modul catatan, kanji, soal latihan, atau gambar materi ke Hugging Face Dataset.</p>
+      <a id="hfRepoHeaderLink" href="https://huggingface.co/datasets/" target="_blank" rel="noopener noreferrer" class="drive-link-btn">🤗 Buka Dataset Hugging Face ↗</a>
     </header>
 
     <div class="tab-bar">
@@ -960,8 +811,8 @@
     </div>
 
     <section id="uploadTab" class="upload-section" style="display: none;">
-      <div class="section-title">📤 Upload Berkas Materi (Tanpa Batas Ukuran)</div>
-      <p class="section-desc">Berkas akan langsung terunggah ke repository Hugging Face Dataset dan tampil pada galeri.</p>
+      <div class="section-title">📤 Upload Berkas Materi</div>
+      <p class="section-desc">Berkas akan langsung terunggah ke repository Hugging Face Dataset.</p>
 
       <form id="uploadForm" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
@@ -971,7 +822,7 @@
 
         <div class="form-group">
           <label>Judul Materi / Catatan</label>
-          <input type="text" id="docTitle" class="form-input" placeholder="Contoh: Ringkasan Pola Kalimat Bab 1-25 N5" required>
+          <input type="text" id="docTitle" class="form-input" placeholder="Contoh: Ringkasan Pola Kalimat" required>
         </div>
 
         <div class="form-group">
@@ -980,25 +831,23 @@
             <option value="Tata Bahasa (Bunpou)">Tata Bahasa (Bunpou)</option>
             <option value="Kanji &amp; Kosakata">Kanji &amp; Kosakata</option>
             <option value="Latihan Soal &amp; Kuis">Latihan Soal &amp; Kuis</option>
-            <option value="Menyimak (Choukai)">Menyimak (Choukai)</option>
-            <option value="Audio / Video Materi">Audio / Video Materi</option>
             <option value="Lainnya">Lainnya</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Deskripsi Singkat</label>
-          <textarea id="docDescription" class="form-textarea" rows="2" placeholder="Tuliskan ringkasan isi berkas ini..."></textarea>
+          <textarea id="docDescription" class="form-textarea" rows="2" placeholder="Tuliskan ringkasan..."></textarea>
         </div>
 
         <div class="form-group">
-          <label>Pilih File (PDF, Word, Gambar, Audio, atau ZIP)</label>
+          <label>Pilih File</label>
           <div class="dropzone" id="dropzoneBox" onclick="document.getElementById('fileInput').click()">
             <div class="dropzone-icon">☁️</div>
-            <p>Ketuk untuk memilih berkas dari HP</p>
-            <span>✨ Tanpa batasan ukuran berkas</span>
+            <p>Ketuk untuk memilih berkas</p>
+            <span>✨ Pilih file PDF, Gambar, atau Dokumen</span>
           </div>
-          <input type="file" id="fileInput" style="display: none;" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.mp4,.zip,.rar" onchange="handleFileSelect(this)">
+          <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(this)">
           
           <div class="file-preview" id="filePreview">
             <span id="fileNameDisplay">nama_file.pdf</span>
@@ -1013,9 +862,7 @@
           </div>
         </div>
 
-        <button type="submit" id="btnSubmit" class="btn-submit">
-          🚀 Kirim &amp; Simpan ke Hugging Face
-        </button>
+        <button type="submit" id="btnSubmit" class="btn-submit">🚀 Kirim &amp; Simpan ke Hugging Face</button>
       </form>
     </section>
 
@@ -1027,7 +874,6 @@
         <button class="filter-chip" onclick="filterGallery('doc', this)">📝 Dokumen</button>
         <button class="btn-refresh" onclick="fetchLiveGalleryFromDrive()">🔄 Sinkronkan</button>
       </div>
-
       <div class="gallery-grid" id="galleryContainer">
         <div class="loading-box">⏳ Memuat berkas galeri...</div>
       </div>
@@ -1044,25 +890,13 @@
     </section>
 
     <div class="footer-section">
-      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
-      <div class="footer-desc">Punya pertanyaan, saran materi, atau ingin memberikan dukungan donasi? Hubungi tautan resmi:</div>
-      
+      <div style="font-size: 0.9rem; font-weight: 800; margin-bottom: 4px;">Dukung Proyek Ini</div>
       <div class="social-group">
-        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WA</a>
-        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
-        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 FB</a>
-        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 IG</a>
+        <a href="https://wa.me/6285726996330" target="_blank" class="social-btn btn-wa">💬 WA</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://saweria.co/VorstCavry" target="_blank" class="social-btn btn-saweria">☕ Saweria</a>
       </div>
-
-      <div class="social-group">
-        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
-        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
-        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
-      </div>
-
-      <div class="copyright">
-        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
-      </div>
+      <div class="copyright">&copy; 2026 Vorst Cavry &bull; Pembelajaran Bahasa Jepang</div>
     </div>
   </div>
 
@@ -1084,7 +918,6 @@
 
   <script src="config.js"></script>
   <script>
-    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const rootHtml = document.documentElement;
@@ -1104,10 +937,8 @@
       }
     }
 
-    // Inisialisasi tema awal
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
-
     if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
       applyThemeState(true);
     } else {
@@ -1115,36 +946,28 @@
     }
 
     themeBtn.addEventListener('click', () => {
-      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
-      applyThemeState(!isCurrentlyLight);
+      applyThemeState(!rootHtml.classList.contains('light-theme'));
     });
 
-    // --- 2. CONFIG HUGGING FACE DATASET (TERPISAH KE config.js) ---
-    // Token diambil dari file eksternal config.js agar tidak terekspos di file HTML utama
     const HF_TOKEN = (typeof CONFIG !== 'undefined' && CONFIG.HF_TOKEN) ? CONFIG.HF_TOKEN : "";
-    const HF_REPO_ID = (typeof CONFIG !== 'undefined' && CONFIG.HF_REPO_ID) ? CONFIG.HF_REPO_ID : "vorstcavry/Belajar-bahasa-jepang";
+    const HF_REPO_ID = (typeof CONFIG !== 'undefined' && CONFIG.HF_REPO_ID) ? CONFIG.HF_REPO_ID : "";
     const HF_BRANCH = (typeof CONFIG !== 'undefined' && CONFIG.HF_BRANCH) ? CONFIG.HF_BRANCH : "main";
     const HF_DATASET_URL = `https://huggingface.co/datasets/${HF_REPO_ID}`;
-    const MAX_FILE_SIZE = Infinity; // Tanpa batasan ukuran file
 
-    // Sinkronkan tautan header dengan HF_DATASET_URL
     const headerRepoLink = document.getElementById('hfRepoHeaderLink');
     if (headerRepoLink) headerRepoLink.href = HF_DATASET_URL;
 
     let sharedDocuments = JSON.parse(localStorage.getItem('hf_gallery_docs')) || [];
     let uploadLogs = JSON.parse(localStorage.getItem('hf_upload_logs')) || [];
-
     let selectedFile = null;
     let currentGalleryFilter = 'all';
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       document.getElementById('uploadTab').style.display = 'none';
       document.getElementById('galleryTab').style.display = 'none';
       document.getElementById('logTab').style.display = 'none';
-
       document.getElementById(tabId).style.display = 'block';
 
       if (tabId === 'galleryTab') renderGallery(sharedDocuments);
@@ -1153,10 +976,7 @@
 
     function handleFileSelect(input) {
       if (input.files && input.files[0]) {
-        const file = input.files[0];
-// Tanpa batasan ukuran file
-
-        selectedFile = file;
+        selectedFile = input.files[0];
         document.getElementById('fileNameDisplay').innerText = `📄 ${selectedFile.name} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`;
         document.getElementById('filePreview').style.display = 'flex';
         document.getElementById('dropzoneBox').style.display = 'none';
@@ -1187,13 +1007,10 @@
     }
 
     function updateProgress(percent, text) {
-      const progressBar = document.getElementById('progressBarFill');
-      const progressStatus = document.getElementById('progressStatus');
-      progressBar.style.width = `${percent}%`;
-      progressStatus.innerText = text;
+      document.getElementById('progressBarFill').style.width = `${percent}%`;
+      document.getElementById('progressStatus').innerText = text;
     }
 
-    // Helper encoding UTF-8 string ke Base64 untuk gallery_index.json
     function utf8ToBase64(str) {
       const bytes = new TextEncoder().encode(str);
       let binString = "";
@@ -1203,17 +1020,14 @@
       return btoa(binString);
     }
 
-    // --- 3. SUBMIT FORMULIR LANGSUNG KE HUGGING FACE HUB API ---
     async function handleFormSubmit(e) {
       e.preventDefault();
-
       if (!selectedFile) {
         showToast("⚠️ Pilih file terlebih dahulu!");
         return;
       }
-
       if (!HF_TOKEN || HF_TOKEN.includes("MASUKKAN_TOKEN")) {
-        showToast("⚠️ Masukkan HF_TOKEN baru Anda pada konfigurasi skrip!");
+        showToast("⚠️ Token Hugging Face belum dikonfigurasi di config.js!");
         return;
       }
 
@@ -1221,7 +1035,7 @@
       const progressWrapper = document.getElementById('progressWrapper');
 
       btnSubmit.disabled = true;
-      btnSubmit.innerText = "⏳ Sedang Mengunggah ke Hugging Face...";
+      btnSubmit.innerText = "⏳ Sedang Mengunggah...";
       progressWrapper.style.display = 'block';
       updateProgress(10, "Menyiapkan file... (10%)");
 
@@ -1232,7 +1046,7 @@
 
       try {
         const base64Data = await toBase64(selectedFile);
-        updateProgress(50, "Mengambil indeks galeri terbaru... (50%)");
+        updateProgress(50, "Memproses indeks galeri... (50%)");
 
         const timestamp = Date.now();
         const safeName = selectedFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -1240,16 +1054,13 @@
         const fileUrl = `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/${targetPath}`;
         const blobUrl = `https://huggingface.co/datasets/${HF_REPO_ID}/blob/${HF_BRANCH}/${targetPath}`;
 
-        // 1. Ambil metadata gallery_index.json yang sudah ada di repo (jika ada)
         let currentIndex = [];
         try {
           const prevIndexRes = await fetch(
             `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/gallery_index.json?t=${timestamp}`,
             { headers: { Authorization: `Bearer ${HF_TOKEN}` } }
           );
-          if (prevIndexRes.ok) {
-            currentIndex = await prevIndexRes.json();
-          }
+          if (prevIndexRes.ok) currentIndex = await prevIndexRes.json();
         } catch (_) {}
 
         const now = new Date();
@@ -1257,8 +1068,7 @@
                            String(now.getMonth() + 1).padStart(2, '0') + "-" + 
                            String(now.getDate()).padStart(2, '0') + " " + 
                            String(now.getHours()).padStart(2, '0') + ":" + 
-                           String(now.getMinutes()).padStart(2, '0') + ":" + 
-                           String(now.getSeconds()).padStart(2, '0');
+                           String(now.getMinutes()).padStart(2, '0');
 
         const newEntry = {
           id: String(timestamp),
@@ -1277,39 +1087,14 @@
         currentIndex.unshift(newEntry);
         const updatedIndexBase64 = utf8ToBase64(JSON.stringify(currentIndex, null, 2));
 
-        updateProgress(75, "Mengunggah berkas langsung ke Hugging Face Hub... (75%)");
+        updateProgress(75, "Mengirim ke Hugging Face (XHR)... (75%)");
 
-        // 2. Kirim file + perbarui gallery_index.json dalam 1 commit atomik (NDJSON)
-        const commitHeader = JSON.stringify({
-          key: "header",
-          value: {
-            summary: `Upload materi: ${title || selectedFile.name} oleh ${uploader || 'Kontributor'}`,
-            description: desc || ""
-          }
-        });
-
-        const fileOperation = JSON.stringify({
-          key: "file",
-          value: {
-            content: base64Data,
-            path: targetPath,
-            encoding: "base64"
-          }
-        });
-
-        const indexOperation = JSON.stringify({
-          key: "file",
-          value: {
-            content: updatedIndexBase64,
-            path: "gallery_index.json",
-            encoding: "base64"
-          }
-        });
-
+        const commitHeader = JSON.stringify({ key: "header", value: { summary: `Upload: ${title || selectedFile.name}`, description: desc } });
+        const fileOperation = JSON.stringify({ key: "file", value: { content: base64Data, path: targetPath, encoding: "base64" } });
+        const indexOperation = JSON.stringify({ key: "file", value: { content: updatedIndexBase64, path: "gallery_index.json", encoding: "base64" } });
         const ndjsonBody = [commitHeader, fileOperation, indexOperation].join("\n");
 
-        // Kirim menggunakan XMLHttpRequest agar progress bar upload nyata
-        const hfResponse = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
           const xhr = new XMLHttpRequest();
           xhr.open("POST", `https://huggingface.co/api/datasets/${HF_REPO_ID}/commit/${HF_BRANCH}`, true);
           xhr.setRequestHeader("Authorization", `Bearer ${HF_TOKEN}`);
@@ -1326,11 +1111,11 @@
             if (xhr.status >= 200 && xhr.status < 300) {
               resolve(xhr.responseText);
             } else {
-              reject(new Error(`Hugging Face Error (${xhr.status}): ${xhr.responseText}`));
+              reject(new Error(`Hugging Face Error (${xhr.status}): ${xhr.responseText || 'Gagal commit'}`));
             }
           };
 
-          xhr.onerror = () => reject(new Error("Gagal terhubung ke server Hugging Face (Network Error)."));
+          xhr.onerror = () => reject(new Error("Gagal terhubung ke server (Network Error / CORS)."));
           xhr.send(ndjsonBody);
         });
 
@@ -1338,13 +1123,8 @@
 
         let fileType = 'doc';
         let isImage = selectedFile.type.startsWith('image/');
-        let isMedia = selectedFile.type.startsWith('audio/') || selectedFile.type.startsWith('video/');
-        
         if (isImage) fileType = 'image';
         else if (selectedFile.name.toLowerCase().endsWith('.pdf')) fileType = 'pdf';
-        else if (isMedia) fileType = 'media';
-
-        const localBlobUrl = URL.createObjectURL(selectedFile);
 
         const newDoc = {
           id: String(timestamp),
@@ -1353,9 +1133,9 @@
           type: fileType,
           uploader: uploader,
           date: dateString,
-          desc: desc || "Materi berhasil diunggah ke Hugging Face Dataset.",
-          thumbIcon: isImage ? '🖼️' : (fileType === 'pdf' ? '📄' : (fileType === 'media' ? '🎧' : '📝')),
-          imgUrl: isImage ? localBlobUrl : '',
+          desc: desc || "Materi berhasil diunggah.",
+          thumbIcon: isImage ? '🖼️' : (fileType === 'pdf' ? '📄' : '📝'),
+          imgUrl: isImage ? URL.createObjectURL(selectedFile) : '',
           previewUrl: fileUrl,
           driveUrl: blobUrl
         };
@@ -1363,15 +1143,13 @@
         sharedDocuments.unshift(newDoc);
         localStorage.setItem('hf_gallery_docs', JSON.stringify(sharedDocuments));
 
-        const newLog = {
+        uploadLogs.unshift({
           uploader: uploader,
           fileName: selectedFile.name,
           date: dateString,
           size: (selectedFile.size / 1024 / 1024).toFixed(2) + " MB",
-          status: "Berhasil Tayang di Galeri & Hugging Face"
-        };
-
-        uploadLogs.unshift(newLog);
+          status: "Berhasil Tayang"
+        });
         localStorage.setItem('hf_upload_logs', JSON.stringify(uploadLogs));
 
         document.getElementById('uploadForm').reset();
@@ -1379,120 +1157,71 @@
         btnSubmit.disabled = false;
         btnSubmit.innerText = "🚀 Kirim & Simpan ke Hugging Face";
 
-        showToast("✅ Berhasil! File tersimpan di Hugging Face Dataset.");
+        showToast("✅ Berhasil diunggah ke Hugging Face!");
         switchTab('galleryTab', document.querySelector('.tab-bar .tab-btn:first-child'));
 
       } catch (err) {
         btnSubmit.disabled = false;
         btnSubmit.innerText = "🚀 Kirim & Simpan ke Hugging Face";
         progressWrapper.style.display = 'none';
-        showToast("❌ Kendala unggah: " + err.message);
+        showToast("❌ Gagal: " + err.message);
+        console.error("Detail Error Upload:", err);
       }
     }
 
-    // --- 4. SINKRONISASI DAFTAR FILE LANGSUNG DARI HUGGING FACE DATASET ---
     async function fetchLiveGalleryFromDrive() {
       const container = document.getElementById('galleryContainer');
-      container.innerHTML = '<div class="loading-box">⏳ Menyinkronkan daftar berkas dari Hugging Face Dataset...</div>';
-
-      const headers = HF_TOKEN && !HF_TOKEN.includes("MASUKKAN_TOKEN")
-        ? { Authorization: `Bearer ${HF_TOKEN}` }
-        : {};
+      container.innerHTML = '<div class="loading-box">⏳ Menyinkronkan daftar berkas...</div>';
+      const headers = HF_TOKEN && !HF_TOKEN.includes("MASUKKAN_TOKEN") ? { Authorization: `Bearer ${HF_TOKEN}` } : {};
 
       try {
-        // Coba baca gallery_index.json dari repository
-        const indexRes = await fetch(
-          `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/gallery_index.json?t=${Date.now()}`,
-          { headers }
-        );
-
-        let rawFiles = [];
-
+        const indexRes = await fetch(`https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/gallery_index.json?t=${Date.now()}`, { headers });
         if (indexRes.ok) {
-          rawFiles = await indexRes.json();
-        } else {
-          // Fallback: baca isi folder uploads/ langsung via HF Tree API
-          const treeRes = await fetch(
-            `https://huggingface.co/api/datasets/${HF_REPO_ID}/tree/${HF_BRANCH}/uploads`,
-            { headers }
-          );
-          if (treeRes.ok) {
-            const items = await treeRes.json();
-            rawFiles = items
-              .filter(item => item.type === 'file')
-              .map(item => {
-                const cleanName = item.path.replace(/^uploads\//, '');
-                return {
-                  id: item.oid || item.path,
-                  path: item.path,
-                  name: cleanName,
-                  title: cleanName,
-                  description: item.size ? `Ukuran berkas: ${(item.size / 1024 / 1024).toFixed(2)} MB` : 'Berkas Dataset',
-                  url: `https://huggingface.co/datasets/${HF_REPO_ID}/resolve/${HF_BRANCH}/${item.path}`,
-                  blobUrl: `https://huggingface.co/datasets/${HF_REPO_ID}/blob/${HF_BRANCH}/${item.path}`
-                };
-              });
-          }
-        }
-
-        if (Array.isArray(rawFiles) && rawFiles.length > 0) {
-          const hfDocs = rawFiles.map(file => {
+          const rawFiles = await indexRes.json();
+          sharedDocuments = rawFiles.map(file => {
             const lowerName = (file.name || '').toLowerCase();
             let fType = 'doc';
             let isImg = /\.(jpg|jpeg|png|gif|webp)$/i.test(lowerName);
-            let isMed = /\.(mp3|wav|ogg|mp4|webm)$/i.test(lowerName);
             if (isImg) fType = 'image';
             else if (lowerName.endsWith('.pdf')) fType = 'pdf';
-            else if (isMed) fType = 'media';
 
             return {
               id: file.id || file.path,
               title: file.title || file.name,
-              category: file.category || "Materi Hugging Face",
+              category: file.category || "Materi",
               type: fType,
-              uploader: file.uploader || "Kontributor HF",
-              date: file.date || "Tersinkronisasi",
-              desc: file.description || "Berkas di repository Hugging Face.",
-              thumbIcon: isImg ? '🖼️' : (fType === 'pdf' ? '📄' : (fType === 'media' ? '🎧' : '📝')),
+              uploader: file.uploader || "Kontributor",
+              date: file.date || "",
+              desc: file.description || "",
+              thumbIcon: isImg ? '🖼️' : (fType === 'pdf' ? '📄' : '📝'),
               imgUrl: isImg ? file.url : '',
               previewUrl: file.url,
               driveUrl: file.blobUrl || file.url
             };
           });
-
-          sharedDocuments = hfDocs;
           localStorage.setItem('hf_gallery_docs', JSON.stringify(sharedDocuments));
         }
       } catch (e) {
-        console.log("Menggunakan cache galeri lokal:", e);
+        console.log("Menggunakan cache lokal:", e);
       }
-
       renderGallery(sharedDocuments);
-      showToast("🔄 Galeri Hugging Face diperbarui!");
+      showToast("🔄 Galeri diperbarui!");
     }
 
-    // --- 5. RENDER GALERI DOKUMEN & GAMBAR ---
     function renderGallery(docs) {
       const container = document.getElementById('galleryContainer');
       container.innerHTML = '';
-
-      const filtered = docs.filter(item => {
-        if (currentGalleryFilter === 'all') return true;
-        return item.type === currentGalleryFilter;
-      });
+      const filtered = docs.filter(item => currentGalleryFilter === 'all' || item.type === currentGalleryFilter);
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--subtext); font-weight: 700; font-size: 0.82rem;">Belum ada berkas pada kategori ini.</div>';
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--subtext); font-weight: 700;">Belum ada berkas.</div>';
         return;
       }
 
       filtered.forEach(doc => {
         const card = document.createElement('div');
         card.className = 'doc-card';
-        
-        let thumb = doc.type === 'image' && doc.imgUrl 
-          ? `<img src="${doc.imgUrl}" alt="${doc.title}" onerror="this.src='https://images.unsplash.com/photo-1528164344705-475426879c0d?w=500&auto=format&fit=crop&q=60'">` 
-          : `<div style="font-size: 2.5rem;">${doc.thumbIcon}</div>`;
+        let thumb = doc.type === 'image' && doc.imgUrl ? `<img src="${doc.imgUrl}" alt="${doc.title}">` : `<div style="font-size: 2.5rem;">${doc.thumbIcon}</div>`;
 
         card.innerHTML = `
           <div class="doc-thumb" onclick="openPreviewModal('${doc.id}')">
@@ -1508,7 +1237,7 @@
             <div>
               <div class="doc-meta">
                 <span>👤 ${doc.uploader}</span>
-                <span>📅 ${doc.date ? doc.date.split(' ')[0] : 'Baru saja'}</span>
+                <span>📅 ${doc.date ? doc.date.split(' ')[0] : ''}</span>
               </div>
               <div class="btn-card-group">
                 <button class="btn-preview-action" onclick="openPreviewModal('${doc.id}')">🔍 Preview</button>
@@ -1521,7 +1250,6 @@
       });
     }
 
-    // --- 6. MODAL PREVIEW HANDLER ---
     function openPreviewModal(docId) {
       const doc = sharedDocuments.find(d => d.id === docId);
       if (!doc) return;
@@ -1536,48 +1264,31 @@
       if (doc.type === 'image') {
         previewContainer.innerHTML = `<img src="${doc.previewUrl || doc.imgUrl}" alt="${doc.title}">`;
       } else if (doc.type === 'pdf') {
-        const pdfSrc = doc.previewUrl.startsWith('blob:')
-          ? doc.previewUrl
-          : `https://docs.google.com/gview?url=${encodeURIComponent(doc.previewUrl)}&embedded=true`;
+        const pdfSrc = doc.previewUrl.startsWith('blob:') ? doc.previewUrl : `https://docs.google.com/gview?url=${encodeURIComponent(doc.previewUrl)}&embedded=true`;
         previewContainer.innerHTML = `<iframe src="${pdfSrc}"></iframe>`;
       } else {
-        previewContainer.innerHTML = `
-          <div class="preview-doc-placeholder">
-            <div class="icon">${doc.thumbIcon}</div>
-            <p style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">${doc.title}</p>
-            <p style="font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px;">${doc.desc}</p>
-            <a href="${doc.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-modal-open-drive">Buka &amp; Unduh Dokumen Lengkap di Hugging Face ↗</a>
-          </div>
-        `;
+        previewContainer.innerHTML = `<div class="preview-doc-placeholder"><div style="font-size: 3rem; margin-bottom: 8px;">${doc.thumbIcon}</div><p>${doc.title}</p></div>`;
       }
-
       document.getElementById('previewModal').classList.add('active');
     }
 
     function closePreviewModal(e) {
       if (e) e.preventDefault();
       document.getElementById('previewModal').classList.remove('active');
-      document.getElementById('modalPreviewContent').innerHTML = '';
     }
 
-    // --- 7. LOG AKTIVITAS ---
     function renderLogs() {
       const container = document.getElementById('logListContainer');
       container.innerHTML = '';
-
       if (uploadLogs.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 16px; color: var(--subtext); font-weight: 600; font-size: 0.78rem;">Belum ada riwayat aktivitas pengunggahan.</div>';
+        container.innerHTML = '<div style="text-align: center; padding: 16px; color: var(--subtext); font-size: 0.78rem;">Belum ada riwayat aktivitas.</div>';
         return;
       }
-
       uploadLogs.forEach(log => {
         const item = document.createElement('div');
         item.className = 'log-item';
         item.innerHTML = `
-          <div class="log-item-top">
-            <span class="log-user">👤 ${log.uploader}</span>
-            <span class="log-time">${log.date}</span>
-          </div>
+          <div class="log-item-top"><span class="log-user">👤 ${log.uploader}</span><span style="font-size: 0.68rem; color: var(--subtext);">${log.date}</span></div>
           <div class="log-filename">📄 ${log.fileName} (${log.size})</div>
           <span class="log-badge-success">✅ ${log.status}</span>
         `;
@@ -1586,11 +1297,11 @@
     }
 
     function clearLogHistory() {
-      if (confirm("Hapus seluruh catatan log aktivitas di perangkat ini?")) {
+      if (confirm("Hapus seluruh catatan log aktivitas?")) {
         uploadLogs = [];
         localStorage.removeItem('hf_upload_logs');
         renderLogs();
-        showToast("🗑️ Riwayat log berhasil dibersihkan.");
+        showToast("🗑️ Log dibersihkan.");
       }
     }
 
@@ -1608,7 +1319,6 @@
       setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
-    // Inisialisasi awal
     if (sharedDocuments.length === 0) {
       fetchLiveGalleryFromDrive();
     } else {
