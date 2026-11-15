@@ -1308,22 +1308,31 @@
 
         const ndjsonBody = [commitHeader, fileOperation, indexOperation].join("\n");
 
-        const hfResponse = await fetch(
-          `https://huggingface.co/api/datasets/${HF_REPO_ID}/commit/${HF_BRANCH}`,
-          {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${HF_TOKEN}`,
-              "Content-Type": "application/x-ndjson"
-            },
-            body: ndjsonBody
-          }
-        );
+        // Kirim menggunakan XMLHttpRequest agar progress bar upload nyata
+        const hfResponse = await new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", `https://huggingface.co/api/datasets/${HF_REPO_ID}/commit/${HF_BRANCH}`, true);
+          xhr.setRequestHeader("Authorization", `Bearer ${HF_TOKEN}`);
+          xhr.setRequestHeader("Content-Type", "application/x-ndjson");
 
-        if (!hfResponse.ok) {
-          const errText = await hfResponse.text();
-          throw new Error(`Hugging Face Error (${hfResponse.status}): ${errText}`);
-        }
+          xhr.upload.onprogress = (event) => {
+            if (event.lengthComputable) {
+              const percent = 50 + Math.round((event.loaded / event.total) * 45);
+              updateProgress(percent, `Mengunggah ke Hugging Face... (${percent}%)`);
+            }
+          };
+
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(xhr.responseText);
+            } else {
+              reject(new Error(`Hugging Face Error (${xhr.status}): ${xhr.responseText}`));
+            }
+          };
+
+          xhr.onerror = () => reject(new Error("Gagal terhubung ke server Hugging Face (Network Error)."));
+          xhr.send(ndjsonBody);
+        });
 
         updateProgress(100, "Selesai! (100%)");
 
