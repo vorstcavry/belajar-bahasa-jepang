@@ -214,8 +214,8 @@
     /* ================= MODE NAVIGATION BAR ================= */
     .mode-nav {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
       margin-bottom: 18px;
       background: var(--tab-nav-bg);
       padding: 6px;
@@ -224,13 +224,150 @@
       box-shadow: 0 2px 8px var(--shadow-color);
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 820px) {
+      .mode-nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
       .mode-nav {
         grid-template-columns: repeat(2, 1fr);
       }
-      .mode-nav .mode-btn:first-child {
-        grid-column: span 2;
-      }
+    }
+
+    /* ================= 5. MENULIS HURUF (WRITING PAD) ================= */
+    .write-box {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .write-header-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--rule-item-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .write-target-meta {
+      text-align: left;
+    }
+
+    .write-romaji {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .write-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .canvas-stage {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 16px;
+      border-radius: 20px;
+      border: 2.5px solid var(--border-color);
+      background: var(--rule-item-bg);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+    }
+
+    /* Garis bantu kuadran kanji/kana (十字) */
+    .canvas-grid-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .canvas-grid-lines::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      border-top: 1.5px dashed var(--border-color);
+      opacity: 0.75;
+    }
+
+    .canvas-grid-lines::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      border-left: 1.5px dashed var(--border-color);
+      opacity: 0.75;
+    }
+
+    /* Jiplakan / Watermark Huruf */
+    .canvas-guide-char {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13.5rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 2;
+      line-height: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .canvas-guide-char.hidden-guide {
+      opacity: 0;
+    }
+
+    #kanaDrawCanvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+      z-index: 3;
+    }
+
+    .write-tools-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .brush-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .brush-swatch.active {
+      transform: scale(1.2);
+      border-color: #ffffff;
+      box-shadow: 0 0 0 2px var(--primary);
     }
 
     .mode-btn {
@@ -366,10 +503,18 @@
       margin-bottom: 16px;
     }
 
+    .sokuon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
     @media (max-width: 600px) {
       .kana-grid { gap: 5px; }
       .yoon-grid { gap: 5px; }
       .tokushu-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+      .sokuon-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
     }
 
     /* Card Item (Kana) */
@@ -377,7 +522,7 @@
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       border-radius: 10px;
-      padding: 10px 4px;
+      padding: 10px 6px;
       text-align: center;
       cursor: pointer;
       transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -388,6 +533,7 @@
       min-height: 96px;
       user-select: none;
       box-shadow: 0 2px 4px var(--shadow-color);
+      position: relative;
     }
 
     .kana-card:hover {
@@ -407,6 +553,22 @@
     .kata-theme .kana-card:hover, .kata-theme .kana-card.playing {
       border-color: var(--accent-kata);
       background: var(--kata-hover-bg);
+    }
+
+    .kana-card.highlight-sokuon {
+      border-color: var(--accent-amber);
+      background: rgba(251, 191, 36, 0.08);
+    }
+
+    .sokuon-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--accent-amber);
+      margin-bottom: 4px;
     }
 
     .tier-jp {
@@ -519,15 +681,9 @@
       color: #ffffff;
     }
 
-    .action-btn.success {
-      background: var(--accent-green);
-      border-color: var(--accent-green);
-      color: #064e3b;
-    }
-
     .stat-badges {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -624,14 +780,14 @@
     }
 
     .fc-romaji {
-      font-size: 2.6rem;
+      font-size: 2.3rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 4px;
     }
 
     .fc-meaning {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
       font-weight: 600;
     }
@@ -647,7 +803,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -780,9 +936,17 @@
 
     /* ================= 4. MENYUSUN HURUF (WORD BUILDER) ================= */
     .scramble-box {
-      max-width: 560px;
+      max-width: 600px;
       margin: 0 auto;
       text-align: center;
+    }
+
+    .scramble-subfilters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
     }
 
     .word-clue-card {
@@ -791,10 +955,22 @@
       border-radius: 14px;
       padding: 18px;
       margin-bottom: 16px;
+      position: relative;
+    }
+
+    .category-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(129, 140, 248, 0.16);
+      color: var(--primary);
+      margin-bottom: 6px;
     }
 
     .word-meaning {
-      font-size: 1.35rem;
+      font-size: 1.38rem;
       font-weight: 800;
       color: var(--text-heading);
       margin-bottom: 4px;
@@ -804,6 +980,13 @@
       font-size: 0.95rem;
       font-weight: 700;
       color: var(--primary);
+    }
+
+    .word-note-hint {
+      font-size: 0.78rem;
+      color: var(--accent-amber);
+      font-weight: 700;
+      margin-top: 4px;
     }
 
     .answer-slots {
@@ -1023,7 +1206,7 @@
       <div>
         <span class="badge-series">Pondasi Huruf Dasar Jepang</span>
         <h1>Belajar Huruf Hiragana &amp; Katakana</h1>
-        <p>Pelajari tabel lengkap lalu uji hafalanmu lewat Flashcard, Cocokkan Huruf, Mini Kuis, dan Menyusun Kata.</p>
+        <p>Pelajari tabel lengkap (termasuk Sokuon っ/ッ) lalu latih hafalanmu lewat Flashcard, Cocokkan Huruf, Mini Kuis, &amp; Menyusun Kata.</p>
       </div>
       <div class="page-badge">Made by Vorst Cavry</div>
     </header>
@@ -1032,12 +1215,13 @@
     <nav class="mode-nav" aria-label="Mode Pembelajaran">
       <button class="mode-btn active" data-mode="table" onclick="switchMode('table')">📖 Tabel Huruf</button>
       <button class="mode-btn" data-mode="flashcard" onclick="switchMode('flashcard')">🃏 Flashcard</button>
-      <button class="mode-btn" data-mode="match" onclick="switchMode('match')">🧩 Cocokkan Huruf</button>
+      <button class="mode-btn" data-mode="write" onclick="switchMode('write')">✍️ Menulis Huruf</button>
+      <button class="mode-btn" data-mode="match" onclick="switchMode('match')">🧩 Cocokkan</button>
       <button class="mode-btn" data-mode="quiz" onclick="switchMode('quiz')">🎯 Mini Kuis</button>
-      <button class="mode-btn" data-mode="scramble" onclick="switchMode('scramble')">🔤 Menyusun Huruf</button>
+      <button class="mode-btn" data-mode="scramble" onclick="switchMode('scramble')">🔤 Susun Kata</button>
     </nav>
 
-    <!-- ================= MODE 0: TABEL HURUF (ASLI) ================= -->
+    <!-- ================= MODE 0: TABEL HURUF ================= -->
     <section id="mode-table">
       <div class="tab-nav">
         <button class="tab-btn active hira-tab" onclick="switchKana('hiragana')">
@@ -1049,9 +1233,10 @@
       </div>
 
       <div class="info-bar" id="kanaInfoText">
-        🌸 <strong>Hiragana:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ).
+        🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), Yoon (ゃ, ゅ, ょ), dan Sokuon / Tsu Kecil (っ).
       </div>
 
+      <!-- HIRAGANA -->
       <div id="hiraganaContainer" class="hira-theme">
         <div class="section-title">1. Huruf Dasar (Gojuon - 46 Huruf)</div>
         <div class="kana-grid" id="hiraBaseGrid"></div>
@@ -1061,8 +1246,12 @@
 
         <div class="section-title">3. Yoon (Gabungan Huruf Kecil ゃ, ゅ, ょ)</div>
         <div class="yoon-grid" id="hiraYoonGrid"></div>
+
+        <div class="section-title">4. Sokuon / Tsu Kecil (っ) — Konsonan Rangkap &amp; Contoh</div>
+        <div class="sokuon-grid" id="hiraSokuonGrid"></div>
       </div>
 
+      <!-- KATAKANA -->
       <div id="katakanaContainer" class="kata-theme" style="display: none;">
         <div class="section-title">1. Huruf Dasar Katakana (46 Huruf)</div>
         <div class="kana-grid" id="kataBaseGrid"></div>
@@ -1073,7 +1262,10 @@
         <div class="section-title">3. Yoon (Gabungan Huruf Kecil ャ, ュ, ョ)</div>
         <div class="yoon-grid" id="kataYoonGrid"></div>
 
-        <div class="section-title">4. Katakana Khusus / Modern (Kata Serapan Asing)</div>
+        <div class="section-title">4. Sokuon / Tsu Kecil (ッ) &amp; Tanda Panjang (ー)</div>
+        <div class="sokuon-grid" id="kataSokuonGrid"></div>
+
+        <div class="section-title">5. Katakana Khusus / Modern (Kata Serapan Asing)</div>
         <div class="tokushu-grid" id="kataSpecialGrid"></div>
       </div>
 
@@ -1090,7 +1282,7 @@
             <strong>3. Yoon (Gabungan Kecil ゃ, ゅ, ょ):</strong> Menggabungkan deret vokal 'i' dengan ya/yu/yo kecil. Contoh: き (ki) + ゃ (ya) = きゃ (kya).
           </div>
           <div class="rule-item">
-            <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Berfungsi sebagai konsonan rangkap (dobel) atau jeda ketukan. Contoh: きって (kitte - perangko).
+            <strong>4. Sokuon (Tsu Kecil っ / ッ):</strong> Menggandakan konsonan huruf setelahnya (k, s, t, p) sehingga terdengar ada jeda hentakan 1 ketukan. Contoh: きって (ki-t-te = perangko), カップ (ka-p-pu = cangkir).
           </div>
         </div>
       </div>
@@ -1110,11 +1302,12 @@
           <button class="pill-btn active" data-val="base" onclick="setFcFilter('group', 'base', this)">Dasar (46)</button>
           <button class="pill-btn" data-val="daku" onclick="setFcFilter('group', 'daku', this)">Dakuon</button>
           <button class="pill-btn" data-val="yoon" onclick="setFcFilter('group', 'yoon', this)">Yoon</button>
+          <button class="pill-btn" data-val="sokuon" onclick="setFcFilter('group', 'sokuon', this)">Tsu Kecil (っ/ッ)</button>
           <button class="pill-btn" data-val="all" onclick="setFcFilter('group', 'all', this)">Semua</button>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
         <span class="stat-badge" id="fcCounter">Kartu 1 / 46</span>
         <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 6px;">
           <input type="checkbox" id="fcAutoAudio" checked> 🔊 Auto-suara saat ganti kartu
@@ -1143,6 +1336,66 @@
         <button class="action-btn" onclick="prevFlashcard()">← Sebelumnya</button>
         <button class="action-btn" onclick="shuffleFlashcards()">🔀 Acak Urutan</button>
         <button class="action-btn primary" onclick="nextFlashcard()">Selanjutnya →</button>
+      </div>
+    </section>
+
+    <!-- ================= MODE 5: MENULIS HURUF ================= -->
+    <section id="mode-write" class="practice-panel" style="display: none;">
+      <div class="filter-bar">
+        <div class="filter-group" id="writeScriptFilter">
+          <span class="filter-label">Aksara:</span>
+          <button class="pill-btn active" onclick="setWriteFilter('script', 'hiragana', this)">🌸 Hiragana</button>
+          <button class="pill-btn" onclick="setWriteFilter('script', 'katakana', this)">⚡ Katakana</button>
+        </div>
+        <div class="filter-group" id="writeGroupFilter">
+          <span class="filter-label">Cakupan:</span>
+          <button class="pill-btn active" onclick="setWriteFilter('group', 'base', this)">Dasar (46)</button>
+          <button class="pill-btn" onclick="setWriteFilter('group', 'daku', this)">Dakuon</button>
+          <button class="pill-btn" onclick="setWriteFilter('group', 'yoon', this)">Yoon</button>
+        </div>
+      </div>
+
+      <div class="write-box">
+        <div class="write-header-info">
+          <div class="write-target-meta">
+            <div style="font-size: 0.74rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;" id="writeProgressLabel">Huruf 1 / 46</div>
+            <div class="write-romaji" id="writeRomajiText">a</div>
+            <div class="write-desc" id="writeMeaningText">Huruf A (Hiragana)</div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button class="action-btn" type="button" onclick="speakWriteChar()" title="Dengar Pelafalan">🔊 Suara</button>
+            <button class="action-btn" type="button" id="toggleGuideBtn" onclick="toggleWriteGuide()">👁️ Jiplakan: ON</button>
+          </div>
+        </div>
+
+        <div class="canvas-stage" id="canvasStage">
+          <div class="canvas-grid-lines"></div>
+          <div class="canvas-guide-char" id="writeGuideChar">あ</div>
+          <canvas id="kanaDrawCanvas" width="340" height="340"></canvas>
+        </div>
+
+        <div class="write-tools-row">
+          <span class="filter-label">Warna Kuas:</span>
+          <button class="brush-swatch active" style="background: #818cf8;" onclick="setBrushColor('#818cf8', this)" title="Indigo"></button>
+          <button class="brush-swatch" style="background: #f472b6;" onclick="setBrushColor('#f472b6', this)" title="Pink Hiragana"></button>
+          <button class="brush-swatch" style="background: #38bdf8;" onclick="setBrushColor('#38bdf8', this)" title="Biru Katakana"></button>
+          <button class="brush-swatch" style="background: #34d399;" onclick="setBrushColor('#34d399', this)" title="Hijau"></button>
+          <button class="brush-swatch" style="background: #fbbf24;" onclick="setBrushColor('#fbbf24', this)" title="Kuning"></button>
+          <span class="filter-label" style="margin-left: 8px;">Tebal:</span>
+          <select id="brushSizeSelect" class="pill-btn" onchange="updateBrushStyle()">
+            <option value="6">Tipis</option>
+            <option value="10" selected>Sedang</option>
+            <option value="15">Tebal</option>
+          </select>
+        </div>
+
+        <div class="fc-controls">
+          <button class="action-btn" onclick="undoCanvasStroke()">↩ Undo Goresan</button>
+          <button class="action-btn" onclick="clearWriteCanvas()">🗑️ Hapus Kanvas</button>
+          <button class="action-btn" onclick="prevWriteChar()">← Sebelumnya</button>
+          <button class="action-btn" onclick="randomWriteChar()">🔀 Acak</button>
+          <button class="action-btn primary" onclick="nextWriteChar()">Selanjutnya →</button>
+        </div>
       </div>
     </section>
 
@@ -1212,21 +1465,34 @@
     <section id="mode-scramble" class="practice-panel" style="display: none;">
       <div class="filter-bar">
         <div class="filter-group" id="scrambleScriptFilter">
-          <span class="filter-label">Kosakata:</span>
+          <span class="filter-label">Aksara:</span>
           <button class="pill-btn active" onclick="setScrambleFilter('hiragana', this)">🌸 Hiragana</button>
           <button class="pill-btn" onclick="setScrambleFilter('katakana', this)">⚡ Katakana</button>
           <button class="pill-btn" onclick="setScrambleFilter('both', this)">🔀 Campur</button>
         </div>
         <div class="stat-badges">
           <span class="stat-badge" id="scrambleSolvedBadge">Tersusun: 0</span>
+          <span class="stat-badge" id="scramblePoolCount">Bank Kata: 0</span>
         </div>
+      </div>
+
+      <!-- Filter Variasi Tema & Level -->
+      <div class="scramble-subfilters" id="scrambleCategoryFilter">
+        <button class="pill-btn active" onclick="setScrambleCat('all', this)">🌟 Semua Tema</button>
+        <button class="pill-btn" onclick="setScrambleCat('basic', this)">🌱 Kata Dasar (2-3 Huruf)</button>
+        <button class="pill-btn" onclick="setScrambleCat('dakuon', this)">゛ Dakuon / Handakuon</button>
+        <button class="pill-btn" onclick="setScrambleCat('yoon', this)">ゃ Yoon (Gabungan)</button>
+        <button class="pill-btn" onclick="setScrambleCat('sokuon', this)">っ/ッ Tsu Kecil (Dobel)</button>
+        <button class="pill-btn" onclick="setScrambleCat('daily', this)">🗣️ Salam &amp; Sehari-hari</button>
+        <button class="pill-btn" onclick="setScrambleCat('food_animal', this)">🍣 Hewan &amp; Makanan</button>
       </div>
 
       <div class="scramble-box">
         <div class="word-clue-card">
-          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">SUSUN KOSAKATA BERIKUT:</div>
+          <span class="category-pill" id="scrambleCatBadge">Kata Dasar</span>
           <div class="word-meaning" id="scrambleMeaning">Kucing</div>
-          <div class="word-romaji-hint" id="scrambleRomaji">neko</div>
+          <div class="word-romaji-hint" id="scrambleRomaji">Petunjuk Romaji: neko</div>
+          <div class="word-note-hint" id="scrambleNote"></div>
         </div>
 
         <div id="scrambleFeedback" class="feedback-banner"></div>
@@ -1238,10 +1504,11 @@
         <div class="pool-letters" id="scramblePool"></div>
 
         <div class="fc-controls">
-          <button class="action-btn" onclick="clearScrambleSlots()">⌫ Hapus Susunan</button>
-          <button class="action-btn" onclick="speakScrambleWord()">🔊 Dengar Kata</button>
+          <button class="action-btn" onclick="clearScrambleSlots()">⌫ Hapus</button>
+          <button class="action-btn" onclick="useScrambleHint()">💡 Bantuan 1 Huruf</button>
+          <button class="action-btn" onclick="speakScrambleWord()">🔊 Dengar</button>
           <button class="action-btn primary" onclick="checkScrambleAnswer()">✔ Cek Jawaban</button>
-          <button class="action-btn" onclick="nextScrambleWord()">Lewati →</button>
+          <button class="action-btn" onclick="nextScrambleWord()">Berikutnya →</button>
         </div>
       </div>
     </section>
@@ -1423,6 +1690,29 @@
       { h: "ぴょ", k: "ピョ", r: "pyo", m: "Bunyi Pyo", s: "ぴょ" }
     ];
 
+    // Data Sokuon (Tsu Kecil) Hiragana & Katakana
+    const hiraSokuonData = [
+      { jp: "っ", r: "Sokuon (Tsu Kecil)", m: "Menggandakan konsonan berikutnya", s: "つ", badge: "Huruf Fungsi", highlight: true },
+      { jp: "きって", r: "ki-t-te", m: "Perangko (Dobel T)", s: "きって", badge: "Deret T" },
+      { jp: "がっこう", r: "ga-k-kou", m: "Sekolah (Dobel K)", s: "がっこう", badge: "Deret K" },
+      { jp: "ざっし", r: "za-s-shi", m: "Majalah (Dobel S)", s: "ざっし", badge: "Deret S" },
+      { jp: "きっぷ", r: "ki-p-pu", m: "Tiket / Karcis (Dobel P)", s: "きっぷ", badge: "Deret P" },
+      { jp: "いっしょ", r: "i-s-sho", m: "Bersama (Sokuon + Yoon)", s: "いっしょ", badge: "Kombinasi" },
+      { jp: "ちょっと", r: "cho-t-to", m: "Sebentar / Sedikit", s: "ちょっと", badge: "Percakapan" },
+      { jp: "ゆっくり", r: "yu-k-kuri", m: "Pelan-pelan", s: "ゆっくり", badge: "Kata Keterangan" }
+    ];
+
+    const kataSokuonData = [
+      { jp: "ッ", r: "Sokuon (Tsu Kecil)", m: "Menggandakan konsonan berikutnya", s: "ツ", badge: "Huruf Fungsi", highlight: true },
+      { jp: "カップ", r: "ka-p-pu", m: "Cangkir / Gelas (Dobel P)", s: "カップ", badge: "Deret P" },
+      { jp: "チケット", r: "chi-ke-t-to", m: "Tiket (Dobel T)", s: "チケット", badge: "Deret T" },
+      { jp: "サッカー", r: "sa-k-kaa", m: "Sepak Bola (Dobel K)", s: "サッカー", badge: "Deret K" },
+      { jp: "ベッド", r: "be-d-do", m: "Tempat Tidur (Dobel D)", s: "ベッド", badge: "Serapan Asing" },
+      { jp: "バッグ", r: "ba-g-gu", m: "Tas (Dobel G)", s: "バッグ", badge: "Serapan Asing" },
+      { jp: "メッセージ", r: "me-s-seeji", m: "Pesan (Dobel S)", s: "メッセージ", badge: "Deret S" },
+      { jp: "インターネット", r: "intaanetto", m: "Internet (Dobel T)", s: "インターネット", badge: "Teknologi" }
+    ];
+
     const specialKatakana = [
       { k: "ウィ", r: "wi", m: "Bunyi Wi", s: "ウィ" },
       { k: "ウェ", r: "we", m: "Bunyi We", s: "ウェ" },
@@ -1449,37 +1739,96 @@
       { k: "シェ", r: "she", m: "Bunyi She", s: "シェ" }
     ];
 
-    // Data Kosakata untuk Fitur Menyusun Huruf
+    // --- BANK KOSAKATA LENGKAP UNTUK FITUR MENYUSUN HURUF ---
+    // Kategori: 'basic', 'dakuon', 'yoon', 'sokuon', 'daily', 'food_animal'
     const wordBank = [
-      // Hiragana
-      { type: 'hiragana', chars: ['ね', 'こ'], romaji: 'neko', meaning: 'Kucing', word: 'ねこ' },
-      { type: 'hiragana', chars: ['い', 'ぬ'], romaji: 'inu', meaning: 'Anjing', word: 'いぬ' },
-      { type: 'hiragana', chars: ['さ', 'く', 'ら'], romaji: 'sakura', meaning: 'Bunga Sakura', word: 'さくら' },
-      { type: 'hiragana', chars: ['す', 'し'], romaji: 'sushi', meaning: 'Sushi', word: 'すし' },
-      { type: 'hiragana', chars: ['み', 'ず'], romaji: 'mizu', meaning: 'Air', word: 'みず' },
-      { type: 'hiragana', chars: ['た', 'べ', 'も', 'の'], romaji: 'tabemono', meaning: 'Makanan', word: 'たべもの' },
-      { type: 'hiragana', chars: ['と', 'も', 'だ', 'ち'], romaji: 'tomodachi', meaning: 'Teman', word: 'ともだち' },
-      { type: 'hiragana', chars: ['せ', 'ん', 'せ', 'い'], romaji: 'sensei', meaning: 'Guru', word: 'せんせい' },
-      { type: 'hiragana', chars: ['あ', 'り', 'が', 'と', 'う'], romaji: 'arigatou', meaning: 'Terima Kasih', word: 'ありがとう' },
-      { type: 'hiragana', chars: ['お', 'は', 'よ', 'う'], romaji: 'ohayou', meaning: 'Selamat Pagi', word: 'おはよう' },
-      { type: 'hiragana', chars: ['やま'], romaji: 'yama', meaning: 'Gunung', word: 'やま', overrideChars: ['や', 'ま'] },
-      { type: 'hiragana', chars: ['く', 'る', 'ま'], romaji: 'kuruma', meaning: 'Mobil', word: 'くるま' },
-      { type: 'hiragana', chars: ['でん', 'しゃ'], romaji: 'densha', meaning: 'Kereta Listrik', word: 'でんしゃ', overrideChars: ['で', 'ん', 'しゃ'] },
-      // Katakana
-      { type: 'katakana', chars: ['カ', 'メ', 'ラ'], romaji: 'kamera', meaning: 'Kamera', word: 'カメラ' },
-      { type: 'katakana', chars: ['テ', 'レ', 'ビ'], romaji: 'terebi', meaning: 'Televisi', word: 'テレビ' },
-      { type: 'katakana', chars: ['コ', 'ー', 'ヒ', 'ー'], romaji: 'koohii', meaning: 'Kopi', word: 'コーヒー' },
-      { type: 'katakana', chars: ['バ', 'ナ', 'ナ'], romaji: 'banana', meaning: 'Pisang', word: 'バナナ' },
-      { type: 'katakana', chars: ['ホ', 'テ', 'ル'], romaji: 'hoteru', meaning: 'Hotel', word: 'ホテル' },
-      { type: 'katakana', chars: ['パ', 'ソ', 'コ', 'ン'], romaji: 'pasokon', meaning: 'Komputer / PC', word: 'パソコン' },
-      { type: 'katakana', chars: ['ア', 'イ', 'ス'], romaji: 'aisu', meaning: 'Es / Es Krim', word: 'アイス' },
-      { type: 'katakana', chars: ['ス', 'マ', 'ホ'], romaji: 'sumaho', meaning: 'Smartphone', word: 'スマホ' },
-      { type: 'katakana', chars: ['ラ', 'ー', 'メ', 'ン'], romaji: 'raamen', meaning: 'Mie Ramen', word: 'ラーメン' },
-      { type: 'katakana', chars: ['タ', 'ク', 'シ', 'ー'], romaji: 'takushii', meaning: 'Taksi', word: 'タクシー' }
-    ].map(item => ({
-      ...item,
-      chars: item.overrideChars || item.chars
-    }));
+      // === HIRAGANA ===
+      // 1. Basic & Food/Animal
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['ね', 'こ'], romaji: 'neko', meaning: 'Kucing', word: 'ねこ' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['い', 'ぬ'], romaji: 'inu', meaning: 'Anjing', word: 'いぬ' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['と', 'り'], romaji: 'tori', meaning: 'Burung', word: 'とり' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Hewan & Dasar', chars: ['さ', 'か', 'な'], romaji: 'sakana', meaning: 'Ikan', word: 'さかな' },
+      { type: 'hiragana', cats: ['basic', 'food_animal'], catLabel: 'Makanan & Dasar', chars: ['す', 'し'], romaji: 'sushi', meaning: 'Sushi', word: 'すし' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['さ', 'く', 'ら'], romaji: 'sakura', meaning: 'Bunga Sakura', word: 'さくら' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['や', 'ま'], romaji: 'yama', meaning: 'Gunung', word: 'やま' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['う', 'み'], romaji: 'umi', meaning: 'Laut', word: 'うみ' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Alam & Dasar', chars: ['そ', 'ら'], romaji: 'sora', meaning: 'Langit', word: 'そら' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['く', 'る', 'ま'], romaji: 'kuruma', meaning: 'Mobil', word: 'くるま' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['と', 'け', 'い'], romaji: 'tokei', meaning: 'Jam / Arloji', word: 'とけい' },
+      { type: 'hiragana', cats: ['basic'], catLabel: 'Benda & Dasar', chars: ['ほ', 'ん'], romaji: 'hon', meaning: 'Buku', word: 'ほん' },
+
+      // 2. Dakuon & Handakuon (゛ / ゜)
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['み', 'ず'], romaji: 'mizu', meaning: 'Air', word: 'みず', note: 'Gunakan ず (zu) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['た', 'べ', 'も', 'の'], romaji: 'tabemono', meaning: 'Makanan', word: 'たべもの', note: 'Gunakan べ (be) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['ご', 'は', 'ん'], romaji: 'gohan', meaning: 'Nasi / Makanan', word: 'ごはん', note: 'Gunakan ご (go) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon (゛)', chars: ['り', 'ん', 'ご'], romaji: 'ringo', meaning: 'Apel', word: 'りんご', note: 'Gunakan ご (go) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['と', 'も', 'だ', 'ち'], romaji: 'tomodachi', meaning: 'Teman', word: 'ともだち', note: 'Gunakan だ (da) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['か', 'ぞ', 'く'], romaji: 'kazoku', meaning: 'Keluarga', word: 'かぞく', note: 'Gunakan ぞ (zo) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Dakuon (゛)', chars: ['め', 'が', 'ね'], romaji: 'megane', meaning: 'Kacamata', word: 'めがね', note: 'Gunakan が (ga) dengan tenten' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Handakuon (゜)', chars: ['え', 'ん', 'ぴ', 'つ'], romaji: 'enpitsu', meaning: 'Pensil', word: 'えんぴつ', note: 'Gunakan ぴ (pi) dengan maru' },
+      { type: 'hiragana', cats: ['dakuon'], catLabel: 'Handakuon (゜)', chars: ['さ', 'ん', 'ぽ'], romaji: 'sanpo', meaning: 'Jalan-jalan Santai', word: 'さんぽ', note: 'Gunakan ぽ (po) dengan maru' },
+
+      // 3. Yoon (ゃ, ゅ, ょ)
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['で', 'ん', 'しゃ'], romaji: 'densha', meaning: 'Kereta Listrik', word: 'でんしゃ', note: 'Gabungan し + ゃ = しゃ (sha)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['じ', 'て', 'ん', 'しゃ'], romaji: 'jitensha', meaning: 'Sepeda', word: 'じてんしゃ', note: 'Gabungan しゃ (sha)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['べ', 'ん', 'きょう'], romaji: 'benkyou', meaning: 'Belajar', word: 'べんきょう', note: 'Gabungan き + ょ = きょ (kyo)' },
+      { type: 'hiragana', cats: ['yoon', 'food_animal'], catLabel: 'Gabungan Yoon', chars: ['ぎゅう', 'にゅう'], romaji: 'gyuunyuu', meaning: 'Susu Sapi', word: 'ぎゅうにゅう', note: 'Gabungan ぎゅう & にゅう' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['りょ', 'こ', 'う'], romaji: 'ryokou', meaning: 'Wisata / Traveling', word: 'りょこう', note: 'Gabungan り + ょ = りょ (ryo)' },
+      { type: 'hiragana', cats: ['yoon'], catLabel: 'Gabungan Yoon', chars: ['びょう', 'い', 'ん'], romaji: 'byouin', meaning: 'Rumah Sakit', word: 'びょういん', note: 'Gabungan び + ょ = びょ (byo)' },
+
+      // 4. Sokuon / Tsu Kecil (っ)
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['き', 'っ', 'て'], romaji: 'kitte', meaning: 'Perangko', word: 'きって', note: 'Tsu kecil (っ) menggandakan huruf T' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['が', 'っ', 'こ', 'う'], romaji: 'gakkou', meaning: 'Sekolah', word: 'がっこう', note: 'Tsu kecil (っ) menggandakan huruf K' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['ざ', 'っ', 'し'], romaji: 'zasshi', meaning: 'Majalah', word: 'ざっし', note: 'Tsu kecil (っ) menggandakan huruf S' },
+      { type: 'hiragana', cats: ['sokuon'], catLabel: 'Tsu Kecil (っ)', chars: ['き', 'っ', 'ぷ'], romaji: 'kippu', meaning: 'Tiket / Karcis', word: 'きっぷ', note: 'Tsu kecil (っ) menggandakan huruf P' },
+      { type: 'hiragana', cats: ['sokuon', 'yoon'], catLabel: 'Tsu Kecil + Yoon', chars: ['い', 'っ', 'しょ'], romaji: 'issho', meaning: 'Bersama-sama', word: 'いっしょ', note: 'Kombinasi っ (sokuon) + しょ (yoon)' },
+      { type: 'hiragana', cats: ['sokuon', 'daily'], catLabel: 'Tsu Kecil (っ)', chars: ['ちょ', 'っ', 'と'], romaji: 'chotto', meaning: 'Sebentar / Sedikit', word: 'ちょっと', note: 'Tsu kecil (っ) memberi jeda ketukan' },
+
+      // 5. Salam & Sehari-hari
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['あ', 'り', 'が', 'と', 'う'], romaji: 'arigatou', meaning: 'Terima Kasih', word: 'ありがとう' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['お', 'は', 'よ', 'う'], romaji: 'ohayou', meaning: 'Selamat Pagi', word: 'おはよう' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['こ', 'ん', 'に', 'ち', 'は'], romaji: 'konnichiwa', meaning: 'Halo / Selamat Siang', word: 'こんにちは', note: 'Partikel wa ditulis dengan は (ha)' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Salam & Ungkapan', chars: ['す', 'み', 'ま', 'せ', 'ん'], romaji: 'sumimasen', meaning: 'Permisi / Maaf', word: 'すみません' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Profesi & Orang', chars: ['せ', 'ん', 'せ', 'い'], romaji: 'sensei', meaning: 'Guru / Pengajar', word: 'せんせい' },
+      { type: 'hiragana', cats: ['daily'], catLabel: 'Profesi & Orang', chars: ['が', 'く', 'せ', 'い'], romaji: 'gakusei', meaning: 'Pelajar / Mahasiswa', word: 'がくせい' },
+
+      // === KATAKANA ===
+      // 1. Basic & Serapan
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['カ', 'メ', 'ラ'], romaji: 'kamera', meaning: 'Kamera', word: 'カメラ' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['ホ', 'テ', 'ル'], romaji: 'hoteru', meaning: 'Hotel', word: 'ホテル' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['タ', 'ク', 'シ', 'ー'], romaji: 'takushii', meaning: 'Taksi', word: 'タクシー', note: 'ー adalah tanda vokal panjang' },
+      { type: 'katakana', cats: ['basic'], catLabel: 'Katakana Dasar', chars: ['ノ', 'ー', 'ト'], romaji: 'nooto', meaning: 'Buku Catatan', word: 'ノート' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['ア', 'イ', 'ス'], romaji: 'aisu', meaning: 'Es / Es Krim', word: 'アイス' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['ラ', 'ー', 'メ', 'ン'], romaji: 'raamen', meaning: 'Mie Ramen', word: 'ラーメン' },
+      { type: 'katakana', cats: ['basic', 'food_animal'], catLabel: 'Makanan Katakana', chars: ['カ', 'レ', 'ー'], romaji: 'karee', meaning: 'Kari', word: 'カレー' },
+
+      // 2. Dakuon & Handakuon Katakana
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['テ', 'レ', 'ビ'], romaji: 'terebi', meaning: 'Televisi', word: 'テレビ', note: 'Gunakan ビ (bi)' },
+      { type: 'katakana', cats: ['dakuon', 'food_animal'], catLabel: 'Dakuon Katakana', chars: ['バ', 'ナ', 'ナ'], romaji: 'banana', meaning: 'Pisang', word: 'バナナ', note: 'Gunakan バ (ba)' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Handakuon Katakana', chars: ['パ', 'ソ', 'コ', 'ン'], romaji: 'pasokon', meaning: 'Komputer / PC', word: 'パソコン', note: 'Gunakan パ (pa)' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['ス', 'マ', 'ホ'], romaji: 'sumaho', meaning: 'Smartphone', word: 'スマホ' },
+      { type: 'katakana', cats: ['dakuon', 'food_animal'], catLabel: 'Handakuon Katakana', chars: ['パ', 'ン'], romaji: 'pan', meaning: 'Roti', word: 'パン' },
+      { type: 'katakana', cats: ['dakuon'], catLabel: 'Dakuon Katakana', chars: ['ゲ', 'ー', 'ム'], romaji: 'geemu', meaning: 'Game / Permainan', word: 'ゲーム' },
+
+      // 3. Yoon Katakana
+      { type: 'katakana', cats: ['yoon'], catLabel: 'Yoon Katakana', chars: ['シャ', 'ツ'], romaji: 'shatsu', meaning: 'Kemeja', word: 'シャツ', note: 'Gabungan シ + ャ = シャ (sha)' },
+      { type: 'katakana', cats: ['yoon', 'food_animal'], catLabel: 'Yoon Katakana', chars: ['ジュー', 'ス'], romaji: 'juusu', meaning: 'Jus Buah', word: 'ジュース', note: 'Gabungan ジ + ュ = ジュ (ju)' },
+      { type: 'katakana', cats: ['yoon', 'food_animal'], catLabel: 'Yoon Katakana', chars: ['チョ', 'コ'], romaji: 'choko', meaning: 'Cokelat', word: 'チョコ', note: 'Gabungan チ + ョ = チョ (cho)' },
+      { type: 'katakana', cats: ['yoon'], catLabel: 'Yoon Katakana', chars: ['ニュー', 'ス'], romaji: 'nyuusu', meaning: 'Berita', word: 'ニュース', note: 'Gabungan ニ + ュ = ニュ (nyu)' },
+
+      // 4. Sokuon / Tsu Kecil Katakana (ッ)
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['カ', 'ッ', 'プ'], romaji: 'kappu', meaning: 'Cangkir / Gelas', word: 'カップ', note: 'Tsu kecil (ッ) menggandakan huruf P' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['チ', 'ケ', 'ッ', 'ト'], romaji: 'chiketto', meaning: 'Tiket', word: 'チケット', note: 'Tsu kecil (ッ) menggandakan huruf T' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['サ', 'ッ', 'カ', 'ー'], romaji: 'sakkaa', meaning: 'Sepak Bola', word: 'サッカー', note: 'Tsu kecil (ッ) menggandakan huruf K' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['ベ', 'ッ', 'ド'], romaji: 'beddo', meaning: 'Tempat Tidur', word: 'ベッド', note: 'Tsu kecil (ッ) menggandakan huruf D' },
+      { type: 'katakana', cats: ['sokuon'], catLabel: 'Tsu Kecil (ッ)', chars: ['バ', 'ッ', 'グ'], romaji: 'baggu', meaning: 'Tas', word: 'バッグ', note: 'Tsu kecil (ッ) menggandakan huruf G' },
+      { type: 'katakana', cats: ['sokuon', 'daily'], catLabel: 'Tsu Kecil (ッ)', chars: ['メ', 'ッ', 'セ', 'ー', 'ジ'], romaji: 'messeeji', meaning: 'Pesan / Message', word: 'メッセージ', note: 'Tsu kecil (ッ) menggandakan huruf S' },
+
+      // 5. Daily Katakana
+      { type: 'katakana', cats: ['daily', 'food_animal'], catLabel: 'Kafe & Sehari-hari', chars: ['コ', 'ー', 'ヒ', 'ー'], romaji: 'koohii', meaning: 'Kopi', word: 'コーヒー' },
+      { type: 'katakana', cats: ['daily'], catLabel: 'Kafe & Sehari-hari', chars: ['ト', 'イ', 'レ'], romaji: 'toire', meaning: 'Toilet', word: 'トイレ' },
+      { type: 'katakana', cats: ['daily'], catLabel: 'Kafe & Sehari-hari', chars: ['レ', 'ス', 'ト', 'ラ', 'ン'], romaji: 'resutoran', meaning: 'Restoran', word: 'レストラン' }
+    ];
 
     // --- 3. SPEECH SYNTHESIS ENGINE ---
     let voices = [];
@@ -1524,6 +1873,21 @@
 
     // Helper: Ambil pool kartu sesuai filter
     function getKanaPool(script = 'hiragana', group = 'base') {
+      if (group === 'sokuon') {
+        let sPool = [];
+        if (script === 'hiragana' || script === 'both') {
+          hiraSokuonData.forEach(item => {
+            sPool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana (Sokuon)' });
+          });
+        }
+        if (script === 'katakana' || script === 'both') {
+          kataSokuonData.forEach(item => {
+            sPool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana (Sokuon)' });
+          });
+        }
+        return sPool;
+      }
+
       let source = [];
       if (group === 'base') source = baseKana.filter(i => !i.empty);
       else if (group === 'daku') source = dakuKana;
@@ -1539,6 +1903,19 @@
           pool.push({ kana: item.k, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana' });
         }
       });
+
+      if (group === 'all') {
+        if (script === 'hiragana' || script === 'both') {
+          hiraSokuonData.slice(1, 5).forEach(item => {
+            pool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Hiragana (Sokuon)' });
+          });
+        }
+        if (script === 'katakana' || script === 'both') {
+          kataSokuonData.slice(1, 5).forEach(item => {
+            pool.push({ kana: item.jp, romaji: item.r, meaning: item.m, sound: item.s, type: 'Katakana (Sokuon)' });
+          });
+        }
+      }
       return pool;
     }
 
@@ -1551,7 +1928,7 @@
       return copy;
     }
 
-    // --- 4. RENDER TABEL HURUF ASLI ---
+    // --- 4. RENDER TABEL HURUF ASLI + SOKUON ---
     function create3TierCard(jpText, readingText, meaningText, soundText) {
       return `
         <div class="kana-card" onclick="playAudio('${soundText}', this)">
@@ -1561,21 +1938,38 @@
         </div>`;
     }
 
+    function createSokuonCard(item) {
+      const extraClass = item.highlight ? ' highlight-sokuon' : '';
+      return `
+        <div class="kana-card${extraClass}" onclick="playAudio('${item.s}', this)">
+          <span class="sokuon-badge">${item.badge}</span>
+          <div class="tier-jp">${item.jp}</div>
+          <div class="tier-reading">${item.r}</div>
+          <div class="tier-meaning">${item.m}</div>
+        </div>`;
+    }
+
     function renderGrids() {
       const hBase = document.getElementById('hiraBaseGrid');
       const hDaku = document.getElementById('hiraDakuGrid');
       const hYoon = document.getElementById('hiraYoonGrid');
+      const hSoku = document.getElementById('hiraSokuonGrid');
+
       baseKana.forEach(i => hBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.h, i.r, i.m, i.s));
       dakuKana.forEach(i => hDaku.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
       yoonKana.forEach(i => hYoon.innerHTML += create3TierCard(i.h, i.r, i.m, i.s));
+      hiraSokuonData.forEach(i => hSoku.innerHTML += createSokuonCard(i));
 
       const kBase = document.getElementById('kataBaseGrid');
       const kDaku = document.getElementById('kataDakuGrid');
       const kYoon = document.getElementById('kataYoonGrid');
+      const kSoku = document.getElementById('kataSokuonGrid');
       const kSpec = document.getElementById('kataSpecialGrid');
+
       baseKana.forEach(i => kBase.innerHTML += i.empty ? '<div class="kana-card empty"></div>' : create3TierCard(i.k, i.r, i.m, i.s));
       dakuKana.forEach(i => kDaku.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
       yoonKana.forEach(i => kYoon.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
+      kataSokuonData.forEach(i => kSoku.innerHTML += createSokuonCard(i));
       specialKatakana.forEach(i => kSpec.innerHTML += create3TierCard(i.k, i.r, i.m, i.s));
     }
 
@@ -1591,13 +1985,13 @@
         kTab.classList.remove('active');
         hCon.style.display = 'block';
         kCon.style.display = 'none';
-        info.innerHTML = '🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), dan Gabungan Yoon (ゃ, ゅ, ょ). Ketuk kartu untuk mendengar suara!';
+        info.innerHTML = '🌸 <strong>Hiragana Lengkap:</strong> 46 Huruf Dasar (Gojuon), Dakuon (゛), Handakuon (゜), Yoon (ゃ, ゅ, ょ), dan Sokuon / Tsu Kecil (っ). Ketuk kartu untuk mendengar suara!';
       } else {
         kTab.classList.add('active');
         hTab.classList.remove('active');
         kCon.style.display = 'block';
         hCon.style.display = 'none';
-        info.innerHTML = '⚡ <strong>Katakana Lengkap &amp; Modern:</strong> 46 Huruf Dasar, Dakuon, Yoon, serta Kombinasi Kata Serapan Modern (wi, we, ti, di, fa, fi, va, vi, che, je).';
+        info.innerHTML = '⚡ <strong>Katakana Lengkap &amp; Modern:</strong> 46 Huruf Dasar, Dakuon, Yoon, Sokuon / Tsu Kecil (ッ), serta Kombinasi Kata Serapan Modern (wi, we, ti, di, fa, fi, va, vi, che, je).';
       }
     }
 
@@ -1607,12 +2001,16 @@
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
 
-      ['table', 'flashcard', 'match', 'quiz', 'scramble'].forEach(m => {
+      ['table', 'flashcard', 'write', 'match', 'quiz', 'scramble'].forEach(m => {
         const el = document.getElementById('mode-' + m);
         if (el) el.style.display = (m === mode) ? 'block' : 'none';
       });
 
       if (mode === 'flashcard' && fcDeck.length === 0) initFlashcards();
+      if (mode === 'write') {
+        if (writeDeck.length === 0) initWriteMode();
+        else resizeWriteCanvas();
+      }
       if (mode === 'match' && matchTiles.length === 0) initMatchGame();
       if (mode === 'quiz' && quizQuestions.length === 0) startQuiz();
       if (mode === 'scramble' && !currentScramble) nextScrambleWord();
@@ -1650,7 +2048,10 @@
 
       document.getElementById('fcCounter').textContent = `Kartu ${fcIndex + 1} / ${fcDeck.length}`;
       document.getElementById('fcTagFront').textContent = card.type;
-      document.getElementById('fcFrontText').textContent = card.kana;
+      const frontEl = document.getElementById('fcFrontText');
+      frontEl.textContent = card.kana;
+      frontEl.style.fontSize = card.kana.length >= 4 ? '2.8rem' : (card.kana.length >= 2 ? '3.8rem' : '5rem');
+
       document.getElementById('fcBackRomaji').textContent = card.romaji;
       document.getElementById('fcBackMeaning').textContent = `${card.meaning} (${card.kana})`;
 
@@ -1828,8 +2229,10 @@
       document.getElementById('quizStepBadge').textContent = `Soal: ${quizIdx + 1} / ${quizQuestions.length}`;
       document.getElementById('quizScoreBadge').textContent = `Skor: ${quizScore}`;
       document.getElementById('quizStreakBadge').textContent = `🔥 ${quizStreak}`;
-      document.getElementById('quizPromptLabel').textContent = `Apa cara baca huruf ${q.target.type} ini?`;
-      document.getElementById('quizTargetText').textContent = q.target.kana;
+      document.getElementById('quizPromptLabel').textContent = `Apa cara baca ${q.target.type} ini?`;
+      const targetEl = document.getElementById('quizTargetText');
+      targetEl.textContent = q.target.kana;
+      targetEl.style.fontSize = q.target.kana.length >= 3 ? '3rem' : '4.2rem';
 
       const fb = document.getElementById('quizFeedback');
       fb.className = 'feedback-banner';
@@ -1893,8 +2296,9 @@
       if (quizQuestions[quizIdx]) playAudio(quizQuestions[quizIdx].target.sound);
     }
 
-    // --- 9. LOGIKA FITUR 4: MENYUSUN HURUF ---
+    // --- 9. LOGIKA FITUR 4: MENYUSUN HURUF (VARIASI LENGKAP) ---
     let scrambleScript = 'hiragana';
+    let scrambleCategory = 'all';
     let currentScramble = null;
     let scramblePoolItems = [];
     let scrambleSelectedIndices = [];
@@ -1908,23 +2312,63 @@
       nextScrambleWord();
     }
 
+    function setScrambleCat(cat, btn) {
+      scrambleCategory = cat;
+      document.querySelectorAll('#scrambleCategoryFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      nextScrambleWord();
+    }
+
+    function getFilteredScrambleWords() {
+      return wordBank.filter(w => {
+        const scriptOk = (scrambleScript === 'both' || w.type === scrambleScript);
+        const catOk = (scrambleCategory === 'all' || w.cats.includes(scrambleCategory));
+        return scriptOk && catOk;
+      });
+    }
+
     function nextScrambleWord() {
-      const filtered = wordBank.filter(w => scrambleScript === 'both' || w.type === scrambleScript);
+      let filtered = getFilteredScrambleWords();
+      if (!filtered.length) {
+        filtered = wordBank.filter(w => scrambleScript === 'both' || w.type === scrambleScript);
+      }
+
+      document.getElementById('scramblePoolCount').textContent = `Bank Kata: ${filtered.length}`;
+
       let candidates = filtered.filter(w => w.word !== lastWordString);
       if (!candidates.length) candidates = filtered;
 
       currentScramble = candidates[Math.floor(Math.random() * candidates.length)];
       lastWordString = currentScramble.word;
 
-      // Tambahkan 2-3 huruf pengecoh dari jenis aksara yang sama
+      // Buat huruf pengecoh cerdas (termasuk sokuon/dakuon/yoon jika relevan)
       const distractorPool = getKanaPool(currentScramble.type, 'base').map(i => i.kana);
-      const distractors = shuffleArray(distractorPool.filter(c => !currentScramble.chars.includes(c))).slice(0, 3);
+      if (currentScramble.type === 'hiragana') {
+        distractorPool.push('っ', 'が', 'ざ', 'だ', 'ば', 'ぱ', 'しゃ', 'ちょ', 'きょ');
+      } else {
+        distractorPool.push('ッ', 'ー', 'バ', 'パ', 'ガ', 'ジ', 'シャ', 'チョ', 'ジュ');
+      }
+
+      const distractors = shuffleArray(
+        [...new Set(distractorPool)].filter(c => !currentScramble.chars.includes(c))
+      ).slice(0, 3);
 
       scramblePoolItems = shuffleArray([...currentScramble.chars, ...distractors]);
       scrambleSelectedIndices = [];
 
+      const typeLabel = currentScramble.type === 'hiragana' ? '🌸 Hiragana' : '⚡ Katakana';
+      document.getElementById('scrambleCatBadge').textContent = `${typeLabel} • ${currentScramble.catLabel}`;
       document.getElementById('scrambleMeaning').textContent = currentScramble.meaning;
       document.getElementById('scrambleRomaji').textContent = `Petunjuk Romaji: ${currentScramble.romaji}`;
+
+      const noteEl = document.getElementById('scrambleNote');
+      if (currentScramble.note) {
+        noteEl.textContent = `💡 Catatan: ${currentScramble.note}`;
+        noteEl.style.display = 'block';
+      } else {
+        noteEl.textContent = '';
+        noteEl.style.display = 'none';
+      }
 
       const fb = document.getElementById('scrambleFeedback');
       fb.className = 'feedback-banner';
@@ -1939,7 +2383,7 @@
 
       slotsEl.innerHTML = '';
       if (scrambleSelectedIndices.length === 0) {
-        slotsEl.innerHTML = '<span style="color: var(--text-muted); font-size: 0.85rem; align-self: center;">Ketuk huruf di bawah untuk menyusun kata...</span>';
+        slotsEl.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem; align-self: center;">Ketuk ${currentScramble.chars.length} potongan huruf di bawah untuk menyusun kata...</span>`;
       } else {
         scrambleSelectedIndices.forEach((poolIdx, slotPos) => {
           const chip = document.createElement('button');
@@ -1961,7 +2405,9 @@
         btn.textContent = char;
         btn.disabled = scrambleSelectedIndices.includes(idx);
         btn.onclick = () => {
-          playAudio(char);
+          if (char !== 'っ' && char !== 'ッ' && char !== 'ー') {
+            playAudio(char);
+          }
           scrambleSelectedIndices.push(idx);
           renderScrambleUI();
         };
@@ -1974,6 +2420,31 @@
       const fb = document.getElementById('scrambleFeedback');
       fb.className = 'feedback-banner';
       renderScrambleUI();
+    }
+
+    function useScrambleHint() {
+      if (!currentScramble) return;
+      // Cari posisi pertama yang belum sesuai dengan target chars
+      let validPrefixLen = 0;
+      for (let i = 0; i < scrambleSelectedIndices.length; i++) {
+        if (scramblePoolItems[scrambleSelectedIndices[i]] === currentScramble.chars[i]) {
+          validPrefixLen++;
+        } else {
+          break;
+        }
+      }
+
+      // Potong susunan yang salah setelah validPrefixLen
+      scrambleSelectedIndices = scrambleSelectedIndices.slice(0, validPrefixLen);
+
+      if (validPrefixLen < currentScramble.chars.length) {
+        const neededChar = currentScramble.chars[validPrefixLen];
+        const poolIdx = scramblePoolItems.findIndex((c, idx) => c === neededChar && !scrambleSelectedIndices.includes(idx));
+        if (poolIdx !== -1) {
+          scrambleSelectedIndices.push(poolIdx);
+          renderScrambleUI();
+        }
+      }
     }
 
     function checkScrambleAnswer() {
@@ -1993,16 +2464,220 @@
         fb.className = 'feedback-banner show ok';
         fb.textContent = `🎉 Benar! "${currentScramble.word}" (${currentScramble.romaji}) = ${currentScramble.meaning}.`;
         playAudio(currentScramble.word);
-        setTimeout(() => nextScrambleWord(), 1400);
+        setTimeout(() => nextScrambleWord(), 1500);
       } else {
         fb.className = 'feedback-banner show err';
-        fb.textContent = `❌ Susunan "${assembled}" belum tepat. Coba periksa kembali urutannya!`;
+        fb.textContent = `❌ Susunan "${assembled}" belum tepat. Coba periksa kembali atau gunakan tombol "💡 Bantuan 1 Huruf"!`;
       }
     }
 
     function speakScrambleWord() {
       if (currentScramble) playAudio(currentScramble.word);
     }
+
+    // --- 10. LOGIKA FITUR 5: MENULIS HURUF (CANVAS) ---
+    let writeScript = 'hiragana';
+    let writeGroup = 'base';
+    let writeDeck = [];
+    let writeIdx = 0;
+    let showGuide = true;
+    let currentBrushColor = '#818cf8';
+    let isDrawing = false;
+    let strokeHistory = []; // Array of stroke arrays [{x, y, color, size}]
+    let currentStroke = [];
+
+    const drawCanvas = document.getElementById('kanaDrawCanvas');
+    const drawCtx = drawCanvas.getContext('2d');
+
+    function setWriteFilter(type, val, btn) {
+      if (type === 'script') {
+        writeScript = val;
+        document.querySelectorAll('#writeScriptFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      } else {
+        writeGroup = val;
+        document.querySelectorAll('#writeGroupFilter .pill-btn').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+      initWriteMode();
+    }
+
+    function initWriteMode() {
+      writeDeck = getKanaPool(writeScript, writeGroup);
+      writeIdx = 0;
+      resizeWriteCanvas();
+      renderWriteTarget(false);
+    }
+
+    function resizeWriteCanvas() {
+      const stage = document.getElementById('canvasStage');
+      if (!stage) return;
+      const rect = stage.getBoundingClientRect();
+      const size = Math.round(rect.width) || 340;
+      if (drawCanvas.width !== size || drawCanvas.height !== size) {
+        drawCanvas.width = size;
+        drawCanvas.height = size;
+        redrawAllStrokes();
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      if (document.getElementById('mode-write').style.display !== 'none') {
+        resizeWriteCanvas();
+      }
+    });
+
+    function renderWriteTarget(autoSpeak = true) {
+      if (!writeDeck.length) return;
+      const item = writeDeck[writeIdx];
+      clearWriteCanvas();
+
+      document.getElementById('writeProgressLabel').textContent = `Huruf ${writeIdx + 1} / ${writeDeck.length} • ${item.type}`;
+      document.getElementById('writeRomajiText').textContent = item.romaji;
+      document.getElementById('writeMeaningText').textContent = item.meaning;
+
+      const guideEl = document.getElementById('writeGuideChar');
+      guideEl.textContent = item.kana;
+      guideEl.style.fontSize = item.kana.length >= 2 ? '9.5rem' : '13.5rem';
+
+      if (autoSpeak) playAudio(item.sound);
+    }
+
+    function toggleWriteGuide() {
+      showGuide = !showGuide;
+      const guideEl = document.getElementById('writeGuideChar');
+      const btn = document.getElementById('toggleGuideBtn');
+      if (showGuide) {
+        guideEl.classList.remove('hidden-guide');
+        btn.textContent = '👁️ Jiplakan: ON';
+      } else {
+        guideEl.classList.add('hidden-guide');
+        btn.textContent = '🙈 Jiplakan: OFF';
+      }
+    }
+
+    function setBrushColor(color, btn) {
+      currentBrushColor = color;
+      document.querySelectorAll('.brush-swatch').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function updateBrushStyle() {
+      // Handled dynamically per stroke
+    }
+
+    function getCanvasCoords(e) {
+      const rect = drawCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: ((clientX - rect.left) / rect.width) * drawCanvas.width,
+        y: ((clientY - rect.top) / rect.height) * drawCanvas.height
+      };
+    }
+
+    function startDrawing(e) {
+      if (e.cancelable) e.preventDefault();
+      isDrawing = true;
+      const pt = getCanvasCoords(e);
+      const size = parseInt(document.getElementById('brushSizeSelect').value, 10) || 10;
+      currentStroke = [{ x: pt.x, y: pt.y, color: currentBrushColor, size }];
+
+      drawCtx.lineCap = 'round';
+      drawCtx.lineJoin = 'round';
+      drawCtx.strokeStyle = currentBrushColor;
+      drawCtx.lineWidth = size;
+      drawCtx.beginPath();
+      drawCtx.moveTo(pt.x, pt.y);
+      drawCtx.lineTo(pt.x + 0.1, pt.y + 0.1);
+      drawCtx.stroke();
+    }
+
+    function continueDrawing(e) {
+      if (!isDrawing) return;
+      if (e.cancelable) e.preventDefault();
+      const pt = getCanvasCoords(e);
+      const size = currentStroke[0].size;
+      currentStroke.push({ x: pt.x, y: pt.y, color: currentBrushColor, size });
+
+      drawCtx.lineTo(pt.x, pt.y);
+      drawCtx.stroke();
+    }
+
+    function stopDrawing() {
+      if (!isDrawing) return;
+      isDrawing = false;
+      if (currentStroke.length > 0) {
+        strokeHistory.push(currentStroke);
+        currentStroke = [];
+      }
+    }
+
+    function redrawAllStrokes() {
+      drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+      strokeHistory.forEach(stroke => {
+        if (!stroke.length) return;
+        drawCtx.lineCap = 'round';
+        drawCtx.lineJoin = 'round';
+        drawCtx.strokeStyle = stroke[0].color;
+        drawCtx.lineWidth = stroke[0].size;
+        drawCtx.beginPath();
+        drawCtx.moveTo(stroke[0].x, stroke[0].y);
+        if (stroke.length === 1) {
+          drawCtx.lineTo(stroke[0].x + 0.1, stroke[0].y + 0.1);
+        } else {
+          for (let i = 1; i < stroke.length; i++) {
+            drawCtx.lineTo(stroke[i].x, stroke[i].y);
+          }
+        }
+        drawCtx.stroke();
+      });
+    }
+
+    function undoCanvasStroke() {
+      if (strokeHistory.length > 0) {
+        strokeHistory.pop();
+        redrawAllStrokes();
+      }
+    }
+
+    function clearWriteCanvas() {
+      strokeHistory = [];
+      currentStroke = [];
+      drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    }
+
+    function nextWriteChar() {
+      writeIdx = (writeIdx + 1) % writeDeck.length;
+      renderWriteTarget(true);
+    }
+
+    function prevWriteChar() {
+      writeIdx = (writeIdx - 1 + writeDeck.length) % writeDeck.length;
+      renderWriteTarget(true);
+    }
+
+    function randomWriteChar() {
+      if (writeDeck.length <= 1) return;
+      let next = writeIdx;
+      while (next === writeIdx) {
+        next = Math.floor(Math.random() * writeDeck.length);
+      }
+      writeIdx = next;
+      renderWriteTarget(true);
+    }
+
+    function speakWriteChar() {
+      if (writeDeck[writeIdx]) playAudio(writeDeck[writeIdx].sound);
+    }
+
+    // Event listeners Mouse & Touch untuk kanvas menulis
+    drawCanvas.addEventListener('mousedown', startDrawing);
+    drawCanvas.addEventListener('mousemove', continueDrawing);
+    window.addEventListener('mouseup', stopDrawing);
+
+    drawCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+    drawCanvas.addEventListener('touchmove', continueDrawing, { passive: false });
+    window.addEventListener('touchend', stopDrawing);
 
     // Inisialisasi awal tabel
     renderGrids();
