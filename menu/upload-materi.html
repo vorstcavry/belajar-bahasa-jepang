@@ -1476,7 +1476,7 @@
         showToast("🗑️ Riwayat log berhasil dibersihkan.");
       }
     }
-
+ 
     function filterGallery(type, btn) {
       currentGalleryFilter = type;
       document.querySelectorAll('.gallery-filter-bar .filter-chip').forEach(b => b.classList.remove('active'));
@@ -1491,7 +1491,7 @@
       setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
-    // Inisialisasi awal
+    // Inisialisasi awal.
     if (sharedDocuments.length === 0) {
       fetchLiveGalleryFromDrive();
     } else {
