@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Buku Saku Master Bunpou N5 - Bab 1 s.d. 25</title>
+  <title>Buku Saku Master Bunpou N5 - Pendahuluan &amp; Bab 1 s.d. 25</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
@@ -110,7 +110,6 @@
       font-family: var(--font-jp);
     }
 
-    /* Highlight Huruf Partikel */
     .pt {
       display: inline-block;
       background-color: var(--particle-bg);
@@ -123,7 +122,6 @@
       font-family: var(--font-jp);
     }
 
-    /* Top Navigation Bar */
     .top-controls {
       display: flex;
       justify-content: space-between;
@@ -164,7 +162,6 @@
       font-size: 1.15rem;
     }
 
-    /* Header Banner */
     .portal-header {
       background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #064e3b 100%);
       color: #ffffff;
@@ -198,12 +195,11 @@
     .portal-header p {
       color: #cbd5e1;
       font-size: clamp(0.78rem, 2vw, 0.9rem);
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       line-height: 1.5;
     }
 
-    /* Search & Quick Jump */
     .quick-jump-bar {
       display: flex;
       gap: 8px;
@@ -223,7 +219,6 @@
       cursor: pointer;
     }
 
-    /* Tab Bar Navigasi Adaptif */
     .tab-bar-container {
       position: sticky;
       top: 8px;
@@ -269,7 +264,6 @@
       box-shadow: 0 4px 12px var(--primary-subtle);
     }
 
-    /* Chapter Content */
     .chapter-content {
       display: none;
       animation: fadeIn 0.25s ease-out forwards;
@@ -284,7 +278,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive Grid Layout */
     .grammar-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -298,7 +291,6 @@
       }
     }
 
-    /* Card Scaffolding */
     .full-card, .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -393,7 +385,6 @@
       color: var(--alert-danger-text);
     }
 
-    /* List Contoh Kalimat */
     .examples-list {
       list-style: none;
       display: flex;
@@ -430,7 +421,6 @@
       font-weight: 600;
     }
 
-    /* Tabel Responsif */
     .table-wrapper {
       width: 100%;
       border-radius: 10px;
@@ -457,7 +447,6 @@
       font-weight: 800;
     }
 
-    /* Kaiwa Dialog */
     .kaiwa-dialog {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -477,7 +466,7 @@
     .speaker {
       font-weight: 800;
       color: var(--primary);
-      min-width: 60px;
+      min-width: 72px;
     }
 
     .speech-content .jp {
@@ -491,7 +480,6 @@
       color: var(--subtext);
     }
 
-    /* Bottom Nav Buttons */
     .bottom-nav {
       display: flex;
       justify-content: space-between;
@@ -524,7 +512,6 @@
       cursor: not-allowed;
     }
 
-    /* Footer & Kontak */
     .footer-section {
       width: 100%;
       background: var(--footer-bg);
@@ -594,7 +581,6 @@
 <body>
 
   <div class="container">
-    <!-- Top Navigation Controls -->
     <div class="top-controls">
       <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
         <span>←</span> Beranda Hub
@@ -604,16 +590,15 @@
       </button>
     </div>
 
-    <!-- Header Portal -->
     <header class="portal-header">
-      <div class="badge-top">DEVELOPED BY VORST CAVRY</div>
-      <h1>📖 Modul Tata Bahasa &amp; Partikel N5</h1>
-      <p>Buku saku lengkap ringkasan pola tata bahasa, huruf partikel, dan percakapan Minna no Nihongo I (Bab 1 s.d. 25).</p>
+      <div class="badge-top">DEVELOPED BY VORST CAVRY • MINNA NO NIHONGO I (ED. 2)</div>
+      <h1>📖 Modul Tata Bahasa &amp; Partikel N5 (Lengkap)</h1>
+      <p>Ringkasan materi pendahuluan (发音・挨拶・数字・教室), bunpou, partikel, dan percakapan Minna no Nihongo I (Bab 1 s.d. 25).</p>
     </header>
 
-    <!-- Dropdown Lompat Cepat Bab -->
     <div class="quick-jump-bar">
       <select id="chapterDropdown" class="chapter-select" onchange="jumpToChapterFromSelect(this.value)">
+        <option value="0">Pendahuluan: 発音, 教室, 挨拶 &amp; 数字</option>
         <option value="1">Bab 1: Perkenalan Diri (は・も・の・か)</option>
         <option value="2">Bab 2: Kata Tunjuk Benda (これ・それ・あれ)</option>
         <option value="3">Bab 3: Tempat, Arah &amp; Harga (ここ・そこ・あそこ)</option>
@@ -642,10 +627,10 @@
       </select>
     </div>
 
-    <!-- Tab Bar Navigasi Adaptif (Bab 1 s.d. Bab 25) -->
     <div class="tab-bar-container">
       <div class="tab-bar" id="chapterTabBar">
-        <button class="tab-btn active" onclick="switchChapterTab(1)">Bab 1</button>
+        <button class="tab-btn active" onclick="switchChapterTab(0)">Awal (発音・挨拶)</button>
+        <button class="tab-btn" onclick="switchChapterTab(1)">Bab 1</button>
         <button class="tab-btn" onclick="switchChapterTab(2)">Bab 2</button>
         <button class="tab-btn" onclick="switchChapterTab(3)">Bab 3</button>
         <button class="tab-btn" onclick="switchChapterTab(4)">Bab 4</button>
@@ -673,8 +658,95 @@
       </div>
     </div>
 
+    <!-- ==================== PENDAHULUAN (DARI PDF HAL. 2–5) ==================== -->
+    <section id="chapter0Tab" class="chapter-content active">
+      <div class="full-card">
+        <h3>📌 I. 日本語の発音 (Pengucapan Bahasa Jepang)</h3>
+        <div class="table-wrapper">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Unsur Bunyi</th>
+                <th>Penjelasan Ringkas</th>
+                <th>Contoh pada Buku</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. かな (ひらがな・かたかな)</strong></td>
+                <td>Huruf dasar suku kata (termasuk dakuten/handakuon が〜ぱ, ざ〜ぼ, dan yōon きゃ〜ぴょ)</td>
+                <td>あかさたなはまやらわん / アイウエオ</td>
+              </tr>
+              <tr>
+                <td><strong>2. 長音 (Chōon)</strong></td>
+                <td>Bunyi vokal panjang (2 ketukan). Dalam katakana ditandai dengan <strong>ー</strong></td>
+                <td>おばさん vs おばあさん / ゆき vs ゆうき / カード / タクシー</td>
+              </tr>
+              <tr>
+                <td><strong>3. 撥音 (Hatsuon - ん)</strong></td>
+                <td>Bunyi sengau (1 ketukan) yang menyesuaikan bunyi di depannya</td>
+                <td>しんぶん / てんき / うんどう / えんぴつ / みんな</td>
+              </tr>
+              <tr>
+                <td><strong>4. 促音 (Sokuon - っ)</strong></td>
+                <td>Jeda konsonan ganda (1 ketukan) sebelum konsonan k, s, t, p</td>
+                <td>きって / にっき / ざっし / いっぱい / コップ / ベッド</td>
+              </tr>
+              <tr>
+                <td><strong>5. 拗音 (Yōon)</strong></td>
+                <td>Bunyi gabungan dengan ゃ, ゅ, ょ kecil (1 ketukan)</td>
+                <td>ひゃく / じゅう / びょういん / シャツ / おちゃ / ぎゅうにゅう</td>
+              </tr>
+              <tr>
+                <td><strong>6. アクセント &amp; 7. イントネーション</strong></td>
+                <td>Tinggi-rendah nada kata (<em>Akusento</em>) dan nada akhir kalimat (<em>Intonēshon</em>: naik [♪] untuk tanya, datar/turun untuk pernyataan)</td>
+                <td>はし (jembatan vs sumpit) / いっしょに いきませんか [♪]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grammar-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">II. 教室のことば (Bahasa di Kelas)</div>
+            <span class="card-badge badge-positive">Kosakata Kelas</span>
+          </div>
+          <div class="card-body">
+            <ul class="examples-list">
+              <li class="example-item"><div class="jp-text">はじめましょう。 / おわりましょう。 / やすみましょう。</div><div class="id-text">Mari kita mulai. / Mari kita akhiri. / Mari kita istirahat.</div></li>
+              <li class="example-item"><div class="jp-text">わかりますか。— はい、わかります。/ いいえ、わかりません。</div><div class="id-text">Apakah mengerti? — Ya, mengerti. / Tidak, tidak mengerti.</div></li>
+              <li class="example-item"><div class="jp-text">もういちど [おねがいします]。 / いいです。 / ちがいます。</div><div class="id-text">Sekali lagi [mohon]. / Boleh / Tidak apa-apa. / Salah / Berbeda.</div></li>
+              <li class="example-item"><div class="jp-text">なまえ / しけん / しゅくだい / しつもん / こたえ / れい</div><div class="id-text">Nama / Ujian / Pekerjaan rumah (PR) / Pertanyaan / Jawaban / Contoh.</div></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">III. 毎日のあいさつ &amp; IV. 数字 (0–10)</div>
+            <span class="card-badge badge-special">Salam &amp; Angka</span>
+          </div>
+          <div class="card-body">
+            <ul class="examples-list">
+              <li class="example-item"><div class="jp-text">おはようございます / こんにちは / こんばんは / おやすみなさい</div><div class="id-text">Selamat pagi / Selamat siang / Selamat malam / Selamat tidur.</div></li>
+              <li class="example-item"><div class="jp-text">さようなら / ありがとうございます / すみません / おねがいします</div><div class="id-text">Sampai jumpa / Terima kasih / Maaf / Permisi / Mohon bantuannya.</div></li>
+              <li class="example-item"><div class="jp-text">0: ゼロ・れい | 1: いち | 2: に | 3: さん | 4: よん・し | 5: ご</div><div class="id-text">Angka dasar 0 sampai 5.</div></li>
+              <li class="example-item"><div class="jp-text">6: ろく | 7: なな・しち | 8: はち | 9: きゅう・く | 10: じゅう</div><div class="id-text">Angka dasar 6 sampai 10.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="nav-link-btn" disabled>← Awal</button>
+        <button class="nav-link-btn" onclick="switchChapterTab(1)">Bab 1 →</button>
+      </div>
+    </section>
+
     <!-- ==================== BAB 1 ==================== -->
-    <section id="chapter1Tab" class="chapter-content active">
+    <section id="chapter1Tab" class="chapter-content">
       <div class="full-card">
         <h3>📌 Ikhtisar Partikel Bab 1: は, も, の, か</h3>
         <div class="table-wrapper">
@@ -757,9 +829,9 @@
                 <div class="id-text">Tuan Santos bukan seorang mahasiswa.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> せんせい では ありません。</div>
-                <div class="romaji">Watashi wa sensei dewa arimasen.</div>
-                <div class="id-text">Saya bukan seorang guru.</div>
+                <div class="jp-text">ワンさん <span class="pt">は</span> ぎんこういん じゃありません。いしゃ です。</div>
+                <div class="romaji">Wan-san wa ginkouin ja arimasen. Isha desu.</div>
+                <div class="id-text">Tuan Wang bukan pegawai bank. Beliau dokter.</div>
               </li>
             </ul>
           </div>
@@ -775,9 +847,9 @@
             <p class="function-desc">Digunakan saat subjek kedua memiliki status atau predikat yang sama dengan subjek sebelumnya.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">は</span> かいしゃいんです。グプタさん <span class="pt">も</span> かいしゃいんです。</div>
-                <div class="romaji">Miraa-san wa kaishain desu. Guputa-san mo kaishain desu.</div>
-                <div class="id-text">Tuan Miller adalah karyawan. Tuan Gupta juga karyawan.</div>
+                <div class="jp-text">グプタさん <span class="pt">は</span> かいしゃいんです。カリナさん <span class="pt">も</span> かいしゃいんですか。— いいえ、がくせいです。</div>
+                <div class="romaji">Guputa-san wa kaishain desu. Karina-san mo kaishain desu ka. — Iie, gakusei desu.</div>
+                <div class="id-text">Tuan Gupta karyawan. Apakah Nona Karina juga karyawan? — Bukan, mahasiswi.</div>
               </li>
             </ul>
           </div>
@@ -789,13 +861,13 @@
             <span class="card-badge badge-question">Afiliasi &amp; Usia</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Lembaga/Negara] + <span class="pt">の</span> + [Profesi] | おいくつ ですか / なんさい ですか</div>
-            <p class="function-desc">Partikel <span class="pt">の</span> menghubungkan dua kata benda. Untuk menanyakan usia secara sopan gunakan <strong>おいくつですか</strong>.</p>
+            <div class="formula-box">[Lembaga/Negara] + <span class="pt">の</span> + [Profesi] | あの方は どなたですか | おいくつ / なんさい</div>
+            <p class="function-desc">Partikel <span class="pt">の</span> menghubungkan dua kata benda. Untuk menanyakan orang atau usia secara sopan gunakan <strong>どなた</strong> dan <strong>おいくつ</strong>.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">は</span> IMC <span class="pt">の</span> しゃいんです。</div>
-                <div class="romaji">Miraa-san wa IMC no shain desu.</div>
-                <div class="id-text">Tuan Miller adalah karyawan perusahaan IMC.</div>
+                <div class="jp-text">あのかた <span class="pt">は</span> どなた ですか。— ワットさんです。さくらだいがく <span class="pt">の</span> せんせいです。</div>
+                <div class="romaji">Ano kata wa donata desu ka. — Watto-san desu. Sakura-daigaku no sensei desu.</div>
+                <div class="id-text">Orang itu siapa? — Tuan Watt. Dosen Universitas Sakura.</div>
               </li>
               <li class="example-item">
                 <div class="jp-text">テレサちゃん <span class="pt">は</span> なんさい ですか。— 9さい です。</div>
@@ -808,34 +880,41 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 1</h3>
+        <h3>💬 Percakapan Bab 1: 初めまして (Salam Kenal)</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Satō:</div>
+            <div class="speech-content">
+              <div class="jp">おはようございます。</div>
+              <div class="id">Selamat pagi.</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Yamada:</div>
+            <div class="speech-content">
+              <div class="jp">おはようございます。さとうさん、こちらは マイク・ミラーさんです。</div>
+              <div class="id">Selamat pagi. Saudara Sato, ini Tuan Mike Miller.</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
               <div class="jp">はじめまして。マイク・ミラーです。アメリカから きました。どうぞよろしく。</div>
-              <div class="id">Salam kenal. Saya Mike Miller. Datang dari Amerika. Mohon bimbingannya.</div>
+              <div class="id">Salam kenal. Saya Mike Miller. Datang dari Amerika. Mohon bantuannya.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Satō:</div>
             <div class="speech-content">
-              <div class="jp">さとうです。ミラーさん <span class="pt">は</span> がくせい です <span class="pt">か</span>。</div>
-              <div class="id">Saya Sato. Apakah Tuan Miller seorang mahasiswa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">A:</div>
-            <div class="speech-content">
-              <div class="jp">いいえ、IMC <span class="pt">の</span> しゃいんです。グプタさん <span class="pt">も</span> IMC <span class="pt">の</span> しゃいんです。</div>
-              <div class="id">Bukan, saya karyawan perusahaan IMC. Tuan Gupta juga karyawan IMC.</div>
+              <div class="jp">さとう けいこ です。どうぞよろしく。</div>
+              <div class="id">Saya Sato Keiko. Mohon bantuannya.</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="bottom-nav">
-        <button class="nav-link-btn" disabled>← Awal</button>
+        <button class="nav-link-btn" onclick="switchChapterTab(0)">← Pendahuluan</button>
         <button class="nav-link-btn" onclick="switchChapterTab(2)">Bab 2 →</button>
       </div>
     </section>
@@ -904,11 +983,6 @@
                 <div class="romaji">Sono kaban wa dare no desu ka.</div>
                 <div class="id-text">Tas itu milik siapa?</div>
               </li>
-              <li class="example-item">
-                <div class="jp-text">あの かた <span class="pt">は</span> どなた ですか。— ミラーさん です。</div>
-                <div class="romaji">Ano kata wa donata desu ka. — Miraa-san desu.</div>
-                <div class="id-text">Orang yang di sana itu siapa? — Tuan Miller.</div>
-              </li>
             </ul>
           </div>
         </div>
@@ -923,14 +997,14 @@
             <p class="function-desc">Partikel <span class="pt">の</span> juga menjelaskan <strong>isi/topik</strong> suatu benda (buku tentang apa, majalah apa).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">これ <span class="pt">は</span> なん <span class="pt">の</span> ざっし ですか。— コンピューター <span class="pt">の</span> ざっし です。</div>
-                <div class="romaji">Kore wa nan no zasshi desu ka. — Konpyuutaa no zasshi desu.</div>
-                <div class="id-text">Ini majalah tentang apa? — Majalah tentang komputer.</div>
+                <div class="jp-text">それ <span class="pt">は</span> なん <span class="pt">の</span> ざっし ですか。— コンピューター <span class="pt">の</span> ざっし です。</div>
+                <div class="romaji">Sore wa nan no zasshi desu ka. — Konpyuutaa no zasshi desu.</div>
+                <div class="id-text">Itu majalah tentang apa? — Majalah tentang komputer.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">それ <span class="pt">は</span> だれ <span class="pt">の</span> かばん ですか。— サントスさん <span class="pt">の</span> です。</div>
-                <div class="romaji">Sore wa dare no kaban desu ka. — Santosu-san no desu.</div>
-                <div class="id-text">Itu tas milik siapa? — Milik Tuan Santos.</div>
+                <div class="jp-text">あれ <span class="pt">は</span> だれ <span class="pt">の</span> かばん ですか。— さとうさん <span class="pt">の</span> かばん です。</div>
+                <div class="romaji">Are wa dare no kaban desu ka. — Satou-san no kaban desu.</div>
+                <div class="id-text">Itu tas milik siapa? — Tas Nona Sato.</div>
               </li>
             </ul>
           </div>
@@ -964,9 +1038,14 @@
             <p class="function-desc">Digunakan untuk membenarkan atau menyangkal pernyataan lawan bicara secara ringkas.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">それ <span class="pt">は</span> テレホンカード ですか。— いいえ、そう じゃありません。めいし です。</div>
-                <div class="romaji">Sore wa terehonkaado desu ka. — Iie, sou ja arimasen. Meishi desu.</div>
-                <div class="id-text">Apakah itu kartu telepon? — Bukan. Ini kartu nama.</div>
+                <div class="jp-text">それ <span class="pt">は</span> ノート ですか。— いいえ、てちょう です。</div>
+                <div class="romaji">Sore wa nooto desu ka. — Iie, techou desu.</div>
+                <div class="id-text">Apakah itu buku catatan? — Bukan, buku agenda.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">この かぎ <span class="pt">は</span> だれ <span class="pt">の</span> ですか。— わたし <span class="pt">の</span> です。</div>
+                <div class="romaji">Kono kagi wa dare no desu ka. — Watashi no desu.</div>
+                <div class="id-text">Kunci ini milik siapa? — Milik saya.</div>
               </li>
             </ul>
           </div>
@@ -974,27 +1053,34 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 2</h3>
+        <h3>💬 Percakapan Bab 2: これから お世話になります</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
             <div class="speaker">Yamada:</div>
             <div class="speech-content">
-              <div class="jp">あのう、これ、ほんの きもちです。どうぞ。</div>
-              <div class="id">Permisi, ini sedikit tanda mata dari saya. Silakan.</div>
+              <div class="jp">はい。どなた ですか。</div>
+              <div class="id">Ya. Siapa ya?</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">Miller:</div>
+            <div class="speaker">Santos:</div>
             <div class="speech-content">
-              <div class="jp">どうも ありがとうございます。なん ですか。</div>
-              <div class="id">Terima kasih banyak. Apakah ini?</div>
+              <div class="jp">408 <span class="pt">の</span> サントス です。こんにちは。サントス です。これから おせわ <span class="pt">に</span> なります。どうぞよろしくおねがいします。</div>
+              <div class="id">Saya Santos dari kamar 408. Halo, saya Santos. Mulai sekarang saya mohon bantuannya.</div>
             </div>
           </div>
           <div class="kaiwa-line">
             <div class="speaker">Yamada:</div>
             <div class="speech-content">
-              <div class="jp">コーヒーです。どうぞ。</div>
-              <div class="id">Kopi. Silakan diterima.</div>
+              <div class="jp">こちらこそ よろしくおねがいします。</div>
+              <div class="id">Sama-sama, saya juga mohon bantuannya.</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Santos:</div>
+            <div class="speech-content">
+              <div class="jp">あのう、これ、コーヒー です。どうぞ。</div>
+              <div class="id">Permisi, ini kopi. Silakan.</div>
             </div>
           </div>
         </div>
@@ -1057,14 +1143,14 @@
             <p class="function-desc">Menunjukkan lokasi suatu ruangan, fasilitas, benda, atau keberadaan seseorang.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">おてあらい <span class="pt">は</span> あそこ です。</div>
-                <div class="romaji">Otearai wa asoko desu.</div>
+                <div class="jp-text">トイレ <span class="pt">は</span> あそこ です。</div>
+                <div class="romaji">Toire wa asoko desu.</div>
                 <div class="id-text">Toilet ada di sana.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">エレベーター <span class="pt">は</span> どちら ですか。— あちら です。</div>
-                <div class="romaji">Erebeetaa wa dochira desu ka. — Achira desu.</div>
-                <div class="id-text">Lift ada di sebelah mana? — Di sebelah sana.</div>
+                <div class="jp-text">やまださん <span class="pt">は</span> どこ ですか。— かいぎしつ です。</div>
+                <div class="romaji">Yamada-san wa doko desu ka. — Kaigishitsu desu.</div>
+                <div class="id-text">Tuan Yamada ada di mana? — Di ruang rapat.</div>
               </li>
             </ul>
           </div>
@@ -1076,18 +1162,18 @@
             <span class="card-badge badge-special">Asal &amp; Merek</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">おくに / かいしゃ / だいがく <span class="pt">は</span> どちら ですか | [Negara/Merek] <span class="pt">の</span> [Barang]</div>
+            <div class="formula-box">おくに / じむしょ <span class="pt">は</span> どちら ですか | [Negara/Merek] <span class="pt">の</span> [Barang]</div>
             <p class="function-desc">Partikel <span class="pt">の</span> menunjukkan negara pembuat atau merek suatu produk.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">かいしゃ <span class="pt">は</span> どちら ですか。— パワーでんき です。</div>
-                <div class="romaji">Kaisha wa dochira desu ka. — Pawaa-denki desu.</div>
-                <div class="id-text">Perusahaan Anda apa? — Power Electric.</div>
+                <div class="jp-text">おくに <span class="pt">は</span> どちら ですか。— アメリカ です。</div>
+                <div class="romaji">Okuni wa dochira desu ka. — Amerika desu.</div>
+                <div class="id-text">Negara asal Anda dari mana? — Amerika.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">これ <span class="pt">は</span> どこの コンピューター ですか。— にほん <span class="pt">の</span> です。</div>
-                <div class="romaji">Kore wa doko no konpyuutaa desu ka. — Nihon no desu.</div>
-                <div class="id-text">Ini komputer buatan mana? — Buatan Jepang.</div>
+                <div class="jp-text">それ <span class="pt">は</span> どこの くつ ですか。— イタリア <span class="pt">の</span> くつ です。</div>
+                <div class="romaji">Sore wa doko no kutsu desu ka. — Itaria no kutsu desu.</div>
+                <div class="id-text">Itu sepatu buatan mana? — Sepatu buatan Italia.</div>
               </li>
             </ul>
           </div>
@@ -1102,14 +1188,14 @@
             <div class="formula-box">[Barang] + <span class="pt">は</span> + いくら (ikura) + ですか</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">この ワイン <span class="pt">は</span> いくら です <span class="pt">か</span>。— 2,500えん です。</div>
-                <div class="romaji">Kono wain wa ikura desu ka. — Ni-sen go-hyaku-en desu.</div>
-                <div class="id-text">Anggur ini harganya berapa? — 2.500 yen.</div>
+                <div class="jp-text">この とけい <span class="pt">は</span> いくら です <span class="pt">か</span>。— 18,600えん です。</div>
+                <div class="romaji">Kono tokei wa ikura desu ka. — Ichi-man hassen roppyaku-en desu.</div>
+                <div class="id-text">Jam tangan ini harganya berapa? — 18.600 yen.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">じゃ、この とけい <span class="pt">を</span> ください。</div>
-                <div class="romaji">Ja, kono tokei o kudasai.</div>
-                <div class="id-text">Kalau begitu tolong berikan jam tangan yang ini.</div>
+                <div class="jp-text">じゃ、これ <span class="pt">を</span> ください。</div>
+                <div class="romaji">Ja, kore o kudasai.</div>
+                <div class="id-text">Kalau begitu tolong berikan yang ini.</div>
               </li>
             </ul>
           </div>
@@ -1121,13 +1207,13 @@
             <span class="card-badge badge-positive">Lantai</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">1かい (ikkai) | 2かい (nikai) | 3がい (sangai) | なんがい (nangai)</div>
+            <div class="formula-box">ちか1かい (B1) | 1かい (ikkai) | 2かい (nikai) | 3がい (sangai) | なんがい</div>
             <p class="function-desc">Perhatikan perubahan bunyi pada lantai 1 (<em>いっかい</em>), lantai 3 (<em>さんがい</em>), dan lantai 6/8/10 (<em>ろっかい・はっかい・じゅっかい</em>).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">とけいうりば <span class="pt">は</span> なんがい ですか。— 3がい です。</div>
-                <div class="romaji">Tokei-uriba wa nangai desu ka. — Sangai desu.</div>
-                <div class="id-text">Konter penjualan jam ada di lantai berapa? — Lantai 3.</div>
+                <div class="jp-text">ワインうりば <span class="pt">は</span> どこ ですか。— ちか1かい です。</div>
+                <div class="romaji">Wain-uriba wa doko desu ka. — Chika ikkai desu.</div>
+                <div class="id-text">Bagian penjualan anggur ada di mana? — Di lantai bawah tanah 1.</div>
               </li>
             </ul>
           </div>
@@ -1135,7 +1221,7 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 3</h3>
+        <h3>💬 Percakapan Bab 3: これを ください</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
             <div class="speaker">Maria:</div>
@@ -1145,17 +1231,24 @@
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">Staf:</div>
+            <div class="speaker">Staf A:</div>
             <div class="speech-content">
-              <div class="jp">ちか 1かい でございます。</div>
-              <div class="id">Ada di lantai basement 1 (B1).</div>
+              <div class="jp">ちか1かい です。</div>
+              <div class="id">Di lantai bawah tanah 1.</div>
             </div>
           </div>
           <div class="kaiwa-line">
             <div class="speaker">Maria:</div>
             <div class="speech-content">
-              <div class="jp">すみません。その ワイン <span class="pt">を</span> みせてください。</div>
-              <div class="id">Permisi. Tolong perlihatkan anggur yang itu.</div>
+              <div class="jp">すみません。その ワイン <span class="pt">を</span> みせてください。これ <span class="pt">は</span> どこの ワイン ですか。</div>
+              <div class="id">Permisi. Tolong perlihatkan anggur itu. Anggur ini dari mana?</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Staf B:</div>
+            <div class="speech-content">
+              <div class="jp">にほん <span class="pt">の</span> です。— じゃ、これ <span class="pt">を</span> ください。いくら ですか。— 2,500えん です。</div>
+              <div class="id">Buatan Jepang. — Kalau begitu saya beli yang ini. Berapa harganya? — 2.500 yen.</div>
             </div>
           </div>
         </div>
@@ -1183,7 +1276,7 @@
             <tbody>
               <tr>
                 <td><code>〜じ / 〜ふん</code></td>
-                <td>Menyatakan Jam dan Menit (4じ=yoji, 7じ=shichiji, 9じ=kuji)</td>
+                <td>Menyatakan Jam dan Menit (4じ=yoji, 7じ=shichiji, 9じ=kuji, ごぜん/ごご)</td>
                 <td><strong>〜ます</strong> (Positif Masa Depan/Rutin)</td>
               </tr>
               <tr>
@@ -1241,14 +1334,14 @@
             <p class="function-desc">Mengubah kata kerja sesuai waktu (lampau/non-lampau) dan bentuk (positif/negatif).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">きのう べんきょうしました。</div>
-                <div class="romaji">Kinou benkyou shimashita.</div>
-                <div class="id-text">Kemarin saya telah belajar.</div>
+                <div class="jp-text">きのう べんきょうしました。— いいえ、べんきょうしませんでした。</div>
+                <div class="romaji">Kinou benkyou shimashita. — Iie, benkyou shimasen deshita.</div>
+                <div class="id-text">Kemarin sudah belajar? — Tidak, tidak belajar.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">きのう の ばん べんきょうしませんでした。</div>
-                <div class="romaji">Kinou no ban benkyou shimasen deshita.</div>
-                <div class="id-text">Tadi malam saya tidak belajar.</div>
+                <div class="jp-text">どようび はたらきますか。— いいえ、はたらきません。</div>
+                <div class="romaji">Doyoubi hatarakimasu ka. — Iie, hatarakimasen.</div>
+                <div class="id-text">Apakah hari Sabtu bekerja? — Tidak, tidak bekerja.</div>
               </li>
             </ul>
           </div>
@@ -1261,12 +1354,12 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Kata Benda 1] + <span class="pt">と</span> + [Kata Benda 2]</div>
-            <p class="function-desc">Partikel <span class="pt">と</span> menghubungkan dua kata benda secara setara ("dan"). Tidak boleh dipakai menghubungkan dua kalimat.</p>
+            <p class="function-desc">Partikel <span class="pt">と</span> menghubungkan dua kata benda secara setara ("dan").</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ぎんこう の やすみ <span class="pt">は</span> どようび <span class="pt">と</span> にちようび です。</div>
-                <div class="romaji">Ginkou no yasumi wa doyoubi to nichiyoubi desu.</div>
-                <div class="id-text">Hari libur bank adalah hari Sabtu dan Minggu.</div>
+                <div class="jp-text">やすみ <span class="pt">は</span> なんようび ですか。— どようび <span class="pt">と</span> にちようび です。</div>
+                <div class="romaji">Yasumi wa nan-youbi desu ka. — Doyoubi to nichiyoubi desu.</div>
+                <div class="id-text">Hari liburnya hari apa? — Hari Sabtu dan Minggu.</div>
               </li>
             </ul>
           </div>
@@ -1279,12 +1372,12 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Kalimat] + <span class="pt">ね</span></div>
-            <p class="function-desc">Ditempatkan di akhir kalimat untuk menunjukkan rasa simpati atau meminta persetujuan lawan bicara ("ya...").</p>
+            <p class="function-desc">Ditempatkan di akhir kalimat untuk menunjukkan rasa simpati atau meminta persetujuan lawan bicara.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">まいにち 10じごろ まで べんきょうします。— たいへんですね。</div>
-                <div class="romaji">Mainichi juu-ji goro made benkyou shimasu. — Taihen desu ne.</div>
-                <div class="id-text">Setiap hari saya belajar sampai sekitar jam 10. — Berat ya.</div>
+                <div class="jp-text">きのう 12じ まで べんきょうしました。— たいへんですね。</div>
+                <div class="romaji">Kinou juu-ni-ji made benkyou shimashita. — Taihen desu ne.</div>
+                <div class="id-text">Kemarin belajar sampai jam 12. — Berat ya.</div>
               </li>
             </ul>
           </div>
@@ -1292,34 +1385,27 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 4</h3>
+        <h3>💬 Percakapan Bab 4: そちらは 何時まで ですか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
-              <div class="jp">いま なんじ ですか。</div>
-              <div class="id">Sekarang jam berapa?</div>
+              <div class="jp">すみません、「あすか」 <span class="pt">の</span> でんわばんごう <span class="pt">は</span> なんばん ですか。— 5275 <span class="pt">の</span> 2725 です。</div>
+              <div class="id">Permisi, nomor telepon "Asuka" nomor berapa? — 5275-2725.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
-              <div class="jp">4じ はん です。</div>
-              <div class="id">Jam 4 lewat 30 menit (setengah 5).</div>
+              <div class="jp">すみません。そちら <span class="pt">は</span> なんじ まで ですか。— 10じ まで です。</div>
+              <div class="id">Permisi. Di sana buka sampai jam berapa? — Sampai jam 10.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
-              <div class="jp">かいしゃ <span class="pt">は</span> なんじ <span class="pt">から</span> なんじ <span class="pt">まで</span> ですか。</div>
-              <div class="id">Perusahaan buka dari jam berapa sampai jam berapa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">9じ <span class="pt">から</span> 5じ <span class="pt">まで</span> です。</div>
-              <div class="id">Dari jam 9 sampai jam 5.</div>
+              <div class="jp">やすみ <span class="pt">は</span> なんようび ですか。— にちようび です。</div>
+              <div class="id">Hari liburnya hari apa? — Hari Minggu.</div>
             </div>
           </div>
         </div>
@@ -1377,18 +1463,17 @@
             <span class="card-badge badge-positive">Arah &amp; Alat</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Tempat] + <span class="pt">へ</span> + [Kendaraan] + <span class="pt">で</span> + いきます</div>
-            <p class="function-desc">Menjelaskan pergi/datang/pulang ke suatu lokasi menggunakan sarana transportasi.</p>
+            <div class="formula-box">[Tempat] + <span class="pt">へ</span> + [Kendaraan] + <span class="pt">で</span> + いきます/きます/かえります</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">きょうと <span class="pt">へ</span> いきます。</div>
-                <div class="romaji">Kyouto e ikimasu.</div>
-                <div class="id-text">Saya akan pergi ke Kyoto.</div>
+                <div class="jp-text">きょうと <span class="pt">へ</span> いきます。 / うち <span class="pt">へ</span> かえります。</div>
+                <div class="romaji">Kyouto e ikimasu. / Uchi e kaerimasu.</div>
+                <div class="id-text">Pergi ke Kyoto. / Pulang ke rumah.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">でんしゃ <span class="pt">で</span> いきます。 / あるいて かえります。</div>
-                <div class="romaji">Densha de ikimasu. / Aruite kaerimasu.</div>
-                <div class="id-text">Pergi naik kereta. / Pulang dengan berjalan kaki.</div>
+                <div class="jp-text">なん <span class="pt">で</span> とうきょう <span class="pt">へ</span> いきますか。— しんかんせん <span class="pt">で</span> いきます。</div>
+                <div class="romaji">Nan de Toukyou e ikimasu ka. — Shinkansen de ikimasu.</div>
+                <div class="id-text">Pergi ke Tokyo naik apa? — Pergi naik Shinkansen.</div>
               </li>
             </ul>
           </div>
@@ -1409,9 +1494,9 @@
                 <div class="id-text">Saya datang ke Jepang bersama keluarga.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">いつ くに <span class="pt">へ</span> かえりますか。— らいねん の 3がつ に かえります。</div>
-                <div class="romaji">Itsu kuni e kaerimasu ka. — Rainen no san-gatsu ni kaerimasu.</div>
-                <div class="id-text">Kapan pulang ke negara asal? — Pulang pada bulan Maret tahun depan.</div>
+                <div class="jp-text">いつ にほん <span class="pt">へ</span> きましたか。— 3がつ 25にち <span class="pt">に</span> きました。</div>
+                <div class="romaji">Itsu Nihon e kimashita ka. — San-gatsu ni-juu-go-nichi ni kimashita.</div>
+                <div class="id-text">Kapan datang ke Jepang? — Datang tanggal 25 Maret.</div>
               </li>
             </ul>
           </div>
@@ -1424,17 +1509,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Kata Tanya] + [Partikel] + <span class="pt">も</span> + [KK Bentuk Negatif]</div>
-            <p class="function-desc">Menambahkan <span class="pt">も</span> setelah kata tanya dengan predikat negatif berarti penyangkalan total ("tidak ke mana-mana", "tidak bersama siapa pun").</p>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">にちようび どこ <span class="pt">へも</span> いきませんでした。</div>
                 <div class="romaji">Nichiyoubi doko e mo ikimasen deshita.</div>
                 <div class="id-text">Hari Minggu kemarin tidak pergi ke mana-mana.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">だれ <span class="pt">とも</span> いきません。</div>
-                <div class="romaji">Dare to mo ikimasen.</div>
-                <div class="id-text">Tidak pergi bersama siapa pun.</div>
               </li>
             </ul>
           </div>
@@ -1447,12 +1526,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">たんじょうび <span class="pt">は</span> いつ ですか | [Bulan] がつ [Tanggal] にち</div>
-            <p class="function-desc">Tanggal 1–10 memiliki bacaan khusus (<em>ついたち、ふつか、みっか、よっか、いつか、むいか、なのか、ようか、ここのか、とおか</em>) serta tanggal 14, 20 (<em>はつか</em>), dan 24.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたしの たんじょうび <span class="pt">は</span> 4がつ 10か です。</div>
-                <div class="romaji">Watashi no tanjoubi wa shi-gatsu tooka desu.</div>
-                <div class="id-text">Ulang tahun saya tanggal 10 April.</div>
+                <div class="jp-text">たんじょうび <span class="pt">は</span> いつ ですか。— 6がつ 13にち です。</div>
+                <div class="romaji">Tanjoubi wa itsu desu ka. — Roku-gatsu juu-san-nichi desu.</div>
+                <div class="id-text">Ulang tahun kapan? — Tanggal 13 Juni.</div>
               </li>
             </ul>
           </div>
@@ -1460,20 +1538,27 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 5</h3>
+        <h3>💬 Percakapan Bab 5: この でんしゃは 甲子園へ いきますか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Santos:</div>
             <div class="speech-content">
-              <div class="jp">にちようび どこ <span class="pt">へ</span> いきましたか。</div>
-              <div class="id">Hari Minggu pergi ke mana?</div>
+              <div class="jp">すみません。こうしえん <span class="pt">まで</span> いくら ですか。— 350えん です。</div>
+              <div class="id">Permisi. Sampai Koshien berapa? — 350 yen.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Santos:</div>
             <div class="speech-content">
-              <div class="jp">どこ <span class="pt">へも</span> いきませんでした。</div>
-              <div class="id">Tidak pergi ke mana-mana.</div>
+              <div class="jp">すみません。こうしえん <span class="pt">は</span> なんばんせん ですか。— 5ばんせん です。</div>
+              <div class="id">Permisi. Koshien peron nomor berapa? — Peron nomor 5.</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Santos / Pria:</div>
+            <div class="speech-content">
+              <div class="jp">あのう、この でんしゃ <span class="pt">は</span> こうしえん <span class="pt">へ</span> いきますか。— いいえ。つぎ <span class="pt">の</span> 「ふつう」 ですよ。</div>
+              <div class="id">Permisi, apakah kereta ini pergi ke Koshien? — Bukan. Kereta "lokal" berikutnya ya.</div>
             </div>
           </div>
         </div>
@@ -1512,7 +1597,7 @@
               <tr>
                 <td><strong>〜ませんか</strong></td>
                 <td>Bentuk Ajakan Halus</td>
-                <td>Mengajak lawan bicara (Menanyakan kesediaan: "Maukah...?")</td>
+                <td>Mengajak lawan bicara ("Maukah...?")</td>
               </tr>
               <tr>
                 <td><strong>〜ましょう</strong></td>
@@ -1532,17 +1617,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Tempat] + <span class="pt">で</span> + [Objek] + <span class="pt">を</span> + [Kata Kerja]</div>
-            <p class="function-desc">Menyatakan aktivitas melakukan sesuatu pada objek di tempat tertentu. Huruf <strong>を</strong> hanya dipakai sebagai partikel objek.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ごはん <span class="pt">を</span> たべます。</div>
-                <div class="romaji">Gohan o tabemasu.</div>
-                <div class="id-text">Makan nasi.</div>
+                <div class="jp-text">ほん <span class="pt">を</span> よみます。 / えき <span class="pt">で</span> しんぶん <span class="pt">を</span> かいます。</div>
+                <div class="romaji">Hon o yomimasu. / Eki de shinbun o kaimasu.</div>
+                <div class="id-text">Membaca buku. / Membeli koran di stasiun.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">えき <span class="pt">で</span> しんぶん <span class="pt">を</span> かいます。</div>
-                <div class="romaji">Eki de shinbun o kaimasu.</div>
-                <div class="id-text">Membeli koran di stasiun.</div>
+                <div class="jp-text">けさ なに <span class="pt">を</span> たべましたか。— なにも たべませんでした。</div>
+                <div class="romaji">Kesa nani o tabemashita ka. — Nani mo tabemasen deshita.</div>
+                <div class="id-text">Tadi pagi makan apa? — Tidak makan apa-apa.</div>
               </li>
             </ul>
           </div>
@@ -1555,17 +1639,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KK-masu hapus masu] + ませんか / ましょう</div>
-            <p class="function-desc"><em>〜ませんか</em> lebih sopan karena mempertimbangkan pendapat lawan bicara; <em>〜ましょう</em> mengajak langsung.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">いっしょに コーヒー <span class="pt">を</span> のみませんか。</div>
-                <div class="romaji">Isshoni koohii o nomimasen ka.</div>
-                <div class="id-text">Maukah minum kopi bersama-sama?</div>
+                <div class="jp-text">いっしょに こうべ <span class="pt">へ</span> いきませんか。— ええ、いいですね。</div>
+                <div class="romaji">Isshoni Koube e ikimasen ka. — Ee, ii desu ne.</div>
+                <div class="id-text">Maukah pergi ke Kobe bersama? — Ya, bagus ya.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">ちょっと やすみましょう。</div>
-                <div class="romaji">Chotto yasumimashou.</div>
-                <div class="id-text">Ayo kita istirahat sebentar!</div>
+                <div class="jp-text">ちょっと やすみましょう。 / あした 10じ <span class="pt">に</span> えき <span class="pt">で</span> あいましょう。</div>
+                <div class="romaji">Chotto yasumimashou. / Ashita juu-ji ni eki de aimashou.</div>
+                <div class="id-text">Ayo istirahat sebentar. / Ayo bertemu jam 10 besok di stasiun.</div>
               </li>
             </ul>
           </div>
@@ -1573,17 +1656,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">3. Kata Kerja "Melakukan" (何をしますか)</div>
-            <span class="card-badge badge-question">Aktivitas</span>
+            <div class="card-title">3. Kata Kerja "Melakukan" &amp; Urutan (それから)</div>
+            <span class="card-badge badge-question">Aktivitas &amp; Urutan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Objek / Kegiatan] + <span class="pt">を</span> + します</div>
-            <p class="function-desc">Kata kerja <strong>します</strong> digunakan untuk berbagai kegiatan seperti olahraga (サッカーをします), pesta (パーティーをします), atau pekerjaan rumah.</p>
+            <div class="formula-box">[Objek / Kegiatan] + <span class="pt">を</span> + します | それから (Setelah itu / Lalu)</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">げつようび なに <span class="pt">を</span> しますか。— きょうと <span class="pt">へ</span> いきます。</div>
-                <div class="romaji">Getsuyoubi nani o shimasu ka. — Kyouto e ikimasu.</div>
-                <div class="id-text">Hari Senin melakukan apa? — Pergi ke Kyoto.</div>
+                <div class="jp-text">どようび なに <span class="pt">を</span> しましたか。— にほんご <span class="pt">を</span> べんきょうしました。それから、ともだち <span class="pt">と</span> えいが <span class="pt">を</span> みました。</div>
+                <div class="romaji">Doyoubi nani o shimashita ka. — Nihongo o benkyou shimashita. Sorekara, tomodachi to eiga o mimashita.</div>
+                <div class="id-text">Hari Sabtu melakukan apa? — Belajar bahasa Jepang. Lalu menonton film bersama teman.</div>
               </li>
             </ul>
           </div>
@@ -1596,12 +1678,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">なん (di depan huruf baris T, D, N atau satuan) | なに (selain itu)</div>
-            <p class="function-desc">Kedua kata ditulis dengan kanji <strong>何</strong>, tetapi cara bacanya menyesuaikan bunyi setelahnya.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">それ <span class="pt">は</span> <strong>なん</strong> ですか。 / <strong>なに</strong> <span class="pt">を</span> のみますか。</div>
-                <div class="romaji">Sore wa nan desu ka. / Nani o nomimasu ka.</div>
-                <div class="id-text">Itu apa? / Minum apa?</div>
+                <div class="jp-text">おさけ <span class="pt">を</span> のみますか。— いいえ、のみません。</div>
+                <div class="romaji">Osake o nomimasu ka. — Iie, nomimasen.</div>
+                <div class="id-text">Apakah minum minuman keras? — Tidak, tidak minum.</div>
               </li>
             </ul>
           </div>
@@ -1609,20 +1690,20 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 6</h3>
+        <h3>💬 Percakapan Bab 6: いっしょに いきませんか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Satō:</div>
             <div class="speech-content">
-              <div class="jp">あした いっしょに えいが <span class="pt">を</span> みませんか。</div>
-              <div class="id">Maukah besok menonton film bersama?</div>
+              <div class="jp">ミラーさん。あした ともだち <span class="pt">と</span> おはなみ <span class="pt">を</span> します。ミラーさん <span class="pt">も</span> いっしょに いきませんか。</div>
+              <div class="id">Tuan Miller. Besok saya hanami (melihat bunga sakura) bersama teman. Tuan Miller juga mau ikut?</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
-              <div class="jp">ええ、いいですね。そうしましょう。</div>
-              <div class="id">Ya, bagus juga. Ayo kita lakukan.</div>
+              <div class="jp">いいですね。どこ <span class="pt">へ</span> いきますか。— おおさかじょう です。— なんじ <span class="pt">に</span> いきますか。— 10じ <span class="pt">に</span> おおさかえき <span class="pt">で</span> あいましょう。</div>
+              <div class="id">Bagus tuh. Pergi ke mana? — Kastil Osaka. — Pergi jam berapa? — Ayo bertemu jam 10 di Stasiun Osaka.</div>
             </div>
           </div>
         </div>
@@ -1682,17 +1763,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Alat / Bahasa] + <span class="pt">で</span> + [Kata Kerja] | 「[Kata]」 <span class="pt">は</span> 〜ご <span class="pt">で</span> なん ですか</div>
-            <p class="function-desc">Digunakan untuk menunjukkan alat, sarana, atau bahasa dalam melakukan sesuatu.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">はし <span class="pt">で</span> たべます。</div>
-                <div class="romaji">Hashi de tabemasu.</div>
-                <div class="id-text">Makan menggunakan sumpit.</div>
+                <div class="jp-text">パソコン <span class="pt">で</span> えいが <span class="pt">を</span> みます。 / えいご <span class="pt">で</span> レポート <span class="pt">を</span> かきます。</div>
+                <div class="romaji">Pasokon de eiga o mimasu. / Eigo de repooto o kakimasu.</div>
+                <div class="id-text">Menonton film di laptop/PC. / Menulis laporan dalam bahasa Inggris.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">「ありがとう」 <span class="pt">は</span> えいご <span class="pt">で</span> なん ですか。— 「Thank you」 です。</div>
-                <div class="romaji">"Arigatou" wa eigo de nan desu ka. — "Thank you" desu.</div>
-                <div class="id-text">"Arigatou" dalam bahasa Inggris apa? — "Thank you".</div>
+                <div class="jp-text">"Goodbye" <span class="pt">は</span> にほんご <span class="pt">で</span> なん ですか。— 「さようなら」 です。</div>
+                <div class="romaji">"Goodbye" wa Nihongo de nan desu ka. — "Sayounara" desu.</div>
+                <div class="id-text">"Goodbye" dalam bahasa Jepang apa? — "Sayounara".</div>
               </li>
             </ul>
           </div>
@@ -1705,17 +1785,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Orang] + <span class="pt">に</span> + [Benda] + <span class="pt">を</span> + あげます / もらいます</div>
-            <p class="function-desc">Jika pemberi berupa organisasi/perusahaan/sekolah, partikel yang digunakan adalah <span class="pt">から</span> (bukan に).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> ヤマダさん <span class="pt">に</span> はな <span class="pt">を</span> あげました。</div>
-                <div class="romaji">Watashi wa Yamada-san ni hana o agemashita.</div>
-                <div class="id-text">Saya telah memberikan bunga kepada Tuan Yamada.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> きむらさん <span class="pt">に</span> はな <span class="pt">を</span> あげます。</div>
+                <div class="romaji">Watashi wa Kimura-san ni hana o agemasu.</div>
+                <div class="id-text">Saya memberikan bunga kepada Nona Kimura.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> ぎんこう <span class="pt">から</span> おかね <span class="pt">を</span> かりました。</div>
-                <div class="romaji">Watashi wa ginkou kara okane o karimashita.</div>
-                <div class="id-text">Saya meminjam uang dari bank.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> カリナさん <span class="pt">に</span> チョコレート <span class="pt">を</span> もらいました。</div>
+                <div class="romaji">Watashi wa Karina-san ni chokoreeto o moraimashita.</div>
+                <div class="id-text">Saya menerima cokelat dari Nona Karina.</div>
               </li>
             </ul>
           </div>
@@ -1728,12 +1807,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">かします (Meminjamkan) ↔ かります (Meminjam) | おしえます (Mengajar) ↔ ならいます (Belajar dari)</div>
-            <p class="function-desc">Semua kata kerja di atas memakai partikel <span class="pt">に</span> untuk menandai orang lawan interaksi.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ワンさん <span class="pt">に</span> にほんご <span class="pt">を</span> おしえます。 / ならいます。</div>
-                <div class="romaji">Wan-san ni Nihongo o oshiemasu. / Naraimasu.</div>
-                <div class="id-text">Mengajari bahasa Jepang kepada Sdr. Wang. / Belajar bahasa Jepang dari Sdr. Wang.</div>
+                <div class="jp-text">だれ <span class="pt">に</span> ねんがじょう <span class="pt">を</span> かきますか。— せんせい <span class="pt">と</span> ともだち <span class="pt">に</span> かきます。</div>
+                <div class="romaji">Dare ni nengajou o kakimasu ka. — Sensei to tomodachi ni kakimasu.</div>
+                <div class="id-text">Menulis kartu tahun baru kepada siapa? — Kepada guru dan teman.</div>
               </li>
             </ul>
           </div>
@@ -1746,12 +1824,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">もう + [KK ました] か — はい、もう [KK ました] / いいえ、まだです</div>
-            <p class="function-desc">Untuk menjawab negatif atas pertanyaan <em>もう〜ましたか</em>, gunakan <strong>いいえ、まだです</strong> (jangan gunakan 〜ませんでした).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">もう にほん <span class="pt">へ</span> いきましたか。— いいえ、まだです。</div>
-                <div class="romaji">Mou Nihon e ikimashita ka. — Iie, mada desu.</div>
-                <div class="id-text">Apakah sudah pergi ke Jepang? — Belum.</div>
+                <div class="jp-text">もう メール <span class="pt">を</span> おくりましたか。— はい、もう おくりました。</div>
+                <div class="romaji">Mou meeru o okurimashita ka. — Hai, mou okurimashita.</div>
+                <div class="id-text">Apakah sudah mengirim email? — Ya, sudah dikirim.</div>
+              </li>
+              <li class="example-item">
+                <div class="jp-text">もう ひるごはん <span class="pt">を</span> たべましたか。— いいえ、まだです。これから たべます。</div>
+                <div class="romaji">Mou hirugohan o tabemashita ka. — Iie, mada desu. Korekara tabemasu.</div>
+                <div class="id-text">Sudah makan siang? — Belum. Baru mau makan sekarang.</div>
               </li>
             </ul>
           </div>
@@ -1759,20 +1841,27 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 7</h3>
+        <h3>💬 Percakapan Bab 7: いらっしゃい</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Yamada I.:</div>
             <div class="speech-content">
-              <div class="jp">もう ひるごはん <span class="pt">を</span> たべましたか。</div>
-              <div class="id">Apakah kamu sudah makan siang?</div>
+              <div class="jp">はい。— サントス です。— あ、いらっしゃい。どうぞ おあがりください。— しつれいします。</div>
+              <div class="id">Ya. — Santos. — Ah, selamat datang. Silakan masuk. — Permisi.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Yamada T.:</div>
             <div class="speech-content">
-              <div class="jp">いいえ、まだです。これから たべます。</div>
-              <div class="id">Belum. Baru mau makan sekarang.</div>
+              <div class="jp">コーヒー <span class="pt">は</span> いかが ですか。— ありがとうございます。— どうぞ。— いただきます。</div>
+              <div class="id">Bagaimana kalau kopi? — Terima kasih. — Silakan. — Saya terima (makan/minum).</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Maria:</div>
+            <div class="speech-content">
+              <div class="jp">この スプーン、すてき ですね。— ええ、かいしゃ <span class="pt">の</span> ひと <span class="pt">に</span> もらいました。メキシコ <span class="pt">の</span> おみやげ です。</div>
+              <div class="id">Sendok ini bagus ya. — Ya, saya dapat dari orang kantor. Oleh-oleh dari Meksiko.</div>
             </div>
           </div>
         </div>
@@ -1803,13 +1892,13 @@
                 <td><strong>KS-い</strong> (contoh: たかい)</td>
                 <td>たかい です</td>
                 <td>たかくない です / たかくありません</td>
-                <td>たかい ほん</td>
+                <td>たかい やま</td>
               </tr>
               <tr>
-                <td><strong>KS-な</strong> (contoh: しずか)</td>
-                <td>しずか です</td>
-                <td>しずか じゃありません</td>
-                <td>しずかな まち</td>
+                <td><strong>KS-な</strong> (contoh: きれい)</td>
+                <td>きれい です</td>
+                <td>きれい じゃありません</td>
+                <td>きれいな はな</td>
               </tr>
             </tbody>
           </table>
@@ -1827,14 +1916,14 @@
             <div class="formula-box">KS-い: hapus い + くないです | KS-な: + じゃありません</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ふじさん <span class="pt">は</span> たかい です。 / この ほん <span class="pt">は</span> おもしろくない です。</div>
-                <div class="romaji">Fujisan wa takai desu. / Kono hon wa omoshirokunai desu.</div>
-                <div class="id-text">Gunung Fuji tinggi. / Buku ini tidak menarik.</div>
+                <div class="jp-text">さくら <span class="pt">は</span> きれい です。 / ふじさん <span class="pt">は</span> たかい です。</div>
+                <div class="romaji">Sakura wa kirei desu. / Fujisan wa takai desu.</div>
+                <div class="id-text">Bunga sakura indah. / Gunung Fuji tinggi.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">なら <span class="pt">は</span> しずか じゃありません。</div>
-                <div class="romaji">Nara wa shizuka ja arimasen.</div>
-                <div class="id-text">Nara tidak sepi.</div>
+                <div class="jp-text">さくらだいがく <span class="pt">は</span> ゆうめい ですか。— いいえ、ゆうめい じゃありません。</div>
+                <div class="romaji">Sakura-daigaku wa yuumei desu ka. — Iie, yuumei ja arimasen.</div>
+                <div class="id-text">Apakah Universitas Sakura terkenal? — Tidak, tidak terkenal.</div>
               </li>
             </ul>
           </div>
@@ -1846,18 +1935,17 @@
             <span class="card-badge badge-special">Modifikasi &amp; Tingkat</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">とても (Sangat) | あまり〜ない (Tidak begitu) | どんな [KB] (Yang bagaimana)</div>
-            <p class="function-desc"><em>あまり</em> selalu berpasangan dengan predikat bentuk negatif.</p>
+            <div class="formula-box">とても (Sangat) | あまり〜ない (Tidak begitu) | KS-な + な + KB</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">きょうと <span class="pt">は</span> とても ゆうめいな まち です。</div>
-                <div class="romaji">Kyouto wa totemo yuumeina machi desu.</div>
-                <div class="id-text">Kyoto adalah kota yang sangat terkenal.</div>
+                <div class="jp-text">さくら <span class="pt">は</span> きれいな はな です。 / ふじさん <span class="pt">は</span> たかい やま です。</div>
+                <div class="romaji">Sakura wa kireina hana desu. / Fujisan wa takai yama desu.</div>
+                <div class="id-text">Sakura adalah bunga yang indah. / Gunung Fuji adalah gunung yang tinggi.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">ペキン <span class="pt">は</span> あまり さむくない です。</div>
-                <div class="romaji">Pekin wa amari samukunai desu.</div>
-                <div class="id-text">Beijing tidak begitu dingin.</div>
+                <div class="jp-text">ペキン <span class="pt">は</span> いま さむいですか。— とても さむいです。シャンハイ <span class="pt">も</span> さむいですか。— あまり さむくないです。</div>
+                <div class="romaji">Pekin wa ima samui desu ka. — Totemo samui desu. Shanhai mo samui desu ka. — Amari samukunai desu.</div>
+                <div class="id-text">Apakah Beijing sekarang dingin? — Sangat dingin. Apakah Shanghai juga dingin? — Tidak begitu dingin.</div>
               </li>
             </ul>
           </div>
@@ -1872,14 +1960,9 @@
             <div class="formula-box">[KB] <span class="pt">は</span> どう ですか (Bagaimana?) | どんな [KB] ですか ([KB] yang bagaimana?)</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">にほん <span class="pt">の</span> せいかつ <span class="pt">は</span> どう ですか。— たのしい です。</div>
-                <div class="romaji">Nihon no seikatsu wa dou desu ka. — Tanoshii desu.</div>
-                <div class="id-text">Bagaimana kehidupan di Jepang? — Menyenangkan.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">なら <span class="pt">は</span> どんな まち ですか。— ふるい まち です。</div>
-                <div class="romaji">Nara wa donna machi desu ka. — Furui machi desu.</div>
-                <div class="id-text">Nara kota yang bagaimana? — Kota yang tua.</div>
+                <div class="jp-text">だいがく <span class="pt">の</span> りょう <span class="pt">は</span> どう ですか。— ふるい です <span class="pt">が</span>、べんり です。</div>
+                <div class="romaji">Daigaku no ryou wa dou desu ka. — Furui desu ga, benri desu.</div>
+                <div class="id-text">Bagaimana asrama universitas? — Tua/lama, tetapi praktis.</div>
               </li>
             </ul>
           </div>
@@ -1894,14 +1977,9 @@
             <div class="formula-box">[Kalimat 1] <span class="pt">が</span>、[Kalimat 2 kontras] | [Kalimat 1]。そして、[Kalimat 2 searah]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">にほん <span class="pt">の</span> たべもの <span class="pt">は</span> おいしいです <span class="pt">が</span>、たかいです。</div>
-                <div class="romaji">Nihon no tabemono wa oishii desu ga, takai desu.</div>
-                <div class="id-text">Makanan Jepang enak, tetapi mahal.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">この へや <span class="pt">は</span> ひろいです。そして、きれいです。</div>
-                <div class="romaji">Kono heya wa hiroi desu. Soshite, kirei desu.</div>
-                <div class="id-text">Kamar ini luas. Dan juga bersih.</div>
+                <div class="jp-text">きのう まつもとさん <span class="pt">の</span> うち <span class="pt">へ</span> いきました。— どんな うち ですか。— きれいな うち です。そして、おおきい うち です。</div>
+                <div class="romaji">Kinou Matsumoto-san no uchi e ikimashita. — Donna uchi desu ka. — Kireina uchi desu. Soshite, ookii uchi desu.</div>
+                <div class="id-text">Kemarin pergi ke rumah Sdr. Matsumoto. — Rumahnya bagaimana? — Rumah yang bagus. Dan juga rumah yang besar.</div>
               </li>
             </ul>
           </div>
@@ -1909,20 +1987,27 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 8</h3>
+        <h3>💬 Percakapan Bab 8: そろそろ しつれいします</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Yamada I.:</div>
             <div class="speech-content">
-              <div class="jp">にほん <span class="pt">の</span> たべもの <span class="pt">は</span> どうですか。</div>
-              <div class="id">Bagaimana makanan Jepang?</div>
+              <div class="jp">マリアさん、にほん <span class="pt">の</span> せいかつ <span class="pt">は</span> どう ですか。— まいにち とても たのしい です。</div>
+              <div class="id">Nona Maria, bagaimana kehidupan di Jepang? — Setiap hari sangat menyenangkan.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Yamada I. / Santos:</div>
             <div class="speech-content">
-              <div class="jp">おいしいです <span class="pt">が</span>、たかいです。</div>
-              <div class="id">Enak, tetapi mahal.</div>
+              <div class="jp">サントスさん、おしごと <span class="pt">は</span> どう ですか。— いそがしい です <span class="pt">が</span>、おもしろい です。</div>
+              <div class="id">Tuan Santos, bagaimana pekerjaan Anda? — Sibuk, tetapi menarik.</div>
+            </div>
+          </div>
+          <div class="kaiwa-line">
+            <div class="speaker">Yamada T. / Santos:</div>
+            <div class="speech-content">
+              <div class="jp">コーヒー、もう いっぱい いかが ですか。— いいえ、けっこう です。あ、もう 6じ ですね。そろそろ しつれいします。</div>
+              <div class="id">Bagaimana kalau secangkir kopi lagi? — Tidak, sudah cukup. Ah, sudah jam 6 ya. Saya pamit pulang dulu.</div>
             </div>
           </div>
         </div>
@@ -1981,7 +2066,6 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Objek] + <span class="pt">が</span> + すき / じょうず / わかります / あります</div>
-            <p class="function-desc">Objek kesukaan, keahlian, pemahaman, atau kepemilikan ditandai dengan partikel <span class="pt">が</span> (bukan を).</p>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">わたし <span class="pt">は</span> イタリアりょうり <span class="pt">が</span> すきです。</div>
@@ -1989,9 +2073,9 @@
                 <div class="id-text">Saya suka masakan Italia.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> くるま <span class="pt">が</span> あります。</div>
-                <div class="romaji">Watashi wa kuruma ga arimasu.</div>
-                <div class="id-text">Saya punya mobil.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> にほんご <span class="pt">が</span> すこし わかります。</div>
+                <div class="romaji">Watashi wa Nihongo ga sukoshi wakarimasu.</div>
+                <div class="id-text">Saya mengerti bahasa Jepang sedikit.</div>
               </li>
             </ul>
           </div>
@@ -2003,18 +2087,17 @@
             <span class="card-badge badge-special">Tingkat</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">よく (Sangat/Baik) | だいたい (Sebagian besar) | すこし (Sedikit) | あまり〜ない | ぜんぜん〜ない (Sama sekali tidak)</div>
-            <p class="function-desc">Ditempatkan tepat sebelum kata kerja atau kata sifat. <em>あまり</em> dan <em>ぜんぜん</em> wajib diikuti bentuk negatif.</p>
+            <div class="formula-box">よく (Sangat/Baik) | だいたい (Sebagian besar) | すこし (Sedikit) | あまり〜ない | ぜんぜん〜ない</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">えいご <span class="pt">が</span> よく わかります。 / かんじ <span class="pt">が</span> ぜんぜん わかりません。</div>
-                <div class="romaji">Eigo ga yoku wakarimasu. / Kanji ga zenzen wakarimasen.</div>
-                <div class="id-text">Sangat paham bahasa Inggris. / Sama sekali tidak paham kanji.</div>
+                <div class="jp-text">たなかさん <span class="pt">は</span> インドネシアご <span class="pt">が</span> わかりますか。— いいえ、ぜんぜん わかりません。</div>
+                <div class="romaji">Tanaka-san wa Indoneshia-go ga wakarimasu ka. — Iie, zenzen wakarimasen.</div>
+                <div class="id-text">Apakah Tuan Tanaka mengerti bahasa Indonesia? — Tidak, sama sekali tidak mengerti.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">おかね <span class="pt">が</span> すこし あります。</div>
-                <div class="romaji">Okane ga sukoshi arimasu.</div>
-                <div class="id-text">Saya punya sedikit uang.</div>
+                <div class="jp-text">こまかい おかね <span class="pt">が</span> ありますか。— いいえ、ありません。</div>
+                <div class="romaji">Komakai okane ga arimasu ka. — Iie, arimasen.</div>
+                <div class="id-text">Apakah punya uang receh/pecahan kecil? — Tidak, tidak ada.</div>
               </li>
             </ul>
           </div>
@@ -2027,17 +2110,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Alasan] + から、[Akibat] | どうして〜か — 〜から です</div>
-            <p class="function-desc">Jika ditanya dengan <strong>どうして</strong> (mengapa), akhiri jawaban dengan <strong>〜からです</strong>.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">じかん <span class="pt">が</span> ありません から、しんぶん <span class="pt">を</span> よみません。</div>
-                <div class="romaji">Jikan ga arimasen kara, shinbun o yomimasen.</div>
-                <div class="id-text">Karena tidak ada waktu, saya tidak membaca koran.</div>
+                <div class="jp-text">きょう <span class="pt">は</span> こども <span class="pt">の</span> たんじょうび ですから、はやく かえります。</div>
+                <div class="romaji">Kyou wa kodomo no tanjoubi desu kara, hayaku kaerimasu.</div>
+                <div class="id-text">Karena hari ini ulang tahun anak saya, saya pulang cepat.</div>
               </li>
               <li class="example-item">
                 <div class="jp-text">どうして きのう はやく かえりましたか。— ようじ <span class="pt">が</span> ありました から。</div>
                 <div class="romaji">Doushite kinou hayaku kaerimashita ka. — Youji ga arimashita kara.</div>
-                <div class="id-text">Mengapa kemarin pulang cepat? — Karena ada urusan.</div>
+                <div class="id-text">Mengapa kemarin pulang cepat? — Karena ada keperluan.</div>
               </li>
             </ul>
           </div>
@@ -2050,12 +2132,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">どんな + [Kata Benda] + <span class="pt">が</span> + すきですか</div>
-            <p class="function-desc">Selain menanyakan sifat (Bab 8), <em>どんな</em> juga menanyakan jenis atau kategori spesifik dari suatu kelompok benda.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">どんな おんがく <span class="pt">が</span> すきですか。— ジャズ <span class="pt">が</span> すきです。</div>
-                <div class="romaji">Donna ongaku ga suki desu ka. — Jazu ga suki desu.</div>
-                <div class="id-text">Musik jenis apa yang kamu suka? — Saya suka jazz.</div>
+                <div class="jp-text">どんな スポーツ <span class="pt">が</span> すきですか。— サッカー <span class="pt">が</span> すきです。</div>
+                <div class="romaji">Donna supootsu ga suki desu ka. — Sakkaa ga suki desu.</div>
+                <div class="id-text">Olahraga apa yang disukai? — Suka sepak bola.</div>
               </li>
             </ul>
           </div>
@@ -2063,20 +2144,20 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 9</h3>
+        <h3>💬 Percakapan Bab 9: ざんねんですが</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Miller:</div>
             <div class="speech-content">
-              <div class="jp">スポーツ <span class="pt">が</span> すきですか。</div>
-              <div class="id">Apakah kamu suka olahraga?</div>
+              <div class="jp">あのう、きむらさん、クラシック <span class="pt">の</span> コンサート、いっしょに いかが ですか。— いいですね。いつ ですか。— らいしゅう <span class="pt">の</span> きんようび <span class="pt">の</span> ばん です。</div>
+              <div class="id">Permisi, Nona Kimura, bagaimana kalau nonton konser musik klasik bersama? — Bagus tuh. Kapannya? — Jumat malam minggu depan.</div>
             </div>
           </div>
           <div class="kaiwa-line">
-            <div class="speaker">B:</div>
+            <div class="speaker">Kimura:</div>
             <div class="speech-content">
-              <div class="jp">はい、すきです。サッカー <span class="pt">が</span> いちばん すきです。</div>
-              <div class="id">Ya, suka. Saya paling suka sepak bola.</div>
+              <div class="jp">きんようび <span class="pt">の</span> ばん は ちょっと……。— だめ ですか。— ええ、ざんねん です <span class="pt">が</span>、ともだち <span class="pt">と</span> やくそく <span class="pt">が</span> あります から、……。— そうですか。— ええ。また こんど おねがいします。</div>
+              <div class="id">Jumat malam agak sulit…. — Tidak bisa ya? — Ya, sayang sekali, karena ada janji dengan teman…. — Begitu ya. — Ya. Lain kali saja ya.</div>
             </div>
           </div>
         </div>
@@ -2134,17 +2215,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Tempat] + <span class="pt">に</span> + [Subjek] + <span class="pt">が</span> + あります / います</div>
-            <p class="function-desc">Menjelaskan keberadaan sesuatu di lokasi tertentu. Gunakan <strong>います</strong> untuk makhluk hidup dan <strong>あります</strong> untuk benda mati.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">きょうしつ <span class="pt">に</span> たなかさん <span class="pt">が</span> います。</div>
-                <div class="romaji">Kyoushitsu ni Tanaka-san ga imasu.</div>
-                <div class="id-text">Di ruang kelas ada Tuan Tanaka.</div>
+                <div class="jp-text">あそこ <span class="pt">に</span> コンビニ <span class="pt">が</span> あります。</div>
+                <div class="romaji">Asoko ni konbini ga arimasu.</div>
+                <div class="id-text">Di sana ada toserba (konbini).</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">つくえ <span class="pt">の</span> うえ <span class="pt">に</span> ほん <span class="pt">が</span> あります。</div>
-                <div class="romaji">Tsukue no ue ni hon ga arimasu.</div>
-                <div class="id-text">Di atas meja ada buku.</div>
+                <div class="jp-text">ロビー <span class="pt">に</span> さとうさん <span class="pt">が</span> います。</div>
+                <div class="romaji">Robii ni Satou-san ga imasu.</div>
+                <div class="id-text">Di lobi ada Nona Sato.</div>
               </li>
             </ul>
           </div>
@@ -2157,17 +2237,16 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Subjek] + <span class="pt">は</span> + [Tempat] + <span class="pt">に</span> + あります / います</div>
-            <p class="function-desc">Menjelaskan lokasi spesifik dari topik/subjek yang sudah diketahui kedua pembicara.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">みずのさん <span class="pt">は</span> じむしょ <span class="pt">に</span> います。</div>
-                <div class="romaji">Mizuno-san wa jimusho ni imasu.</div>
-                <div class="id-text">Nona Mizuno ada di kantor.</div>
+                <div class="jp-text">とうきょうディズニーランド <span class="pt">は</span> ちばけん <span class="pt">に</span> あります。</div>
+                <div class="romaji">Toukyou Dizuniirando wa Chiba-ken ni arimasu.</div>
+                <div class="id-text">Tokyo Disneyland berada di Prefektur Chiba.</div>
               </li>
               <li class="example-item">
-                <div class="jp-text">ゆうびんきょく <span class="pt">は</span> ぎんこう <span class="pt">の</span> となり <span class="pt">に</span> あります。</div>
-                <div class="romaji">Yuubinkyoku wa ginkou no tonari ni arimasu.</div>
-                <div class="id-text">Kantor pos berada di samping bank.</div>
+                <div class="jp-text">かぞく <span class="pt">は</span> ニューヨーク <span class="pt">に</span> います。</div>
+                <div class="romaji">Kazoku wa Nyuu Yooku ni imasu.</div>
+                <div class="id-text">Keluarga ada di New York.</div>
               </li>
             </ul>
           </div>
@@ -2180,7 +2259,6 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KB1] + <span class="pt">や</span> + [KB2] + (など)</div>
-            <p class="function-desc">Berbeda dengan <span class="pt">と</span> (menyebutkan semua), partikel <span class="pt">や</span> menyebutkan beberapa contoh perwakilan ("...dan... dan lain-lain").</p>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">はこの なか <span class="pt">に</span> てがみ <span class="pt">や</span> しゃしん <span class="pt">など</span> <span class="pt">が</span> あります。</div>
@@ -2210,20 +2288,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 10</h3>
+        <h3>💬 Percakapan Bab 10: ナンプラー、ありますか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
             <div class="speaker">A:</div>
             <div class="speech-content">
-              <div class="jp">すみません、パンや <span class="pt">は</span> どこ <span class="pt">に</span> ありますか。</div>
-              <div class="id">Permisi, toko roti ada di mana?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">スーパー <span class="pt">の</span> なか <span class="pt">に</span> ありますよ。</div>
-              <div class="id">Ada di dalam supermarket lho.</div>
+              <div class="jp">すみません。ナンプラー、あります <span class="pt">か</span>。— はい、あそこ <span class="pt">に</span> あります。</div>
+              <div class="id">Permisi. Apakah ada saus ikan (nam pla)? — Ya, ada di sana.</div>
             </div>
           </div>
         </div>
@@ -2285,14 +2356,14 @@
             <div class="formula-box">[KB] + <span class="pt">を</span>/<span class="pt">が</span> + [Jumlah] + [Kata Kerja]</div>
             <ul class="examples-list">
               <li class="example-item">
+                <div class="jp-text">かいぎしつ <span class="pt">に</span> テーブル <span class="pt">が</span> 7つ あります。</div>
+                <div class="romaji">Kaigishitsu ni teeburu ga nanatsu arimasu.</div>
+                <div class="id-text">Di ruang rapat ada 7 buah meja.</div>
+              </li>
+              <li class="example-item">
                 <div class="jp-text">りんご <span class="pt">を</span> よっつ かいました。</div>
                 <div class="romaji">Ringo o yottsu kaimashita.</div>
                 <div class="id-text">Saya telah membeli 4 buah apel.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">がいこくじん の がくせい <span class="pt">が</span> ふたり います。</div>
-                <div class="romaji">Gaikokujin no gakusei ga futari imasu.</div>
-                <div class="id-text">Ada 2 orang mahasiswa asing.</div>
               </li>
             </ul>
           </div>
@@ -2300,21 +2371,21 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Durasi Waktu (〜じかん / 〜かげつ) &amp; どのくらい</div>
+            <div class="card-title">2. Durasi Waktu (〜じかん / 〜かげつ / 〜ねん) &amp; どのくらい</div>
             <span class="card-badge badge-question">Durasi</span>
           </div>
           <div class="card-body">
             <div class="formula-box">どのくらい + [KK] + か | [Durasi] + [KK] (tanpa partikel に)</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">くに <span class="pt">で</span> 2かげつ にほんご <span class="pt">を</span> べんきょうしました。</div>
-                <div class="romaji">Kuni de ni-kagetsu Nihongo o benkyou shimashita.</div>
-                <div class="id-text">Di negara asal saya belajar bahasa Jepang selama 2 bulan.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> にほん <span class="pt">に</span> 1ねん います。</div>
+                <div class="romaji">Watashi wa Nihon ni ichi-nen imasu.</div>
+                <div class="id-text">Saya berada di Jepang selama 1 tahun.</div>
               </li>
               <li class="example-item">
                 <div class="jp-text">おおさか から とうきょう まで しんかんせん <span class="pt">で</span> どのくらい かかりますか。— 2じかんはん かかります。</div>
                 <div class="romaji">Oosaka kara Toukyou made shinkansen de dono kurai kakarimasu ka. — Ni-jikan-han kakarimasu.</div>
-                <div class="id-text">Dari Osaka ke Tokyo naik Shinkansen memakan waktu berapa lama? — Memakan waktu 2,5 jam.</div>
+                <div class="id-text">Dari Osaka ke Tokyo naik Shinkansen memakan waktu berapa lama? — 2,5 jam.</div>
               </li>
             </ul>
           </div>
@@ -2331,7 +2402,7 @@
               <li class="example-item">
                 <div class="jp-text">1かげつ <span class="pt">に</span> 2かい えいが <span class="pt">を</span> みます。</div>
                 <div class="romaji">Ik-kagetsu ni ni-kai eiga o mimasu.</div>
-                <div class="id-text">Dalam 1 bulan saya menonton film 2 kali.</div>
+                <div class="id-text">Dalam 1 bulan menonton film 2 kali.</div>
               </li>
             </ul>
           </div>
@@ -2344,7 +2415,6 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Kata Bilangan / KB] + だけ</div>
-            <p class="function-desc">Menyatakan batasan ("hanya / cuma").</p>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">やすみ <span class="pt">は</span> にちようび だけ です。</div>
@@ -2357,20 +2427,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 11</h3>
+        <h3>💬 Percakapan Bab 11: これ、おねがいします</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">ごかぞく <span class="pt">は</span> なんにん ですか。</div>
-              <div class="id">Keluarga Anda ada berapa orang?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">4にん です。りょうしん と あね <span class="pt">が</span> ひとり います。</div>
-              <div class="id">4 orang. Ada kedua orang tua dan 1 kakak perempuan.</div>
+              <div class="jp">これ、おねがいします。— はい。80まい と 240えん の きって ですね。</div>
+              <div class="id">Mohon bantuannya untuk yang ini. — Baik. 80 lembar dan prangko 240 yen ya.</div>
             </div>
           </div>
         </div>
@@ -2403,7 +2466,7 @@
               </tr>
               <tr>
                 <td><strong>KS-い</strong></td>
-                <td>[hapus い] + かったです (contoh: あつかったです)</td>
+                <td>[hapus い] + かったです (contoh: さむかったです)</td>
                 <td>[hapus い] + くなかったです (くありませんでした)</td>
               </tr>
             </tbody>
@@ -2422,14 +2485,9 @@
             <div class="formula-box">KS-い: 〜かったです / 〜くなかったです | KB/KS-な: 〜でした / 〜じゃありませんでした</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">きのう <span class="pt">は</span> あめ でした。</div>
-                <div class="romaji">Kinou wa ame deshita.</div>
-                <div class="id-text">Kemarin hujan.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">パーティー <span class="pt">は</span> とても たのしかったです。</div>
-                <div class="romaji">Paatii wa totemo tanoshikatta desu.</div>
-                <div class="id-text">Pestanya sangat menyenangkan.</div>
+                <div class="jp-text">きのう <span class="pt">は</span> あめ でした。 / きのう <span class="pt">は</span> さむかった です。</div>
+                <div class="romaji">Kinou wa ame deshita. / Kinou wa samukatta desu.</div>
+                <div class="id-text">Kemarin hujan. / Kemarin dingin.</div>
               </li>
             </ul>
           </div>
@@ -2442,12 +2500,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KB1] + <span class="pt">は</span> + [KB2] + <span class="pt">より</span> + [KS] + です</div>
-            <p class="function-desc">Membandingkan dua objek ("[KB1] lebih [KS] daripada [KB2]").</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">この くるま <span class="pt">は</span> あの くるま <span class="pt">より</span> おおきい です。</div>
-                <div class="romaji">Kono kuruma wa ano kuruma yori ookii desu.</div>
-                <div class="id-text">Mobil ini lebih besar daripada mobil itu.</div>
+                <div class="jp-text">ほっかいどう <span class="pt">は</span> きゅうしゅう <span class="pt">より</span> おおきい です。</div>
+                <div class="romaji">Hokkaidou wa Kyuushuu yori ookii desu.</div>
+                <div class="id-text">Hokkaido lebih besar daripada Kyushu.</div>
               </li>
             </ul>
           </div>
@@ -2460,7 +2517,6 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KB1] <span class="pt">と</span> [KB2] <span class="pt">と</span> どちら <span class="pt">が</span> [KS] ですか — [KB] <span class="pt">の ほうが</span> [KS] です</div>
-            <p class="function-desc">Selalu gunakan <strong>どちら</strong> (bukan どれ) saat membandingkan 2 hal, dan jawab dengan <strong>〜の ほうが</strong>.</p>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">サッカー <span class="pt">と</span> やきゅう <span class="pt">と</span> どちら <span class="pt">が</span> おもしろいですか。— サッカー <span class="pt">の ほうが</span> おもしろいです。</div>
@@ -2478,12 +2534,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Lingkup] <span class="pt">の なかで</span> [Kata Tanya] <span class="pt">が</span> いちばん [KS] ですか</div>
-            <p class="function-desc">Kata tanya menyesuaikan kategori: <strong>なに</strong> (benda), <strong>どこ</strong> (tempat), <strong>だれ</strong> (orang), <strong>いつ</strong> (waktu).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">スポーツ <span class="pt">の なかで</span> なに <span class="pt">が</span> いちばん おもしろいですか。— サッカー <span class="pt">が</span> いちばん おもしろいです。</div>
-                <div class="romaji">Supootsu no naka de nani ga ichiban omoshiroi desu ka. — Sakkaa ga ichiban omoshiroi desu.</div>
-                <div class="id-text">Di antara olahraga, apa yang paling menarik? — Sepak bola paling menarik.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> 1ねん <span class="pt">で</span> なつ <span class="pt">が</span> いちばん すきです。</div>
+                <div class="romaji">Watashi wa ichi-nen de natsu ga ichiban suki desu.</div>
+                <div class="id-text">Dalam setahun, saya paling suka musim panas.</div>
               </li>
             </ul>
           </div>
@@ -2491,20 +2546,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 12</h3>
+        <h3>💬 Percakapan Bab 12: ぎおんまつりは どうでしたか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">ほっかいどう <span class="pt">は</span> どうでしたか。</div>
-              <div class="id">Bagaimana Hokkaido kemarin?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">とても きれいでした。とうきょう <span class="pt">より</span> ずっと すずしかったです。</div>
-              <div class="id">Sangat indah. Jauh lebih sejuk daripada Tokyo.</div>
+              <div class="jp">ぎおんまつり <span class="pt">は</span> どうでしたか。— とても にぎやかでした。でも、ひと <span class="pt">が</span> おおかった です。</div>
+              <div class="id">Bagaimana Festival Gion kemarin? — Sangat ramai. Tetapi orangnya banyak sekali.</div>
             </div>
           </div>
         </div>
@@ -2548,7 +2596,7 @@
             </tbody>
           </table>
         </div>
-        <div class="alert-danger alert-box">🚫 <strong>ほしい</strong> dan <strong>〜たいです</strong> hanya untuk keinginan <em>diri sendiri</em> atau pertanyaan langsung ke lawan bicara. Untuk orang ketiga digunakan <em>ほしがっています / 〜たがっています</em>.</div>
+        <div class="alert-danger alert-box">🚫 <strong>ほしい</strong> dan <strong>〜たいです</strong> hanya untuk keinginan <em>diri sendiri</em> atau pertanyaan langsung ke lawan bicara.</div>
       </div>
 
       <div class="grammar-grid">
@@ -2558,17 +2606,12 @@
             <span class="card-badge badge-positive">Keinginan Benda</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Benda] + <span class="pt">が</span> + ほしいです (Positif) | ほしくないです (Negatif)</div>
+            <div class="formula-box">[Benda] + <span class="pt">が</span> + ほしいです / ほしくないです</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> あたらしい パソコン <span class="pt">が</span> ほしいです。</div>
-                <div class="romaji">Watashi wa atarashii pasokon ga hoshii desu.</div>
-                <div class="id-text">Saya ingin laptop baru.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">いま なに <span class="pt">が</span> いちばん ほしいですか。— じかん <span class="pt">が</span> ほしいです。</div>
-                <div class="romaji">Ima nani ga ichiban hoshii desu ka. — Jikan ga hoshii desu.</div>
-                <div class="id-text">Sekarang paling ingin apa? — Ingin waktu.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> くるま <span class="pt">が</span> ほしいです。</div>
+                <div class="romaji">Watashi wa kuruma ga hoshii desu.</div>
+                <div class="id-text">Saya ingin mobil.</div>
               </li>
             </ul>
           </div>
@@ -2580,18 +2623,12 @@
             <span class="card-badge badge-special">Keinginan Aksi</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK bentuk ます hapus ます] + たいです / たくないです / たかったです</div>
-            <p class="function-desc">Konjugasinya mengikuti aturan kata sifat <strong>い</strong>. Partikel <span class="pt">へ・に・で・と</span> tetap dipakai sebelum kata kerja.</p>
+            <div class="formula-box">[KK bentuk ます hapus ます] + たいです / たくないです</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> おすし <span class="pt">が</span>（<span class="pt">を</span>）たべたいです。</div>
-                <div class="romaji">Watashi wa osushi ga (o) tabetai desu.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> すし <span class="pt">を</span>（<span class="pt">が</span>）たべたいです。</div>
+                <div class="romaji">Watashi wa sushi o (ga) tabetai desu.</div>
                 <div class="id-text">Saya ingin makan sushi.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">なにも たべたくないです。</div>
-                <div class="romaji">Nani mo tabetakunai desu.</div>
-                <div class="id-text">Saya tidak ingin makan apa-apa.</div>
               </li>
             </ul>
           </div>
@@ -2606,14 +2643,9 @@
             <div class="formula-box">[Tempat] + <span class="pt">へ</span> + [KK-masu / KB kegiatan] + <span class="pt">に</span> + いきます/きます/かえります</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">こうべ <span class="pt">へ</span> インドりょうり <span class="pt">を</span> たべ <span class="pt">に</span> いきます。</div>
-                <div class="romaji">Koube e Indo-ryouri o tabe ni ikimasu.</div>
-                <div class="id-text">Saya pergi ke Kobe untuk makan masakan India.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">にほん <span class="pt">へ</span> びじゅつ <span class="pt">の</span> べんきょう <span class="pt">に</span> きました。</div>
-                <div class="romaji">Nihon e bijutsu no benkyou ni kimashita.</div>
-                <div class="id-text">Saya datang ke Jepang untuk belajar seni rupa.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> フランス <span class="pt">へ</span> りょうり <span class="pt">を</span> ならい <span class="pt">に</span> いきます。</div>
+                <div class="romaji">Watashi wa Furansu e ryouri o narai ni ikimasu.</div>
+                <div class="id-text">Saya pergi ke Prancis untuk belajar memasak.</div>
               </li>
             </ul>
           </div>
@@ -2625,12 +2657,12 @@
             <span class="card-badge badge-question">Tak Tentu</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">どこか (Suatu tempat) | なにか (Sesuatu) — partikel へ/を boleh dihilangkan</div>
+            <div class="formula-box">どこか (Suatu tempat) | なにか (Sesuatu)</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">ふゆやすみ <span class="pt">は</span> どこか へ いきたいです。</div>
                 <div class="romaji">Fuyuyasumi wa dokoka e ikitai desu.</div>
-                <div class="id-text">Libur musim dingin nanti saya ingin pergi ke suatu tempat.</div>
+                <div class="id-text">Libur musim dingin ingin pergi ke suatu tempat.</div>
               </li>
             </ul>
           </div>
@@ -2638,20 +2670,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 13</h3>
+        <h3>💬 Percakapan Bab 13: べつべつに おねがいします</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">おなか <span class="pt">が</span> すきましたね。なにか たべませんか。</div>
-              <div class="id">Perut sudah lapar ya. Maukah makan sesuatu?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">いいですね。ラーメン <span class="pt">を</span> たべ <span class="pt">に</span> いきましょう。</div>
-              <div class="id">Ide bagus. Ayo pergi makan ramen.</div>
+              <div class="jp">べつべつ <span class="pt">に</span> おねがいします。— はい。2,400えん です。</div>
+              <div class="id">Mohon dibayar terpisah. — Baik. 2.400 yen.</div>
             </div>
           </div>
         </div>
@@ -2686,7 +2711,7 @@
               </tr>
               <tr>
                 <td><strong>Grup II (Ichidan)</strong></td>
-                <td>Vokal sebelum ます adalah <strong>e</strong> (+ beberapa <strong>i</strong> khusus: おきます, みます, います, かります, できます, あびます, おります)</td>
+                <td>Vokal sebelum ます adalah <strong>e</strong> (+ beberapa <strong>i</strong> khusus)</td>
                 <td>Hapus <strong>ます</strong> + <strong>て</strong></td>
                 <td>たべます → たべて<br>みます → みて</td>
               </tr>
@@ -2708,17 +2733,12 @@
             <span class="card-badge badge-positive">Permintaan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk て] + ください (Tolong lakukan...)</div>
+            <div class="formula-box">[KK Bentuk て] + ください</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">ちょっと まって ください。</div>
                 <div class="romaji">Chotto matte kudasai.</div>
                 <div class="id-text">Tolong tunggu sebentar.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ここ <span class="pt">に</span> なまえ <span class="pt">を</span> かいて ください。</div>
-                <div class="romaji">Koko ni namae o kaite kudasai.</div>
-                <div class="id-text">Tolong tulis nama di sini.</div>
               </li>
             </ul>
           </div>
@@ -2730,17 +2750,12 @@
             <span class="card-badge badge-special">Progresif</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk て] + います (Sedang melakukan...)</div>
+            <div class="formula-box">[KK Bentuk て] + います</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">ミラーさん <span class="pt">は</span> いま でんわ <span class="pt">を</span> かけて います。</div>
                 <div class="romaji">Miraa-san wa ima denwa o kakete imasu.</div>
                 <div class="id-text">Tuan Miller sekarang sedang menelepon.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">あめ <span class="pt">が</span> ふって います。</div>
-                <div class="romaji">Ame ga futte imasu.</div>
-                <div class="id-text">Sedang turun hujan.</div>
               </li>
             </ul>
           </div>
@@ -2752,12 +2767,12 @@
             <span class="card-badge badge-question">Tawaran Bantuan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK-masu hapus ます] + ましょうか (Mari saya bantu...)</div>
+            <div class="formula-box">[KK-masu hapus ます] + ましょうか</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">にもつ <span class="pt">を</span> もちましょうか。— すみません、おねがいします。</div>
-                <div class="romaji">Nimotsu o mochimashou ka. — Sumimasen, onegaishimasu.</div>
-                <div class="id-text">Mari saya bawakan barangnya? — Maaf merepotkan, mohon bantuannya.</div>
+                <div class="jp-text">にもつ <span class="pt">を</span> もちましょうか。</div>
+                <div class="romaji">Nimotsu o mochimashou ka.</div>
+                <div class="id-text">Mari saya bawakan barangnya?</div>
               </li>
             </ul>
           </div>
@@ -2769,13 +2784,12 @@
             <span class="card-badge badge-positive">Fenomena</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Fenomena Alam / Kejadian Langsung] + <span class="pt">が</span> + [KK]</div>
-            <p class="function-desc">Kejadian alam atau hal yang langsung tertangkap pancaindra memakai partikel <span class="pt">が</span>.</p>
+            <div class="formula-box">[Fenomena Alam] + <span class="pt">が</span> + [KK]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ゆき <span class="pt">が</span> ふって います。</div>
-                <div class="romaji">Yuki ga futte imasu.</div>
-                <div class="id-text">Sedang turun salju.</div>
+                <div class="jp-text">あめ <span class="pt">が</span> ふって います。</div>
+                <div class="romaji">Ame ga futte imasu.</div>
+                <div class="id-text">Sedang turun hujan.</div>
               </li>
             </ul>
           </div>
@@ -2783,20 +2797,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 14</h3>
+        <h3>💬 Percakapan Bab 14: みどりまちまで おねがいします</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Miller / Sopir:</div>
             <div class="speech-content">
-              <div class="jp">すみません、この かんじ <span class="pt">の</span> よみかた <span class="pt">を</span> おしえて ください。</div>
-              <div class="id">Permisi, tolong ajari cara baca kanji ini.</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">いいですよ。「じゅうしょ」 です。</div>
-              <div class="id">Boleh. Bacanya "juusho" (alamat).</div>
+              <div class="jp">みどりまち <span class="pt">まで</span> おねがいします。— はい、わかりました。</div>
+              <div class="id">Mohon antar sampai Midorimachi. — Baik, mengerti.</div>
             </div>
           </div>
         </div>
@@ -2818,7 +2825,7 @@
               <tr>
                 <th>Pola Kalimat</th>
                 <th>Makna Utama</th>
-                <th>Cara Menjawab</th>
+                <th>Catatan Penting</th>
               </tr>
             </thead>
             <tbody>
@@ -2830,12 +2837,12 @@
               <tr>
                 <td><strong>[KK-て] は いけません</strong></td>
                 <td>Menyatakan larangan ("Tidak boleh...")</td>
-                <td>Dipakai aturan / orang berwenang</td>
+                <td>Dipakai untuk aturan / larangan tegas</td>
               </tr>
               <tr>
-                <td><strong>[KK-て] います</strong> (Status/Pekerjaan)</td>
+                <td><strong>[KK-て] います</strong> (Status)</td>
                 <td>Menyatakan kondisi berkelanjutan, domisili, pernikahan, atau profesi</td>
-                <td>Negatif <em>しっています</em> adalah <strong>しりません</strong>!</td>
+                <td>Negatif <em>しっています</em> adalah <strong>しりません</strong></td>
               </tr>
             </tbody>
           </table>
@@ -2849,17 +2856,12 @@
             <span class="card-badge badge-positive">Izin</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk て] + も いいですか (Bolehkah...?)</div>
+            <div class="formula-box">[KK Bentuk て] + も いいですか</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">しゃしん <span class="pt">を</span> とって も いいですか。— はい、いいですよ。</div>
                 <div class="romaji">Shashin o totte mo ii desu ka. — Hai, ii desu yo.</div>
-                <div class="id-text">Bolehkah saya mengambil foto? — Ya, boleh.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">この カタログ <span class="pt">を</span> もらって も いいですか。</div>
-                <div class="romaji">Kono katarogu o moratte mo ii desu ka.</div>
-                <div class="id-text">Bolehkah saya meminta katalog ini?</div>
+                <div class="id-text">Bolehkah mengambil foto? — Ya, boleh.</div>
               </li>
             </ul>
           </div>
@@ -2871,7 +2873,7 @@
             <span class="card-badge badge-negative">Larangan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk て] + <span class="pt">は</span> いけません (Dilarang / Tidak boleh...)</div>
+            <div class="formula-box">[KK Bentuk て] + <span class="pt">は</span> いけません</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">ここ <span class="pt">で</span> たばこ <span class="pt">を</span> すって <span class="pt">は</span> いけません。</div>
@@ -2884,22 +2886,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">3. Status Menetap &amp; Profesi ([KK-て] います)</div>
+            <div class="card-title">3. Status Menetap &amp; Kepemilikan ([KK-て] います)</div>
             <span class="card-badge badge-special">Status Tetap</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">けっこんして います | すんで います | つくって います | うって います</div>
-            <p class="function-desc">Menyatakan hasil tindakan yang masih berlangsung sampai sekarang (menikah, tinggal di, memproduksi).</p>
+            <div class="formula-box">もって います | すんで います | けっこんして います</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> おおさか <span class="pt">に</span> すんで います。</div>
-                <div class="romaji">Watashi wa Oosaka ni sunde imasu.</div>
-                <div class="id-text">Saya tinggal di Osaka.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">IMC <span class="pt">は</span> コンピューターソフト <span class="pt">を</span> つくって います。</div>
-                <div class="romaji">IMC wa konpyuutaasofuto o tsukutte imasu.</div>
-                <div class="id-text">IMC memproduksi perangkat lunak komputer.</div>
+                <div class="jp-text">サントスさん <span class="pt">は</span> でんしじしょ <span class="pt">を</span> もって います。</div>
+                <div class="romaji">Santosu-san wa denshijisho o motte imasu.</div>
+                <div class="id-text">Tuan Santos memiliki/membawa kamus elektronik.</div>
               </li>
             </ul>
           </div>
@@ -2912,12 +2908,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">Positif: しって います (Tahu) | Negatif: しりません (Tidak tahu)</div>
-            <div class="alert-danger alert-box">🚫 Jangan pernah mengatakan <em>しっていません</em>; bentuk negatifnya wajib <strong>しりません</strong>.</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">の</span> でんわばんごう <span class="pt">を</span> しって いますか。— いいえ、しりません。</div>
-                <div class="romaji">Miraa-san no denwabangou o shitte imasu ka. — Iie, shirimasen.</div>
-                <div class="id-text">Apakah kamu tahu nomor telepon Tuan Miller? — Tidak, saya tidak tahu.</div>
+                <div class="jp-text">ミラーさん <span class="pt">の</span> じゅうしょ <span class="pt">を</span> しって いますか。— いいえ、しりません。</div>
+                <div class="romaji">Miraa-san no juusho o shitte imasu ka. — Iie, shirimasen.</div>
+                <div class="id-text">Apakah tahu alamat Tuan Miller? — Tidak, tidak tahu.</div>
               </li>
             </ul>
           </div>
@@ -2925,20 +2920,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 15</h3>
+        <h3>💬 Percakapan Bab 15: ごかぞくは？</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">すみません、ここ <span class="pt">に</span> くるま <span class="pt">を</span> とめて も いいですか。</div>
-              <div class="id">Permisi, bolehkah saya memarkir mobil di sini?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">すみません、ここ <span class="pt">は</span> ちゅうしゃきんし ですから、とめて <span class="pt">は</span> いけません。</div>
-              <div class="id">Maaf, karena di sini dilarang parkir, Anda tidak boleh memarkir mobil di sini.</div>
+              <div class="jp">ごかぞく <span class="pt">は</span>？— 3にん です。かぞく <span class="pt">は</span> カナダ <span class="pt">に</span> すんで います。</div>
+              <div class="id">Keluarganya? — 3 orang. Keluarga tinggal di Kanada.</div>
             </div>
           </div>
         </div>
@@ -2972,12 +2960,12 @@
               <tr>
                 <td><strong>Kata Kerja (Setelah selesai)</strong></td>
                 <td>[KK1 bentuk て] <strong>から</strong>、[KK2]</td>
-                <td>しごとが おわって <strong>から</strong>、のみに いきます。</td>
+                <td>コンサートが おわって <strong>から</strong>、レストランで しょくじしました。</td>
               </tr>
               <tr>
                 <td><strong>KS-い</strong></td>
                 <td>[hapus い] + <strong>くて</strong>、[Kalimat 2]</td>
-                <td>おおきくて、きれいです (Besar dan bersih)</td>
+                <td>おおきくて、きれいです</td>
               </tr>
               <tr>
                 <td><strong>KS-な / KB</strong></td>
@@ -2996,18 +2984,12 @@
             <span class="card-badge badge-positive">Urutan Aksi</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK1-て]、[KK2] (Lalu) | [KK1-て] から、[KK2] (Setelah selesai KK1, lalu KK2)</div>
-            <p class="function-desc">Kala (lampau/non-lampau) ditentukan oleh <strong>kata kerja terakhir</strong>.</p>
+            <div class="formula-box">[KK1-て]、[KK2] | [KK1-て] から、[KK2]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">くに <span class="pt">へ</span> かえって から、ちち <span class="pt">の</span> かいしゃ <span class="pt">で</span> はたらきます。</div>
-                <div class="romaji">Kuni e kaette kara, chichi no kaisha de hatarakimasu.</div>
-                <div class="id-text">Setelah pulang ke negara asal, saya akan bekerja di perusahaan ayah.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ひるごはん <span class="pt">を</span> たべて から、べんきょうしました。</div>
-                <div class="romaji">Hirugohan o tabete kara, benkyou shimashita.</div>
-                <div class="id-text">Setelah makan siang, saya belajar.</div>
+                <div class="jp-text">コンサート <span class="pt">が</span> おわって から、レストラン <span class="pt">で</span> しょくじしました。</div>
+                <div class="romaji">Konsaato ga owatte kara, resutoran de shokuji shimashita.</div>
+                <div class="id-text">Setelah konser selesai, makan di restoran.</div>
               </li>
             </ul>
           </div>
@@ -3020,17 +3002,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">KS-い → 〜くて | KS-な → 〜で | KB → 〜で</div>
-            <p class="function-desc">Pengecualian <strong>いい</strong> berubah menjadi <strong>よくて</strong>.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">は</span> わかくて、げんきです。</div>
-                <div class="romaji">Miraa-san wa wakakute, genki desu.</div>
-                <div class="id-text">Tuan Miller muda dan energik.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">サントスさん <span class="pt">は</span> ブラジルじん <span class="pt">で</span>、IMC <span class="pt">の</span> しゃいんです。</div>
-                <div class="romaji">Santosu-san wa Burajiru-jin de, IMC no shain desu.</div>
-                <div class="id-text">Tuan Santos orang Brazil, dan merupakan karyawan IMC.</div>
+                <div class="jp-text">この へや <span class="pt">は</span> ひろくて、あかるい です。</div>
+                <div class="romaji">Kono heya wa hirokute, akarui desu.</div>
+                <div class="id-text">Kamar ini luas dan terang.</div>
               </li>
             </ul>
           </div>
@@ -3045,11 +3021,6 @@
             <div class="formula-box">[Topik Utama] + <span class="pt">は</span> + [Bagian/Ciri] + <span class="pt">が</span> + [Kata Sifat] + です</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">マリアさん <span class="pt">は</span> かみ <span class="pt">が</span> ながいです。</div>
-                <div class="romaji">Maria-san wa kami ga nagai desu.</div>
-                <div class="id-text">Nona Maria rambutnya panjang.</div>
-              </li>
-              <li class="example-item">
                 <div class="jp-text">おおさか <span class="pt">は</span> たべもの <span class="pt">が</span> おいしいです。</div>
                 <div class="romaji">Oosaka wa tabemono ga oishii desu.</div>
                 <div class="id-text">Osaka makanannya enak.</div>
@@ -3060,16 +3031,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Tanya Cara / Rute (どうやって) &amp; Pilihan (どの [KB])</div>
-            <span class="card-badge badge-question">Cara &amp; Pilih 3+</span>
+            <div class="card-title">4. Tanya Cara / Rute (どうやって)</div>
+            <span class="card-badge badge-question">Cara</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">どうやって (Bagaimana caranya?) | どの + [KB] (Yang mana di antara 3 atau lebih?)</div>
+            <div class="formula-box">どうやって + [KK] + か</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">だいがく <span class="pt">まで</span> どうやって いきますか。— きょうとえき <span class="pt">で</span> バス <span class="pt">に</span> のって、だいがくまえ <span class="pt">で</span> おります。</div>
-                <div class="romaji">Daigaku made douyatte ikimasu ka. — Kyouto-eki de basu ni notte, daigaku-mae de orimasu.</div>
-                <div class="id-text">Bagaimana cara pergi ke universitas? — Naik bus di stasiun Kyoto, lalu turun di depan universitas.</div>
+                <div class="jp-text">だいがく <span class="pt">まで</span> どうやって いきますか。</div>
+                <div class="romaji">Daigaku made douyatte ikimasu ka.</div>
+                <div class="id-text">Bagaimana cara pergi sampai universitas?</div>
               </li>
             </ul>
           </div>
@@ -3077,20 +3048,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 16</h3>
+        <h3>💬 Percakapan Bab 16: つかいかたを おしえてください</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">すみません、おかね <span class="pt">を</span> おろしたいんですが、どうやって おろしますか。</div>
-              <div class="id">Permisi, saya ingin menarik uang, bagaimana cara menariknya?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">まず カード <span class="pt">を</span> いれて、あんしょうばんごう <span class="pt">を</span> おして ください。</div>
-              <div class="id">Pertama masukkan kartu, lalu tekan nomor PIN Anda.</div>
+              <div class="jp">すみません、この ほんき <span class="pt">の</span> つかいかた <span class="pt">を</span> おしえて ください。— まず、ここ <span class="pt">を</span> おして ください。</div>
+              <div class="id">Permisi, tolong ajari cara pakai mesin fotokopi ini. — Pertama, tekan bagian ini.</div>
             </div>
           </div>
         </div>
@@ -3118,23 +3082,22 @@
             <tbody>
               <tr>
                 <td><strong>Grup I (Godan)</strong></td>
-                <td>Ubah vokal <strong>i</strong> sebelum ます menjadi deret <strong>a</strong> + <strong>ない</strong><br><em>*Khusus vokal <strong>い</strong> murni berubah menjadi <strong>わ</strong> (bukan あ)!</em></td>
-                <td>かきます → かかない<br>のみます → のまない<br>かいます → かわない</td>
+                <td>Ubah vokal <strong>i</strong> sebelum ます menjadi deret <strong>a</strong> + <strong>ない</strong> (vokal <strong>い</strong> murni jadi <strong>わ</strong>)</td>
+                <td>かきます → かかない / かいます → かわない</td>
               </tr>
               <tr>
                 <td><strong>Grup II (Ichidan)</strong></td>
                 <td>Hapus <strong>ます</strong> + <strong>ない</strong></td>
-                <td>たべます → たべない<br>みます → みない</td>
+                <td>たべます → たべない / おきます → おきない</td>
               </tr>
               <tr>
                 <td><strong>Grup III (Irregular)</strong></td>
-                <td>します → <strong>しない</strong> | きます → <strong>こない</strong> (konai)</td>
+                <td>します → <strong>しない</strong> | きます → <strong>こない</strong></td>
                 <td>べんきょうします → べんきょうしない</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="alert-box">⚠️ Pengecualian Grup I: <strong>あります</strong> → <strong>ない</strong> (bukan <em>あらない</em>).</div>
       </div>
 
       <div class="grammar-grid">
@@ -3144,17 +3107,12 @@
             <span class="card-badge badge-negative">Jangan...</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk ない] + で ください (Tolong jangan...)</div>
+            <div class="formula-box">[KK Bentuk ない] + で ください</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> げんき ですから、しんぱいしない で ください。</div>
-                <div class="romaji">Watashi wa genki desu kara, shinpai shinai de kudasai.</div>
-                <div class="id-text">Karena saya sehat-sehat saja, tolong jangan khawatir.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ここ <span class="pt">で</span> しゃしん <span class="pt">を</span> とらない で ください。</div>
-                <div class="romaji">Koko de shashin o toranai de kudasai.</div>
-                <div class="id-text">Tolong jangan mengambil foto di sini.</div>
+                <div class="jp-text">しゃしん <span class="pt">を</span> とらない で ください。</div>
+                <div class="romaji">Shashin o toranai de kudasai.</div>
+                <div class="id-text">Tolong jangan mengambil foto.</div>
               </li>
             </ul>
           </div>
@@ -3166,17 +3124,12 @@
             <span class="card-badge badge-special">Harus</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK-ない hapus い] + ければ なりません (Harus melakukan...)</div>
+            <div class="formula-box">[KK-ない hapus い] + ければ なりません</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">くすり <span class="pt">を</span> のまなければ なりません。</div>
-                <div class="romaji">Kusuri o nomanakereba narimasen.</div>
-                <div class="id-text">Saya harus minum obat.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">あした 9じ <span class="pt">までに</span> かいしゃ <span class="pt">へ</span> いかなければ なりません。</div>
-                <div class="romaji">Ashita ku-ji made ni kaisha e ikanakereba narimasen.</div>
-                <div class="id-text">Besok saya harus pergi ke perusahaan paling lambat jam 9.</div>
+                <div class="jp-text">パスポート <span class="pt">を</span> みせなければ なりません。</div>
+                <div class="romaji">Pasupooto o misenakereba narimasen.</div>
+                <div class="id-text">Harus menunjukkan paspor.</div>
               </li>
             </ul>
           </div>
@@ -3188,12 +3141,12 @@
             <span class="card-badge badge-positive">Tidak Perlu</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK-ない hapus い] + くても いいです (Tidak perlu / tidak apa-apa jika tidak...)</div>
+            <div class="formula-box">[KK-ない hapus い] + くても いいです</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あした <span class="pt">は</span> こなくても いいです。</div>
-                <div class="romaji">Ashita wa konakute mo ii desu.</div>
-                <div class="id-text">Besok Anda tidak perlu datang.</div>
+                <div class="jp-text">にちようび <span class="pt">は</span> はやく おきなくても いいです。</div>
+                <div class="romaji">Nichiyoubi wa hayaku okinakute mo ii desu.</div>
+                <div class="id-text">Hari Minggu tidak perlu bangun pagi.</div>
               </li>
             </ul>
           </div>
@@ -3201,16 +3154,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Perbedaan まで dan までに + Objek jadi Topik (は)</div>
+            <div class="card-title">4. Batas Waktu (までに)</div>
             <span class="card-badge badge-question">Batas Waktu</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">まで (Terus berlangsung sampai...) | までに (Batas akhir penyelesaian / paling lambat)</div>
+            <div class="formula-box">[Waktu] + <span class="pt">までに</span> + [KK]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">レポート <span class="pt">は</span> きんようび <span class="pt">までに</span> ださなければ なりません。</div>
-                <div class="romaji">Repooto wa kinyoubi made ni dasanakereba narimasen.</div>
-                <div class="id-text">Laporan harus dikumpulkan paling lambat hari Jumat.</div>
+                <div class="jp-text">5じ <span class="pt">までに</span> かえらなければ なりません。</div>
+                <div class="romaji">Go-ji made ni kaeranakereba narimasen.</div>
+                <div class="id-text">Harus pulang paling lambat jam 5.</div>
               </li>
             </ul>
           </div>
@@ -3218,20 +3171,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 17</h3>
+        <h3>💬 Percakapan Bab 17: どうしましたか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">Dokter:</div>
+            <div class="speaker">Dokter / Pasien:</div>
             <div class="speech-content">
-              <div class="jp">きょう <span class="pt">は</span> おふろ <span class="pt">に</span> はいらない で ください。</div>
-              <div class="id">Hari ini tolong jangan mandi berendam.</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">Pasien:</div>
-            <div class="speech-content">
-              <div class="jp">はい、わかりました。あした <span class="pt">は</span> はいって も いいですか。</div>
-              <div class="id">Baik, saya mengerti. Kalau besok boleh mandi?</div>
+              <div class="jp">どうしましたか。— ちょっと ねつ <span class="pt">が</span> あります。— じゃ、きょう <span class="pt">は</span> おふろ <span class="pt">に</span> はいらない で ください。</div>
+              <div class="id">Ada keluhan apa? — Agak demam. — Kalau begitu hari ini jangan mandi berendam.</div>
             </div>
           </div>
         </div>
@@ -3260,12 +3206,12 @@
               <tr>
                 <td><strong>Grup I (Godan)</strong></td>
                 <td>Ubah vokal <strong>i</strong> sebelum ます menjadi deret <strong>u</strong></td>
-                <td>かきます → かく<br>のみます → のむ<br>かいます → かう</td>
+                <td>よみます → よむ / とります → とる</td>
               </tr>
               <tr>
                 <td><strong>Grup II (Ichidan)</strong></td>
                 <td>Hapus <strong>ます</strong> + <strong>る</strong></td>
-                <td>たべます → たべる<br>みます → みる</td>
+                <td>たべます → たべる / みます → みる</td>
               </tr>
               <tr>
                 <td><strong>Grup III (Irregular)</strong></td>
@@ -3284,18 +3230,12 @@
             <span class="card-badge badge-positive">Kemampuan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KB] <span class="pt">が</span> できます | [KK Bentuk Kamus] こと <span class="pt">が</span> できます (Bisa...)</div>
-            <p class="function-desc">Menambahkan <strong>こと</strong> setelah bentuk kamus memfungsikan kata kerja sebagai kata benda.</p>
+            <div class="formula-box">[KB] <span class="pt">が</span> できます | [KK Bentuk Kamus] こと <span class="pt">が</span> できます</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">ミラーさん <span class="pt">は</span> かんじ <span class="pt">を</span> よむ こと <span class="pt">が</span> できます。</div>
                 <div class="romaji">Miraa-san wa kanji o yomu koto ga dekimasu.</div>
-                <div class="id-text">Tuan Miller bisa membaca huruf kanji.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">カード <span class="pt">で</span> はらう こと <span class="pt">が</span> できますか。</div>
-                <div class="romaji">Kaado de harau koto ga dekimasu ka.</div>
-                <div class="id-text">Apakah bisa membayar dengan kartu?</div>
+                <div class="id-text">Tuan Miller bisa membaca kanji.</div>
               </li>
             </ul>
           </div>
@@ -3310,14 +3250,9 @@
             <div class="formula-box">わたし <span class="pt">の</span> しゅみ <span class="pt">は</span> [KB / KK-Kamus こと] です</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">の</span> しゅみ <span class="pt">は</span> しゃしん <span class="pt">を</span> とる こと です。</div>
-                <div class="romaji">Watashi no shumi wa shashin o toru koto desu.</div>
-                <div class="id-text">Hobi saya adalah memotret.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">の</span> しゅみ <span class="pt">は</span> おんがく です。</div>
-                <div class="romaji">Watashi no shumi wa ongaku desu.</div>
-                <div class="id-text">Hobi saya adalah musik.</div>
+                <div class="jp-text">わたし <span class="pt">の</span> しゅみ <span class="pt">は</span> えいが <span class="pt">を</span> みる こと です。</div>
+                <div class="romaji">Watashi no shumi wa eiga o miru koto desu.</div>
+                <div class="id-text">Hobi saya adalah menonton film.</div>
               </li>
             </ul>
           </div>
@@ -3329,18 +3264,12 @@
             <span class="card-badge badge-positive">Sebelum...</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk Kamus] + まえに | [KB] + <span class="pt">の</span> + まえに | [Durasi] + まえに</div>
-            <p class="function-desc">Kata kerja sebelum <em>まえに</em> selalu berbentuk <strong>kamus</strong>, meskipun kalimat utamanya berbentuk lampau.</p>
+            <div class="formula-box">[KK Bentuk Kamus] + まえに | [KB] + <span class="pt">の</span> + まえに</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ねる まえに、ほん <span class="pt">を</span> よみます。</div>
-                <div class="romaji">Neru mae ni, hon o yomimasu.</div>
-                <div class="id-text">Sebelum tidur, saya membaca buku.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">しょくじ <span class="pt">の</span> まえに、て <span class="pt">を</span> あらいます。</div>
-                <div class="romaji">Shokuji no mae ni, te o araimasu.</div>
-                <div class="id-text">Sebelum makan, saya mencuci tangan.</div>
+                <div class="jp-text">ねる まえに、にっき <span class="pt">を</span> かきます。</div>
+                <div class="romaji">Neru mae ni, nikki o kakimasu.</div>
+                <div class="id-text">Sebelum tidur, menulis buku harian.</div>
               </li>
             </ul>
           </div>
@@ -3352,12 +3281,12 @@
             <span class="card-badge badge-question">Keterangan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">なかなか + [Negatif] (Tidak mudah / jarang) | ぜひ + [Keinginan/Ajakan] (Sangat ingin / pasti)</div>
+            <div class="formula-box">なかなか + [Negatif] | ぜひ + [Keinginan/Ajakan]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">にほん <span class="pt">では</span> なかなか うま <span class="pt">を</span> みる こと <span class="pt">が</span> できません。</div>
-                <div class="romaji">Nihon dewa nakanaka uma o miru koto ga dekimasen.</div>
-                <div class="id-text">Di Jepang tidak mudah (jarang) bisa melihat kuda.</div>
+                <div class="jp-text">ぜひ にほん <span class="pt">へ</span> きたい です。</div>
+                <div class="romaji">Zehi Nihon e kitai desu.</div>
+                <div class="id-text">Sangat ingin datang ke Jepang.</div>
               </li>
             </ul>
           </div>
@@ -3365,20 +3294,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 18</h3>
+        <h3>💬 Percakapan Bab 18: しゅみは なんですか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">サントスさん <span class="pt">の</span> しゅみ <span class="pt">は</span> なんですか。</div>
-              <div class="id">Hobi Tuan Santos apa?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">しゃしん <span class="pt">を</span> とる こと です。とくに どうぶつ <span class="pt">の</span> しゃしん <span class="pt">を</span> とる こと <span class="pt">が</span> すきです。</div>
-              <div class="id">Memotret. Terutama saya suka memotret hewan.</div>
+              <div class="jp">しゅみ <span class="pt">は</span> なんですか。— りょうり <span class="pt">を</span> つくる こと です。</div>
+              <div class="id">Hobinya apa? — Membuat masakan.</div>
             </div>
           </div>
         </div>
@@ -3404,8 +3326,8 @@
             </thead>
             <tbody>
               <tr>
-                <td>Sama persis dengan aturan <strong>Bentuk て</strong> (Bab 14), cukup ganti akhiran <strong>て → た</strong> dan <strong>で → だ</strong></td>
-                <td>かいて → <strong>かいた</strong> | のんで → <strong>のんだ</strong> | たべて → <strong>たべた</strong> | して → <strong>した</strong> | きて → <strong>きた</strong></td>
+                <td>Sama dengan aturan <strong>Bentuk て</strong> (Bab 14), ganti <strong>て → た</strong> dan <strong>で → だ</strong></td>
+                <td>みて → <strong>みた</strong> / して → <strong>した</strong> / いって → <strong>いった</strong></td>
               </tr>
             </tbody>
           </table>
@@ -3419,17 +3341,12 @@
             <span class="card-badge badge-positive">Pengalaman</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk た] + こと <span class="pt">が</span> あります / ありません (Pernah / Tidak pernah...)</div>
+            <div class="formula-box">[KK Bentuk た] + こと <span class="pt">が</span> あります / ありません</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">うま <span class="pt">に</span> のった こと <span class="pt">が</span> あります。</div>
-                <div class="romaji">Uma ni notta koto ga arimasu.</div>
-                <div class="id-text">Saya pernah menunggang kuda.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ふじさん <span class="pt">に</span> のぼった こと <span class="pt">が</span> ありません。</div>
-                <div class="romaji">Fujisan ni nobotta koto ga arimasen.</div>
-                <div class="id-text">Saya belum pernah mendaki Gunung Fuji.</div>
+                <div class="jp-text">すもう <span class="pt">を</span> みた こと <span class="pt">が</span> あります。</div>
+                <div class="romaji">Sumou o mita koto ga arimasu.</div>
+                <div class="id-text">Pernah menonton sumo.</div>
               </li>
             </ul>
           </div>
@@ -3442,12 +3359,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KK1-た] り、[KK2-た] り + します / しました</div>
-            <p class="function-desc">Menyebutkan beberapa aktivitas perwakilan tanpa urutan waktu yang kaku. Bentuk lampau ditandai di akhir (<em>しました</em>).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">にちようび <span class="pt">は</span> テニス <span class="pt">を</span> したり、えいが <span class="pt">を</span> みたり します。</div>
-                <div class="romaji">Nichiyoubi wa tenisu o shitari, eiga o mitari shimasu.</div>
-                <div class="id-text">Hari Minggu saya bermain tenis, menonton film, dan kegiatan lainnya.</div>
+                <div class="jp-text">やすみ <span class="pt">の</span> ひ <span class="pt">は</span> テニス <span class="pt">を</span> したり、さんぽ <span class="pt">に</span> いったり します。</div>
+                <div class="romaji">Yasumi no hi wa tenisu o shitari, sanpo ni ittari shimasu.</div>
+                <div class="id-text">Hari libur bermain tenis, pergi jalan-jalan, dan sebagainya.</div>
               </li>
             </ul>
           </div>
@@ -3462,14 +3378,9 @@
             <div class="formula-box">KS-い (hapus い) + <strong>く</strong> なります | KS-な + <strong>に</strong> なります | KB + <strong>に</strong> なります</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">さむく なりましたね。</div>
-                <div class="romaji">Samuku narimashita ne.</div>
-                <div class="id-text">Sudah menjadi dingin ya.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">25さい <span class="pt">に</span> なりました。 / げんき <span class="pt">に</span> なりました。</div>
-                <div class="romaji">Ni-juu-go-sai ni narimashita. / Genki ni narimashita.</div>
-                <div class="id-text">Sudah berumur 25 tahun. / Sudah menjadi sehat.</div>
+                <div class="jp-text">これから だんだん あつく なります。</div>
+                <div class="romaji">Korekara dandan atsuku narimasu.</div>
+                <div class="id-text">Mulai sekarang lambat laun akan menjadi panas.</div>
               </li>
             </ul>
           </div>
@@ -3477,16 +3388,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Bentuk Lampau + だ (Sudah Selesai / Tiba)</div>
-            <span class="card-badge badge-question">Nuansa Lampau</span>
+            <div class="card-title">4. Keterangan Bertahap (だんだん)</div>
+            <span class="card-badge badge-question">Bertahap</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">もう [KK-ました] か — いいえ、まだです (Belum) / はい、もう [KK-ました] (Sudah)</div>
+            <div class="formula-box">だんだん + [Perubahan]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">もう じょうず <span class="pt">に</span> なりましたか。— いいえ、まだまだです。</div>
-                <div class="romaji">Mou jouzu ni narimashita ka. — Iie, madamada desu.</div>
-                <div class="id-text">Apakah sudah menjadi mahir? — Tidak, masih jauh dari mahir.</div>
+                <div class="jp-text">にほんご <span class="pt">が</span> だんだん わかる ように なりました。</div>
+                <div class="romaji">Nihongo ga dandan wakaru you ni narimashita.</div>
+                <div class="id-text">Bahasa Jepang lambat laun mulai bisa dipahami.</div>
               </li>
             </ul>
           </div>
@@ -3494,20 +3405,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 19</h3>
+        <h3>💬 Percakapan Bab 19: ダイエットは あしたから します</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">すもう <span class="pt">を</span> みた こと <span class="pt">が</span> ありますか。</div>
-              <div class="id">Apakah kamu pernah menonton sumo?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">いいえ、いちども ありません。ぜひ みたい です。</div>
-              <div class="id">Tidak, sekali pun belum pernah. Saya sangat ingin menontonnya.</div>
+              <div class="jp">ケーキ、たべませんか。— いいえ、けっこう です。ダイエット <span class="pt">は</span> あしたから します。</div>
+              <div class="id">Tidak mau makan kue? — Tidak, terima kasih. Dietnya mulai besok saja.</div>
             </div>
           </div>
         </div>
@@ -3537,49 +3441,77 @@
             <tbody>
               <tr>
                 <td><strong>Kata Kerja</strong></td>
-                <td>かきます → <strong>かく</strong> (Kamus)</td>
-                <td>かきません → <strong>かかない</strong></td>
-                <td>かきました → <strong>かいた</strong></td>
-                <td>かきませんでした → <strong>かなかった</strong></td>
+                <td>きます → <strong>くる</strong></td>
+                <td>きません → <strong>こない</strong></td>
+                <td>きました → <strong>きた</strong></td>
+                <td>きませんでした → <strong>こなかった</strong></td>
               </tr>
               <tr>
                 <td><strong>KS-い</strong></td>
-                <td>あついです → <strong>あつい</strong></td>
-                <td>あつくないです → <strong>あつくない</strong></td>
-                <td>あつかったです → <strong>あつかった</strong></td>
-                <td>あつくなかったです → <strong>あつくなかった</strong></td>
+                <td>おおいです → <strong>おおい</strong></td>
+                <td>おおくないです → <strong>おおくない</strong></td>
+                <td>おおかったです → <strong>おおかった</strong></td>
+                <td>おおくなかったです → <strong>おおくなった</strong></td>
               </tr>
               <tr>
                 <td><strong>KS-な / KB</strong></td>
-                <td>ひまです → <strong>ひまだ</strong><br>あめです → <strong>あめだ</strong></td>
-                <td>ひまじゃありません → <strong>ひまじゃない</strong></td>
-                <td>ひまでした → <strong>ひまだった</strong></td>
-                <td>ひまじゃありませんでした → <strong>ひまじゃなかった</strong></td>
+                <td>きれい → <strong>きれいだ</strong><br>たんじょうび → <strong>たんじょうびだ</strong></td>
+                <td>きれいじゃない</td>
+                <td>きれいだった</td>
+                <td>きれいじゃなかった</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="alert-box">💡 Bentuk biasa dipakai untuk berbicara dengan teman akrab, keluarga, anak kecil, menulis buku harian, serta menjadi dasar tata bahasa Bab 21–25!</div>
       </div>
 
       <div class="grammar-grid">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">1. Kalimat Tanya Kasual (Tanpa か, Intonasi Naik ↑)</div>
+            <div class="card-title">1. Predikat Bentuk Biasa (KK, KS, KB)</div>
+            <span class="card-badge badge-positive">Bentuk Biasa</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">KK (Kamus/ない/た/なかった) | KS-い (〜い/〜くない/〜かった/〜くなかった) | KS-な・KB (〜だ/〜じゃない/〜だった/〜じゃなかった)</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">サントスさん <span class="pt">は</span> パーティー <span class="pt">に</span> こなかった。 / とうきょう <span class="pt">は</span> ひと <span class="pt">が</span> おおい。</div>
+                <div class="romaji">Santosu-san wa paatii ni konakatta. / Toukyou wa hito ga ooi.</div>
+                <div class="id-text">Tuan Santos tidak datang ke pesta. / Tokyo banyak orang.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. Lampau KB / KS-な Bentuk Biasa</div>
+            <span class="card-badge badge-special">Lampau Kasual</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">KB / KS-な + だった / じゃなかった</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">おきなわ <span class="pt">の</span> うみ <span class="pt">は</span> きれいだった。 / きょう <span class="pt">は</span> ぼく <span class="pt">の</span> たんじょうびだ。</div>
+                <div class="romaji">Okinawa no umi wa kirei datta. / Kyou wa boku no tanjoubi da.</div>
+                <div class="id-text">Laut Okinawa indah. / Hari ini ulang tahunku.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">3. Kalimat Tanya Kasual (Tanpa か)</div>
             <span class="card-badge badge-question">Tanya Kasual</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Kalimat Bentuk Biasa] ↑ (Untuk KB &amp; KS-な, hapus だ!)</div>
+            <div class="formula-box">[Kalimat Bentuk Biasa] ↑ (KB &amp; KS-な hapus だ)</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">コーヒー <span class="pt">を</span> のむ？ — うん、のむ。 / ううん、のまない。</div>
-                <div class="romaji">Koohii o nomu? — Un, nomu. / Uun, nomanai.</div>
-                <div class="id-text">Minum kopi? — Ya, minum. / Enggak, nggak minum.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">きょう <span class="pt">は</span> ひま？ — うん、ひまだよ。</div>
-                <div class="romaji">Kyou wa hima? — Un, hima da yo.</div>
-                <div class="id-text">Hari ini senggang? — Ya, senggang kok.</div>
+                <div class="jp-text">あした ひま？ — うん、ひまだよ。</div>
+                <div class="romaji">Ashita hima? — Un, hima da yo.</div>
+                <div class="id-text">Besok senggang? — Ya, senggang kok.</div>
               </li>
             </ul>
           </div>
@@ -3587,55 +3519,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Penghilangan Partikel dalam Percakapan Kasual</div>
-            <span class="card-badge badge-special">Percakapan Santai</span>
+            <div class="card-title">4. Konteks Penggunaan Bentuk Biasa</div>
+            <span class="card-badge badge-negative">Konteks</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">Partikel <span class="pt">は</span>, <span class="pt">を</span>, <span class="pt">が</span>, <span class="pt">へ</span> sering dihilangkan jika konteks sudah jelas</div>
+            <div class="formula-box">Teman dekat, keluarga, anak kecil, buku harian, dan klausa bawahan</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あした とうきょう（へ）いく？</div>
-                <div class="romaji">Ashita Toukyou (e) iku?</div>
-                <div class="id-text">Besok pergi ke Tokyo?</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">もう ごはん（を）たべた？ — ううん、まだ。</div>
-                <div class="romaji">Mou gohan (o) tabeta? — Uun, mada.</div>
+                <div class="jp-text">もう たべた？ — ううん、まだ。</div>
+                <div class="romaji">Mou tabeta? — Uun, mada.</div>
                 <div class="id-text">Sudah makan? — Belum.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">3. Bentuk Progresif Kasual (〜ている → 〜てる)</div>
-            <span class="card-badge badge-positive">Kontraksi</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[KK-て] いる → [KK-て] る (Huruf い sering luluh dalam lisan santai)</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">いま なに（を）して（い）るの？ — べんきょうして（い）る。</div>
-                <div class="romaji">Ima nani (o) shite (i)ru no? — Benkyou shite (i)ru.</div>
-                <div class="id-text">Sekarang lagi ngapain? — Lagi belajar.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">4. Perbandingan Kosa Kata Sopan vs Biasa</div>
-            <span class="card-badge badge-negative">Padanan Kata</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">はい → うん | いいえ → ううん | わたし → ぼく (Pria) | あなた → きみ</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">きのう どうだった？ — すごく たのしかったよ！</div>
-                <div class="romaji">Kinou dou datta? — Sugoku tanoshikatta yo!</div>
-                <div class="id-text">Kemarin gimana? — Seru banget lho!</div>
               </li>
             </ul>
           </div>
@@ -3643,20 +3536,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 20</h3>
+        <h3>💬 Percakapan Bab 20: いっしょに いかない？</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">Kobayashi:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">なつやすみ <span class="pt">は</span> くに <span class="pt">へ</span> かえるの？</div>
-              <div class="id">Libur musim panas pulang ke negara asalmu?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">Thawaphon:</div>
-            <div class="speech-content">
-              <div class="jp">ううん、かえらない。ふじさん <span class="pt">に</span> のぼりたいんだ。</div>
-              <div class="id">Enggak, nggak pulang. Aku ingin mendaki Gunung Fuji.</div>
+              <div class="jp">きょう、いっしょに いかない？ — いいね。どこ へ いく？</div>
+              <div class="id">Hari ini tidak pergi bersama? — Bagus tuh. Pergi ke mana?</div>
             </div>
           </div>
         </div>
@@ -3688,18 +3574,13 @@
                 <td>Menyatakan dugaan, perkiraan, atau opini ("Saya rasa / menurut saya...")</td>
               </tr>
               <tr>
-                <td><strong>「[Kutipan Langsung]」と いいます</strong></td>
-                <td>Kalimat persis seperti yang diucapkan</td>
-                <td>Mengutip ucapan seseorang secara langsung</td>
-              </tr>
-              <tr>
                 <td><strong>[Bentuk Biasa] と いいます</strong></td>
-                <td>Bentuk Biasa (KK, KS-い, KS-な+だ, KB+だ)</td>
-                <td>Menyampaikan ucapan orang lain secara tidak langsung ("Berkata bahwa...")</td>
+                <td>Bentuk Biasa / 「Kutipan Langsung」</td>
+                <td>Menyampaikan ucapan seseorang ("Berkata bahwa...")</td>
               </tr>
               <tr>
                 <td><strong>[Bentuk Biasa] でしょう？</strong></td>
-                <td>Bentuk Biasa (untuk KB &amp; KS-な <strong>tanpa だ</strong>)</td>
+                <td>Bentuk Biasa (KB &amp; KS-な <strong>tanpa だ</strong>)</td>
                 <td>Meminta persetujuan lawan bicara ("...kan?")</td>
               </tr>
             </tbody>
@@ -3715,56 +3596,28 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[Kalimat Bentuk Biasa] + <span class="pt">と</span> おもいます</div>
-            <p class="function-desc">Jika pendapat berupa penyangkalan, ubah kata kerja di dalam klausa menjadi bentuk biasa negatif (<em>〜ないと思います</em>).</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あした あめ <span class="pt">が</span> ふる <span class="pt">と</span> おもいます。</div>
-                <div class="romaji">Ashita ame ga furu to omoimasu.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> あした あめ <span class="pt">が</span> ふる <span class="pt">と</span> おもいます。</div>
+                <div class="romaji">Watashi wa ashita ame ga furu to omoimasu.</div>
                 <div class="id-text">Saya rasa besok akan turun hujan.</div>
               </li>
-              <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">は</span> この ニュース <span class="pt">を</span> しらない <span class="pt">と</span> おもいます。</div>
-                <div class="romaji">Miraa-san wa kono nyuusu o shiranai to omoimasu.</div>
-                <div class="id-text">Saya rasa Tuan Miller tidak tahu berita ini.</div>
-              </li>
             </ul>
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Menanyakan Pendapat ([KB] に ついて どう 思いますか)</div>
-            <span class="card-badge badge-question">Tanya Opini</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[Topik] + <span class="pt">に ついて</span> + どう おもいますか</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">あたらしい くうこう <span class="pt">に ついて</span> どう おもいますか。— べんりだ <span class="pt">と</span> おもいます。</div>
-                <div class="romaji">Atarashii kuukou ni tsuite dou omoimasu ka. — Benri da to omoimasu.</div>
-                <div class="id-text">Bagaimana pendapat Anda tentang bandara baru? — Menurut saya praktis.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">3. Mengutip Ucapan (〜と言いました)</div>
+            <div class="card-title">2. Mengutip Ucapan (〜と言いました)</div>
             <span class="card-badge badge-special">Kutipan</span>
           </div>
           <div class="card-body">
             <div class="formula-box">[Orang] + <span class="pt">は</span> + [Bentuk Biasa / 「Kutipan」] + <span class="pt">と</span> いいました</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">ねる まえに 「おやすみなさい」 <span class="pt">と</span> いいます。</div>
-                <div class="romaji">Neru mae ni "Oyasuminasai" to iimasu.</div>
-                <div class="id-text">Sebelum tidur kita mengucapkan "Selamat tidur".</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">ミラーさん <span class="pt">は</span> らいしゅう とうきょう <span class="pt">へ</span> いく <span class="pt">と</span> いいました。</div>
-                <div class="romaji">Miraa-san wa raishuu Toukyou e iku to iimashita.</div>
-                <div class="id-text">Tuan Miller berkata bahwa minggu depan akan pergi ke Tokyo.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> ちち <span class="pt">に</span> りゅうがくしたい <span class="pt">と</span> いいました。</div>
+                <div class="romaji">Watashi wa chichi ni ryuugaku shitai to iimashita.</div>
+                <div class="id-text">Saya berkata kepada ayah bahwa saya ingin kuliah ke luar negeri.</div>
               </li>
             </ul>
           </div>
@@ -3772,16 +3625,33 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Konfirmasi Persetujuan (〜でしょう？)</div>
-            <span class="card-badge badge-positive">Konfirmasi</span>
+            <div class="card-title">3. Konfirmasi Persetujuan (〜でしょう？)</div>
+            <span class="card-badge badge-question">Konfirmasi</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK / KS-い / KS-な (tanpa だ) / KB (tanpa だ)] + でしょう？</div>
+            <div class="formula-box">[Bentuk Biasa] + でしょう？</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あした パーティー <span class="pt">に</span> いく でしょう？ — ええ、いきます。</div>
-                <div class="romaji">Ashita paatii ni iku deshou? — Ee, ikimasu.</div>
-                <div class="id-text">Besok kamu pergi ke pesta kan? — Ya, pergi.</div>
+                <div class="jp-text">つかれた でしょう？ — はい、ちょっと つかれました。</div>
+                <div class="romaji">Tsukareta deshou? — Hai, chotto tsukaremashita.</div>
+                <div class="id-text">Capek kan? — Ya, agak capek.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">4. Menanyakan Pendapat (〜について どう 思いますか)</div>
+            <span class="card-badge badge-positive">Tanya Opini</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[Topik] + <span class="pt">について</span> + どう おもいますか</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">この まち <span class="pt">について</span> どう おもいますか。</div>
+                <div class="romaji">Kono machi ni tsuite dou omoimasu ka.</div>
+                <div class="id-text">Bagaimana pendapat Anda tentang kota ini?</div>
               </li>
             </ul>
           </div>
@@ -3789,20 +3659,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 21</h3>
+        <h3>💬 Percakapan Bab 21: わたしも そう おもいます</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">にほん <span class="pt">の</span> ぶっか <span class="pt">に ついて</span> どう おもいますか。</div>
-              <div class="id">Bagaimana pendapat Anda mengenai harga barang di Jepang?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">たかい <span class="pt">と</span> おもいます。とくに こうつうひ <span class="pt">が</span> たかい ですね。</div>
-              <div class="id">Menurut saya mahal. Terutama biaya transportasinya mahal ya.</div>
+              <div class="jp">あした <span class="pt">も</span> あつい <span class="pt">と</span> おもいますね。— ええ、わたし <span class="pt">も</span> そう おもいます。</div>
+              <div class="id">Besok juga sepertinya akan panas ya. — Ya, saya juga berpikir begitu.</div>
             </div>
           </div>
         </div>
@@ -3833,16 +3696,15 @@
               </tr>
               <tr>
                 <td>Subjek di dalam anak kalimat penjelas wajib memakai partikel <span class="pt">が</span> (bukan は)</td>
-                <td><code>わたし <strong>が</strong> とった しゃしん</code> (Foto yang saya ambil)</td>
+                <td><code>ミラーさん <strong>が</strong> つくった ケーキ</code></td>
               </tr>
               <tr>
                 <td>KS-な memakai <strong>〜な</strong> dan KB memakai <strong>〜の</strong> sebelum kata benda</td>
-                <td><code>しずかな まち</code> | <code>65さい の ちち</code></td>
+                <td><code>しずかな まち</code> | <code>こどもの とき</code></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="alert-danger alert-box">🚫 Dalam bahasa Jepang, kata kerja penjelas selalu berada <strong>di depan</strong> kata benda yang diterangkan (kebalikan dari bahasa Indonesia "buku <em>yang saya beli</em>").</div>
       </div>
 
       <div class="grammar-grid">
@@ -3857,12 +3719,7 @@
               <li class="example-item">
                 <div class="jp-text">これ <span class="pt">は</span> ミラーさん <span class="pt">が</span> つくった ケーキ です。</div>
                 <div class="romaji">Kore wa Miraa-san ga tsukutta keeki desu.</div>
-                <div class="id-text">Ini adalah kue yang dibuat oleh Tuan Miller.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">あそこ <span class="pt">に</span> いる ひと <span class="pt">は</span> わたし <span class="pt">の</span> せんせい です。</div>
-                <div class="romaji">Asoko ni iru hito wa watashi no sensei desu.</div>
-                <div class="id-text">Orang yang berada di sana adalah guru saya.</div>
+                <div class="id-text">Ini kue yang dibuat Tuan Miller.</div>
               </li>
             </ul>
           </div>
@@ -3870,21 +3727,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Kata Benda Modifikasi Sebagai Subjek / Objek</div>
+            <div class="card-title">2. Kata Benda Modifikasi Sebagai Topik / Subjek</div>
             <span class="card-badge badge-special">Posisi Kalimat</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Anak Kalimat + KB] + <span class="pt">は</span> / <span class="pt">が</span> / <span class="pt">を</span> / <span class="pt">に</span> + [Predikat Utama]</div>
+            <div class="formula-box">[Anak Kalimat + KB] + <span class="pt">は</span> / <span class="pt">が</span> / <span class="pt">を</span> + [Predikat Utama]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">カリナさん <span class="pt">が</span> かいた え <span class="pt">は</span> どれ ですか。</div>
-                <div class="romaji">Karina-san ga kaita e wa dore desu ka.</div>
-                <div class="id-text">Lukisan yang digambar oleh Nona Karina yang mana?</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> きのう かった ほん <span class="pt">を</span> よんでいます。</div>
-                <div class="romaji">Watashi wa kinou katta hon o yonde imasu.</div>
-                <div class="id-text">Saya sedang membaca buku yang saya beli kemarin.</div>
+                <div class="jp-text">あそこ <span class="pt">に</span> いる ひと <span class="pt">は</span> ミラーさん です。</div>
+                <div class="romaji">Asoko ni iru hito wa Miraa-san desu.</div>
+                <div class="id-text">Orang yang ada di sana adalah Tuan Miller.</div>
               </li>
             </ul>
           </div>
@@ -3892,21 +3744,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">3. Modifikasi Kata Waktu / Janji ([KK-Kamus] じかん / やくそく)</div>
-            <span class="card-badge badge-question">Waktu &amp; Janji</span>
+            <div class="card-title">3. Modifikasi Objek Lampau</div>
+            <span class="card-badge badge-question">Objek Penjelas</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[KK Bentuk Kamus] + じかん / やくそく / ようじ <span class="pt">が</span> あります / ありません</div>
+            <div class="formula-box">[KK-た] + [KB] + <span class="pt">を</span> + [KK]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あさごはん <span class="pt">を</span> たべる じかん <span class="pt">が</span> ありません。</div>
-                <div class="romaji">Asagohan o taberu jikan ga arimasen.</div>
-                <div class="id-text">Saya tidak punya waktu untuk makan sarapan.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">きょう <span class="pt">は</span> ともだち <span class="pt">と</span> えいが <span class="pt">を</span> みる やくそく <span class="pt">が</span> あります。</div>
-                <div class="romaji">Kyou wa tomodachi to eiga o miru yakusoku ga arimasu.</div>
-                <div class="id-text">Hari ini saya ada janji menonton film bersama teman.</div>
+                <div class="jp-text">きのう ならった ことば <span class="pt">を</span> わすれました。</div>
+                <div class="romaji">Kinou naratta kotoba o wasuremashita.</div>
+                <div class="id-text">Lupa kosakata yang dipelajari kemarin.</div>
               </li>
             </ul>
           </div>
@@ -3914,17 +3761,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Kosakata Memakai Pakaian &amp; Aksesori</div>
-            <span class="card-badge badge-positive">Busana</span>
+            <div class="card-title">4. Modifikasi Kata Waktu / Janji ([KK-Kamus] じかん)</div>
+            <span class="card-badge badge-positive">Waktu</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">きます (Atasan/Jas) | はきます (Celana/Sepatu) | かぶります (Topi) | かけます (Kacamata)</div>
-            <p class="function-desc">Untuk menyatakan orang yang <em>sedang mengenakan</em> sesuatu, gunakan bentuk <strong>〜ている</strong>.</p>
+            <div class="formula-box">[KK Bentuk Kamus] + じかん / やくそく <span class="pt">が</span> あります / ありません</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">めがね <span class="pt">を</span> かけて いる ひと <span class="pt">は</span> ヤマダさん です。</div>
-                <div class="romaji">Megane o kakete iru hito wa Yamada-san desu.</div>
-                <div class="id-text">Orang yang memakai kacamata adalah Tuan Yamada.</div>
+                <div class="jp-text">かいもの <span class="pt">に</span> いく じかん <span class="pt">が</span> ありません。</div>
+                <div class="romaji">Kaimono ni iku jikan ga arimasen.</div>
+                <div class="id-text">Tidak ada waktu untuk pergi berbelanja.</div>
               </li>
             </ul>
           </div>
@@ -3932,20 +3778,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 22</h3>
+        <h3>💬 Percakapan Bab 22: どんな へやを おさがしですか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">Staf / Pelanggan:</div>
             <div class="speech-content">
-              <div class="jp">どんな うち <span class="pt">が</span> ほしいですか。</div>
-              <div class="id">Rumah yang seperti apa yang Anda inginkan?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">ひろい にわ <span class="pt">が</span> ある うち <span class="pt">が</span> ほしいです。</div>
-              <div class="id">Saya ingin rumah yang memiliki halaman luas.</div>
+              <div class="jp">どんな へや <span class="pt">を</span> おさがしですか。— せんせい <span class="pt">の</span> うち <span class="pt">から</span> ちかい へや <span class="pt">が</span> ほしいです。</div>
+              <div class="id">Mencari kamar yang seperti apa? — Ingin kamar yang dekat dari rumah guru.</div>
             </div>
           </div>
         </div>
@@ -3974,22 +3813,22 @@
               <tr>
                 <td><strong>Kata Kerja</strong></td>
                 <td>KK-Kamus / KK-ない / KK-た + <strong>とき</strong></td>
-                <td>くにへ かえる とき (Saat pulang) | かった とき (Saat telah membeli)</td>
+                <td>としょかんで ほんを かりる とき</td>
               </tr>
               <tr>
                 <td><strong>KS-い</strong></td>
                 <td>KS-い + <strong>とき</strong></td>
-                <td>さむい とき (Saat dingin)</td>
+                <td>さむい とき</td>
               </tr>
               <tr>
                 <td><strong>KS-な</strong></td>
                 <td>KS-な + <strong>な とき</strong></td>
-                <td>ひまな とき (Saat senggang)</td>
+                <td>ひまな とき</td>
               </tr>
               <tr>
                 <td><strong>Kata Benda</strong></td>
                 <td>KB + <strong>の とき</strong></td>
-                <td>こどもの とき (Saat masih anak-anak)</td>
+                <td>こどもの とき</td>
               </tr>
             </tbody>
           </table>
@@ -4010,55 +3849,22 @@
                 <div class="romaji">Toshokan de hon o kariru toki, kaado ga irimasu.</div>
                 <div class="id-text">Ketika meminjam buku di perpustakaan, diperlukan kartu.</div>
               </li>
-              <li class="example-item">
-                <div class="jp-text">こども <span class="pt">の</span> とき、よく かわ <span class="pt">で</span> およぎました。</div>
-                <div class="romaji">Kodomo no toki, yoku kawa de oyogimashita.</div>
-                <div class="id-text">Waktu kecil, saya sering berenang di sungai.</div>
-              </li>
             </ul>
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Perbedaan KK-Kamus とき vs KK-た とき</div>
-            <span class="card-badge badge-special">Nuansa Waktu</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">KK-Kamus とき (Sebelum aksi selesai) vs KK-た とき (Setelah aksi selesai)</div>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">くに <span class="pt">へ</span> <strong>かえる</strong> とき、かばん <span class="pt">を</span> かいます。(Beli di Jepang sebelum pulang)</div>
-                <div class="romaji">Kuni e kaeru toki, kaban o kaimasu.</div>
-                <div class="id-text">Saat mau pulang ke negara asal, saya membeli tas.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">くに <span class="pt">へ</span> <strong>かえった</strong> とき、かばん <span class="pt">を</span> かいました。(Beli sesudah tiba di negara asal)</div>
-                <div class="romaji">Kuni e kaetta toki, kaban o kaimashita.</div>
-                <div class="id-text">Ketika sudah pulang ke negara asal, saya membeli tas.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">3. Akibat Pasti / Otomatis ([KK-Kamus / KK-ない] + と)</div>
-            <span class="card-badge badge-positive">Kalau / Begitu...</span>
+            <div class="card-title">2. Akibat Pasti / Otomatis ([KK-Kamus / KK-ない] + と)</div>
+            <span class="card-badge badge-special">Kalau / Begitu...</span>
           </div>
           <div class="card-body">
             <div class="formula-box">[KK-Kamus / KK-ない] + <span class="pt">と</span>、[Hasil Pasti / Petunjuk Jalan / Mesin]</div>
-            <div class="alert-danger alert-box">🚫 Kalimat setelah <span class="pt">と</span> tidak boleh berisi kehendak, ajakan, atau perintah (seperti <em>〜たい、〜ましょう、〜てください</em>).</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">この ボタン <span class="pt">を</span> おす <span class="pt">と</span>、おつり <span class="pt">が</span> でます。</div>
                 <div class="romaji">Kono botan o osu to, otsuri ga demasu.</div>
-                <div class="id-text">Begitu menekan tombol ini, uang kembalian akan keluar.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">みぎ <span class="pt">へ</span> まがる <span class="pt">と</span>、ゆうびんきょく <span class="pt">が</span> あります。</div>
-                <div class="romaji">Migi e magaru to, yuubinkyoku ga arimasu.</div>
-                <div class="id-text">Kalau belok ke kanan, ada kantor pos.</div>
+                <div class="id-text">Begitu menekan tombol ini, uang kembalian keluar.</div>
               </li>
             </ul>
           </div>
@@ -4066,16 +3872,33 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Lintas / Melewati Tempat ([Tempat] を + KK Gerak)</div>
+            <div class="card-title">3. Lintas / Melewati Tempat ([Tempat] を + KK Gerak)</div>
             <span class="card-badge badge-question">Partikel を Lintasan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Jalan / Jembatan / Taman] + <span class="pt">を</span> + あるきます / わたります / さんぽします</div>
+            <div class="formula-box">[Jalan / Jembatan] + <span class="pt">を</span> + あるきます / わたります</div>
             <ul class="examples-list">
               <li class="example-item">
                 <div class="jp-text">はし <span class="pt">を</span> わたって、まっすぐ いって ください。</div>
                 <div class="romaji">Hashi o watatte, massugu itte kudasai.</div>
-                <div class="id-text">Tolong seberangi jembatan, lalu jalan lurus.</div>
+                <div class="id-text">Seberangi jembatan, lalu jalan lurus.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">4. Perbedaan KK-Kamus とき vs KK-た とき</div>
+            <span class="card-badge badge-positive">Nuansa Waktu</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">KK-Kamus とき (Sebelum selesai) vs KK-た とき (Setelah selesai)</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">でかける とき、かぎ <span class="pt">を</span> かけます。</div>
+                <div class="romaji">Dekakeru toki, kagi o kakemasu.</div>
+                <div class="id-text">Saat mau keluar rumah, mengunci pintu.</div>
               </li>
             </ul>
           </div>
@@ -4083,20 +3906,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 23</h3>
+        <h3>💬 Percakapan Bab 23: どうやって いきますか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">すみません、みどりとしょかん <span class="pt">は</span> どこ ですか。</div>
-              <div class="id">Permisi, Perpustakaan Midori ada di mana?</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">あの しんごう <span class="pt">を</span> ひだり <span class="pt">へ</span> まがる <span class="pt">と</span>、みぎ <span class="pt">に</span> あります。</div>
-              <div class="id">Kalau belok kiri di lampu merah itu, ada di sebelah kanan.</div>
+              <div class="jp">えき <span class="pt">まで</span> どうやって いきますか。— この みち <span class="pt">を</span> まっすぐ いく <span class="pt">と</span>、えき <span class="pt">が</span> あります。</div>
+              <div class="id">Bagaimana cara pergi sampai stasiun? — Kalau jalan lurus lewat jalan ini, ada stasiun.</div>
             </div>
           </div>
         </div>
@@ -4144,27 +3960,21 @@
             </tbody>
           </table>
         </div>
-        <div class="alert-danger alert-box">🚫 Jangan menawarkan bantuan langsung kepada atasan atau orang yang tidak akrab memakai <em>〜てあげますか</em> (terkesan sombong). Gunakan <strong>〜ましょうか</strong> (Bab 14)!</div>
       </div>
 
       <div class="grammar-grid">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">1. Memberi Bantuan ([Orang] に [KK-て] あげます)</div>
+            <div class="card-title">1. Memberi Jasa / Benda ([Orang] に [KK-て] あげます)</div>
             <span class="card-badge badge-positive">Memberi Jasa</span>
           </div>
           <div class="card-body">
             <div class="formula-box">わたし <span class="pt">は</span> [Penerima] + <span class="pt">に</span> + [KK Bentuk て] + あげます</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> むすめ <span class="pt">に</span> ほん <span class="pt">を</span> よんで あげました。</div>
-                <div class="romaji">Watashi wa musume ni hon o yonde agemashita.</div>
-                <div class="id-text">Saya membacakan buku untuk putri saya.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> ヤマダさん <span class="pt">に</span> にもつ <span class="pt">を</span> もって あげました。</div>
-                <div class="romaji">Watashi wa Yamada-san ni nimotsu o motte agemashita.</div>
-                <div class="id-text">Saya membawakan barang untuk Tuan Yamada.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> きむらさん <span class="pt">に</span> ほん <span class="pt">を</span> かして あげました。</div>
+                <div class="romaji">Watashi wa Kimura-san ni hon o kashite agemashita.</div>
+                <div class="id-text">Saya meminjamkan buku kepada Nona Kimura.</div>
               </li>
             </ul>
           </div>
@@ -4172,22 +3982,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Diberi Bantuan ([Orang] が [KK-て] くれます)</div>
+            <div class="card-title">2. Diberi Benda / Jasa ([Orang] が くれます)</div>
             <span class="card-badge badge-special">Menerima Kebaikan</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Pemberi] + <span class="pt">は</span>/<span class="pt">が</span> + (わたし <span class="pt">に</span>) + [KK Bentuk て] + くれます</div>
-            <p class="function-desc">Juga berlaku untuk pemberian benda kepada <em>saya</em>: <em>さとうさんは わたしに チョコレートを くれました</em>.</p>
+            <div class="formula-box">[Pemberi] + <span class="pt">は</span>/<span class="pt">が</span> + (わたし <span class="pt">に</span>) + [Benda / KK-て] + くれます</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">さとうさん <span class="pt">は</span> わたし <span class="pt">に</span> クリスマスカード <span class="pt">を</span> くれました。</div>
-                <div class="romaji">Satou-san wa watashi ni kurisumasukaado o kuremashita.</div>
-                <div class="id-text">Nona Sato memberi saya kartu Natal.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">カリナさん <span class="pt">が</span> わたし <span class="pt">に</span> ちず <span class="pt">を</span> かいて くれました。</div>
-                <div class="romaji">Karina-san ga watashi ni chizu o kaite kuremashita.</div>
-                <div class="id-text">Nona Karina menggambarkan peta untuk saya.</div>
+                <div class="jp-text">さとうさん <span class="pt">は</span> わたし <span class="pt">に</span> チョコレート <span class="pt">を</span> くれました。</div>
+                <div class="romaji">Satou-san wa watashi ni chokoreeto o kuremashita.</div>
+                <div class="id-text">Nona Sato memberi saya cokelat.</div>
               </li>
             </ul>
           </div>
@@ -4200,12 +4004,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">わたし <span class="pt">は</span> [Pemberi] + <span class="pt">に</span> + [KK Bentuk て] + もらいます</div>
-            <p class="function-desc">Fokus kalimat ada pada pihak yang menerima bantuan dan rasa terima kasihnya.</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">わたし <span class="pt">は</span> ヤマダさん <span class="pt">に</span> としょかん <span class="pt">の</span> でんわばんごう <span class="pt">を</span> おしえて もらいました。</div>
-                <div class="romaji">Watashi wa Yamada-san ni toshokan no denwabangou o oshiete moraimashita.</div>
-                <div class="id-text">Saya diberitahu nomor telepon perpustakaan oleh Tuan Yamada.</div>
+                <div class="jp-text">わたし <span class="pt">は</span> やまださん <span class="pt">に</span> レポート <span class="pt">を</span> なおして もらいました。</div>
+                <div class="romaji">Watashi wa Yamada-san ni repooto o naoshite moraimashita.</div>
+                <div class="id-text">Saya dibantu mengoreksi laporan oleh Tuan Yamada.</div>
               </li>
             </ul>
           </div>
@@ -4213,16 +4016,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Penekanan Subjek Pelaku dengan Partikel が</div>
-            <span class="card-badge badge-question">Fokus Pelaku</span>
+            <div class="card-title">4. Kiriman dari Keluarga (おくって くれます)</div>
+            <span class="card-badge badge-question">Kiriman</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">[Siapa yang melakukan] + <span class="pt">が</span> + [Predikat]</div>
+            <div class="formula-box">[Keluarga] + <span class="pt">は</span> + わたし <span class="pt">に</span> + [Benda] + を + おくって くれます</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">だれ <span class="pt">が</span> 料理 (りょうり) <span class="pt">を</span> つくりましたか。— 母 (はは) <span class="pt">が</span> つくりました。</div>
-                <div class="romaji">Dare ga ryouri o tsukurimashita ka. — Haha ga tsukurimashita.</div>
-                <div class="id-text">Siapa yang membuat masakannya? — Ibu saya yang membuatnya.</div>
+                <div class="jp-text">はは <span class="pt">は</span> わたし <span class="pt">に</span> セーター <span class="pt">を</span> おくって くれました。</div>
+                <div class="romaji">Haha wa watashi ni seetaa o okutte kuremashita.</div>
+                <div class="id-text">Ibu mengirimkan sweter untuk saya.</div>
               </li>
             </ul>
           </div>
@@ -4230,20 +4033,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 24</h3>
+        <h3>💬 Percakapan Bab 24: てつだいに いきましょうか</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">すてきな ネクタイ ですね。</div>
-              <div class="id">Dasi yang bagus ya.</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">ありがとうございます。たんじょうび <span class="pt">に</span> ちち <span class="pt">が</span> くれました。</div>
-              <div class="id">Terima kasih. Ayah memberikannya kepada saya saat ulang tahun.</div>
+              <div class="jp">てつだい <span class="pt">に</span> いきましょうか。— ありがとうございます。おねがいします。</div>
+              <div class="id">Mari saya pergi membantu? — Terima kasih. Mohon bantuannya.</div>
             </div>
           </div>
         </div>
@@ -4271,23 +4067,23 @@
             <tbody>
               <tr>
                 <td><strong>Kata Kerja</strong></td>
-                <td>[KK Bentuk た] + <strong>ら</strong> (contoh: かったら / のんだら)</td>
-                <td>[KK Bentuk て] + <strong>も</strong> (contoh: かっても / のんでも)</td>
+                <td>[KK Bentuk た] + <strong>ら</strong> (ふったら)</td>
+                <td>[KK Bentuk て] + <strong>も</strong> (ふっても)</td>
               </tr>
               <tr>
                 <td><strong>Kata Kerja Negatif</strong></td>
-                <td>[KK-ない hapus い] + <strong>かったら</strong> (いか<strong>なかったら</strong>)</td>
-                <td>[KK-ない hapus い] + <strong>くても</strong> (いか<strong>なくても</strong>)</td>
+                <td>[KK-ない hapus い] + <strong>かったら</strong></td>
+                <td>[KK-ない hapus い] + <strong>くても</strong></td>
               </tr>
               <tr>
                 <td><strong>KS-い</strong></td>
-                <td>[hapus い] + <strong>かったら</strong> (たか<strong>かったら</strong>)</td>
-                <td>[hapus い] + <strong>くても</strong> (たか<strong>くても</strong>)</td>
+                <td>[hapus い] + <strong>かったら</strong></td>
+                <td>[hapus い] + <strong>くても</strong></td>
               </tr>
               <tr>
                 <td><strong>KS-な / KB</strong></td>
-                <td>[KS-な / KB] + <strong>だったら</strong> (ひま<strong>だったら</strong> / あめ<strong>だったら</strong>)</td>
-                <td>[KS-な / KB] + <strong>でも</strong> (ひま<strong>でも</strong> / にちようび<strong>でも</strong>)</td>
+                <td>[KS-な / KB] + <strong>だったら</strong></td>
+                <td>[KS-な / KB] + <strong>でも</strong></td>
               </tr>
             </tbody>
           </table>
@@ -4302,17 +4098,11 @@
           </div>
           <div class="card-body">
             <div class="formula-box">[KK-た / KS-かった / KS-な・KB だった] + ら、[Hasil / Tindakan]</div>
-            <p class="function-desc">Berbeda dari <span class="pt">と</span> (Bab 23), klausa utama setelah <strong>〜たら</strong> <em>boleh</em> berisi permintaan, ajakan, atau keinginan!</p>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">おかね <span class="pt">が</span> あったら、りょこう <span class="pt">を</span> します。</div>
-                <div class="romaji">Okane ga attara, ryokou o shimasu.</div>
-                <div class="id-text">Kalau punya uang, saya akan berwisata.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">じかん <span class="pt">が</span> なかったら、テレビ <span class="pt">を</span> みません。</div>
-                <div class="romaji">Jikan ga nakattara, terebi o mimasen.</div>
-                <div class="id-text">Kalau tidak ada waktu, saya tidak menonton TV.</div>
+                <div class="jp-text">あめ <span class="pt">が</span> ふったら、でかけません。</div>
+                <div class="romaji">Ame ga futtara, dekakemasen.</div>
+                <div class="id-text">Kalau turun hujan, tidak keluar rumah.</div>
               </li>
             </ul>
           </div>
@@ -4320,44 +4110,16 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">2. Setelah Terjadi Nanti ([KK Bentuk た] + ら)</div>
-            <span class="card-badge badge-special">Setelah Nanti</span>
-          </div>
-          <div class="card-body">
-            <div class="formula-box">[KK Bentuk た] + ら、[Tindakan berikutnya di masa depan]</div>
-            <p class="function-desc">Menyatakan tindakan yang pasti akan dilakukan setelah suatu kejadian selesai terjadi.</p>
-            <ul class="examples-list">
-              <li class="example-item">
-                <div class="jp-text">えき <span class="pt">に</span> ついたら、でんわ <span class="pt">を</span> ください。</div>
-                <div class="romaji">Eki ni tsuitara, denwa o kudasai.</div>
-                <div class="id-text">Kalau sudah tiba di stasiun nanti, tolong telepon saya.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">10じ <span class="pt">に</span> なったら、でかけましょう。</div>
-                <div class="romaji">Juu-ji ni nattara, dekakemashou.</div>
-                <div class="id-text">Kalau sudah jam 10 nanti, ayo kita berangkat.</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">3. Pertentangan / Konsesif ([Bentuk て] + も)</div>
+            <div class="card-title">2. Pertentangan / Konsesif ([Bentuk て] + も)</div>
             <span class="card-badge badge-negative">Meskipun / Walaupun</span>
           </div>
           <div class="card-body">
             <div class="formula-box">[KK-て / KS-くて / KS-な・KB で] + も、[Hasil berlawanan]</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">あめ <span class="pt">が</span> ふって も、せんたくします。</div>
-                <div class="romaji">Ame ga futte mo, sentaku shimasu.</div>
-                <div class="id-text">Meskipun turun hujan, saya tetap mencuci pakaian.</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">たかくても、かいます。 / にちようび でも、はたらきます。</div>
-                <div class="romaji">Takakute mo, kaimasu. / Nichiyoubi demo, hatarakimasu.</div>
-                <div class="id-text">Walaupun mahal, saya akan membelinya. / Meskipun hari Minggu, saya bekerja.</div>
+                <div class="jp-text">あめ <span class="pt">が</span> ふって も、でかけます。</div>
+                <div class="romaji">Ame ga futte mo, dekakemasu.</div>
+                <div class="id-text">Meskipun turun hujan, tetap keluar rumah.</div>
               </li>
             </ul>
           </div>
@@ -4365,21 +4127,33 @@
 
         <div class="card">
           <div class="card-header">
-            <div class="card-title">4. Penekanan Pengandaian (もし) &amp; Batas (いくら)</div>
+            <div class="card-title">3. Setelah Terjadi Nanti ([KK Bentuk た] + ら)</div>
+            <span class="card-badge badge-special">Setelah Nanti</span>
+          </div>
+          <div class="card-body">
+            <div class="formula-box">[KK Bentuk た] + ら、[Tindakan berikutnya]</div>
+            <ul class="examples-list">
+              <li class="example-item">
+                <div class="jp-text">しごと <span class="pt">が</span> おわったら、のみに いきましょう。</div>
+                <div class="romaji">Shigoto ga owattara, nomi ni ikimashou.</div>
+                <div class="id-text">Kalau pekerjaan sudah selesai nanti, ayo pergi minum.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">4. Penekanan Pengandaian (もし)</div>
             <span class="card-badge badge-question">Penegas</span>
           </div>
           <div class="card-body">
-            <div class="formula-box">もし + 〜たら (Seandainya...) | いくら + 〜ても (Betapapun / Sebanyak apa pun...)</div>
+            <div class="formula-box">もし + 〜たら (Seandainya...)</div>
             <ul class="examples-list">
               <li class="example-item">
-                <div class="jp-text">もし 1おくえん あったら、なに <span class="pt">を</span> したいですか。</div>
-                <div class="romaji">Moshi ichi-oku-en attara, nani o shitai desu ka.</div>
-                <div class="id-text">Seandainya punya 100 juta yen, apa yang ingin Anda lakukan?</div>
-              </li>
-              <li class="example-item">
-                <div class="jp-text">いくら かんがえて も、わかりません。</div>
-                <div class="romaji">Ikura kangaete mo, wakarimasen.</div>
-                <div class="id-text">Betapapun dipikirkan, saya tetap tidak mengerti.</div>
+                <div class="jp-text">もし にほん <span class="pt">へ</span> きたら、れんらくして ください。</div>
+                <div class="romaji">Moshi Nihon e kitara, renraku shite kudasai.</div>
+                <div class="id-text">Seandainya datang ke Jepang, tolong hubungi saya.</div>
               </li>
             </ul>
           </div>
@@ -4387,20 +4161,13 @@
       </div>
 
       <div class="full-card">
-        <h3>💬 Percakapan Bab 25</h3>
+        <h3>💬 Percakapan Bab 25: いろいろ おせわに なりました</h3>
         <div class="kaiwa-dialog">
           <div class="kaiwa-line">
-            <div class="speaker">A:</div>
+            <div class="speaker">A / B:</div>
             <div class="speech-content">
-              <div class="jp">いろいろ おせわ <span class="pt">に</span> なりました。くに <span class="pt">へ</span> かえっても、おげんき で。</div>
-              <div class="id">Terima kasih banyak atas segala bantuannya. Meskipun sudah pulang ke negara asal, tetap jaga kesehatan ya.</div>
-            </div>
-          </div>
-          <div class="kaiwa-line">
-            <div class="speaker">B:</div>
-            <div class="speech-content">
-              <div class="jp">ありがとうございます。もし にほん <span class="pt">へ</span> きたら、ぜひ あそび <span class="pt">に</span> きて ください。</div>
-              <div class="id">Terima kasih. Kalau nanti datang ke Jepang, pastikan mampir bermain ya.</div>
+              <div class="jp">いろいろ おせわ <span class="pt">に</span> なりました。— こちらこそ。おげんき で。</div>
+              <div class="id">Terima kasih atas segala bantuannya. — Sama-sama. Semoga sehat selalu.</div>
             </div>
           </div>
         </div>
@@ -4408,11 +4175,10 @@
 
       <div class="bottom-nav">
         <button class="nav-link-btn" onclick="switchChapterTab(24)">← Bab 24</button>
-        <button class="nav-link-btn" onclick="switchChapterTab(1)">↺ Kembali ke Bab 1</button>
+        <button class="nav-link-btn" onclick="switchChapterTab(0)">↺ Kembali ke Awal</button>
       </div>
     </section>
 
-    <!-- Footer & Kontak Section -->
     <div class="footer-section">
       <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
       <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
@@ -4431,13 +4197,12 @@
       </div>
 
       <div class="copyright">
-        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang (N5 Bab 1–25)
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang (Pendahuluan &amp; N5 Bab 1–25)
       </div>
     </div>
   </div>
 
   <script>
-    // --- 1. SINKRONISASI TEMA ---
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const rootHtml = document.documentElement;
@@ -4472,14 +4237,13 @@
       });
     }
 
-    // --- 2. SWITCH TAB BAB & DROPDOWN ---
     function switchChapterTab(chapterNum) {
       const tabId = 'chapter' + chapterNum + 'Tab';
       const buttons = document.querySelectorAll('#chapterTabBar .tab-btn');
       buttons.forEach(b => b.classList.remove('active'));
-      if (buttons[chapterNum - 1]) {
-        buttons[chapterNum - 1].classList.add('active');
-        buttons[chapterNum - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      if (buttons[chapterNum]) {
+        buttons[chapterNum].classList.add('active');
+        buttons[chapterNum].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
 
       document.querySelectorAll('.chapter-content').forEach(c => c.classList.remove('active'));
@@ -4490,7 +4254,7 @@
       }
 
       const dropdown = document.getElementById('chapterDropdown');
-      if (dropdown && chapterNum <= 25) {
+      if (dropdown && chapterNum >= 0 && chapterNum <= 25) {
         dropdown.value = String(chapterNum);
       }
     }
