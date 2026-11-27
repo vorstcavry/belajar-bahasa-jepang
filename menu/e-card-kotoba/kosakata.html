@@ -315,14 +315,90 @@
       box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
     }
 
-    /* MODE FLIP CARD */
+    /* MODE FLIP CARD & FITUR TAMBAHAN */
     .flashcard-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       max-width: 480px;
       margin: 10px auto;
+    }
+
+    .flip-extra-toggles {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-flip-option {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      color: var(--subtext);
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .btn-flip-option:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .btn-flip-option.active-kanji {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-flip-option.active-noreading {
+      background: rgba(167, 139, 250, 0.16);
+      color: var(--purple);
+      border-color: var(--purple);
+    }
+
+    .flip-top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      min-height: 24px;
+    }
+
+    .flip-active-badges {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .flip-mode-pill {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--tag-bab-bg);
+      color: var(--subtext);
+      border: 1px solid var(--border);
+    }
+
+    .flip-mode-pill.pill-kanji {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .flip-mode-pill.pill-noreading {
+      color: var(--purple);
+      border-color: var(--purple);
     }
 
     .flip-scene {
@@ -422,6 +498,16 @@
       margin-top: 6px;
       letter-spacing: 0.5px;
       opacity: 0.95;
+    }
+
+    .flip-hidden-reading-note {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-top: 8px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(167, 139, 250, 0.12);
     }
 
     .flip-reading-box {
@@ -724,6 +810,13 @@
         text-align: center;
         padding: 5px 6px;
       }
+      .flip-extra-toggles {
+        gap: 6px;
+      }
+      .btn-flip-option {
+        font-size: 0.72rem;
+        padding: 7px 6px;
+      }
       .flip-scene {
         height: 250px;
       }
@@ -776,7 +869,19 @@
     </div>
 
     <div id="flipModeView" class="flashcard-wrapper">
-      <div class="card-counter" id="flipCounterText">Kartu 1 dari 1</div>
+      <div class="flip-extra-toggles">
+        <button type="button" class="btn-flip-option" id="btnToggleKanjiMode" onclick="toggleKanjiMode()">
+          🈳 Mode Kanji: OFF
+        </button>
+        <button type="button" class="btn-flip-option" id="btnToggleNoReadingMode" onclick="toggleNoReadingMode()">
+          🙈 Tanpa Cara Baca: OFF
+        </button>
+      </div>
+
+      <div class="flip-top-bar">
+        <div class="card-counter" id="flipCounterText">Kartu 1 dari 1</div>
+        <div class="flip-active-badges" id="flipActiveBadges"></div>
+      </div>
       
       <div class="flip-scene" onclick="toggleCardFlip()">
         <div class="flip-card-inner" id="flipCardInner">
@@ -788,6 +893,7 @@
             <div class="flip-center-content">
               <div class="flip-jp-text" id="flipFrontJp">日本語</div>
               <div class="flip-sub-reading" id="flipFrontSubReading"></div>
+              <div class="flip-hidden-reading-note" id="flipHiddenReadingNote" style="display: none;">Cara baca disembunyikan</div>
             </div>
             <div class="flip-hint">👆 Ketuk untuk lihat arti</div>
           </div>
@@ -1077,7 +1183,7 @@
       { b: 5, jp: "先月", r: "せんげつ", romaji: "sengetsu", id: "Bulan Lalu", icon: "📆" },
       { b: 5, jp: "先週", r: "せんしゅう", romaji: "senshuu", id: "Minggu Lalu", icon: "📅" },
       { b: 5, jp: "先輩", r: "せんぱい", romaji: "senpai", id: "Senior", icon: "👨‍🎓" },
-      { b: 5, jp: "電車", r: " railway", romaji: "densha", id: "Kereta Listrik", icon: "🚆" },
+      { b: 5, jp: "電車", r: "でんしゃ", romaji: "densha", id: "Kereta Listrik", icon: "🚆" },
       { b: 5, jp: "本屋", r: "ほんや", romaji: "honya", id: "Toko Buku", icon: "📚" },
       { b: 5, jp: "友達", r: "ともだち", romaji: "tomodachi", id: "Teman", icon: "🧑‍🤝‍🧑" },
       { b: 5, jp: "来月", r: "らいげつ", romaji: "raigetsu", id: "Bulan Depan", icon: "📅" },
@@ -1658,7 +1764,7 @@
       { b: 19, jp: "退院します", r: "たいいんします", romaji: "taiin shimasu", id: "Keluar Dari Rumah Sakit", icon: "🏥" },
       { b: 19, jp: "入院します", r: "にゅういんします", romaji: "nyuuin shimasu", id: "Masuk Rumah Sakit", icon: "🏥" },
       { b: 19, jp: "落とします", r: "おとします", romaji: "otoshimasu", id: "Menjatuhkan", icon: "⬇️" },
-      { b: 19, jp: "喉が渇きます", r: "のどがかわきます", romaji: "nodo ga族kimasu", id: "Haus", icon: "🥤" },
+      { b: 19, jp: "喉が渇きます", r: "のどがかわきます", romaji: "nodo ga kawakimasu", id: "Haus", icon: "🥤" },
 
       // ================= BAB 20 =================
       { b: 20, jp: "てつくず", r: "てつくず", romaji: "tetsukuzu", id: "Sampah Serbuk Besi", icon: "🔩" },
@@ -2160,9 +2266,18 @@
     let filteredList = [...rawVocabData];
     let currentFlashIndex = 0;
     let currentViewMode = 'flip';
+    let isKanjiOnlyMode = false;
+    let isNoReadingMode = false;
+
+    const kanjiRegex = /[\u3400-\u9faf\uf900-\ufaff]/;
+
+    function hasKanji(text) {
+      return kanjiRegex.test(text || '');
+    }
 
     function initApp() {
       renderChapterButtons();
+      updateFlipToggleButtons();
       applyFilter();
     }
 
@@ -2197,17 +2312,52 @@
       document.getElementById('listModeView').style.display = (mode === 'list') ? 'grid' : 'none';
     }
 
+    function toggleKanjiMode() {
+      isKanjiOnlyMode = !isKanjiOnlyMode;
+      updateFlipToggleButtons();
+      applyFilter();
+    }
+
+    function toggleNoReadingMode() {
+      isNoReadingMode = !isNoReadingMode;
+      updateFlipToggleButtons();
+      updateFlashcardDisplay();
+    }
+
+    function updateFlipToggleButtons() {
+      const btnKanji = document.getElementById('btnToggleKanjiMode');
+      const btnNoReading = document.getElementById('btnToggleNoReadingMode');
+      const badgesContainer = document.getElementById('flipActiveBadges');
+
+      btnKanji.innerText = `🈳 Mode Kanji: ${isKanjiOnlyMode ? 'ON' : 'OFF'}`;
+      btnKanji.classList.toggle('active-kanji', isKanjiOnlyMode);
+
+      btnNoReading.innerText = `🙈 Tanpa Cara Baca: ${isNoReadingMode ? 'ON' : 'OFF'}`;
+      btnNoReading.classList.toggle('active-noreading', isNoReadingMode);
+
+      const pills = [];
+      if (isKanjiOnlyMode) {
+        pills.push('<span class="flip-mode-pill pill-kanji">🈳 Kanji Saja</span>');
+      }
+      if (isNoReadingMode) {
+        pills.push('<span class="flip-mode-pill pill-noreading">🙈 Tanpa Cara Baca</span>');
+      }
+      badgesContainer.innerHTML = pills.join('');
+    }
+
     function applyFilter() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
-      
+      const filterByKanji = (currentViewMode === 'flip') && isKanjiOnlyMode;
+
       filteredList = rawVocabData.filter(item => {
         const matchChap = (currentChapter === 0) || (item.b === currentChapter);
+        const matchKanji = !filterByKanji || hasKanji(item.jp);
         const matchQuery = !query || 
                            item.jp.toLowerCase().includes(query) || 
                            item.r.toLowerCase().includes(query) || 
                            item.romaji.toLowerCase().includes(query) || 
                            item.id.toLowerCase().includes(query);
-        return matchChap && matchQuery;
+        return matchChap && matchKanji && matchQuery;
       });
 
       currentFlashIndex = 0;
@@ -2227,15 +2377,19 @@
 
       const frontJp = document.getElementById('flipFrontJp');
       const frontSubReading = document.getElementById('flipFrontSubReading');
+      const hiddenNote = document.getElementById('flipHiddenReadingNote');
 
       if (filteredList.length === 0) {
-        frontJp.innerText = "Tidak Ditemukan";
+        frontJp.innerText = isKanjiOnlyMode ? "Tidak Ada Kanji" : "Tidak Ditemukan";
         frontSubReading.innerText = "";
         frontSubReading.style.display = 'none';
+        hiddenNote.style.display = 'none';
         document.getElementById('flipFrontBab').innerText = "-";
         document.getElementById('flipBackReading').innerText = "-";
         document.getElementById('flipBackRomaji').innerText = "";
-        document.getElementById('flipBackId').innerText = "Coba kata kunci lain";
+        document.getElementById('flipBackId').innerText = isKanjiOnlyMode
+          ? "Coba bab lain atau matikan Mode Kanji"
+          : "Coba kata kunci lain";
         document.getElementById('flipBackBab').innerText = "-";
         document.getElementById('flipCounterText').innerText = "0 dari 0 Kartu";
         return;
@@ -2247,15 +2401,22 @@
       frontJp.innerText = item.jp;
       document.getElementById('flipFrontBab').innerText = `Bab ${item.b}`;
 
-      // 2. Deteksi apakah kosakata mengandung huruf Kanji (\u4e00-\u9faf)
-      const containsKanji = /[\u4e00-\u9faf]/.test(item.jp);
+      // 2. Deteksi Kanji & Mode Tanpa Cara Baca
+      const containsKanji = hasKanji(item.jp);
 
-      if (containsKanji && item.r) {
-        frontSubReading.innerText = item.r;
-        frontSubReading.style.display = 'block';
-      } else {
+      if (isNoReadingMode) {
         frontSubReading.innerText = '';
         frontSubReading.style.display = 'none';
+        hiddenNote.style.display = containsKanji ? 'inline-block' : 'none';
+      } else {
+        hiddenNote.style.display = 'none';
+        if (containsKanji && item.r) {
+          frontSubReading.innerText = item.r;
+          frontSubReading.style.display = 'block';
+        } else {
+          frontSubReading.innerText = '';
+          frontSubReading.style.display = 'none';
+        }
       }
 
       // 3. Data Sisi Belakang Kartu
