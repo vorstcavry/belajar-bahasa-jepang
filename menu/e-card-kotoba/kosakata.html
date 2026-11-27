@@ -1361,22 +1361,39 @@
     // =========================================================================
     // 2. STATE APLIKASI & PENYIMPANAN LOKAL
     // =========================================================================
+    function getInitialDarkMode() {
+      try {
+        // Cek standar umum key tema di localStorage ('theme' atau 'jp_vocab_dark_mode')
+        const globalTheme = localStorage.getItem('theme');
+        if (globalTheme === 'dark') return true;
+        if (globalTheme === 'light') return false;
+
+        const savedDark = localStorage.getItem('jp_vocab_dark_mode');
+        if (savedDark !== null) return JSON.parse(savedDark);
+
+        // Cek apakah halaman/parent sudah memiliki class 'dark'
+        if (document.documentElement.classList.contains('dark')) return true;
+      } catch (e) {
+        console.error('Gagal membaca preferensi tema:', e);
+      }
+      // Fallback mengikuti tema sistem perangkat / browser pengguna
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
     const state = {
       activeTab: 'flip', // 'flip' | 'dictionary' | 'quiz'
-      darkMode: JSON.parse(localStorage.getItem('jp_vocab_dark_mode') || 'false'),
+      darkMode: getInitialDarkMode(),
       showKanji: true,
       hideReading: false,
       hideEmoji: JSON.parse(localStorage.getItem('jp_vocab_hide_emoji') || 'false'),
       selectedBab: 'ALL',
-      filterStatus: 'ALL',
+      flipSelectedBabs: [], // Array nomor bab khusus mode flip (kosong = semua bab)
+      filterStatus: 'ALL', // 'ALL' | 'MASTERED' | 'UNMASTERED'
       searchQuery: '',
       masteredIds: JSON.parse(localStorage.getItem('jp_vocab_mastered') || '[]'),
-      // Flashcard state
       currentIndex: 0,
       isFlipped: false,
       shuffledOrder: null,
-      flipSelectedBabs: [], // Array nomor bab yang dipilih khusus untuk Mode Flip (kosong = semua bab)
-      // Quiz state
       quizQuestions: [],
       quizIndex: 0,
       quizScore: 0,
@@ -1384,9 +1401,6 @@
       quizFinished: false
     };
 
-    // =========================================================================
-    // 3. FUNGSI PEMBANTU & PENYIMPANAN
-    // =========================================================================
     function saveMastered() {
       try {
         localStorage.setItem('jp_vocab_mastered', JSON.stringify(state.masteredIds));
@@ -1398,6 +1412,8 @@
     function savePreferences() {
       try {
         localStorage.setItem('jp_vocab_dark_mode', JSON.stringify(state.darkMode));
+        // Sinkronkan juga ke key standar 'theme' agar halaman lain dalam satu domain ikut berubah
+        localStorage.setItem('theme', state.darkMode ? 'dark' : 'light');
         localStorage.setItem('jp_vocab_hide_emoji', JSON.stringify(state.hideEmoji));
       } catch (e) {
         console.error('Gagal menyimpan preferensi:', e);
@@ -1417,8 +1433,9 @@
 
     function toggleMastered(id, e) {
       if (e) e.stopPropagation();
-      if (state.masteredIds.includes(id)) {
-        state.masteredIds = state.masteredIds.filter(item => item !== id);
+      const idx = state.masteredIds.indexOf(id);
+      if (idx > -1) {
+        state.masteredIds.splice(idx, 1);
       } else {
         state.masteredIds.push(id);
       }
@@ -1426,51 +1443,62 @@
       renderAll();
     }
 
-    function getFilteredVocab() {
-      const q = state.searchQuery.trim().toLowerCase();
-      return VOCAB_DATA.filter(item => {
-        const matchBab = state.selectedBab === 'ALL' || item.bab === Number(state.selectedBab);
+    // =========================================================================
+    // 3. FILTER & PENGOLAHAN DATA
+    // =========================================================================
+    function getFilteredVocab(mode = state.activeTab) {
+      return VOCAB_DATA.filter((item) => {
+        let matchBab = true;
+        if (mode === 'flip') {
+          if (state.flipSelectedBabs.length > 0) {
+            matchBab = state.flipSelectedBabs.includes(item.bab);
+          } else {
+            matchBab = state.selectedBab === 'ALL' || item.bab === Number(state.selectedBab);
+          }
+        } else {
+          matchBab = state.selectedBab === 'ALL' || item.bab === Number(state.selectedBab);
+        }
+
         const isMastered = state.masteredIds.includes(item.id);
         const matchStatus =
           state.filterStatus === 'ALL' ||
           (state.filterStatus === 'MASTERED' && isMastered) ||
           (state.filterStatus === 'UNMASTERED' && !isMastered);
+
+        const q = state.searchQuery.trim().toLowerCase();
         const matchQuery =
           !q ||
           item.jp.toLowerCase().includes(q) ||
           item.r.toLowerCase().includes(q) ||
           item.romaji.toLowerCase().includes(q) ||
           item.arti.toLowerCase().includes(q);
+
         return matchBab && matchStatus && matchQuery;
       });
     }
 
     function getDeckCards() {
-      let filtered = getFilteredVocab();
-      // Terapkan filter khusus multi-bab di Mode Flip jika ada bab yang dipilih
-      if (state.flipSelectedBabs.length > 0) {
-        filtered = filtered.filter(item => state.flipSelectedBabs.includes(item.bab));
-      }
+      const filtered = getFilteredVocab('flip');
       if (!state.shuffledOrder) return filtered;
-      const mapById = new Map(filtered.map(item => [item.id, item]));
-      const ordered = state.shuffledOrder.map(id => mapById.get(id)).filter(Boolean);
-      const existingIds = new Set(ordered.map(i => i.id));
-      const remaining = filtered.filter(i => !existingIds.has(i.id));
+      const mapById = new Map(filtered.map((item) => [item.id, item]));
+      const ordered = state.shuffledOrder.map((id) => mapById.get(id)).filter(Boolean);
+      const existingIds = new Set(ordered.map((i) => i.id));
+      const remaining = filtered.filter((i) => !existingIds.has(i.id));
       return [...ordered, ...remaining];
     }
 
     // =========================================================================
-    // 4. LOGIKA KUIS PILIHAN GANDA
+    // 4. LOGIKA KUIS
     // =========================================================================
     function generateQuiz() {
-      const filtered = getFilteredVocab();
+      const filtered = getFilteredVocab('quiz');
       const sourcePool = filtered.length >= 4 ? filtered : VOCAB_DATA;
       const shuffledPool = [...sourcePool].sort(() => Math.random() - 0.5);
       const totalQuestions = Math.min(10, shuffledPool.length);
       const selectedItems = shuffledPool.slice(0, totalQuestions);
 
-      state.quizQuestions = selectedItems.map(target => {
-        const distractors = VOCAB_DATA.filter(v => v.id !== target.id)
+      state.quizQuestions = selectedItems.map((target) => {
+        const distractors = VOCAB_DATA.filter((v) => v.id !== target.id)
           .sort(() => Math.random() - 0.5)
           .slice(0, 3);
         const options = [target, ...distractors].sort(() => Math.random() - 0.5);
@@ -1481,150 +1509,146 @@
       state.quizScore = 0;
       state.selectedOption = null;
       state.quizFinished = false;
-      renderQuizView();
-    }
-
-    function handleAnswerQuiz(optionId) {
-      if (state.selectedOption !== null) return;
-      state.selectedOption = optionId;
-      const currentQ = state.quizQuestions[state.quizIndex];
-      if (optionId === currentQ.question.id) {
-        state.quizScore += 1;
-        speakJapanese(currentQ.question.r);
-      }
-      renderQuizView();
+      renderQuiz();
     }
 
     // =========================================================================
     // 5. FUNGSI RENDER UI
     // =========================================================================
-    function applyTheme() {
+    function renderHeaderAndControls() {
+      // Tema Gelap / Terang
       const htmlEl = document.documentElement;
+      const themeIcon = document.getElementById('icon-theme');
       if (state.darkMode) {
         htmlEl.classList.add('dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
       } else {
         htmlEl.classList.remove('dark');
+        themeIcon.setAttribute('data-lucide', 'moon');
       }
-      const iconTheme = document.getElementById('icon-theme');
-      if (iconTheme) {
-        iconTheme.setAttribute('data-lucide', state.darkMode ? 'sun' : 'moon');
-      }
-    }
 
-    function updateHeaderAndControls() {
+      // Subtitle & Progres Hafalan
       const totalCount = VOCAB_DATA.length;
       const masteredCount = state.masteredIds.length;
       const pct = Math.round((masteredCount / totalCount) * 100);
-
       document.getElementById('header-subtitle').textContent = `Kosakata Lengkap Bab 1 – 35 (${totalCount} Kata)`;
       document.getElementById('mastered-badge').textContent = `Hafal: ${masteredCount}/${totalCount} (${pct}%)`;
 
-      // Update style tab aktif
-      const tabs = ['flip', 'dictionary', 'quiz'];
-      tabs.forEach(tab => {
+      // Tab Aktif
+      ['flip', 'dictionary', 'quiz'].forEach((tab) => {
         const btn = document.getElementById(`tab-${tab}`);
         if (state.activeTab === tab) {
           btn.className = 'tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-sm';
         } else {
           btn.className = 'tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-800';
         }
+        const view = document.getElementById(`view-${tab}`);
+        if (state.activeTab === tab) {
+          view.classList.remove('hidden');
+        } else {
+          view.classList.add('hidden');
+        }
       });
 
-      // Tampilkan view yang sesuai
-      document.getElementById('view-flip').classList.toggle('hidden', state.activeTab !== 'flip');
-      document.getElementById('view-dictionary').classList.toggle('hidden', state.activeTab !== 'dictionary');
-      document.getElementById('view-quiz').classList.toggle('hidden', state.activeTab !== 'quiz');
-      document.getElementById('flip-order-controls').classList.toggle('hidden', state.activeTab !== 'flip');
-
-      // Update tombol Kanji
+      // Toggle Kanji
       const btnKanji = document.getElementById('btn-toggle-kanji');
-      document.getElementById('label-kanji').textContent = state.showKanji ? 'Kanji: Aktif' : 'Hiragana Saja';
-      btnKanji.className = state.showKanji
-        ? 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400'
-        : 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+      const labelKanji = document.getElementById('label-kanji');
+      if (state.showKanji) {
+        btnKanji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400';
+        labelKanji.textContent = 'Kanji: Aktif';
+      } else {
+        btnKanji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+        labelKanji.textContent = 'Hiragana Saja';
+      }
 
-      // Update tombol Tanpa Cara Baca
+      // Toggle Tanpa Cara Baca
       const btnReading = document.getElementById('btn-toggle-reading');
       const iconReading = document.getElementById('icon-reading');
-      iconReading.setAttribute('data-lucide', state.hideReading ? 'eye-off' : 'eye');
-      btnReading.className = state.hideReading
-        ? 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
-        : 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+      if (state.hideReading) {
+        btnReading.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400';
+        iconReading.setAttribute('data-lucide', 'eye-off');
+      } else {
+        btnReading.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+        iconReading.setAttribute('data-lucide', 'eye');
+      }
 
-      // Update tombol Tanpa Emoji
+      // Toggle Tanpa Emoji
       const btnEmoji = document.getElementById('btn-toggle-emoji');
-      document.getElementById('label-emoji').textContent = state.hideEmoji ? 'Tanpa Emoji: ON' : 'Tanpa Emoji';
-      btnEmoji.className = state.hideEmoji
-        ? 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400'
-        : 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+      const labelEmoji = document.getElementById('label-emoji');
+      if (state.hideEmoji) {
+        btnEmoji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400';
+        labelEmoji.textContent = 'Tanpa Emoji: ON';
+      } else {
+        btnEmoji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+        labelEmoji.textContent = 'Tanpa Emoji';
+      }
 
-      // Update tombol Acak & Urutkan
+      // Kontrol Urutan Kartu (Khusus Mode Flip)
+      const orderControls = document.getElementById('flip-order-controls');
       const btnShuffle = document.getElementById('btn-shuffle');
       const btnResetOrder = document.getElementById('btn-reset-order');
-      if (state.shuffledOrder) {
-        btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-violet-500/15 border-violet-500/40 text-violet-600 dark:text-violet-400';
-        btnResetOrder.classList.remove('hidden');
+      if (state.activeTab === 'flip') {
+        orderControls.classList.remove('hidden');
+        if (state.shuffledOrder) {
+          btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-violet-500/15 border-violet-500/40 text-violet-600 dark:text-violet-400';
+          btnResetOrder.classList.remove('hidden');
+        } else {
+          btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
+          btnResetOrder.classList.add('hidden');
+        }
       } else {
-        btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
-        btnResetOrder.classList.add('hidden');
+        orderControls.classList.add('hidden');
       }
     }
 
-    function renderFlipBabSelector() {
+    function renderFlipBabChips() {
       const container = document.getElementById('flip-bab-chips');
       const label = document.getElementById('flip-bab-selector-label');
       const btnClear = document.getElementById('btn-flip-clear-babs');
-      const babs = [...new Set(VOCAB_DATA.map(item => item.bab))].sort((a, b) => a - b);
+      const babs = [...new Set(VOCAB_DATA.map((v) => v.bab))].sort((a, b) => a - b);
 
       if (state.flipSelectedBabs.length === 0) {
-        label.textContent = 'Pilih Bab untuk Mode Flip (Semua Bab)';
+        label.textContent = state.selectedBab === 'ALL'
+          ? 'Pilih Bab untuk Mode Flip (Semua Bab)'
+          : `Pilih Bab untuk Mode Flip (Bab ${state.selectedBab})`;
         btnClear.classList.add('hidden');
       } else {
         const sorted = [...state.flipSelectedBabs].sort((a, b) => a - b);
-        label.textContent = `Bab Terpilih: Bab ${sorted.join(', ')}`;
+        label.textContent = `Bab Terpilih (${sorted.length}): Bab ${sorted.join(', ')}`;
         btnClear.classList.remove('hidden');
       }
 
-      container.innerHTML = babs.map(bab => {
-        const isSelected = state.flipSelectedBabs.includes(bab);
-        const btnClass = isSelected
-          ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-          : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-indigo-300 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:border-indigo-500/50';
-        return `
-          <button
-            type="button"
-            onclick="toggleFlipBab(${bab})"
-            class="px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${btnClass}"
-          >
-            Bab ${bab}
-          </button>
-        `;
-      }).join('');
+      container.innerHTML = '';
+      babs.forEach((bab) => {
+        const isActive = state.flipSelectedBabs.includes(bab);
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.textContent = `Bab ${bab}`;
+        chip.className = isActive
+          ? 'px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-600 text-white shadow-sm transition-all'
+          : 'px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-all';
+        chip.addEventListener('click', () => {
+          const idx = state.flipSelectedBabs.indexOf(bab);
+          if (idx > -1) {
+            state.flipSelectedBabs.splice(idx, 1);
+          } else {
+            state.flipSelectedBabs.push(bab);
+          }
+          state.currentIndex = 0;
+          state.isFlipped = false;
+          renderAll();
+        });
+        container.appendChild(chip);
+      });
     }
 
-    function toggleFlipBab(bab) {
-      if (state.flipSelectedBabs.includes(bab)) {
-        state.flipSelectedBabs = state.flipSelectedBabs.filter(b => b !== bab);
-      } else {
-        state.flipSelectedBabs.push(bab);
-      }
-      // Sinkronkan filter bab atas ke ALL agar multi-bab di Mode Flip bekerja leluasa
-      if (state.selectedBab !== 'ALL') {
-        state.selectedBab = 'ALL';
-        document.getElementById('bab-select').value = 'ALL';
-      }
-      state.currentIndex = 0;
-      state.isFlipped = false;
-      renderAll();
-    }
-
-    function renderFlipView() {
-      renderFlipBabSelector();
-      const cards = getDeckCards();
+    function renderFlipCard() {
+      renderFlipBabChips();
+      const deck = getDeckCards();
       const emptyBox = document.getElementById('flip-empty');
       const contentBox = document.getElementById('flip-content');
 
-      if (cards.length === 0) {
+      if (deck.length === 0) {
         emptyBox.classList.remove('hidden');
         contentBox.classList.add('hidden');
         return;
@@ -1633,17 +1657,15 @@
       emptyBox.classList.add('hidden');
       contentBox.classList.remove('hidden');
 
-      if (state.currentIndex >= cards.length) {
-        state.currentIndex = 0;
-      }
-
-      const card = cards[state.currentIndex];
+      if (state.currentIndex >= deck.length) state.currentIndex = 0;
+      const card = deck[state.currentIndex];
       const isMastered = state.masteredIds.includes(card.id);
 
-      document.getElementById('flip-counter').textContent = `Kartu ${state.currentIndex + 1} dari ${cards.length}`;
+      document.getElementById('flip-counter').textContent = `Kartu ${state.currentIndex + 1} dari ${deck.length}`;
       document.getElementById('flip-bab-badge').textContent = `Bab ${card.bab}`;
+      document.getElementById('card-back-bab').textContent = `Bab ${card.bab}`;
 
-      // Animasi rotasi kartu
+      // Animasi Flip
       const inner = document.getElementById('flashcard-inner');
       if (state.isFlipped) {
         inner.classList.add('rotate-y-180');
@@ -1651,11 +1673,10 @@
         inner.classList.remove('rotate-y-180');
       }
 
-      // Tombol Tandai Hafal pada kartu
+      // Status Hafal
       const btnMastered = document.getElementById('btn-card-mastered');
       const iconMastered = document.getElementById('icon-card-mastered');
       const labelMastered = document.getElementById('label-card-mastered');
-
       if (isMastered) {
         btnMastered.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-emerald-500/15 text-emerald-600 dark:text-emerald-400';
         iconMastered.setAttribute('data-lucide', 'check-circle-2');
@@ -1666,110 +1687,127 @@
         labelMastered.textContent = 'Tandai Hafal';
       }
 
-      // Sisi Depan
+      // Emoji
       const frontEmoji = document.getElementById('card-front-emoji');
-      frontEmoji.textContent = card.icon;
-      frontEmoji.classList.toggle('hidden', state.hideEmoji);
-
-      document.getElementById('card-front-main').textContent = state.showKanji ? card.jp : card.r;
-
-      const readingBox = document.getElementById('card-front-reading-box');
-      readingBox.classList.toggle('hidden', state.hideReading);
-
-      const frontKana = document.getElementById('card-front-kana');
-      if (state.showKanji && card.jp !== card.r) {
-        frontKana.textContent = card.r;
-        frontKana.classList.remove('hidden');
+      const backEmoji = document.getElementById('card-back-emoji');
+      if (state.hideEmoji) {
+        frontEmoji.classList.add('hidden');
+        backEmoji.classList.add('hidden');
       } else {
-        frontKana.classList.add('hidden');
+        frontEmoji.classList.remove('hidden');
+        backEmoji.classList.remove('hidden');
+        frontEmoji.textContent = card.icon;
+        backEmoji.textContent = card.icon;
       }
-      document.getElementById('card-front-romaji').textContent = card.romaji;
+
+      // Teks Jepang & Cara Baca (Depan)
+      document.getElementById('card-front-main').textContent = state.showKanji ? card.jp : card.r;
+      const readingBox = document.getElementById('card-front-reading-box');
+      const kanaEl = document.getElementById('card-front-kana');
+      const romajiEl = document.getElementById('card-front-romaji');
+
+      if (state.hideReading) {
+        readingBox.classList.add('hidden');
+      } else {
+        readingBox.classList.remove('hidden');
+        if (state.showKanji && card.jp !== card.r) {
+          kanaEl.classList.remove('hidden');
+          kanaEl.textContent = card.r;
+        } else {
+          kanaEl.classList.add('hidden');
+        }
+        romajiEl.textContent = card.romaji;
+      }
 
       // Sisi Belakang
-      document.getElementById('card-back-bab').textContent = `Bab ${card.bab}`;
-      const backEmoji = document.getElementById('card-back-emoji');
-      backEmoji.textContent = card.icon;
-      backEmoji.classList.toggle('hidden', state.hideEmoji);
-
       document.getElementById('card-back-arti').textContent = card.arti;
       document.getElementById('card-back-jp').textContent = card.jp;
       document.getElementById('card-back-sub').textContent = `${card.r} • ${card.romaji}`;
     }
 
-    function renderDictionaryView() {
-      const filtered = getFilteredVocab();
-      const countLabel = document.getElementById('dict-count-label');
+    function renderDictionary() {
+      const list = getFilteredVocab('dictionary');
+      document.getElementById('dict-count-label').textContent = `Menampilkan ${list.length} kosakata`;
+
       const emptyBox = document.getElementById('dict-empty');
       const grid = document.getElementById('dict-grid');
 
-      countLabel.textContent = `Menampilkan ${filtered.length} kosakata`;
-
-      if (filtered.length === 0) {
+      if (list.length === 0) {
         emptyBox.classList.remove('hidden');
         grid.innerHTML = '';
         return;
       }
 
       emptyBox.classList.add('hidden');
-      grid.innerHTML = filtered.map(item => {
-        const isMastered = state.masteredIds.includes(item.id);
-        const cardClass = isMastered
-          ? 'bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/60'
-          : 'bg-white border-slate-200 hover:border-indigo-200 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700';
+      grid.innerHTML = list
+        .map((item) => {
+          const isMastered = state.masteredIds.includes(item.id);
+          const cardClass = isMastered
+            ? 'bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/60'
+            : 'bg-white border-slate-200 hover:border-indigo-200 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700';
 
-        const emojiHtml = state.hideEmoji
-          ? ''
-          : `<span class="text-2xl select-none bg-slate-100 dark:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">${item.icon}</span>`;
+          const emojiHtml = state.hideEmoji
+            ? ''
+            : `<span class="text-2xl select-none bg-slate-100 dark:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">${item.icon}</span>`;
 
-        const readingHtml = state.hideReading
-          ? ''
-          : `<p class="text-xs mb-1.5 text-slate-500 dark:text-slate-400">${state.showKanji && item.jp !== item.r ? `${item.r} • ` : ''}<span class="font-mono">${item.romaji}</span></p>`;
+          const readingHtml = state.hideReading
+            ? ''
+            : `<p class="text-xs mb-1.5 text-slate-500 dark:text-slate-400">
+                 ${state.showKanji && item.jp !== item.r ? `${item.r} • ` : ''}<span class="font-mono">${item.romaji}</span>
+               </p>`;
 
-        const masteredBtnClass = isMastered
-          ? 'text-emerald-500 bg-emerald-500/15'
-          : 'text-slate-400 hover:bg-slate-100 dark:text-slate-500 dark:hover:bg-slate-800';
+          const masteredBtnClass = isMastered
+            ? 'text-emerald-500 bg-emerald-500/15'
+            : 'text-slate-400 hover:bg-slate-100 dark:text-slate-500 dark:hover:bg-slate-800';
 
-        return `
-          <div class="p-4 rounded-2xl border transition-all flex flex-col justify-between ${cardClass}">
-            <div class="flex items-start justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                ${emojiHtml}
-                <div>
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Bab ${item.bab}</span>
-                  <h3 class="text-xl font-extrabold leading-snug font-jp">${state.showKanji ? item.jp : item.r}</h3>
+          const masteredIcon = isMastered ? 'check-circle-2' : 'circle';
+
+          return `
+            <div class="p-4 rounded-2xl border transition-all flex flex-col justify-between ${cardClass}">
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <div class="flex items-center gap-2.5">
+                  ${emojiHtml}
+                  <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Bab ${item.bab}</span>
+                    <h3 class="text-xl font-extrabold leading-snug font-jp">${state.showKanji ? item.jp : item.r}</h3>
+                  </div>
+                </div>
+                <div class="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onclick="speakJapanese('${item.r.replace(/'/g, "\\'")}', event)"
+                    class="p-2 rounded-xl transition-colors bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-slate-800 dark:text-indigo-400 dark:hover:bg-slate-700"
+                    title="Dengar Pengucapan"
+                  >
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="toggleMastered(${item.id}, event)"
+                    class="p-2 rounded-xl transition-colors ${masteredBtnClass}"
+                    title="${isMastered ? 'Sudah Hafal' : 'Tandai Hafal'}"
+                  >
+                    <i data-lucide="${masteredIcon}" class="w-4 h-4"></i>
+                  </button>
                 </div>
               </div>
-              <div class="flex items-center gap-1">
-                <button
-                  type="button"
-                  onclick="speakJapanese('${item.r.replace(/'/g, "\\'")}', event)"
-                  class="p-2 rounded-xl transition-colors bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-slate-800 dark:text-indigo-400 dark:hover:bg-slate-700"
-                  title="Dengar Pengucapan"
-                >
-                  <i data-lucide="volume-2" class="w-4 h-4"></i>
-                </button>
-                <button
-                  type="button"
-                  onclick="toggleMastered(${item.id}, event)"
-                  class="p-2 rounded-xl transition-colors ${masteredBtnClass}"
-                  title="${isMastered ? 'Sudah Hafal' : 'Tandai Hafal'}"
-                >
-                  <i data-lucide="${isMastered ? 'check-circle-2' : 'circle'}" class="w-4 h-4"></i>
-                </button>
+              <div>
+                ${readingHtml}
+                <p class="text-sm font-bold text-slate-800 dark:text-slate-100 pt-2 border-t border-slate-200/60 dark:border-slate-800">
+                  ${item.arti}
+                </p>
               </div>
             </div>
-            <div>
-              ${readingHtml}
-              <p class="text-sm font-bold text-slate-800 dark:text-slate-100 pt-2 border-t border-slate-200/60 dark:border-slate-800">${item.arti}</p>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        })
+        .join('');
     }
 
-    function renderQuizView() {
+    function renderQuiz() {
       const resultBox = document.getElementById('quiz-result-box');
       const activeBox = document.getElementById('quiz-active-box');
+
+      if (state.quizQuestions.length === 0) return;
 
       if (state.quizFinished) {
         resultBox.classList.remove('hidden');
@@ -1781,35 +1819,44 @@
       resultBox.classList.add('hidden');
       activeBox.classList.remove('hidden');
 
-      const currentQuiz = state.quizQuestions[state.quizIndex];
-      if (!currentQuiz) return;
-
+      const currentQ = state.quizQuestions[state.quizIndex];
       document.getElementById('quiz-progress-badge').textContent = `Soal ${state.quizIndex + 1} / ${state.quizQuestions.length}`;
       document.getElementById('quiz-score-badge').textContent = `Skor: ${state.quizScore}`;
 
-      const quizEmoji = document.getElementById('quiz-emoji');
-      quizEmoji.textContent = currentQuiz.question.icon;
-      quizEmoji.classList.toggle('hidden', state.hideEmoji);
+      const emojiEl = document.getElementById('quiz-emoji');
+      if (state.hideEmoji) {
+        emojiEl.classList.add('hidden');
+      } else {
+        emojiEl.classList.remove('hidden');
+        emojiEl.textContent = currentQ.question.icon;
+      }
 
       document.getElementById('quiz-question-text').textContent = state.showKanji
-        ? currentQuiz.question.jp
-        : currentQuiz.question.r;
+        ? currentQ.question.jp
+        : currentQ.question.r;
 
       const readingEl = document.getElementById('quiz-reading-text');
-      readingEl.classList.toggle('hidden', state.hideReading);
-      readingEl.textContent =
-        state.showKanji && currentQuiz.question.jp !== currentQuiz.question.r
-          ? `${currentQuiz.question.r} (${currentQuiz.question.romaji})`
-          : currentQuiz.question.romaji;
+      if (state.hideReading) {
+        readingEl.classList.add('hidden');
+      } else {
+        readingEl.classList.remove('hidden');
+        readingEl.textContent =
+          state.showKanji && currentQ.question.jp !== currentQ.question.r
+            ? `${currentQ.question.r} (${currentQ.question.romaji})`
+            : currentQ.question.romaji;
+      }
 
       const optionsContainer = document.getElementById('quiz-options-container');
-      const isAnswered = state.selectedOption !== null;
+      optionsContainer.innerHTML = '';
 
-      optionsContainer.innerHTML = currentQuiz.options.map(opt => {
-        const isCorrect = opt.id === currentQuiz.question.id;
+      currentQ.options.forEach((opt) => {
+        const isAnswered = state.selectedOption !== null;
+        const isCorrect = opt.id === currentQ.question.id;
         const isChosen = opt.id === state.selectedOption;
 
-        let btnStyle = 'bg-slate-50 border-slate-200 hover:border-indigo-400 text-slate-800 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-indigo-500 dark:text-slate-200';
+        let btnStyle =
+          'bg-slate-50 border-slate-200 hover:border-indigo-400 text-slate-800 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-indigo-500 dark:text-slate-200';
+
         if (isAnswered) {
           if (isCorrect) {
             btnStyle = 'bg-emerald-500/20 border-emerald-500 text-emerald-700 dark:text-emerald-300 font-bold';
@@ -1820,55 +1867,61 @@
           }
         }
 
-        return `
-          <button
-            type="button"
-            onclick="handleAnswerQuiz(${opt.id})"
-            ${isAnswered ? 'disabled' : ''}
-            class="w-full text-left px-4 py-3.5 rounded-2xl border-2 text-sm font-semibold transition-all ${btnStyle}"
-          >
-            ${opt.arti}
-          </button>
-        `;
-      }).join('');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.disabled = isAnswered;
+        btn.textContent = opt.arti;
+        btn.className = `w-full text-left px-4 py-3.5 rounded-2xl border-2 text-sm font-semibold transition-all ${btnStyle}`;
+        btn.addEventListener('click', () => {
+          if (state.selectedOption !== null) return;
+          state.selectedOption = opt.id;
+          if (opt.id === currentQ.question.id) {
+            state.quizScore += 1;
+            speakJapanese(currentQ.question.r);
+          }
+          renderQuiz();
+        });
+        optionsContainer.appendChild(btn);
+      });
 
       const btnNext = document.getElementById('btn-quiz-next');
-      if (isAnswered) {
+      if (state.selectedOption !== null) {
         btnNext.classList.remove('hidden');
-        btnNext.textContent = state.quizIndex + 1 < state.quizQuestions.length ? 'Soal Berikutnya' : 'Lihat Hasil Kuis';
+        btnNext.textContent =
+          state.quizIndex + 1 < state.quizQuestions.length ? 'Soal Berikutnya' : 'Lihat Hasil Kuis';
       } else {
         btnNext.classList.add('hidden');
       }
     }
 
     function renderAll() {
-      applyTheme();
-      updateHeaderAndControls();
-      if (state.activeTab === 'flip') renderFlipView();
-      if (state.activeTab === 'dictionary') renderDictionaryView();
-      if (state.activeTab === 'quiz') renderQuizView();
+      renderHeaderAndControls();
+      if (state.activeTab === 'flip') {
+        renderFlipCard();
+      } else if (state.activeTab === 'dictionary') {
+        renderDictionary();
+      } else if (state.activeTab === 'quiz') {
+        renderQuiz();
+      }
       if (window.lucide) {
-        window.lucide.createIcons();
+        lucide.createIcons();
       }
     }
 
     // =========================================================================
-    // 6. INISIALISASI EVENT LISTENER
+    // 6. INISIALISASI & EVENT LISTENERS
     // =========================================================================
-    function init() {
-      // Isi dropdown Bab 1 - 35
+    function initApp() {
+      // Isi dropdown pilihan Bab
       const babSelect = document.getElementById('bab-select');
-      const babs = [...new Set(VOCAB_DATA.map(item => item.bab))].sort((a, b) => a - b);
-      babs.forEach(bab => {
-        const count = VOCAB_DATA.filter(v => v.bab === bab).length;
+      const babs = [...new Set(VOCAB_DATA.map((item) => item.bab))].sort((a, b) => a - b);
+      babs.forEach((bab) => {
+        const count = VOCAB_DATA.filter((v) => v.bab === bab).length;
         const opt = document.createElement('option');
         opt.value = bab;
         opt.textContent = `Bab ${bab} (${count} kata)`;
         babSelect.appendChild(opt);
       });
-
-      const statusSelect = document.getElementById('status-select');
-      statusSelect.options[0].textContent = `Semua Status (${VOCAB_DATA.length})`;
 
       // Toggle Dark Mode
       document.getElementById('btn-dark-mode').addEventListener('click', () => {
@@ -1877,54 +1930,70 @@
         renderAll();
       });
 
+      // Sinkronisasi otomatis jika tema sistem/browser berubah (misal dari pengaturan OS/Chrome)
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          state.darkMode = e.matches;
+          savePreferences();
+          renderAll();
+        });
+      }
+
+      // Sinkronisasi otomatis antar tab atau dengan halaman lain dalam satu domain (localStorage)
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme') {
+          state.darkMode = e.newValue === 'dark';
+          renderAll();
+        } else if (e.key === 'jp_vocab_dark_mode' && e.newValue !== null) {
+          state.darkMode = JSON.parse(e.newValue);
+          renderAll();
+        }
+      });
+
+      // Sinkronisasi jika halaman dibuka di dalam iframe dan parent mengubah class 'dark'
+      try {
+        if (window.parent && window.parent !== window && window.parent.document) {
+          const parentHtml = window.parent.document.documentElement;
+          const syncFromParent = () => {
+            const parentIsDark = parentHtml.classList.contains('dark');
+            if (state.darkMode !== parentIsDark) {
+              state.darkMode = parentIsDark;
+              renderAll();
+            }
+          };
+          syncFromParent();
+          const observer = new MutationObserver(syncFromParent);
+          observer.observe(parentHtml, { attributes: true, attributeFilter: ['class'] });
+        }
+      } catch (err) {
+        // Abaikan jika berbeda origin (cross-origin iframe)
+      }
+
       // Navigasi Tab
-      ['flip', 'dictionary', 'quiz'].forEach(tab => {
+      ['flip', 'dictionary', 'quiz'].forEach((tab) => {
         document.getElementById(`tab-${tab}`).addEventListener('click', () => {
           state.activeTab = tab;
-          if (tab === 'quiz') generateQuiz();
+          if (tab === 'quiz') {
+            generateQuiz();
+          }
           renderAll();
         });
       });
 
-      // Filter Pencarian, Bab, dan Status
+      // Pencarian & Filter
       document.getElementById('search-input').addEventListener('input', (e) => {
         state.searchQuery = e.target.value;
         state.currentIndex = 0;
         state.isFlipped = false;
-        if (state.activeTab === 'quiz') generateQuiz();
         renderAll();
       });
 
       babSelect.addEventListener('change', (e) => {
         state.selectedBab = e.target.value;
-        // Jika user memilih bab tertentu di dropdown atas, sinkronkan dengan chip Mode Flip
-        if (e.target.value === 'ALL') {
-          state.flipSelectedBabs = [];
-        } else {
-          state.flipSelectedBabs = [Number(e.target.value)];
-        }
+        state.flipSelectedBabs = [];
         state.currentIndex = 0;
         state.isFlipped = false;
         if (state.activeTab === 'quiz') generateQuiz();
-        renderAll();
-      });
-
-      // Tombol Semua Bab & Reset pada pemilih bab Mode Flip
-      document.getElementById('btn-flip-select-all').addEventListener('click', () => {
-        state.flipSelectedBabs = [];
-        state.selectedBab = 'ALL';
-        babSelect.value = 'ALL';
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      document.getElementById('btn-flip-clear-babs').addEventListener('click', () => {
-        state.flipSelectedBabs = [];
-        state.selectedBab = 'ALL';
-        babSelect.value = 'ALL';
-        state.currentIndex = 0;
-        state.isFlipped = false;
         renderAll();
       });
 
@@ -1936,7 +2005,7 @@
         renderAll();
       });
 
-      // Kontrol Tambahan
+      // Kontrol Kanji, Cara Baca, Emoji
       document.getElementById('btn-toggle-kanji').addEventListener('click', () => {
         state.showKanji = !state.showKanji;
         renderAll();
@@ -1953,9 +2022,10 @@
         renderAll();
       });
 
-      // Acak & Reset Urutan Kartu
+      // Kontrol Urutan Kartu (Acak / Urutkan)
       document.getElementById('btn-shuffle').addEventListener('click', () => {
-        const ids = getFilteredVocab().map(item => item.id);
+        const filtered = getFilteredVocab('flip');
+        const ids = filtered.map((item) => item.id);
         for (let i = ids.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [ids[i], ids[j]] = [ids[j], ids[i]];
@@ -1973,46 +2043,71 @@
         renderAll();
       });
 
+      // Kontrol Pemilih Multi-Bab di Mode Flip
+      document.getElementById('btn-flip-select-all').addEventListener('click', () => {
+        state.flipSelectedBabs = [];
+        state.selectedBab = 'ALL';
+        babSelect.value = 'ALL';
+        state.currentIndex = 0;
+        state.isFlipped = false;
+        renderAll();
+      });
+
+      document.getElementById('btn-flip-clear-babs').addEventListener('click', () => {
+        state.flipSelectedBabs = [];
+        state.currentIndex = 0;
+        state.isFlipped = false;
+        renderAll();
+      });
+
       // Interaksi Kartu Flip
       document.getElementById('flashcard-wrapper').addEventListener('click', () => {
         state.isFlipped = !state.isFlipped;
-        renderFlipView();
+        renderFlipCard();
+        if (window.lucide) lucide.createIcons();
       });
 
       document.getElementById('btn-card-mastered').addEventListener('click', (e) => {
-        const cards = getDeckCards();
-        if (cards[state.currentIndex]) {
-          toggleMastered(cards[state.currentIndex].id, e);
+        const deck = getDeckCards();
+        if (deck[state.currentIndex]) {
+          toggleMastered(deck[state.currentIndex].id, e);
         }
       });
 
       document.getElementById('btn-card-speak-front').addEventListener('click', (e) => {
-        const cards = getDeckCards();
-        if (cards[state.currentIndex]) speakJapanese(cards[state.currentIndex].r, e);
+        const deck = getDeckCards();
+        if (deck[state.currentIndex]) {
+          speakJapanese(deck[state.currentIndex].r, e);
+        }
       });
 
       document.getElementById('btn-card-speak-back').addEventListener('click', (e) => {
-        const cards = getDeckCards();
-        if (cards[state.currentIndex]) speakJapanese(cards[state.currentIndex].r, e);
+        const deck = getDeckCards();
+        if (deck[state.currentIndex]) {
+          speakJapanese(deck[state.currentIndex].r, e);
+        }
       });
 
-      document.getElementById('btn-prev-card').addEventListener('click', () => {
-        const cards = getDeckCards();
-        if (cards.length === 0) return;
-        // Langsung ubah ke sisi depan dan ganti indeks kartu sekaligus agar tidak bocor/spoiler
+      const goNextCard = () => {
+        const deck = getDeckCards();
+        if (deck.length === 0) return;
         state.isFlipped = false;
-        state.currentIndex = (state.currentIndex - 1 + cards.length) % cards.length;
-        renderAll();
-      });
+        state.currentIndex = (state.currentIndex + 1) % deck.length;
+        renderFlipCard();
+        if (window.lucide) lucide.createIcons();
+      };
 
-      document.getElementById('btn-next-card').addEventListener('click', () => {
-        const cards = getDeckCards();
-        if (cards.length === 0) return;
-        // Langsung ubah ke sisi depan dan ganti indeks kartu sekaligus agar tidak bocor/spoiler
+      const goPrevCard = () => {
+        const deck = getDeckCards();
+        if (deck.length === 0) return;
         state.isFlipped = false;
-        state.currentIndex = (state.currentIndex + 1) % cards.length;
-        renderAll();
-      });
+        state.currentIndex = (state.currentIndex - 1 + deck.length) % deck.length;
+        renderFlipCard();
+        if (window.lucide) lucide.createIcons();
+      };
+
+      document.getElementById('btn-next-card').addEventListener('click', goNextCard);
+      document.getElementById('btn-prev-card').addEventListener('click', goPrevCard);
 
       // Navigasi Keyboard untuk Mode Flip
       window.addEventListener('keydown', (e) => {
@@ -2021,11 +2116,12 @@
         if (e.code === 'Space') {
           e.preventDefault();
           state.isFlipped = !state.isFlipped;
-          renderFlipView();
+          renderFlipCard();
+          if (window.lucide) lucide.createIcons();
         } else if (e.code === 'ArrowRight') {
-          document.getElementById('btn-next-card').click();
+          goNextCard();
         } else if (e.code === 'ArrowLeft') {
-          document.getElementById('btn-prev-card').click();
+          goPrevCard();
         }
       });
 
@@ -2039,20 +2135,24 @@
         if (state.quizIndex + 1 < state.quizQuestions.length) {
           state.quizIndex += 1;
           state.selectedOption = null;
-          renderQuizView();
+          renderQuiz();
         } else {
           state.quizFinished = true;
-          renderQuizView();
+          renderQuiz();
         }
+        if (window.lucide) lucide.createIcons();
       });
 
-      document.getElementById('btn-restart-quiz').addEventListener('click', generateQuiz);
+      document.getElementById('btn-restart-quiz').addEventListener('click', () => {
+        generateQuiz();
+        if (window.lucide) lucide.createIcons();
+      });
 
-      // Render pertama kali
+      // Render awal
       renderAll();
     }
 
-    window.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
 </html>
