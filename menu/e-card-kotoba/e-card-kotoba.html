@@ -1,2194 +1,548 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kamus & Flashcard Kosakata Jepang Bab 1 - 35</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Card Kotoba Bergambar - Sub Menu Hub</title>
+
   <script>
-    // Inisialisasi tema sejak awal sebelum halaman dirender (anti-kedip)
     (function () {
       try {
         const savedTheme = localStorage.getItem('theme_preference');
-        const isLight =
-          savedTheme === 'light' ||
-          (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
-        if (!isLight) {
-          document.documentElement.classList.add('dark');
-        } else {
+        if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
           document.documentElement.classList.add('light-theme');
         }
-      } catch (e) {
-        document.documentElement.classList.add('dark');
-      }
+      } catch (e) {}
     })();
-
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', '"Noto Sans JP"', 'sans-serif'],
-            jp: ['"Noto Sans JP"', 'sans-serif'],
-          }
-        }
-      }
-    }
   </script>
+
   <style>
-    /* Gaya animasi flip kartu 3D */
-    .perspective-1000 { perspective: 1000px; }
-    .transform-style-3d { transform-style: preserve-3d; }
-    .backface-hidden {
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@700;900&display=swap');
+
+    /* ================= TEMA DEFAULT (DARK MODE) ================= */
+    :root {
+      --primary: #c084fc;
+      --primary-dark: #9333ea;
+      --accent: #38bdf8;
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --border-color: #334155;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --badge-bg: #3b0764;
+      --badge-text: #d8b4fe;
+      --toggle-btn-bg: #1e293b;
+      --toggle-btn-border: #475569;
+      --toggle-btn-text: #f8fafc;
+      --footer-bg: #1e293b;
+      --footer-border: #334155;
+      --dashed-border: #334155;
+
+      /* Palette Khusus Kartu Kotoba (Dark Mode) */
+      --kosakata-icon-bg: #500724; --kosakata-icon-text: #f472b6; --kosakata-badge-bg: #370318; --kosakata-badge-text: #fbcfe8; --kosakata-hover: #f472b6;
+      --meishi-icon-bg: #1e1b4b; --meishi-icon-text: #818cf8; --meishi-badge-bg: #0f172a; --meishi-badge-text: #a5b4fc; --meishi-hover: #818cf8;
+      --doushi-icon-bg: #052e16; --doushi-icon-text: #4ade80; --doushi-badge-bg: #021a0d; --doushi-badge-text: #86efac; --doushi-hover: #4ade80;
+      --keiyoushi-icon-bg: #451a03; --keiyoushi-icon-text: #fbbf24; --keiyoushi-badge-bg: #271002; --keiyoushi-badge-text: #fde68a; --keiyoushi-hover: #fbbf24;
     }
-    .rotate-y-180 { transform: rotateY(180deg); }
+
+    /* ================= TEMA TERANG (LIGHT MODE) ================= */
+    html.light-theme, body.light-theme {
+      --primary: #9333ea;
+      --primary-dark: #7e22ce;
+      --accent: #0284c7;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #f1f5f9;
+      --shadow-color: rgba(100, 116, 139, 0.12);
+      --badge-bg: #ede9fe;
+      --badge-text: #6d28d9;
+      --toggle-btn-bg: #ffffff;
+      --toggle-btn-border: #cbd5e1;
+      --toggle-btn-text: #0f172a;
+      --footer-bg: #ffffff;
+      --footer-border: #e2e8f0;
+      --dashed-border: #f1f5f9;
+
+      /* Palette Khusus Kartu Kotoba (Light Mode) */
+      --kosakata-icon-bg: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); --kosakata-icon-text: #db2777; --kosakata-badge-bg: #fce7f3; --kosakata-badge-text: #db2777; --kosakata-hover: #f472b6;
+      --meishi-icon-bg: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); --meishi-icon-text: #4338ca; --meishi-badge-bg: #e0e7ff; --meishi-badge-text: #4338ca; --meishi-hover: #818cf8;
+      --doushi-icon-bg: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); --doushi-icon-text: #059669; --doushi-badge-bg: #dcfce7; --doushi-badge-text: #15803d; --doushi-hover: #4ade80;
+      --keiyoushi-icon-bg: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); --keiyoushi-icon-text: #d97706; --keiyoushi-badge-bg: #fef3c7; --keiyoushi-badge-text: #b45309; --keiyoushi-hover: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      padding: 16px 8px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Top Navigation Controls */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-back-hub:hover {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      font-size: 1.2rem;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 28px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+    }
+
+    .hero h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    /* Grid Layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 20px;
+    }
+
+    /* Card Styling */
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 10px -2px var(--shadow-color);
+      border: 1.5px solid var(--border-color);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      margin-bottom: 16px;
+      pointer-events: none;
+    }
+
+    .icon-wrapper {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-wrapper svg {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .icon-wrapper {
+      transform: scale(1.1) rotate(4deg);
+    }
+
+    .count-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* Card Color Styling */
+    .card-kosakata .icon-wrapper { background: var(--kosakata-icon-bg); color: var(--kosakata-icon-text); }
+    .card-kosakata .count-badge { background: var(--kosakata-badge-bg); color: var(--kosakata-badge-text); }
+    .card-kosakata:hover { border-color: var(--kosakata-hover); box-shadow: 0 14px 24px -4px rgba(219, 39, 119, 0.2); }
+    .card-kosakata .card-footer { color: var(--kosakata-icon-text); }
+
+    .card-meishi .icon-wrapper { background: var(--meishi-icon-bg); color: var(--meishi-icon-text); }
+    .card-meishi .count-badge { background: var(--meishi-badge-bg); color: var(--meishi-badge-text); }
+    .card-meishi:hover { border-color: var(--meishi-hover); box-shadow: 0 14px 24px -4px rgba(67, 56, 202, 0.2); }
+    .card-meishi .card-footer { color: var(--meishi-icon-text); }
+
+    .card-doushi .icon-wrapper { background: var(--doushi-icon-bg); color: var(--doushi-icon-text); }
+    .card-doushi .count-badge { background: var(--doushi-badge-bg); color: var(--doushi-badge-text); }
+    .card-doushi:hover { border-color: var(--doushi-hover); box-shadow: 0 14px 24px -4px rgba(5, 150, 105, 0.2); }
+    .card-doushi .card-footer { color: var(--doushi-icon-text); }
+
+    .card-keiyoushi .icon-wrapper { background: var(--keiyoushi-icon-bg); color: var(--keiyoushi-icon-text); }
+    .card-keiyoushi .count-badge { background: var(--keiyoushi-badge-bg); color: var(--keiyoushi-badge-text); }
+    .card-keiyoushi:hover { border-color: var(--keiyoushi-hover); box-shadow: 0 14px 24px -4px rgba(217, 119, 6, 0.2); }
+    .card-keiyoushi .card-footer { color: var(--keiyoushi-icon-text); }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--dashed-border);
+      pointer-events: none;
+    }
+
+    .arrow {
+      margin-left: 6px;
+      font-size: 1.05rem;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    /* Footer & Social Section */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .footer-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
   </style>
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 font-sans">
+<body>
 
-  <!-- HEADER UTAMA -->
-  <header class="sticky top-0 z-30 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md transition-colors">
-    <div class="max-w-5xl mx-auto px-4 py-3.5">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <!-- Logo & Judul -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-md font-jp">
-            日
+  <div class="container">
+    <div class="top-controls">
+      <a href="/belajar-bahasa-jepang/index.html" class="btn-back-hub">
+        <span>←</span> Beranda Hub
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+
+    <div class="hero">
+      <div class="badge">DEVELOPED BY VORST CAVRY</div>
+      <h1>Katalog <span>E-Card Bergambar</span></h1>
+      <p>Pilih kategori kosakata visual di bawah ini. Lengkap dengan ilustrasi ikon, pelafalan audio penutur asli, mode flashcard interaktif, dan klasifikasi tata bahasa.</p>
+    </div>
+
+    <div class="cards-container">
+
+      <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kosakata.html" class="card card-kosakata">
+        <div class="card-top">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path>
+              <path d="M6 6h10"></path>
+              <path d="M6 10h10"></path>
+              <path d="M6 14h6"></path>
+            </svg>
           </div>
-          <div>
-            <h1 class="text-base sm:text-lg font-extrabold tracking-tight leading-tight">
-              Kamus & Flashcard Jepang
-            </h1>
-            <p id="header-subtitle" class="text-xs text-slate-500 dark:text-slate-400">
-              Kosakata Lengkap Bab 1 – 35
-            </p>
-          </div>
+          <span class="count-badge">Bab 1 - 35</span>
+          <h2>Kosa Kata (ことば / 言葉)</h2>
+          <p>Kamus kosakata lengkap Bab 1 sampai 35 dilengkapi cara baca (Furigana &amp; Romaji), audio penutur asli, dan Mode Flip Card belajar mandiri.</p>
         </div>
-
-        <!-- Indikator Progres Hafalan & Toggle Dark Mode -->
-        <div class="flex items-center gap-2.5">
-          <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-slate-800 dark:border-slate-700 dark:text-emerald-400">
-            <i data-lucide="award" class="w-3.5 h-3.5"></i>
-            <span id="mastered-badge">Hafal: 0/0 (0%)</span>
-          </div>
-
-          <button
-            id="btn-dark-mode"
-            type="button"
-            class="p-2.5 rounded-xl border bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-amber-400 dark:hover:bg-slate-700 transition-all"
-            aria-label="Ubah Tema"
-            title="Ubah Tema Gelap/Terang"
-          >
-            <i id="icon-theme" data-lucide="moon" class="w-4 h-4"></i>
-          </button>
+        <div class="card-footer">
+          Buka Kosa Kata Bab 1-35 <span class="arrow">→</span>
         </div>
+      </a>
+
+      <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-benda.html" class="card card-meishi">
+        <div class="card-top">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+              <path d="m3.3 7 8.7 5 8.7-5"></path>
+              <path d="M12 22V12"></path>
+            </svg>
+          </div>
+          <span class="count-badge">244 Kosakata</span>
+          <h2>Kata Benda (めいし / 名詞)</h2>
+          <p>Katalog benda sehari-hari, negara berbendera, transportasi, fasilitas, alat kantor, makanan, hingga anatomi tubuh.</p>
+        </div>
+        <div class="card-footer">
+          Buka E-Card Meishi <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-kerja.html" class="card card-doushi">
+        <div class="card-top">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 4v16"></path>
+              <path d="M17 8 9 12l8 4"></path>
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+          </div>
+          <span class="count-badge">136 Kosakata</span>
+          <h2>Kata Kerja (どうし / 動詞)</h2>
+          <p>Daftar kata kerja bentuk ~ます (~masu), rutinitas, perpindahan arah, transaksi sosial, lengkap label Grup 1, 2, &amp; 3.</p>
+        </div>
+        <div class="card-footer">
+          Buka E-Card Doushi <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/kata-sifat.html" class="card card-keiyoushi">
+        <div class="card-top">
+          <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <span class="count-badge">71 Kosakata</span>
+          <h2>Kata Sifat (けいようし / 形容詞)</h2>
+          <p>Karakteristik sifat, kondisi ukuran, suhu, rasa makanan, warna, lengkap pembeda Sifat-I (い) dan Sifat-Na (な).</p>
+        </div>
+        <div class="card-footer">
+          Buka E-Card Keiyoushi <span class="arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
       </div>
 
-      <!-- Navigasi Tab Mode -->
-      <div class="grid grid-cols-3 gap-2 mt-3.5">
-        <button
-          id="tab-flip"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-sm"
-        >
-          <i data-lucide="layers" class="w-4 h-4"></i>
-          <span>Mode Flip</span>
-        </button>
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
 
-        <button
-          id="tab-dictionary"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-800"
-        >
-          <i data-lucide="book-open" class="w-4 h-4"></i>
-          <span>Mode Kamus</span>
-        </button>
-
-        <button
-          id="tab-quiz"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-800"
-        >
-          <i data-lucide="help-circle" class="w-4 h-4"></i>
-          <span>Mode Kuis</span>
-        </button>
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
       </div>
     </div>
-  </header>
-
-  <!-- KONTEN UTAMA -->
-  <main class="max-w-5xl mx-auto px-4 py-5">
-    <!-- PANEL FILTER & PENGATURAN -->
-    <section class="p-4 rounded-2xl border mb-6 bg-white border-slate-200 shadow-sm dark:bg-slate-900/70 dark:border-slate-800 transition-colors">
-      <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-        <!-- Input Pencarian -->
-        <div class="sm:col-span-5 relative">
-          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Cari kanji, kana, romaji, atau arti..."
-            class="w-full pl-10 pr-4 py-2 rounded-xl text-sm border bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-500 transition-colors"
-          />
-        </div>
-
-        <!-- Filter Pilih Bab -->
-        <div class="sm:col-span-4 relative">
-          <i data-lucide="filter" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
-          <select
-            id="bab-select"
-            class="w-full pl-10 pr-4 py-2 rounded-xl text-sm border bg-slate-50 border-slate-200 text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 transition-colors"
-          >
-            <option value="ALL">Semua Bab (Bab 1 – 35)</option>
-          </select>
-        </div>
-
-        <!-- Filter Status Hafalan -->
-        <div class="sm:col-span-3">
-          <select
-            id="status-select"
-            class="w-full px-3.5 py-2 rounded-xl text-sm border bg-slate-50 border-slate-200 text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 transition-colors"
-          >
-            <option value="ALL">Semua Status</option>
-            <option value="UNMASTERED">Belum Hafal</option>
-            <option value="MASTERED">Sudah Hafal</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Baris Kontrol Tambahan -->
-      <div class="flex flex-wrap items-center justify-between gap-2 mt-3.5 pt-3.5 border-t border-slate-200/70 dark:border-slate-800">
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- Toggle Kanji -->
-          <button
-            id="btn-toggle-kanji"
-            type="button"
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400"
-          >
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-            <span id="label-kanji">Kanji: Aktif</span>
-          </button>
-
-          <!-- Toggle Tanpa Cara Baca -->
-          <button
-            id="btn-toggle-reading"
-            type="button"
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700"
-            title="Sembunyikan Hiragana & Romaji untuk melatih baca Kanji"
-          >
-            <i id="icon-reading" data-lucide="eye" class="w-3.5 h-3.5"></i>
-            <span>Tanpa Cara Baca</span>
-          </button>
-
-          <!-- Toggle Mode Tanpa Emoji -->
-          <button
-            id="btn-toggle-emoji"
-            type="button"
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700"
-            title="Sembunyikan ikon emoji agar tidak membocorkan arti kosakata"
-          >
-            <i data-lucide="smile-plus" class="w-3.5 h-3.5"></i>
-            <span id="label-emoji">Tanpa Emoji</span>
-          </button>
-        </div>
-
-        <!-- Kontrol Urutan Kartu (Khusus Mode Flip) -->
-        <div id="flip-order-controls" class="flex items-center gap-2">
-          <button
-            id="btn-shuffle"
-            type="button"
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700"
-          >
-            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
-            <span>Acak Kartu</span>
-          </button>
-
-          <button
-            id="btn-reset-order"
-            type="button"
-            class="hidden flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700"
-          >
-            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-            <span>Urutkan</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================== -->
-    <!-- VIEW 1: MODE FLASHCARD (FLIP 3D)                                   -->
-    <!-- ================================================================== -->
-    <section id="view-flip" class="max-w-xl mx-auto">
-      <!-- Pemilih Bab Khusus Mode Flip (Multi-Bab) -->
-      <div class="mb-4 p-3.5 rounded-2xl border bg-white border-slate-200 dark:bg-slate-900/70 dark:border-slate-800 transition-colors">
-        <div class="flex items-center justify-between gap-2 mb-2.5">
-          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200">
-            <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400"></i>
-            <span id="flip-bab-selector-label">Pilih Bab untuk Mode Flip (Semua Bab)</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <button
-              id="btn-flip-select-all"
-              type="button"
-              class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-500/15 dark:text-indigo-400 dark:hover:bg-indigo-500/25 transition-colors"
-            >
-              Semua Bab
-            </button>
-            <button
-              id="btn-flip-clear-babs"
-              type="button"
-              class="hidden px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 dark:bg-rose-500/15 dark:text-rose-400 dark:hover:bg-rose-500/25 transition-colors"
-            >
-              Reset
-            </button>
-          </div>
-        </div>
-        <div id="flip-bab-chips" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1"></div>
-      </div>
-
-      <div id="flip-empty" class="hidden text-center p-10 rounded-3xl border bg-white border-slate-200 text-slate-500 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-400">
-        <p class="text-base font-semibold mb-1">Tidak ada kosakata ditemukan</p>
-        <p class="text-xs">Coba ubah filter bab, status hafalan, atau kata kunci pencarian.</p>
-      </div>
-
-      <div id="flip-content">
-        <!-- Info Nomor Kartu -->
-        <div class="flex items-center justify-between text-xs font-semibold mb-3 px-1">
-          <span id="flip-counter" class="text-slate-500 dark:text-slate-400">Kartu 1 dari 1</span>
-          <span id="flip-bab-badge" class="px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-bold">Bab 1</span>
-        </div>
-
-        <!-- Wadah Kartu 3D -->
-        <div id="flashcard-wrapper" class="perspective-1000 w-full h-80 sm:h-96 cursor-pointer select-none">
-          <div id="flashcard-inner" class="relative w-full h-full transition-transform duration-500 transform-style-3d">
-            
-            <!-- SISI DEPAN KARTU -->
-            <div class="absolute inset-0 backface-hidden rounded-3xl border-2 p-6 flex flex-col justify-between shadow-lg bg-white border-slate-200 hover:border-indigo-300 dark:bg-slate-900 dark:border-slate-800 dark:hover:border-indigo-500/50 transition-colors">
-              <div class="flex items-center justify-between">
-                <button
-                  id="btn-card-mastered"
-                  type="button"
-                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-100 text-slate-500 hover:text-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
-                >
-                  <i id="icon-card-mastered" data-lucide="circle" class="w-4 h-4"></i>
-                  <span id="label-card-mastered">Tandai Hafal</span>
-                </button>
-
-                <button
-                  id="btn-card-speak-front"
-                  type="button"
-                  class="p-2.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/25 transition-colors"
-                  title="Dengarkan Pengucapan"
-                >
-                  <i data-lucide="volume-2" class="w-5 h-5"></i>
-                </button>
-              </div>
-
-              <div class="my-auto text-center px-2">
-                <div id="card-front-emoji" class="text-4xl sm:text-5xl mb-4 select-none">🙋</div>
-                <h2 id="card-front-main" class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3 break-words leading-snug font-jp">私</h2>
-                <div id="card-front-reading-box" class="space-y-1">
-                  <p id="card-front-kana" class="text-base sm:text-lg font-medium text-indigo-600 dark:text-indigo-400 font-jp">わたし</p>
-                  <p id="card-front-romaji" class="text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400">watashi</p>
-                </div>
-              </div>
-
-              <p class="text-center text-[11px] font-medium text-slate-400 dark:text-slate-500">
-                Ketuk kartu atau tekan Spasi untuk melihat arti
-              </p>
-            </div>
-
-            <!-- SISI BELAKANG KARTU -->
-            <div class="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-700 text-white p-6 flex flex-col justify-between shadow-xl">
-              <div class="flex items-center justify-between">
-                <span id="card-back-bab" class="px-3 py-1 rounded-full bg-white/15 text-xs font-bold">Bab 1</span>
-                <button
-                  id="btn-card-speak-back"
-                  type="button"
-                  class="p-2.5 rounded-full bg-white/15 hover:bg-white/25 transition-colors"
-                  title="Dengarkan Pengucapan"
-                >
-                  <i data-lucide="volume-2" class="w-5 h-5"></i>
-                </button>
-              </div>
-
-              <div class="my-auto text-center px-2">
-                <div id="card-back-emoji" class="text-4xl sm:text-5xl mb-3 select-none">🙋</div>
-                <p class="text-xs uppercase tracking-widest text-indigo-200 font-semibold mb-1">Arti Bahasa Indonesia</p>
-                <h3 id="card-back-arti" class="text-2xl sm:text-4xl font-extrabold leading-tight mb-4">Saya</h3>
-                <div class="inline-block px-4 py-2 rounded-2xl bg-black/20 backdrop-blur-sm">
-                  <p id="card-back-jp" class="text-base font-bold font-jp">私</p>
-                  <p id="card-back-sub" class="text-xs text-indigo-200">わたし • watashi</p>
-                </div>
-              </div>
-
-              <p class="text-center text-[11px] text-indigo-200 font-medium">
-                Ketuk kembali untuk membalik kartu
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Tombol Navigasi Kartu -->
-        <div class="flex items-center justify-between gap-3 mt-5">
-          <button
-            id="btn-prev-card"
-            type="button"
-            class="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl font-bold text-sm border bg-white border-slate-200 text-slate-700 hover:bg-slate-100 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-800 transition-all active:scale-95"
-          >
-            <i data-lucide="chevron-left" class="w-5 h-5"></i>
-            <span>Sebelumnya</span>
-          </button>
-
-          <button
-            id="btn-next-card"
-            type="button"
-            class="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl font-bold text-sm bg-indigo-600 text-white hover:bg-indigo-700 shadow-md transition-all active:scale-95"
-          >
-            <span>Berikutnya</span>
-            <i data-lucide="chevron-right" class="w-5 h-5"></i>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================== -->
-    <!-- VIEW 2: MODE KAMUS (DAFTAR GRID KOSAKATA)                          -->
-    <!-- ================================================================== -->
-    <section id="view-dictionary" class="hidden">
-      <div class="flex items-center justify-between mb-4 px-1">
-        <p id="dict-count-label" class="text-xs font-semibold text-slate-500 dark:text-slate-400">
-          Menampilkan 0 kosakata
-        </p>
-      </div>
-
-      <div id="dict-empty" class="hidden text-center p-10 rounded-3xl border bg-white border-slate-200 text-slate-500 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-400">
-        <p class="text-base font-semibold mb-1">Kosakata tidak ditemukan</p>
-        <p class="text-xs">Silakan gunakan kata kunci lain atau ubah filter bab.</p>
-      </div>
-
-      <div id="dict-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
-    </section>
-
-    <!-- ================================================================== -->
-    <!-- VIEW 3: MODE KUIS PILIHAN GANDA                                    -->
-    <!-- ================================================================== -->
-    <section id="view-quiz" class="hidden max-w-xl mx-auto">
-      <!-- Layar Hasil Akhir Kuis -->
-      <div id="quiz-result-box" class="hidden p-8 rounded-3xl border text-center bg-white border-slate-200 shadow-lg dark:bg-slate-900 dark:border-slate-800">
-        <div class="w-16 h-16 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="award" class="w-9 h-9"></i>
-        </div>
-        <h2 class="text-2xl font-extrabold mb-1">Kuis Selesai!</h2>
-        <p class="text-sm mb-6 text-slate-500 dark:text-slate-400">Berikut hasil latihan kosakata Anda</p>
-
-        <div class="inline-block px-8 py-4 rounded-2xl bg-indigo-600 text-white mb-6">
-          <p class="text-xs uppercase tracking-wider text-indigo-200 font-semibold">Skor Akhir</p>
-          <p id="quiz-final-score" class="text-4xl font-extrabold mt-1">0 / 10</p>
-        </div>
-
-        <div>
-          <button
-            id="btn-restart-quiz"
-            type="button"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all"
-          >
-            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-            <span>Mulai Kuis Baru</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Layar Soal Kuis Aktif -->
-      <div id="quiz-active-box" class="p-6 sm:p-8 rounded-3xl border bg-white border-slate-200 shadow-lg dark:bg-slate-900 dark:border-slate-800">
-        <div class="flex items-center justify-between text-xs font-bold mb-4">
-          <span id="quiz-progress-badge" class="px-3 py-1 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400">Soal 1 / 10</span>
-          <span id="quiz-score-badge" class="text-emerald-600 dark:text-emerald-400">Skor: 0</span>
-        </div>
-
-        <div class="text-center my-6">
-          <div id="quiz-emoji" class="text-4xl mb-3 select-none">🙋</div>
-          <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-2">Apa arti dari kosakata berikut?</p>
-          <div class="flex items-center justify-center gap-2">
-            <h3 id="quiz-question-text" class="text-3xl sm:text-4xl font-extrabold font-jp">私</h3>
-            <button
-              id="btn-quiz-speak"
-              type="button"
-              class="p-2 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/25"
-              title="Dengar Pengucapan"
-            >
-              <i data-lucide="volume-2" class="w-4 h-4"></i>
-            </button>
-          </div>
-          <p id="quiz-reading-text" class="text-xs text-slate-400 mt-1.5 font-mono">わたし (watashi)</p>
-        </div>
-
-        <div id="quiz-options-container" class="space-y-2.5 mt-6"></div>
-
-        <button
-          id="btn-quiz-next"
-          type="button"
-          class="hidden w-full mt-5 py-3.5 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all"
-        >
-          Soal Berikutnya
-        </button>
-      </div>
-    </section>
-  </main>
+  </div>
 
   <script>
-    // =========================================================================
-    // 1. DATABASE KOSAKATA LENGKAP BAB 1 - 35
-    // =========================================================================
-    const VOCAB_DATA = [
-      // BAB 1
-      { id: 1, bab: 1, jp: '私', r: 'わたし', romaji: 'watashi', arti: 'Saya', icon: '🙋' },
-      { id: 2, bab: 1, jp: '私たち', r: 'わたしたち', romaji: 'watashitachi', arti: 'Kami / Kita', icon: '👥' },
-      { id: 3, bab: 1, jp: 'あなた', r: 'あなた', romaji: 'anata', arti: 'Anda / Kamu', icon: '🫵' },
-      { id: 4, bab: 1, jp: 'あの人', r: 'あのひと', romaji: 'ano hito', arti: 'Orang itu', icon: '👤' },
-      { id: 5, bab: 1, jp: 'あの方', r: 'あのかた', romaji: 'ano kata', arti: 'Beliau / Orang itu (sopan)', icon: '🙇' },
-      { id: 6, bab: 1, jp: '皆さん', r: 'みなさん', romaji: 'minasan', arti: 'Saudara sekalian / Semuanya', icon: '👨‍👩‍👧‍👦' },
-      { id: 7, bab: 1, jp: '先生', r: 'せんせい', romaji: 'sensei', arti: 'Guru / Dosen', icon: '👨‍🏫' },
-      { id: 8, bab: 1, jp: '教師', r: 'きょうし', romaji: 'kyoushi', arti: 'Guru / Pengajar (profesi)', icon: '🏫' },
-      { id: 9, bab: 1, jp: '学生', r: 'がくせい', romaji: 'gakusei', arti: 'Mahasiswa / Pelajar', icon: '🎓' },
-      { id: 10, bab: 1, jp: '会社員', r: 'かいしゃいん', romaji: 'kaishain', arti: 'Karyawan perusahaan', icon: '💼' },
-      { id: 11, bab: 1, jp: '社員', r: 'しゃいん', romaji: 'shain', arti: 'Karyawan (perusahaan ...)', icon: '🏢' },
-      { id: 12, bab: 1, jp: '銀行員', r: 'ぎんこういん', romaji: 'ginkouin', arti: 'Pegawai bank', icon: '🏦' },
-      { id: 13, bab: 1, jp: '医者', r: 'いしゃ', romaji: 'isha', arti: 'Dokter', icon: '🩺' },
-      { id: 14, bab: 1, jp: '研究者', r: 'けんきゅうしゃ', romaji: 'kenkyuusha', arti: 'Peneliti', icon: '🔬' },
-      { id: 15, bab: 1, jp: 'エンジニア', r: 'エンジニア', romaji: 'enjinia', arti: 'Insinyur / Teknisi', icon: '⚙️' },
-      { id: 16, bab: 1, jp: '大学', r: 'だいがく', romaji: 'daigaku', arti: 'Universitas', icon: '🏛️' },
-      { id: 17, bab: 1, jp: '病院', r: 'びょういん', romaji: 'byouin', arti: 'Rumah sakit', icon: '🏥' },
-      { id: 18, bab: 1, jp: '電気', r: 'でんき', romaji: 'denki', arti: 'Listrik / Lampu', icon: '💡' },
-      { id: 19, bab: 1, jp: '誰', r: 'だれ', romaji: 'dare', arti: 'Siapa', icon: '❓' },
-      { id: 20, bab: 1, jp: 'どなた', r: 'どなた', romaji: 'donata', arti: 'Siapa (sopan)', icon: '🎩' },
-      { id: 21, bab: 1, jp: '〜歳', r: '〜さい', romaji: '~sai', arti: 'Umur ... tahun', icon: '🎂' },
-      { id: 22, bab: 1, jp: '何歳', r: 'なんさい', romaji: 'nansai', arti: 'Umur berapa', icon: '🔢' },
-      { id: 23, bab: 1, jp: 'おいくつ', r: 'おいくつ', romaji: 'oikutsu', arti: 'Umur berapa (sopan)', icon: '🕰️' },
+    // --- 1. SINKRONISASI & PENGENDALI TEMA ---
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const rootHtml = document.documentElement;
+    const bodyEl = document.body;
 
-      // BAB 2
-      { id: 24, bab: 2, jp: 'これ', r: 'これ', romaji: 'kore', arti: 'Ini (dekat pembicara)', icon: '👇' },
-      { id: 25, bab: 2, jp: 'それ', r: 'それ', romaji: 'sore', arti: 'Itu (dekat lawan bicara)', icon: '👉' },
-      { id: 26, bab: 2, jp: 'あれ', r: 'あれ', romaji: 'are', arti: 'Itu (jauh dari keduanya)', icon: '☝️' },
-      { id: 27, bab: 2, jp: '本', r: 'ほん', romaji: 'hon', arti: 'Buku', icon: '📖' },
-      { id: 28, bab: 2, jp: '辞書', r: 'じしょ', romaji: 'jisho', arti: 'Kamus', icon: '📚' },
-      { id: 29, bab: 2, jp: '雑誌', r: 'ざっし', romaji: 'zasshi', arti: 'Majalah', icon: '📰' },
-      { id: 30, bab: 2, jp: '新聞', r: 'しんぶん', romaji: 'shinbun', arti: 'Koran / Surat kabar', icon: '🗞️' },
-      { id: 31, bab: 2, jp: 'ノート', r: 'ノート', romaji: 'nooto', arti: 'Buku catatan', icon: '📓' },
-      { id: 32, bab: 2, jp: '手帳', r: 'てちょう', romaji: 'techou', arti: 'Buku agenda', icon: '📔' },
-      { id: 33, bab: 2, jp: '名刺', r: 'めいし', romaji: 'meishi', arti: 'Kartu nama', icon: '🪪' },
-      { id: 34, bab: 2, jp: 'カード', r: 'カード', romaji: 'kaado', arti: 'Kartu', icon: '💳' },
-      { id: 35, bab: 2, jp: '鉛筆', r: 'えんぴつ', romaji: 'enpitsu', arti: 'Pensil', icon: '✏️' },
-      { id: 36, bab: 2, jp: 'ボールペン', r: 'ボールペン', romaji: 'boorupen', arti: 'Bolpoin', icon: '🖊️' },
-      { id: 37, bab: 2, jp: '鍵', r: 'かぎ', romaji: 'kagi', arti: 'Kunci', icon: '🔑' },
-      { id: 38, bab: 2, jp: '時計', r: 'とけい', romaji: 'tokei', arti: 'Jam / Arloji', icon: '⌚' },
-      { id: 39, bab: 2, jp: '傘', r: 'かさ', romaji: 'kasa', arti: 'Payung', icon: '☂️' },
-      { id: 40, bab: 2, jp: '鞄', r: 'かばん', romaji: 'kaban', arti: 'Tas', icon: '👜' },
-      { id: 41, bab: 2, jp: 'テレビ', r: 'テレビ', romaji: 'terebi', arti: 'Televisi', icon: '📺' },
-      { id: 42, bab: 2, jp: 'ラジオ', r: 'ラジオ', romaji: 'rajio', arti: 'Radio', icon: '📻' },
-      { id: 43, bab: 2, jp: 'カメラ', r: 'カメラ', romaji: 'kamera', arti: 'Kamera', icon: '📷' },
-      { id: 44, bab: 2, jp: 'コンピューター', r: 'コンピューター', romaji: 'konpyuutaa', arti: 'Komputer', icon: '💻' },
-      { id: 45, bab: 2, jp: '自動車', r: 'じどうしゃ', romaji: 'jidousha', arti: 'Mobil', icon: '🚗' },
-      { id: 46, bab: 2, jp: '机', r: 'つくえ', romaji: 'tsukue', arti: 'Meja tulis', icon: '🪑' },
-      { id: 47, bab: 2, jp: '椅子', r: 'いす', romaji: 'isu', arti: 'Kursi', icon: '💺' },
-      { id: 48, bab: 2, jp: 'チョコレート', r: 'チョコレート', romaji: 'chokoreeto', arti: 'Cokelat', icon: '🍫' },
-      { id: 49, bab: 2, jp: 'コーヒー', r: 'コーヒー', romaji: 'koohii', arti: 'Kopi', icon: '☕' },
-      { id: 50, bab: 2, jp: 'お土産', r: 'おみやげ', romaji: 'omiyage', arti: 'Oleh-oleh', icon: '🎁' },
-      { id: 51, bab: 2, jp: '英語', r: 'えいご', romaji: 'eigo', arti: 'Bahasa Inggris', icon: '🇬🇧' },
-      { id: 52, bab: 2, jp: '日本語', r: 'にほんご', romaji: 'nihongo', arti: 'Bahasa Jepang', icon: '🇯🇵' },
-
-      // BAB 3
-      { id: 53, bab: 3, jp: 'ここ', r: 'ここ', romaji: 'koko', arti: 'Di sini', icon: '📍' },
-      { id: 54, bab: 3, jp: 'そこ', r: 'そこ', romaji: 'soko', arti: 'Di situ', icon: '📌' },
-      { id: 55, bab: 3, jp: 'あそこ', r: 'あそこ', romaji: 'asoko', arti: 'Di sana', icon: '🗺️' },
-      { id: 56, bab: 3, jp: 'どこ', r: 'どこ', romaji: 'doko', arti: 'Di mana', icon: '🧭' },
-      { id: 57, bab: 3, jp: '教室', r: 'きょうしつ', romaji: 'kyoushitsu', arti: 'Ruang kelas', icon: '🏫' },
-      { id: 58, bab: 3, jp: '食堂', r: 'しょくどう', romaji: 'shokudou', arti: 'Kantin / Ruang makan', icon: '🍽️' },
-      { id: 59, bab: 3, jp: '事務所', r: 'じむしょ', romaji: 'jimusho', arti: 'Kantor', icon: '🗂️' },
-      { id: 60, bab: 3, jp: '会議室', r: 'かいぎしつ', romaji: 'kaigishitsu', arti: 'Ruang rapat', icon: '🤝' },
-      { id: 61, bab: 3, jp: '受付', r: 'うけつけ', romaji: 'uketsuke', arti: 'Meja resepsionis', icon: '🛎️' },
-      { id: 62, bab: 3, jp: 'ロビー', r: 'ロビー', romaji: 'robii', arti: 'Lobi', icon: '🛋️' },
-      { id: 63, bab: 3, jp: '部屋', r: 'へや', romaji: 'heya', arti: 'Kamar / Ruangan', icon: '🚪' },
-      { id: 64, bab: 3, jp: 'トイレ', r: 'トイレ', romaji: 'toire', arti: 'Toilet / Kamar kecil', icon: '🚻' },
-      { id: 65, bab: 3, jp: '階段', r: 'かいだん', romaji: 'kaidan', arti: 'Tangga', icon: '🪜' },
-      { id: 66, bab: 3, jp: 'エレベーター', r: 'エレベーター', romaji: 'erebeetaa', arti: 'Lift', icon: '🛗' },
-      { id: 67, bab: 3, jp: 'エスカレーター', r: 'エスカレーター', romaji: 'esukareetaa', arti: 'Eskalator', icon: '🎢' },
-      { id: 68, bab: 3, jp: '自動販売機', r: 'じどうはんばいき', romaji: 'jidouhanbaiki', arti: 'Mesin penjual otomatis', icon: '🥤' },
-      { id: 69, bab: 3, jp: '電話', r: 'でんわ', romaji: 'denwa', arti: 'Telepon', icon: '☎️' },
-      { id: 70, bab: 3, jp: 'お国', r: 'おくに', romaji: 'okuni', arti: 'Negara', icon: '🌏' },
-      { id: 71, bab: 3, jp: '会社', r: 'かいしゃ', romaji: 'kaisha', arti: 'Perusahaan', icon: '🏢' },
-      { id: 72, bab: 3, jp: 'うち', r: 'うち', romaji: 'uchi', arti: 'Rumah', icon: '🏠' },
-      { id: 73, bab: 3, jp: '靴', r: 'くつ', romaji: 'kutsu', arti: 'Sepatu', icon: '👟' },
-      { id: 74, bab: 3, jp: 'ネクタイ', r: 'ネクタイ', romaji: 'nekutai', arti: 'Dasi', icon: '👔' },
-      { id: 75, bab: 3, jp: 'ワイン', r: 'ワイン', romaji: 'wain', arti: 'Anggur (minuman)', icon: '🍷' },
-      { id: 76, bab: 3, jp: '売り場', r: 'うりば', romaji: 'uriba', arti: 'Tempat penjualan / Konter', icon: '🛍️' },
-      { id: 77, bab: 3, jp: '地下', r: 'ちか', romaji: 'chika', arti: 'Bawah tanah', icon: '🚇' },
-      { id: 78, bab: 3, jp: 'いくら', r: 'いくら', romaji: 'ikura', arti: 'Berapa harganya', icon: '💴' },
-
-      // BAB 4
-      { id: 79, bab: 4, jp: '起きます', r: 'おきます', romaji: 'okimasu', arti: 'Bangun tidur', icon: '⏰' },
-      { id: 80, bab: 4, jp: '寝ます', r: 'ねます', romaji: 'nemasu', arti: 'Tidur', icon: '😴' },
-      { id: 81, bab: 4, jp: '働きます', r: 'はたらきます', romaji: 'hatarakimasu', arti: 'Bekerja', icon: '💼' },
-      { id: 82, bab: 4, jp: '休みます', r: 'やすみます', romaji: 'yasumimasu', arti: 'Beristirahat / Libur', icon: '🛌' },
-      { id: 83, bab: 4, jp: '勉強します', r: 'べんきょうします', romaji: 'benkyoushimasu', arti: 'Belajar', icon: '✍️' },
-      { id: 84, bab: 4, jp: '終わります', r: 'おわります', romaji: 'owarimasu', arti: 'Selesai', icon: '🏁' },
-      { id: 85, bab: 4, jp: 'デパート', r: 'デパート', romaji: 'depaato', arti: 'Department store / Mal', icon: '🏬' },
-      { id: 86, bab: 4, jp: '銀行', r: 'ぎんこう', romaji: 'ginkou', arti: 'Bank', icon: '🏦' },
-      { id: 87, bab: 4, jp: '郵便局', r: 'ゆうびんきょく', romaji: 'yuubinkyoku', arti: 'Kantor pos', icon: '🏤' },
-      { id: 88, bab: 4, jp: '図書館', r: 'としょかん', romaji: 'toshokan', arti: 'Perpustakaan', icon: '📚' },
-      { id: 89, bab: 4, jp: '美術館', r: 'びじゅつかん', romaji: 'bijutsukan', arti: 'Gedung kesenian / Museum seni', icon: '🖼️' },
-      { id: 90, bab: 4, jp: '今', r: 'いま', romaji: 'ima', arti: 'Sekarang', icon: '⏱️' },
-      { id: 91, bab: 4, jp: '午前', r: 'ごぜん', romaji: 'gozen', arti: 'Pagi (AM)', icon: '🌅' },
-      { id: 92, bab: 4, jp: '午後', r: 'ごご', romaji: 'gogo', arti: 'Sore / Malam (PM)', icon: '🌆' },
-      { id: 93, bab: 4, jp: '朝', r: 'あさ', romaji: 'asa', arti: 'Pagi', icon: '☀️' },
-      { id: 94, bab: 4, jp: '昼', r: 'ひる', romaji: 'hiru', arti: 'Siang', icon: '🌤️' },
-      { id: 95, bab: 4, jp: '晩', r: 'ばん', romaji: 'ban', arti: 'Malam', icon: '🌙' },
-      { id: 96, bab: 4, jp: 'おととい', r: 'おととい', romaji: 'ototoi', arti: 'Kemarin lusa', icon: '⏮️' },
-      { id: 97, bab: 4, jp: '昨日', r: 'きのう', romaji: 'kinou', arti: 'Kemarin', icon: '◀️' },
-      { id: 98, bab: 4, jp: '今日', r: 'きょう', romaji: 'kyou', arti: 'Hari ini', icon: '📅' },
-      { id: 99, bab: 4, jp: '明日', r: 'あした', romaji: 'ashita', arti: 'Besok', icon: '▶️' },
-      { id: 100, bab: 4, jp: 'あさって', r: 'あさって', romaji: 'asatte', arti: 'Lusa', icon: '⏭️' },
-      { id: 101, bab: 4, jp: '今朝', r: 'けさ', romaji: 'kesa', arti: 'Tadi pagi', icon: '🌄' },
-      { id: 102, bab: 4, jp: '今晩', r: 'こんばん', romaji: 'konban', arti: 'Nanti malam', icon: '🌃' },
-      { id: 103, bab: 4, jp: '休み', r: 'やすみ', romaji: 'yasumi', arti: 'Istirahat / Cuti / Libur', icon: '🏖️' },
-      { id: 104, bab: 4, jp: '昼休み', r: 'ひるやすみ', romaji: 'hiruyasumi', arti: 'Istirahat siang', icon: '🍱' },
-      { id: 105, bab: 4, jp: '試験', r: 'しけん', romaji: 'shiken', arti: 'Ujian', icon: '📝' },
-      { id: 106, bab: 4, jp: '会議', r: 'かいぎ', romaji: 'kaigi', arti: 'Rapat', icon: '📊' },
-      { id: 107, bab: 4, jp: '映画', r: 'えいが', romaji: 'eiga', arti: 'Film', icon: '🎬' },
-      { id: 108, bab: 4, jp: '毎朝', r: 'まいあさ', romaji: 'maiasa', arti: 'Setiap pagi', icon: '🐓' },
-      { id: 109, bab: 4, jp: '毎晩', r: 'まいばん', romaji: 'maiban', arti: 'Setiap malam', icon: '🦉' },
-      { id: 110, bab: 4, jp: '毎日', r: 'まいにち', romaji: 'mainichi', arti: 'Setiap hari', icon: '🗓️' },
-
-      // BAB 5
-      { id: 111, bab: 5, jp: '行きます', r: 'いきます', romaji: 'ikimasu', arti: 'Pergi', icon: '🚶' },
-      { id: 112, bab: 5, jp: '来ます', r: 'きます', romaji: 'kimasu', arti: 'Datang', icon: '🏃' },
-      { id: 113, bab: 5, jp: '帰ります', r: 'かえります', romaji: 'kaerimasu', arti: 'Pulang', icon: '🏡' },
-      { id: 114, bab: 5, jp: '学校', r: 'がっこう', romaji: 'gakkou', arti: 'Sekolah', icon: '🏫' },
-      { id: 115, bab: 5, jp: 'スーパー', r: 'スーパー', romaji: 'suupaa', arti: 'Supermarket', icon: '🛒' },
-      { id: 116, bab: 5, jp: '駅', r: 'えき', romaji: 'eki', arti: 'Stasiun', icon: '🚉' },
-      { id: 117, bab: 5, jp: '飛行機', r: 'ひこうき', romaji: 'hikouki', arti: 'Pesawat terbang', icon: '✈️' },
-      { id: 118, bab: 5, jp: '船', r: 'ふね', romaji: 'fune', arti: 'Kapal laut', icon: '🚢' },
-      { id: 119, bab: 5, jp: '電車', r: 'でんしゃ', romaji: 'densha', arti: 'Kereta listrik', icon: '🚃' },
-      { id: 120, bab: 5, jp: '地下鉄', r: 'ちかてつ', romaji: 'chikatetsu', arti: 'Kereta bawah tanah', icon: '🚇' },
-      { id: 121, bab: 5, jp: '新幹線', r: 'しんかんせん', romaji: 'shinkansen', arti: 'Kereta cepat Shinkansen', icon: '🚄' },
-      { id: 122, bab: 5, jp: 'バス', r: 'バス', romaji: 'basu', arti: 'Bus', icon: '🚌' },
-      { id: 123, bab: 5, jp: 'タクシー', r: 'タクシー', romaji: 'takushii', arti: 'Taksi', icon: '🚕' },
-      { id: 124, bab: 5, jp: '自転車', r: 'じてんしゃ', romaji: 'jitensha', arti: 'Sepeda', icon: '🚲' },
-      { id: 125, bab: 5, jp: '歩いて', r: 'あるいて', romaji: 'aruite', arti: 'Jalan kaki', icon: '👣' },
-      { id: 126, bab: 5, jp: '人', r: 'ひと', romaji: 'hito', arti: 'Orang', icon: '🧑' },
-      { id: 127, bab: 5, jp: '友達', r: 'ともだち', romaji: 'tomodachi', arti: 'Teman', icon: '🧑‍🤝‍🧑' },
-      { id: 128, bab: 5, jp: '彼', r: 'かれ', romaji: 'kare', arti: 'Dia (laki-laki) / Pacar', icon: '👨' },
-      { id: 129, bab: 5, jp: '彼女', r: 'かのじょ', romaji: 'kanojo', arti: 'Dia (perempuan) / Pacar', icon: '👩' },
-      { id: 130, bab: 5, jp: '家族', r: 'かぞく', romaji: 'kazoku', arti: 'Keluarga', icon: '👨‍👩‍👧' },
-      { id: 131, bab: 5, jp: '一人で', r: 'ひとりで', romaji: 'hitoride', arti: 'Sendirian', icon: '🧍' },
-      { id: 132, bab: 5, jp: '先週', r: 'せんしゅう', romaji: 'senshuu', arti: 'Minggu lalu', icon: '⬅️' },
-      { id: 133, bab: 5, jp: '今週', r: 'こんしゅう', romaji: 'konshuu', arti: 'Minggu ini', icon: '📆' },
-      { id: 134, bab: 5, jp: '来週', r: 'らいしゅう', romaji: 'raishuu', arti: 'Minggu depan', icon: '➡️' },
-      { id: 135, bab: 5, jp: '先月', r: 'せんげつ', romaji: 'sengetsu', arti: 'Bulan lalu', icon: '🌘' },
-      { id: 136, bab: 5, jp: '今月', r: 'こんげつ', romaji: 'kongetsu', arti: 'Bulan ini', icon: '🌕' },
-      { id: 137, bab: 5, jp: '来月', r: 'らいげつ', romaji: 'raigetsu', arti: 'Bulan depan', icon: '🌒' },
-      { id: 138, bab: 5, jp: '去年', r: 'きょねん', romaji: 'kyonen', arti: 'Tahun lalu', icon: '⏪' },
-      { id: 139, bab: 5, jp: '今年', r: 'ことし', romaji: 'kotoshi', arti: 'Tahun ini', icon: '🎯' },
-      { id: 140, bab: 5, jp: '来年', r: 'らいねん', romaji: 'rainen', arti: 'Tahun depan', icon: '⏩' },
-      { id: 141, bab: 5, jp: '誕生日', r: 'たんじょうび', romaji: 'tanjoubi', arti: 'Hari ulang tahun', icon: '🎉' },
-
-      // BAB 6
-      { id: 142, bab: 6, jp: '食べます', r: 'たべます', romaji: 'tabemasu', arti: 'Makan', icon: '🍚' },
-      { id: 143, bab: 6, jp: '飲みます', r: 'のみます', romaji: 'nomimasu', arti: 'Minum', icon: '🥤' },
-      { id: 144, bab: 6, jp: '吸います', r: 'すいます', romaji: 'suimasu', arti: 'Menghisap (rokok)', icon: '🚬' },
-      { id: 145, bab: 6, jp: '見ます', r: 'みます', romaji: 'mimasu', arti: 'Melihat / Menonton', icon: '👀' },
-      { id: 146, bab: 6, jp: '聞きます', r: 'ききます', romaji: 'kikimasu', arti: 'Mendengar', icon: '👂' },
-      { id: 147, bab: 6, jp: '読みます', r: 'よみます', romaji: 'yomimasu', arti: 'Membaca', icon: '📖' },
-      { id: 148, bab: 6, jp: '書きます', r: 'かきます', romaji: 'kakimasu', arti: 'Menulis / Menggambar', icon: '✍️' },
-      { id: 149, bab: 6, jp: '買います', r: 'かいます', romaji: 'kaimasu', arti: 'Membeli', icon: '🛍️' },
-      { id: 150, bab: 6, jp: '撮ります', r: 'とります', romaji: 'torimasu', arti: 'Mengambil (foto)', icon: '📸' },
-      { id: 151, bab: 6, jp: 'します', r: 'します', romaji: 'shimasu', arti: 'Melakukan / Mengerjakan', icon: '🛠️' },
-      { id: 152, bab: 6, jp: '会います', r: 'あいます', romaji: 'aimasu', arti: 'Bertemu', icon: '🤝' },
-      { id: 153, bab: 6, jp: 'ご飯', r: 'ごはん', romaji: 'gohan', arti: 'Nasi / Makanan', icon: '🍚' },
-      { id: 154, bab: 6, jp: '朝ご飯', r: 'あさごはん', romaji: 'asagohan', arti: 'Sarapan', icon: '🍳' },
-      { id: 155, bab: 6, jp: '昼ご飯', r: 'ひるごはん', romaji: 'hirugohan', arti: 'Makan siang', icon: '🍜' },
-      { id: 156, bab: 6, jp: '晩ご飯', r: 'ばんごはん', romaji: 'bangohan', arti: 'Makan malam', icon: '🍛' },
-      { id: 157, bab: 6, jp: 'パン', r: 'パン', romaji: 'pan', arti: 'Roti', icon: '🍞' },
-      { id: 158, bab: 6, jp: '卵', r: 'たまご', romaji: 'tamago', arti: 'Telur', icon: '🥚' },
-      { id: 159, bab: 6, jp: '肉', r: 'にく', romaji: 'niku', arti: 'Daging', icon: '🥩' },
-      { id: 160, bab: 6, jp: '魚', r: 'さかな', romaji: 'sakana', arti: 'Ikan', icon: '🐟' },
-      { id: 161, bab: 6, jp: '野菜', r: 'やさい', romaji: 'yasai', arti: 'Sayuran', icon: '🥬' },
-      { id: 162, bab: 6, jp: '果物', r: 'くだもの', romaji: 'kudamono', arti: 'Buah-buahan', icon: '🍎' },
-      { id: 163, bab: 6, jp: '水', r: 'みず', romaji: 'mizu', arti: 'Air', icon: '💧' },
-      { id: 164, bab: 6, jp: 'お茶', r: 'おちゃ', romaji: 'ocha', arti: 'Teh hijau', icon: '🍵' },
-      { id: 165, bab: 6, jp: '紅茶', r: 'こうちゃ', romaji: 'koucha', arti: 'Teh hitam / Teh manis', icon: '🫖' },
-      { id: 166, bab: 6, jp: '牛乳', r: 'ぎゅうにゅう', romaji: 'gyuunyuu', arti: 'Susu sapi', icon: '🥛' },
-      { id: 167, bab: 6, jp: 'ジュース', r: 'ジュース', romaji: 'juusu', arti: 'Jus', icon: '🧃' },
-      { id: 168, bab: 6, jp: 'ビール', r: 'ビール', romaji: 'biiru', arti: 'Bir', icon: '🍺' },
-      { id: 169, bab: 6, jp: 'お酒', r: 'おさけ', romaji: 'osake', arti: 'Minuman keras / Sake', icon: '🍶' },
-      { id: 170, bab: 6, jp: '手紙', r: 'てがみ', romaji: 'tegami', arti: 'Surat', icon: '✉️' },
-      { id: 171, bab: 6, jp: 'レポート', r: 'レポート', romaji: 'repooto', arti: 'Laporan', icon: '📄' },
-      { id: 172, bab: 6, jp: '写真', r: 'しゃしん', romaji: 'shashin', arti: 'Foto', icon: '🖼️' },
-      { id: 173, bab: 6, jp: '店', r: 'みせ', romaji: 'mise', arti: 'Toko', icon: '🏪' },
-      { id: 174, bab: 6, jp: '庭', r: 'にわ', romaji: 'niwa', arti: 'Halaman / Taman rumah', icon: '🌳' },
-      { id: 175, bab: 6, jp: '宿題', r: 'しゅくだい', romaji: 'shukudai', arti: 'PR / Pekerjaan rumah', icon: '📚' },
-      { id: 176, bab: 6, jp: 'テニス', r: 'テニス', romaji: 'tenisu', arti: 'Tenis', icon: '🎾' },
-      { id: 177, bab: 6, jp: 'サッカー', r: 'サッカー', romaji: 'sakkaa', arti: 'Sepak bola', icon: '⚽' },
-      { id: 178, bab: 6, jp: 'お花見', r: 'おはなみ', romaji: 'ohanami', arti: 'Menikmati bunga sakura', icon: '🌸' },
-
-      // BAB 7
-      { id: 179, bab: 7, jp: '切ります', r: 'きります', romaji: 'kirimasu', arti: 'Memotong', icon: '✂️' },
-      { id: 180, bab: 7, jp: '送ります', r: 'おくります', romaji: 'okurimasu', arti: 'Mengirim', icon: '📦' },
-      { id: 181, bab: 7, jp: 'あげます', r: 'あげます', romaji: 'agemasu', arti: 'Memberi', icon: '🎁' },
-      { id: 182, bab: 7, jp: 'もらいます', r: 'もらいます', romaji: 'moraimasu', arti: 'Menerima', icon: '🤲' },
-      { id: 183, bab: 7, jp: '貸します', r: 'かします', romaji: 'kashimasu', arti: 'Meminjamkan', icon: '💸' },
-      { id: 184, bab: 7, jp: '借ります', r: 'かります', romaji: 'karimasu', arti: 'Meminjam', icon: '🙏' },
-      { id: 185, bab: 7, jp: '教えます', r: 'おしえます', romaji: 'oshiemasu', arti: 'Mengajar / Memberitahu', icon: '👨‍🏫' },
-      { id: 186, bab: 7, jp: '習います', r: 'ならいます', romaji: 'naraimasu', arti: 'Belajar (dari seseorang)', icon: '🧑‍🎓' },
-      { id: 187, bab: 7, jp: 'かけます', r: 'かけます', romaji: 'kakemasu', arti: 'Menelepon', icon: '📞' },
-      { id: 188, bab: 7, jp: '手', r: 'て', romaji: 'te', arti: 'Tangan', icon: '✋' },
-      { id: 189, bab: 7, jp: '箸', r: 'はし', romaji: 'hashi', arti: 'Sumpit', icon: '🥢' },
-      { id: 190, bab: 7, jp: 'スプーン', r: 'スプーン', romaji: 'supuun', arti: 'Sendok', icon: '🥄' },
-      { id: 191, bab: 7, jp: 'ナイフ', r: 'ナイフ', romaji: 'naifu', arti: 'Pisau', icon: '🔪' },
-      { id: 192, bab: 7, jp: 'フォーク', r: 'フォーク', romaji: 'fooku', arti: 'Garpu', icon: '🍴' },
-      { id: 193, bab: 7, jp: 'はさみ', r: 'はさみ', romaji: 'hasami', arti: 'Gunting', icon: '✂️' },
-      { id: 194, bab: 7, jp: 'パソコン', r: 'パソコン', romaji: 'pasokon', arti: 'Laptop / PC', icon: '💻' },
-      { id: 195, bab: 7, jp: 'ケータイ', r: 'ケータイ', romaji: 'keetai', arti: 'HP / Ponsel', icon: '📱' },
-      { id: 196, bab: 7, jp: 'メール', r: 'メール', romaji: 'meeru', arti: 'Email / Pesan', icon: '📧' },
-      { id: 197, bab: 7, jp: '年賀状', r: 'ねんがじょう', romaji: 'nengajou', arti: 'Kartu ucapan tahun baru', icon: '🎍' },
-      { id: 198, bab: 7, jp: 'パンチ', r: 'パンチ', romaji: 'panchi', arti: 'Pelubang kertas', icon: '🕳️' },
-      { id: 199, bab: 7, jp: 'ホッチキス', r: 'ホッチキス', romaji: 'hocchikisu', arti: 'Stapler', icon: '📎' },
-      { id: 200, bab: 7, jp: 'セロテープ', r: 'セロテープ', romaji: 'seroteepu', arti: 'Selotip', icon: '🩹' },
-      { id: 201, bab: 7, jp: '消しゴム', r: 'けしごむ', romaji: 'keshigomu', arti: 'Penghapus karet', icon: '🧽' },
-      { id: 202, bab: 7, jp: '紙', r: 'かみ', romaji: 'kami', arti: 'Kertas', icon: '📃' },
-      { id: 203, bab: 7, jp: '花', r: 'はな', romaji: 'hana', arti: 'Bunga', icon: '🌺' },
-      { id: 204, bab: 7, jp: 'シャツ', r: 'シャツ', romaji: 'shatsu', arti: 'Kemeja', icon: '👕' },
-      { id: 205, bab: 7, jp: 'プレゼント', r: 'プレゼント', romaji: 'purezento', arti: 'Hadiah / Kado', icon: '🎁' },
-      { id: 206, bab: 7, jp: '荷物', r: 'にもつ', romaji: 'nimotsu', arti: 'Barang bawaan / Paket', icon: '🧳' },
-      { id: 207, bab: 7, jp: 'お金', r: 'おかね', romaji: 'okane', arti: 'Uang', icon: '💰' },
-      { id: 208, bab: 7, jp: '切符', r: 'きっぷ', romaji: 'kippu', arti: 'Karcis / Tiket', icon: '🎫' },
-      { id: 209, bab: 7, jp: '父', r: 'ちち', romaji: 'chichi', arti: 'Ayah (sendiri)', icon: '👨' },
-      { id: 210, bab: 7, jp: '母', r: 'はは', romaji: 'haha', arti: 'Ibu (sendiri)', icon: '👩' },
-      { id: 211, bab: 7, jp: 'お父さん', r: 'おとうさん', romaji: 'otousan', arti: 'Ayah (orang lain)', icon: '🧔' },
-      { id: 212, bab: 7, jp: 'お母さん', r: 'おかあさん', romaji: 'okaasan', arti: 'Ibu (orang lain)', icon: '👩‍🦱' },
-
-      // BAB 8
-      { id: 213, bab: 8, jp: 'ハンサム', r: 'ハンサム', romaji: 'hansamu', arti: 'Tampan / Gagah', icon: '😎' },
-      { id: 214, bab: 8, jp: '綺麗', r: 'きれい', romaji: 'kirei', arti: 'Cantik / Bersih / Indah', icon: '✨' },
-      { id: 215, bab: 8, jp: '静か', r: 'しずか', romaji: 'shizuka', arti: 'Tenang / Sepi', icon: '🤫' },
-      { id: 216, bab: 8, jp: '賑やか', r: 'にぎやか', romaji: 'nigiyaka', arti: 'Ramai / Meriah', icon: '🥳' },
-      { id: 217, bab: 8, jp: '有名', r: 'ゆうめい', romaji: 'yuumei', arti: 'Terkenal', icon: '🌟' },
-      { id: 218, bab: 8, jp: '親切', r: 'しんせつ', romaji: 'shinsetsu', arti: 'Ramah / Baik hati', icon: '💖' },
-      { id: 219, bab: 8, jp: '元気', r: 'げんき', romaji: 'genki', arti: 'Sehat / Semangat', icon: '💪' },
-      { id: 220, bab: 8, jp: '暇', r: 'ひま', romaji: 'hima', arti: 'Senggang / Luang', icon: '🛋️' },
-      { id: 221, bab: 8, jp: '便利', r: 'べんり', romaji: 'benri', arti: 'Praktis / Nyaman', icon: '👍' },
-      { id: 222, bab: 8, jp: '素敵', r: 'すてき', romaji: 'suteki', arti: 'Bagus / Luar biasa', icon: '😍' },
-      { id: 223, bab: 8, jp: '大きい', r: 'おおきい', romaji: 'ookii', arti: 'Besar', icon: '🐘' },
-      { id: 224, bab: 8, jp: '小さい', r: 'ちいさい', romaji: 'chiisai', arti: 'Kecil', icon: '🐜' },
-      { id: 225, bab: 8, jp: '新しい', r: 'あたらしい', romaji: 'atarashii', arti: 'Baru', icon: '🆕' },
-      { id: 226, bab: 8, jp: '古い', r: 'ふるい', romaji: 'furui', arti: 'Lama / Tua (benda)', icon: '🏚️' },
-      { id: 227, bab: 8, jp: 'いい', r: 'いい', romaji: 'ii', arti: 'Bagus / Baik', icon: '👌' },
-      { id: 228, bab: 8, jp: '悪い', r: 'わるい', romaji: 'warui', arti: 'Buruk / Jelek', icon: '👎' },
-      { id: 229, bab: 8, jp: '暑い', r: 'あつい', romaji: 'atsui', arti: 'Panas (cuaca)', icon: '🥵' },
-      { id: 230, bab: 8, jp: '寒い', r: 'さむい', romaji: 'samui', arti: 'Dingin (cuaca)', icon: '🥶' },
-      { id: 231, bab: 8, jp: '冷たい', r: 'つめたい', romaji: 'tsumetai', arti: 'Dingin (benda/air)', icon: '🧊' },
-      { id: 232, bab: 8, jp: '難しい', r: 'むずかしい', romaji: 'muzukashii', arti: 'Sulit / Susah', icon: '🤯' },
-      { id: 233, bab: 8, jp: '易しい', r: 'やさしい', romaji: 'yasashii', arti: 'Mudah / Gampang', icon: '😌' },
-      { id: 234, bab: 8, jp: '高い', r: 'たかい', romaji: 'takai', arti: 'Mahal / Tinggi', icon: '📈' },
-      { id: 235, bab: 8, jp: '安い', r: 'やすい', romaji: 'yasui', arti: 'Murah', icon: '🏷️' },
-      { id: 236, bab: 8, jp: '低い', r: 'ひくい', romaji: 'hikui', arti: 'Rendah', icon: '📉' },
-      { id: 237, bab: 8, jp: '面白い', r: 'おもしろい', romaji: 'omoshiroi', arti: 'Menarik / Lucu', icon: '🤣' },
-      { id: 238, bab: 8, jp: '美味しい', r: 'おいしい', romaji: 'oishii', arti: 'Enak / Lezat', icon: '😋' },
-      { id: 239, bab: 8, jp: '忙しい', r: 'いそがしい', romaji: 'isogashii', arti: 'Sibuk', icon: '🏃‍♂️' },
-      { id: 240, bab: 8, jp: '楽しい', r: 'たのしい', romaji: 'tanoshii', arti: 'Menyenangkan / Gembira', icon: '😆' },
-      { id: 241, bab: 8, jp: '白い', r: 'しろい', romaji: 'shiroi', arti: 'Putih', icon: '⬜' },
-      { id: 242, bab: 8, jp: '黒い', r: 'くろい', romaji: 'kuroi', arti: 'Hitam', icon: '⬛' },
-      { id: 243, bab: 8, jp: '赤い', r: 'あかい', romaji: 'akai', arti: 'Merah', icon: '🟥' },
-      { id: 244, bab: 8, jp: '青い', r: 'あおい', romaji: 'aoi', arti: 'Biru', icon: '🟦' },
-      { id: 245, bab: 8, jp: '桜', r: 'さくら', romaji: 'sakura', arti: 'Bunga sakura', icon: '🌸' },
-      { id: 246, bab: 8, jp: '山', r: 'やま', romaji: 'yama', arti: 'Gunung', icon: '⛰️' },
-      { id: 247, bab: 8, jp: '町', r: 'まち', romaji: 'machi', arti: 'Kota', icon: '🏙️' },
-      { id: 248, bab: 8, jp: '食べ物', r: 'たべもの', romaji: 'tabemono', arti: 'Makanan', icon: '🍔' },
-      { id: 249, bab: 8, jp: '所', r: 'ところ', romaji: 'tokoro', arti: 'Tempat', icon: '📍' },
-      { id: 250, bab: 8, jp: '寮', r: 'りょう', romaji: 'ryou', arti: 'Asrama', icon: '🏢' },
-      { id: 251, bab: 8, jp: 'レストラン', r: 'レストラン', romaji: 'resutoran', arti: 'Restoran', icon: '🍽️' },
-      { id: 252, bab: 8, jp: '生活', r: 'せいかつ', romaji: 'seikatsu', arti: 'Kehidupan', icon: '🌱' },
-      { id: 253, bab: 8, jp: 'お仕事', r: 'おしごと', romaji: 'oshigoto', arti: 'Pekerjaan', icon: '💼' },
-
-      // BAB 9
-      { id: 254, bab: 9, jp: '分かります', r: 'わかります', romaji: 'wakarimasu', arti: 'Mengerti / Paham', icon: '💡' },
-      { id: 255, bab: 9, jp: 'あります', r: 'あります', romaji: 'arimasu', arti: 'Ada / Mempunyai (benda mati)', icon: '📦' },
-      { id: 256, bab: 9, jp: '好き', r: 'すき', romaji: 'suki', arti: 'Suka', icon: '❤️' },
-      { id: 257, bab: 9, jp: '嫌い', r: 'きらい', romaji: 'kirai', arti: 'Benci / Tidak suka', icon: '💔' },
-      { id: 258, bab: 9, jp: '上手', r: 'じょうず', romaji: 'jouzu', arti: 'Pandai / Mahir', icon: '🏆' },
-      { id: 259, bab: 9, jp: '下手', r: 'へた', romaji: 'heta', arti: 'Tidak pandai / Bodoh', icon: '💦' },
-      { id: 260, bab: 9, jp: '飲み物', r: 'のみもの', romaji: 'nomimono', arti: 'Minuman', icon: '🍹' },
-      { id: 261, bab: 9, jp: '料理', r: 'りょうり', romaji: 'ryouri', arti: 'Masakan', icon: '🍲' },
-      { id: 262, bab: 9, jp: 'スポーツ', r: 'スポーツ', romaji: 'supootsu', arti: 'Olahraga', icon: '🏅' },
-      { id: 263, bab: 9, jp: '野球', r: 'やきゅう', romaji: 'yakyuu', arti: 'Bisbol', icon: '⚾' },
-      { id: 264, bab: 9, jp: 'ダンス', r: 'ダンス', romaji: 'dansu', arti: 'Dansa / Menari', icon: '💃' },
-      { id: 265, bab: 9, jp: '旅行', r: 'りょこう', romaji: 'ryokou', arti: 'Wisata / Perjalanan', icon: '🧳' },
-      { id: 266, bab: 9, jp: '音楽', r: 'おんがく', romaji: 'ongaku', arti: 'Musik', icon: '🎵' },
-      { id: 267, bab: 9, jp: '歌', r: 'うた', romaji: 'uta', arti: 'Lagu', icon: '🎤' },
-      { id: 268, bab: 9, jp: 'クラシック', r: 'クラシック', romaji: 'kurashikku', arti: 'Musik klasik', icon: '🎻' },
-      { id: 269, bab: 9, jp: 'ジャズ', r: 'ジャズ', romaji: 'jazu', arti: 'Musik jazz', icon: '🎷' },
-      { id: 270, bab: 9, jp: 'コンサート', r: 'コンサート', romaji: 'konsaato', arti: 'Konser', icon: '🎸' },
-      { id: 271, bab: 9, jp: 'カラオケ', r: 'カラオケ', romaji: 'karaoke', arti: 'Karaoke', icon: '🎶' },
-      { id: 272, bab: 9, jp: '歌舞伎', r: 'かぶき', romaji: 'kabuki', arti: 'Drama tradisional Kabuki', icon: '🎭' },
-      { id: 273, bab: 9, jp: '絵', r: 'え', romaji: 'e', arti: 'Gambar / Lukisan', icon: '🎨' },
-      { id: 274, bab: 9, jp: '字', r: 'じ', romaji: 'ji', arti: 'Huruf / Tulisan', icon: '🔤' },
-      { id: 275, bab: 9, jp: '漢字', r: 'かんじ', romaji: 'kanji', arti: 'Huruf Kanji', icon: '🈵' },
-      { id: 276, bab: 9, jp: 'ひらがな', r: 'ひらがな', romaji: 'hiragana', arti: 'Huruf Hiragana', icon: 'あ' },
-      { id: 277, bab: 9, jp: 'カタカナ', r: 'カタカナ', romaji: 'katakana', arti: 'Huruf Katakana', icon: 'ア' },
-      { id: 278, bab: 9, jp: 'ローマ字', r: 'ローマじ', romaji: 'roomaji', arti: 'Huruf Latin / Romaji', icon: '🔠' },
-      { id: 279, bab: 9, jp: '細かいお金', r: 'こまかいおかね', romaji: 'komakai okane', arti: 'Uang receh / Kecil', icon: '🪙' },
-      { id: 280, bab: 9, jp: '時間', r: 'じかん', romaji: 'jikan', arti: 'Waktu', icon: '⏳' },
-      { id: 281, bab: 9, jp: '用事', r: 'ようじ', romaji: 'youji', arti: 'Urusan / Keperluan', icon: '📋' },
-      { id: 282, bab: 9, jp: '約束', r: 'やくそく', romaji: 'yakusoku', arti: 'Janji', icon: '🤙' },
-      { id: 283, bab: 9, jp: 'ご主人', r: 'ごしゅじん', romaji: 'goshujin', arti: 'Suami (orang lain)', icon: '🤵' },
-      { id: 284, bab: 9, jp: '夫', r: 'おっと', romaji: 'otto', arti: 'Suami (sendiri)', icon: '👨' },
-      { id: 285, bab: 9, jp: '奥さん', r: 'おくさん', romaji: 'okusan', arti: 'Istri (orang lain)', icon: '👰' },
-      { id: 286, bab: 9, jp: '妻', r: 'つま', romaji: 'tsuma', arti: 'Istri (sendiri)', icon: '👩' },
-      { id: 287, bab: 9, jp: '子ども', r: 'こども', romaji: 'kodomo', arti: 'Anak', icon: '🧒' },
-
-      // BAB 10
-      { id: 288, bab: 10, jp: 'います', r: 'います', romaji: 'imasu', arti: 'Ada (makhluk hidup)', icon: '🧍' },
-      { id: 289, bab: 10, jp: '色々', r: 'いろいろ', romaji: 'iroiro', arti: 'Bermacam-macam', icon: '🌈' },
-      { id: 290, bab: 10, jp: '男の人', r: 'おとこのひと', romaji: 'otoko no hito', arti: 'Orang laki-laki', icon: '👨' },
-      { id: 291, bab: 10, jp: '女の人', r: 'おんなのひと', romaji: 'onna no hito', arti: 'Orang perempuan', icon: '👩' },
-      { id: 292, bab: 10, jp: '男の子', r: 'おとこのこ', romaji: 'otoko no ko', arti: 'Anak laki-laki', icon: '👦' },
-      { id: 293, bab: 10, jp: '女の子', r: 'おんなのこ', romaji: 'onna no ko', arti: 'Anak perempuan', icon: '👧' },
-      { id: 294, bab: 10, jp: '犬', r: 'いぬ', romaji: 'inu', arti: 'Anjing', icon: '🐶' },
-      { id: 295, bab: 10, jp: '猫', r: 'ねこ', romaji: 'neko', arti: 'Kucing', icon: '🐱' },
-      { id: 296, bab: 10, jp: 'パンダ', r: 'パンダ', romaji: 'panda', arti: 'Panda', icon: '🐼' },
-      { id: 297, bab: 10, jp: '象', r: 'ぞう', romaji: 'zou', arti: 'Gajah', icon: '🐘' },
-      { id: 298, bab: 10, jp: '木', r: 'き', romaji: 'ki', arti: 'Pohon', icon: '🌲' },
-      { id: 299, bab: 10, jp: '物', r: 'もの', romaji: 'mono', arti: 'Barang / Benda', icon: '📦' },
-      { id: 300, bab: 10, jp: '電池', r: 'でんち', romaji: 'denchi', arti: 'Baterai', icon: '🔋' },
-      { id: 301, bab: 10, jp: '箱', r: 'はこ', romaji: 'hako', arti: 'Kotak', icon: '📥' },
-      { id: 302, bab: 10, jp: 'スイッチ', r: 'スイッチ', romaji: 'suicchi', arti: 'Sakelar', icon: '🎛️' },
-      { id: 303, bab: 10, jp: '冷蔵庫', r: 'れいぞうこ', romaji: 'reizouko', arti: 'Kulkas', icon: '🧊' },
-      { id: 304, bab: 10, jp: 'テーブル', r: 'テーブル', romaji: 'teeburu', arti: 'Meja makan', icon: '🪑' },
-      { id: 305, bab: 10, jp: 'ベッド', r: 'ベッド', romaji: 'beddo', arti: 'Tempat tidur / Kasur', icon: '🛏️' },
-      { id: 306, bab: 10, jp: '棚', r: 'たな', romaji: 'tana', arti: 'Lemari / Rak', icon: '🗄️' },
-      { id: 307, bab: 10, jp: 'ドア', r: 'ドア', romaji: 'doa', arti: 'Pintu', icon: '🚪' },
-      { id: 308, bab: 10, jp: '窓', r: 'まど', romaji: 'mado', arti: 'Jendela', icon: '🪟' },
-      { id: 309, bab: 10, jp: 'ポスト', r: 'ポスト', romaji: 'posuto', arti: 'Kotak surat', icon: '📮' },
-      { id: 310, bab: 10, jp: 'ビル', r: 'ビル', romaji: 'biru', arti: 'Gedung', icon: '🏢' },
-      { id: 311, bab: 10, jp: '公園', r: 'こうえん', romaji: 'kouen', arti: 'Taman', icon: '🏞️' },
-      { id: 312, bab: 10, jp: '喫茶店', r: 'きっさてん', romaji: 'kissaten', arti: 'Kedai kopi / Kafe', icon: '☕' },
-      { id: 313, bab: 10, jp: '本屋', r: 'ほんや', romaji: 'honya', arti: 'Toko buku', icon: '📚' },
-      { id: 314, bab: 10, jp: '乗り場', r: 'のりば', romaji: 'noriba', arti: 'Tempat naik kendaraan / Halte', icon: '🚏' },
-      { id: 315, bab: 10, jp: '県', r: 'けん', romaji: 'ken', arti: 'Prefektur / Provinsi', icon: '🗾' },
-      { id: 316, bab: 10, jp: '上', r: 'うえ', romaji: 'ue', arti: 'Atas', icon: '⬆️' },
-      { id: 317, bab: 10, jp: '下', r: 'した', romaji: 'shita', arti: 'Bawah', icon: '⬇️' },
-      { id: 318, bab: 10, jp: '前', r: 'まえ', romaji: 'mae', arti: 'Depan', icon: '🔼' },
-      { id: 319, bab: 10, jp: '後ろ', r: 'うしろ', romaji: 'ushiro', arti: 'Belakang', icon: '🔽' },
-      { id: 320, bab: 10, jp: '右', r: 'みぎ', romaji: 'migi', arti: 'Kanan', icon: '➡️' },
-      { id: 321, bab: 10, jp: '左', r: 'ひだり', romaji: 'hidari', arti: 'Kiri', icon: '⬅️' },
-      { id: 322, bab: 10, jp: '中', r: 'なか', romaji: 'naka', arti: 'Dalam', icon: '📥' },
-      { id: 323, bab: 10, jp: '外', r: 'そと', romaji: 'soto', arti: 'Luar', icon: '📤' },
-      { id: 324, bab: 10, jp: '隣', r: 'となり', romaji: 'tonari', arti: 'Sebelah / Tetangga', icon: '🏘️' },
-      { id: 325, bab: 10, jp: '近く', r: 'ちかく', romaji: 'chikaku', arti: 'Dekat', icon: '📍' },
-      { id: 326, bab: 10, jp: '間', r: 'あいだ', romaji: 'aida', arti: 'Antara', icon: '↔️' },
-
-      // BAB 11 - 15
-      { id: 327, bab: 11, jp: 'りんご', r: 'りんご', romaji: 'ringo', arti: 'Apel', icon: '🍎' },
-      { id: 328, bab: 11, jp: 'みかん', r: 'みかん', romaji: 'mikan', arti: 'Jeruk', icon: '🍊' },
-      { id: 329, bab: 11, jp: 'サンドイッチ', r: 'サンドイッチ', romaji: 'sandoicchi', arti: 'Sandwich / Roti lapis', icon: '🥪' },
-      { id: 330, bab: 11, jp: 'カレー', r: 'カレー', romaji: 'karee', arti: 'Kari', icon: '🍛' },
-      { id: 331, bab: 11, jp: 'アイスクリーム', r: 'アイスクリーム', romaji: 'aisukuriimu', arti: 'Es krim', icon: '🍦' },
-      { id: 332, bab: 11, jp: '切手', r: 'きって', romaji: 'kitte', arti: 'Perangko', icon: '📮' },
-      { id: 333, bab: 11, jp: 'はがき', r: 'はがき', romaji: 'hagaki', arti: 'Kartu pos', icon: '💌' },
-      { id: 334, bab: 11, jp: '封筒', r: 'ふうとう', romaji: 'fuutou', arti: 'Amplop', icon: '✉️' },
-      { id: 335, bab: 11, jp: '両親', r: 'りょうしん', romaji: 'ryoushin', arti: 'Orang tua', icon: '👨‍👩‍👧' },
-      { id: 336, bab: 11, jp: '兄弟', r: 'きょうだい', romaji: 'kyoudai', arti: 'Saudara kandung', icon: '👫' },
-      { id: 337, bab: 11, jp: '兄', r: 'あに', romaji: 'ani', arti: 'Kakak laki-laki (sendiri)', icon: '👦' },
-      { id: 338, bab: 11, jp: 'お兄さん', r: 'おにいさん', romaji: 'oniisan', arti: 'Kakak laki-laki (orang lain)', icon: '🧑' },
-      { id: 339, bab: 11, jp: '姉', r: 'あね', romaji: 'ane', arti: 'Kakak perempuan (sendiri)', icon: '👧' },
-      { id: 340, bab: 11, jp: 'お姉さん', r: 'おねえさん', romaji: 'oneesan', arti: 'Kakak perempuan (orang lain)', icon: '👩' },
-      { id: 341, bab: 11, jp: '弟', r: 'おとうと', romaji: 'otouto', arti: 'Adik laki-laki (sendiri)', icon: '🧒' },
-      { id: 342, bab: 11, jp: '妹', r: 'いもうと', romaji: 'imouto', arti: 'Adik perempuan (sendiri)', icon: '👧' },
-      { id: 343, bab: 11, jp: '外国', r: 'がいこく', romaji: 'gaikoku', arti: 'Luar negeri', icon: '🌍' },
-      { id: 344, bab: 11, jp: '留学生', r: 'りゅうがくせい', romaji: 'ryuugakusei', arti: 'Pelajar asing', icon: '🎓' },
-
-      { id: 345, bab: 12, jp: '簡単', r: 'かんたん', romaji: 'kantan', arti: 'Mudah / Sederhana', icon: '👌' },
-      { id: 346, bab: 12, jp: '近い', r: 'ちかい', romaji: 'chikai', arti: 'Dekat', icon: '📍' },
-      { id: 347, bab: 12, jp: '遠い', r: 'とおい', romaji: 'tooi', arti: 'Jauh', icon: '🔭' },
-      { id: 348, bab: 12, jp: '速い', r: 'はやい', romaji: 'hayai', arti: 'Cepat', icon: '⚡' },
-      { id: 349, bab: 12, jp: '遅い', r: 'おそい', romaji: 'osoi', arti: 'Lambat / Terlambat', icon: '🐢' },
-      { id: 350, bab: 12, jp: '多い', r: 'おおい', romaji: 'ooi', arti: 'Banyak', icon: '👨‍👩‍👧‍👦' },
-      { id: 351, bab: 12, jp: '少ない', r: 'すくない', romaji: 'sukunai', arti: 'Sedikit', icon: '🤏' },
-      { id: 352, bab: 12, jp: '暖かい', r: 'あたたかい', romaji: 'atatakai', arti: 'Hangat', icon: '☀️' },
-      { id: 353, bab: 12, jp: '涼しい', r: 'すずしい', romaji: 'suzushii', arti: 'Sejuk', icon: '🍃' },
-      { id: 354, bab: 12, jp: '甘い', r: 'あまい', romaji: 'amai', arti: 'Manis', icon: '🍭' },
-      { id: 355, bab: 12, jp: '辛い', r: 'からい', romaji: 'karai', arti: 'Pedas', icon: '🌶️' },
-      { id: 356, bab: 12, jp: '重い', r: 'おもい', romaji: 'omoi', arti: 'Berat', icon: '🏋️' },
-      { id: 357, bab: 12, jp: '軽い', r: 'かるい', romaji: 'karui', arti: 'Ringan', icon: '🪶' },
-      { id: 358, bab: 12, jp: '季節', r: 'きせつ', romaji: 'kisetsu', arti: 'Musim', icon: '🍂' },
-      { id: 359, bab: 12, jp: '春', r: 'はる', romaji: 'haru', arti: 'Musim semi', icon: '🌸' },
-      { id: 360, bab: 12, jp: '夏', r: 'なつ', romaji: 'natsu', arti: 'Musim panas', icon: '🌻' },
-      { id: 361, bab: 12, jp: '秋', r: 'あき', romaji: 'aki', arti: 'Musim gugur', icon: '🍁' },
-      { id: 362, bab: 12, jp: '冬', r: 'ふゆ', romaji: 'fuyu', arti: 'Musim dingin', icon: '⛄' },
-      { id: 363, bab: 12, jp: '天気', r: 'てんき', romaji: 'tenki', arti: 'Cuaca', icon: '⛅' },
-      { id: 364, bab: 12, jp: '雨', r: 'あめ', romaji: 'ame', arti: 'Hujan', icon: '🌧️' },
-      { id: 365, bab: 12, jp: '雪', r: 'ゆき', romaji: 'yuki', arti: 'Salju', icon: '❄️' },
-      { id: 366, bab: 12, jp: '曇り', r: 'くもり', romaji: 'kumori', arti: 'Mendung', icon: '☁️' },
-      { id: 367, bab: 12, jp: 'ホテル', r: 'ホテル', romaji: 'hoteru', arti: 'Hotel', icon: '🏨' },
-      { id: 368, bab: 12, jp: '空港', r: 'くうこう', romaji: 'kuukou', arti: 'Bandara', icon: '🛫' },
-      { id: 369, bab: 12, jp: '海', r: 'うみ', romaji: 'umi', arti: 'Laut / Pantai', icon: '🌊' },
-      { id: 370, bab: 12, jp: '世界', r: 'せかい', romaji: 'sekai', arti: 'Dunia', icon: '🌎' },
-      { id: 371, bab: 12, jp: 'パーティー', r: 'パーティー', romaji: 'paatii', arti: 'Pesta', icon: '🎉' },
-      { id: 372, bab: 12, jp: 'お祭り', r: 'おまつり', romaji: 'omatsuri', arti: 'Festival / Perayaan', icon: '🏮' },
-
-      { id: 373, bab: 13, jp: '遊びます', r: 'あそびます', romaji: 'asobimasu', arti: 'Bermain', icon: '🎮' },
-      { id: 374, bab: 13, jp: '泳ぎます', r: 'およぎます', romaji: 'oyogimasu', arti: 'Berenang', icon: '🏊' },
-      { id: 375, bab: 13, jp: '迎えます', r: 'むかえます', romaji: 'mukaemasu', arti: 'Menjemput', icon: '🚖' },
-      { id: 376, bab: 13, jp: '疲れます', r: 'つかれます', romaji: 'tsukaremasu', arti: 'Lelah / Capek', icon: '😫' },
-      { id: 377, bab: 13, jp: '結婚します', r: 'けっこんします', romaji: 'kekkonshimasu', arti: 'Menikah', icon: '💒' },
-      { id: 378, bab: 13, jp: '買い物します', r: 'かいものします', romaji: 'kaimonoshimasu', arti: 'Berbelanja', icon: '🛍️' },
-      { id: 379, bab: 13, jp: '食事します', r: 'しょくじします', romaji: 'shokujishimasu', arti: 'Makan bersama', icon: '🍽️' },
-      { id: 380, bab: 13, jp: '散歩します', r: 'さんぽします', romaji: 'sanposhimasu', arti: 'Jalan-jalan', icon: '🚶‍♂️' },
-      { id: 381, bab: 13, jp: '大変', r: 'たいへん', romaji: 'taihen', arti: 'Berat / Sulit / Gawat', icon: '😰' },
-      { id: 382, bab: 13, jp: '欲しい', r: 'ほしい', romaji: 'hoshii', arti: 'Ingin (benda)', icon: '🤩' },
-      { id: 383, bab: 13, jp: '広い', r: 'ひろい', romaji: 'hiroi', arti: 'Luas', icon: '🏟️' },
-      { id: 384, bab: 13, jp: '狭い', r: 'せまい', romaji: 'semai', arti: 'Sempit', icon: '📦' },
-      { id: 385, bab: 13, jp: 'プール', r: 'プール', romaji: 'puuru', arti: 'Kolam renang', icon: '🏊‍♂️' },
-      { id: 386, bab: 13, jp: '川', r: 'かわ', romaji: 'kawa', arti: 'Sungai', icon: '🏞️' },
-      { id: 387, bab: 13, jp: '美術', r: 'びじゅつ', romaji: 'bijutsu', arti: 'Seni rupa', icon: '🎨' },
-      { id: 388, bab: 13, jp: '釣り', r: 'つり', romaji: 'tsuri', arti: 'Memancing', icon: '🎣' },
-      { id: 389, bab: 13, jp: 'スキー', r: 'スキー', romaji: 'sukii', arti: 'Ski', icon: '⛷️' },
-      { id: 390, bab: 13, jp: '週末', r: 'しゅうまつ', romaji: 'shuumatsu', arti: 'Akhir pekan', icon: '📅' },
-      { id: 391, bab: 13, jp: 'お正月', r: 'おしょうがつ', romaji: 'oshougatsu', arti: 'Tahun baru Jepang', icon: '🎍' },
-
-      { id: 392, bab: 14, jp: 'つけます', r: 'つけます', romaji: 'tsukemasu', arti: 'Menyalakan (lampu/AC)', icon: '💡' },
-      { id: 393, bab: 14, jp: '消します', r: 'けします', romaji: 'keshimasu', arti: 'Mematikan / Menghapus', icon: '🔌' },
-      { id: 394, bab: 14, jp: '開けます', r: 'あけます', romaji: 'akemasu', arti: 'Membuka', icon: '🔓' },
-      { id: 395, bab: 14, jp: '閉めます', r: 'しめます', romaji: 'shimemasu', arti: 'Menutup', icon: '🔒' },
-      { id: 396, bab: 14, jp: '急ぎます', r: 'いそぎます', romaji: 'isogimasu', arti: 'Buru-buru', icon: '🏃💨' },
-      { id: 397, bab: 14, jp: '待ちます', r: 'まちます', romaji: 'machimasu', arti: 'Menunggu', icon: '⏳' },
-      { id: 398, bab: 14, jp: '止めます', r: 'とめます', romaji: 'tomemasu', arti: 'Menghentikan / Memarkir', icon: '🛑' },
-      { id: 399, bab: 14, jp: '曲がります', r: 'まがります', romaji: 'magarimasu', arti: 'Belok', icon: '↪️' },
-      { id: 400, bab: 14, jp: '持ちます', r: 'もちます', romaji: 'mochimasu', arti: 'Membawa / Memegang', icon: '👜' },
-      { id: 401, bab: 14, jp: '取ります', r: 'とります', romaji: 'torimasu', arti: 'Mengambil', icon: '🤏' },
-      { id: 402, bab: 14, jp: '手伝います', r: 'てつだいます', romaji: 'tetsudaimasu', arti: 'Membantu', icon: '🤝' },
-      { id: 403, bab: 14, jp: '呼びます', r: 'よびます', romaji: 'yobimasu', arti: 'Memanggil', icon: '📣' },
-      { id: 404, bab: 14, jp: '話します', r: 'はなします', romaji: 'hanashimasu', arti: 'Berbicara', icon: '🗣️' },
-      { id: 405, bab: 14, jp: '見せます', r: 'みせます', romaji: 'misemasu', arti: 'Memperlihatkan', icon: '👀' },
-      { id: 406, bab: 14, jp: '始めます', r: 'はじめます', romaji: 'hajimemasu', arti: 'Memulai', icon: '▶️' },
-      { id: 407, bab: 14, jp: '降ります', r: 'ふります', romaji: 'furimasu', arti: 'Turun (hujan/salju)', icon: '☔' },
-      { id: 408, bab: 14, jp: 'コピーします', r: 'コピーします', romaji: 'kopiishimasu', arti: 'Memfotokopi', icon: '🖨️' },
-      { id: 409, bab: 14, jp: 'エアコン', r: 'エアコン', romaji: 'eakon', arti: 'AC / Pendingin ruangan', icon: '❄️' },
-      { id: 410, bab: 14, jp: 'パスポート', r: 'パスポート', romaji: 'pasupooto', arti: 'Paspor', icon: '🛂' },
-      { id: 411, bab: 14, jp: '名前', r: 'なまえ', romaji: 'namae', arti: 'Nama', icon: '📛' },
-      { id: 412, bab: 14, jp: '住所', r: 'じゅうしょ', romaji: 'juusho', arti: 'Alamat', icon: '🏠' },
-      { id: 413, bab: 14, jp: '地図', r: 'ちず', romaji: 'chizu', arti: 'Peta', icon: '🗺️' },
-      { id: 414, bab: 14, jp: '塩', r: 'しお', romaji: 'shio', arti: 'Garam', icon: '🧂' },
-      { id: 415, bab: 14, jp: '砂糖', r: 'さとう', romaji: 'satou', arti: 'Gula', icon: '🍬' },
-      { id: 416, bab: 14, jp: '問題', r: 'もんだい', romaji: 'mondai', arti: 'Masalah / Soal', icon: '❓' },
-      { id: 417, bab: 14, jp: '答え', r: 'こたえ', romaji: 'kotae', arti: 'Jawaban', icon: '✅' },
-
-      { id: 418, bab: 15, jp: '立ちます', r: 'たちます', romaji: 'tachimasu', arti: 'Berdiri', icon: '🧍' },
-      { id: 419, bab: 15, jp: '座ります', r: 'すわります', romaji: 'suwarimasu', arti: 'Duduk', icon: '🪑' },
-      { id: 420, bab: 15, jp: '使います', r: 'つかいます', romaji: 'tsukaimasu', arti: 'Menggunakan / Memakai', icon: '🔧' },
-      { id: 421, bab: 15, jp: '置きます', r: 'おきます', romaji: 'okimasu', arti: 'Meletakkan', icon: '📥' },
-      { id: 422, bab: 15, jp: '作ります', r: 'つくります', romaji: 'tsukurimasu', arti: 'Membuat', icon: '🛠️' },
-      { id: 423, bab: 15, jp: '売ります', r: 'うります', romaji: 'urimasu', arti: 'Menjual', icon: '🏪' },
-      { id: 424, bab: 15, jp: '知ります', r: 'しります', romaji: 'shirimasu', arti: 'Tahu / Kenal', icon: '🧠' },
-      { id: 425, bab: 15, jp: '住みます', r: 'すみます', romaji: 'sumimasu', arti: 'Tinggal', icon: '🏡' },
-      { id: 426, bab: 15, jp: '研究します', r: 'けんきゅうします', romaji: 'kenkyuushimasu', arti: 'Meneliti', icon: '🔬' },
-      { id: 427, bab: 15, jp: '資料', r: 'しりょう', romaji: 'shiryou', arti: 'Data / Dokumen', icon: '📁' },
-      { id: 428, bab: 15, jp: 'カタログ', r: 'カタログ', romaji: 'katarogu', arti: 'Katalog', icon: '📖' },
-      { id: 429, bab: 15, jp: '時刻表', r: 'じこくひょう', romaji: 'jikokuhyou', arti: 'Jadwal keberangkatan', icon: '🕒' },
-      { id: 430, bab: 15, jp: '服', r: 'ふく', romaji: 'fuku', arti: 'Pakaian', icon: '👗' },
-      { id: 431, bab: 15, jp: '製品', r: 'せいひん', romaji: 'seihin', arti: 'Produk', icon: '📦' },
-      { id: 432, bab: 15, jp: 'ソフト', r: 'ソフト', romaji: 'sofuto', arti: 'Perangkat lunak / Software', icon: '💿' },
-      { id: 433, bab: 15, jp: '専門', r: 'せんもん', romaji: 'senmon', arti: 'Jurusan / Keahlian', icon: '🎓' },
-      { id: 434, bab: 15, jp: '歯医者', r: 'はいしゃ', romaji: 'haisha', arti: 'Dokter gigi', icon: '🦷' },
-      { id: 435, bab: 15, jp: '床屋', r: 'とこや', romaji: 'tokoya', arti: 'Tukang cukur', icon: '💈' },
-      { id: 436, bab: 15, jp: '独身', r: 'どくしん', romaji: 'dokushin', arti: 'Lajang / Belum menikah', icon: '🧑' },
-
-      // BAB 16 - 25
-      { id: 437, bab: 16, jp: '乗ります', r: 'のります', romaji: 'norimasu', arti: 'Naik (kendaraan)', icon: '🚌' },
-      { id: 438, bab: 16, jp: '降ります', r: 'おります', romaji: 'orimasu', arti: 'Turun (kendaraan)', icon: '🚶' },
-      { id: 439, bab: 16, jp: '乗り換えます', r: 'のりかえます', romaji: 'norikaemasu', arti: 'Ganti kendaraan / Transit', icon: '🔄' },
-      { id: 440, bab: 16, jp: '浴びます', r: 'あびます', romaji: 'abimasu', arti: 'Mandi (shower)', icon: '🚿' },
-      { id: 441, bab: 16, jp: '入れます', r: 'いれます', romaji: 'iremasu', arti: 'Memasukkan', icon: '📥' },
-      { id: 442, bab: 16, jp: '出します', r: 'だします', romaji: 'dashimasu', arti: 'Mengeluarkan / Mengirim', icon: '📤' },
-      { id: 443, bab: 16, jp: 'おろします', r: 'おろします', romaji: 'oroshimasu', arti: 'Mengambil uang (ATM)', icon: '🏧' },
-      { id: 444, bab: 16, jp: '入ります', r: 'はいります', romaji: 'hairimasu', arti: 'Masuk', icon: '🚪' },
-      { id: 445, bab: 16, jp: '出ます', r: 'でます', romaji: 'demasu', arti: 'Keluar', icon: '🚶‍♂️' },
-      { id: 446, bab: 16, jp: '押します', r: 'おします', romaji: 'oshimasu', arti: 'Menekan / Mendorong', icon: '👆' },
-      { id: 447, bab: 16, jp: '若い', r: 'わかい', romaji: 'wakai', arti: 'Muda', icon: '🧒' },
-      { id: 448, bab: 16, jp: '長い', r: 'ながい', romaji: 'nagai', arti: 'Panjang', icon: '📏' },
-      { id: 449, bab: 16, jp: '短い', r: 'みじかい', romaji: 'mijikai', arti: 'Pendek', icon: '✂️' },
-      { id: 450, bab: 16, jp: '明るい', r: 'あかるい', romaji: 'akarui', arti: 'Terang / Ceria', icon: '☀️' },
-      { id: 451, bab: 16, jp: '暗い', r: 'くらい', romaji: 'kurai', arti: 'Gelap', icon: '🌑' },
-      { id: 452, bab: 16, jp: '体', r: 'からだ', romaji: 'karada', arti: 'Tubuh / Badan', icon: '🧍' },
-      { id: 453, bab: 16, jp: '頭', r: 'あたま', romaji: 'atama', arti: 'Kepala', icon: '🗣️' },
-      { id: 454, bab: 16, jp: '髪', r: 'かみ', romaji: 'kami', arti: 'Rambut', icon: '💇' },
-      { id: 455, bab: 16, jp: '顔', r: 'かお', romaji: 'kao', arti: 'Wajah', icon: '😊' },
-      { id: 456, bab: 16, jp: '目', r: 'め', romaji: 'me', arti: 'Mata', icon: '👁️' },
-      { id: 457, bab: 16, jp: '耳', r: 'みみ', romaji: 'mimi', arti: 'Telinga', icon: '👂' },
-      { id: 458, bab: 16, jp: '鼻', r: 'はな', romaji: 'hana', arti: 'Hidung', icon: '👃' },
-      { id: 459, bab: 16, jp: '口', r: 'くち', romaji: 'kuchi', arti: 'Mulut', icon: '👄' },
-      { id: 460, bab: 16, jp: '歯', r: 'は', romaji: 'ha', arti: 'Gigi', icon: '🦷' },
-      { id: 461, bab: 16, jp: 'お腹', r: 'おなか', romaji: 'onaka', arti: 'Perut', icon: '🤰' },
-      { id: 462, bab: 16, jp: '足', r: 'あし', romaji: 'ashi', arti: 'Kaki', icon: '🦶' },
-
-      { id: 463, bab: 17, jp: '覚えます', r: 'おぼえます', romaji: 'oboemasu', arti: 'Mengingat / Menghafal', icon: '🧠' },
-      { id: 464, bab: 17, jp: '忘れます', r: 'わすれます', romaji: 'wasuremasu', arti: 'Lupa', icon: '🤦' },
-      { id: 465, bab: 17, jp: 'なくします', r: 'なくします', romaji: 'nakushimasu', arti: 'Kehilangan', icon: '🔍' },
-      { id: 466, bab: 17, jp: '払います', r: 'はらいます', romaji: 'haraimasu', arti: 'Membayar', icon: '💳' },
-      { id: 467, bab: 17, jp: '返します', r: 'かえします', romaji: 'kaeshimasu', arti: 'Mengembalikan', icon: '↩️' },
-      { id: 468, bab: 17, jp: '出かけます', r: 'でかけます', romaji: 'dekakemasu', arti: 'Keluar rumah / Pergi', icon: '🚶' },
-      { id: 469, bab: 17, jp: '脱ぎます', r: 'ぬぎます', romaji: 'nugimasu', arti: 'Melepas (pakaian/sepatu)', icon: '👟' },
-      { id: 470, bab: 17, jp: '持って行きます', r: 'もっていきます', romaji: 'motteikimasu', arti: 'Membawa pergi', icon: '🎒' },
-      { id: 471, bab: 17, jp: '持って来ます', r: 'もってきます', romaji: 'mottekimasu', arti: 'Membawa datang', icon: '📦' },
-      { id: 472, bab: 17, jp: '心配します', r: 'しんぱいします', romaji: 'shinpaishimasu', arti: 'Khawatir', icon: '😟' },
-      { id: 473, bab: 17, jp: '残業します', r: 'ざんぎょうします', romaji: 'zangyoushimasu', arti: 'Lembur kerja', icon: '🌃' },
-      { id: 474, bab: 17, jp: '出張します', r: 'しゅっちょうします', romaji: 'shucchoushimasu', arti: 'Dinas luar kota', icon: '💼' },
-      { id: 475, bab: 17, jp: '大切', r: 'たいせつ', romaji: 'taisetsu', arti: 'Penting / Berharga', icon: '💎' },
-      { id: 476, bab: 17, jp: '大丈夫', r: 'だいじょうぶ', romaji: 'daijoubu', arti: 'Tidak apa-apa / Baik-baik saja', icon: '👌' },
-      { id: 477, bab: 17, jp: '危ない', r: 'あぶない', romaji: 'abunai', arti: 'Berbahaya', icon: '⚠️' },
-      { id: 478, bab: 17, jp: '禁煙', r: 'きんえん', romaji: 'kinen', arti: 'Dilarang merokok', icon: '🚭' },
-      { id: 479, bab: 17, jp: '健康保険証', r: 'けんこうほけんしょう', romaji: 'kenkouhokenshou', arti: 'Kartu asuransi kesehatan', icon: '🪪' },
-      { id: 480, bab: 17, jp: '熱', r: 'ねつ', romaji: 'netsu', arti: 'Demam', icon: '🤒' },
-      { id: 481, bab: 17, jp: '病気', r: 'びょうき', romaji: 'byouki', arti: 'Sakit / Penyakit', icon: '🏥' },
-      { id: 482, bab: 17, jp: '薬', r: 'くすり', romaji: 'kusuri', arti: 'Obat', icon: '💊' },
-      { id: 483, bab: 17, jp: 'お風呂', r: 'おふろ', romaji: 'ofuro', arti: 'Kamar mandi / Bak mandi', icon: '🛁' },
-
-      { id: 484, bab: 18, jp: 'できます', r: 'できます', romaji: 'dekimasu', arti: 'Bisa / Dapat', icon: '✅' },
-      { id: 485, bab: 18, jp: '洗います', r: 'あらいます', romaji: 'araimasu', arti: 'Mencuci', icon: '🧼' },
-      { id: 486, bab: 18, jp: '弾きます', r: 'ひきます', romaji: 'hikimasu', arti: 'Bermain alat musik petik/tuts', icon: '🎹' },
-      { id: 487, bab: 18, jp: '歌います', r: 'うたいます', romaji: 'utaimasu', arti: 'Bernyanyi', icon: '🎤' },
-      { id: 488, bab: 18, jp: '集めます', r: 'あつめます', romaji: 'atsumemasu', arti: 'Mengumpulkan', icon: '🗂️' },
-      { id: 489, bab: 18, jp: '捨てます', r: 'すてます', romaji: 'sutemasu', arti: 'Membuang', icon: '🗑️' },
-      { id: 490, bab: 18, jp: '換えます', r: 'かえます', romaji: 'kaemasu', arti: 'Menukar / Mengganti', icon: '💱' },
-      { id: 491, bab: 18, jp: '運転します', r: 'うんてんします', romaji: 'untenshimasu', arti: 'Menyetir / Mengemudi', icon: '🚗' },
-      { id: 492, bab: 18, jp: '予約します', r: 'よやくします', romaji: 'yoyakushimasu', arti: 'Memesan / Reservasi', icon: '📅' },
-      { id: 493, bab: 18, jp: 'ピアノ', r: 'ピアノ', romaji: 'piano', arti: 'Piano', icon: '🎹' },
-      { id: 494, bab: 18, jp: '現金', r: 'げんきん', romaji: 'genkin', arti: 'Uang tunai', icon: '💵' },
-      { id: 495, bab: 18, jp: '趣味', r: 'しゅみ', romaji: 'shumi', arti: 'Hobi', icon: '🎨' },
-      { id: 496, bab: 18, jp: '日記', r: 'にっき', romaji: 'nikki', arti: 'Buku harian', icon: '📔' },
-      { id: 497, bab: 18, jp: 'お祈り', r: 'おいのり', romaji: 'oinori', arti: 'Doa', icon: '🙏' },
-      { id: 498, bab: 18, jp: '社長', r: 'しゃちょう', romaji: 'shachou', arti: 'Direktur utama', icon: '👔' },
-      { id: 499, bab: 18, jp: '部長', r: 'ぶちょう', romaji: 'buchou', arti: 'Kepala bagian / Manajer', icon: '💼' },
-      { id: 500, bab: 18, jp: '課長', r: 'かちょう', romaji: 'kachou', arti: 'Kepala seksi / Supervisor', icon: '📋' },
-
-      { id: 501, bab: 19, jp: '登ります', r: 'のぼります', romaji: 'noborimasu', arti: 'Mendaki / Memanjat', icon: '🧗' },
-      { id: 502, bab: 19, jp: '泊まります', r: 'とまります', romaji: 'tomarimasu', arti: 'Menginap', icon: '🏨' },
-      { id: 503, bab: 19, jp: '掃除します', r: 'そうじします', romaji: 'soujishimasu', arti: 'Membersihkan', icon: '🧹' },
-      { id: 504, bab: 19, jp: '洗濯します', r: 'せんたくします', romaji: 'sentakushimasu', arti: 'Mencuci pakaian', icon: '🧺' },
-      { id: 505, bab: 19, jp: 'なります', r: 'なります', romaji: 'narimasu', arti: 'Menjadi', icon: '🦋' },
-      { id: 506, bab: 19, jp: '眠い', r: 'ねむい', romaji: 'nemui', arti: 'Mengantuk', icon: '🥱' },
-      { id: 507, bab: 19, jp: '強い', r: 'つよい', romaji: 'tsuyoi', arti: 'Kuat', icon: '💪' },
-      { id: 508, bab: 19, jp: '弱い', r: 'よわい', romaji: 'yowai', arti: 'Lemah', icon: '🥀' },
-      { id: 509, bab: 19, jp: '練習', r: 'れんしゅう', romaji: 'renshuu', arti: 'Latihan', icon: '🏋️' },
-      { id: 510, bab: 19, jp: 'ゴルフ', r: 'ゴルフ', romaji: 'gorufu', arti: 'Golf', icon: '🏌️' },
-      { id: 511, bab: 19, jp: '相撲', r: 'すもう', romaji: 'sumou', arti: 'Gulat Sumo', icon: '🤼' },
-      { id: 512, bab: 19, jp: 'お茶', r: 'おちゃ', romaji: 'ocha', arti: 'Upacara minum teh', icon: '🍵' },
-      { id: 513, bab: 19, jp: '日', r: 'ひ', romaji: 'hi', arti: 'Hari / Tanggal', icon: '📅' },
-      { id: 514, bab: 19, jp: '調子', r: 'ちょうし', romaji: 'choushi', arti: 'Kondisi', icon: '📊' },
-
-      { id: 515, bab: 20, jp: '要ります', r: 'いります', romaji: 'irimasu', arti: 'Memerlukan / Butuh', icon: '❗' },
-      { id: 516, bab: 20, jp: '調べます', r: 'しらべます', romaji: 'shirabemasu', arti: 'Memeriksa / Mencari tahu', icon: '🔎' },
-      { id: 517, bab: 20, jp: '修理します', r: 'しゅうりします', romaji: 'shuurishimasu', arti: 'Memperbaiki', icon: '🔧' },
-      { id: 518, bab: 20, jp: '僕', r: 'ぼく', romaji: 'boku', arti: 'Aku (laki-laki)', icon: '👦' },
-      { id: 519, bab: 20, jp: '君', r: 'きみ', romaji: 'kimi', arti: 'Kamu (akrab)', icon: '👉' },
-      { id: 520, bab: 20, jp: '言葉', r: 'ことば', romaji: 'kotoba', arti: 'Kata / Bahasa', icon: '💬' },
-      { id: 521, bab: 20, jp: '着物', r: 'きもの', romaji: 'kimono', arti: 'Kimono', icon: '👘' },
-      { id: 522, bab: 20, jp: 'ビザ', r: 'ビザ', romaji: 'biza', arti: 'Visa', icon: '🛂' },
-      { id: 523, bab: 20, jp: '初め', r: 'はじめ', romaji: 'hajime', arti: 'Awal / Permulaan', icon: '🏁' },
-      { id: 524, bab: 20, jp: '終わり', r: 'おわり', romaji: 'owari', arti: 'Akhir', icon: '🔚' },
-
-      { id: 525, bab: 21, jp: '思います', r: 'おもいます', romaji: 'omoimasu', arti: 'Mengira / Berpikir', icon: '💭' },
-      { id: 526, bab: 21, jp: '言います', r: 'いいます', romaji: 'iimasu', arti: 'Berkata / Mengatakan', icon: '🗣️' },
-      { id: 527, bab: 21, jp: '勝ちます', r: 'かちます', romaji: 'kachimasu', arti: 'Menang', icon: '🏆' },
-      { id: 528, bab: 21, jp: '負けます', r: 'まけます', romaji: 'makemasu', arti: 'Kalah', icon: '🏳️' },
-      { id: 529, bab: 21, jp: '役に立ちます', r: 'やくにたちます', romaji: 'yakunitachimasu', arti: 'Bermanfaat / Berguna', icon: '👍' },
-      { id: 530, bab: 21, jp: '動きます', r: 'うごきます', romaji: 'ugokimasu', arti: 'Bergerak / Berfungsi', icon: '⚙️' },
-      { id: 531, bab: 21, jp: 'やめます', r: 'やめます', romaji: 'yamemasu', arti: 'Berhenti (kerja/kebiasaan)', icon: '🛑' },
-      { id: 532, bab: 21, jp: '気をつけます', r: 'きをつけます', romaji: 'ki o tsukemasu', arti: 'Berhati-hati', icon: '⚠️' },
-      { id: 533, bab: 21, jp: '留学します', r: 'りゅうがくします', romaji: 'ryuugakushimasu', arti: 'Belajar di luar negeri', icon: '✈️' },
-      { id: 534, bab: 21, jp: '無駄', r: 'むだ', romaji: 'muda', arti: 'Sia-sia / Boros', icon: '🗑️' },
-      { id: 535, bab: 21, jp: '不便', r: 'ふべん', romaji: 'fuben', arti: 'Tidak praktis / Repot', icon: '😫' },
-      { id: 536, bab: 21, jp: 'すごい', r: 'すごい', romaji: 'sugoi', arti: 'Hebat / Luar biasa', icon: '🤩' },
-      { id: 537, bab: 21, jp: '本当', r: 'ほんとう', romaji: 'hontou', arti: 'Benar / Sungguh', icon: '💯' },
-      { id: 538, bab: 21, jp: '嘘', r: 'うそ', romaji: 'uso', arti: 'Bohong', icon: '🤥' },
-      { id: 539, bab: 21, jp: '自動車', r: 'じどうしゃ', romaji: 'jidousha', arti: 'Mobil', icon: '🚘' },
-      { id: 540, bab: 21, jp: '交通', r: 'こうつう', romaji: 'koutsuu', arti: 'Lalu lintas / Transportasi', icon: '🚦' },
-      { id: 541, bab: 21, jp: '物価', r: 'ぶっか', romaji: 'bukka', arti: 'Harga barang', icon: '🏷️' },
-      { id: 542, bab: 21, jp: '放送', r: 'ほうそう', romaji: 'housou', arti: 'Siaran', icon: '📡' },
-      { id: 543, bab: 21, jp: 'ニュース', r: 'ニュース', romaji: 'nyuusu', arti: 'Berita', icon: '📰' },
-      { id: 544, bab: 21, jp: 'アニメ', r: 'アニメ', romaji: 'anime', arti: 'Animasi / Anime', icon: '📺' },
-      { id: 545, bab: 21, jp: '漫画', r: 'まんが', romaji: 'manga', arti: 'Komik Jepang', icon: '📖' },
-      { id: 546, bab: 21, jp: 'デザイン', r: 'デザイン', romaji: 'dezain', arti: 'Desain', icon: '🎨' },
-      { id: 547, bab: 21, jp: '夢', r: 'ゆめ', romaji: 'yume', arti: 'Mimpi / Cita-cita', icon: '🌠' },
-      { id: 548, bab: 21, jp: '天才', r: 'てんさい', romaji: 'tensai', arti: 'Jenius', icon: '🧠' },
-      { id: 549, bab: 21, jp: '試合', r: 'しあい', romaji: 'shiai', arti: 'Pertandingan', icon: '🏟️' },
-      { id: 550, bab: 21, jp: '意見', r: 'いけん', romaji: 'iken', arti: 'Pendapat', icon: '💬' },
-      { id: 551, bab: 21, jp: '話', r: 'はなし', romaji: 'hanashi', arti: 'Cerita / Pembicaraan', icon: '🗨️' },
-      { id: 552, bab: 21, jp: '地球', r: 'ちきゅう', romaji: 'chikyuu', arti: 'Bumi', icon: '🌍' },
-      { id: 553, bab: 21, jp: '月', r: 'つき', romaji: 'tsuki', arti: 'Bulan', icon: '🌕' },
-
-      { id: 554, bab: 22, jp: '着ます', r: 'きます', romaji: 'kimasu', arti: 'Memakai (baju/atasan)', icon: '👕' },
-      { id: 555, bab: 22, jp: '履きます', r: 'はきます', romaji: 'hakimasu', arti: 'Memakai (celana/sepatu)', icon: '👖' },
-      { id: 556, bab: 22, jp: 'かぶります', r: 'かぶります', romaji: 'kaburimasu', arti: 'Memakai (topi)', icon: '🧢' },
-      { id: 557, bab: 22, jp: 'かけます', r: 'かけます', romaji: 'kakemasu', arti: 'Memakai (kacamata)', icon: '👓' },
-      { id: 558, bab: 22, jp: '生まれます', r: 'うまれます', romaji: 'umaremasu', arti: 'Lahir', icon: '👶' },
-      { id: 559, bab: 22, jp: 'コート', r: 'コート', romaji: 'kooto', arti: 'Mantel / Jas hujan', icon: '🧥' },
-      { id: 560, bab: 22, jp: 'セーター', r: 'セーター', romaji: 'seetaa', arti: 'Sweter', icon: '🧶' },
-      { id: 561, bab: 22, jp: 'スーツ', r: 'スーツ', romaji: 'suutsu', arti: 'Setelan jas', icon: '🤵' },
-      { id: 562, bab: 22, jp: '帽子', r: 'ぼうし', romaji: 'boushi', arti: 'Topi', icon: '🎩' },
-      { id: 563, bab: 22, jp: '眼鏡', r: 'めがね', romaji: 'megane', arti: 'Kacamata', icon: '👓' },
-      { id: 564, bab: 22, jp: 'ケーキ', r: 'ケーキ', romaji: 'keeki', arti: 'Kue', icon: '🍰' },
-      { id: 565, bab: 22, jp: 'お弁当', r: 'おべんとう', romaji: 'obentou', arti: 'Bekal makanan', icon: '🍱' },
-      { id: 566, bab: 22, jp: 'ロボット', r: 'ロボット', romaji: 'robotto', arti: 'Robot', icon: '🤖' },
-      { id: 567, bab: 22, jp: 'ユーモア', r: 'ユーモア', romaji: 'yuumoa', arti: 'Humor', icon: '😂' },
-      { id: 568, bab: 22, jp: '都合', r: 'つごう', romaji: 'tsugou', arti: 'Kondisi / Kesempatan', icon: '🗓️' },
-
-      { id: 569, bab: 23, jp: '聞きます', r: 'ききます', romaji: 'kikimasu', arti: 'Bertanya', icon: '🙋' },
-      { id: 570, bab: 23, jp: '回します', r: 'まわします', romaji: 'mawashimasu', arti: 'Memutar', icon: '🔄' },
-      { id: 571, bab: 23, jp: '引きます', r: 'ひきます', romaji: 'hikimasu', arti: 'Menarik', icon: '🧲' },
-      { id: 572, bab: 23, jp: '変えます', r: 'かえます', romaji: 'kaemasu', arti: 'Mengubah', icon: '🔀' },
-      { id: 573, bab: 23, jp: '触ります', r: 'さわります', romaji: 'sawarimasu', arti: 'Menyentuh', icon: '👆' },
-      { id: 574, bab: 23, jp: '出ます', r: 'でます', romaji: 'demasu', arti: 'Keluar (uang kembalian)', icon: '🪙' },
-      { id: 575, bab: 23, jp: '歩きます', r: 'あるきます', romaji: 'arukimasu', arti: 'Berjalan kaki', icon: '🚶' },
-      { id: 576, bab: 23, jp: '渡ります', r: 'わたります', romaji: 'watarimasu', arti: 'Menyeberang', icon: '🌉' },
-      { id: 577, bab: 23, jp: '気をつけます', r: 'きをつけます', romaji: 'ki o tsukemasu', arti: 'Berhati-hati (kendaraan)', icon: '🚸' },
-      { id: 578, bab: 23, jp: '引っ越しします', r: 'ひっこしします', romaji: 'hikkoshishimasu', arti: 'Pindah rumah', icon: '🚚' },
-      { id: 579, bab: 23, jp: '電気屋', r: 'でんきや', romaji: 'denkiya', arti: 'Toko elektronik', icon: '🔌' },
-      { id: 580, bab: 23, jp: 'サイズ', r: 'サイズ', romaji: 'saizu', arti: 'Ukuran', icon: '📐' },
-      { id: 581, bab: 23, jp: '音', r: 'おと', romaji: 'oto', arti: 'Suara / Bunyi', icon: '🔊' },
-      { id: 582, bab: 23, jp: '機械', r: 'きかい', romaji: 'kikai', arti: 'Mesin', icon: '⚙️' },
-      { id: 583, bab: 23, jp: 'つまみ', r: 'つまみ', romaji: 'tsumami', arti: 'Tombol putar / Kenop', icon: '🎛️' },
-      { id: 584, bab: 23, jp: '故障', r: 'こしょう', romaji: 'koshou', arti: 'Kerusakan / Mogok', icon: '🛠️' },
-      { id: 585, bab: 23, jp: '道', r: 'みち', romaji: 'michi', arti: 'Jalan', icon: '🛣️' },
-      { id: 586, bab: 23, jp: '交差点', r: 'こうさてん', romaji: 'kousaten', arti: 'Perempatan jalan', icon: '🚦' },
-      { id: 587, bab: 23, jp: '信号', r: 'しんごう', romaji: 'shingou', arti: 'Lampu lalu lintas', icon: '🚥' },
-      { id: 588, bab: 23, jp: '角', r: 'かど', romaji: 'kado', arti: 'Sudut / Tikungan', icon: '📐' },
-      { id: 589, bab: 23, jp: '橋', r: 'はし', romaji: 'hashi', arti: 'Jembatan', icon: '🌉' },
-      { id: 590, bab: 23, jp: '駐車場', r: 'ちゅうしゃじょう', romaji: 'chuushajou', arti: 'Tempat parkir', icon: '🅿️' },
-      { id: 591, bab: 23, jp: '建物', r: 'たてもの', romaji: 'tatemono', arti: 'Bangunan / Gedung', icon: '🏛️' },
-
-      { id: 592, bab: 24, jp: 'くれます', r: 'くれます', romaji: 'kuremasu', arti: 'Memberi (kepada saya)', icon: '🎁' },
-      { id: 593, bab: 24, jp: '直します', r: 'なおします', romaji: 'naoshimasu', arti: 'Memperbaiki / Mengoreksi', icon: '🔧' },
-      { id: 594, bab: 24, jp: '連れて行きます', r: 'つれていきます', romaji: 'tsureteikimasu', arti: 'Mengajak pergi', icon: '🚶‍♂️' },
-      { id: 595, bab: 24, jp: '連れて来ます', r: 'つれてきます', romaji: 'tsuretekimasu', arti: 'Mengajak datang', icon: '🤝' },
-      { id: 596, bab: 24, jp: '送ります', r: 'おくります', romaji: 'okurimasu', arti: 'Mengantar (orang)', icon: '🚗' },
-      { id: 597, bab: 24, jp: '紹介します', r: 'しょうかいします', romaji: 'shoukaishimasu', arti: 'Memperkenalkan', icon: '🙇' },
-      { id: 598, bab: 24, jp: '案内します', r: 'あんないします', romaji: 'annaishimasu', arti: 'Memandu / Mengantarkan keliling', icon: '🗺️' },
-      { id: 599, bab: 24, jp: '説明します', r: 'せつめいします', romaji: 'setsumeishimasu', arti: 'Menjelaskan', icon: '📊' },
-      { id: 600, bab: 24, jp: 'おじいさん', r: 'おじいさん', romaji: 'ojiisan', arti: 'Kakek', icon: '👴' },
-      { id: 601, bab: 24, jp: 'おばあさん', r: 'おばあさん', romaji: 'obaasan', arti: 'Nenek', icon: '👵' },
-      { id: 602, bab: 24, jp: '準備', r: 'じゅんび', romaji: 'junbi', arti: 'Persiapan', icon: '📋' },
-      { id: 603, bab: 24, jp: '引っ越し', r: 'ひっこし', romaji: 'hikkoshi', arti: 'Pindah rumah', icon: '📦' },
-      { id: 604, bab: 24, jp: 'お菓子', r: 'おかし', romaji: 'okashi', arti: 'Camilan / Kue manis', icon: '🍪' },
-      { id: 605, bab: 24, jp: 'ホームステイ', r: 'ホームステイ', romaji: 'hoomusutei', arti: 'Homestay', icon: '🏡' },
-
-      { id: 606, bab: 25, jp: '考えます', r: 'かんがえます', romaji: 'kangaemasu', arti: 'Berpikir / Mempertimbangkan', icon: '🤔' },
-      { id: 607, bab: 25, jp: '着きます', r: 'つきます', romaji: 'tsukimasu', arti: 'Tiba / Sampai', icon: '🏁' },
-      { id: 608, bab: 25, jp: '取ります', r: 'とります', romaji: 'torimasu', arti: 'Bertambah (umur)', icon: '🎂' },
-      { id: 609, bab: 25, jp: '足ります', r: 'たります', romaji: 'tarimasu', arti: 'Cukup', icon: '👌' },
-      { id: 610, bab: 25, jp: '田舎', r: 'いなか', romaji: 'inaka', arti: 'Kampung halaman / Desa', icon: '🌾' },
-      { id: 611, bab: 25, jp: 'チャンス', r: 'チャンス', romaji: 'chansu', arti: 'Kesempatan / Peluang', icon: '🎯' },
-      { id: 612, bab: 25, jp: '億', r: 'おく', romaji: 'oku', arti: 'Ratus juta', icon: '💰' },
-      { id: 613, bab: 25, jp: '転勤', r: 'てんきん', romaji: 'tenkin', arti: 'Pindah tugas kerja', icon: '🏢' },
-
-      // BAB 26 - 35
-      { id: 614, bab: 26, jp: '見ます', r: 'みます', romaji: 'mimasu', arti: 'Memeriksa / Melihat', icon: '🩺' },
-      { id: 615, bab: 26, jp: '探します', r: 'さがします', romaji: 'sagashimasu', arti: 'Mencari', icon: '🔍' },
-      { id: 616, bab: 26, jp: '遅れます', r: 'おくれます', romaji: 'okuremasu', arti: 'Terlambat', icon: '⏰' },
-      { id: 617, bab: 26, jp: '間に合います', r: 'まにあいます', romaji: 'maniaimasu', arti: 'Tepat waktu / Sempat', icon: '⏱️' },
-      { id: 618, bab: 26, jp: 'やります', r: 'やります', romaji: 'yarimasu', arti: 'Melakukan', icon: '💪' },
-      { id: 619, bab: 26, jp: '参加します', r: 'さんかします', romaji: 'sankashimasu', arti: 'Ikut serta / Berpartisipasi', icon: '🙋‍♂️' },
-      { id: 620, bab: 26, jp: '申し込みます', r: 'もうしこみます', romaji: 'moushikomimasu', arti: 'Mendaftar', icon: '📝' },
-      { id: 621, bab: 26, jp: '連絡します', r: 'れんらくします', romaji: 'renrakushimasu', arti: 'Menghubungi', icon: '📱' },
-      { id: 622, bab: 26, jp: '気分がいい', r: 'きぶんがいい', romaji: 'kibun ga ii', arti: 'Perasaan enak / Sehat', icon: '😄' },
-      { id: 623, bab: 26, jp: '気分が悪い', r: 'きぶんがわるい', romaji: 'kibun ga warui', arti: 'Perasaan tidak enak / Mual', icon: '🤢' },
-      { id: 624, bab: 26, jp: '運動会', r: 'うんどうかい', romaji: 'undoukai', arti: 'Lomba olahraga', icon: '🏃' },
-      { id: 625, bab: 26, jp: '盆踊り', r: 'ぼんおどり', romaji: 'bonodori', arti: 'Tarian Bon Odori', icon: '🏮' },
-      { id: 626, bab: 26, jp: 'フリーマーケット', r: 'フリーマーケット', romaji: 'furiimaaketto', arti: 'Pasar loak', icon: '🛍️' },
-      { id: 627, bab: 26, jp: '場所', r: 'ばしょ', romaji: 'basho', arti: 'Tempat / Lokasi', icon: '📍' },
-      { id: 628, bab: 26, jp: 'ボランティア', r: 'ボランティア', romaji: 'borantia', arti: 'Sukarelawan', icon: '🤝' },
-      { id: 629, bab: 26, jp: '財布', r: 'さいふ', romaji: 'saifu', arti: 'Dompet', icon: '👛' },
-      { id: 630, bab: 26, jp: 'ごみ', r: 'ごみ', romaji: 'gomi', arti: 'Sampah', icon: '🗑️' },
-      { id: 631, bab: 26, jp: '国会議事堂', r: 'こっかいぎじどう', romaji: 'kokkaigijidou', arti: 'Gedung Parlemen Jepang', icon: '🏛️' },
-
-      { id: 632, bab: 27, jp: '飼います', r: 'かいます', romaji: 'kaimasu', arti: 'Memelihara (hewan)', icon: '🐕' },
-      { id: 633, bab: 27, jp: '走ります', r: 'はしります', romaji: 'hashirimasu', arti: 'Berlari', icon: '🏃‍♂️' },
-      { id: 634, bab: 27, jp: '見えます', r: 'みえます', romaji: 'miemasu', arti: 'Terlihat', icon: '👀' },
-      { id: 635, bab: 27, jp: '聞こえます', r: 'きこえます', romaji: 'kikoemasu', arti: 'Terdengar', icon: '👂' },
-      { id: 636, bab: 27, jp: 'できます', r: 'できます', romaji: 'dekimasu', arti: 'Selesai dibuat / Jadi', icon: '🏗️' },
-      { id: 637, bab: 27, jp: '開きます', r: 'ひらきます', romaji: 'hirakimasu', arti: 'Membuka (kelas/acara)', icon: '🏫' },
-      { id: 638, bab: 27, jp: 'ペット', r: 'ペット', romaji: 'petto', arti: 'Hewan peliharaan', icon: '🐾' },
-      { id: 639, bab: 27, jp: '鳥', r: 'とり', romaji: 'tori', arti: 'Burung', icon: '🐦' },
-      { id: 640, bab: 27, jp: '声', r: 'こえ', romaji: 'koe', arti: 'Suara (orang/hewan)', icon: '🗣️' },
-      { id: 641, bab: 27, jp: '波', r: 'なみ', romaji: 'nami', arti: 'Ombak', icon: '🌊' },
-      { id: 642, bab: 27, jp: '花火', r: 'はなび', romaji: 'hanabi', arti: 'Kembang api', icon: '🎆' },
-      { id: 643, bab: 27, jp: '景色', r: 'けしき', romaji: 'keshiki', arti: 'Pemandangan', icon: '🏞️' },
-      { id: 644, bab: 27, jp: '昼間', r: 'ひるま', romaji: 'hiruma', arti: 'Siang hari', icon: '☀️' },
-      { id: 645, bab: 27, jp: '昔', r: 'むかし', romaji: 'mukashi', arti: 'Dahulu kala / Masa lalu', icon: '📜' },
-      { id: 646, bab: 27, jp: '道具', r: 'どうぐ', romaji: 'dougu', arti: 'Alat / Perkakas', icon: '🧰' },
-      { id: 647, bab: 27, jp: '自動販売機', r: 'じどうはんばいき', romaji: 'jidouhanbaiki', arti: 'Mesin jual otomatis', icon: '🥤' },
-      { id: 648, bab: 27, jp: '通信販売', r: 'つうしんはんばい', romaji: 'tsuushinhanbai', arti: 'Belanja online / Pesan antar', icon: '📦' },
-      { id: 649, bab: 27, jp: 'クリーニング', r: 'クリーニング', romaji: 'kuriiningu', arti: 'Binatu / Laundry', icon: '👔' },
-      { id: 650, bab: 27, jp: 'マンション', r: 'マンション', romaji: 'manshon', arti: 'Apartemen modern', icon: '🏢' },
-      { id: 651, bab: 27, jp: '台所', r: 'だいどころ', romaji: 'daidokoro', arti: 'Dapur', icon: '🍳' },
-
-      { id: 652, bab: 28, jp: '売れます', r: 'うれます', romaji: 'uremasu', arti: 'Terjual / Laku', icon: '💰' },
-      { id: 653, bab: 28, jp: '踊ります', r: 'おどります', romaji: 'odorimasu', arti: 'Menari', icon: '💃' },
-      { id: 654, bab: 28, jp: '噛みます', r: 'かみます', romaji: 'kamimasu', arti: 'Menggigit / Mengunyah', icon: '🦷' },
-      { id: 655, bab: 28, jp: '選びます', r: 'えらびます', romaji: 'erabimasu', arti: 'Memilih', icon: '☑️' },
-      { id: 656, bab: 28, jp: '通います', r: 'かよいます', romaji: 'kayoimasu', arti: 'Pulang-pergi (sekolah/kerja)', icon: '🚃' },
-      { id: 657, bab: 28, jp: 'メモします', r: 'メモします', romaji: 'memoshimasu', arti: 'Mencatat', icon: '📝' },
-      { id: 658, bab: 28, jp: '真面目', r: 'まじめ', romaji: 'majime', arti: 'Serius / Rajin', icon: '🧐' },
-      { id: 659, bab: 28, jp: '熱心', r: 'ねっしん', romaji: 'nesshin', arti: 'Tekun / Antusias', icon: '🔥' },
-      { id: 660, bab: 28, jp: '優しい', r: 'やさしい', romaji: 'yasashii', arti: 'Baik hati / Lembut', icon: '🥰' },
-      { id: 661, bab: 28, jp: '偉い', r: 'えらい', romaji: 'erai', arti: 'Hebat / Terhormat', icon: '👑' },
-      { id: 662, bab: 28, jp: 'ちょうどいい', r: 'ちょうどいい', romaji: 'choudo ii', arti: 'Pas / Tepat sekali', icon: '👌' },
-      { id: 663, bab: 28, jp: '習慣', r: 'しゅうかん', romaji: 'shuukan', arti: 'Kebiasaan / Adat', icon: '🔄' },
-      { id: 664, bab: 28, jp: '経験', r: 'けいけん', romaji: 'keiken', arti: 'Pengalaman', icon: '🎓' },
-      { id: 665, bab: 28, jp: '力', r: 'ちから', romaji: 'chikara', arti: 'Tenaga / Kekuatan', icon: '💪' },
-      { id: 666, bab: 28, jp: '人気', r: 'にんき', romaji: 'ninki', arti: 'Populer', icon: '⭐' },
-      { id: 667, bab: 28, jp: '形', r: 'かたち', romaji: 'katachi', arti: 'Bentuk', icon: '🔷' },
-      { id: 668, bab: 28, jp: '色', r: 'いろ', romaji: 'iro', arti: 'Warna', icon: '🎨' },
-      { id: 669, bab: 28, jp: '味', r: 'あじ', romaji: 'aji', arti: 'Rasa', icon: '👅' },
-      { id: 670, bab: 28, jp: 'ガム', r: 'ガム', romaji: 'gamu', arti: 'Permen karet', icon: '🍬' },
-      { id: 671, bab: 28, jp: '品物', r: 'しなもの', romaji: 'shinamono', arti: 'Barang dagangan', icon: '📦' },
-      { id: 672, bab: 28, jp: '値段', r: 'ねだん', romaji: 'nedan', arti: 'Harga', icon: '🏷️' },
-      { id: 673, bab: 28, jp: '給料', r: 'きゅうりょう', romaji: 'kyuuryou', arti: 'Gaji', icon: '💵' },
-      { id: 674, bab: 28, jp: 'ボーナス', r: 'ボーナス', romaji: 'boonasu', arti: 'Bonus', icon: '🧧' },
-
-      { id: 675, bab: 29, jp: '開きます', r: 'あきます', romaji: 'akimasu', arti: 'Terbuka', icon: '🚪' },
-      { id: 676, bab: 29, jp: '閉まります', r: 'しまります', romaji: 'shimarimasu', arti: 'Tertutup', icon: '🔒' },
-      { id: 677, bab: 29, jp: 'つきます', r: 'つきます', romaji: 'tsukimasu', arti: 'Menyala', icon: '💡' },
-      { id: 678, bab: 29, jp: '消えます', r: 'きえます', romaji: 'kiemasu', arti: 'Padam / Mati', icon: '🌑' },
-      { id: 679, bab: 29, jp: '込みます', r: 'こみます', romaji: 'komimasu', arti: 'Macet / Penuh sesak', icon: '🚦' },
-      { id: 680, bab: 29, jp: 'すきます', r: 'すきます', romaji: 'sukimasu', arti: 'Sepi / Lengang', icon: '🛣️' },
-      { id: 681, bab: 29, jp: '壊れます', r: 'こわれます', romaji: 'kowaremasu', arti: 'Rusak', icon: '💔' },
-      { id: 682, bab: 29, jp: '割れます', r: 'われます', romaji: 'waremasu', arti: 'Pecah (gelas/piring)', icon: '🥛' },
-      { id: 683, bab: 29, jp: '折れます', r: 'おれます', romaji: 'oremasu', arti: 'Patah (kayu/tulang)', icon: '🦴' },
-      { id: 684, bab: 29, jp: '破れます', r: 'やぶれます', romaji: 'yaburemasu', arti: 'Robek (kertas/baju)', icon: '📄' },
-      { id: 685, bab: 29, jp: '汚れます', r: 'よごれます', romaji: 'yogoremasu', arti: 'Menjadi kotor', icon: '💩' },
-      { id: 686, bab: 29, jp: '付きます', r: 'つきます', romaji: 'tsukimasu', arti: 'Ada / Terpasang (saku)', icon: '🧥' },
-      { id: 687, bab: 29, jp: '外れます', r: 'はずれます', romaji: 'hazuremasu', arti: 'Lepas / Copot (kancing)', icon: '🔘' },
-      { id: 688, bab: 29, jp: '止まります', r: 'とまります', romaji: 'tomarimasu', arti: 'Berhenti', icon: '🛑' },
-      { id: 689, bab: 29, jp: '間違えます', r: 'まちがえます', romaji: 'machigaemasu', arti: 'Keliru / Salah', icon: '❌' },
-      { id: 690, bab: 29, jp: '落とします', r: 'おとします', romaji: 'otoshimasu', arti: 'Menjatuhkan', icon: '📉' },
-      { id: 691, bab: 29, jp: 'かかります', r: 'かかります', romaji: 'kakarimasu', arti: 'Terkunci', icon: '🔐' },
-      { id: 692, bab: 29, jp: 'お皿', r: 'おさら', romaji: 'osara', arti: 'Piring', icon: '🍽️' },
-      { id: 693, bab: 29, jp: 'お茶碗', r: 'おちゃわん', romaji: 'ochawan', arti: 'Mangkuk nasi', icon: '🍚' },
-      { id: 694, bab: 29, jp: 'コップ', r: 'コップ', romaji: 'koppu', arti: 'Gelas', icon: '🥛' },
-      { id: 695, bab: 29, jp: 'ガラス', r: 'ガラス', romaji: 'garasu', arti: 'Kaca', icon: '🪟' },
-      { id: 696, bab: 29, jp: '袋', r: 'ふくろ', romaji: 'fukuro', arti: 'Kantong / Tas plastik', icon: '🛍️' },
-      { id: 697, bab: 29, jp: '枝', r: 'えだ', romaji: 'eda', arti: 'Ranting / Dahan', icon: '🌿' },
-      { id: 698, bab: 29, jp: '駅員', r: 'えきいん', romaji: 'ekiin', arti: 'Petugas stasiun', icon: '👮' },
-      { id: 699, bab: 29, jp: '交番', r: 'こうばん', romaji: 'kouban', arti: 'Pos polisi', icon: '🚓' },
-      { id: 700, bab: 29, jp: 'お先にどうぞ', r: 'おさきにどうぞ', romaji: 'osaki ni douzo', arti: 'Silakan duluan', icon: '🙇' },
-
-      { id: 701, bab: 30, jp: '貼ります', r: 'はります', romaji: 'harimasu', arti: 'Menempelkan', icon: '🩹' },
-      { id: 702, bab: 30, jp: '掛けます', r: 'かけます', romaji: 'kakemasu', arti: 'Menggantungkan', icon: '🖼️' },
-      { id: 703, bab: 30, jp: '飾ります', r: 'かざります', romaji: 'kazarimasu', arti: 'Menghias / Memajang', icon: '💐' },
-      { id: 704, bab: 30, jp: '並べます', r: 'ならべます', romaji: 'narabemasu', arti: 'Menata / Menyusun', icon: '📚' },
-      { id: 705, bab: 30, jp: '植えます', r: 'うえます', romaji: 'uemasu', arti: 'Menanam', icon: '🌱' },
-      { id: 706, bab: 30, jp: '戻します', r: 'もどします', romaji: 'modoshimasu', arti: 'Mengembalikan ke tempat asal', icon: '🔙' },
-      { id: 707, bab: 30, jp: 'まとめます', r: 'まとめます', romaji: 'matomemasu', arti: 'Merangkum / Mengumpulkan', icon: '📑' },
-      { id: 708, bab: 30, jp: '片付けます', r: 'かたづけます', romaji: 'katazukemasu', arti: 'Membereskan / Merapikan', icon: '🧹' },
-      { id: 709, bab: 30, jp: 'しまいます', r: 'しまいます', romaji: 'shimaimasu', arti: 'Menyimpan', icon: '🗄️' },
-      { id: 710, bab: 30, jp: '決めます', r: 'きめます', romaji: 'kimemasu', arti: 'Memutuskan / Menentukan', icon: '🎯' },
-      { id: 711, bab: 30, jp: '知らせます', r: 'しらせます', romaji: 'shirasemasu', arti: 'Memberitahukan', icon: '📢' },
-      { id: 712, bab: 30, jp: '相談します', r: 'そうだんします', romaji: 'soudanshimasu', arti: 'Berdiskusi / Berkonsultasi', icon: '🗣️' },
-      { id: 713, bab: 30, jp: '予習します', r: 'よしゅうします', romaji: 'yoshuushimasu', arti: 'Belajar persiapan', icon: '📖' },
-      { id: 714, bab: 30, jp: '復習します', r: 'ふくしゅうします', romaji: 'fukushuushimasu', arti: 'Mengulang pelajaran', icon: '🔁' },
-      { id: 715, bab: 30, jp: '授業', r: 'じゅぎょう', romaji: 'jugyou', arti: 'Pelajaran / Kuliah', icon: '🏫' },
-      { id: 716, bab: 30, jp: '講義', r: 'こうぎ', romaji: 'kougi', arti: 'Kuliah / Ceramah', icon: '🎓' },
-      { id: 717, bab: 30, jp: 'ミーティング', r: 'ミーティング', romaji: 'miitingu', arti: 'Rapat singkat', icon: '🤝' },
-      { id: 718, bab: 30, jp: '予定', r: 'よてい', romaji: 'yotei', arti: 'Rencana / Jadwal', icon: '🗓️' },
-      { id: 719, bab: 30, jp: 'お知らせ', r: 'おしらせ', romaji: 'oshirase', arti: 'Pengumuman', icon: '📣' },
-      { id: 720, bab: 30, jp: 'ガイドブック', r: 'ガイドブック', romaji: 'gaidobukku', arti: 'Buku panduan wisata', icon: '🗺️' },
-      { id: 721, bab: 30, jp: 'カレンダー', r: 'カレンダー', romaji: 'karendaa', arti: 'Kalender', icon: '📅' },
-      { id: 722, bab: 30, jp: 'ポスター', r: 'ポスター', romaji: 'posutaa', arti: 'Poster', icon: '🖼️' },
-      { id: 723, bab: 30, jp: 'ごみ箱', r: 'ごみばこ', romaji: 'gomibako', arti: 'Tempat sampah', icon: '🗑️' },
-      { id: 724, bab: 30, jp: '人形', r: 'にんぎょう', romaji: 'ningyou', arti: 'Boneka', icon: '🪆' },
-      { id: 725, bab: 30, jp: '花瓶', r: 'かびん', romaji: 'kabin', arti: 'Vas bunga', icon: '🏺' },
-      { id: 726, bab: 30, jp: '鏡', r: 'かがみ', romaji: 'kagami', arti: 'Cermin', icon: '🪞' },
-      { id: 727, bab: 30, jp: '引き出し', r: 'ひきだし', romaji: 'hikidashi', arti: 'Laci', icon: '🗄️' },
-      { id: 728, bab: 30, jp: '玄関', r: 'げんかん', romaji: 'genkan', arti: 'Pintu masuk rumah Jepang', icon: '🚪' },
-      { id: 729, bab: 30, jp: '廊下', r: 'ろうか', romaji: 'rouka', arti: 'Lorong / Koridor', icon: '🚶' },
-      { id: 730, bab: 30, jp: '壁', r: 'かべ', romaji: 'kabe', arti: 'Dinding / Tembok', icon: '🧱' },
-      { id: 731, bab: 30, jp: '池', r: 'いけ', romaji: 'ike', arti: 'Kolam', icon: '🏞️' },
-
-      { id: 732, bab: 31, jp: '続けます', r: 'つづけます', romaji: 'tsuzukemasu', arti: 'Melanjutkan', icon: '⏭️' },
-      { id: 733, bab: 31, jp: '見つけます', r: 'みつけます', romaji: 'mitsukemasu', arti: 'Menemukan', icon: '💡' },
-      { id: 734, bab: 31, jp: '取ります', r: 'とります', romaji: 'torimasu', arti: 'Mengambil (cuti/libur)', icon: '🏖️' },
-      { id: 735, bab: 31, jp: '受けます', r: 'うけます', romaji: 'ukemasu', arti: 'Mengikuti (ujian)', icon: '✍️' },
-      { id: 736, bab: 31, jp: '申し込みます', r: 'もうしこみます', romaji: 'moushikomimasu', arti: 'Mendaftar / Mengajukan', icon: '📋' },
-      { id: 737, bab: 31, jp: '休憩します', r: 'きゅうけいします', romaji: 'kyuukeishimasu', arti: 'Beristirahat sebentar', icon: '☕' },
-      { id: 738, bab: 31, jp: '連休', r: 'れんきゅう', romaji: 'renkyuu', arti: 'Libur panjang berurutan', icon: '🗓️' },
-      { id: 739, bab: 31, jp: '作文', r: 'さくぶん', romaji: 'sakubun', arti: 'Karangan / Esai', icon: '📝' },
-      { id: 740, bab: 31, jp: '発表', r: 'はっぴょう', romaji: 'happyou', arti: 'Presentasi / Pengumuman', icon: '🎤' },
-      { id: 741, bab: 31, jp: '展覧会', r: 'てんらんかい', romaji: 'tenrankai', arti: 'Pameran', icon: '🖼️' },
-      { id: 742, bab: 31, jp: '結婚式', r: 'けっこんしき', romaji: 'kekkonshiki', arti: 'Upacara pernikahan', icon: '💒' },
-      { id: 743, bab: 31, jp: 'お葬式', r: 'おそうしき', romaji: 'osoushiki', arti: 'Upacara pemakaman', icon: '🕯️' },
-      { id: 744, bab: 31, jp: '式', r: 'しき', romaji: 'shiki', arti: 'Upacara', icon: '🎖️' },
-      { id: 745, bab: 31, jp: '本社', r: 'ほんしゃ', romaji: 'honsha', arti: 'Kantor pusat', icon: '🏢' },
-      { id: 746, bab: 31, jp: '支店', r: 'してん', romaji: 'shiten', arti: 'Kantor cabang', icon: '🏪' },
-      { id: 747, bab: 31, jp: '教会', r: 'きょうかい', romaji: 'kyoukai', arti: 'Gereja', icon: '⛪' },
-      { id: 748, bab: 31, jp: '大学院', r: 'だいがくいん', romaji: 'daigakuin', arti: 'Sekolah pascasarjana', icon: '🎓' },
-      { id: 749, bab: 31, jp: '動物園', r: 'どうぶつえん', romaji: 'doubutsuen', arti: 'Kebun binatang', icon: '🦁' },
-      { id: 750, bab: 31, jp: '温泉', r: 'おんせん', romaji: 'onsen', arti: 'Pemandian air panas', icon: '♨️' },
-
-      { id: 751, bab: 32, jp: '運動します', r: 'うんどうします', romaji: 'undoushimasu', arti: 'Berolahraga', icon: '🏃' },
-      { id: 752, bab: 32, jp: '成功します', r: 'せいこうします', romaji: 'seikoushimasu', arti: 'Berhasil / Sukses', icon: '🎉' },
-      { id: 753, bab: 32, jp: '失敗します', r: 'しっぱいします', romaji: 'shippaishimasu', arti: 'Gagal', icon: '😞' },
-      { id: 754, bab: 32, jp: '合格します', r: 'ごうかくします', romaji: 'goukakushimasu', arti: 'Lulus (ujian)', icon: '🎓' },
-      { id: 755, bab: 32, jp: '止みます', r: 'やみます', romaji: 'yamimasu', arti: 'Berhenti / Reda (hujan)', icon: '🌤️' },
-      { id: 756, bab: 32, jp: '晴れます', r: 'はれます', romaji: 'haremasu', arti: 'Menjadi cerah', icon: '☀️' },
-      { id: 757, bab: 32, jp: '曇ります', r: 'くもります', romaji: 'kumorimasu', arti: 'Menjadi mendung', icon: '☁️' },
-      { id: 758, bab: 32, jp: '吹きます', r: 'ふきます', romaji: 'fukimasu', arti: 'Bertiup (angin)', icon: '💨' },
-      { id: 759, bab: 32, jp: '治ります', r: 'なおります', romaji: 'naorimasu', arti: 'Sembuh (penyakit)', icon: '💪' },
-      { id: 760, bab: 32, jp: '直ります', r: 'なおります', romaji: 'naorimasu', arti: 'Menjadi baik / Diperbaiki', icon: '🔧' },
-      { id: 761, bab: 32, jp: '続きます', r: 'つづきます', romaji: 'tsuzukimasu', arti: 'Berlanjut', icon: '➡️' },
-      { id: 762, bab: 32, jp: '引きます', r: 'ひきます', romaji: 'hikimasu', arti: 'Masuk angin / Flu', icon: '🤧' },
-      { id: 763, bab: 32, jp: '冷やします', r: 'ひやします', romaji: 'hiyashimasu', arti: 'Mendinginkan / Mengompres', icon: '🧊' },
-      { id: 764, bab: 32, jp: '心配', r: 'しんぱい', romaji: 'shinpai', arti: 'Khawatir', icon: '😟' },
-      { id: 765, bab: 32, jp: '十分', r: 'じゅうぶん', romaji: 'juubun', arti: 'Cukup', icon: '👌' },
-      { id: 766, bab: 32, jp: 'おかしい', r: 'おかしい', romaji: 'okashii', arti: 'Aneh / Lucu', icon: '🤨' },
-      { id: 767, bab: 32, jp: 'うるさい', r: 'うるさい', romaji: 'urusai', arti: 'Berisik / Cerewet', icon: '🙉' },
-      { id: 768, bab: 32, jp: '火傷', r: 'やけど', romaji: 'yakedo', arti: 'Luka bakar', icon: '🔥' },
-      { id: 769, bab: 32, jp: '怪我', r: 'けが', romaji: 'kega', arti: 'Luka / Cedera', icon: '🩹' },
-      { id: 770, bab: 32, jp: '咳', r: 'せき', romaji: 'seki', arti: 'Batuk', icon: '😷' },
-      { id: 771, bab: 32, jp: 'インフルエンザ', r: 'インフルエンザ', romaji: 'infuruenza', arti: 'Influenza / Flu berat', icon: '🤒' },
-      { id: 772, bab: 32, jp: '空', r: 'そら', romaji: 'sora', arti: 'Langit', icon: '🌌' },
-      { id: 773, bab: 32, jp: '太陽', r: 'たいよう', romaji: 'taiyou', arti: 'Matahari', icon: '☀️' },
-      { id: 774, bab: 32, jp: '星', r: 'ほし', romaji: 'hoshi', arti: 'Bintang', icon: '⭐' },
-      { id: 775, bab: 32, jp: '風', r: 'かぜ', romaji: 'kaze', arti: 'Angin', icon: '🍃' },
-      { id: 776, bab: 32, jp: '東', r: 'ひがし', romaji: 'higashi', arti: 'Timur', icon: '➡️' },
-      { id: 777, bab: 32, jp: '西', r: 'にし', romaji: 'nishi', arti: 'Barat', icon: '⬅️' },
-      { id: 778, bab: 32, jp: '南', r: 'みなみ', romaji: 'minami', arti: 'Selatan', icon: '⬇️' },
-      { id: 779, bab: 32, jp: '北', r: 'きた', romaji: 'kita', arti: 'Utara', icon: '⬆️' },
-      { id: 780, bab: 32, jp: '水道', r: 'すいどう', romaji: 'suidou', arti: 'Air ledeng', icon: '🚰' },
-      { id: 781, bab: 32, jp: 'エンジン', r: 'エンジン', romaji: 'enjin', arti: 'Mesin kendaraan', icon: '🏎️' },
-      { id: 782, bab: 32, jp: 'チーム', r: 'チーム', romaji: 'chiimu', arti: 'Tim / Regu', icon: '👥' },
-      { id: 783, bab: 32, jp: '今夜', r: 'こんや', romaji: 'konya', arti: 'Malam ini', icon: '🌙' },
-      { id: 784, bab: 32, jp: '夕方', r: 'ゆうがた', romaji: 'yuugata', arti: 'Sore hari', icon: '🌇' },
-
-      { id: 785, bab: 33, jp: '逃げます', r: 'にげます', romaji: 'nigemasu', arti: 'Melarikan diri / Kabur', icon: '🏃💨' },
-      { id: 786, bab: 33, jp: '騒ぎます', r: 'さわぎます', romaji: 'sawagimasu', arti: 'Membuat keributan / Gaduh', icon: '📢' },
-      { id: 787, bab: 33, jp: '諦めます', r: 'あきらめます', romaji: 'akiramemasu', arti: 'Menyerah / Putus asa', icon: '🏳️' },
-      { id: 788, bab: 33, jp: '投げます', r: 'なげます', romaji: 'nagemasu', arti: 'Melempar', icon: '⚾' },
-      { id: 789, bab: 33, jp: '守ります', r: 'まもります', romaji: 'mamorimasu', arti: 'Mematuhi / Melindungi', icon: '🛡️' },
-      { id: 790, bab: 33, jp: '始まります', r: 'はじまります', romaji: 'hajimarimasu', arti: 'Dimulai (acara)', icon: '🎬' },
-      { id: 791, bab: 33, jp: '出席します', r: 'しゅっせきします', romaji: 'shussekishimasu', arti: 'Menghadiri', icon: '🙋' },
-      { id: 792, bab: 33, jp: '伝えます', r: 'つたえます', romaji: 'tsutaemasu', arti: 'Menyampaikan pesan', icon: '📨' },
-      { id: 793, bab: 33, jp: '注意します', r: 'ちゅういします', romaji: 'chuuishimasu', arti: 'Memperhatikan / Memperingatkan', icon: '⚠️' },
-      { id: 794, bab: 33, jp: '外します', r: 'はずします', romaji: 'hazushimasu', arti: 'Meninggalkan tempat sebentar', icon: '🚶' },
-      { id: 795, bab: 33, jp: '戻ります', r: 'もどります', romaji: 'modorimasu', arti: 'Kembali', icon: '↩️' },
-      { id: 796, bab: 33, jp: 'あります', r: 'あります', romaji: 'arimasu', arti: 'Ada (telepon/acara)', icon: '📞' },
-      { id: 797, bab: 33, jp: 'だめ', r: 'だめ', romaji: 'dame', arti: 'Tidak boleh / Jangan', icon: '🙅' },
-      { id: 798, bab: 33, jp: '同じ', r: 'おなじ', romaji: 'onaji', arti: 'Sama', icon: '👯' },
-      { id: 799, bab: 33, jp: '警察', r: 'けいさつ', romaji: 'keisatsu', arti: 'Polisi', icon: '🚓' },
-      { id: 800, bab: 33, jp: '席', r: 'せき', romaji: 'seki', arti: 'Tempat duduk', icon: '💺' },
-      { id: 801, bab: 33, jp: 'マーク', r: 'マーク', romaji: 'maaku', arti: 'Tanda / Simbol', icon: '🚸' },
-      { id: 802, bab: 33, jp: 'ボール', r: 'ボール', romaji: 'booru', arti: 'Bola', icon: '⚽' },
-      { id: 803, bab: 33, jp: '締め切り', r: 'しめきり', romaji: 'shimekiri', arti: 'Batas waktu / Deadline', icon: '⏰' },
-      { id: 804, bab: 33, jp: '規則', r: 'きそく', romaji: 'kisoku', arti: 'Peraturan', icon: '📜' },
-      { id: 805, bab: 33, jp: '危険', r: 'きけん', romaji: 'kiken', arti: 'Bahaya', icon: '☢️' },
-      { id: 806, bab: 33, jp: '使用禁止', r: 'しようきんし', romaji: 'shiyoukinshi', arti: 'Dilarang menggunakan', icon: '🚫' },
-      { id: 807, bab: 33, jp: '立入禁止', r: 'たちいりきんし', romaji: 'tachiirikinshi', arti: 'Dilarang masuk', icon: '⛔' },
-      { id: 808, bab: 33, jp: '徐行', r: 'じょこう', romaji: 'jokou', arti: 'Jalan pelan-pelan', icon: '🐢' },
-      { id: 809, bab: 33, jp: '入口', r: 'いりぐち', romaji: 'iriguchi', arti: 'Pintu masuk', icon: '🚪' },
-      { id: 810, bab: 33, jp: '出口', r: 'でぐち', romaji: 'deguchi', arti: 'Pintu keluar', icon: '🏃' },
-      { id: 811, bab: 33, jp: '非常口', r: 'ひじょうぐち', romaji: 'hijouguchi', arti: 'Pintu darurat', icon: '🚨' },
-      { id: 812, bab: 33, jp: '無料', r: 'むりょう', romaji: 'muryou', arti: 'Gratis', icon: '🆓' },
-      { id: 813, bab: 33, jp: '割引', r: 'わりびき', romaji: 'waribiki', arti: 'Diskon / Potongan harga', icon: '🏷️' },
-      { id: 814, bab: 33, jp: '飲み放題', r: 'のみほうだい', romaji: 'nomihoudai', arti: 'Minum sepuasnya', icon: '🍻' },
-      { id: 815, bab: 33, jp: '使用中', r: 'しようちゅう', romaji: 'shiyouchuu', arti: 'Sedang dipakai', icon: '⏳' },
-      { id: 816, bab: 33, jp: '募集中', r: 'ぼしゅうちゅう', romaji: 'boshuuchuu', arti: 'Sedang menerima lowongan', icon: '📢' },
-
-      { id: 817, bab: 34, jp: '磨きます', r: 'みがきます', romaji: 'migakimasu', arti: 'Menggosok (gigi/sepatu)', icon: '🪥' },
-      { id: 818, bab: 34, jp: '組み立てます', r: 'くみたてます', romaji: 'kumitatemasu', arti: 'Merakit / Memasang', icon: '🛠️' },
-      { id: 819, bab: 34, jp: '折ります', r: 'おります', romaji: 'orimasu', arti: 'Melipat / Mematahkan', icon: '📄' },
-      { id: 820, bab: 34, jp: '気がつきます', r: 'きがつきます', romaji: 'ki ga tsukimasu', arti: 'Menyadari', icon: '💡' },
-      { id: 821, bab: 34, jp: 'つけます', r: 'つけます', romaji: 'tsukemasu', arti: 'Membubuhkan (kecap/saus)', icon: '🥢' },
-      { id: 822, bab: 34, jp: '見つかります', r: 'みつかります', romaji: 'mitsukarimasu', arti: 'Ditemukan', icon: '🔍' },
-      { id: 823, bab: 34, jp: 'します', r: 'します', romaji: 'shimasu', arti: 'Memakai (dasi/aksesoris)', icon: '👔' },
-      { id: 824, bab: 34, jp: '質問します', r: 'しつもんします', romaji: 'shitsumonshimasu', arti: 'Bertanya', icon: '❓' },
-      { id: 825, bab: 34, jp: '細い', r: 'ほそい', romaji: 'hosoi', arti: 'Tipis / Kurus / Ramping', icon: '📏' },
-      { id: 826, bab: 34, jp: '太い', r: 'ふとい', romaji: 'futoi', arti: 'Tebal / Gemuk / Besar', icon: '🪵' },
-      { id: 827, bab: 34, jp: '盆踊り', r: 'ぼんおどり', romaji: 'bonodori', arti: 'Tarian Bon Odori', icon: '🏮' },
-      { id: 828, bab: 34, jp: 'スポーツクラブ', r: 'スポーツクラブ', romaji: 'supootsukurabu', arti: 'Klub olahraga / Gym', icon: '🏋️' },
-      { id: 829, bab: 34, jp: '家具', r: 'かぐ', romaji: 'kagu', arti: 'Perabot rumah tangga', icon: '🛋️' },
-      { id: 830, bab: 34, jp: 'キー', r: 'キー', romaji: 'kii', arti: 'Tombol / Kunci', icon: '⌨️' },
-      { id: 831, bab: 34, jp: 'シートベルト', r: 'シートベルト', romaji: 'shiitoberuto', arti: 'Sabuk pengaman', icon: '🚗' },
-      { id: 832, bab: 34, jp: '説明書', r: 'せつめいしょ', romaji: 'setsumeisho', arti: 'Buku petunjuk pemakaian', icon: '📘' },
-      { id: 833, bab: 34, jp: '図', r: 'ず', romaji: 'zu', arti: 'Gambar / Diagram', icon: '📊' },
-      { id: 834, bab: 34, jp: '線', r: 'せん', romaji: 'sen', arti: 'Garis', icon: '➖' },
-      { id: 835, bab: 34, jp: '矢印', r: 'やじるし', romaji: 'yajirushi', arti: 'Tanda panah', icon: '➡️' },
-      { id: 836, bab: 34, jp: '黒', r: 'くろ', romaji: 'kuro', arti: 'Warna hitam', icon: '⬛' },
-      { id: 837, bab: 34, jp: '白', r: 'しろ', romaji: 'shiro', arti: 'Warna putih', icon: '⬜' },
-      { id: 838, bab: 34, jp: '赤', r: 'あか', romaji: 'aka', arti: 'Warna merah', icon: '🟥' },
-      { id: 839, bab: 34, jp: '青', r: 'あお', romaji: 'ao', arti: 'Warna biru', icon: '🟦' },
-      { id: 840, bab: 34, jp: '紺', r: 'こん', romaji: 'kon', arti: 'Biru tua / Navy', icon: '👖' },
-      { id: 841, bab: 34, jp: '黄色', r: 'きいろ', romaji: 'kiiro', arti: 'Warna kuning', icon: '🟨' },
-      { id: 842, bab: 34, jp: '茶色', r: 'ちゃいろ', romaji: 'chairo', arti: 'Warna cokelat', icon: '🟫' },
-      { id: 843, bab: 34, jp: '醤油', r: 'しょうゆ', romaji: 'shouyu', arti: 'Kecap asin Jepang', icon: '🍶' },
-      { id: 844, bab: 34, jp: 'ソース', r: 'ソース', romaji: 'soosu', arti: 'Saus', icon: '🥫' },
-
-      { id: 845, bab: 35, jp: '咲きます', r: 'さきます', romaji: 'sakimasu', arti: 'Mekar (bunga)', icon: '🌸' },
-      { id: 846, bab: 35, jp: '変わります', r: 'かわります', romaji: 'kawarimasu', arti: 'Berubah', icon: '🔄' },
-      { id: 847, bab: 35, jp: '困ります', r: 'こまります', romaji: 'komarimasu', arti: 'Bingung / Susah / Repot', icon: '😓' },
-      { id: 848, bab: 35, jp: '付けます', r: 'つけます', romaji: 'tsukemasu', arti: 'Memberi tanda (lingkaran)', icon: '⭕' },
-      { id: 849, bab: 35, jp: '拾います', r: 'ひろいます', romaji: 'hiroimasu', arti: 'Memungut / Menemukan', icon: '🤲' },
-      { id: 850, bab: 35, jp: 'かかります', r: 'かかります', romaji: 'kakarimasu', arti: 'Ada telepon masuk', icon: '☎️' },
-      { id: 851, bab: 35, jp: '楽', r: 'らく', romaji: 'raku', arti: 'Nyaman / Mudah / Santai', icon: '😌' },
-      { id: 852, bab: 35, jp: '正しい', r: 'ただしい', romaji: 'tadashii', arti: 'Benar / Tepat', icon: '✅' },
-      { id: 853, bab: 35, jp: '珍しい', r: 'めずらしい', romaji: 'mezurashii', arti: 'Langka / Jarang', icon: '🦄' },
-      { id: 854, bab: 35, jp: '方', r: 'かた', romaji: 'kata', arti: 'Orang (hormat)', icon: '🙇' },
-      { id: 855, bab: 35, jp: '向こう', r: 'むこう', romaji: 'mukou', arti: 'Sebelah sana / Seberang', icon: '👉' },
-      { id: 856, bab: 35, jp: '島', r: 'しま', romaji: 'shima', arti: 'Pulau', icon: '🏝️' },
-      { id: 857, bab: 35, jp: '村', r: 'むら', romaji: 'mura', arti: 'Desa', icon: '🏡' },
-      { id: 858, bab: 35, jp: '港', r: 'みなと', romaji: 'minato', arti: 'Pelabuhan', icon: '⚓' },
-      { id: 859, bab: 35, jp: '近所', r: 'きんじょ', romaji: 'kinjo', arti: 'Tetangga / Lingkungan sekitar', icon: '🏘️' },
-      { id: 860, bab: 35, jp: '屋上', r: 'おくじょう', romaji: 'okujou', arti: 'Atap gedung / Rooftop', icon: '🏙️' },
-      { id: 861, bab: 35, jp: '海外', r: 'かいがい', romaji: 'kaigai', arti: 'Luar negeri', icon: '✈️' },
-      { id: 862, bab: 35, jp: '山登り', r: 'やまのぼり', romaji: 'yamanobori', arti: 'Pendakian gunung', icon: '⛰️' },
-      { id: 863, bab: 35, jp: 'ハイキング', r: 'ハイキング', romaji: 'haikingu', arti: 'Hiking / Jalan lintas alam', icon: '🥾' },
-      { id: 864, bab: 35, jp: '機会', r: 'きかい', romaji: 'kikai', arti: 'Kesempatan', icon: '🌟' },
-      { id: 865, bab: 35, jp: '許可', r: 'きょか', romaji: 'kyoka', arti: 'Izin', icon: '🪪' },
-      { id: 866, bab: 35, jp: '丸', r: 'まる', romaji: 'maru', arti: 'Lingkaran / Bulat', icon: '⭕' },
-      { id: 867, bab: 35, jp: '操作', r: 'そうさ', romaji: 'sousa', arti: 'Pengoperasian', icon: '🎛️' },
-      { id: 868, bab: 35, jp: '方法', r: 'ほうほう', romaji: 'houhou', arti: 'Cara / Metode', icon: '🧭' },
-      { id: 869, bab: 35, jp: '設備', r: 'せつび', romaji: 'setsubi', arti: 'Fasilitas / Perlengkapan', icon: '🏢' },
-      { id: 870, bab: 35, jp: 'カーテン', r: 'カーテン', romaji: 'kaaten', arti: 'Tirai / Gorden', icon: '🪟' },
-      { id: 871, bab: 35, jp: '紐', r: 'ひも', romaji: 'himo', arti: 'Tali', icon: '🧶' },
-      { id: 872, bab: 35, jp: '蓋', r: 'ふた', romaji: 'futa', arti: 'Tutup (panci/botol)', icon: '🥫' },
-      { id: 873, bab: 35, jp: '葉', r: 'は', romaji: 'ha', arti: 'Daun', icon: '🍃' },
-      { id: 874, bab: 35, jp: '曲', r: 'きょく', romaji: 'kyoku', arti: 'Lagu / Melodi', icon: '🎼' },
-      { id: 875, bab: 35, jp: '楽しみ', r: 'たのしみ', romaji: 'tanoshimi', arti: 'Kesenangan / Hal yang dinanti', icon: '🥳' }
-    ];
-
-    // =========================================================================
-    // 2. STATE APLIKASI & PENYIMPANAN LOKAL
-    // =========================================================================
-    function getInitialDarkMode() {
-      try {
-        // Gunakan key yang sama persis dengan halaman index utama ('theme_preference')
-        const savedTheme = localStorage.getItem('theme_preference');
-        if (savedTheme === 'light') return false;
-        if (savedTheme === 'dark') return true;
-
-        // Jika belum pernah diatur, ikuti preferensi sistem (default Dark Mode seperti index.html)
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return false;
-        }
-      } catch (e) {
-        console.error('Gagal membaca preferensi tema:', e);
-      }
-      return true;
-    }
-
-    const state = {
-      activeTab: 'flip', // 'flip' | 'dictionary' | 'quiz'
-      darkMode: getInitialDarkMode(),
-      showKanji: true,
-      hideReading: false,
-      hideEmoji: JSON.parse(localStorage.getItem('jp_vocab_hide_emoji') || 'false'),
-      selectedBab: 'ALL',
-      flipSelectedBabs: [], // Array nomor bab khusus mode flip (kosong = semua bab)
-      filterStatus: 'ALL', // 'ALL' | 'MASTERED' | 'UNMASTERED'
-      searchQuery: '',
-      masteredIds: JSON.parse(localStorage.getItem('jp_vocab_mastered') || '[]'),
-      currentIndex: 0,
-      isFlipped: false,
-      shuffledOrder: null,
-      quizQuestions: [],
-      quizIndex: 0,
-      quizScore: 0,
-      selectedOption: null,
-      quizFinished: false
-    };
-
-    function saveMastered() {
-      try {
-        localStorage.setItem('jp_vocab_mastered', JSON.stringify(state.masteredIds));
-      } catch (e) {
-        console.error('Gagal menyimpan progres hafalan:', e);
-      }
-    }
-
-    function savePreferences() {
-      try {
-        // Simpan ke key 'theme_preference' agar sinkron 100% dengan index.html
-        localStorage.setItem('theme_preference', state.darkMode ? 'dark' : 'light');
-        localStorage.setItem('jp_vocab_hide_emoji', JSON.stringify(state.hideEmoji));
-      } catch (e) {
-        console.error('Gagal menyimpan preferensi:', e);
-      }
-    }
-
-    function speakJapanese(text, e) {
-      if (e) e.stopPropagation();
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ja-JP';
-        utterance.rate = 0.9;
-        window.speechSynthesis.speak(utterance);
-      }
-    }
-
-    function toggleMastered(id, e) {
-      if (e) e.stopPropagation();
-      const idx = state.masteredIds.indexOf(id);
-      if (idx > -1) {
-        state.masteredIds.splice(idx, 1);
+    function applyThemeState(isLight) {
+      if (isLight) {
+        rootHtml.classList.add('light-theme');
+        bodyEl.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        try { localStorage.setItem('theme_preference', 'light'); } catch (e) {}
       } else {
-        state.masteredIds.push(id);
-      }
-      saveMastered();
-      renderAll();
-    }
-
-    // =========================================================================
-    // 3. FILTER & PENGOLAHAN DATA
-    // =========================================================================
-    function getFilteredVocab(mode = state.activeTab) {
-      return VOCAB_DATA.filter((item) => {
-        let matchBab = true;
-        if (mode === 'flip') {
-          if (state.flipSelectedBabs.length > 0) {
-            matchBab = state.flipSelectedBabs.includes(item.bab);
-          } else {
-            matchBab = state.selectedBab === 'ALL' || item.bab === Number(state.selectedBab);
-          }
-        } else {
-          matchBab = state.selectedBab === 'ALL' || item.bab === Number(state.selectedBab);
-        }
-
-        const isMastered = state.masteredIds.includes(item.id);
-        const matchStatus =
-          state.filterStatus === 'ALL' ||
-          (state.filterStatus === 'MASTERED' && isMastered) ||
-          (state.filterStatus === 'UNMASTERED' && !isMastered);
-
-        const q = state.searchQuery.trim().toLowerCase();
-        const matchQuery =
-          !q ||
-          item.jp.toLowerCase().includes(q) ||
-          item.r.toLowerCase().includes(q) ||
-          item.romaji.toLowerCase().includes(q) ||
-          item.arti.toLowerCase().includes(q);
-
-        return matchBab && matchStatus && matchQuery;
-      });
-    }
-
-    function getDeckCards() {
-      const filtered = getFilteredVocab('flip');
-      if (!state.shuffledOrder) return filtered;
-      const mapById = new Map(filtered.map((item) => [item.id, item]));
-      const ordered = state.shuffledOrder.map((id) => mapById.get(id)).filter(Boolean);
-      const existingIds = new Set(ordered.map((i) => i.id));
-      const remaining = filtered.filter((i) => !existingIds.has(i.id));
-      return [...ordered, ...remaining];
-    }
-
-    // =========================================================================
-    // 4. LOGIKA KUIS
-    // =========================================================================
-    function generateQuiz() {
-      const filtered = getFilteredVocab('quiz');
-      const sourcePool = filtered.length >= 4 ? filtered : VOCAB_DATA;
-      const shuffledPool = [...sourcePool].sort(() => Math.random() - 0.5);
-      const totalQuestions = Math.min(10, shuffledPool.length);
-      const selectedItems = shuffledPool.slice(0, totalQuestions);
-
-      state.quizQuestions = selectedItems.map((target) => {
-        const distractors = VOCAB_DATA.filter((v) => v.id !== target.id)
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 3);
-        const options = [target, ...distractors].sort(() => Math.random() - 0.5);
-        return { question: target, options };
-      });
-
-      state.quizIndex = 0;
-      state.quizScore = 0;
-      state.selectedOption = null;
-      state.quizFinished = false;
-      renderQuiz();
-    }
-
-    // =========================================================================
-    // 5. FUNGSI RENDER UI
-    // =========================================================================
-    function renderHeaderAndControls() {
-      // Tema Gelap / Terang (Sinkron dengan class 'dark' Tailwind & 'light-theme' index utama)
-      const htmlEl = document.documentElement;
-      const bodyEl = document.body;
-      const themeIcon = document.getElementById('icon-theme');
-      if (state.darkMode) {
-        htmlEl.classList.add('dark');
-        htmlEl.classList.remove('light-theme');
-        if (bodyEl) bodyEl.classList.remove('light-theme');
-        themeIcon.setAttribute('data-lucide', 'sun');
-      } else {
-        htmlEl.classList.remove('dark');
-        htmlEl.classList.add('light-theme');
-        if (bodyEl) bodyEl.classList.add('light-theme');
-        themeIcon.setAttribute('data-lucide', 'moon');
-      }
-
-      // Subtitle & Progres Hafalan
-      const totalCount = VOCAB_DATA.length;
-      const masteredCount = state.masteredIds.length;
-      const pct = Math.round((masteredCount / totalCount) * 100);
-      document.getElementById('header-subtitle').textContent = `Kosakata Lengkap Bab 1 – 35 (${totalCount} Kata)`;
-      document.getElementById('mastered-badge').textContent = `Hafal: ${masteredCount}/${totalCount} (${pct}%)`;
-
-      // Tab Aktif
-      ['flip', 'dictionary', 'quiz'].forEach((tab) => {
-        const btn = document.getElementById(`tab-${tab}`);
-        if (state.activeTab === tab) {
-          btn.className = 'tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-sm';
-        } else {
-          btn.className = 'tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200/80 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-800';
-        }
-        const view = document.getElementById(`view-${tab}`);
-        if (state.activeTab === tab) {
-          view.classList.remove('hidden');
-        } else {
-          view.classList.add('hidden');
-        }
-      });
-
-      // Toggle Kanji
-      const btnKanji = document.getElementById('btn-toggle-kanji');
-      const labelKanji = document.getElementById('label-kanji');
-      if (state.showKanji) {
-        btnKanji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-indigo-500/15 border-indigo-500/40 text-indigo-600 dark:text-indigo-400';
-        labelKanji.textContent = 'Kanji: Aktif';
-      } else {
-        btnKanji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
-        labelKanji.textContent = 'Hiragana Saja';
-      }
-
-      // Toggle Tanpa Cara Baca
-      const btnReading = document.getElementById('btn-toggle-reading');
-      const iconReading = document.getElementById('icon-reading');
-      if (state.hideReading) {
-        btnReading.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400';
-        iconReading.setAttribute('data-lucide', 'eye-off');
-      } else {
-        btnReading.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
-        iconReading.setAttribute('data-lucide', 'eye');
-      }
-
-      // Toggle Tanpa Emoji
-      const btnEmoji = document.getElementById('btn-toggle-emoji');
-      const labelEmoji = document.getElementById('label-emoji');
-      if (state.hideEmoji) {
-        btnEmoji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400';
-        labelEmoji.textContent = 'Tanpa Emoji: ON';
-      } else {
-        btnEmoji.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
-        labelEmoji.textContent = 'Tanpa Emoji';
-      }
-
-      // Kontrol Urutan Kartu (Khusus Mode Flip)
-      const orderControls = document.getElementById('flip-order-controls');
-      const btnShuffle = document.getElementById('btn-shuffle');
-      const btnResetOrder = document.getElementById('btn-reset-order');
-      if (state.activeTab === 'flip') {
-        orderControls.classList.remove('hidden');
-        if (state.shuffledOrder) {
-          btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-violet-500/15 border-violet-500/40 text-violet-600 dark:text-violet-400';
-          btnResetOrder.classList.remove('hidden');
-        } else {
-          btnShuffle.className = 'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-all bg-white border-slate-200 text-slate-700 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700';
-          btnResetOrder.classList.add('hidden');
-        }
-      } else {
-        orderControls.classList.add('hidden');
+        rootHtml.classList.remove('light-theme');
+        bodyEl.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        try { localStorage.setItem('theme_preference', 'dark'); } catch (e) {}
       }
     }
 
-    function renderFlipBabChips() {
-      const container = document.getElementById('flip-bab-chips');
-      const label = document.getElementById('flip-bab-selector-label');
-      const btnClear = document.getElementById('btn-flip-clear-babs');
-      const babs = [...new Set(VOCAB_DATA.map((v) => v.bab))].sort((a, b) => a - b);
+    // Inisialisasi tema awal
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme_preference'); } catch (e) {}
 
-      if (state.flipSelectedBabs.length === 0) {
-        label.textContent = state.selectedBab === 'ALL'
-          ? 'Pilih Bab untuk Mode Flip (Semua Bab)'
-          : `Pilih Bab untuk Mode Flip (Bab ${state.selectedBab})`;
-        btnClear.classList.add('hidden');
-      } else {
-        const sorted = [...state.flipSelectedBabs].sort((a, b) => a - b);
-        label.textContent = `Bab Terpilih (${sorted.length}): Bab ${sorted.join(', ')}`;
-        btnClear.classList.remove('hidden');
-      }
-
-      container.innerHTML = '';
-      babs.forEach((bab) => {
-        const isActive = state.flipSelectedBabs.includes(bab);
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.textContent = `Bab ${bab}`;
-        chip.className = isActive
-          ? 'px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-600 text-white shadow-sm transition-all'
-          : 'px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-all';
-        chip.addEventListener('click', () => {
-          const idx = state.flipSelectedBabs.indexOf(bab);
-          if (idx > -1) {
-            state.flipSelectedBabs.splice(idx, 1);
-          } else {
-            state.flipSelectedBabs.push(bab);
-          }
-          state.currentIndex = 0;
-          state.isFlipped = false;
-          renderAll();
-        });
-        container.appendChild(chip);
-      });
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      applyThemeState(true);
+    } else {
+      applyThemeState(false);
     }
 
-    function renderFlipCard() {
-      renderFlipBabChips();
-      const deck = getDeckCards();
-      const emptyBox = document.getElementById('flip-empty');
-      const contentBox = document.getElementById('flip-content');
-
-      if (deck.length === 0) {
-        emptyBox.classList.remove('hidden');
-        contentBox.classList.add('hidden');
-        return;
-      }
-
-      emptyBox.classList.add('hidden');
-      contentBox.classList.remove('hidden');
-
-      if (state.currentIndex >= deck.length) state.currentIndex = 0;
-      const card = deck[state.currentIndex];
-      const isMastered = state.masteredIds.includes(card.id);
-
-      document.getElementById('flip-counter').textContent = `Kartu ${state.currentIndex + 1} dari ${deck.length}`;
-      document.getElementById('flip-bab-badge').textContent = `Bab ${card.bab}`;
-      document.getElementById('card-back-bab').textContent = `Bab ${card.bab}`;
-
-      // Animasi Flip
-      const inner = document.getElementById('flashcard-inner');
-      if (state.isFlipped) {
-        inner.classList.add('rotate-y-180');
-      } else {
-        inner.classList.remove('rotate-y-180');
-      }
-
-      // Status Hafal
-      const btnMastered = document.getElementById('btn-card-mastered');
-      const iconMastered = document.getElementById('icon-card-mastered');
-      const labelMastered = document.getElementById('label-card-mastered');
-      if (isMastered) {
-        btnMastered.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-emerald-500/15 text-emerald-600 dark:text-emerald-400';
-        iconMastered.setAttribute('data-lucide', 'check-circle-2');
-        labelMastered.textContent = 'Sudah Hafal';
-      } else {
-        btnMastered.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-100 text-slate-500 hover:text-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:text-slate-200';
-        iconMastered.setAttribute('data-lucide', 'circle');
-        labelMastered.textContent = 'Tandai Hafal';
-      }
-
-      // Emoji
-      const frontEmoji = document.getElementById('card-front-emoji');
-      const backEmoji = document.getElementById('card-back-emoji');
-      if (state.hideEmoji) {
-        frontEmoji.classList.add('hidden');
-        backEmoji.classList.add('hidden');
-      } else {
-        frontEmoji.classList.remove('hidden');
-        backEmoji.classList.remove('hidden');
-        frontEmoji.textContent = card.icon;
-        backEmoji.textContent = card.icon;
-      }
-
-      // Teks Jepang & Cara Baca (Depan)
-      document.getElementById('card-front-main').textContent = state.showKanji ? card.jp : card.r;
-      const readingBox = document.getElementById('card-front-reading-box');
-      const kanaEl = document.getElementById('card-front-kana');
-      const romajiEl = document.getElementById('card-front-romaji');
-
-      if (state.hideReading) {
-        readingBox.classList.add('hidden');
-      } else {
-        readingBox.classList.remove('hidden');
-        if (state.showKanji && card.jp !== card.r) {
-          kanaEl.classList.remove('hidden');
-          kanaEl.textContent = card.r;
-        } else {
-          kanaEl.classList.add('hidden');
-        }
-        romajiEl.textContent = card.romaji;
-      }
-
-      // Sisi Belakang
-      document.getElementById('card-back-arti').textContent = card.arti;
-      document.getElementById('card-back-jp').textContent = card.jp;
-      document.getElementById('card-back-sub').textContent = `${card.r} • ${card.romaji}`;
-    }
-
-    function renderDictionary() {
-      const list = getFilteredVocab('dictionary');
-      document.getElementById('dict-count-label').textContent = `Menampilkan ${list.length} kosakata`;
-
-      const emptyBox = document.getElementById('dict-empty');
-      const grid = document.getElementById('dict-grid');
-
-      if (list.length === 0) {
-        emptyBox.classList.remove('hidden');
-        grid.innerHTML = '';
-        return;
-      }
-
-      emptyBox.classList.add('hidden');
-      grid.innerHTML = list
-        .map((item) => {
-          const isMastered = state.masteredIds.includes(item.id);
-          const cardClass = isMastered
-            ? 'bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/60'
-            : 'bg-white border-slate-200 hover:border-indigo-200 shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700';
-
-          const emojiHtml = state.hideEmoji
-            ? ''
-            : `<span class="text-2xl select-none bg-slate-100 dark:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">${item.icon}</span>`;
-
-          const readingHtml = state.hideReading
-            ? ''
-            : `<p class="text-xs mb-1.5 text-slate-500 dark:text-slate-400">
-                 ${state.showKanji && item.jp !== item.r ? `${item.r} • ` : ''}<span class="font-mono">${item.romaji}</span>
-               </p>`;
-
-          const masteredBtnClass = isMastered
-            ? 'text-emerald-500 bg-emerald-500/15'
-            : 'text-slate-400 hover:bg-slate-100 dark:text-slate-500 dark:hover:bg-slate-800';
-
-          const masteredIcon = isMastered ? 'check-circle-2' : 'circle';
-
-          return `
-            <div class="p-4 rounded-2xl border transition-all flex flex-col justify-between ${cardClass}">
-              <div class="flex items-start justify-between gap-2 mb-3">
-                <div class="flex items-center gap-2.5">
-                  ${emojiHtml}
-                  <div>
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Bab ${item.bab}</span>
-                    <h3 class="text-xl font-extrabold leading-snug font-jp">${state.showKanji ? item.jp : item.r}</h3>
-                  </div>
-                </div>
-                <div class="flex items-center gap-1">
-                  <button
-                    type="button"
-                    onclick="speakJapanese('${item.r.replace(/'/g, "\\'")}', event)"
-                    class="p-2 rounded-xl transition-colors bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-slate-800 dark:text-indigo-400 dark:hover:bg-slate-700"
-                    title="Dengar Pengucapan"
-                  >
-                    <i data-lucide="volume-2" class="w-4 h-4"></i>
-                  </button>
-                  <button
-                    type="button"
-                    onclick="toggleMastered(${item.id}, event)"
-                    class="p-2 rounded-xl transition-colors ${masteredBtnClass}"
-                    title="${isMastered ? 'Sudah Hafal' : 'Tandai Hafal'}"
-                  >
-                    <i data-lucide="${masteredIcon}" class="w-4 h-4"></i>
-                  </button>
-                </div>
-              </div>
-              <div>
-                ${readingHtml}
-                <p class="text-sm font-bold text-slate-800 dark:text-slate-100 pt-2 border-t border-slate-200/60 dark:border-slate-800">
-                  ${item.arti}
-                </p>
-              </div>
-            </div>
-          `;
-        })
-        .join('');
-    }
-
-    function renderQuiz() {
-      const resultBox = document.getElementById('quiz-result-box');
-      const activeBox = document.getElementById('quiz-active-box');
-
-      if (state.quizQuestions.length === 0) return;
-
-      if (state.quizFinished) {
-        resultBox.classList.remove('hidden');
-        activeBox.classList.add('hidden');
-        document.getElementById('quiz-final-score').textContent = `${state.quizScore} / ${state.quizQuestions.length}`;
-        return;
-      }
-
-      resultBox.classList.add('hidden');
-      activeBox.classList.remove('hidden');
-
-      const currentQ = state.quizQuestions[state.quizIndex];
-      document.getElementById('quiz-progress-badge').textContent = `Soal ${state.quizIndex + 1} / ${state.quizQuestions.length}`;
-      document.getElementById('quiz-score-badge').textContent = `Skor: ${state.quizScore}`;
-
-      const emojiEl = document.getElementById('quiz-emoji');
-      if (state.hideEmoji) {
-        emojiEl.classList.add('hidden');
-      } else {
-        emojiEl.classList.remove('hidden');
-        emojiEl.textContent = currentQ.question.icon;
-      }
-
-      document.getElementById('quiz-question-text').textContent = state.showKanji
-        ? currentQ.question.jp
-        : currentQ.question.r;
-
-      const readingEl = document.getElementById('quiz-reading-text');
-      if (state.hideReading) {
-        readingEl.classList.add('hidden');
-      } else {
-        readingEl.classList.remove('hidden');
-        readingEl.textContent =
-          state.showKanji && currentQ.question.jp !== currentQ.question.r
-            ? `${currentQ.question.r} (${currentQ.question.romaji})`
-            : currentQ.question.romaji;
-      }
-
-      const optionsContainer = document.getElementById('quiz-options-container');
-      optionsContainer.innerHTML = '';
-
-      currentQ.options.forEach((opt) => {
-        const isAnswered = state.selectedOption !== null;
-        const isCorrect = opt.id === currentQ.question.id;
-        const isChosen = opt.id === state.selectedOption;
-
-        let btnStyle =
-          'bg-slate-50 border-slate-200 hover:border-indigo-400 text-slate-800 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-indigo-500 dark:text-slate-200';
-
-        if (isAnswered) {
-          if (isCorrect) {
-            btnStyle = 'bg-emerald-500/20 border-emerald-500 text-emerald-700 dark:text-emerald-300 font-bold';
-          } else if (isChosen) {
-            btnStyle = 'bg-rose-500/20 border-rose-500 text-rose-700 dark:text-rose-300';
-          } else {
-            btnStyle = 'bg-slate-50 border-slate-200 text-slate-400 dark:bg-slate-800/40 dark:border-slate-800 dark:text-slate-500';
-          }
-        }
-
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.disabled = isAnswered;
-        btn.textContent = opt.arti;
-        btn.className = `w-full text-left px-4 py-3.5 rounded-2xl border-2 text-sm font-semibold transition-all ${btnStyle}`;
-        btn.addEventListener('click', () => {
-          if (state.selectedOption !== null) return;
-          state.selectedOption = opt.id;
-          if (opt.id === currentQ.question.id) {
-            state.quizScore += 1;
-            speakJapanese(currentQ.question.r);
-          }
-          renderQuiz();
-        });
-        optionsContainer.appendChild(btn);
-      });
-
-      const btnNext = document.getElementById('btn-quiz-next');
-      if (state.selectedOption !== null) {
-        btnNext.classList.remove('hidden');
-        btnNext.textContent =
-          state.quizIndex + 1 < state.quizQuestions.length ? 'Soal Berikutnya' : 'Lihat Hasil Kuis';
-      } else {
-        btnNext.classList.add('hidden');
-      }
-    }
-
-    function renderAll() {
-      renderHeaderAndControls();
-      if (state.activeTab === 'flip') {
-        renderFlipCard();
-      } else if (state.activeTab === 'dictionary') {
-        renderDictionary();
-      } else if (state.activeTab === 'quiz') {
-        renderQuiz();
-      }
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-    }
-
-    // =========================================================================
-    // 6. INISIALISASI & EVENT LISTENERS
-    // =========================================================================
-    function initApp() {
-      // Ambil elemen dropdown pilihan Bab dan isi daftar bab (Bab 1 - 35)
-      const babSelect = document.getElementById('bab-select');
-      const uniqueBabs = [...new Set(VOCAB_DATA.map((item) => item.bab))].sort((a, b) => a - b);
-      uniqueBabs.forEach((bab) => {
-        const count = VOCAB_DATA.filter((v) => v.bab === bab).length;
-        const opt = document.createElement('option');
-        opt.value = bab;
-        opt.textContent = `Bab ${bab} (${count} kata)`;
-        babSelect.appendChild(opt);
-      });
-
-      // Toggle Dark Mode manual
-      document.getElementById('btn-dark-mode').addEventListener('click', () => {
-        state.darkMode = !state.darkMode;
-        savePreferences();
-        renderAll();
-      });
-
-      // Sinkronisasi otomatis jika tema sistem/browser berubah (saat user belum memilih manual)
-      if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-          if (!localStorage.getItem('theme_preference')) {
-            state.darkMode = !e.matches;
-            renderAll();
-          }
-        });
-      }
-
-      // Sinkronisasi otomatis antar tab/halaman menggunakan key 'theme_preference'
-      window.addEventListener('storage', (e) => {
-        if (e.key === 'theme_preference' && e.newValue) {
-          state.darkMode = e.newValue === 'dark';
-          renderAll();
-        }
-      });
-
-      // Sinkronisasi saat user kembali ke tab/halaman ini (misal habis mengganti tema di halaman lain)
-      window.addEventListener('focus', () => {
-        const latestDark = getInitialDarkMode();
-        if (state.darkMode !== latestDark) {
-          state.darkMode = latestDark;
-          renderAll();
-        }
-      });
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-          const latestDark = getInitialDarkMode();
-          if (state.darkMode !== latestDark) {
-            state.darkMode = latestDark;
-            renderAll();
-          }
-        }
-      });
-
-      // Sinkronisasi jika halaman dibuka di dalam iframe dan parent mengubah class 'light-theme' atau 'dark'
-      try {
-        if (window.parent && window.parent !== window && window.parent.document) {
-          const parentHtml = window.parent.document.documentElement;
-          const syncFromParent = () => {
-            const parentIsLight = parentHtml.classList.contains('light-theme');
-            const targetDark = !parentIsLight;
-            if (state.darkMode !== targetDark) {
-              state.darkMode = targetDark;
-              renderAll();
-            }
-          };
-          syncFromParent();
-          const observer = new MutationObserver(syncFromParent);
-          observer.observe(parentHtml, { attributes: true, attributeFilter: ['class'] });
-        }
-      } catch (err) {
-        // Abaikan jika berbeda origin (cross-origin iframe)
-      }
-
-      // Navigasi Tab
-      ['flip', 'dictionary', 'quiz'].forEach((tab) => {
-        document.getElementById(`tab-${tab}`).addEventListener('click', () => {
-          state.activeTab = tab;
-          if (tab === 'quiz') {
-            generateQuiz();
-          }
-          renderAll();
-        });
-      });
-
-      // Pencarian & Filter
-      document.getElementById('search-input').addEventListener('input', (e) => {
-        state.searchQuery = e.target.value;
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      babSelect.addEventListener('change', (e) => {
-        state.selectedBab = e.target.value;
-        state.flipSelectedBabs = [];
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        if (state.activeTab === 'quiz') generateQuiz();
-        renderAll();
-      });
-
-      document.getElementById('status-select').addEventListener('change', (e) => {
-        state.filterStatus = e.target.value;
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        if (state.activeTab === 'quiz') generateQuiz();
-        renderAll();
-      });
-
-      // Kontrol Kanji, Cara Baca, Emoji
-      document.getElementById('btn-toggle-kanji').addEventListener('click', () => {
-        state.showKanji = !state.showKanji;
-        renderAll();
-      });
-
-      document.getElementById('btn-toggle-reading').addEventListener('click', () => {
-        state.hideReading = !state.hideReading;
-        renderAll();
-      });
-
-      document.getElementById('btn-toggle-emoji').addEventListener('click', () => {
-        state.hideEmoji = !state.hideEmoji;
-        savePreferences();
-        renderAll();
-      });
-
-      // Kontrol Urutan Kartu (Acak / Urutkan)
-      document.getElementById('btn-shuffle').addEventListener('click', () => {
-        const filtered = getFilteredVocab('flip');
-        const ids = filtered.map((item) => item.id);
-        for (let i = ids.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [ids[i], ids[j]] = [ids[j], ids[i]];
-        }
-        state.shuffledOrder = ids;
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      document.getElementById('btn-reset-order').addEventListener('click', () => {
-        state.shuffledOrder = null;
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      // Kontrol Pemilih Multi-Bab di Mode Flip
-      document.getElementById('btn-flip-select-all').addEventListener('click', () => {
-        state.flipSelectedBabs = [];
-        state.selectedBab = 'ALL';
-        babSelect.value = 'ALL';
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      document.getElementById('btn-flip-clear-babs').addEventListener('click', () => {
-        state.flipSelectedBabs = [];
-        state.currentIndex = 0;
-        state.isFlipped = false;
-        renderAll();
-      });
-
-      // Interaksi Kartu Flip
-      document.getElementById('flashcard-wrapper').addEventListener('click', () => {
-        state.isFlipped = !state.isFlipped;
-        renderFlipCard();
-        if (window.lucide) lucide.createIcons();
-      });
-
-      document.getElementById('btn-card-mastered').addEventListener('click', (e) => {
-        const deck = getDeckCards();
-        if (deck[state.currentIndex]) {
-          toggleMastered(deck[state.currentIndex].id, e);
-        }
-      });
-
-      document.getElementById('btn-card-speak-front').addEventListener('click', (e) => {
-        const deck = getDeckCards();
-        if (deck[state.currentIndex]) {
-          speakJapanese(deck[state.currentIndex].r, e);
-        }
-      });
-
-      document.getElementById('btn-card-speak-back').addEventListener('click', (e) => {
-        const deck = getDeckCards();
-        if (deck[state.currentIndex]) {
-          speakJapanese(deck[state.currentIndex].r, e);
-        }
-      });
-
-      const goNextCard = () => {
-        const deck = getDeckCards();
-        if (deck.length === 0) return;
-        state.isFlipped = false;
-        state.currentIndex = (state.currentIndex + 1) % deck.length;
-        renderFlipCard();
-        if (window.lucide) lucide.createIcons();
-      };
-
-      const goPrevCard = () => {
-        const deck = getDeckCards();
-        if (deck.length === 0) return;
-        state.isFlipped = false;
-        state.currentIndex = (state.currentIndex - 1 + deck.length) % deck.length;
-        renderFlipCard();
-        if (window.lucide) lucide.createIcons();
-      };
-
-      document.getElementById('btn-next-card').addEventListener('click', goNextCard);
-      document.getElementById('btn-prev-card').addEventListener('click', goPrevCard);
-
-      // Navigasi Keyboard untuk Mode Flip
-      window.addEventListener('keydown', (e) => {
-        if (state.activeTab !== 'flip') return;
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-        if (e.code === 'Space') {
-          e.preventDefault();
-          state.isFlipped = !state.isFlipped;
-          renderFlipCard();
-          if (window.lucide) lucide.createIcons();
-        } else if (e.code === 'ArrowRight') {
-          goNextCard();
-        } else if (e.code === 'ArrowLeft') {
-          goPrevCard();
-        }
-      });
-
-      // Kontrol Kuis
-      document.getElementById('btn-quiz-speak').addEventListener('click', (e) => {
-        const currentQ = state.quizQuestions[state.quizIndex];
-        if (currentQ) speakJapanese(currentQ.question.r, e);
-      });
-
-      document.getElementById('btn-quiz-next').addEventListener('click', () => {
-        if (state.quizIndex + 1 < state.quizQuestions.length) {
-          state.quizIndex += 1;
-          state.selectedOption = null;
-          renderQuiz();
-        } else {
-          state.quizFinished = true;
-          renderQuiz();
-        }
-        if (window.lucide) lucide.createIcons();
-      });
-
-      document.getElementById('btn-restart-quiz').addEventListener('click', () => {
-        generateQuiz();
-        if (window.lucide) lucide.createIcons();
-      });
-
-      // Render awal
-      renderAll();
-    }
-
-    document.addEventListener('DOMContentLoaded', initApp);
+    themeBtn.addEventListener('click', () => {
+      const isCurrentlyLight = rootHtml.classList.contains('light-theme') || bodyEl.classList.contains('light-theme');
+      applyThemeState(!isCurrentlyLight);
+    });
   </script>
+
 </body>
 </html>
