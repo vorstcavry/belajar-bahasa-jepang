@@ -2,14 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kamus & Flashcard Kosakata Jepang Bab 1 - 35</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Kamus &amp; Flashcard Kosakata Bab 1 - 35</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -118,31 +118,161 @@
       --footer-border: #e2e8f0;
     }
 
+    * {
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
+      padding-bottom: env(safe-area-inset-bottom, 30px);
+      min-height: 100vh;
       transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
-    .theme-header {
+    /* ================= HEADER BAWAAN TEST123 + MENU KUIS ================= */
+    .app-header {
       background: var(--app-header-bg);
       border-bottom: 2px solid var(--border);
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       box-shadow: 0 2px 8px var(--shadow-color);
-    }
-
-    /* Header otomatis menghilang saat scroll turun dan muncul saat scroll naik */
-    .header-auto-hide {
-      transform: translateY(0);
-      transition: transform 260ms ease;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
       will-change: transform;
     }
-    .header-auto-hide.header-hidden {
+
+    .app-header.header-hidden {
       transform: translateY(-100%);
     }
-    @media (prefers-reduced-motion: reduce) {
-      .header-auto-hide { transition-duration: 0ms; }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
     }
 
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .brand-badge {
+      background: var(--primary-dark);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-back-hub {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      transition: transform 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-btn-bg);
+      border: 1.5px solid var(--toggle-btn-border);
+      color: var(--toggle-btn-text);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      font-size: 1rem;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .view-mode-tabs {
+      display: flex;
+      background: var(--view-tab-bg);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .btn-view-mode {
+      padding: 5px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--subtext);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-view-mode.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .brand-title {
+        justify-content: space-between;
+      }
+      .header-actions {
+        justify-content: space-between;
+      }
+      .view-mode-tabs {
+        flex: 1;
+        justify-content: center;
+      }
+      .btn-view-mode {
+        flex: 1;
+        text-align: center;
+        padding: 5px 6px;
+      }
+    }
+
+    /* ================= KOMPONEN FITUR DARI REFERENSI ================= */
     .theme-card {
       background: var(--card-bg);
       border-color: var(--border);
@@ -153,18 +283,6 @@
       background: var(--bg);
       border-color: var(--border);
       color: var(--text);
-    }
-
-    .theme-toggle-btn {
-      background: var(--toggle-btn-bg);
-      border-color: var(--toggle-btn-border);
-      color: var(--toggle-btn-text);
-      box-shadow: 0 2px 6px var(--shadow-color);
-    }
-
-    .theme-tab-group {
-      background: var(--view-tab-bg);
-      border: 1px solid var(--border);
     }
 
     .theme-flip-front {
@@ -208,93 +326,111 @@
       -webkit-backface-visibility: hidden;
     }
     .rotate-y-180 { transform: rotateY(180deg); }
+
+    /* Footer Section bawaan test123 */
+    .footer-section {
+      width: 100%;
+      max-width: 1000px;
+      margin: 28px auto 0;
+      background: var(--footer-bg);
+      border: 1.5px solid var(--footer-border);
+      border-radius: 16px;
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .footer-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .footer-desc {
+      font-size: 0.78rem;
+      color: var(--subtext);
+      margin-bottom: 14px;
+    }
+
+    .social-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-wa { background: #14532d; color: #4ade80; border: 1px solid #16a34a; }
+    .btn-email { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-fb { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+    .btn-ig { background: #831843; color: #f472b6; border: 1px solid #db2777; }
+    .btn-saweria { background: #78350f; color: #fbbf24; border: 1px solid #d97706; }
+    .btn-trakteer { background: #7f1d1d; color: #f87171; border: 1px solid #dc2626; }
+    .btn-kofi { background: #075985; color: #38bdf8; border: 1px solid #0284c7; }
+
+    html.light-theme .btn-wa, body.light-theme .btn-wa { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    html.light-theme .btn-email, body.light-theme .btn-email { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    html.light-theme .btn-fb, body.light-theme .btn-fb { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    html.light-theme .btn-ig, body.light-theme .btn-ig { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+    html.light-theme .btn-saweria, body.light-theme .btn-saweria { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    html.light-theme .btn-trakteer, body.light-theme .btn-trakteer { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    html.light-theme .btn-kofi, body.light-theme .btn-kofi { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+
+    .copyright {
+      font-size: 0.72rem;
+      color: var(--subtext);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
   </style>
 </head>
 <body class="min-h-screen font-sans">
 
-  <!-- HEADER UTAMA -->
-  <header id="app-header" class="sticky top-0 z-30 theme-header header-auto-hide backdrop-blur-md transition-colors">
-    <div class="max-w-5xl mx-auto px-4 py-3.5">
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <!-- Tombol kembali ke halaman sebelumnya -->
-        <button
-          id="btn-go-back"
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border theme-toggle-btn hover:opacity-90 transition-all text-xs sm:text-sm font-semibold"
-          aria-label="Kembali ke halaman sebelumnya"
-          title="Kembali ke halaman sebelumnya"
-        >
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          <span>Kembali</span>
+  <!-- HEADER ATAS BAWAAN TEST123 + MENU KUIS -->
+  <header class="app-header" id="mainHeader">
+    <div class="header-inner">
+      <div class="brand-title">
+        <div>
+          <span class="brand-badge">KOSAKATA</span>
+          <span class="brand-text">Bab 1 – 35</span>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span id="themeIcon">🌙</span>
         </button>
-
-        <!-- Logo & Judul -->
-        <div class="flex items-center gap-3">
-          <div style="background: var(--primary-dark);" class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md font-jp">
-            日
-          </div>
-          <div>
-            <h1 class="text-base sm:text-lg font-extrabold tracking-tight leading-tight">
-              Kamus & Flashcard Jepang
-            </h1>
-            <p id="header-subtitle" style="color: var(--subtext);" class="text-xs">
-              Kosakata Lengkap Bab 1 – 35
-            </p>
-          </div>
-        </div>
-
-        <!-- Indikator Progres Hafalan & Toggle Dark Mode -->
-        <div class="flex items-center gap-2.5">
-          <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
-            <i data-lucide="award" class="w-3.5 h-3.5"></i>
-            <span id="mastered-badge">Hafal: 0/0 (0%)</span>
-          </div>
-
-          <button
-            id="btn-dark-mode"
-            type="button"
-            class="p-2.5 rounded-xl border theme-toggle-btn hover:opacity-90 transition-all"
-            aria-label="Ubah Tema"
-            title="Ubah Tema Gelap/Terang"
-          >
-            <i id="icon-theme" data-lucide="sun" class="w-4 h-4"></i>
-          </button>
-        </div>
       </div>
 
-      <!-- Navigasi Tab Mode -->
-      <div class="grid grid-cols-3 gap-1.5 p-1 rounded-xl mt-3.5 theme-tab-group">
-        <button
-          id="tab-flip"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all"
-        >
-          <i data-lucide="layers" class="w-4 h-4"></i>
-          <span>Mode Flip</span>
-        </button>
+      <div class="header-actions">
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/e-card-kotoba.html" class="btn-back-hub">
+          <span>←</span> Kembali
+        </a>
 
-        <button
-          id="tab-dictionary"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all"
-        >
-          <i data-lucide="book-open" class="w-4 h-4"></i>
-          <span>Mode Kamus</span>
-        </button>
-
-        <button
-          id="tab-quiz"
-          type="button"
-          class="tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all"
-        >
-          <i data-lucide="help-circle" class="w-4 h-4"></i>
-          <span>Mode Kuis</span>
-        </button>
+        <div class="view-mode-tabs">
+          <button class="btn-view-mode active" id="tab-flip" type="button">🎴 Mode Flip</button>
+          <button class="btn-view-mode" id="tab-dictionary" type="button">📑 Mode Kamus</button>
+          <button class="btn-view-mode" id="tab-quiz" type="button">❓ Mode Kuis</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- KONTEN UTAMA -->
+  <!-- KONTEN UTAMA (MATERI & FITUR DARI REFERENSI) -->
   <main class="max-w-5xl mx-auto px-4 py-5">
     <!-- PANEL FILTER & PENGATURAN -->
     <section class="p-4 sm:p-5 rounded-2xl border mb-6 theme-card transition-colors">
@@ -315,7 +451,7 @@
           <i data-lucide="filter" style="color: var(--subtext);" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           <select
             id="bab-select"
-            class="w-full pl-10 pr-4 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none cursor-pointer transition-colors"
+            class="w-full h-[46px] pl-10 pr-4 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none cursor-pointer transition-colors"
           >
             <option value="ALL">Semua Bab (Bab 1 – 35)</option>
           </select>
@@ -325,7 +461,7 @@
         <div class="sm:col-span-4 min-w-0">
           <select
             id="status-select"
-            class="w-full px-3.5 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer transition-colors"
+            class="w-full h-[46px] px-3.5 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer transition-colors"
           >
             <option value="ALL">Semua Status</option>
             <option value="UNMASTERED">Belum Hafal</option>
@@ -392,6 +528,12 @@
             <i data-lucide="smile-plus" class="w-3.5 h-3.5"></i>
             <span id="label-emoji">Tanpa Emoji</span>
           </button>
+
+          <!-- Indikator Progres Hafalan -->
+          <div class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border bg-emerald-500/10 border-emerald-500/30 text-emerald-500">
+            <i data-lucide="award" class="w-3.5 h-3.5"></i>
+            <span id="mastered-badge">Hafal: 0/0 (0%)</span>
+          </div>
         </div>
 
         <!-- Kontrol Urutan Kartu (Khusus Mode Flip) -->
@@ -613,11 +755,34 @@
         </button>
       </div>
     </section>
+
+    <!-- FOOTER BAWAAN TEST123 -->
+    <div class="footer-section">
+      <div class="footer-title">Hubungi Pengembang &amp; Dukung Proyek Ini</div>
+      <div class="footer-desc">Punya pertanyaan, kritik, saran, atau ingin memberikan dukungan donasi? Hubungi lewat tautan resmi berikut:</div>
+      
+      <div class="social-group">
+        <a href="https://wa.me/6285726996330" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp</a>
+        <a href="mailto:vorstcavry@gmail.com" target="_blank" rel="noopener noreferrer" class="social-btn btn-email">✉️ Email</a>
+        <a href="https://www.facebook.com/VorstCavry.VendyVannessa/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">🌐 Facebook</a>
+        <a href="https://www.instagram.com/vorst_cavry/" target="_blank" rel="noopener noreferrer" class="social-btn btn-ig">📸 Instagram</a>
+      </div>
+
+      <div class="social-group">
+        <a href="https://saweria.co/VorstCavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-saweria">☕ Saweria</a>
+        <a href="https://trakteer.id/vorstcavry/tip" target="_blank" rel="noopener noreferrer" class="social-btn btn-trakteer">🍜 Trakteer</a>
+        <a href="https://ko-fi.com/vorstcavry" target="_blank" rel="noopener noreferrer" class="social-btn btn-kofi">🍵 Ko-fi</a>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 Vorst Cavry &bull; Modul Pembelajaran Interaktif Bahasa Jepang
+      </div>
+    </div>
   </main>
 
   <script>
     // =========================================================================
-    // 1. DATABASE KOSAKATA LENGKAP BAB 1 - 35
+    // 1. DATABASE KOSAKATA LENGKAP BAB 1 - 35 (DARI REFERENSI)
     // =========================================================================
     const VOCAB_DATA = [
       // BAB 1
@@ -1549,12 +1714,9 @@
     // =========================================================================
     function getInitialDarkMode() {
       try {
-        // Gunakan key yang sama persis dengan halaman index utama ('theme_preference')
         const savedTheme = localStorage.getItem('theme_preference');
         if (savedTheme === 'light') return false;
         if (savedTheme === 'dark') return true;
-
-        // Jika belum pernah diatur, ikuti preferensi sistem (default Dark Mode seperti index.html)
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
           return false;
         }
@@ -1571,8 +1733,8 @@
       hideReading: false,
       hideEmoji: JSON.parse(localStorage.getItem('jp_vocab_hide_emoji') || 'false'),
       selectedBab: 'ALL',
-      flipSelectedBabs: [], // Array nomor bab khusus mode flip (kosong = semua bab)
-      filterStatus: 'ALL', // 'ALL' | 'MASTERED' | 'UNMASTERED'
+      flipSelectedBabs: [],
+      filterStatus: 'ALL',
       searchQuery: '',
       masteredIds: JSON.parse(localStorage.getItem('jp_vocab_mastered') || '[]'),
       currentIndex: 0,
@@ -1595,7 +1757,6 @@
 
     function savePreferences() {
       try {
-        // Simpan ke key 'theme_preference' agar sinkron 100% dengan index.html
         localStorage.setItem('theme_preference', state.darkMode ? 'dark' : 'light');
         localStorage.setItem('jp_vocab_hide_emoji', JSON.stringify(state.hideEmoji));
       } catch (e) {
@@ -1699,40 +1860,35 @@
     // 5. FUNGSI RENDER UI
     // =========================================================================
     function renderHeaderAndControls() {
-      // Tema Gelap / Terang (Sinkron dengan class 'dark' Tailwind & 'light-theme' index utama)
+      // Sinkronisasi tema gelap / terang
       const htmlEl = document.documentElement;
       const bodyEl = document.body;
-      const themeIcon = document.getElementById('icon-theme');
+      const themeIcon = document.getElementById('themeIcon');
       if (state.darkMode) {
         htmlEl.classList.add('dark');
         htmlEl.classList.remove('light-theme');
         if (bodyEl) bodyEl.classList.remove('light-theme');
-        themeIcon.setAttribute('data-lucide', 'sun');
+        if (themeIcon) themeIcon.textContent = '🌙';
       } else {
         htmlEl.classList.remove('dark');
         htmlEl.classList.add('light-theme');
         if (bodyEl) bodyEl.classList.add('light-theme');
-        themeIcon.setAttribute('data-lucide', 'moon');
+        if (themeIcon) themeIcon.textContent = '☀️';
       }
 
-      // Subtitle & Progres Hafalan
+      // Progres Hafalan
       const totalCount = VOCAB_DATA.length;
       const masteredCount = state.masteredIds.length;
       const pct = Math.round((masteredCount / totalCount) * 100);
-      document.getElementById('header-subtitle').textContent = `Kosakata Lengkap Bab 1 – 35 (${totalCount} Kata)`;
       document.getElementById('mastered-badge').textContent = `Hafal: ${masteredCount}/${totalCount} (${pct}%)`;
 
-      // Tab Aktif
+      // Tab Aktif di Header Atas
       ['flip', 'dictionary', 'quiz'].forEach((tab) => {
         const btn = document.getElementById(`tab-${tab}`);
         if (state.activeTab === tab) {
-          btn.style.background = 'var(--card-bg)';
-          btn.style.color = 'var(--primary)';
-          btn.style.boxShadow = '0 2px 4px var(--shadow-color)';
+          btn.classList.add('active');
         } else {
-          btn.style.background = 'transparent';
-          btn.style.color = 'var(--subtext)';
-          btn.style.boxShadow = 'none';
+          btn.classList.remove('active');
         }
         const view = document.getElementById(`view-${tab}`);
         if (state.activeTab === tab) {
@@ -1787,7 +1943,7 @@
         labelEmoji.textContent = 'Tanpa Emoji';
       }
 
-      // Pemilih multi-bab hanya ditampilkan pada Mode Flip.
+      // Pemilih multi-bab hanya ditampilkan pada Mode Flip
       const flipBabSelector = document.getElementById('flip-bab-selector-card');
       if (state.activeTab === 'flip') {
         flipBabSelector.classList.remove('hidden');
@@ -2138,7 +2294,7 @@
     // 6. INISIALISASI & EVENT LISTENERS
     // =========================================================================
     function initApp() {
-      // Ambil elemen dropdown pilihan Bab dan isi daftar bab (Bab 1 - 35)
+      // Isi dropdown Bab (Bab 1 - 35)
       const babSelect = document.getElementById('bab-select');
       const uniqueBabs = [...new Set(VOCAB_DATA.map((item) => item.bab))].sort((a, b) => a - b);
       uniqueBabs.forEach((bab) => {
@@ -2149,49 +2305,39 @@
         babSelect.appendChild(opt);
       });
 
-      // Toggle Dark Mode manual
-      document.getElementById('btn-dark-mode').addEventListener('click', () => {
+      // Toggle Dark Mode bawaan header test123
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
         state.darkMode = !state.darkMode;
         savePreferences();
         renderAll();
       });
 
-      // Tombol kembali: gunakan riwayat browser bila tersedia.
-      document.getElementById('btn-go-back').addEventListener('click', () => {
-        if (window.history.length > 1) {
-          window.history.back();
-        } else if (document.referrer) {
-          window.location.href = document.referrer;
-        } else {
-          alert('Tidak ada halaman sebelumnya untuk kembali.');
-        }
-      });
+      // Auto-hide header bawaan test123 saat scroll
+      let lastScrollTop = 0;
+      const header = document.getElementById('mainHeader');
+      const scrollThreshold = 15;
 
-      // Header: sembunyikan saat menggulir ke bawah, tampilkan saat menggulir ke atas.
-      const appHeader = document.getElementById('app-header');
-      let previousScrollY = window.scrollY || 0;
-      const scrollDirectionThreshold = 8;
       window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY || 0;
-        const scrollDifference = currentScrollY - previousScrollY;
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Selalu tampilkan header ketika berada dekat bagian paling atas halaman.
-        if (currentScrollY <= 24) {
-          appHeader.classList.remove('header-hidden');
-          previousScrollY = currentScrollY;
+        if (currentScroll <= 10) {
+          header.classList.remove('header-hidden');
+          lastScrollTop = currentScroll;
           return;
         }
 
-        if (scrollDifference > scrollDirectionThreshold) {
-          appHeader.classList.add('header-hidden');
-          previousScrollY = currentScrollY;
-        } else if (scrollDifference < -scrollDirectionThreshold) {
-          appHeader.classList.remove('header-hidden');
-          previousScrollY = currentScrollY;
+        if (Math.abs(lastScrollTop - currentScroll) <= scrollThreshold) return;
+
+        if (currentScroll > lastScrollTop && currentScroll > 60) {
+          header.classList.add('header-hidden');
+        } else if (currentScroll < lastScrollTop) {
+          header.classList.remove('header-hidden');
         }
+
+        lastScrollTop = currentScroll;
       }, { passive: true });
 
-      // Sinkronisasi otomatis jika tema sistem/browser berubah (saat user belum memilih manual)
+      // Sinkronisasi tema sistem & antar tab
       if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
           if (!localStorage.getItem('theme_preference')) {
@@ -2201,7 +2347,6 @@
         });
       }
 
-      // Sinkronisasi otomatis antar tab/halaman menggunakan key 'theme_preference'
       window.addEventListener('storage', (e) => {
         if (e.key === 'theme_preference' && e.newValue) {
           state.darkMode = e.newValue === 'dark';
@@ -2209,7 +2354,6 @@
         }
       });
 
-      // Sinkronisasi saat user kembali ke tab/halaman ini (misal habis mengganti tema di halaman lain)
       window.addEventListener('focus', () => {
         const latestDark = getInitialDarkMode();
         if (state.darkMode !== latestDark) {
@@ -2217,37 +2361,8 @@
           renderAll();
         }
       });
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-          const latestDark = getInitialDarkMode();
-          if (state.darkMode !== latestDark) {
-            state.darkMode = latestDark;
-            renderAll();
-          }
-        }
-      });
 
-      // Sinkronisasi jika halaman dibuka di dalam iframe dan parent mengubah class 'light-theme' atau 'dark'
-      try {
-        if (window.parent && window.parent !== window && window.parent.document) {
-          const parentHtml = window.parent.document.documentElement;
-          const syncFromParent = () => {
-            const parentIsLight = parentHtml.classList.contains('light-theme');
-            const targetDark = !parentIsLight;
-            if (state.darkMode !== targetDark) {
-              state.darkMode = targetDark;
-              renderAll();
-            }
-          };
-          syncFromParent();
-          const observer = new MutationObserver(syncFromParent);
-          observer.observe(parentHtml, { attributes: true, attributeFilter: ['class'] });
-        }
-      } catch (err) {
-        // Abaikan jika berbeda origin (cross-origin iframe)
-      }
-
-      // Navigasi Tab
+      // Navigasi Tab di Header Atas (Mode Flip, Mode Kamus, Mode Kuis)
       ['flip', 'dictionary', 'quiz'].forEach((tab) => {
         document.getElementById(`tab-${tab}`).addEventListener('click', () => {
           state.activeTab = tab;
