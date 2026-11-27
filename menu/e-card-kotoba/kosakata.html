@@ -132,17 +132,21 @@
       transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
-    /* ================= HEADER BAWAAN TEST123 + MENU KUIS ================= */
+    /* ================= HEADER RESPONSIF UNTUK SEMUA DEVICE ================= */
     .app-header {
       background: var(--app-header-bg);
       border-bottom: 2px solid var(--border);
-      padding: 10px 16px;
+      padding-top: max(10px, env(safe-area-inset-top));
+      padding-bottom: 10px;
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 8px var(--shadow-color);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
       will-change: transform;
+      width: 100%;
     }
 
     .app-header.header-hidden {
@@ -150,12 +154,20 @@
     }
 
     .header-inner {
-      max-width: 1000px;
+      max-width: 1024px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+    }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .brand-title {
@@ -163,20 +175,21 @@
       align-items: center;
       gap: 6px;
       white-space: nowrap;
+      min-width: 0;
     }
 
     .brand-badge {
       background: var(--primary-dark);
       color: #ffffff;
       font-weight: 800;
-      font-size: 0.72rem;
+      font-size: clamp(0.65rem, 1.5vw, 0.72rem);
       padding: 3px 8px;
       border-radius: 6px;
       letter-spacing: 0.5px;
     }
 
     .brand-text {
-      font-size: 0.95rem;
+      font-size: clamp(0.85rem, 2vw, 0.98rem);
       font-weight: 800;
       color: var(--text);
     }
@@ -184,24 +197,33 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
     }
 
     .btn-back-hub {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 4px;
       background: var(--card-bg);
       border: 1.5px solid var(--border);
       color: var(--text);
       font-weight: 700;
-      font-size: 0.78rem;
+      font-size: clamp(0.72rem, 1.8vw, 0.78rem);
       padding: 6px 10px;
       border-radius: 8px;
       text-decoration: none;
       box-shadow: 0 2px 6px var(--shadow-color);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
       white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-back-hub:hover {
+      border-color: var(--primary);
     }
 
     .theme-toggle-btn {
@@ -216,31 +238,41 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 2px 6px var(--shadow-color);
-      font-size: 1rem;
+      font-size: 0.95rem;
       user-select: none;
       flex-shrink: 0;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--primary);
     }
 
     .view-mode-tabs {
       display: flex;
       background: var(--view-tab-bg);
       padding: 3px;
-      border-radius: 8px;
-      gap: 2px;
+      border-radius: 10px;
+      gap: 3px;
       border: 1px solid var(--border);
+      min-width: 0;
     }
 
     .btn-view-mode {
-      padding: 5px 10px;
+      padding: 6px 12px;
       border: none;
       background: transparent;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      border-radius: 7px;
+      font-size: clamp(0.7rem, 1.8vw, 0.78rem);
       font-weight: 800;
       color: var(--subtext);
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
     .btn-view-mode.active {
@@ -249,26 +281,51 @@
       box-shadow: 0 2px 4px var(--shadow-color);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+      .app-header {
+        padding-top: max(8px, env(safe-area-inset-top));
+        padding-bottom: 8px;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
       .header-inner {
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
       }
-      .brand-title {
-        justify-content: space-between;
+      .header-top-row {
+        width: 100%;
       }
       .header-actions {
-        justify-content: space-between;
+        width: 100%;
+        justify-content: stretch;
       }
       .view-mode-tabs {
+        width: 100%;
         flex: 1;
-        justify-content: center;
       }
       .btn-view-mode {
         flex: 1;
-        text-align: center;
-        padding: 5px 6px;
+        padding: 7px 6px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand-badge {
+        padding: 2px 6px;
+      }
+      .btn-back-hub {
+        padding: 5px 8px;
+      }
+      .theme-toggle-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+      }
+      .btn-view-mode {
+        padding: 6px 4px;
+        font-size: 0.68rem;
+        gap: 2px;
       }
     }
 
@@ -403,21 +460,27 @@
 </head>
 <body class="min-h-screen font-sans">
 
-  <!-- HEADER ATAS BAWAAN TEST123 + MENU KUIS -->
+  <!-- HEADER ATAS RESPONSIF UNTUK SEMUA DEVICE -->
   <header class="app-header" id="mainHeader">
     <div class="header-inner">
-      <div class="brand-title">
-        <div>
+      <div class="header-top-row">
+        <div class="brand-title">
           <span class="brand-badge">KOSAKATA</span>
           <span class="brand-text">Bab 1 – 35</span>
         </div>
-        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" title="Ubah Tema">
-          <span id="themeIcon">🌙</span>
-        </button>
+
+        <div class="flex items-center gap-2 md:hidden">
+          <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/e-card-kotoba.html" class="btn-back-hub">
+            <span>←</span> Kembali
+          </a>
+          <button class="theme-toggle-btn" id="themeToggleBtnMobile" type="button" title="Ubah Tema">
+            <span class="theme-icon-display">🌙</span>
+          </button>
+        </div>
       </div>
 
       <div class="header-actions">
-        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/e-card-kotoba.html" class="btn-back-hub">
+        <a href="/belajar-bahasa-jepang/menu/e-card-kotoba/e-card-kotoba.html" class="btn-back-hub hidden md:inline-flex">
           <span>←</span> Kembali
         </a>
 
@@ -426,6 +489,10 @@
           <button class="btn-view-mode" id="tab-dictionary" type="button">📑 Mode Kamus</button>
           <button class="btn-view-mode" id="tab-quiz" type="button">❓ Mode Kuis</button>
         </div>
+
+        <button class="theme-toggle-btn hidden md:flex" id="themeToggleBtn" type="button" title="Ubah Tema">
+          <span class="theme-icon-display">🌙</span>
+        </button>
       </div>
     </div>
   </header>
@@ -1863,18 +1930,19 @@
       // Sinkronisasi tema gelap / terang
       const htmlEl = document.documentElement;
       const bodyEl = document.body;
-      const themeIcon = document.getElementById('themeIcon');
+      const iconText = state.darkMode ? '🌙' : '☀️';
       if (state.darkMode) {
         htmlEl.classList.add('dark');
         htmlEl.classList.remove('light-theme');
         if (bodyEl) bodyEl.classList.remove('light-theme');
-        if (themeIcon) themeIcon.textContent = '🌙';
       } else {
         htmlEl.classList.remove('dark');
         htmlEl.classList.add('light-theme');
         if (bodyEl) bodyEl.classList.add('light-theme');
-        if (themeIcon) themeIcon.textContent = '☀️';
       }
+      document.querySelectorAll('.theme-icon-display').forEach((el) => {
+        el.textContent = iconText;
+      });
 
       // Progres Hafalan
       const totalCount = VOCAB_DATA.length;
@@ -2305,11 +2373,16 @@
         babSelect.appendChild(opt);
       });
 
-      // Toggle Dark Mode bawaan header test123
-      document.getElementById('themeToggleBtn').addEventListener('click', () => {
-        state.darkMode = !state.darkMode;
-        savePreferences();
-        renderAll();
+      // Toggle Dark Mode untuk Mobile & Desktop
+      ['themeToggleBtn', 'themeToggleBtnMobile'].forEach((btnId) => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+          btn.addEventListener('click', () => {
+            state.darkMode = !state.darkMode;
+            savePreferences();
+            renderAll();
+          });
+        }
       });
 
       // Auto-hide header bawaan test123 saat scroll
