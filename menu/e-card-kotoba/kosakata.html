@@ -130,6 +130,19 @@
       box-shadow: 0 2px 8px var(--shadow-color);
     }
 
+    /* Header otomatis menghilang saat scroll turun dan muncul saat scroll naik */
+    .header-auto-hide {
+      transform: translateY(0);
+      transition: transform 260ms ease;
+      will-change: transform;
+    }
+    .header-auto-hide.header-hidden {
+      transform: translateY(-100%);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .header-auto-hide { transition-duration: 0ms; }
+    }
+
     .theme-card {
       background: var(--card-bg);
       border-color: var(--border);
@@ -200,9 +213,21 @@
 <body class="min-h-screen font-sans">
 
   <!-- HEADER UTAMA -->
-  <header class="sticky top-0 z-30 theme-header backdrop-blur-md transition-colors">
+  <header id="app-header" class="sticky top-0 z-30 theme-header header-auto-hide backdrop-blur-md transition-colors">
     <div class="max-w-5xl mx-auto px-4 py-3.5">
       <div class="flex flex-wrap items-center justify-between gap-3">
+        <!-- Tombol kembali ke halaman sebelumnya -->
+        <button
+          id="btn-go-back"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border theme-toggle-btn hover:opacity-90 transition-all text-xs sm:text-sm font-semibold"
+          aria-label="Kembali ke halaman sebelumnya"
+          title="Kembali ke halaman sebelumnya"
+        >
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Kembali</span>
+        </button>
+
         <!-- Logo & Judul -->
         <div class="flex items-center gap-3">
           <div style="background: var(--primary-dark);" class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md font-jp">
@@ -272,21 +297,21 @@
   <!-- KONTEN UTAMA -->
   <main class="max-w-5xl mx-auto px-4 py-5">
     <!-- PANEL FILTER & PENGATURAN -->
-    <section class="p-4 rounded-2xl border mb-6 theme-card transition-colors">
-      <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+    <section class="p-4 sm:p-5 rounded-2xl border mb-6 theme-card transition-colors">
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
         <!-- Input Pencarian -->
-        <div class="sm:col-span-5 relative">
+        <div class="sm:col-span-4 relative flex items-center">
           <i data-lucide="search" style="color: var(--subtext);" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
           <input
             id="search-input"
             type="text"
             placeholder="Cari kanji, kana, romaji, atau arti..."
-            class="w-full pl-10 pr-4 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors"
+            class="w-full h-[46px] pl-10 pr-4 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors"
           />
         </div>
 
         <!-- Filter Pilih Bab -->
-        <div class="sm:col-span-4 relative">
+        <div class="sm:col-span-4 relative min-w-0">
           <i data-lucide="filter" style="color: var(--subtext);" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           <select
             id="bab-select"
@@ -297,7 +322,7 @@
         </div>
 
         <!-- Filter Status Hafalan -->
-        <div class="sm:col-span-3">
+        <div class="sm:col-span-4 min-w-0">
           <select
             id="status-select"
             class="w-full px-3.5 py-2 rounded-xl text-sm border theme-input focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer transition-colors"
@@ -306,6 +331,30 @@
             <option value="UNMASTERED">Belum Hafal</option>
             <option value="MASTERED">Sudah Hafal</option>
           </select>
+        </div>
+
+        <!-- Pemilih Bab Khusus Mode Flip, diletakkan di bawah seluruh filter -->
+        <div id="flip-bab-selector-card" class="sm:col-span-12 min-w-0 p-3.5 rounded-xl border theme-card transition-colors">
+          <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-3">
+            <div class="flex items-center gap-2 text-xs font-bold min-w-0">
+              <i data-lucide="layers" style="color: var(--primary);" class="w-3.5 h-3.5"></i>
+              <span id="flip-bab-selector-label">Pilih Bab untuk Mode Flip (Semua Bab)</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button
+                id="btn-flip-select-all"
+                type="button"
+                style="background: var(--primary-light); color: var(--primary); border-color: var(--primary);"
+                class="px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-colors"
+              >Semua Bab</button>
+              <button
+                id="btn-flip-clear-babs"
+                type="button"
+                class="hidden px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-500/15 text-rose-500 border border-rose-500/30 transition-colors"
+              >Reset</button>
+            </div>
+          </div>
+          <div id="flip-bab-chips" class="flex flex-nowrap items-center gap-1.5 overflow-x-auto overflow-y-hidden pb-1.5 pr-1 scroll-smooth" style="scrollbar-width: thin; scrollbar-color: var(--border) transparent;"></div>
         </div>
       </div>
 
@@ -372,34 +421,6 @@
     <!-- VIEW 1: MODE FLASHCARD (FLIP 3D)                                   -->
     <!-- ================================================================== -->
     <section id="view-flip" class="max-w-xl mx-auto">
-      <!-- Pemilih Bab Khusus Mode Flip (Multi-Bab) -->
-      <div class="mb-4 p-3.5 rounded-2xl border theme-card transition-colors">
-        <div class="flex items-center justify-between gap-2 mb-2.5">
-          <div class="flex items-center gap-1.5 text-xs font-bold">
-            <i data-lucide="layers" style="color: var(--primary);" class="w-3.5 h-3.5"></i>
-            <span id="flip-bab-selector-label">Pilih Bab untuk Mode Flip (Semua Bab)</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <button
-              id="btn-flip-select-all"
-              type="button"
-              style="background: var(--primary-light); color: var(--primary); border-color: var(--primary);"
-              class="px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-colors"
-            >
-              Semua Bab
-            </button>
-            <button
-              id="btn-flip-clear-babs"
-              type="button"
-              class="hidden px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-500/15 text-rose-500 border border-rose-500/30 transition-colors"
-            >
-              Reset
-            </button>
-          </div>
-        </div>
-        <div id="flip-bab-chips" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1"></div>
-      </div>
-
       <div id="flip-empty" style="color: var(--subtext);" class="hidden text-center p-10 rounded-3xl border theme-card">
         <p class="text-base font-semibold mb-1">Tidak ada kosakata ditemukan</p>
         <p class="text-xs">Coba ubah filter bab, status hafalan, atau kata kunci pencarian.</p>
@@ -1766,6 +1787,14 @@
         labelEmoji.textContent = 'Tanpa Emoji';
       }
 
+      // Pemilih multi-bab hanya ditampilkan pada Mode Flip.
+      const flipBabSelector = document.getElementById('flip-bab-selector-card');
+      if (state.activeTab === 'flip') {
+        flipBabSelector.classList.remove('hidden');
+      } else {
+        flipBabSelector.classList.add('hidden');
+      }
+
       // Kontrol Urutan Kartu (Khusus Mode Flip)
       const orderControls = document.getElementById('flip-order-controls');
       const btnShuffle = document.getElementById('btn-shuffle');
@@ -1823,7 +1852,7 @@
           chip.style.color = 'var(--btn-chap-text)';
           chip.style.borderColor = 'var(--btn-chap-border)';
         }
-        chip.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold border transition-all';
+        chip.className = 'shrink-0 whitespace-nowrap px-3 py-1.5 rounded-lg text-[11px] font-bold border transition-all hover:-translate-y-0.5';
         chip.addEventListener('click', () => {
           const idx = state.flipSelectedBabs.indexOf(bab);
           if (idx > -1) {
@@ -2126,6 +2155,41 @@
         savePreferences();
         renderAll();
       });
+
+      // Tombol kembali: gunakan riwayat browser bila tersedia.
+      document.getElementById('btn-go-back').addEventListener('click', () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else if (document.referrer) {
+          window.location.href = document.referrer;
+        } else {
+          alert('Tidak ada halaman sebelumnya untuk kembali.');
+        }
+      });
+
+      // Header: sembunyikan saat menggulir ke bawah, tampilkan saat menggulir ke atas.
+      const appHeader = document.getElementById('app-header');
+      let previousScrollY = window.scrollY || 0;
+      const scrollDirectionThreshold = 8;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY || 0;
+        const scrollDifference = currentScrollY - previousScrollY;
+
+        // Selalu tampilkan header ketika berada dekat bagian paling atas halaman.
+        if (currentScrollY <= 24) {
+          appHeader.classList.remove('header-hidden');
+          previousScrollY = currentScrollY;
+          return;
+        }
+
+        if (scrollDifference > scrollDirectionThreshold) {
+          appHeader.classList.add('header-hidden');
+          previousScrollY = currentScrollY;
+        } else if (scrollDifference < -scrollDirectionThreshold) {
+          appHeader.classList.remove('header-hidden');
+          previousScrollY = currentScrollY;
+        }
+      }, { passive: true });
 
       // Sinkronisasi otomatis jika tema sistem/browser berubah (saat user belum memilih manual)
       if (window.matchMedia) {
